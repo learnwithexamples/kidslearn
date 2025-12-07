@@ -1,0 +1,228 @@
+/* Vocabulary from Classical Roots Styles */
+
+.book-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.book-intro {
+    background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
+    border: 3px solid #b8d4ff;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.book-intro h2 {
+    color: #5a67d8;
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+
+.book-intro p {
+    color: #2d3748;
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+/* Lessons Section */
+.lessons-section {
+    margin-bottom: 40px;
+}
+
+.lessons-section h2 {
+    color: #2d3748;
+    font-size: 2em;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.lesson-card {
+    background: white;
+    border: 3px solid #e2e8f0;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.lesson-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+}
+
+.lesson-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(90, 103, 216, 0.2);
+    border-color: #5a67d8;
+}
+
+.lesson-number {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.lesson-card h3 {
+    color: #2d3748;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.lesson-card p {
+    color: #718096;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.lesson-link {
+    display: inline-block;
+    padding: 10px 25px;
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+}
+
+.lesson-link:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(72, 187, 120, 0.5);
+}
+
+.lesson-link.disabled {
+    background: #cbd5e0;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.lesson-link.disabled:hover {
+    transform: none;
+}
+
+/* Practice Section */
+.practice-section {
+    background: #fafafa;
+    border-radius: 15px;
+    padding: 30px;
+    border: 2px solid #e2e8f0;
+}
+
+.practice-section h2 {
+    color: #2d3748;
+    font-size: 2em;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.practice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.practice-card {
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.practice-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-color: #5a67d8;
+}
+
+.practice-icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+}
+
+.practice-card h3 {
+    color: #2d3748;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+.practice-card p {
+    color: #718096;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.practice-link {
+    display: inline-block;
+    padding: 8px 20px;
+    background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 18px;
+    font-weight: bold;
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(237, 137, 54, 0.3);
+}
+
+.practice-link:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(237, 137, 54, 0.5);
+}
+
+.practice-link.disabled {
+    background: #cbd5e0;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.practice-link.disabled:hover {
+    transform: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .book-intro {
+        padding: 20px;
+    }
+    
+    .book-intro h2 {
+        font-size: 1.6em;
+    }
+    
+    .book-intro p {
+        font-size: 1em;
+    }
+    
+    .lessons-grid,
+    .practice-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .practice-section {
+        padding: 20px;
+    }
+}
