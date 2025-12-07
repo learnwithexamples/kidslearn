@@ -6,6 +6,7 @@
     <title>Book C - Vocabulary from Classical Roots - KidsLearn</title>
     <link rel="stylesheet" href="../../styles/main.css">
     <link rel="stylesheet" href="../../styles/vocabulary.css">
+    <link rel="stylesheet" href="../../styles/vocabulary-modal.css">
 </head>
 <body>
     <div class="container">
@@ -24,33 +25,7 @@
             <div class="lessons-section">
                 <h2>Lessons</h2>
                 <div class="lessons-grid">
-                    <div class="lesson-card">
-                        <div class="lesson-number">Lesson 1</div>
-                        <h3>Coming Soon</h3>
-                        <p>First set of vocabulary words and roots</p>
-                        <a href="#" class="lesson-link disabled">Start Lesson</a>
-                    </div>
-
-                    <div class="lesson-card">
-                        <div class="lesson-number">Lesson 2</div>
-                        <h3>Coming Soon</h3>
-                        <p>Second set of vocabulary words and roots</p>
-                        <a href="#" class="lesson-link disabled">Start Lesson</a>
-                    </div>
-
-                    <div class="lesson-card">
-                        <div class="lesson-number">Lesson 3</div>
-                        <h3>Coming Soon</h3>
-                        <p>Third set of vocabulary words and roots</p>
-                        <a href="#" class="lesson-link disabled">Start Lesson</a>
-                    </div>
-
-                    <div class="lesson-card">
-                        <div class="lesson-number">Lesson 4</div>
-                        <h3>Coming Soon</h3>
-                        <p>Fourth set of vocabulary words and roots</p>
-                        <a href="#" class="lesson-link disabled">Start Lesson</a>
-                    </div>
+                    <!-- Lessons will be loaded dynamically from JSON -->
                 </div>
             </div>
 
@@ -85,5 +60,8 @@
             <p>Keep learning and growing your vocabulary! 🌟</p>
         </footer>
     </div>
+
+    <script src="../../data/vocabulary-data.js"></script>
+    <script src="../../scripts/vocabulary-loader.js"></script>
 </body>
 </html>
