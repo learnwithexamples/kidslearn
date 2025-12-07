@@ -45,8 +45,8 @@ function setupEventListeners() {
 
     // Check button
     document.getElementById('check-btn').addEventListener('click', function() {
+        checkAnswers();
         if (!isChecked) {
-            checkAnswers();
             stopTimer();
             isChecked = true;
         }
@@ -312,17 +312,19 @@ function checkAnswers() {
         const questionItem = input.closest('.question-item');
         const resultIcon = questionItem.querySelector('.result-icon');
         
+        // Clear previous states
+        questionItem.classList.remove('correct', 'incorrect');
+        
         if (userAnswer !== null) {
             const isCorrect = Math.abs(userAnswer - questions[index].answer) < 0.001;
             
             if (isCorrect) {
                 questionItem.classList.add('correct');
-                questionItem.classList.remove('incorrect');
                 resultIcon.textContent = '✓';
+                resultIcon.title = '';
                 correct++;
             } else {
                 questionItem.classList.add('incorrect');
-                questionItem.classList.remove('correct');
                 resultIcon.textContent = '✗';
                 resultIcon.title = `Correct answer: ${questions[index].answer}`;
             }
