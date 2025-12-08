@@ -101,6 +101,7 @@ function setupEventListeners() {
     document.getElementById('next-btn').addEventListener('click', nextCard);
     document.getElementById('flip-btn').addEventListener('click', flipCard);
     document.getElementById('shuffle-btn').addEventListener('click', shuffleCards);
+    document.getElementById('speak-btn').addEventListener('click', speakWord);
     document.getElementById('flashcard').addEventListener('click', flipCard);
     
     // Keyboard navigation
@@ -227,4 +228,52 @@ function shuffleCards() {
     }
     currentCardIndex = 0;
     displayCard();
+}
+
+// Speak the current word
+function speakWord(event) {
+    if (event) {
+        event.stopPropagation(); // Prevent card flip when clicking speaker
+    }
+    
+    if (flashcards.length === 0) return;
+    
+    const word = flashcards[currentCardIndex].word;
+    
+    // Check if browser supports speech synthesis
+    if ('speechSynthesis' in window) {
+        // Cancel any ongoing speech
+        window.speechSynthesis.cancel();
+        
+        // Create speech utterance
+        const utterance = new SpeechSynthesisUtterance(word);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.9;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+        
+        // Try to use the best available voice
+        const voices = window.speechSynthesis.getVoices();
+        
+        // Prefer Google voices, then premium/natural voices
+        const preferredVoice = voices.find(voice => 
+            voice.lang.startsWith('en') && (
+                voice.name.includes('Google') ||
+                voice.name.includes('Premium') ||
+                voice.name.includes('Natural') ||
+                voice.name.includes('Enhanced') ||
+                voice.name.includes('Samantha') || // macOS high-quality voice
+                voice.name.includes('Alex') // macOS high-quality voice
+            )
+        ) || voices.find(voice => voice.lang.startsWith('en'));
+        
+        if (preferredVoice) {
+            utterance.voice = preferredVoice;
+        }
+        
+        // Speak the word
+        window.speechSynthesis.speak(utterance);
+    } else {
+        alert('Sorry, your browser does not support text-to-speech.');
+    }
 }
