@@ -5,6 +5,7 @@ let selectedLessons = [];
 let flashcards = [];
 let currentCardIndex = 0;
 let isFlipped = false;
+let voicesLoaded = false;
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
@@ -13,6 +14,24 @@ document.addEventListener('DOMContentLoaded', function() {
     if (currentBook) {
         loadBookData();
         setupEventListeners();
+    }
+    
+    // Load voices when available
+    if ('speechSynthesis' in window) {
+        // Voices might load asynchronously
+        speechSynthesis.addEventListener('voiceschanged', function() {
+            voicesLoaded = true;
+        });
+        
+        // Try to trigger voice loading
+        speechSynthesis.getVoices();
+        
+        // Set flag after a short delay if voices are already available
+        setTimeout(() => {
+            if (speechSynthesis.getVoices().length > 0) {
+                voicesLoaded = true;
+            }
+        }, 100);
     }
 });
 
