@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictation - Vocabulary from Classical Roots - KidsLearn</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/vocabulary.css">
+    <link rel="stylesheet" href="../../styles/dictation.css">
+</head>
+<body>
+    <div class="container">
+        <header class="dictation-header">
+            <h1>🎤 Dictation Practice</h1>
+            <p class="subtitle" id="book-title">Loading...</p>
+            <a href="#" id="back-link" class="back-link">← Back to Book</a>
+        </header>
+
+        <!-- Controls Panel -->
+        <div class="controls-panel">
+            <div class="lesson-selector">
+                <h2>Select Lessons</h2>
+                <div class="selector-buttons">
+                    <button id="select-all-btn" class="selector-btn">✓ Select All</button>
+                    <button id="deselect-all-btn" class="selector-btn">✗ Deselect All</button>
+                </div>
+                <div id="lesson-checkboxes" class="lesson-checkboxes">
+                    <!-- Lesson checkboxes will be generated here -->
+                </div>
+            </div>
+
+            <div class="dictation-settings">
+                <label for="word-count">Number of words:</label>
+                <select id="word-count">
+                    <option value="5">5 words</option>
+                    <option value="10" selected>10 words</option>
+                    <option value="15">15 words</option>
+                    <option value="20">20 words</option>
+                    <option value="all">All words</option>
+                </select>
+            </div>
+
+            <button id="start-dictation-btn" class="primary-btn">Start Dictation</button>
+        </div>
+
+        <!-- Dictation Area -->
+        <div id="dictation-area" class="dictation-area hidden">
+            <div class="progress-section">
+                <div class="progress-info">
+                    <span id="word-counter">Word 1 of 10</span>
+                    <span id="score-display">Score: 0/0</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div id="progress-bar" class="progress-bar"></div>
+                </div>
+            </div>
+
+            <div class="word-section">
+                <div class="audio-controls">
+                    <button id="play-word-btn" class="play-btn">🔊 Play Word</button>
+                    <button id="replay-btn" class="replay-btn">🔁 Replay</button>
+                </div>
+
+                <div class="input-section">
+                    <label for="word-input">Type what you hear:</label>
+                    <input type="text" id="word-input" class="word-input" placeholder="Type the word here..." autocomplete="off" spellcheck="false">
+                    <button id="check-btn" class="check-btn">Check Answer</button>
+                </div>
+
+                <div id="feedback" class="feedback hidden">
+                    <p id="feedback-text"></p>
+                    <div id="word-details" class="word-details hidden">
+                        <p class="correct-word"><strong>Correct spelling:</strong> <span id="correct-spelling"></span></p>
+                        <p class="pronunciation"><strong>Pronunciation:</strong> <span id="word-pronunciation"></span></p>
+                        <p class="definition"><strong>Definition:</strong> <span id="word-definition"></span></p>
+                    </div>
+                </div>
+            </div>
+
+            <button id="next-word-btn" class="next-btn hidden">Next Word →</button>
+        </div>
+
+        <!-- Results Area -->
+        <div id="results-area" class="results-area hidden">
+            <div class="results-card">
+                <div class="percentage-circle">
+                    <h2 id="final-percentage">0%</h2>
+                </div>
+                <p id="final-score-text">You scored 0 out of 0</p>
+                <p id="performance-text">Keep practicing!</p>
+            </div>
+
+            <div class="results-buttons">
+                <button id="review-btn" class="review-btn">📋 Review Answers</button>
+                <button id="retake-btn" class="retake-btn">🔄 Retake Test</button>
+                <button id="new-dictation-btn" class="new-btn">✨ New Dictation</button>
+            </div>
+
+            <div id="review-section" class="review-section hidden">
+                <h3>Your Answers</h3>
+                <div id="review-list" class="review-list">
+                    <!-- Review items will be generated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../data/vocabulary-data.js"></script>
+    <script src="../../scripts/dictation.js"></script>
+</body>
+</html>

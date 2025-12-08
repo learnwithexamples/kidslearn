@@ -1,0 +1,634 @@
+/* Dictation Styles */
+.dictation-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.dictation-header {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(240, 147, 251, 0.3);
+}
+
+.dictation-header h1 {
+    margin: 0 0 10px 0;
+    font-size: 2rem;
+}
+
+.dictation-header .back-link {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.dictation-header .back-link:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Controls Panel */
+.controls-panel {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.controls-panel h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.lesson-selector {
+    margin-bottom: 25px;
+}
+
+.lesson-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.lesson-checkbox {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.lesson-checkbox:hover {
+    background: #e9ecef;
+    transform: translateX(5px);
+}
+
+.lesson-checkbox input[type="checkbox"] {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.lesson-checkbox span {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.selector-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.selector-buttons button {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#select-all-btn {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+}
+
+#deselect-all-btn {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+
+.selector-buttons button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Dictation Settings */
+.dictation-settings {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.dictation-settings label {
+    font-weight: 600;
+    color: #333;
+}
+
+.dictation-settings select {
+    padding: 10px 20px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dictation-settings select:hover {
+    border-color: #f093fb;
+}
+
+.dictation-settings select:focus {
+    outline: none;
+    border-color: #f093fb;
+    box-shadow: 0 0 0 3px rgba(240, 147, 251, 0.1);
+}
+
+/* Primary Button */
+.primary-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(240, 147, 251, 0.3);
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(240, 147, 251, 0.4);
+}
+
+/* Dictation Area */
+.dictation-area {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Progress Bar */
+.progress-section {
+    margin-bottom: 30px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 10px;
+    background: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+/* Word Section */
+.word-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.audio-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.play-btn,
+.replay-btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.play-btn {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    box-shadow: 0 4px 8px rgba(240, 147, 251, 0.3);
+}
+
+.replay-btn {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    box-shadow: 0 4px 8px rgba(79, 172, 254, 0.3);
+}
+
+.play-btn:hover,
+.replay-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Input Section */
+.input-section {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.input-section label {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.word-input {
+    width: 100%;
+    padding: 15px 20px;
+    font-size: 1.2rem;
+    border: 3px solid #e9ecef;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.word-input:focus {
+    outline: none;
+    border-color: #f093fb;
+    box-shadow: 0 0 0 3px rgba(240, 147, 251, 0.1);
+}
+
+.word-input:disabled {
+    background: #f8f9fa;
+    cursor: not-allowed;
+}
+
+.check-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.check-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(17, 153, 142, 0.4);
+}
+
+.check-btn:disabled {
+    background: #cbd5e0;
+    cursor: not-allowed;
+}
+
+/* Feedback */
+.feedback {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.feedback.correct-feedback {
+    background: linear-gradient(135deg, rgba(17, 153, 142, 0.1) 0%, rgba(56, 239, 125, 0.1) 100%);
+    border: 2px solid #11998e;
+}
+
+.feedback.incorrect-feedback {
+    background: linear-gradient(135deg, rgba(245, 87, 108, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%);
+    border: 2px solid #f5576c;
+}
+
+#feedback-text {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.feedback.correct-feedback #feedback-text {
+    color: #11998e;
+}
+
+.feedback.incorrect-feedback #feedback-text {
+    color: #f5576c;
+}
+
+.word-details {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px solid #e9ecef;
+}
+
+.word-details p {
+    margin: 10px 0;
+    color: #333;
+}
+
+.word-details strong {
+    color: #666;
+}
+
+.correct-word span,
+.pronunciation span {
+    color: #f093fb;
+    font-weight: 600;
+}
+
+.definition span {
+    color: #555;
+}
+
+/* Next Button */
+.next-btn {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 15px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.next-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* Results Area */
+.results-area {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.results-card {
+    text-align: center;
+    padding: 40px;
+    background: linear-gradient(135deg, rgba(240, 147, 251, 0.05) 0%, rgba(245, 87, 108, 0.05) 100%);
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.percentage-circle {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 16px rgba(240, 147, 251, 0.3);
+}
+
+.percentage-circle h2 {
+    color: white;
+    font-size: 3rem;
+    margin: 0;
+}
+
+#final-score-text {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+#performance-text {
+    font-size: 1.3rem;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Results Buttons */
+.results-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.results-buttons button {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.review-btn {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+}
+
+.retake-btn {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+
+.new-btn {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    color: white;
+}
+
+.results-buttons button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Review Section */
+.review-section {
+    margin-top: 20px;
+}
+
+.review-section h3 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.review-item {
+    display: grid;
+    grid-template-columns: 40px 1fr 40px;
+    gap: 15px;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    background: white;
+}
+
+.review-item.correct {
+    border-color: #11998e;
+    background: linear-gradient(135deg, rgba(17, 153, 142, 0.05) 0%, rgba(56, 239, 125, 0.05) 100%);
+}
+
+.review-item.incorrect {
+    border-color: #f5576c;
+    background: linear-gradient(135deg, rgba(245, 87, 108, 0.05) 0%, rgba(240, 147, 251, 0.05) 100%);
+}
+
+.review-number {
+    width: 40px;
+    height: 40px;
+    background: #f093fb;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.review-content h4 {
+    color: #f093fb;
+    font-size: 1.3rem;
+    margin: 0 0 10px 0;
+}
+
+.review-label {
+    font-size: 0.85rem;
+    color: #666;
+    margin: 8px 0 4px 0;
+    font-weight: 600;
+}
+
+.review-answer {
+    margin: 0 0 8px 0;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 3px solid #e9ecef;
+}
+
+.review-answer.wrong {
+    border-left-color: #f5576c;
+    color: #f5576c;
+}
+
+.review-answer.correct-answer {
+    border-left-color: #11998e;
+    color: #11998e;
+}
+
+.review-detail {
+    margin: 0 0 8px 0;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.review-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.review-item.correct .review-icon {
+    background: #11998e;
+    color: white;
+}
+
+.review-item.incorrect .review-icon {
+    background: #f5576c;
+    color: white;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dictation-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .controls-panel,
+    .dictation-area,
+    .results-area {
+        padding: 20px;
+    }
+
+    .lesson-checkboxes {
+        grid-template-columns: 1fr;
+    }
+
+    .audio-controls {
+        flex-direction: column;
+    }
+
+    .play-btn,
+    .replay-btn {
+        width: 100%;
+    }
+
+    .results-buttons {
+        flex-direction: column;
+    }
+
+    .results-buttons button {
+        width: 100%;
+    }
+
+    .review-item {
+        grid-template-columns: 30px 1fr 30px;
+        padding: 15px;
+    }
+
+    .review-number,
+    .review-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+
+    .percentage-circle {
+        width: 120px;
+        height: 120px;
+    }
+
+    .percentage-circle h2 {
+        font-size: 2.5rem;
+    }
+}
