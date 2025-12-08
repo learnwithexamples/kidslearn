@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Vocabulary from Classical Roots - KidsLearn</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/vocabulary.css">
+    <link rel="stylesheet" href="../../styles/quiz.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Vocabulary Quiz</h1>
+            <p class="subtitle" id="book-title">Loading...</p>
+            <a href="#" id="back-link" class="back-link">← Back to Book</a>
+        </header>
+
+        <div class="controls-panel">
+            <div class="lesson-selector">
+                <h3>Select Lessons</h3>
+                <div class="selector-buttons">
+                    <button id="select-all-btn" class="selector-btn">✓ Select All</button>
+                    <button id="deselect-all-btn" class="selector-btn">✗ Deselect All</button>
+                </div>
+                <div id="lesson-checkboxes" class="lesson-checkboxes">
+                    <!-- Lesson checkboxes will be generated here -->
+                </div>
+                
+                <div class="quiz-options">
+                    <h3>Quiz Options</h3>
+                    <label class="option-label">
+                        <span>Number of Questions:</span>
+                        <select id="question-count">
+                            <option value="5">5 Questions</option>
+                            <option value="10" selected>10 Questions</option>
+                            <option value="15">15 Questions</option>
+                            <option value="20">20 Questions</option>
+                            <option value="all">All Available</option>
+                        </select>
+                    </label>
+                </div>
+                
+                <button id="start-quiz-btn" class="primary-btn">Start Quiz</button>
+            </div>
+        </div>
+
+        <div id="quiz-area" class="quiz-area hidden">
+            <div class="quiz-header">
+                <div class="progress-bar-container">
+                    <div id="progress-bar" class="progress-bar"></div>
+                </div>
+                <div class="quiz-info">
+                    <span id="question-counter">Question 1 of 10</span>
+                    <span id="score-display">Score: 0/0</span>
+                </div>
+            </div>
+
+            <div id="quiz-content" class="quiz-content">
+                <div class="question-card">
+                    <div id="question-text" class="question-text">
+                        What is the definition of <strong id="question-word">word</strong>?
+                    </div>
+                    
+                    <div id="answer-choices" class="answer-choices">
+                        <!-- Answer choices will be generated here -->
+                    </div>
+                    
+                    <div id="feedback" class="feedback hidden">
+                        <p id="feedback-text"></p>
+                        <button id="next-question-btn" class="primary-btn">Next Question</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="results-area" class="results-area hidden">
+            <div class="results-card">
+                <h2>🎉 Quiz Complete!</h2>
+                <div class="final-score">
+                    <div class="score-circle">
+                        <span id="final-percentage">0%</span>
+                    </div>
+                    <p id="final-score-text">You scored 0 out of 0</p>
+                </div>
+                
+                <div class="performance-message">
+                    <p id="performance-text"></p>
+                </div>
+                
+                <div class="results-buttons">
+                    <button id="review-btn" class="secondary-btn">📋 Review Answers</button>
+                    <button id="retake-btn" class="primary-btn">🔄 Retake Quiz</button>
+                    <button id="new-quiz-btn" class="primary-btn">✨ New Quiz</button>
+                </div>
+            </div>
+            
+            <div id="review-section" class="review-section hidden">
+                <h3>Answer Review</h3>
+                <div id="review-list" class="review-list">
+                    <!-- Review items will be generated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../data/vocabulary-data.js"></script>
+    <script src="../../scripts/quiz.js"></script>
+</body>
+</html>
