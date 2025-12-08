@@ -116,7 +116,6 @@ function setupEventListeners() {
     
     document.getElementById('start-dictation-btn').addEventListener('click', startDictation);
     document.getElementById('play-word-btn').addEventListener('click', playWord);
-    document.getElementById('replay-btn').addEventListener('click', playWord);
     document.getElementById('check-btn').addEventListener('click', checkAnswer);
     document.getElementById('next-word-btn').addEventListener('click', nextWord);
     document.getElementById('retake-btn').addEventListener('click', retakeDictation);
