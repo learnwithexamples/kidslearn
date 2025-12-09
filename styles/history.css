@@ -129,6 +129,8 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
     border-left: 4px solid #667eea;
+    display: flex;
+    flex-direction: column;
 }
 
 .chapter-card:hover {
@@ -157,6 +159,7 @@
     list-style: none;
     padding: 0;
     margin: 1rem 0;
+    flex-grow: 1;
 }
 
 .chapter-topics li {
@@ -173,6 +176,11 @@
     left: 0;
     color: #667eea;
     font-weight: bold;
+}
+
+.chapter-card .topic-link {
+    margin-top: auto;
+    text-align: center;
 }
 
 /* Chapter Lesson Page */
