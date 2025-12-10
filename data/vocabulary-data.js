@@ -134,9 +134,9 @@ const vocabularyData = {
           "title": "Looking and Seeing",
           "roots": [
             {
-              "root": "SPEC/SPECT",
-              "origin": "Latin",
-              "meaning": "look, see",
+              "root": "VIS,SPEC/SPECT",
+              "origin": "Latin,Latin",
+              "meaning": "to see, sight;to look at, to watch",
               "words": [
                 {
                   "word": "prospect",
@@ -172,7 +172,77 @@ const vocabularyData = {
                   "partOfSpeech": "adjective",
                   "definition": "impressive, dramatic, striking to see",
                   "example": "The view from the mountaintop was spectacular."
-                }
+                },
+                {
+                  "word": "visible",
+                  "pronunciation": "VIZ-uh-buhl",
+                  "partOfSpeech": "adjective",
+                  "definition": "able to be seen",
+                  "example": "The stars were visible in the clear night sky."
+                },
+                {
+                  "word": "visor",
+                  "pronunciation": "VY-zer",
+                  "partOfSpeech": "noun",
+                  "definition": "a shield for the eyes, often on a helmet or cap",
+                  "example": "He lowered the visor on his helmet before riding his bike."
+                },
+                {
+                  "word": "revise",
+                  "pronunciation": "ri-VAHYZ",
+                  "partOfSpeech": "verb",
+                  "definition": "to look over again in order to correct or improve",
+                  "example": "She decided to revise her essay before submitting it."
+                },
+                {
+                  "word": "supervise",
+                  "pronunciation": "SOO-per-vahyz",
+                  "partOfSpeech": "verb",
+                  "definition": "to watch over and direct",
+                  "example": "The teacher will supervise the students during the exam."
+                },
+                {
+                  "word": "envision",
+                  "pronunciation": "en-VIZH-uhn",
+                  "partOfSpeech": "verb",
+                  "definition": "to imagine or picture something in the mind",
+                  "example": "She could envision a future where she was a successful artist."
+                },
+                {
+                  "word": "visionary",
+                  "pronunciation": "VIZH-uh-ner-ee",
+                  "partOfSpeech": "noun/adjective",
+                  "definition": "a person with original ideas about the future; having clear ideas about what the future should be like",
+                  "example": "The inventor was a visionary who changed the world with his ideas."
+                },
+                {
+                  "word": "visage",
+                  "pronunciation": "VIZH-ij",
+                  "partOfSpeech": "noun",
+                  "definition": "a person's face or facial expression",
+                  "example": "Her calm visage helped to soothe the frightened children."
+                },
+                {
+                  "word": "suspect",
+                  "pronunciation": "suh-SPEKT",
+                  "partOfSpeech": "verb/noun",
+                    "definition": "to think something is likely; a person believed to be guilty",
+                  "example": "The detective began to suspect the butler of the crime."
+                },
+                {
+                  "word": "introspection",
+                  "pronunciation": "in-truh-SPEK-shuhn",
+                  "partOfSpeech": "noun",
+                  "definition": "the act of looking inward and examining one's own thoughts and feelings",
+                  "example": "After the argument, she took some time for introspection to understand her emotions."
+                },
+                {
+                  "word": "spectrum",
+                  "pronunciation": "SPEK-truhm",
+                  "partOfSpeech": "noun",
+                  "definition": "a range or scope of something, often colors or opinions",
+                  "example": "The rainbow displayed a beautiful spectrum of colors."
+                },
               ]
             }
           ]
@@ -475,14 +545,84 @@ const vocabularyData = {
                   "partOfSpeech": "verb",
                   "definition": "to move downward; to come from an ancestor",
                   "example": "The airplane began to descend for landing."
-                }
+                },
+                {
+                  "word": "subside",
+                  "pronunciation": "suhb-SAHYD",
+                  "partOfSpeech": "verb",
+                  "definition": "to become less intense, violent, or severe",
+                  "example": "The storm began to subside after an hour."
+                },
+                {
+                  "word": "subdue",
+                  "pronunciation": "suhb-DOO",
+                  "partOfSpeech": "verb",
+                  "definition": "to bring under control, especially by force",
+                  "example": "The police managed to subdue the suspect."
+                },
+                {
+                  "word": "subsistence",
+                  "pronunciation": "suhb-SIS-tuhns",
+                  "partOfSpeech": "noun",
+                  "definition": "the means of maintaining life; livelihood",
+                  "example": "Farmers rely on subsistence agriculture to support their families."
+                },
+                {
+                  "word": "subheading",
+                  "pronunciation": "suhb-HED-ing",
+                  "partOfSpeech": "noun",
+                  "definition": "a title or heading given to a subsection of a piece of writing",
+                  "example": "The article was divided into sections with clear subheadings."
+                },              
+                {
+                  "word": "submerge",
+                  "pronunciation": "suhb-MURJ",
+                  "partOfSpeech": "verb",
+                  "definition": "to go under a liquid, usually water",
+                  "example": "The submarine will submerge to avoid detection."
+                },               
+                {
+                  "word": "destructive",
+                  "pronunciation": "dih-STRUHK-tiv",
+                  "partOfSpeech": "adjective",
+                  "definition": "causing great damage",
+                  "example": "The hurricane was highly destructive to the coastal town."
+                },
+                {
+                  "word": "delinquent",
+                  "pronunciation": "dih-LING-kwuhnt",
+                  "partOfSpeech": "adjective",
+                  "definition": "failing in or neglectful of a duty or obligation; guilty of a misdeed or offense",
+                  "example": "The delinquent teenager was caught vandalizing the school."
+                },
+                {
+                  "word": "subservient",
+                  "pronunciation": "suhb-SUR-vee-uhnt",
+                  "partOfSpeech": "adjective",
+                  "definition": "prepared to obey others unquestioningly",
+                  "example": "The assistant was subservient to the manager's orders."
+                },
+                {
+                  "word": "submarine",
+                  "pronunciation": "suhb-muh-REEN",
+                  "partOfSpeech": "noun,adjective",
+                  "definition": "a watercraft capable of underwater operation; existing, occurring, or done under the surface of the sea",
+                  "example": "The submarine explored the depths of the ocean."
+                },
+                {
+                  "word": "sublimate",
+                  "pronunciation": "SUB-luh-mayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to change directly from a solid to a gas; to redirect energy or impulses into a more acceptable form",
+                  "example": "The ice will sublimate in the sun."
+                },
               ]
             }
           ]
         },
         {
           "number": 8, // review (lessons 5-7)
-          "title": "Down and Below",
+          "title": "Review (Lessons 5-7)  ",
           "roots": [
             {
               "root": "sub, de, mem, scrib/script, graph",
