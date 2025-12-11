@@ -1123,9 +1123,9 @@ const vocabularyData = {
           "title": "Breath and Spirit",
           "roots": [
             {
-              "root": "SPIR",
-              "origin": "Latin",
-              "meaning": "breathe",
+              "root": "SPIR, PHOTO,FLAM",
+              "origin": "Latin, Greek, Latin",
+              "meaning": "breathe, light, flame",
               "words": [
                 {
                   "word": "inspire",
@@ -1154,6 +1154,83 @@ const vocabularyData = {
                   "partOfSpeech": "adjective",
                   "definition": "having inner drive; lively; excited",
                   "example": "The team put up a spirited defense in the final quarter."
+                },
+                {
+                  "word": "conspiracy",
+                  "pronunciation": "kuhn-SPI-ruh-see",
+                  "partOfSpeech": "noun",
+                  "definition": "a secret plan by a group to do something unlawful or harmful",
+                  "example": "The police uncovered a conspiracy to commit fraud."
+                },
+                {
+                  "word": "transpire",
+                  "pronunciation": "trans-PAHY-uhr",
+                  "partOfSpeech": "verb",
+                  "definition": "to happen; to become known",
+                  "example": "It transpired that the meeting had been canceled."
+                },
+                {
+                  "word": "photogenic",
+                  "pronunciation": "foh-tuh-JEN-ik",
+                  "partOfSpeech": "adjective",
+                  "definition": "looking attractive in photographs",
+                  "example": "She is very photogenic and always looks great in pictures."
+                },
+                {
+                  "word": "photosynthesis",
+                  "pronunciation": "foh-tuh-SIN-thuh-sis",
+                  "partOfSpeech": "noun",
+                  "definition": "the process by which green plants use sunlight to make food from carbon dioxide and water",
+                  "example": "Photosynthesis is essential for the survival of plants and the production of oxygen."
+                },
+                {
+                  "word": "photographer",
+                  "pronunciation": "foh-tuh-GRAF-er",
+                  "partOfSpeech": "noun",
+                  "definition": "a person who takes photographs, especially as a profession",
+                  "example": "The photographer captured stunning images of the sunset."
+                },
+                {
+                  "word": "telephoto",
+                  "pronunciation": "tel-uh-FOH-toh",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to or denoting a lens with a long focal length that produces a large image of a distant object",
+                  "example": "She used a telephoto lens to capture close-up shots of the wildlife."
+                },
+                {
+                  "word": "flamingo",
+                  "pronunciation": "fluh-MING-goh",
+                  "partOfSpeech": "noun",
+                  "definition": "a tall wading bird with mainly pink or scarlet plumage and long legs and neck",
+                  "example": "The flamingo stood gracefully in the shallow water."
+                },
+                {
+                  "word": "flammable",
+                  "pronunciation": "FLAM-uh-buhl",
+                  "partOfSpeech": "adjective",
+                  "definition": "easily set on fire",
+                  "example": "Be careful with flammable materials near open flames."
+                },
+                {
+                  "word": "inflammation",
+                  "pronunciation": "in-fluh-MAY-shuhn",
+                  "partOfSpeech": "noun",
+                  "definition": "a localized physical condition in which part of the body becomes reddened, swollen, hot, and often painful, especially as a reaction to injury or infection",
+                  "example": "The doctor explained that the redness and swelling were signs of inflammation.;Inflamation is caused by specific protiens in the body."
+                },
+                {
+                  "word": "inflammatory",
+                  "pronunciation": "in-FLAM-uh-tawr-ee",
+                  "partOfSpeech": "adjective",
+                  "definition": "causing or related to inflammation",
+                  "example": "The doctor prescribed medication to reduce the inflammatory response."
+                },
+                {
+                  "word": "flamboyant",
+                  "pronunciation": "flam-BOY-uhnt",
+                  "partOfSpeech": "adjective",
+                  "definition": "tending to attract attention because of their exuberance, confidence, and stylishness",
+                  "example": "The artist was known for his flamboyant style and colorful paintings."
                 }
               ]
             }
