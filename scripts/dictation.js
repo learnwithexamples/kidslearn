@@ -118,6 +118,7 @@ function setupEventListeners() {
     document.getElementById('play-word-btn').addEventListener('click', playWord);
     document.getElementById('check-btn').addEventListener('click', checkAnswer);
     document.getElementById('next-word-btn').addEventListener('click', nextWord);
+    document.getElementById('retry-wrong-btn').addEventListener('click', retryWrongAnswers);
     document.getElementById('retake-btn').addEventListener('click', retakeDictation);
     document.getElementById('new-dictation-btn').addEventListener('click', newDictation);
     document.getElementById('review-btn').addEventListener('click', toggleReview);
@@ -222,7 +223,7 @@ function playWord() {
         
         const utterance = new SpeechSynthesisUtterance(word);
         utterance.lang = 'en-US';
-        utterance.rate = 0.85;
+        utterance.rate = 0.9;
         utterance.pitch = 1;
         utterance.volume = 1;
         
@@ -392,6 +393,38 @@ function toggleReview() {
     } else {
         btn.textContent = '🔼 Hide Review';
     }
+}
+
+// Retry wrong answers only
+function retryWrongAnswers() {
+    // Filter words that were answered incorrectly
+    const wrongWords = answers.filter(answer => !answer.isCorrect);
+    
+    if (wrongWords.length === 0) {
+        alert('You spelled all words correctly! No wrong answers to retry.');
+        return;
+    }
+    
+    // Recreate dictationWords from wrong answers
+    dictationWords = wrongWords.map(answer => {
+        return {
+            word: answer.word,
+            pronunciation: answer.pronunciation,
+            definition: answer.definition
+        };
+    });
+    
+    // Shuffle the wrong words
+    dictationWords = dictationWords.sort(() => Math.random() - 0.5);
+    
+    // Reset state
+    currentWordIndex = 0;
+    score = 0;
+    answers = [];
+    
+    document.getElementById('results-area').classList.add('hidden');
+    document.getElementById('dictation-area').classList.remove('hidden');
+    displayWord();
 }
 
 // Retake dictation

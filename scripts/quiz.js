@@ -100,6 +100,7 @@ function setupEventListeners() {
     
     document.getElementById('start-quiz-btn').addEventListener('click', startQuiz);
     document.getElementById('next-question-btn').addEventListener('click', nextQuestion);
+    document.getElementById('retry-wrong-btn').addEventListener('click', retryWrongAnswers);
     document.getElementById('retake-btn').addEventListener('click', retakeQuiz);
     document.getElementById('new-quiz-btn').addEventListener('click', newQuiz);
     document.getElementById('review-btn').addEventListener('click', toggleReview);
@@ -347,6 +348,49 @@ function toggleReview() {
     } else {
         btn.textContent = '🔼 Hide Review';
     }
+}
+
+// Retry wrong answers only
+function retryWrongAnswers() {
+    // Filter questions that were answered incorrectly
+    const wrongAnswers = answers.filter(answer => !answer.isCorrect);
+    
+    if (wrongAnswers.length === 0) {
+        alert('You answered all questions correctly! No wrong answers to retry.');
+        return;
+    }
+    
+    // Recreate questions from wrong answers
+    questions = wrongAnswers.map(answer => {
+        const word = answer.word;
+        const correctDef = answer.correctDefinition;
+        
+        // Find the original word data
+        const wordData = quizWords.find(w => w.word === word);
+        if (!wordData) return null;
+        
+        // Get other definitions for choices
+        const otherWords = quizWords.filter(w => w.word !== word);
+        const shuffled = otherWords.sort(() => Math.random() - 0.5);
+        const wrongChoices = shuffled.slice(0, 3).map(w => w.definition);
+        
+        const choices = [correctDef, ...wrongChoices].sort(() => Math.random() - 0.5);
+        
+        return {
+            word: word,
+            choices: choices,
+            correctAnswer: correctDef
+        };
+    }).filter(q => q !== null);
+    
+    // Reset state
+    currentQuestionIndex = 0;
+    score = 0;
+    answers = [];
+    
+    document.getElementById('results-area').classList.add('hidden');
+    document.getElementById('quiz-area').classList.remove('hidden');
+    displayQuestion();
 }
 
 // Retake quiz
