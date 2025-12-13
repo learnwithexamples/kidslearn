@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crossword Puzzle - Vocabulary from Classical Roots - KidsLearn</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/vocabulary.css">
+    <link rel="stylesheet" href="../../styles/crossword.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧩 Crossword Puzzle</h1>
+            <p class="subtitle" id="book-title">Loading...</p>
+            <a href="#" id="back-link" class="back-link">← Back to Book</a>
+        </header>
+
+        <div class="controls-panel">
+            <div class="lesson-selector">
+                <h3>Select Lessons</h3>
+                <div class="selector-buttons">
+                    <button id="select-all-btn" class="selector-btn">✓ Select All</button>
+                    <button id="deselect-all-btn" class="selector-btn">✗ Deselect All</button>
+                </div>
+                <div id="lesson-checkboxes" class="lesson-checkboxes">
+                    <!-- Lesson checkboxes will be generated here -->
+                </div>
+                <div class="puzzle-settings">
+                    <label for="puzzle-size">Puzzle Size:</label>
+                    <select id="puzzle-size">
+                        <option value="small">Small (8-10 words)</option>
+                        <option value="medium" selected>Medium (12-15 words)</option>
+                        <option value="large">Large (18-20 words)</option>
+                    </select>
+                </div>
+                <button id="generate-puzzle-btn" class="primary-btn">Generate Puzzle</button>
+            </div>
+        </div>
+
+        <div id="crossword-area" class="crossword-area hidden">
+            <div class="crossword-header">
+                <div class="puzzle-info">
+                    <span id="words-completed">0 of 0 words completed</span>
+                    <span id="timer">Time: 0:00</span>
+                </div>
+                <div class="puzzle-controls">
+                    <button id="check-btn" class="control-btn">✓ Check Answers</button>
+                    <button id="reveal-word-btn" class="control-btn">💡 Reveal Word</button>
+                    <button id="new-puzzle-btn" class="control-btn">🔄 New Puzzle</button>
+                </div>
+            </div>
+
+            <div class="crossword-container">
+                <div class="crossword-grid" id="crossword-grid">
+                    <!-- Grid will be generated here -->
+                </div>
+
+                <div class="crossword-clues">
+                    <div class="clues-section">
+                        <h3>Across</h3>
+                        <ol id="across-clues" class="clue-list">
+                            <!-- Across clues will be generated here -->
+                        </ol>
+                    </div>
+                    <div class="clues-section">
+                        <h3>Down</h3>
+                        <ol id="down-clues" class="clue-list">
+                            <!-- Down clues will be generated here -->
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="keyboard-hint">
+                <p>💡 Click a clue to highlight, use <kbd>Tab</kbd> to switch direction, <kbd>Backspace</kbd> to delete</p>
+            </div>
+        </div>
+
+        <div id="completion-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>🎉 Puzzle Complete!</h2>
+                <p id="completion-time">Time: 0:00</p>
+                <p id="completion-score">Score: 100%</p>
+                <div class="modal-buttons">
+                    <button id="new-puzzle-modal-btn" class="primary-btn">New Puzzle</button>
+                    <button id="close-modal-btn" class="secondary-btn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../data/vocabulary-data.js"></script>
+    <script src="crossword.js"></script>
+</body>
+</html>
