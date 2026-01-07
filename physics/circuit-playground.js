@@ -113,6 +113,29 @@ class CircuitPlayground {
         canvas.width = boardGrid.offsetWidth;
         canvas.height = boardGrid.offsetHeight;
         
+        // Change cursor when hovering over wires
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const connection = this.findConnectionAtPoint(x, y);
+            canvas.style.cursor = connection ? 'pointer' : 'default';
+        });
+        
+        // Click on canvas to remove wires
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Check if click is near any wire
+            const clickedConnection = this.findConnectionAtPoint(x, y);
+            if (clickedConnection) {
+                this.removeConnection(clickedConnection);
+            }
+        });
+        
         // Redraw on window resize
         window.addEventListener('resize', () => {
             canvas.width = boardGrid.offsetWidth;
@@ -308,13 +331,97 @@ class CircuitPlayground {
     removeComponent(componentId) {
         // Remove connections involving this component
         this.connections = this.connections.filter(
-            conn => conn.from !== componentId && conn.to !== componentId
+            conn => conn.from.componentId !== componentId && conn.to.componentId !== componentId
         );
         
         this.components = this.components.filter(c => c.id !== componentId);
         const el = document.querySelector(`[data-id="${componentId}"]`);
         if (el) el.remove();
         this.updateCircuit();
+    }
+
+    removeConnection(connection) {
+        const index = this.connections.indexOf(connection);
+        if (index > -1) {
+            this.connections.splice(index, 1);
+            this.updateCircuit();
+            this.showStatus('Connection removed!', 'success');
+            console.log('🗑️ Connection removed');
+        }
+    }
+
+    findConnectionAtPoint(x, y) {
+        const canvas = document.getElementById('wire-canvas');
+        const threshold = 8; // Click within 8 pixels of wire
+        
+        for (const conn of this.connections) {
+            const comp1 = this.components.find(c => c.id === conn.from.componentId);
+            const comp2 = this.components.find(c => c.id === conn.to.componentId);
+            
+            if (!comp1 || !comp2) continue;
+
+            // Get connection point elements
+            const el1 = document.querySelector(`[data-id="${comp1.id}"]`);
+            const el2 = document.querySelector(`[data-id="${comp2.id}"]`);
+            
+            if (!el1 || !el2) continue;
+            
+            const point1 = el1.querySelector(`[data-point="${conn.from.pointIndex}"]`);
+            const point2 = el2.querySelector(`[data-point="${conn.to.pointIndex}"]`);
+            
+            if (!point1 || !point2) continue;
+            
+            const rect1 = point1.getBoundingClientRect();
+            const rect2 = point2.getBoundingClientRect();
+            const canvasRect = canvas.getBoundingClientRect();
+            
+            const x1 = rect1.left + rect1.width / 2 - canvasRect.left;
+            const y1 = rect1.top + rect1.height / 2 - canvasRect.top;
+            const x2 = rect2.left + rect2.width / 2 - canvasRect.left;
+            const y2 = rect2.top + rect2.height / 2 - canvasRect.top;
+
+            // Calculate distance from point to line segment
+            const dist = this.pointToLineDistance(x, y, x1, y1, x2, y2);
+            
+            if (dist < threshold) {
+                return conn;
+            }
+        }
+        
+        return null;
+    }
+
+    pointToLineDistance(px, py, x1, y1, x2, y2) {
+        // Calculate distance from point (px, py) to line segment (x1, y1) - (x2, y2)
+        const A = px - x1;
+        const B = py - y1;
+        const C = x2 - x1;
+        const D = y2 - y1;
+
+        const dot = A * C + B * D;
+        const lenSq = C * C + D * D;
+        let param = -1;
+
+        if (lenSq !== 0) {
+            param = dot / lenSq;
+        }
+
+        let xx, yy;
+
+        if (param < 0) {
+            xx = x1;
+            yy = y1;
+        } else if (param > 1) {
+            xx = x2;
+            yy = y2;
+        } else {
+            xx = x1 + param * C;
+            yy = y1 + param * D;
+        }
+
+        const dx = px - xx;
+        const dy = py - yy;
+        return Math.sqrt(dx * dx + dy * dy);
     }
 
     handleConnectionPointClick(componentId, pointIndex) {
