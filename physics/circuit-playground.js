@@ -251,20 +251,15 @@ class CircuitPlayground {
 
         const icons = {
             battery: '🔋',
-            bulb: '💡',
-            switch: '🔘'
+            bulb: '💡'
         };
 
         const labels = {
             battery: 'Battery',
-            bulb: 'Bulb',
-            switch: 'Switch'
+            bulb: 'Bulb'
         };
 
         let iconClass = component.type + '-icon';
-        if (component.type === 'switch') {
-            iconClass += component.active ? ' switch-on' : ' switch-off';
-        }
         if (component.type === 'bulb' && component.active) {
             iconClass += ' bulb-on';
         }
@@ -307,7 +302,6 @@ class CircuitPlayground {
         el.addEventListener('mousedown', (e) => {
             if (e.target.classList.contains('remove-btn')) return;
             if (e.target.classList.contains('connection-point')) return;
-            if (e.target.classList.contains('component-icon') && component.type === 'switch') return;
             this.startDrag(component.id, e);
         });
 
@@ -530,39 +524,12 @@ class CircuitPlayground {
         document.querySelectorAll('.connection-point').forEach(p => p.classList.remove('selected'));
     }
 
-    toggleSwitch(componentId) {
-        const component = this.components.find(c => c.id === componentId);
-        if (!component) return;
-
-        component.active = !component.active;
-        const el = document.querySelector(`[data-id="${componentId}"]`);
-        const icon = el.querySelector('.component-icon');
-        
-        if (component.active) {
-            icon.classList.remove('switch-off');
-            icon.classList.add('switch-on');
-        } else {
-            icon.classList.remove('switch-on');
-            icon.classList.add('switch-off');
-        }
-
-        this.updateCircuit();
-    }
-
     updateCircuit() {
         const hasBattery = this.components.some(c => c.type === 'battery');
         const hasBulb = this.components.some(c => c.type === 'bulb');
-        const hasSwitch = this.components.some(c => c.type === 'switch');
 
         // Check if circuit forms a complete path
         const circuitComplete = this.checkCircuitComplete();
-        
-        // Check if all switches are on
-        let allSwitchesOn = true;
-        if (hasSwitch) {
-            const switches = this.components.filter(c => c.type === 'switch');
-            allSwitchesOn = switches.every(s => s.active);
-        }
 
         // Update all bulb states
         const bulbComponents = this.components.filter(c => c.type === 'bulb');
@@ -573,7 +540,7 @@ class CircuitPlayground {
                 this.isConnectedPath(battery.id, bulbComponent.id)
             );
             
-            bulbComponent.active = isInCompletePath && allSwitchesOn;
+            bulbComponent.active = isInCompletePath;
             const bulbEl = document.querySelector(`[data-id="${bulbComponent.id}"]`);
             if (bulbEl) {
                 const bulbIcon = bulbEl.querySelector('.component-icon');
@@ -593,7 +560,7 @@ class CircuitPlayground {
         batteryComponents.forEach(batteryComponent => {
             const batteryEl = document.querySelector(`[data-id="${batteryComponent.id}"]`);
             if (batteryEl) {
-                if (circuitComplete && allSwitchesOn) {
+                if (circuitComplete) {
                     batteryEl.classList.add('active');
                 } else {
                     batteryEl.classList.remove('active');
@@ -602,14 +569,14 @@ class CircuitPlayground {
         });
 
         // Calculate and display readings
-        this.calculateReadings(circuitComplete && allSwitchesOn);
+        this.calculateReadings(circuitComplete);
         
         // Draw connecting wires
         this.drawWires();
 
         // Update status message
         if (!this.isConnecting) {
-            this.updateStatus(hasBattery, hasBulb, hasSwitch, circuitComplete, allSwitchesOn);
+            this.updateStatus(hasBattery, hasBulb, circuitComplete);
         }
     }
 
@@ -915,13 +882,7 @@ class CircuitPlayground {
 
         // Determine if circuit is active
         const circuitComplete = this.checkCircuitComplete();
-        const hasSwitch = this.components.some(c => c.type === 'switch');
         let isActive = circuitComplete;
-        
-        if (hasSwitch && circuitComplete) {
-            const switchComp = this.components.find(c => c.type === 'switch');
-            isActive = switchComp.active;
-        }
 
         // Draw each connection
         this.connections.forEach(conn => {
