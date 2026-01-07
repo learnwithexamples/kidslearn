@@ -113,18 +113,53 @@ class CircuitPlayground {
         canvas.width = boardGrid.offsetWidth;
         canvas.height = boardGrid.offsetHeight;
         
-        // Change cursor when hovering over wires
+        let draggingControl = null;
+        
+        // Change cursor when hovering over wires or control points
         canvas.addEventListener('mousemove', (e) => {
             const rect = canvas.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             
+            if (draggingControl) {
+                // Update control point position
+                const canvasRect = canvas.getBoundingClientRect();
+                draggingControl.controlPoint.x = x;
+                draggingControl.controlPoint.y = y;
+                this.drawWires();
+                return;
+            }
+            
+            const controlPoint = this.findControlPointAt(x, y);
             const connection = this.findConnectionAtPoint(x, y);
-            canvas.style.cursor = connection ? 'pointer' : 'default';
+            canvas.style.cursor = (controlPoint || connection) ? 'pointer' : 'default';
+        });
+        
+        // Mouse down to start dragging control point
+        canvas.addEventListener('mousedown', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const controlPoint = this.findControlPointAt(x, y);
+            if (controlPoint) {
+                draggingControl = controlPoint;
+                e.stopPropagation();
+            }
+        });
+        
+        // Mouse up to stop dragging or remove wire
+        canvas.addEventListener('mouseup', (e) => {
+            if (draggingControl) {
+                draggingControl = null;
+                return;
+            }
         });
         
         // Click on canvas to remove wires
         canvas.addEventListener('click', (e) => {
+            if (draggingControl) return;
+            
             const rect = canvas.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
@@ -343,7 +378,7 @@ class CircuitPlayground {
 
     findConnectionAtPoint(x, y) {
         const canvas = document.getElementById('wire-canvas');
-        const threshold = 8; // Click within 8 pixels of wire
+        const threshold = 12; // Click within 12 pixels of wire
         
         for (const conn of this.connections) {
             const comp1 = this.components.find(c => c.id === conn.from.componentId);
@@ -370,11 +405,21 @@ class CircuitPlayground {
             const y1 = rect1.top + rect1.height / 2 - canvasRect.top;
             const x2 = rect2.left + rect2.width / 2 - canvasRect.left;
             const y2 = rect2.top + rect2.height / 2 - canvasRect.top;
-
-            // Calculate distance from point to line segment
-            const dist = this.pointToLineDistance(x, y, x1, y1, x2, y2);
             
-            if (dist < threshold) {
+            const cpX = conn.controlPoint.x;
+            const cpY = conn.controlPoint.y;
+
+            // Check distance to quadratic bezier curve
+            // Sample points along the curve
+            let minDist = Infinity;
+            for (let t = 0; t <= 1; t += 0.05) {
+                const curveX = (1-t)*(1-t)*x1 + 2*(1-t)*t*cpX + t*t*x2;
+                const curveY = (1-t)*(1-t)*y1 + 2*(1-t)*t*cpY + t*t*y2;
+                const dist = Math.sqrt((x - curveX)**2 + (y - curveY)**2);
+                minDist = Math.min(minDist, dist);
+            }
+            
+            if (minDist < threshold) {
                 return conn;
             }
         }
@@ -462,8 +507,15 @@ class CircuitPlayground {
                 return;
             }
             
-            // Add the connection
-            this.connections.push({ from: fromPoint, to: toPoint });
+            // Add the connection with a control point for the curve
+            const midX = (fromPoint.componentId === toPoint.componentId) ? 0 : 0;
+            const midY = (fromPoint.componentId === toPoint.componentId) ? 0 : 0;
+            
+            this.connections.push({ 
+                from: fromPoint, 
+                to: toPoint,
+                controlPoint: { x: midX, y: midY } // Offset from midpoint
+            });
             console.log('✅ Connection created:', fromPoint, '→', toPoint);
             
             this.cancelConnection();
@@ -654,26 +706,35 @@ class CircuitPlayground {
             return;
         }
 
-        // Analyze circuit to calculate effective voltage and resistance
-        const { totalVoltage, totalResistance } = this.analyzeCircuit();
+        // Analyze circuit to calculate effective voltage
+        const { totalVoltage } = this.analyzeCircuit();
         
-        if (totalVoltage === 0 || totalResistance === 0) {
+        if (totalVoltage === 0) {
             document.getElementById('current-reading').textContent = '-';
             document.getElementById('power-reading').textContent = '-';
             return;
         }
 
         const bulbsInParallel = this.areComponentsInParallel(connectedBulbs);
+        const bulbsInSeries = this.areComponentsInSeries(connectedBulbs);
         
         let current, power;
         
         if (bulbsInParallel && connectedBulbs.length > 1) {
-            // For parallel bulbs: show current through EACH bulb, but TOTAL power
-            current = totalVoltage / this.resistance; // Current through one bulb
-            const powerPerBulb = totalVoltage * current; // Power per bulb
-            power = powerPerBulb * connectedBulbs.length; // Total power
+            // Parallel: Each bulb gets full voltage
+            // Current through each bulb = V / R
+            current = totalVoltage / this.resistance;
+            const powerPerBulb = totalVoltage * current;
+            power = powerPerBulb * connectedBulbs.length; // Total power = sum of all bulbs
+        } else if (bulbsInSeries && !bulbsInParallel && connectedBulbs.length > 1) {
+            // Series: Same current through all bulbs
+            // Total resistance = R1 + R2 + ...
+            const totalResistance = this.resistance * connectedBulbs.length;
+            current = totalVoltage / totalResistance;
+            power = totalVoltage * current; // Total power
         } else {
-            // For series or single bulb: standard calculation
+            // Single bulb or mixed circuit
+            const totalResistance = this.resistance;
             current = totalVoltage / totalResistance;
             power = totalVoltage * current;
         }
@@ -696,6 +757,11 @@ class CircuitPlayground {
             powerDisplay = `${(power * 1000).toFixed(1)} mW`;
         } else {
             powerDisplay = `${power.toFixed(2)} W`;
+        }
+        
+        // Add indicator for total power
+        if (connectedBulbs.length > 1) {
+            powerDisplay += ' (total)';
         }
 
         document.getElementById('current-reading').textContent = currentDisplay;
@@ -884,15 +950,33 @@ class CircuitPlayground {
             const x2 = rect2.left + rect2.width / 2 - canvasRect.left;
             const y2 = rect2.top + rect2.height / 2 - canvasRect.top;
 
-            // Wire color based on state
+            // Calculate control point (use stored or default to midpoint with offset)
+            let cpX = conn.controlPoint.x;
+            let cpY = conn.controlPoint.y;
+            
+            // If control point is at origin (newly created), set default curve
+            if (cpX === 0 && cpY === 0) {
+                cpX = (x1 + x2) / 2 + (y2 - y1) * 0.2; // Perpendicular offset
+                cpY = (y1 + y2) / 2 - (x2 - x1) * 0.2;
+                conn.controlPoint.x = cpX;
+                conn.controlPoint.y = cpY;
+            }
+
+            // Draw curved wire
             ctx.strokeStyle = isActive ? '#4caf50' : '#999';
             ctx.lineWidth = 4;
             ctx.lineCap = 'round';
 
             ctx.beginPath();
             ctx.moveTo(x1, y1);
-            ctx.lineTo(x2, y2);
+            ctx.quadraticCurveTo(cpX, cpY, x2, y2);
             ctx.stroke();
+
+            // Draw control point handle (small circle)
+            ctx.fillStyle = '#667eea';
+            ctx.beginPath();
+            ctx.arc(cpX, cpY, 6, 0, Math.PI * 2);
+            ctx.fill();
 
             // Add current flow animation if active
             if (isActive) {
@@ -905,7 +989,7 @@ class CircuitPlayground {
                 
                 ctx.beginPath();
                 ctx.moveTo(x1, y1);
-                ctx.lineTo(x2, y2);
+                ctx.quadraticCurveTo(cpX, cpY, x2, y2);
                 ctx.stroke();
                 
                 ctx.setLineDash([]);
@@ -916,6 +1000,22 @@ class CircuitPlayground {
         if (isActive) {
             requestAnimationFrame(() => this.drawWires());
         }
+    }
+
+    findControlPointAt(x, y) {
+        const threshold = 10;
+        
+        for (const conn of this.connections) {
+            const cpX = conn.controlPoint.x;
+            const cpY = conn.controlPoint.y;
+            
+            const dist = Math.sqrt((x - cpX) ** 2 + (y - cpY) ** 2);
+            if (dist < threshold) {
+                return conn;
+            }
+        }
+        
+        return null;
     }
 
     updateStatus(hasBattery, hasLed, hasSwitch, circuitComplete, switchOn) {
