@@ -564,6 +564,12 @@
     padding: 1.5rem;
     min-height: 500px;
     position: relative;
+    transition: all 0.3s;
+}
+
+.circuit-board.drag-over {
+    border-color: #4caf50;
+    background: #f1f8f4;
 }
 
 .board-title {
@@ -584,6 +590,11 @@
     background-size: 30px 30px;
     border-radius: 8px;
     position: relative;
+    transition: all 0.3s;
+}
+
+.board-grid.drag-over {
+    background-color: rgba(76, 175, 80, 0.05);
 }
 
 #wire-canvas {
@@ -619,6 +630,22 @@
     box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
 }
 
+.placed-component.connecting-from {
+    border-color: #ff9800;
+    border-width: 4px;
+    box-shadow: 0 0 20px rgba(255, 152, 0, 0.6);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 152, 0, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 152, 0, 0.8);
+    }
+}
+
 .placed-component .component-icon {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
@@ -650,6 +677,29 @@
 
 .placed-component .remove-btn:hover {
     background: #d32f2f;
+}
+
+.placed-component .connect-btn {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 28px;
+    height: 28px;
+    background: #2196f3;
+    color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.placed-component .connect-btn:hover {
+    background: #1976d2;
+    transform: scale(1.1);
 }
 
 /* LED States */

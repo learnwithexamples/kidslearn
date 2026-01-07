@@ -2,12 +2,15 @@
 class CircuitPlayground {
     constructor() {
         this.components = [];
+        this.connections = [];
         this.voltage = 9;
         this.resistance = 100;
         this.draggedElement = null;
         this.offsetX = 0;
         this.offsetY = 0;
         this.nextId = 1;
+        this.selectedComponent = null;
+        this.isConnecting = false;
         
         this.init();
     }
@@ -15,20 +18,65 @@ class CircuitPlayground {
     init() {
         this.setupEventListeners();
         this.setupCanvas();
-        this.updateReadings();
+        this.updateCircuit();
     }
 
     setupEventListeners() {
+        console.log('=== Setting up event listeners ===');
+        
         // Drag and drop from palette
         const paletteItems = document.querySelectorAll('.component-item');
-        paletteItems.forEach(item => {
-            item.addEventListener('dragstart', (e) => this.handleDragStart(e));
+        console.log('Found palette items:', paletteItems.length, paletteItems);
+        
+        paletteItems.forEach((item, index) => {
+            console.log(`Setting up item ${index}, type:`, item.dataset.type);
+            item.setAttribute('draggable', 'true');
+            
+            // Also make child elements non-draggable to prevent interference
+            item.querySelectorAll('*').forEach(child => {
+                child.setAttribute('draggable', 'false');
+            });
+            
+            item.addEventListener('dragstart', (e) => {
+                console.log('🎯 Drag start event fired!', e.target);
+                this.handleDragStart(e);
+            });
+            
+            item.addEventListener('dragend', (e) => {
+                e.target.style.opacity = '1';
+            });
         });
 
-        // Drop zone
+        // Drop zone - both board-grid and circuit-board
         const boardGrid = document.getElementById('board-grid');
-        boardGrid.addEventListener('dragover', (e) => e.preventDefault());
-        boardGrid.addEventListener('drop', (e) => this.handleDrop(e));
+        const circuitBoard = document.getElementById('circuit-board');
+        
+        console.log('Board grid:', boardGrid);
+        console.log('Circuit board:', circuitBoard);
+        
+        [boardGrid, circuitBoard].forEach(element => {
+            if (!element) return;
+            
+            element.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                e.dataTransfer.dropEffect = 'copy';
+                element.classList.add('drag-over');
+                console.log('🎯 Dragover event on', element.id);
+            });
+            
+            element.addEventListener('dragleave', (e) => {
+                if (e.target === element) {
+                    element.classList.remove('drag-over');
+                }
+            });
+            
+            element.addEventListener('drop', (e) => {
+                console.log('🎯 Drop event fired!', e);
+                element.classList.remove('drag-over');
+                this.handleDrop(e);
+            });
+        });
 
         // Voltage control
         const voltageInput = document.getElementById('voltage-input');
@@ -50,6 +98,13 @@ class CircuitPlayground {
         document.getElementById('clear-circuit').addEventListener('click', () => {
             this.clearCircuit();
         });
+
+        // Canvas click for connection mode (reuse boardGrid from above)
+        boardGrid.addEventListener('click', (e) => {
+            if (e.target === boardGrid || e.target.id === 'wire-canvas') {
+                this.cancelConnection();
+            }
+        });
     }
 
     setupCanvas() {
@@ -67,15 +122,37 @@ class CircuitPlayground {
     }
 
     handleDragStart(e) {
-        const componentType = e.target.closest('.component-item').dataset.type;
+        console.log('handleDragStart called');
+        const componentItem = e.target.closest('.component-item');
+        if (!componentItem) {
+            console.log('No component item found');
+            return;
+        }
+        
+        const componentType = componentItem.dataset.type;
+        console.log('Dragging component type:', componentType);
+        
+        e.dataTransfer.effectAllowed = 'copy';
+        e.dataTransfer.setData('text/plain', componentType);
         e.dataTransfer.setData('componentType', componentType);
+        
+        // Visual feedback
+        componentItem.style.opacity = '0.5';
     }
 
     handleDrop(e) {
+        console.log('handleDrop called');
         e.preventDefault();
-        const componentType = e.dataTransfer.getData('componentType');
+        e.stopPropagation();
         
-        if (!componentType) return;
+        const componentType = e.dataTransfer.getData('componentType') || e.dataTransfer.getData('text/plain');
+        
+        console.log('Dropped component type:', componentType);
+        
+        if (!componentType) {
+            console.log('No component type in drop data');
+            return;
+        }
 
         // Check if component already exists (only one of each type allowed)
         const existing = this.components.find(c => c.type === componentType);
@@ -84,10 +161,17 @@ class CircuitPlayground {
             return;
         }
 
+        // Calculate drop position relative to board-grid
         const boardGrid = document.getElementById('board-grid');
         const rect = boardGrid.getBoundingClientRect();
-        const x = e.clientX - rect.left - 50; // Center the component
-        const y = e.clientY - rect.top - 50;
+        let x = e.clientX - rect.left - 50; // Center the component (component width is ~100px)
+        let y = e.clientY - rect.top - 50;
+        
+        console.log('Drop position:', x, y);
+        
+        // Keep within bounds
+        x = Math.max(0, Math.min(x, rect.width - 100));
+        y = Math.max(0, Math.min(y, rect.height - 100));
 
         this.addComponent(componentType, x, y);
     }
@@ -140,15 +224,22 @@ class CircuitPlayground {
             <div class="component-icon ${iconClass}">${icons[component.type]}</div>
             <span class="component-label">${labels[component.type]}</span>
             <button class="remove-btn">✕</button>
+            <button class="connect-btn" title="Connect to another component">🔗</button>
         `;
+
+        // Connect button
+        el.querySelector('.connect-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.startConnection(component.id);
+        });
 
         // Make switch clickable
         if (component.type === 'switch') {
-            el.style.cursor = 'pointer';
-            el.addEventListener('click', (e) => {
-                if (!e.target.classList.contains('remove-btn')) {
-                    this.toggleSwitch(component.id);
-                }
+            const icon = el.querySelector('.component-icon');
+            icon.style.cursor = 'pointer';
+            icon.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.toggleSwitch(component.id);
             });
         }
 
@@ -158,11 +249,23 @@ class CircuitPlayground {
             this.removeComponent(component.id);
         });
 
-        // Make draggable
+        // Make draggable (but not the icon for switch)
         el.addEventListener('mousedown', (e) => {
             if (e.target.classList.contains('remove-btn')) return;
-            if (component.type === 'switch') return; // Don't drag switch, let it toggle
+            if (e.target.classList.contains('connect-btn')) return;
+            if (e.target.classList.contains('component-icon') && component.type === 'switch') return;
             this.startDrag(component.id, e);
+        });
+
+        // Click to complete connection
+        el.addEventListener('click', (e) => {
+            if (this.isConnecting && this.selectedComponent !== component.id) {
+                if (!e.target.classList.contains('remove-btn') && 
+                    !e.target.classList.contains('connect-btn') &&
+                    !(e.target.classList.contains('component-icon') && component.type === 'switch')) {
+                    this.completeConnection(component.id);
+                }
+            }
         });
 
         boardGrid.appendChild(el);
@@ -197,10 +300,63 @@ class CircuitPlayground {
     }
 
     removeComponent(componentId) {
+        // Remove connections involving this component
+        this.connections = this.connections.filter(
+            conn => conn.from !== componentId && conn.to !== componentId
+        );
+        
         this.components = this.components.filter(c => c.id !== componentId);
         const el = document.querySelector(`[data-id="${componentId}"]`);
         if (el) el.remove();
         this.updateCircuit();
+    }
+
+    startConnection(componentId) {
+        this.isConnecting = true;
+        this.selectedComponent = componentId;
+        
+        // Highlight the selected component
+        document.querySelectorAll('.placed-component').forEach(el => {
+            el.classList.remove('connecting-from');
+        });
+        const el = document.querySelector(`[data-id="${componentId}"]`);
+        el.classList.add('connecting-from');
+        
+        this.showStatus('Click on another component to connect!', '');
+    }
+
+    completeConnection(targetId) {
+        if (!this.isConnecting || !this.selectedComponent) return;
+        
+        const fromId = this.selectedComponent;
+        const toId = targetId;
+        
+        // Check if connection already exists
+        const exists = this.connections.some(
+            conn => (conn.from === fromId && conn.to === toId) || 
+                    (conn.from === toId && conn.to === fromId)
+        );
+        
+        if (exists) {
+            this.showStatus('Components are already connected!', 'error');
+            this.cancelConnection();
+            return;
+        }
+        
+        // Add the connection
+        this.connections.push({ from: fromId, to: toId });
+        
+        this.cancelConnection();
+        this.updateCircuit();
+        this.showStatus('Connection created! 🔌', 'success');
+    }
+
+    cancelConnection() {
+        this.isConnecting = false;
+        this.selectedComponent = null;
+        document.querySelectorAll('.placed-component').forEach(el => {
+            el.classList.remove('connecting-from');
+        });
     }
 
     toggleSwitch(componentId) {
@@ -226,20 +382,14 @@ class CircuitPlayground {
         const hasBattery = this.components.some(c => c.type === 'battery');
         const hasLed = this.components.some(c => c.type === 'led');
         const hasSwitch = this.components.some(c => c.type === 'switch');
-        const hasResistor = this.components.some(c => c.type === 'resistor');
 
-        let circuitComplete = false;
+        // Check if circuit forms a complete path
+        const circuitComplete = this.checkCircuitComplete();
+        
         let switchOn = true;
-
-        // Check if circuit is complete
-        if (hasBattery && hasLed) {
-            circuitComplete = true;
-            
-            // If there's a switch, check if it's on
-            if (hasSwitch) {
-                const switchComponent = this.components.find(c => c.type === 'switch');
-                switchOn = switchComponent.active;
-            }
+        if (hasSwitch && circuitComplete) {
+            const switchComponent = this.components.find(c => c.type === 'switch');
+            switchOn = switchComponent.active;
         }
 
         // Update LED state
@@ -247,14 +397,16 @@ class CircuitPlayground {
         if (ledComponent) {
             ledComponent.active = circuitComplete && switchOn;
             const ledEl = document.querySelector(`[data-id="${ledComponent.id}"]`);
-            const ledIcon = ledEl.querySelector('.component-icon');
-            
-            if (ledComponent.active) {
-                ledIcon.classList.add('led-on');
-                ledEl.classList.add('active');
-            } else {
-                ledIcon.classList.remove('led-on');
-                ledEl.classList.remove('active');
+            if (ledEl) {
+                const ledIcon = ledEl.querySelector('.component-icon');
+                
+                if (ledComponent.active) {
+                    ledIcon.classList.add('led-on');
+                    ledEl.classList.add('active');
+                } else {
+                    ledIcon.classList.remove('led-on');
+                    ledEl.classList.remove('active');
+                }
             }
         }
 
@@ -262,10 +414,12 @@ class CircuitPlayground {
         const batteryComponent = this.components.find(c => c.type === 'battery');
         if (batteryComponent) {
             const batteryEl = document.querySelector(`[data-id="${batteryComponent.id}"]`);
-            if (circuitComplete && switchOn) {
-                batteryEl.classList.add('active');
-            } else {
-                batteryEl.classList.remove('active');
+            if (batteryEl) {
+                if (circuitComplete && switchOn) {
+                    batteryEl.classList.add('active');
+                } else {
+                    batteryEl.classList.remove('active');
+                }
             }
         }
 
@@ -276,7 +430,63 @@ class CircuitPlayground {
         this.drawWires();
 
         // Update status message
-        this.updateStatus(hasBattery, hasLed, hasSwitch, circuitComplete, switchOn);
+        if (!this.isConnecting) {
+            this.updateStatus(hasBattery, hasLed, hasSwitch, circuitComplete, switchOn);
+        }
+    }
+
+    checkCircuitComplete() {
+        // Need at least battery and LED
+        const battery = this.components.find(c => c.type === 'battery');
+        const led = this.components.find(c => c.type === 'led');
+        
+        if (!battery || !led) return false;
+        if (this.connections.length === 0) return false;
+
+        // Check if there's a path from battery to LED and back
+        // For simplicity, check if all required components are connected
+        const hasSwitch = this.components.some(c => c.type === 'switch');
+        
+        if (hasSwitch) {
+            // Need connections: battery-switch, switch-led, led-battery (or variations)
+            const switchComp = this.components.find(c => c.type === 'switch');
+            return this.isConnectedPath(battery.id, led.id);
+        } else {
+            // Just need battery connected to LED
+            return this.isConnectedPath(battery.id, led.id);
+        }
+    }
+
+    isConnectedPath(fromId, toId) {
+        // Build adjacency list
+        const graph = {};
+        this.components.forEach(c => {
+            graph[c.id] = [];
+        });
+        
+        this.connections.forEach(conn => {
+            graph[conn.from].push(conn.to);
+            graph[conn.to].push(conn.from);
+        });
+
+        // BFS to check if path exists
+        const visited = new Set();
+        const queue = [fromId];
+        visited.add(fromId);
+
+        while (queue.length > 0) {
+            const current = queue.shift();
+            if (current === toId) return true;
+
+            for (const neighbor of (graph[current] || [])) {
+                if (!visited.has(neighbor)) {
+                    visited.add(neighbor);
+                    queue.push(neighbor);
+                }
+            }
+        }
+
+        return false;
     }
 
     calculateReadings(circuitActive) {
@@ -320,74 +530,62 @@ class CircuitPlayground {
         const ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        if (this.components.length < 2) return;
+        if (this.connections.length === 0) return;
 
-        const hasBattery = this.components.some(c => c.type === 'battery');
-        const hasLed = this.components.some(c => c.type === 'led');
+        // Determine if circuit is active
+        const circuitComplete = this.checkCircuitComplete();
         const hasSwitch = this.components.some(c => c.type === 'switch');
+        let isActive = circuitComplete;
         
-        if (!hasBattery || !hasLed) return;
-
-        const battery = this.components.find(c => c.type === 'battery');
-        const led = this.components.find(c => c.type === 'led');
-        const switchComp = this.components.find(c => c.type === 'switch');
-
-        // Wire color and style
-        const isActive = led.active;
-        ctx.strokeStyle = isActive ? '#4caf50' : '#999';
-        ctx.lineWidth = 4;
-        ctx.lineCap = 'round';
-
-        // Draw wires connecting components
-        ctx.beginPath();
-        
-        if (switchComp) {
-            // Battery -> Switch -> LED -> Battery
-            this.drawLine(ctx, battery, switchComp);
-            this.drawLine(ctx, switchComp, led);
-            this.drawLine(ctx, led, battery);
-        } else {
-            // Battery -> LED -> Battery
-            this.drawLine(ctx, battery, led);
-            this.drawLine(ctx, led, battery);
+        if (hasSwitch && circuitComplete) {
+            const switchComp = this.components.find(c => c.type === 'switch');
+            isActive = switchComp.active;
         }
 
-        ctx.stroke();
+        // Draw each connection
+        this.connections.forEach(conn => {
+            const comp1 = this.components.find(c => c.id === conn.from);
+            const comp2 = this.components.find(c => c.id === conn.to);
+            
+            if (!comp1 || !comp2) return;
 
-        // Add current flow animation if active
-        if (isActive) {
-            ctx.setLineDash([10, 10]);
-            ctx.strokeStyle = '#ffeb3b';
-            ctx.lineWidth = 2;
-            
-            // Animate by changing dash offset
-            const offset = (Date.now() / 50) % 20;
-            ctx.lineDashOffset = -offset;
-            
+            // Wire color based on state
+            ctx.strokeStyle = isActive ? '#4caf50' : '#999';
+            ctx.lineWidth = 4;
+            ctx.lineCap = 'round';
+
+            const x1 = comp1.x + 50;
+            const y1 = comp1.y + 50;
+            const x2 = comp2.x + 50;
+            const y2 = comp2.y + 50;
+
             ctx.beginPath();
-            if (switchComp) {
-                this.drawLine(ctx, battery, switchComp);
-                this.drawLine(ctx, switchComp, led);
-            } else {
-                this.drawLine(ctx, battery, led);
-            }
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
             ctx.stroke();
-            
-            ctx.setLineDash([]);
-            
-            // Continue animation
+
+            // Add current flow animation if active
+            if (isActive) {
+                ctx.setLineDash([10, 10]);
+                ctx.strokeStyle = '#ffeb3b';
+                ctx.lineWidth = 2;
+                
+                const offset = (Date.now() / 50) % 20;
+                ctx.lineDashOffset = -offset;
+                
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+                
+                ctx.setLineDash([]);
+            }
+        });
+
+        // Continue animation if active
+        if (isActive) {
             requestAnimationFrame(() => this.drawWires());
         }
-    }
-
-    drawLine(ctx, comp1, comp2) {
-        const x1 = comp1.x + 50; // Center of component (100px width / 2)
-        const y1 = comp1.y + 50; // Center of component
-        const x2 = comp2.x + 50;
-        const y2 = comp2.y + 50;
-        
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
     }
 
     updateStatus(hasBattery, hasLed, hasSwitch, circuitComplete, switchOn) {
@@ -399,14 +597,20 @@ class CircuitPlayground {
         } else if (!hasLed) {
             statusEl.textContent = 'Add an LED to see the light!';
             statusEl.className = 'status-message';
+        } else if (this.connections.length === 0) {
+            statusEl.textContent = 'Click the 🔗 button on components to connect them!';
+            statusEl.className = 'status-message';
+        } else if (!circuitComplete) {
+            statusEl.textContent = 'Connect all components to complete the circuit!';
+            statusEl.className = 'status-message';
         } else if (hasSwitch && !switchOn) {
-            statusEl.textContent = 'Click the switch to turn it ON!';
+            statusEl.textContent = 'Click the switch icon to turn it ON!';
             statusEl.className = 'status-message';
         } else if (circuitComplete && switchOn) {
             statusEl.textContent = '✨ Circuit is complete and working!';
             statusEl.className = 'status-message success';
         } else {
-            statusEl.textContent = 'Circuit ready! Add more components or adjust values.';
+            statusEl.textContent = 'Keep building your circuit!';
             statusEl.className = 'status-message';
         }
     }
@@ -427,6 +631,8 @@ class CircuitPlayground {
             if (el) el.remove();
         });
         this.components = [];
+        this.connections = [];
+        this.cancelConnection();
         this.updateCircuit();
         this.showStatus('Circuit cleared! Drop components to start building!', '');
     }
