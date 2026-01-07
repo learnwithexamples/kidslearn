@@ -262,11 +262,80 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Interactive Circuit Playground -->
+            <section class="lesson-section playground-section">
+                <h2>🔧 Interactive Circuit Playground</h2>
+                <p class="playground-intro">Build your own circuit! Drag and drop components to create a working circuit. Adjust the voltage and resistance to see how current and power change!</p>
+                
+                <div class="playground-container">
+                    <!-- Component Palette -->
+                    <div class="component-palette">
+                        <h3>Components</h3>
+                        <div class="palette-items">
+                            <div class="component-item" draggable="true" data-type="battery">
+                                <div class="component-icon battery-icon">🔋</div>
+                                <span>Battery</span>
+                            </div>
+                            <div class="component-item" draggable="true" data-type="led">
+                                <div class="component-icon led-icon">💡</div>
+                                <span>LED</span>
+                            </div>
+                            <div class="component-item" draggable="true" data-type="switch">
+                                <div class="component-icon switch-icon">🔘</div>
+                                <span>Switch</span>
+                            </div>
+                            <div class="component-item" draggable="true" data-type="resistor">
+                                <div class="component-icon resistor-icon">⚡</div>
+                                <span>Resistor</span>
+                            </div>
+                        </div>
+                        
+                        <div class="controls-section">
+                            <h3>Controls</h3>
+                            <div class="control-group">
+                                <label for="voltage-input">Voltage (V):</label>
+                                <input type="range" id="voltage-input" min="1" max="12" value="9" step="0.5">
+                                <span id="voltage-display">9V</span>
+                            </div>
+                            <div class="control-group">
+                                <label for="resistance-input">Resistance (Ω):</label>
+                                <input type="range" id="resistance-input" min="10" max="1000" value="100" step="10">
+                                <span id="resistance-display">100Ω</span>
+                            </div>
+                            <button id="clear-circuit" class="control-btn">🗑️ Clear Circuit</button>
+                        </div>
+
+                        <div class="readings-section">
+                            <h3>📊 Measurements</h3>
+                            <div class="reading-item">
+                                <span class="reading-label">Current:</span>
+                                <span id="current-reading" class="reading-value">-</span>
+                            </div>
+                            <div class="reading-item">
+                                <span class="reading-label">Power:</span>
+                                <span id="power-reading" class="reading-value">-</span>
+                            </div>
+                            <div id="circuit-status" class="status-message">Drop components to start building!</div>
+                        </div>
+                    </div>
+
+                    <!-- Circuit Board -->
+                    <div class="circuit-board" id="circuit-board">
+                        <div class="board-title">Circuit Board - Drop Components Here</div>
+                        <div class="board-grid" id="board-grid">
+                            <!-- Components will be dropped here -->
+                        </div>
+                        <canvas id="wire-canvas"></canvas>
+                    </div>
+                </div>
+            </section>
         </main>
 
         <footer>
             <p>You're becoming an electricity expert! ⚡🌟</p>
         </footer>
     </div>
+    <script src="circuit-playground.js"></script>
 </body>
 </html>
