@@ -18,7 +18,74 @@ class CircuitPlayground {
     init() {
         this.setupEventListeners();
         this.setupCanvas();
+        this.loadDefaultCircuit();
         this.updateCircuit();
+    }
+
+    loadDefaultCircuit() {
+        // Create a default circuit with 1 battery and 2 parallel bulbs
+        // Bulb1 on top, battery in middle, bulb2 on bottom
+        
+        // Add first bulb (top position)
+        const bulb1 = {
+            id: this.nextId++,
+            type: 'bulb',
+            x: 250,
+            y: 50,
+            active: false
+        };
+        this.components.push(bulb1);
+        this.renderComponent(bulb1);
+        
+        // Add battery (middle position)
+        const battery = {
+            id: this.nextId++,
+            type: 'battery',
+            x: 250,
+            y: 150,
+            active: false
+        };
+        this.components.push(battery);
+        this.renderComponent(battery);
+        
+        // Add second bulb (bottom position)
+        const bulb2 = {
+            id: this.nextId++,
+            type: 'bulb',
+            x: 250,
+            y: 250,
+            active: false
+        };
+        this.components.push(bulb2);
+        this.renderComponent(bulb2);
+        
+        // Create parallel connections
+        // Battery left (point 0) connects to both bulbs' left (point 0) - curve left
+        // Battery right (point 1) connects to both bulbs' right (point 1) - curve right
+        
+        this.connections.push({
+            from: { componentId: battery.id, pointIndex: 0 },
+            to: { componentId: bulb1.id, pointIndex: 0 },
+            controlPoint: { x: -80, y: 0 }
+        });
+        
+        this.connections.push({
+            from: { componentId: battery.id, pointIndex: 0 },
+            to: { componentId: bulb2.id, pointIndex: 0 },
+            controlPoint: { x: -80, y: 0 }
+        });
+        
+        this.connections.push({
+            from: { componentId: bulb1.id, pointIndex: 1 },
+            to: { componentId: battery.id, pointIndex: 1 },
+            controlPoint: { x: 80, y: 0 }
+        });
+        
+        this.connections.push({
+            from: { componentId: bulb2.id, pointIndex: 1 },
+            to: { componentId: battery.id, pointIndex: 1 },
+            controlPoint: { x: 80, y: 0 }
+        });
     }
 
     setupEventListeners() {
@@ -904,16 +971,11 @@ class CircuitPlayground {
             const y2 = rect2.top + rect2.height / 2 - canvasRect.top;
 
             // Calculate control point (use stored or default to midpoint with offset)
-            let cpX = conn.controlPoint.x;
-            let cpY = conn.controlPoint.y;
+            const midX = (x1 + x2) / 2;
+            const midY = (y1 + y2) / 2;
             
-            // If control point is at origin (newly created), set default curve
-            if (cpX === 0 && cpY === 0) {
-                cpX = (x1 + x2) / 2 + (y2 - y1) * 0.2; // Perpendicular offset
-                cpY = (y1 + y2) / 2 - (x2 - x1) * 0.2;
-                conn.controlPoint.x = cpX;
-                conn.controlPoint.y = cpY;
-            }
+            let cpX = midX + conn.controlPoint.x;
+            let cpY = midY + conn.controlPoint.y;
 
             // Draw curved wire
             ctx.strokeStyle = isActive ? '#4caf50' : '#999';
