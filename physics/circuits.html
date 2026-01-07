@@ -16,6 +16,66 @@
         </header>
 
         <main class="lesson-content">
+            <!-- Interactive Circuit Playground -->
+            <section class="lesson-section playground-section">
+                <h2>🔧 Interactive Circuit Playground</h2>
+                <p class="playground-intro">Build your own circuit! Drag and drop components to create a working circuit. Adjust the voltage and resistance to see how current and power change!</p>
+                
+                <div class="playground-container">
+                    <!-- Component Palette -->
+                    <div class="component-palette">
+                        <h3>Components</h3>
+                        <div class="palette-items">
+                            <div class="component-item" draggable="true" data-type="battery">
+                                <div class="component-icon battery-icon">🔋</div>
+                                <span>Battery</span>
+                            </div>
+                            <div class="component-item" draggable="true" data-type="bulb">
+                                <div class="component-icon bulb-icon">💡</div>
+                                <span>Bulb</span>
+                            </div>
+                        </div>
+                        
+                        <div class="controls-section">
+                            <h3>Controls</h3>
+                            <div class="control-group">
+                                <label for="voltage-input">Voltage (V):</label>
+                                <input type="range" id="voltage-input" min="1" max="120" value="9" step="1">
+                                <span id="voltage-display">9V</span>
+                            </div>
+                            <div class="control-group">
+                                <label for="resistance-input">Resistance (Ω):</label>
+                                <input type="range" id="resistance-input" min="1" max="100" value="10" step="1">
+                                <span id="resistance-display">10Ω</span>
+                            </div>
+                            <button id="clear-circuit" class="control-btn">🗑️ Clear Circuit</button>
+                        </div>
+
+                        <div class="readings-section">
+                            <h3>📊 Measurements</h3>
+                            <div class="reading-item">
+                                <span class="reading-label">Current:</span>
+                                <span id="current-reading" class="reading-value">-</span>
+                            </div>
+                            <div class="reading-item">
+                                <span class="reading-label">Power:</span>
+                                <span id="power-reading" class="reading-value">-</span>
+                            </div>
+                            <div id="circuit-status" class="status-message">Drop components to start building!</div>
+                        </div>
+                    </div>
+
+                    <!-- Circuit Board -->
+                    <div class="circuit-board" id="circuit-board">
+                        <div class="board-title">Circuit Board - Drop Components Here</div>
+                        <div class="board-grid" id="board-grid">
+                            <!-- Components will be dropped here -->
+                        </div>
+                        <canvas id="wire-canvas"></canvas>
+                    </div>
+                </div>
+            </section>
+
             <!-- Introduction -->
             <section class="lesson-section intro-box">
                 <h2>🔋 What is Electricity?</h2>
@@ -259,66 +319,6 @@
                     <div class="activity-item">
                         <h3>3. Conductor Test</h3>
                         <p>Test different materials (with adult supervision) to see which conduct electricity and which don't!</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Interactive Circuit Playground -->
-            <section class="lesson-section playground-section">
-                <h2>🔧 Interactive Circuit Playground</h2>
-                <p class="playground-intro">Build your own circuit! Drag and drop components to create a working circuit. Adjust the voltage and resistance to see how current and power change!</p>
-                
-                <div class="playground-container">
-                    <!-- Component Palette -->
-                    <div class="component-palette">
-                        <h3>Components</h3>
-                        <div class="palette-items">
-                            <div class="component-item" draggable="true" data-type="battery">
-                                <div class="component-icon battery-icon">🔋</div>
-                                <span>Battery</span>
-                            </div>
-                            <div class="component-item" draggable="true" data-type="bulb">
-                                <div class="component-icon bulb-icon">💡</div>
-                                <span>Bulb</span>
-                            </div>
-                        </div>
-                        
-                        <div class="controls-section">
-                            <h3>Controls</h3>
-                            <div class="control-group">
-                                <label for="voltage-input">Voltage (V):</label>
-                                <input type="range" id="voltage-input" min="1" max="120" value="9" step="1">
-                                <span id="voltage-display">9V</span>
-                            </div>
-                            <div class="control-group">
-                                <label for="resistance-input">Resistance (Ω):</label>
-                                <input type="range" id="resistance-input" min="1" max="100" value="10" step="1">
-                                <span id="resistance-display">10Ω</span>
-                            </div>
-                            <button id="clear-circuit" class="control-btn">🗑️ Clear Circuit</button>
-                        </div>
-
-                        <div class="readings-section">
-                            <h3>📊 Measurements</h3>
-                            <div class="reading-item">
-                                <span class="reading-label">Current:</span>
-                                <span id="current-reading" class="reading-value">-</span>
-                            </div>
-                            <div class="reading-item">
-                                <span class="reading-label">Power:</span>
-                                <span id="power-reading" class="reading-value">-</span>
-                            </div>
-                            <div id="circuit-status" class="status-message">Drop components to start building!</div>
-                        </div>
-                    </div>
-
-                    <!-- Circuit Board -->
-                    <div class="circuit-board" id="circuit-board">
-                        <div class="board-title">Circuit Board - Drop Components Here</div>
-                        <div class="board-grid" id="board-grid">
-                            <!-- Components will be dropped here -->
-                        </div>
-                        <canvas id="wire-canvas"></canvas>
                     </div>
                 </div>
             </section>
