@@ -394,9 +394,9 @@
 }
 
 .playground-container {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     background: white;
     border-radius: 15px;
     padding: 2rem;
@@ -407,32 +407,33 @@
 .component-palette {
     background: #f8f9fa;
     border-radius: 10px;
-    padding: 1.5rem;
+    padding: 1rem;
 }
 
 .component-palette h3 {
     color: #667eea;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
     text-align: center;
 }
 
 .palette-items {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    justify-content: center;
     gap: 1rem;
-    margin-bottom: 2rem;
+    flex-wrap: wrap;
 }
 
 .component-item {
     background: white;
     border: 2px solid #ddd;
     border-radius: 10px;
-    padding: 1rem;
+    padding: 0.75rem 1rem;
     text-align: center;
     cursor: grab;
     transition: all 0.3s;
     user-select: none;
+    min-width: 100px;
 }
 
 .component-item:hover {
@@ -459,13 +460,25 @@
 
 /* Controls Section */
 .controls-section {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 2px solid #ddd;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.controls-section h3 {
+    width: 100%;
+    color: #667eea;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
 }
 
 .control-group {
-    margin-bottom: 1.5rem;
+    flex: 1;
+    min-width: 200px;
 }
 
 .control-group label {
@@ -473,6 +486,7 @@
     color: #333;
     font-weight: 600;
     margin-bottom: 0.5rem;
+    font-size: 0.9rem;
 }
 
 .control-group input[type="range"] {
@@ -490,16 +504,16 @@
 }
 
 .control-btn {
-    width: 100%;
-    padding: 0.75rem;
+    padding: 0.75rem 1.5rem;
     background: #f44336;
     color: white;
     border: none;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
     transition: background 0.3s;
+    white-space: nowrap;
 }
 
 .control-btn:hover {
@@ -508,9 +522,20 @@
 
 /* Readings Section */
 .readings-section {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 2px solid #ddd;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.readings-section h3 {
+    width: 100%;
+    color: #667eea;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
 }
 
 .reading-item {
@@ -518,10 +543,11 @@
     justify-content: space-between;
     align-items: center;
     background: white;
-    padding: 0.75rem;
-    margin-bottom: 0.75rem;
+    padding: 0.75rem 1rem;
     border-radius: 8px;
     border: 2px solid #e0e0e0;
+    flex: 1;
+    min-width: 150px;
 }
 
 .reading-label {
@@ -562,9 +588,10 @@
     border-radius: 10px;
     border: 3px solid #667eea;
     padding: 1.5rem;
-    min-height: 500px;
+    min-height: 600px;
     position: relative;
     transition: all 0.3s;
+    flex: 1;
 }
 
 .circuit-board.drag-over {
