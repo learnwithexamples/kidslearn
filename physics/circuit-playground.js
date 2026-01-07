@@ -4,7 +4,7 @@ class CircuitPlayground {
         this.components = [];
         this.connections = [];
         this.voltage = 9;
-        this.resistance = 100;
+        this.resistance = 10;
         this.draggedElement = null;
         this.offsetX = 0;
         this.offsetY = 0;
@@ -709,22 +709,14 @@ class CircuitPlayground {
         // Display with appropriate units
         let currentDisplay, powerDisplay;
         
-        if (current < 1) {
-            currentDisplay = `${(current * 1000).toFixed(1)} mA`;
-        } else {
-            currentDisplay = `${current.toFixed(2)} A`;
-        }
+        currentDisplay = `${current.toFixed(2)} A`;
         
         // Add indicator for parallel circuits
         if (bulbsInParallel && connectedBulbs.length > 1) {
             currentDisplay += ' (per bulb)';
         }
 
-        if (power < 1) {
-            powerDisplay = `${(power * 1000).toFixed(1)} mW`;
-        } else {
-            powerDisplay = `${power.toFixed(2)} W`;
-        }
+        powerDisplay = `${power.toFixed(2)} W`;
         
         // Add indicator for total power
         if (connectedBulbs.length > 1) {
@@ -979,30 +971,21 @@ class CircuitPlayground {
         return null;
     }
 
-    updateStatus(hasBattery, hasLed, hasSwitch, circuitComplete, switchOn) {
+    updateStatus(hasBattery, hasBulb, circuitComplete) {
         const statusEl = document.getElementById('circuit-status');
         
         if (!hasBattery) {
-            statusEl.textContent = 'Add a battery to power your circuit!';
+            statusEl.textContent = 'Add a battery to power the circuit!';
             statusEl.className = 'status-message';
-        } else if (!hasLed) {
-            statusEl.textContent = 'Add an LED to see the light!';
-            statusEl.className = 'status-message';
-        } else if (this.connections.length === 0) {
-            statusEl.textContent = 'Click the 🔗 button on components to connect them!';
+        } else if (!hasBulb) {
+            statusEl.textContent = 'Add a bulb to light up!';
             statusEl.className = 'status-message';
         } else if (!circuitComplete) {
-            statusEl.textContent = 'Connect all components to complete the circuit!';
+            statusEl.textContent = 'Connect components to complete the circuit!';
             statusEl.className = 'status-message';
-        } else if (hasSwitch && !switchOn) {
-            statusEl.textContent = 'Click the switch icon to turn it ON!';
-            statusEl.className = 'status-message';
-        } else if (circuitComplete && switchOn) {
-            statusEl.textContent = '✨ Circuit is complete and working!';
-            statusEl.className = 'status-message success';
         } else {
-            statusEl.textContent = 'Keep building your circuit!';
-            statusEl.className = 'status-message';
+            statusEl.textContent = '✨ Circuit is complete and working! ✨';
+            statusEl.className = 'status-message success';
         }
     }
 
