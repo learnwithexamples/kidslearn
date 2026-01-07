@@ -625,14 +625,30 @@ class CircuitPlayground {
             return;
         }
 
-        // Use user-defined resistance for bulb
-        const totalResistance = this.resistance; // Bulb resistance from slider
-
-        // Calculate current using Ohm's Law: I = V / R
-        const current = this.voltage / totalResistance;
+        // Analyze circuit to calculate effective voltage and resistance
+        const bulbs = this.components.filter(c => c.type === 'bulb');
+        const { totalVoltage, totalResistance } = this.analyzeCircuit();
         
-        // Calculate power: P = V × I
-        const power = this.voltage * current;
+        if (totalVoltage === 0 || totalResistance === 0) {
+            document.getElementById('current-reading').textContent = '-';
+            document.getElementById('power-reading').textContent = '-';
+            return;
+        }
+
+        const bulbsInParallel = this.areComponentsInParallel(bulbs);
+        
+        let current, power;
+        
+        if (bulbsInParallel && bulbs.length > 1) {
+            // For parallel bulbs: show current through EACH bulb, but TOTAL power
+            current = totalVoltage / this.resistance; // Current through one bulb
+            const powerPerBulb = totalVoltage * current; // Power per bulb
+            power = powerPerBulb * bulbs.length; // Total power
+        } else {
+            // For series or single bulb: standard calculation
+            current = totalVoltage / totalResistance;
+            power = totalVoltage * current;
+        }
 
         // Display with appropriate units
         let currentDisplay, powerDisplay;
@@ -641,6 +657,11 @@ class CircuitPlayground {
             currentDisplay = `${(current * 1000).toFixed(1)} mA`;
         } else {
             currentDisplay = `${current.toFixed(2)} A`;
+        }
+        
+        // Add indicator for parallel circuits
+        if (bulbsInParallel && bulbs.length > 1) {
+            currentDisplay += ' (per bulb)';
         }
 
         if (power < 1) {
@@ -651,6 +672,140 @@ class CircuitPlayground {
 
         document.getElementById('current-reading').textContent = currentDisplay;
         document.getElementById('power-reading').textContent = powerDisplay;
+    }
+
+    analyzeCircuit() {
+        // Find all batteries and bulbs in the circuit
+        const batteries = this.components.filter(c => c.type === 'battery');
+        const bulbs = this.components.filter(c => c.type === 'bulb');
+        
+        if (batteries.length === 0 || bulbs.length === 0) {
+            return { totalVoltage: 0, totalResistance: 0 };
+        }
+
+        // Check circuit configuration
+        const bulbsInSeries = this.areComponentsInSeries(bulbs);
+        const bulbsInParallel = this.areComponentsInParallel(bulbs);
+        const batteriesInSeries = this.areComponentsInSeries(batteries);
+        
+        let totalVoltage;
+        if (batteriesInSeries) {
+            // Series batteries: voltages add
+            totalVoltage = this.voltage * batteries.length;
+        } else {
+            // Parallel or mixed: use base voltage
+            totalVoltage = this.voltage;
+        }
+        
+        let totalResistance;
+        if (bulbs.length === 1) {
+            totalResistance = this.resistance;
+        } else if (bulbsInSeries && !bulbsInParallel) {
+            // Pure series: resistances add
+            totalResistance = this.resistance * bulbs.length;
+        } else if (bulbsInParallel && !bulbsInSeries) {
+            // Pure parallel: 1/R_total = 1/R1 + 1/R2 + ... = n/R for identical R
+            // So R_total = R/n
+            totalResistance = this.resistance / bulbs.length;
+        } else {
+            // Mixed or complex circuit - use average as approximation
+            totalResistance = this.resistance;
+        }
+        
+        return { totalVoltage, totalResistance };
+    }
+
+    areComponentsInParallel(components) {
+        if (components.length <= 1) return false;
+        
+        // Components are in parallel if they share the same two connection nodes
+        // Check if all components connect to the same two distinct nodes
+        
+        const firstComp = components[0];
+        const firstConnections = this.getComponentConnections(firstComp.id);
+        
+        if (firstConnections.length < 2) return false;
+        
+        // Get the two nodes this component connects to (via its connection points)
+        const firstNodes = new Set();
+        firstConnections.forEach(conn => {
+            if (conn.from.componentId === firstComp.id) {
+                firstNodes.add(conn.to.componentId);
+            } else {
+                firstNodes.add(conn.from.componentId);
+            }
+        });
+        
+        // Check if all other components of the same type connect to the same nodes
+        for (let i = 1; i < components.length; i++) {
+            const comp = components[i];
+            const compConnections = this.getComponentConnections(comp.id);
+            
+            const compNodes = new Set();
+            compConnections.forEach(conn => {
+                if (conn.from.componentId === comp.id) {
+                    compNodes.add(conn.to.componentId);
+                } else {
+                    compNodes.add(conn.from.componentId);
+                }
+            });
+            
+            // Check if nodes match (parallel components share the same connection points)
+            if (compNodes.size !== firstNodes.size) return false;
+            
+            const nodesMatch = Array.from(compNodes).every(node => 
+                Array.from(firstNodes).some(firstNode => {
+                    // Check if these nodes are connected (same electrical node)
+                    return node === firstNode || this.isConnectedPath(node, firstNode);
+                })
+            );
+            
+            if (!nodesMatch) return false;
+        }
+        
+        return true;
+    }
+
+    areComponentsInSeries(components) {
+        if (components.length <= 1) return false;
+        
+        // Check if components are connected in a chain (series)
+        // In series: each component connects to exactly 2 other components
+        // and they form a single path
+        
+        for (let i = 0; i < components.length - 1; i++) {
+            const comp1 = components[i];
+            const comp2 = components[i + 1];
+            
+            // Check if these two components are directly connected
+            const directlyConnected = this.connections.some(conn =>
+                (conn.from.componentId === comp1.id && conn.to.componentId === comp2.id) ||
+                (conn.from.componentId === comp2.id && conn.to.componentId === comp1.id)
+            );
+            
+            if (directlyConnected) {
+                // Check if they only connect to each other and endpoints
+                const comp1Connections = this.getComponentConnections(comp1.id).length;
+                const comp2Connections = this.getComponentConnections(comp2.id).length;
+                
+                // In a pure series, each component should have exactly 2 connections
+                // (except possibly the first and last)
+                if (i === 0 || i === components.length - 1) {
+                    if (comp1Connections !== 2 && comp2Connections !== 2) {
+                        return false;
+                    }
+                }
+            }
+        }
+        
+        // Simplified: if all components of same type are in one continuous path, they're in series
+        return true;
+    }
+
+    getComponentConnections(componentId) {
+        return this.connections.filter(conn =>
+            conn.from.componentId === componentId || conn.to.componentId === componentId
+        );
     }
 
     drawWires() {
