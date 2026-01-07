@@ -569,14 +569,30 @@ class CircuitPlayground {
         if (!hasBattery || !hasBulb) return false;
         if (this.connections.length === 0) return false;
 
-        // Check if any battery is connected to any bulb
         const batteries = this.components.filter(c => c.type === 'battery');
         const bulbs = this.components.filter(c => c.type === 'bulb');
         
-        // Return true if at least one battery connects to at least one bulb
-        return batteries.some(battery => 
-            bulbs.some(bulb => this.isConnectedPath(battery.id, bulb.id))
-        );
+        // For a complete circuit, we need a closed loop
+        // Each component must have at least 2 connections (except in very simple circuits)
+        // Check if there's a path AND if it forms a closed loop
+        
+        for (const battery of batteries) {
+            for (const bulb of bulbs) {
+                // Check if battery and bulb are connected
+                if (!this.isConnectedPath(battery.id, bulb.id)) continue;
+                
+                // Check if both battery and bulb have at least 2 connections (forming a loop)
+                const batteryConnections = this.getComponentConnections(battery.id);
+                const bulbConnections = this.getComponentConnections(bulb.id);
+                
+                // A complete circuit requires both terminals to be connected
+                if (batteryConnections.length >= 2 && bulbConnections.length >= 2) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
     }
 
     isConnectedPath(fromId, toId) {
@@ -625,8 +641,20 @@ class CircuitPlayground {
             return;
         }
 
+        // Only count bulbs that are fully connected (have 2 connections)
+        const allBulbs = this.components.filter(c => c.type === 'bulb');
+        const connectedBulbs = allBulbs.filter(bulb => {
+            const connections = this.getComponentConnections(bulb.id);
+            return connections.length >= 2;
+        });
+        
+        if (connectedBulbs.length === 0) {
+            document.getElementById('current-reading').textContent = '-';
+            document.getElementById('power-reading').textContent = '-';
+            return;
+        }
+
         // Analyze circuit to calculate effective voltage and resistance
-        const bulbs = this.components.filter(c => c.type === 'bulb');
         const { totalVoltage, totalResistance } = this.analyzeCircuit();
         
         if (totalVoltage === 0 || totalResistance === 0) {
@@ -635,15 +663,15 @@ class CircuitPlayground {
             return;
         }
 
-        const bulbsInParallel = this.areComponentsInParallel(bulbs);
+        const bulbsInParallel = this.areComponentsInParallel(connectedBulbs);
         
         let current, power;
         
-        if (bulbsInParallel && bulbs.length > 1) {
+        if (bulbsInParallel && connectedBulbs.length > 1) {
             // For parallel bulbs: show current through EACH bulb, but TOTAL power
             current = totalVoltage / this.resistance; // Current through one bulb
             const powerPerBulb = totalVoltage * current; // Power per bulb
-            power = powerPerBulb * bulbs.length; // Total power
+            power = powerPerBulb * connectedBulbs.length; // Total power
         } else {
             // For series or single bulb: standard calculation
             current = totalVoltage / totalResistance;
@@ -660,7 +688,7 @@ class CircuitPlayground {
         }
         
         // Add indicator for parallel circuits
-        if (bulbsInParallel && bulbs.length > 1) {
+        if (bulbsInParallel && connectedBulbs.length > 1) {
             currentDisplay += ' (per bulb)';
         }
 
@@ -675,9 +703,13 @@ class CircuitPlayground {
     }
 
     analyzeCircuit() {
-        // Find all batteries and bulbs in the circuit
+        // Find all batteries and only fully connected bulbs (with 2 connections)
         const batteries = this.components.filter(c => c.type === 'battery');
-        const bulbs = this.components.filter(c => c.type === 'bulb');
+        const allBulbs = this.components.filter(c => c.type === 'bulb');
+        const bulbs = allBulbs.filter(bulb => {
+            const connections = this.getComponentConnections(bulb.id);
+            return connections.length >= 2;
+        });
         
         if (batteries.length === 0 || bulbs.length === 0) {
             return { totalVoltage: 0, totalResistance: 0 };
