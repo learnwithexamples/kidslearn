@@ -177,13 +177,6 @@ class CircuitPlayground {
             return;
         }
 
-        // Check if component already exists (only one of each type allowed)
-        const existing = this.components.find(c => c.type === componentType);
-        if (existing) {
-            this.showStatus('You can only have one ' + componentType + ' in the circuit!', 'error');
-            return;
-        }
-
         // Calculate drop position relative to board-grid
         const boardGrid = document.getElementById('board-grid');
         const rect = boardGrid.getBoundingClientRect();
@@ -506,81 +499,84 @@ class CircuitPlayground {
 
     updateCircuit() {
         const hasBattery = this.components.some(c => c.type === 'battery');
-        const hasLed = this.components.some(c => c.type === 'led');
+        const hasBulb = this.components.some(c => c.type === 'bulb');
         const hasSwitch = this.components.some(c => c.type === 'switch');
 
         // Check if circuit forms a complete path
         const circuitComplete = this.checkCircuitComplete();
         
-        let switchOn = true;
-        if (hasSwitch && circuitComplete) {
-            const switchComponent = this.components.find(c => c.type === 'switch');
-            switchOn = switchComponent.active;
+        // Check if all switches are on
+        let allSwitchesOn = true;
+        if (hasSwitch) {
+            const switches = this.components.filter(c => c.type === 'switch');
+            allSwitchesOn = switches.every(s => s.active);
         }
 
-        // Update LED state
-        const ledComponent = this.components.find(c => c.type === 'led');
-        if (ledComponent) {
-            ledComponent.active = circuitComplete && switchOn;
-            const ledEl = document.querySelector(`[data-id="${ledComponent.id}"]`);
-            if (ledEl) {
-                const ledIcon = ledEl.querySelector('.component-icon');
+        // Update all bulb states
+        const bulbComponents = this.components.filter(c => c.type === 'bulb');
+        bulbComponents.forEach(bulbComponent => {
+            // Check if this specific bulb is in a complete circuit path from battery
+            const batteryComponents = this.components.filter(c => c.type === 'battery');
+            const isInCompletePath = batteryComponents.some(battery => 
+                this.isConnectedPath(battery.id, bulbComponent.id)
+            );
+            
+            bulbComponent.active = isInCompletePath && allSwitchesOn;
+            const bulbEl = document.querySelector(`[data-id="${bulbComponent.id}"]`);
+            if (bulbEl) {
+                const bulbIcon = bulbEl.querySelector('.component-icon');
                 
-                if (ledComponent.active) {
-                    ledIcon.classList.add('led-on');
-                    ledEl.classList.add('active');
+                if (bulbComponent.active) {
+                    bulbIcon.classList.add('bulb-on');
+                    bulbEl.classList.add('active');
                 } else {
-                    ledIcon.classList.remove('led-on');
-                    ledEl.classList.remove('active');
+                    bulbIcon.classList.remove('bulb-on');
+                    bulbEl.classList.remove('active');
                 }
             }
-        }
+        });
 
-        // Update battery visual state
-        const batteryComponent = this.components.find(c => c.type === 'battery');
-        if (batteryComponent) {
+        // Update all battery visual states
+        const batteryComponents = this.components.filter(c => c.type === 'battery');
+        batteryComponents.forEach(batteryComponent => {
             const batteryEl = document.querySelector(`[data-id="${batteryComponent.id}"]`);
             if (batteryEl) {
-                if (circuitComplete && switchOn) {
+                if (circuitComplete && allSwitchesOn) {
                     batteryEl.classList.add('active');
                 } else {
                     batteryEl.classList.remove('active');
                 }
             }
-        }
+        });
 
         // Calculate and display readings
-        this.calculateReadings(circuitComplete && switchOn);
+        this.calculateReadings(circuitComplete && allSwitchesOn);
         
         // Draw connecting wires
         this.drawWires();
 
         // Update status message
         if (!this.isConnecting) {
-            this.updateStatus(hasBattery, hasBulb, hasSwitch, circuitComplete, switchOn);
+            this.updateStatus(hasBattery, hasBulb, hasSwitch, circuitComplete, allSwitchesOn);
         }
     }
 
     checkCircuitComplete() {
-        // Need at least battery and bulb
-        const battery = this.components.find(c => c.type === 'battery');
-        const bulb = this.components.find(c => c.type === 'bulb');
+        // Need at least one battery and one bulb
+        const hasBattery = this.components.some(c => c.type === 'battery');
+        const hasBulb = this.components.some(c => c.type === 'bulb');
         
-        if (!battery || !bulb) return false;
+        if (!hasBattery || !hasBulb) return false;
         if (this.connections.length === 0) return false;
 
-        // Check if there's a path from battery to bulb and back
-        // For simplicity, check if all required components are connected
-        const hasSwitch = this.components.some(c => c.type === 'switch');
+        // Check if any battery is connected to any bulb
+        const batteries = this.components.filter(c => c.type === 'battery');
+        const bulbs = this.components.filter(c => c.type === 'bulb');
         
-        if (hasSwitch) {
-            // Need connections: battery-switch, switch-bulb, bulb-battery (or variations)
-            const switchComp = this.components.find(c => c.type === 'switch');
-            return this.isConnectedPath(battery.id, bulb.id);
-        } else {
-            // Just need battery connected to bulb
-            return this.isConnectedPath(battery.id, bulb.id);
-        }
+        // Return true if at least one battery connects to at least one bulb
+        return batteries.some(battery => 
+            bulbs.some(bulb => this.isConnectedPath(battery.id, bulb.id))
+        );
     }
 
     isConnectedPath(fromId, toId) {
