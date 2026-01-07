@@ -276,7 +276,19 @@ class CircuitPlayground {
         if (!component) return;
 
         const el = document.querySelector(`[data-id="${componentId}"]`);
-        this.draggedElement = { component, el, startX: e.clientX - component.x, startY: e.clientY - component.y };
+        const boardGrid = document.getElementById('board-grid');
+        const rect = boardGrid.getBoundingClientRect();
+        
+        // Calculate offset from mouse to component position (relative to board)
+        const mouseXInBoard = e.clientX - rect.left;
+        const mouseYInBoard = e.clientY - rect.top;
+        
+        this.draggedElement = { 
+            component, 
+            el, 
+            startX: mouseXInBoard - component.x, 
+            startY: mouseYInBoard - component.y 
+        };
 
         const handleMove = (e) => {
             if (!this.draggedElement) return;
