@@ -9,7 +9,7 @@ class CircuitPlayground {
         this.offsetX = 0;
         this.offsetY = 0;
         this.nextId = 1;
-        this.selectedComponent = null;
+        this.selectedPoint = null; // {componentId, pointIndex}
         this.isConnecting = false;
         
         this.init();
@@ -221,16 +221,21 @@ class CircuitPlayground {
         }
 
         el.innerHTML = `
+            <div class="connection-point" data-point="0" title="Connection Point 1">●</div>
             <div class="component-icon ${iconClass}">${icons[component.type]}</div>
             <span class="component-label">${labels[component.type]}</span>
+            <div class="connection-point" data-point="1" title="Connection Point 2">●</div>
             <button class="remove-btn">✕</button>
-            <button class="connect-btn" title="Connect to another component">🔗</button>
         `;
 
-        // Connect button
-        el.querySelector('.connect-btn').addEventListener('click', (e) => {
-            e.stopPropagation();
-            this.startConnection(component.id);
+        // Connection points
+        el.querySelectorAll('.connection-point').forEach(point => {
+            point.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const pointIndex = parseInt(point.dataset.point);
+                console.log('🔗 Connection point clicked:', component.id, 'point:', pointIndex);
+                this.handleConnectionPointClick(component.id, pointIndex);
+            });
         });
 
         // Make switch clickable
@@ -249,23 +254,12 @@ class CircuitPlayground {
             this.removeComponent(component.id);
         });
 
-        // Make draggable (but not the icon for switch)
+        // Make draggable (but not buttons or connection points)
         el.addEventListener('mousedown', (e) => {
             if (e.target.classList.contains('remove-btn')) return;
-            if (e.target.classList.contains('connect-btn')) return;
+            if (e.target.classList.contains('connection-point')) return;
             if (e.target.classList.contains('component-icon') && component.type === 'switch') return;
             this.startDrag(component.id, e);
-        });
-
-        // Click to complete connection
-        el.addEventListener('click', (e) => {
-            if (this.isConnecting && this.selectedComponent !== component.id) {
-                if (!e.target.classList.contains('remove-btn') && 
-                    !e.target.classList.contains('connect-btn') &&
-                    !(e.target.classList.contains('component-icon') && component.type === 'switch')) {
-                    this.completeConnection(component.id);
-                }
-            }
         });
 
         boardGrid.appendChild(el);
@@ -323,52 +317,67 @@ class CircuitPlayground {
         this.updateCircuit();
     }
 
-    startConnection(componentId) {
-        this.isConnecting = true;
-        this.selectedComponent = componentId;
+    handleConnectionPointClick(componentId, pointIndex) {
+        console.log('🟠 Connection point clicked:', componentId, pointIndex);
         
-        // Highlight the selected component
-        document.querySelectorAll('.placed-component').forEach(el => {
-            el.classList.remove('connecting-from');
-        });
-        const el = document.querySelector(`[data-id="${componentId}"]`);
-        el.classList.add('connecting-from');
-        
-        this.showStatus('Click on another component to connect!', '');
-    }
-
-    completeConnection(targetId) {
-        if (!this.isConnecting || !this.selectedComponent) return;
-        
-        const fromId = this.selectedComponent;
-        const toId = targetId;
-        
-        // Check if connection already exists
-        const exists = this.connections.some(
-            conn => (conn.from === fromId && conn.to === toId) || 
-                    (conn.from === toId && conn.to === fromId)
-        );
-        
-        if (exists) {
-            this.showStatus('Components are already connected!', 'error');
+        if (!this.selectedPoint) {
+            // First click - select this point
+            this.selectedPoint = { componentId, pointIndex };
+            this.isConnecting = true;
+            
+            // Highlight the selected point
+            const el = document.querySelector(`[data-id="${componentId}"]`);
+            const point = el.querySelector(`[data-point="${pointIndex}"]`);
+            document.querySelectorAll('.connection-point').forEach(p => p.classList.remove('selected'));
+            point.classList.add('selected');
+            
+            this.showStatus('Click on another connection point to connect!', '');
+            console.log('✅ First point selected');
+        } else {
+            // Second click - complete connection
+            const fromPoint = this.selectedPoint;
+            const toPoint = { componentId, pointIndex };
+            
+            // Can't connect a point to itself
+            if (fromPoint.componentId === toPoint.componentId && fromPoint.pointIndex === toPoint.pointIndex) {
+                console.log('❌ Cannot connect point to itself');
+                this.cancelConnection();
+                return;
+            }
+            
+            // Check if this connection already exists
+            const exists = this.connections.some(conn => 
+                (conn.from.componentId === fromPoint.componentId && 
+                 conn.from.pointIndex === fromPoint.pointIndex &&
+                 conn.to.componentId === toPoint.componentId && 
+                 conn.to.pointIndex === toPoint.pointIndex) ||
+                (conn.from.componentId === toPoint.componentId && 
+                 conn.from.pointIndex === toPoint.pointIndex &&
+                 conn.to.componentId === fromPoint.componentId && 
+                 conn.to.pointIndex === fromPoint.pointIndex)
+            );
+            
+            if (exists) {
+                console.log('⚠️ Connection already exists');
+                this.showStatus('These points are already connected!', 'error');
+                this.cancelConnection();
+                return;
+            }
+            
+            // Add the connection
+            this.connections.push({ from: fromPoint, to: toPoint });
+            console.log('✅ Connection created:', fromPoint, '→', toPoint);
+            
             this.cancelConnection();
-            return;
+            this.updateCircuit();
+            this.showStatus('Connection created! 🔌', 'success');
         }
-        
-        // Add the connection
-        this.connections.push({ from: fromId, to: toId });
-        
-        this.cancelConnection();
-        this.updateCircuit();
-        this.showStatus('Connection created! 🔌', 'success');
     }
 
     cancelConnection() {
         this.isConnecting = false;
-        this.selectedComponent = null;
-        document.querySelectorAll('.placed-component').forEach(el => {
-            el.classList.remove('connecting-from');
-        });
+        this.selectedPoint = null;
+        document.querySelectorAll('.connection-point').forEach(p => p.classList.remove('selected'));
     }
 
     toggleSwitch(componentId) {
@@ -470,15 +479,22 @@ class CircuitPlayground {
     }
 
     isConnectedPath(fromId, toId) {
-        // Build adjacency list
+        // Build adjacency list from connection points
         const graph = {};
         this.components.forEach(c => {
             graph[c.id] = [];
         });
         
         this.connections.forEach(conn => {
-            graph[conn.from].push(conn.to);
-            graph[conn.to].push(conn.from);
+            // Connections are between points, but we check component connectivity
+            const comp1 = conn.from.componentId;
+            const comp2 = conn.to.componentId;
+            if (!graph[comp1].includes(comp2)) {
+                graph[comp1].push(comp2);
+            }
+            if (!graph[comp2].includes(comp1)) {
+                graph[comp2].push(comp1);
+            }
         });
 
         // BFS to check if path exists
@@ -556,20 +572,35 @@ class CircuitPlayground {
 
         // Draw each connection
         this.connections.forEach(conn => {
-            const comp1 = this.components.find(c => c.id === conn.from);
-            const comp2 = this.components.find(c => c.id === conn.to);
+            const comp1 = this.components.find(c => c.id === conn.from.componentId);
+            const comp2 = this.components.find(c => c.id === conn.to.componentId);
             
             if (!comp1 || !comp2) return;
+
+            // Get connection point elements
+            const el1 = document.querySelector(`[data-id="${comp1.id}"]`);
+            const el2 = document.querySelector(`[data-id="${comp2.id}"]`);
+            
+            if (!el1 || !el2) return;
+            
+            const point1 = el1.querySelector(`[data-point="${conn.from.pointIndex}"]`);
+            const point2 = el2.querySelector(`[data-point="${conn.to.pointIndex}"]`);
+            
+            if (!point1 || !point2) return;
+            
+            const rect1 = point1.getBoundingClientRect();
+            const rect2 = point2.getBoundingClientRect();
+            const canvasRect = canvas.getBoundingClientRect();
+            
+            const x1 = rect1.left + rect1.width / 2 - canvasRect.left;
+            const y1 = rect1.top + rect1.height / 2 - canvasRect.top;
+            const x2 = rect2.left + rect2.width / 2 - canvasRect.left;
+            const y2 = rect2.top + rect2.height / 2 - canvasRect.top;
 
             // Wire color based on state
             ctx.strokeStyle = isActive ? '#4caf50' : '#999';
             ctx.lineWidth = 4;
             ctx.lineCap = 'round';
-
-            const x1 = comp1.x + 50;
-            const y1 = comp1.y + 50;
-            const x2 = comp2.x + 50;
-            const y2 = comp2.y + 50;
 
             ctx.beginPath();
             ctx.moveTo(x1, y1);

@@ -619,6 +619,11 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 2;
     user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
 }
 
 .placed-component:hover {
@@ -630,11 +635,51 @@
     box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
 }
 
-.placed-component.connecting-from {
-    border-color: #ff9800;
-    border-width: 4px;
-    box-shadow: 0 0 20px rgba(255, 152, 0, 0.6);
-    animation: pulse 1s infinite;
+/* Connection Points */
+.connection-point {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #667eea;
+    border: 2px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0;
+    z-index: 3;
+    transition: all 0.3s;
+}
+
+.connection-point:first-of-type {
+    top: 50%;
+    left: -10px;
+    transform: translateY(-50%);
+}
+
+.connection-point:last-of-type {
+    top: 50%;
+    right: -10px;
+    transform: translateY(-50%);
+}
+
+.connection-point:hover {
+    background: #ff9800;
+    transform: translateY(-50%) scale(1.3);
+    box-shadow: 0 0 10px rgba(255, 152, 0, 0.6);
+}
+
+.connection-point.selected {
+    background: #ff9800;
+    animation: pulse-point 0.8s infinite;
+    box-shadow: 0 0 15px rgba(255, 152, 0, 0.8);
+}
+
+@keyframes pulse-point {
+    0%, 100% {
+        transform: translateY(-50%) scale(1.2);
+    }
+    50% {
+        transform: translateY(-50%) scale(1.5);
+    }
 }
 
 @keyframes pulse {
