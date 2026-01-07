@@ -223,24 +223,22 @@ class CircuitPlayground {
 
         const icons = {
             battery: '🔋',
-            led: '💡',
-            switch: '🔘',
-            resistor: '⚡'
+            bulb: '💡',
+            switch: '🔘'
         };
 
         const labels = {
             battery: 'Battery',
-            led: 'LED',
-            switch: 'Switch',
-            resistor: 'Resistor'
+            bulb: 'Bulb',
+            switch: 'Switch'
         };
 
         let iconClass = component.type + '-icon';
         if (component.type === 'switch') {
             iconClass += component.active ? ' switch-on' : ' switch-off';
         }
-        if (component.type === 'led' && component.active) {
-            iconClass += ' led-on';
+        if (component.type === 'bulb' && component.active) {
+            iconClass += ' bulb-on';
         }
 
         el.innerHTML = `
@@ -559,29 +557,29 @@ class CircuitPlayground {
 
         // Update status message
         if (!this.isConnecting) {
-            this.updateStatus(hasBattery, hasLed, hasSwitch, circuitComplete, switchOn);
+            this.updateStatus(hasBattery, hasBulb, hasSwitch, circuitComplete, switchOn);
         }
     }
 
     checkCircuitComplete() {
-        // Need at least battery and LED
+        // Need at least battery and bulb
         const battery = this.components.find(c => c.type === 'battery');
-        const led = this.components.find(c => c.type === 'led');
+        const bulb = this.components.find(c => c.type === 'bulb');
         
-        if (!battery || !led) return false;
+        if (!battery || !bulb) return false;
         if (this.connections.length === 0) return false;
 
-        // Check if there's a path from battery to LED and back
+        // Check if there's a path from battery to bulb and back
         // For simplicity, check if all required components are connected
         const hasSwitch = this.components.some(c => c.type === 'switch');
         
         if (hasSwitch) {
-            // Need connections: battery-switch, switch-led, led-battery (or variations)
+            // Need connections: battery-switch, switch-bulb, bulb-battery (or variations)
             const switchComp = this.components.find(c => c.type === 'switch');
-            return this.isConnectedPath(battery.id, led.id);
+            return this.isConnectedPath(battery.id, bulb.id);
         } else {
-            // Just need battery connected to LED
-            return this.isConnectedPath(battery.id, led.id);
+            // Just need battery connected to bulb
+            return this.isConnectedPath(battery.id, bulb.id);
         }
     }
 
@@ -631,9 +629,8 @@ class CircuitPlayground {
             return;
         }
 
-        // Use user-defined resistance or default LED resistance
-        const hasResistor = this.components.some(c => c.type === 'resistor');
-        const totalResistance = hasResistor ? this.resistance : 100; // Default LED resistance
+        // Use user-defined resistance for bulb
+        const totalResistance = this.resistance; // Bulb resistance from slider
 
         // Calculate current using Ohm's Law: I = V / R
         const current = this.voltage / totalResistance;

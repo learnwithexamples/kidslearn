@@ -777,8 +777,8 @@
     transform: scale(1.1);
 }
 
-/* LED States */
-.led-icon.led-on {
+/* Bulb States */
+.bulb-icon.bulb-on {
     filter: brightness(1.5) drop-shadow(0 0 10px yellow);
     animation: glow 1s infinite alternate;
 }
