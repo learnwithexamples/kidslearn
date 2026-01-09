@@ -5,6 +5,7 @@ class CircuitPlayground {
         this.connections = [];
         this.voltage = 9;
         this.resistance = 10;
+        this.batteryCapacity = 2; // Ah
         this.draggedElement = null;
         this.offsetX = 0;
         this.offsetY = 0;
@@ -158,6 +159,14 @@ class CircuitPlayground {
         resistanceInput.addEventListener('input', (e) => {
             this.resistance = parseFloat(e.target.value);
             document.getElementById('resistance-display').textContent = `${this.resistance}Ω`;
+            this.updateCircuit();
+        });
+
+        // Battery capacity control
+        const capacityInput = document.getElementById('capacity-input');
+        capacityInput.addEventListener('input', (e) => {
+            this.batteryCapacity = parseFloat(e.target.value);
+            document.getElementById('capacity-display').textContent = `${this.batteryCapacity}Ah`;
             this.updateCircuit();
         });
 
@@ -724,6 +733,7 @@ class CircuitPlayground {
         if (!circuitActive) {
             document.getElementById('current-reading').textContent = '-';
             document.getElementById('power-reading').textContent = '-';
+            document.getElementById('runtime-reading').textContent = '-';
             return;
         }
 
@@ -737,15 +747,17 @@ class CircuitPlayground {
         if (connectedBulbs.length === 0) {
             document.getElementById('current-reading').textContent = '-';
             document.getElementById('power-reading').textContent = '-';
+            document.getElementById('runtime-reading').textContent = '-';
             return;
         }
 
-        // Analyze circuit to calculate effective voltage
-        const { totalVoltage } = this.analyzeCircuit();
+        // Analyze circuit to calculate effective voltage and capacity
+        const { totalVoltage, totalCapacity } = this.analyzeCircuit();
         
         if (totalVoltage === 0) {
             document.getElementById('current-reading').textContent = '-';
             document.getElementById('power-reading').textContent = '-';
+            document.getElementById('runtime-reading').textContent = '-';
             return;
         }
 
@@ -773,8 +785,14 @@ class CircuitPlayground {
             power = totalVoltage * current;
         }
 
+        // Calculate runtime
+        // Energy in battery (Wh) = Capacity (Ah) × Voltage (V)
+        const batteryEnergy = totalCapacity * totalVoltage; // Wh
+        // Runtime (hours) = Energy (Wh) / Power (W)
+        const runtimeHours = batteryEnergy / power;
+        
         // Display with appropriate units
-        let currentDisplay, powerDisplay;
+        let currentDisplay, powerDisplay, runtimeDisplay;
         
         currentDisplay = `${current.toFixed(2)} A`;
         
@@ -790,8 +808,20 @@ class CircuitPlayground {
             powerDisplay += ' (total)';
         }
 
+        // Format runtime based on duration
+        if (runtimeHours < 1) {
+            const minutes = runtimeHours * 60;
+            runtimeDisplay = `${minutes.toFixed(1)} min`;
+        } else if (runtimeHours < 24) {
+            runtimeDisplay = `${runtimeHours.toFixed(2)} hours`;
+        } else {
+            const days = runtimeHours / 24;
+            runtimeDisplay = `${days.toFixed(2)} days`;
+        }
+
         document.getElementById('current-reading').textContent = currentDisplay;
         document.getElementById('power-reading').textContent = powerDisplay;
+        document.getElementById('runtime-reading').textContent = runtimeDisplay;
     }
 
     analyzeCircuit() {
@@ -804,21 +834,29 @@ class CircuitPlayground {
         });
         
         if (batteries.length === 0 || bulbs.length === 0) {
-            return { totalVoltage: 0, totalResistance: 0 };
+            return { totalVoltage: 0, totalResistance: 0, totalCapacity: 0 };
         }
 
         // Check circuit configuration
         const bulbsInSeries = this.areComponentsInSeries(bulbs);
         const bulbsInParallel = this.areComponentsInParallel(bulbs);
         const batteriesInSeries = this.areComponentsInSeries(batteries);
+        const batteriesInParallel = this.areComponentsInParallel(batteries);
         
-        let totalVoltage;
-        if (batteriesInSeries) {
-            // Series batteries: voltages add
+        let totalVoltage, totalCapacity;
+        
+        if (batteriesInSeries && batteries.length > 1) {
+            // Series batteries: voltages add, capacity stays the same
             totalVoltage = this.voltage * batteries.length;
-        } else {
-            // Parallel or mixed: use base voltage
+            totalCapacity = this.batteryCapacity;
+        } else if (batteriesInParallel && batteries.length > 1) {
+            // Parallel batteries: voltage stays the same, capacities add
             totalVoltage = this.voltage;
+            totalCapacity = this.batteryCapacity * batteries.length;
+        } else {
+            // Single battery or mixed configuration
+            totalVoltage = this.voltage;
+            totalCapacity = this.batteryCapacity;
         }
         
         let totalResistance;
@@ -836,7 +874,7 @@ class CircuitPlayground {
             totalResistance = this.resistance;
         }
         
-        return { totalVoltage, totalResistance };
+        return { totalVoltage, totalResistance, totalCapacity };
     }
 
     areComponentsInParallel(components) {
