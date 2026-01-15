@@ -1281,32 +1281,283 @@ const vocabularyData = {
     },
     "book-a": {
       "title": "Book A",
-      "level": "Middle School",
-      "description": "Middle school level vocabulary from Greek and Latin roots",
+      "level": "grade 4",
+      "description": "grade 4 level vocabulary from Greek and Latin roots",
       "lessons": [
         {
           "number": 1,
-          "title": "The Roots of Knowledge",
+          "title": "Numbers",
           "roots": [
             {
-              "root": "GNO",
-              "origin": "Greek/Latin",
-              "meaning": "know",
+              "root": "monos , unus , duo , duplex , bi",
+              "origin": "Greek, Latin, Latin, Latin, Latin",
+              "meaning": "one , one , two , twofold, two",
               "words": [
                 {
-                  "word": "agnostic",
-                  "pronunciation": "ag-NOS-tik",
+                  "word": "monologue",
+                  "pronunciation": "MON-uh-lawg",
                   "partOfSpeech": "noun",
-                  "definition": "a person who believes it is impossible to know whether God exists",
-                  "example": "As an agnostic, she neither confirms nor denies the existence of a higher power."
+                  "definition": "a long speech by one actor in a play or movie",
+                  "example": "Because my friend does all the talking, our conversation turns into a monologue."
                 },
                 {
-                  "word": "diagnose",
-                  "pronunciation": "dy-uhg-NOHS",
+                  "word": "monarch",
+                  "pronunciation": "MON-ahrk",
+                  "partOfSpeech": "noun",
+                  "definition": "a sole ruler of a state or nation",
+                  "example": "The monarch ruled the kingdom with fairness and wisdom."
+                },
+                {
+                  "word": "monogram",
+                  "pronunciation": "MON-uh-gram",
+                  "partOfSpeech": "noun",
+                  "definition": "a design composed of one or more letters, typically the initials of a name",
+                  "example": "She embroidered her monogram on the handkerchief."
+                },
+                {
+                  "word": "monopoly",
+                  "pronunciation": "muh-NOP-uh-lee",
+                  "partOfSpeech": "noun",
+                  "definition": "exclusive control of a commodity or service in a particular market",
+                  "example": "The company held a monopoly on the local water supply."
+                },
+                {
+                  "word": "monolith",
+                  "pronunciation": "MON-uh-lith",
+                  "partOfSpeech": "noun",
+                  "definition": "a large single upright block of stone, especially one shaped into or serving as a pillar or monument",
+                  "example": "The ancient monolith stood tall in the middle of the desert."
+                },
+                {
+                  "word": "unanimous",
+                  "pronunciation": "yoo-NAN-uh-muhs",
+                  "partOfSpeech": "adjective",
+                  "definition": "fully in agreement",
+                  "example": "The jury was unanimous in their verdict."
+                },
+                {
+                  "word": "unilateral",
+                  "pronunciation": "yoo-nuh-LAT-er-uhl",
+                  "partOfSpeech": "adjective",
+                  "definition": "involving only one side",
+                  "example": "The decision was made unilaterally by the manager."
+                },
+                {
+                  "word": "duplex",
+                  "pronunciation": "DOO-pleks",
+                  "partOfSpeech": "noun",
+                  "definition": "a house divided into two separate living units",
+                  "example": "They bought a duplex so they could rent out one side and live in the other."
+                },
+                {
+                  "word": "duplicate",
+                  "pronunciation": "DOO-pluh-kit",
                   "partOfSpeech": "verb",
-                  "definition": "to identify a disease or problem",
-                  "example": "The doctor was able to diagnose the illness quickly."
+                  "definition": "to make an exact copy of something",
+                  "example": "She had to duplicate the document for the meeting."
+                },
+                {
+                  "word": "bilateral",
+                  "pronunciation": "bahy-LAT-er-uhl",
+                  "partOfSpeech": "adjective",
+                  "definition": "involving two sides",
+                  "example": "The countries signed a bilateral agreement to promote trade."
+                },
+                {
+                  "word": "bipartisan",
+                  "pronunciation": "bahy-PAHR-tuh-zuhn",
+                  "partOfSpeech": "adjective",
+                  "definition": "involving two political parties",
+                  "example": "The bill received bipartisan support in the legislature."
+                },
+                {
+                  "word": "bisect",
+                  "pronunciation": "bahy-SEKT",
+                  "partOfSpeech": "verb",
+                  "definition": "to divide into two equal parts",
+                  "example": "The line bisects the angle into two equal parts."
                 }
+              ]
+            }
+          ]
+        },
+       {
+          "number": 2,
+          "title": "Numbers",
+          "roots": [
+            {
+              "root": "tri , tres , quatuor , quartus , decem , centum",
+              "origin": "greek, Latin, Latin, Latin, Latin, Latin",
+              "meaning": "three , three , four , fourth , ten , hundred",
+              "words": [
+                {
+                  "word": "trilogy",
+                  "pronunciation": "TRY-uh-jee",
+                  "partOfSpeech": "noun",
+                  "definition": "a group of three related works, such as books or movies",
+                  "example": "The Lord of the Rings is a famous trilogy of fantasy novels."
+                },
+                {
+                  "word": "trisect",
+                  "pronunciation": "TRY-SEKT",
+                  "partOfSpeech": "verb",
+                  "definition": "to divide into three equal parts",
+                  "example": "The artist trisected the canvas to create a balanced composition."
+                },
+                {
+                  "word": "triumvirate",
+                  "pronunciation": "trahy-UM-vuh-rit",
+                  "partOfSpeech": "noun",
+                  "definition": "a group of three people holding power or office",
+                  "example": "The ancient Roman triumvirate consisted of three leaders who shared control of the government."
+                },
+                {
+                  "word": "quadrant",
+                  "pronunciation": "KWAD-runt",
+                  "partOfSpeech": "noun",
+                  "definition": "a quarter of a circle or its circumference",
+                  "example": "The graph was divided into four quadrants to analyze the data."
+                },
+                {
+                  "word": "quartet",
+                  "pronunciation": "kwor-TEY",
+                  "partOfSpeech": "noun",
+                  "definition": "a group of four musicians or singers who perform together",
+                  "example": "The string quartet played a beautiful piece at the concert."
+                },
+                {
+                  "word": "quatrain",
+                  "pronunciation": "KWAT-rin",
+                  "partOfSpeech": "noun",
+                  "definition": "a stanza of four lines, especially one having alternate rhymes",
+                  "example": "The poet wrote a beautiful quatrain about nature."
+                },
+                {
+                  "word": "decimate",
+                  "pronunciation": "DES-uh-meyt",
+                  "partOfSpeech": "verb",
+                  "definition": "to destroy a large portion of something",
+                  "example": "The disease decimated the population of the village."
+                },
+                {
+                  "word": "decathlon",
+                  "pronunciation": "de-KATH-lon",
+                  "partOfSpeech": "noun",
+                  "definition": "an athletic event consisting of ten different track and field events",
+                  "example": "The athlete trained hard for the decathlon to compete in multiple events."
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
               ]
             }
           ]
@@ -1315,8 +1566,8 @@ const vocabularyData = {
     },
     "book-b": {
       "title": "Book B",
-      "level": "Middle School",
-      "description": "Middle school level vocabulary from Greek and Latin roots",
+      "level": "grade 5",
+      "description": "grade 5 level vocabulary from Greek and Latin roots",
       "lessons": [
         {
           "number": 1,
