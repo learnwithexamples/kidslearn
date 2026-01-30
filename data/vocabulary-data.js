@@ -290,6 +290,41 @@ const vocabularyData = {
                   "partOfSpeech": "adjective",
                   "definition": "not able to be heard",
                   "example": "The sound was inaudible over the loud music."
+                },
+                {
+                  "word": "megaphone",
+                  "pronunciation": "MEG-uh-fohn",
+                  "partOfSpeech": "noun",
+                  "definition": "a device used to amplify the voice",
+                  "example": "The coach used a megaphone to give instructions to the team."
+                },
+                {
+                  "word": "phonics",
+                  "pronunciation": "FON-iks",
+                  "partOfSpeech": "noun",
+                  "definition": "a method of teaching reading and spelling based on the sounds of letters",
+                  "example": "The teacher used phonics to help the students learn to read."
+                },
+                {
+                  "word": "saxophone",
+                  "pronunciation": "SAK-suh-fohn",
+                  "partOfSpeech": "noun",
+                  "definition": "a musical instrument that is a type of woodwind",
+                  "example": "She played a beautiful solo on the saxophone."
+                },
+                {
+                  "word": "stereophonic",
+                  "pronunciation": "ster-ee-uh-FAWN-ik",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to or denoting sound reproduction using two or more channels to create a sense of directionality",
+                  "example": "The concert was recorded in stereophonic sound to capture the full experience."
+                },
+                {
+                  "word": "symphony",
+                  "pronunciation": "SIM-fuh-nee",
+                  "partOfSpeech": "noun",
+                  "definition": "a long piece of music usually for an orchestra",
+                  "example": "The orchestra performed a beautiful symphony."
                 }
               ]
             }
@@ -331,6 +366,48 @@ const vocabularyData = {
                   "partOfSpeech": "noun",
                   "definition": "a person's occupation or calling",
                   "example": "Teaching is not just a job for her; it's her vocation."
+                },
+                {
+                  "word": "addictive",
+                  "pronunciation": "uh-DIK-tiv",
+                  "partOfSpeech": "adjective",
+                  "definition": "causing a strong and harmful need to regularly have or do something",
+                  "example": "Video games can be addictive for some people."
+                },
+                {
+                  "word": "contradict",
+                  "pronunciation": "kon-truh-DIKT",
+                  "partOfSpeech": "verb",
+                  "definition": "to assert the opposite of a statement made by someone",
+                  "example": "Her actions contradict her words."
+                },
+                {
+                  "word": "dictation",
+                  "pronunciation": "dik-TEY-shuhn",
+                  "partOfSpeech": "noun",
+                  "definition": "the act of saying words aloud to be typed, written down, or recorded",
+                  "example": "The teacher gave a dictation exercise to the students."
+                },
+                {
+                  "word": "dictator",
+                  "pronunciation": "dik-TEY-ter",
+                  "partOfSpeech": "noun",
+                  "definition": "a ruler with total power over a country, typically one who has obtained control by force",
+                  "example": "The dictator ruled the country with an iron fist."
+                },
+                {
+                  "word": "predict",
+                  "pronunciation": "pri-DIKT",
+                  "partOfSpeech": "verb",
+                  "definition": "to say what will happen before it occurs",
+                  "example": "Meteorologists predict the weather using various tools."
+                },
+                {
+                  "word": "verdict",
+                  "pronunciation": "VUR-dikt",
+                  "partOfSpeech": "noun",
+                  "definition": "a decision on a disputed issue in a civil or criminal case",
+                  "example": "The jury reached a verdict after deliberating for several hours."
                 }
               ]
             }
@@ -1272,7 +1349,49 @@ const vocabularyData = {
                   "partOfSpeech": "adjective",
                   "definition": "able to be foretold; capable of being predicted",
                   "example": "The ending of the movie was predictable."
-                }
+                },
+                {
+                  "word": "colonize",
+                  "pronunciation": "KOL-uh-nahyz",
+                  "partOfSpeech": "verb",
+                  "definition": "to establish a colony in or on; to settle among and establish control over the indigenous people of an area",
+                  "example": "European countries began to colonize parts of Africa in the 19th century."
+                },
+                {
+                  "word": "generalize",
+                  "pronunciation": "JEN-uh-ruh-lahyz",
+                  "partOfSpeech": "verb",
+                  "definition": "to make a general or broad statement by inferring from specific cases",
+                  "example": "It's not fair to generalize about all students based on one experience."
+                },
+                {
+                  "word": "visualize",
+                  "pronunciation": "VIZH-oo-uh-lahyz",
+                  "partOfSpeech": "verb",
+                  "definition": "to form a mental image of; to make visible",
+                  "example": "She tried to visualize the scene described in the book."
+                },
+                {
+                  "word": "vocalize",
+                  "pronunciation": "VOH-kuh-lahyz",
+                  "partOfSpeech": "verb",
+                  "definition": "to produce sound with the voice; to express something aloud",
+                  "example": "The teacher asked the students to vocalize their thoughts during the discussion."
+                },
+                {
+                  "word": "socialize",
+                  "pronunciation": "SOH-shuh-lahyz",
+                  "partOfSpeech": "verb",
+                  "definition": "to interact with others; to engage in social activities",
+                  "example": "Children need time to socialize and make friends at school."
+                },
+                {
+                  "word": "trivialize",
+                  "pronunciation": "TRIV-ee-uh-lahyz",
+                  "partOfSpeech": "verb",
+                  "definition": "to make something seem less important or significant",
+                  "example": "It's not fair to trivialize her achievements just because they were done at a young age."
+                },
               ]
             }
           ]
@@ -1445,119 +1564,7 @@ const vocabularyData = {
                   "partOfSpeech": "noun",
                   "definition": "an athletic event consisting of ten different track and field events",
                   "example": "The athlete trained hard for the decathlon to compete in multiple events."
-                },
-                {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
-                },
-                {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
-                },
-                {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
-                },
-                {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
-                },
-                {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
-                },
-                {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
-                },
-                {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
-                },
-                {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
-                },
-                {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
-                },
-                {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
-                },
-                {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
-                },
-                {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
-                },
-                {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
-                },
-                {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
-                },
-                {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
-                },
-                {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
-                },
+                }
               ]
             }
           ]
