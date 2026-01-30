@@ -9,9 +9,11 @@ let elapsedTime = 0;
 
 // Configuration
 const config = {
-    aDigits: 2,
+    aMin: 1,
+    aMax: 99,
     aDecimals: 0,
-    bDigits: 2,
+    bMin: 1,
+    bMax: 99,
     bDecimals: 0,
     rows: 6,
     cols: 10
@@ -58,26 +60,35 @@ function setupEventListeners() {
     });
 
     // Configuration inputs
-    ['a-digits', 'a-decimals', 'b-digits', 'b-decimals', 'grid-rows', 'grid-cols'].forEach(id => {
+    ['a-min', 'a-max', 'a-decimals', 'b-min', 'b-max', 'b-decimals', 'grid-rows', 'grid-cols'].forEach(id => {
         document.getElementById(id).addEventListener('change', updateConfig);
     });
 }
 
 // Update configuration from inputs
 function updateConfig() {
-    config.aDigits = parseInt(document.getElementById('a-digits').value) || 2;
+    config.aMin = parseInt(document.getElementById('a-min').value) || 1;
+    config.aMax = parseInt(document.getElementById('a-max').value) || 99;
     config.aDecimals = parseInt(document.getElementById('a-decimals').value) || 0;
-    config.bDigits = parseInt(document.getElementById('b-digits').value) || 2;
+    config.bMin = parseInt(document.getElementById('b-min').value) || 1;
+    config.bMax = parseInt(document.getElementById('b-max').value) || 99;
     config.bDecimals = parseInt(document.getElementById('b-decimals').value) || 0;
     config.rows = parseInt(document.getElementById('grid-rows').value) || 6;
     config.cols = parseInt(document.getElementById('grid-cols').value) || 10;
+    
+    // Ensure max >= min
+    if (config.aMax < config.aMin) {
+        config.aMax = config.aMin;
+        document.getElementById('a-max').value = config.aMax;
+    }
+    if (config.bMax < config.bMin) {
+        config.bMax = config.bMin;
+        document.getElementById('b-max').value = config.bMax;
+    }
 }
 
 // Generate a random number based on configuration
-function generateNumber(digits, decimals) {
-    const max = Math.pow(10, digits) - 1;
-    const min = Math.pow(10, digits - 1);
-    
+function generateNumber(min, max, decimals) {
     let num = Math.floor(Math.random() * (max - min + 1)) + min;
     
     if (decimals > 0) {
@@ -94,8 +105,8 @@ function generateQuestions() {
     const totalQuestions = config.rows * config.cols;
     
     for (let i = 0; i < totalQuestions; i++) {
-        let a = generateNumber(config.aDigits, config.aDecimals);
-        let b = generateNumber(config.bDigits, config.bDecimals);
+        let a = generateNumber(config.aMin, config.aMax, config.aDecimals);
+        let b = generateNumber(config.bMin, config.bMax, config.bDecimals);
         
         // For subtraction, ensure a >= b to avoid negative results for kids
         if (currentOperation === '-' && a < b) {
