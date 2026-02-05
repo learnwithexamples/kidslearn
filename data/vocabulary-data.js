@@ -1568,6 +1568,123 @@ const vocabularyData = {
               ]
             }
           ]
+        },
+        {
+          "number": 3,
+          "title": "",
+          "roots": [
+            {
+              "root": "pan , omnis , totus , holo",
+              "origin": "Greek, Latin, Latin, Greek",
+              "meaning": "all , all , whole , whole",
+              "words": [
+                {
+                  "word": "catholic",
+                  "pronunciation": "kath-uh-lik",
+                  "partOfSpeech": "adjective",
+                  "definition": "including a wide variety of things; all-embracing",
+                  "example": "She has a catholic taste in music, enjoying everything from classical to rock."
+                },
+                {
+                  "word": "cloister",
+                  "pronunciation": "kloi-ster",
+                  "partOfSpeech": "noun",
+                  "definition": "a covered walk in a convent, monastery, college, or cathedral, typically with a wall on one side and a colonnade open to a quadrangle on the other",
+                  "example": "The monks spent their days in the quiet cloister of the monastery."
+                },
+                {
+                  "word": "holocaust",
+                  "pronunciation": "HOL-uh-kawst",
+                  "partOfSpeech": "noun",
+                  "definition": "a large-scale destruction, especially by fire; a vast slaughter; a burnt offering",
+                  "example": "The wildfire created a devastating holocaust in the forest."
+                },
+                {
+                  "word": "omnipotent",
+                  "pronunciation": "om-NIP-uh-tuhnt",
+                  "partOfSpeech": "adjective",
+                  "definition": "having unlimited power; able to do anything",
+                  "example": "In many religions, God is considered omnipotent."
+                },
+                {
+                  "word": "omnipresent",
+                  "pronunciation": "om-NIP-ruh-suhnt",
+                  "partOfSpeech": "adjective",
+                  "definition": "present everywhere at the same time",
+                  "example": "The idea of a god being omnipresent is common in many religions."
+                },
+                {
+                  "word": "omnivorous",
+                  "pronunciation": "om-NIV-er-uhs",
+                  "partOfSpeech": "adjective",
+                  "definition": "eating both plants and animals",
+                  "example": "Bears are omnivorous animals, consuming a variety of foods."
+                },
+                {
+                  "word": "panacea",
+                  "pronunciation": "pan-uh-SEE-uh",
+                  "partOfSpeech": "noun",
+                  "definition": "a solution or remedy for all difficulties or diseases",
+                  "example": "Many people believe that education is a panacea for social problems."
+                },
+                {
+                  "word": "pandemonium",
+                  "pronunciation": "pan-duh-MOH-nee-uhm",
+                  "partOfSpeech": "noun",
+                  "definition": "wild and noisy disorder or confusion; uproar",
+                  "example": "The announcement of the surprise test caused pandemonium in the classroom."
+                },
+                {
+                  "word": "preclude",
+                  "pronunciation": "pri-KLOOD",
+                  "partOfSpeech": "verb",
+                  "definition": "to prevent something from happening or someone from doing something",
+                  "example": "His injury precluded him from playing in the game."
+                },
+                {
+                  "word": "recluse",
+                  "pronunciation": "REK-loos",
+                  "partOfSpeech": "noun",
+                  "definition": "a person who lives a solitary life and tends to avoid other people",
+                  "example": "The famous author became a recluse, rarely leaving his home."
+                },
+                {
+                  "word": "totalitarian",
+                  "pronunciation": "toh-TAL-uh-TAIR-ee-uhn",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to a system of government that is centralized and dictatorial and requires complete subservience to the state",
+                  "example": "The country was ruled by a totalitarian regime that controlled every aspect of life."
+                },
+              ]
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                }
+              ]
+            }
+          ]
         }
       ]
     },
