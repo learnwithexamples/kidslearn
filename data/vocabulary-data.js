@@ -1655,6 +1655,13 @@ const vocabularyData = {
                   "definition": "relating to a system of government that is centralized and dictatorial and requires complete subservience to the state",
                   "example": "The country was ruled by a totalitarian regime that controlled every aspect of life."
                 },
+                {
+                  "word": "conclusion",
+                  "pronunciation": "kuhn-KLOO-zhuhn",
+                  "partOfSpeech": "noun",
+                  "definition": "the end or finish of an event or process; a judgment or decision reached after consideration",
+                  "example": "After reviewing all the evidence, the jury reached a conclusion."
+                }
               ]
             }
           ]
