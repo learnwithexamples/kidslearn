@@ -1671,23 +1671,114 @@ const vocabularyData = {
           "title": "",
           "roots": [
             {
-              "root": "",
-              "origin": "",
-              "meaning": "",
+              "root": "insipio , inceptum , incupere , incepi , nihil , nego , negavi , negare , negatum , vanus , vacuus , aperio , aperiere , aperuri , apertum",
+              "origin": "latin, Latin, Latin, Latin, Latin, Latin, Latin, Latin, Latin, Latin, Latin, Latin, Latin, Latin",
+              "meaning": "to began ,to began ,to began ,to began , nothing , to deny , to deny , to deny , to deny , empty, empty, to open, to open, to open, to open",
               "words": [
                 {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
+                  "word": "inception",
+                  "pronunciation": "in-SEP-shuhn",
+                  "partOfSpeech": "noun",
+                  "definition": "the beginning of something",
+                  "example": "The inception of the new project was marked by a grand opening ceremony."
                 },
                 {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
+                  "word": "incipiant",
+                  "pronunciation": "in-SIP-ee-uhnt",
+                  "partOfSpeech": "adjective",
+                  "definition": "beginning to develop or exist",
+                  "example": "The incipient stages of the project showed great promise."
+                },
+                {
+                  "word": "annihilate",
+                  "pronunciation": "uh-NYE-uh-layt",
+                  "partOfSpeech": "verb",
+                  "definition": "to destroy completely",
+                  "example": "The bomb could annihilate the entire city."
+                },
+                {
+                  "word": "nihilism",
+                  "pronunciation": "NY-huh-liz-uhm",
+                  "partOfSpeech": "noun",
+                  "definition": "the rejection of all religious and moral principles, often in the belief that life is meaningless",
+                  "example": "The philosopher's writings were steeped in nihilism, challenging traditional values."
+                },
+                {
+                  "word": "negate",
+                  "pronunciation": "ni-GAYT",
+                  "partOfSpeech": "verb",
+                  "definition": "to nullify or make ineffective",
+                  "example": "The new evidence served to negate the previous assumptions."
+                },
+                {
+                  "word": "renegade",
+                  "pronunciation": "REN-uh-gayd",
+                  "partOfSpeech": "adjective/noun",
+                  "definition": "a person who deserts and betrays an organization, country, or set of principles",
+                  "example": "The soldier was labeled a renegade after he abandoned his post."
+                },
+                {
+                  "word": "negociate",
+                  "pronunciation": "ni-GOH-shee-ayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to discuss something in order to reach an agreement",
+                  "example": "The two companies negociated a merger agreement."
+                },
+                {
+                  "word": "vacuous",
+                  "pronunciation": "VAK-yoo-uhs",
+                  "partOfSpeech": "adjective",
+                  "definition": "having or showing a lack of thought or intelligence; mindless",
+                  "example": "The vacuous expression on her face revealed her confusion."
+                },
+                {
+                  "word": "vanity",
+                  "pronunciation": "VAN-i-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "excessive pride in or admiration of one's own appearance or achievements",
+                  "example": "Her vanity was evident in the way she constantly admired herself in the mirror."
+                },
+                {
+                  "word": "vaunt",
+                  "pronunciation": "VAWNT",
+                  "partOfSpeech": "verb",
+                  "definition": "to boast or brag about something",
+                  "example": "He vaunted his achievements to anyone who would listen."
+                },
+                {
+                  "word": "vacuum",
+                  "pronunciation": "VAK-yoom",
+                  "partOfSpeech": "noun",
+                  "definition": "a space entirely devoid of matter",
+                  "example": "The scientist created a vacuum in the chamber to conduct the experiment."
+                },
+                {
+                  "word": "evacuate",
+                  "pronunciation": "ih-VAK-yoo-ayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to remove people from a dangerous place to a safe place",
+                  "example": "The residents were evacuated from the area due to the approaching hurricane."
+                },
+                {
+                  "word": "aperture",
+                  "pronunciation": "AP-er-cher",
+                  "partOfSpeech": "noun",
+                  "definition": "an opening, hole, or gap",
+                  "example": "The photographer adjusted the aperture of the camera to control the amount of light entering the lens."
+                },
+                {
+                  "word": "overt",
+                  "pronunciation": "OH-vurt",
+                  "partOfSpeech": "adjective",
+                  "definition": "done or shown openly; not secret or hidden",
+                  "example": "The politician's overt attempts to gain favor were obvious to everyone."
+                },
+                {
+                  "word": "overture",
+                  "pronunciation": "OH-ver-tyoor",
+                  "partOfSpeech": "noun",
+                  "definition": "an introduction to something more substantial",
+                  "example": "The orchestra played an overture before the main performance."
                 }
               ]
             }
