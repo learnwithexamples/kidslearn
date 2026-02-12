@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fractions Practice - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/fact-sheet.css">
+    <style>
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 8px;
+            font-size: 1.1em;
+        }
+        
+        .fraction .numerator {
+            border-bottom: 2px solid #333;
+            padding: 0 8px 2px;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .fraction .denominator {
+            padding: 2px 8px 0;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .question-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80px;
+            font-size: 1.1em;
+        }
+        
+        .mixed-number {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .answer-input-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .answer-input-group input {
+            width: 60px;
+            text-align: center;
+        }
+        
+        .fraction-slash {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .operation-type-desc {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        .hint-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .hint-box h4 {
+            margin-top: 0;
+            color: #1976d2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎲 Fractions Practice</h1>
+            <a href="math.html" class="back-link">← Back to Math Topics</a>
+        </header>
+
+        <div class="controls-panel">
+            <div class="control-section">
+                <h3>Question Type</h3>
+                <div class="button-group">
+                    <button class="operation-btn active" data-type="simplify">
+                        ✂️ Simplify
+                    </button>
+                    <button class="operation-btn" data-type="addition">
+                        ➕ Addition
+                    </button>
+                    <button class="operation-btn" data-type="subtraction">
+                        ➖ Subtraction
+                    </button>
+                    <button class="operation-btn" data-type="multiplication">
+                        ✖️ Multiply
+                    </button>
+                    <button class="operation-btn" data-type="division">
+                        ➗ Division
+                    </button>
+                    <button class="operation-btn" data-type="compare">
+                        ⚖️ Compare
+                    </button>
+                    <button class="operation-btn" data-type="equivalent">
+                        🔄 Equivalent
+                    </button>
+                    <button class="operation-btn" data-type="mixed-conversion">
+                        🔢 Mixed/Improper
+                    </button>
+                    <button class="operation-btn" data-type="decimal">
+                        📊 To Decimal
+                    </button>
+                    <button class="operation-btn" data-type="mixed-operations">
+                        🎲 Mixed Practice
+                    </button>
+                </div>
+                <div class="operation-type-desc" id="type-description">
+                    Reduce fractions to their simplest form
+                </div>
+            </div>
+
+            <div class="control-section">
+                <h3>Difficulty Settings</h3>
+                <div class="number-settings">
+                    <label>
+                        Max Numerator:
+                        <input type="number" id="max-numerator" min="2" max="100" value="20">
+                    </label>
+                    <label>
+                        Max Denominator:
+                        <input type="number" id="max-denominator" min="2" max="100" value="20">
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <h3>Grid Size</h3>
+                <div class="number-settings">
+                    <label>
+                        Rows:
+                        <input type="number" id="grid-rows" min="1" max="15" value="5">
+                    </label>
+                    <label>
+                        Columns:
+                        <input type="number" id="grid-cols" min="1" max="10" value="4">
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <button id="generate-btn" class="primary-btn">🎲 Generate New Questions</button>
+                <button id="show-hint-btn" class="secondary-btn">💡 Show Hints</button>
+            </div>
+        </div>
+
+        <div id="hint-section" class="hint-box" style="display: none;">
+            <h4>💡 Helpful Tips</h4>
+            <div id="hint-content"></div>
+        </div>
+
+        <div class="quiz-section">
+            <div class="quiz-header">
+                <div class="timer-display">
+                    <span id="timer">00:00</span>
+                    <button id="timer-btn" class="icon-btn">▶️</button>
+                </div>
+                <button id="check-btn" class="primary-btn">✓ Check Answers</button>
+            </div>
+
+            <div id="questions-grid" class="questions-grid"></div>
+
+            <div id="score-display" class="score-section" style="display: none;">
+                <h3>Results</h3>
+                <div class="score-summary">
+                    <div class="score-item">
+                        <span class="score-label">Score:</span>
+                        <span class="score-value" id="final-score">0/0</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Percentage:</span>
+                        <span class="score-value" id="percentage">0%</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Time:</span>
+                        <span class="score-value" id="final-time">00:00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Keep practicing fractions! 📚</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/fractions.js"></script>
+</body>
+</html>

@@ -108,13 +108,20 @@ function generateQuestions() {
         let a = generateNumber(config.aMin, config.aMax, config.aDecimals);
         let b = generateNumber(config.bMin, config.bMax, config.bDecimals);
         
+        // For mixed operations, randomly select an operation for this question
+        let operation = currentOperation;
+        if (currentOperation === 'mixed') {
+            const operations = ['+', '-', '*', '/'];
+            operation = operations[Math.floor(Math.random() * operations.length)];
+        }
+        
         // For subtraction, ensure a >= b to avoid negative results for kids
-        if (currentOperation === '-' && a < b) {
+        if (operation === '-' && a < b) {
             [a, b] = [b, a];
         }
         
         // For division, ensure b is not zero and result is reasonable
-        if (currentOperation === '/') {
+        if (operation === '/') {
             if (b === 0) b = 1;
             // Make it easier by ensuring a is divisible by b for whole number results
             if (config.aDecimals === 0 && config.bDecimals === 0) {
@@ -122,9 +129,9 @@ function generateQuestions() {
             }
         }
         
-        const answer = calculateAnswer(a, b, currentOperation);
+        const answer = calculateAnswer(a, b, operation);
         
-        questions.push({ a, b, answer, userAnswer: null });
+        questions.push({ a, b, operation, answer, userAnswer: null });
     }
     
     renderQuestions();
@@ -165,8 +172,10 @@ function renderQuestions() {
     questions.forEach((q, index) => {
         const questionDiv = document.createElement('div');
         questionDiv.className = 'question-item';
+        // Use the stored operation for mixed mode, otherwise use currentOperation
+        const displayOperation = q.operation || currentOperation;
         questionDiv.innerHTML = `
-            <div class="question-text">${q.a} ${currentOperation} ${q.b} =</div>
+            <div class="question-text">${q.a} ${displayOperation} ${q.b} =</div>
             <input type="text" 
                    class="answer-input" 
                    data-index="${index}"
