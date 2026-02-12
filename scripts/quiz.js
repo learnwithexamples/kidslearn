@@ -369,12 +369,12 @@ function retryWrongAnswers() {
         const wordData = quizWords.find(w => w.word === word);
         if (!wordData) return null;
         
-        // Get other definitions for choices
+        // Get other definitions for choices (get full word objects, not just definitions)
         const otherWords = quizWords.filter(w => w.word !== word);
         const shuffled = otherWords.sort(() => Math.random() - 0.5);
-        const wrongChoices = shuffled.slice(0, 3).map(w => w.definition);
+        const wrongChoices = shuffled.slice(0, 3);
         
-        const choices = [correctDef, ...wrongChoices].sort(() => Math.random() - 0.5);
+        const choices = [wordData, ...wrongChoices].sort(() => Math.random() - 0.5);
         
         return {
             word: word,
