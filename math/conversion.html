@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraction · % · Decimal – KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/fact-sheet.css">
+    <style>
+        /* ── Calculator Panel ── */
+        .calc-panel {
+            background: linear-gradient(135deg, #fff8e1 0%, #fff3cd 100%);
+            border: 3px solid #ffc107;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .calc-panel h2 { color: #e65100; margin-bottom: 6px; }
+        .calc-desc { color: #888; margin-bottom: 18px; font-size: 0.95em; }
+
+        .calc-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        .calc-box {
+            background: white;
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+            padding: 15px 20px;
+            min-width: 155px;
+        }
+        .calc-label {
+            font-weight: bold;
+            color: #e65100;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+        .calc-box input {
+            padding: 8px 10px;
+            font-size: 1.15em;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: inherit;
+            text-align: center;
+            transition: border-color 0.2s;
+            width: 80px;
+        }
+        .calc-box input:focus { outline: none; border-color: #ffc107; }
+        .calc-frac-row { display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .calc-pct-row  { display: flex; align-items: center; justify-content: center; gap: 5px; }
+        .calc-pct-row input, #calc-dec { width: 115px; }
+        .fi-slash  { font-size: 1.4em; font-weight: bold; color: #555; }
+        .pct-sym   { font-size: 1.3em; font-weight: bold; color: #555; }
+        .calc-arrow { font-size: 1.7em; color: #ffc107; font-weight: bold; }
+
+        /* hide spinners in calculator */
+        .calc-box input[type=number]::-webkit-inner-spin-button,
+        .calc-box input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+        .calc-box input[type=number] { -moz-appearance: textfield; }
+
+        /* ── Quiz Section ── */
+        .quiz-section { margin-top: 20px; }
+        .quiz-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        .quiz-tip {
+            font-size: 0.9em;
+            color: #888;
+            font-style: italic;
+            margin: 0;
+        }
+        .icon-btn {
+            background: linear-gradient(135deg, #5a67d8 0%, #4c51bf 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 6px 14px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .icon-btn:hover { transform: translateY(-1px); }
+
+        /* ── Conversion Table ── */
+        .conv-table-wrap { overflow-x: auto; }
+        .conv-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1.05em;
+            min-width: 480px;
+        }
+        .conv-table thead tr {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        .conv-table th {
+            padding: 13px 18px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .conv-table th.col-num { width: 44px; border-radius: 10px 0 0 0; }
+        .conv-table th.col-res { width: 44px; border-radius: 0 10px 0 0; }
+        .conv-table td {
+            padding: 10px 14px;
+            text-align: center;
+            border-bottom: 1px solid #e8eaf6;
+            vertical-align: middle;
+        }
+        .conv-table tbody tr:nth-child(even) td { background: #f8f9ff; }
+        .conv-table tbody tr:hover td { background: #eef0ff; }
+
+        /* Given cell */
+        .given-cell {
+            background: #e8eaf6 !important;
+            font-weight: bold;
+            font-size: 1.05em;
+        }
+
+        /* Fraction display (given) */
+        .frac-disp {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.2;
+        }
+        .frac-disp .fn {
+            border-bottom: 2px solid #333;
+            padding: 0 6px 2px;
+            min-width: 22px;
+            text-align: center;
+        }
+        .frac-disp .fd {
+            padding: 2px 6px 0;
+            min-width: 22px;
+            text-align: center;
+        }
+
+        /* Inputs inside table cells */
+        .frac-input-wrap { display: flex; align-items: center; justify-content: center; gap: 4px; }
+        .pct-input-wrap  { display: flex; align-items: center; justify-content: center; gap: 4px; }
+        .dec-input-wrap  { display: flex; align-items: center; justify-content: center; gap: 4px; }
+
+        .frac-input-wrap input,
+        .pct-input-wrap input,
+        .dec-input-wrap input {
+            padding: 5px 7px;
+            font-size: 0.95em;
+            border: 2px solid #cbd5e0;
+            border-radius: 6px;
+            text-align: center;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        .frac-input-wrap input { width: 60px; }
+        .pct-input-wrap input  { width: 90px; }
+        .dec-input-wrap input  { width: 100px; }
+
+        /* hide spinners in table fraction inputs */
+        .frac-input-wrap input[type=number]::-webkit-inner-spin-button,
+        .frac-input-wrap input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+        .frac-input-wrap input[type=number] { -moz-appearance: textfield; }
+
+        /* Answer state */
+        .cell-ok { background: #f0fff4 !important; }
+        .cell-ok input { border-color: #48bb78 !important; background: #f0fff4; }
+        .cell-err { background: #fff5f5 !important; }
+        .cell-err input { border-color: #fc8181 !important; background: #fff5f5; }
+
+        .correct-hint {
+            color: #c53030;
+            font-size: 0.85em;
+            margin-top: 4px;
+            display: block;
+        }
+
+        /* Result column */
+        .result-col { font-size: 1.3em; font-weight: bold; width: 44px; }
+
+        /* Score section */
+        .score-section {
+            background: linear-gradient(135deg, #f0fff4, #e6ffed);
+            border: 3px solid #48bb78;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .score-section h3 { color: #276749; margin-bottom: 15px; font-size: 1.5em; }
+        .score-summary {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .score-item { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+        .score-label { color: #718096; font-size: 0.9em; }
+        .score-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #276749;
+            background: white;
+            padding: 6px 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        /* Secondary button */
+        .secondary-btn {
+            padding: 10px 24px;
+            font-size: 1em;
+            font-weight: bold;
+            background: white;
+            color: #5a67d8;
+            border: 2px solid #5a67d8;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .secondary-btn:hover {
+            background: #5a67d8;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔄 Fraction · % · Decimal</h1>
+            <p class="subtitle">Convert between fractions, percentages, and decimals</p>
+            <a href="math.html" class="back-link">← Back to Math Topics</a>
+        </header>
+
+        <!-- ── Conversion Calculator ── -->
+        <div class="calc-panel">
+            <h2>🧮 Conversion Calculator</h2>
+            <p class="calc-desc">Type any value — the other two fill in automatically!</p>
+            <div class="calc-row">
+                <div class="calc-box">
+                    <div class="calc-label">Fraction</div>
+                    <div class="calc-frac-row">
+                        <input type="number" id="calc-num" placeholder="num" autocomplete="off">
+                        <span class="fi-slash">/</span>
+                        <input type="number" id="calc-den" placeholder="den" autocomplete="off">
+                    </div>
+                </div>
+                <div class="calc-arrow">⇌</div>
+                <div class="calc-box">
+                    <div class="calc-label">Percentage</div>
+                    <div class="calc-pct-row">
+                        <input type="text" id="calc-pct" placeholder="e.g. 25" autocomplete="off">
+                        <span class="pct-sym">%</span>
+                    </div>
+                </div>
+                <div class="calc-arrow">⇌</div>
+                <div class="calc-box">
+                    <div class="calc-label">Decimal</div>
+                    <input type="text" id="calc-dec" placeholder="e.g. 0.25" autocomplete="off">
+                </div>
+            </div>
+            <button id="calc-clear-btn" class="secondary-btn">🗑️ Clear</button>
+        </div>
+
+        <!-- ── Practice Controls ── -->
+        <div class="controls-panel">
+            <div class="control-section">
+                <h3>Given Type</h3>
+                <div class="button-group">
+                    <button class="operation-btn active" data-given="fraction">🔢 Fraction</button>
+                    <button class="operation-btn" data-given="percent">% Percentage</button>
+                    <button class="operation-btn" data-given="decimal">· Decimal</button>
+                    <button class="operation-btn" data-given="random">🎲 Random Mix</button>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <h3>Difficulty</h3>
+                <div class="button-group">
+                    <button class="operation-btn active" data-diff="easy">⭐ Easy</button>
+                    <button class="operation-btn" data-diff="medium">⭐⭐ Medium</button>
+                    <button class="operation-btn" data-diff="hard">⭐⭐⭐ Hard</button>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <h3>Number of Questions</h3>
+                <div class="number-settings">
+                    <label>Questions:
+                        <input type="number" id="num-questions" min="1" max="30" value="10">
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <button id="generate-btn" class="primary-btn">🎲 Generate</button>
+                <button id="check-btn" class="primary-btn">✓ Check Answers</button>
+            </div>
+        </div>
+
+        <!-- ── Quiz ── -->
+        <div class="quiz-section">
+            <div class="quiz-header">
+                <div class="timer-display">
+                    <span id="timer">00:00</span>
+                    <button id="timer-btn" class="icon-btn">▶️</button>
+                </div>
+                <p class="quiz-tip">💡 Fill in the two blank cells for each row. Fraction must be fully simplified (e.g. 1/5, not 2/10).</p>
+            </div>
+
+            <div class="conv-table-wrap">
+                <table class="conv-table">
+                    <thead>
+                        <tr>
+                            <th class="col-num">#</th>
+                            <th>Fraction</th>
+                            <th>Percentage</th>
+                            <th>Decimal</th>
+                            <th class="col-res"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="quiz-body"></tbody>
+                </table>
+            </div>
+
+            <div id="score-display" class="score-section" style="display:none">
+                <h3>Results</h3>
+                <div class="score-summary">
+                    <div class="score-item">
+                        <span class="score-label">Score</span>
+                        <span class="score-value" id="final-score">0/0</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Percentage</span>
+                        <span class="score-value" id="score-pct">0%</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Time</span>
+                        <span class="score-value" id="final-time">00:00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Fractions, percentages, and decimals are just three ways of writing the same number! 🔄</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/conversion.js"></script>
+</body>
+</html>
