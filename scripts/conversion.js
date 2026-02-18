@@ -5,7 +5,6 @@ let difficulty = 'easy';
 let questions  = [];
 let startTime     = null;
 let timerInterval = null;
-let isChecked  = false;
 let isPaused   = false;
 let elapsedTime = 0;
 
@@ -141,11 +140,11 @@ function setupEvents() {
     document.getElementById('generate-btn').addEventListener('click', () => {
         generateQuestions();
         resetTimer();
-        isChecked = false;
     });
 
     document.getElementById('check-btn').addEventListener('click', () => {
-        if (!isChecked) { checkAnswers(); stopTimer(); isChecked = true; }
+        checkAnswers();
+        stopTimer();
     });
 
     document.getElementById('timer-btn').addEventListener('click', toggleTimer);
@@ -322,18 +321,18 @@ function renderTable() {
 // ─────────────────────────────────────────────────────────────
 
 function checkAnswers() {
+    hideScore();
     let correct = 0;
 
     questions.forEach((q, i) => {
-        const tr = document.querySelector(`tr[data-index="${i}"]`);
         let rowOk = true;
 
         // ── Check fraction ──
         if (q.given !== 'fraction') {
-            const inpN = tr.querySelector('[data-type="fn"]');
-            const inpD = tr.querySelector('[data-type="fd"]');
-            const userN = parseInt(inpN?.value);
-            const userD = parseInt(inpD?.value);
+            const inpN = document.querySelector(`input[data-type="fn"][data-index="${i}"]`);
+            const inpD = document.querySelector(`input[data-type="fd"][data-index="${i}"]`);
+            const userN = parseInt(inpN ? inpN.value.trim() : '');
+            const userD = parseInt(inpD ? inpD.value.trim() : '');
             let fracOk = false;
             if (!isNaN(userN) && !isNaN(userD) && userD !== 0) {
                 const s = simplify(userN, userD);
@@ -345,31 +344,30 @@ function checkAnswers() {
 
         // ── Check percentage ──
         if (q.given !== 'percent') {
-            const inp     = tr.querySelector('[data-type="pct"]');
-            const userPct = parseFloat(inp?.value);
-            // Accept within 0.05 percentage points (handles floating-point for
-            // terminating decimals, and requires at least 1 decimal place for
-            // repeating ones like 33.33 for 1/3).
-            const pctOk = isFinite(userPct) && Math.abs(userPct - q.pct) < 0.05;
+            const inp = document.querySelector(`input[data-type="pct"][data-index="${i}"]`);
+            const raw = inp ? inp.value.trim() : '';
+            const userPct = parseFloat(raw);
+            const pctOk = raw !== '' && isFinite(userPct) &&
+                Math.round(userPct * 100) === Math.round(q.pct * 100);
             markCell(`cell-pct-${i}`, pctOk, fmtPct(q.pct) + '%');
             if (!pctOk) rowOk = false;
         }
 
         // ── Check decimal ──
         if (q.given !== 'decimal') {
-            const inp     = tr.querySelector('[data-type="dec"]');
-            const userDec = parseFloat(inp?.value);
-            // Accept within 0.0005 (requires at least 3 decimal places for
-            // repeating ones like 0.333 for 1/3).
-            const decOk = isFinite(userDec) && Math.abs(userDec - q.dec) < 0.0005;
+            const inp = document.querySelector(`input[data-type="dec"][data-index="${i}"]`);
+            const raw = inp ? inp.value.trim() : '';
+            const userDec = parseFloat(raw);
+            const decOk = raw !== '' && isFinite(userDec) &&
+                Math.round(userDec * 10000) === Math.round(q.dec * 10000);
             markCell(`cell-dec-${i}`, decOk, fmtDec(q.dec));
             if (!decOk) rowOk = false;
         }
 
         // Row result icon
         const resCell = document.getElementById(`cell-res-${i}`);
-        resCell.textContent    = rowOk ? '✓' : '✗';
-        resCell.style.color    = rowOk ? '#4caf50' : '#f44336';
+        resCell.textContent = rowOk ? '✓' : '✗';
+        resCell.style.color = rowOk ? '#4caf50' : '#f44336';
         if (rowOk) correct++;
     });
 
