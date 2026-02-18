@@ -327,7 +327,7 @@ function checkAnswers() {
     let total = questions.length;
     
     inputs.forEach((input, index) => {
-        const userAnswer = parseFloat(input.value) || null;
+        const userAnswer = input.value.trim() !== '' ? parseFloat(input.value) : null;
         questions[index].userAnswer = userAnswer;
         
         const questionItem = input.closest('.question-item');
