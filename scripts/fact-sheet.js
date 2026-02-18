@@ -125,7 +125,8 @@ function generateQuestions() {
             if (b === 0) b = 1;
             // Make it easier by ensuring a is divisible by b for whole number results
             if (config.aDecimals === 0 && config.bDecimals === 0) {
-                a = b * Math.floor(Math.random() * 10 + 1);
+                const maxMultiplier = Math.max(1, Math.floor(config.aMax / b));
+                a = b * (Math.floor(Math.random() * maxMultiplier) + 1);
             }
         }
         

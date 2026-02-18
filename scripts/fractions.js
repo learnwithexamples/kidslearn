@@ -210,17 +210,22 @@ function simplifyFraction(num, den) {
 
 // Generate a random fraction
 function generateFraction(maxNum = null, maxDen = null) {
-    const numerator = Math.floor(Math.random() * (maxNum || config.maxNumerator)) + 1;
-    const denominator = Math.floor(Math.random() * (maxDen || config.maxDenominator)) + 2;
+    const mn = maxNum || config.maxNumerator;
+    const md = maxDen || config.maxDenominator;
+    const numerator = Math.floor(Math.random() * mn) + 1;         // [1, mn]
+    const denominator = Math.floor(Math.random() * (md - 1)) + 2; // [2, md]
     return { numerator, denominator };
 }
 
 // Generate a simplifiable fraction
 function generateSimplifiableFraction() {
-    const factor = Math.floor(Math.random() * 5) + 2; // 2-6
-    const simpleNum = Math.floor(Math.random() * 10) + 1;
-    const simpleDen = Math.floor(Math.random() * 10) + 2;
-    
+    // factor must satisfy: factor*1 <= maxNumerator AND factor*2 <= maxDenominator
+    const maxFactor = Math.min(6, config.maxNumerator, Math.floor(config.maxDenominator / 2));
+    const factor = Math.floor(Math.random() * Math.max(1, maxFactor - 1)) + 2; // [2, maxFactor]
+    const maxSimpleNum = Math.max(1, Math.floor(config.maxNumerator / factor));
+    const maxSimpleDen = Math.max(2, Math.floor(config.maxDenominator / factor));
+    const simpleNum = Math.floor(Math.random() * maxSimpleNum) + 1;
+    const simpleDen = Math.floor(Math.random() * (maxSimpleDen - 1)) + 2;
     return {
         numerator: simpleNum * factor,
         denominator: simpleDen * factor
@@ -229,8 +234,11 @@ function generateSimplifiableFraction() {
 
 // Generate improper fraction
 function generateImproperFraction() {
-    const denominator = Math.floor(Math.random() * 8) + 2; // 2-9
-    const numerator = denominator + Math.floor(Math.random() * 20) + 1;
+    // denominator must be strictly less than numerator, both within config limits
+    const maxDen = Math.min(config.maxDenominator, config.maxNumerator - 1);
+    const denominator = Math.floor(Math.random() * (maxDen - 1)) + 2; // [2, maxDen]
+    const maxExtra = config.maxNumerator - denominator; // >= 1 since maxDen <= maxNumerator-1
+    const numerator = denominator + Math.floor(Math.random() * maxExtra) + 1;
     return { numerator, denominator };
 }
 
@@ -369,8 +377,8 @@ function generateSubtractionQuestion() {
 
 // Generate multiplication question
 function generateMultiplicationQuestion() {
-    const frac1 = generateFraction(12, 12); // Smaller numbers for multiplication
-    const frac2 = generateFraction(12, 12);
+    const frac1 = generateFraction();
+    const frac2 = generateFraction();
     
     const resultNum = frac1.numerator * frac2.numerator;
     const resultDen = frac1.denominator * frac2.denominator;
@@ -390,8 +398,8 @@ function generateMultiplicationQuestion() {
 
 // Generate division question
 function generateDivisionQuestion() {
-    const frac1 = generateFraction(12, 12);
-    const frac2 = generateFraction(12, 12);
+    const frac1 = generateFraction();
+    const frac2 = generateFraction();
     
     // Divide by flipping and multiplying
     const resultNum = frac1.numerator * frac2.denominator;
@@ -435,7 +443,7 @@ function generateCompareQuestion() {
 
 // Generate equivalent fraction question
 function generateEquivalentQuestion() {
-    const baseFrac = generateFraction(10, 10);
+    const baseFrac = generateFraction();
     const multiplier = Math.floor(Math.random() * 5) + 2;
     
     const choice = Math.random() < 0.5;
@@ -488,7 +496,7 @@ function generateMixedConversionQuestion() {
     } else {
         // Mixed to improper
         const whole = Math.floor(Math.random() * 5) + 1;
-        const frac = generateFraction(8, 8);
+        const frac = generateFraction();
         const improper = mixedToImproper(whole, frac.numerator, frac.denominator);
         
         return {
@@ -506,7 +514,7 @@ function generateMixedConversionQuestion() {
 
 // Generate decimal conversion question
 function generateDecimalQuestion() {
-    const frac = generateFraction(20, 20);
+    const frac = generateFraction();
     const decimal = (frac.numerator / frac.denominator).toFixed(3);
     const answer = parseFloat(decimal);
     
