@@ -561,10 +561,10 @@ function renderQuestions() {
         } else if (q.type === 'mixed-conversion' && q.isMixed) {
             inputHTML = `
                 <div class="answer-input-group">
-                    <input type="number" class="answer-input" data-index="${index}" data-part="whole" placeholder="whole" style="width: 50px;">
-                    <input type="number" class="answer-input" data-index="${index}" data-part="num" placeholder="num" style="width: 50px;">
+                    <input type="number" class="answer-input" data-index="${index}" data-part="whole" placeholder="whole" style="width: 80px;">
+                    <input type="number" class="answer-input" data-index="${index}" data-part="num" placeholder="num" style="width: 80px;">
                     <span class="fraction-slash">/</span>
-                    <input type="number" class="answer-input" data-index="${index}" data-part="den" placeholder="den" style="width: 50px;">
+                    <input type="number" class="answer-input" data-index="${index}" data-part="den" placeholder="den" style="width: 80px;">
                 </div>
             `;
         } else {
