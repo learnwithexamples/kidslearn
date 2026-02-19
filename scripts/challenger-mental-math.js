@@ -8,6 +8,7 @@ let equation   = null;   // { nums: number[], ops: string[], answer: number }
 let stepIdx    = 0;
 let stopFlag   = false;
 let sessionId  = 0;      // increment to invalidate stale setTimeout callbacks
+let difficulty = 'simple';
 let currentCfg = { min: 1, max: 50, count: 5, interval: 1.5 };
 
 const hasSpeech = typeof speechSynthesis !== 'undefined';
@@ -25,6 +26,16 @@ document.addEventListener('DOMContentLoaded', () => {
         speechSynthesis.addEventListener('voiceschanged', loadVoices);
     }
 
+    // Difficulty buttons
+    document.querySelectorAll('[data-diff]').forEach(btn => {
+        btn.addEventListener('click', function () {
+            document.querySelectorAll('[data-diff]').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            difficulty = this.dataset.diff;
+            applyDifficultyPreset(difficulty);
+        });
+    });
+
     document.getElementById('btn-start').addEventListener('click', handleStart);
     document.getElementById('btn-stop') .addEventListener('click', handleStop);
     document.getElementById('btn-check').addEventListener('click', checkAnswer);
@@ -35,13 +46,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Preset defaults per difficulty
+function applyDifficultyPreset(diff) {
+    const presets = {
+        simple: { min: 1, max: 20,  count: 4, interval: 2.0 },
+        medium: { min: 1, max: 50,  count: 5, interval: 1.5 },
+        hard:   { min: 5, max: 100, count: 6, interval: 1.0 },
+    };
+    const p = presets[diff];
+    if (!p) return;
+    document.getElementById('cfg-min').value      = p.min;
+    document.getElementById('cfg-max').value      = p.max;
+    document.getElementById('cfg-count').value    = p.count;
+    document.getElementById('cfg-interval').value = p.interval;
+}
+
 // ── Config ────────────────────────────────────────────────────────────────────
 function readCfg() {
     const min      = Math.max(1,       parseInt(document.getElementById('cfg-min').value)      || 1);
     const max      = Math.max(min + 1, parseInt(document.getElementById('cfg-max').value)      || 50);
     const count    = Math.max(2, Math.min(10, parseInt(document.getElementById('cfg-count').value)   || 5));
     const interval = Math.max(0.5,     parseFloat(document.getElementById('cfg-interval').value) || 1.5);
-    return { min, max, count, interval };
+    return { min, max, count, interval, difficulty };
 }
 
 // ── Math helpers ──────────────────────────────────────────────────────────────
@@ -54,7 +80,7 @@ function randInt(a, b) {
  * Returns { n, result } or null if not feasible.
  * All results are guaranteed to be integers.
  */
-function tryOp(op, curr, min, max) {
+function tryOp(op, curr, min, max, cfg) {
     switch (op) {
         case '+': {
             const n = randInt(min, max);
@@ -70,7 +96,16 @@ function tryOp(op, curr, min, max) {
         }
         case '*': {
             // Cap so running total stays below 9999
-            const capHi = Math.min(max, Math.floor(9999 / Math.max(1, curr)));
+            let capHi = Math.min(max, Math.floor(9999 / Math.max(1, curr)));
+            // Simple mode: multiplication stays within 12×12 table.
+            // If current value > 12, restrict multiplier to single digit (≤9).
+            if (cfg && cfg.difficulty === 'simple') {
+                if (curr <= 12) {
+                    capHi = Math.min(capHi, Math.floor(144 / Math.max(1, curr)));
+                } else {
+                    capHi = Math.min(capHi, 9);
+                }
+            }
             if (capHi < min) return null;
             const n = randInt(min, capHi);
             return { n, result: curr * n };
@@ -106,7 +141,7 @@ function genEquation(cfg) {
         let chosen = null;
 
         for (const op of shuffled) {
-            const r = tryOp(op, curr, min, max);
+            const r = tryOp(op, curr, min, max, cfg);
             if (r) { chosen = { op, n: r.n, result: r.result }; break; }
         }
 
