@@ -19,6 +19,10 @@ const OP_WORD   = { '+': 'plus', '-': 'minus', '*': 'times', '/': 'divided by' }
 document.addEventListener('DOMContentLoaded', () => {
     if (!hasSpeech) {
         document.getElementById('no-speech-warn').style.display = 'block';
+    } else {
+        // Voices may already be available (Firefox) or load async (Chrome)
+        loadVoices();
+        speechSynthesis.addEventListener('voiceschanged', loadVoices);
     }
 
     document.getElementById('btn-start').addEventListener('click', handleStart);
@@ -154,20 +158,102 @@ function setStatus(html) {
     document.getElementById('eq-status').innerHTML = html;
 }
 
-// ── Speech ────────────────────────────────────────────────────────────────────
-function say(text, onDone) {
-    if (!hasSpeech) {
-        // No TTS: just show visually with a brief delay so the animation is visible
-        setTimeout(onDone, 600);
-        return;
+// ── Speech engine ─────────────────────────────────────────────────────────────
+
+let selectedVoice   = null;
+let keepAliveTimer  = null;
+
+/**
+ * Voice quality priority list (tested highest → lowest quality).
+ * Prefers Google Neural / Apple Enhanced / Microsoft Neural over default TTS.
+ */
+const VOICE_PRIORITY = [
+    v => v.name === 'Google US English',
+    v => v.name === 'Samantha',                                 // macOS default, excellent
+    v => v.name === 'Alex',                                     // macOS
+    v => /enhanced/i.test(v.name) && /en.US/i.test(v.lang),
+    v => /premium/i.test(v.name)  && /en.US/i.test(v.lang),
+    v => /enhanced/i.test(v.name) && /en/i.test(v.lang),
+    v => /premium/i.test(v.name)  && /en/i.test(v.lang),
+    v => /google/i.test(v.name)   && /en.US/i.test(v.lang),
+    v => /google/i.test(v.name)   && /en/i.test(v.lang),
+    v => /microsoft/i.test(v.name)&& /en.US/i.test(v.lang),
+    v => /en.US/i.test(v.lang),
+    v => /en/i.test(v.lang),
+];
+
+function loadVoices() {
+    if (!hasSpeech) return;
+    const voices = speechSynthesis.getVoices();
+    if (!voices.length) return;
+
+    // Auto-select best voice
+    if (!selectedVoice) {
+        for (const test of VOICE_PRIORITY) {
+            const found = voices.find(test);
+            if (found) { selectedVoice = found; break; }
+        }
     }
-    speechSynthesis.cancel();
+
+    // Populate the selector
+    const sel = document.getElementById('voice-select');
+    sel.innerHTML = '';
+    voices
+        .filter(v => /en/i.test(v.lang))    // English voices only
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .forEach(v => {
+            const opt  = document.createElement('option');
+            opt.value  = v.name;
+            opt.text   = `${v.name} (${v.lang})`;
+            if (selectedVoice && v.name === selectedVoice.name) opt.selected = true;
+            sel.appendChild(opt);
+        });
+
+    sel.addEventListener('change', () => {
+        selectedVoice = speechSynthesis.getVoices().find(v => v.name === sel.value) || null;
+    });
+}
+
+// Chrome stops TTS after ~15s unless we tickle it.
+function startKeepAlive() {
+    stopKeepAlive();
+    keepAliveTimer = setInterval(() => {
+        if (hasSpeech && !speechSynthesis.speaking) return;
+        // Pause + resume to prevent Chrome's 15-second cut-off
+        speechSynthesis.pause();
+        speechSynthesis.resume();
+    }, 12000);
+}
+function stopKeepAlive() {
+    if (keepAliveTimer) { clearInterval(keepAliveTimer); keepAliveTimer = null; }
+}
+
+/**
+ * Speak `text` and call `onDone` when finished.
+ * Does NOT cancel previous speech — call cancelSpeech() explicitly when needed.
+ */
+function say(text, onDone) {
+    if (!hasSpeech) { setTimeout(onDone, 500); return; }
+
+    const rate = Math.max(0.5, Math.min(1.5, parseFloat(document.getElementById('cfg-rate').value) || 0.85));
+
     const u   = new SpeechSynthesisUtterance(text);
-    u.rate    = 0.92;
+    u.rate    = rate;
     u.pitch   = 1.0;
-    u.onend   = onDone;
-    u.onerror = onDone;
+    u.volume  = 1.0;
+    if (selectedVoice) u.voice = selectedVoice;
+
+    u.onend   = () => { if (onDone) onDone(); };
+    u.onerror = (e) => {
+        // 'interrupted' fires when we cancel deliberately — don't call onDone
+        if (e.error !== 'interrupted' && e.error !== 'canceled') { if (onDone) onDone(); }
+    };
+
     speechSynthesis.speak(u);
+}
+
+function cancelSpeech() {
+    if (hasSpeech) speechSynthesis.cancel();
 }
 
 // ── Handlers ──────────────────────────────────────────────────────────────────
@@ -186,7 +272,8 @@ function handleRedo() {
 function handleStop() {
     stopFlag = true;
     sessionId++;                               // invalidate all pending callbacks
-    if (hasSpeech) speechSynthesis.cancel();
+    cancelSpeech();
+    stopKeepAlive();
 
     document.getElementById('btn-start').style.display = 'inline-block';
     document.getElementById('btn-stop') .style.display = 'none';
@@ -199,6 +286,9 @@ function beginPlay() {
     sessionId++;                               // invalidate any leftover callbacks
     const sid = sessionId;
     stepIdx   = 0;
+
+    cancelSpeech();
+    startKeepAlive();
 
     // Reset answer area
     document.getElementById('answer-section').style.display = 'none';
@@ -258,8 +348,7 @@ function speakStep(sid) {
 
 function finishEquation(sid) {
     if (sid !== sessionId) return;
-
-    document.getElementById('btn-start').style.display = 'none';
+    stopKeepAlive();    document.getElementById('btn-start').style.display = 'none';
     document.getElementById('btn-stop') .style.display = 'none';
     setStatus('✅ Done — what\'s your answer?');
 
