@@ -193,6 +193,14 @@ function setStatus(html) {
     document.getElementById('eq-status').innerHTML = html;
 }
 
+// ── Board show/hide ───────────────────────────────────────────────────────────
+function toggleBoard() {
+    const wrap = document.getElementById('board-collapsible');
+    const btn  = document.getElementById('btn-toggle-board');
+    const hidden = wrap.classList.toggle('hidden');
+    btn.textContent = hidden ? '👁️ Show' : '👁️ Hide';
+}
+
 // ── Speech engine ─────────────────────────────────────────────────────────────
 
 let selectedVoice   = null;
