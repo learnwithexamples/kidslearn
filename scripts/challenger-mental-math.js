@@ -107,15 +107,19 @@ function tryOp(op, curr, min, max, cfg) {
             return { n, result: curr * n };
         }
         case '/': {
-            // Only divide when result is a whole number.
-            // Avoid dividing by 1 (trivial) — require divisor >= max(2, min).
+            // Only divide when result is a whole number and > 1.
+            // - require divisor >= max(2, min)
+            // - exclude d === curr (which gives x/x = 1)
+            // - prefer larger divisors: pick from the top half of valid ones
             const lo = Math.max(2, min);
             const divs = [];
-            for (let d = lo; d <= Math.min(max, Math.abs(curr)); d++) {
+            for (let d = lo; d <= Math.min(max, curr - 1); d++) {
                 if (curr !== 0 && curr % d === 0) divs.push(d);
             }
             if (!divs.length) return null;
-            const n = divs[Math.floor(Math.random() * divs.length)];
+            // Bias towards larger divisors (harder division, result is smaller)
+            const startIdx = Math.floor(divs.length / 2);
+            const n = divs[startIdx + Math.floor(Math.random() * (divs.length - startIdx))];
             return { n, result: curr / n };
         }
     }
