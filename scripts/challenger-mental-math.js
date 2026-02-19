@@ -97,14 +97,10 @@ function tryOp(op, curr, min, max, cfg) {
         case '*': {
             // Cap so running total stays below 9999
             let capHi = Math.min(max, Math.floor(9999 / Math.max(1, curr)));
-            // Simple mode: multiplication stays within 12×12 table.
-            // If current value > 12, restrict multiplier to single digit (≤9).
+            // Simple mode: both operands must be ≤ 12 (stay in 12×12 table).
+            // genEquation guarantees curr ≤ 12 before calling tryOp('*') in simple mode.
             if (cfg && cfg.difficulty === 'simple') {
-                if (curr <= 12) {
-                    capHi = Math.min(capHi, Math.floor(144 / Math.max(1, curr)));
-                } else {
-                    capHi = Math.min(capHi, 9);
-                }
+                capHi = Math.min(capHi, 12);
             }
             if (capHi < min) return null;
             const n = randInt(min, capHi);
@@ -138,9 +134,24 @@ function genEquation(cfg) {
     for (let i = 1; i < count; i++) {
         // Try each operation in random order; pick first valid one
         const shuffled = [...opPool].sort(() => Math.random() - 0.5);
-        let chosen = null;
+        let chosen  = null;
+        let preStep = null; // optional extra step inserted before chosen
 
         for (const op of shuffled) {
+            // Simple mode: if curr > 12 and we want ×, first subtract to bring curr ≤ 12
+            if (op === '*' && cfg.difficulty === 'simple' && curr > 12) {
+                const target = randInt(Math.max(min, 1), 12);
+                const subN   = curr - target;
+                if (subN >= 1) {
+                    const r = tryOp('*', target, min, max, cfg);
+                    if (r) {
+                        preStep = { op: '-', n: subN, tempCurr: target };
+                        chosen  = { op: '*', n: r.n, result: r.result };
+                        break;
+                    }
+                }
+                continue; // couldn't set up ×, try next op
+            }
             const r = tryOp(op, curr, min, max, cfg);
             if (r) { chosen = { op, n: r.n, result: r.result }; break; }
         }
@@ -149,6 +160,13 @@ function genEquation(cfg) {
         if (!chosen) {
             const n = randInt(min, max);
             chosen = { op: '+', n, result: curr + n };
+        }
+
+        // Insert the pre-subtraction step if one was generated
+        if (preStep) {
+            ops.push(preStep.op);
+            nums.push(preStep.n);
+            curr = preStep.tempCurr;
         }
 
         ops.push(chosen.op);
