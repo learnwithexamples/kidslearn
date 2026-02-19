@@ -81,11 +81,11 @@ function setupEventListeners() {
     document.getElementById('check-answers-btn').addEventListener('click', checkAnswers);
     document.getElementById('reveal-word-btn').addEventListener('click', revealWord);
     document.getElementById('new-puzzle-btn').addEventListener('click', generatePuzzle);
-    document.getElementById('modal-new-puzzle-btn').addEventListener('click', () => {
+    document.getElementById('new-puzzle-modal-btn').addEventListener('click', () => {
         document.getElementById('completion-modal').classList.add('hidden');
         generatePuzzle();
     });
-    document.getElementById('modal-close-btn').addEventListener('click', () => {
+    document.getElementById('close-modal-btn').addEventListener('click', () => {
         document.getElementById('completion-modal').classList.add('hidden');
     });
 }
@@ -678,17 +678,21 @@ function revealWord() {
     const row = parseInt(selectedCell.dataset.row);
     const col = parseInt(selectedCell.dataset.col);
     
-    // Find the word
+    // Find the word in currentDirection; fall back to the other direction if not found
+    const directions = currentDirection === 'across' ? ['across', 'down'] : ['down', 'across'];
     let word = null;
-    crosswordData.placedWords.forEach(pw => {
-        if (pw.direction === currentDirection) {
-            if (currentDirection === 'across' && pw.row === row && col >= pw.col && col < pw.col + pw.word.length) {
-                word = pw;
-            } else if (currentDirection === 'down' && pw.col === col && row >= pw.row && row < pw.row + pw.word.length) {
-                word = pw;
+    for (const dir of directions) {
+        crosswordData.placedWords.forEach(pw => {
+            if (!word && pw.direction === dir) {
+                if (dir === 'across' && pw.row === row && col >= pw.col && col < pw.col + pw.word.length) {
+                    word = pw;
+                } else if (dir === 'down' && pw.col === col && row >= pw.row && row < pw.row + pw.word.length) {
+                    word = pw;
+                }
             }
-        }
-    });
+        });
+        if (word) break;
+    }
     
     if (word) {
         for (let i = 0; i < word.word.length; i++) {
