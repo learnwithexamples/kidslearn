@@ -87,9 +87,9 @@ function tryOp(op, curr, min, max, cfg) {
             return { n, result: curr + n };
         }
         case '-': {
-            // Keep result >= 0 to avoid negative running totals
-            if (curr <= 0) return null;
-            const hi = Math.min(max, curr);
+            // Keep result >= 1 to avoid x-x=0 and negative running totals
+            if (curr <= 1) return null;
+            const hi = Math.min(max, curr - 1);
             if (hi < min) return null;
             const n = randInt(min, hi);
             return { n, result: curr - n };
