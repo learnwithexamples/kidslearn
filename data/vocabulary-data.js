@@ -1783,6 +1783,137 @@ const vocabularyData = {
               ]
             }
           ]
+        },
+        {
+          "number": 5,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "attenuate",
+                  "pronunciation": "uh-TEN-yoo-ayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to reduce in force, intensity, or value",
+                  "example": "The medicine helped to attenuate the pain."
+                },
+                {
+                  "word": "expletive",
+                  "pronunciation": "EK-spluh-tiv",
+                  "partOfSpeech": "noun",
+                  "definition": "an oath or swear word",
+                  "example": "He muttered an expletive under his breath when he stubbed his toe."
+                },
+                {
+                  "word": "implement",
+                  "pronunciation": "IM-pluh-ment",
+                  "partOfSpeech": "verb",
+                  "definition": "to put into effect or carry out",
+                  "example": "The company decided to implement the new policy immediately."
+                },
+                {
+                  "word": "microbe",
+                  "pronunciation": "MY-krohb",
+                  "partOfSpeech": "noun",
+                  "definition": "a microscopic organism, especially bacteria, viruses, or fungi",
+                  "example": "The scientist studied the microbe under a powerful microscope."
+                },
+                {
+                  "word": "microcosm",
+                  "pronunciation": "MY-kro-koh-zum",
+                  "partOfSpeech": "noun",
+                  "definition": "a miniature representation of something larger",
+                  "example": "The small village was a microcosm of the entire country."
+                },
+                {
+                  "word": "miniscule",
+                  "pronunciation": "MIN-ih-skyool",
+                  "partOfSpeech": "adjective",
+                  "definition": "extremely small",
+                  "example": "The amount of sugar in the recipe was miniscule."
+                },
+                {
+                  "word": "minutia",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "replete",
+                  "pronunciation": "ri-PLEET",
+                  "partOfSpeech": "adjective",
+                  "definition": "filled or well-supplied with something",
+                  "example": "The book was replete with interesting facts."
+                },
+                {
+                  "word": "satiate",
+                  "pronunciation": "SAY-shee-ayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to satisfy fully or to excess",
+                  "example": "The large meal helped to satiate his hunger."
+                },
+                {
+                  "word": "tenuous",
+                  "pronunciation": "TEN-yoo-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "very weak or slight",
+                  "example": "The evidence for the theory was tenuous at best."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                }
+              ]
+            }
+          ]
         }
       ]
     },
