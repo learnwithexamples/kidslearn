@@ -141,6 +141,30 @@ h1 {
     transform: none;
 }
 
+/* Intro section used on subject hub pages */
+.intro-section {
+    background: linear-gradient(135deg, #ebf4ff 0%, #f0fff4 100%);
+    border: 2px solid #bee3f8;
+    border-radius: 15px;
+    padding: 20px 25px;
+    margin-bottom: 28px;
+    color: #2d3748;
+    line-height: 1.65;
+}
+
+.intro-section h2 {
+    color: #5a67d8;
+    margin-bottom: 8px;
+    font-size: 1.35em;
+}
+
+/* h3 inside topic cards (sub-pages use h3 instead of h2) */
+.topic-card h3 {
+    color: #2d3748;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
 footer {
     text-align: center;
     padding: 20px;

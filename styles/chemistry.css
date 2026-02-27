@@ -1,0 +1,410 @@
+/* ====================================
+   Chemistry / Periodic Table Styles
+   ==================================== */
+
+/* ---- Page Layout ---- */
+.pt-page {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    padding: 10px;
+}
+
+.pt-page header {
+    margin-bottom: 18px;
+}
+
+/* ---- Legend ---- */
+.pt-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    background: #f9fafb;
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+}
+
+.pt-legend h3 {
+    width: 100%;
+    margin: 0 0 6px;
+    font-size: 0.85em;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78em;
+    color: #444;
+}
+
+.legend-swatch {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,0.15);
+    flex-shrink: 0;
+}
+
+/* ---- Periodic Table Grid ---- */
+.periodic-table-wrapper {
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.periodic-table {
+    display: grid;
+    grid-template-columns: repeat(18, minmax(54px, 1fr));
+    grid-template-rows: repeat(10, 58px);
+    gap: 3px;
+    min-width: 990px;
+    position: relative;
+}
+
+/* ---- Individual Element Cell ---- */
+.element {
+    border-radius: 6px;
+    border: 1.5px solid rgba(0,0,0,0.12);
+    padding: 3px 2px 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    user-select: none;
+    line-height: 1.1;
+}
+
+.element:hover {
+    transform: scale(1.18);
+    z-index: 50;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    border-color: rgba(0,0,0,0.35);
+}
+
+.element .el-number {
+    font-size: 0.58em;
+    color: rgba(0,0,0,0.55);
+    align-self: flex-start;
+    padding-left: 2px;
+    line-height: 1.2;
+}
+
+.element .el-symbol {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: #1a202c;
+    line-height: 1;
+}
+
+.element .el-name {
+    font-size: 0.5em;
+    color: rgba(0,0,0,0.6);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    padding: 0 2px;
+}
+
+.element .el-mass {
+    font-size: 0.48em;
+    color: rgba(0,0,0,0.5);
+    line-height: 1.2;
+}
+
+/* ---- Placeholder cells (La*/Ac* in main grid) ---- */
+.element.placeholder {
+    cursor: default;
+    opacity: 0.6;
+}
+.element.placeholder:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* ---- Separator row label ---- */
+.pt-separator-label {
+    grid-column: 1 / 4;
+    display: flex;
+    align-items: center;
+    font-size: 0.65em;
+    color: #888;
+    padding-left: 4px;
+}
+
+/* ---- Category Colors ---- */
+.cat-nonmetal         { background: #c8f0d8; }
+.cat-noble-gas        { background: #b3d9ff; }
+.cat-alkali-metal     { background: #ffcdd2; }
+.cat-alkaline-earth   { background: #ffe0b2; }
+.cat-metalloid        { background: #b2dfdb; }
+.cat-halogen          { background: #f0f4ad; }
+.cat-post-trans       { background: #cfd8dc; }
+.cat-transition       { background: #f8bbd0; }
+.cat-lanthanide       { background: #e1bee7; }
+.cat-actinide         { background: #d1c4e9; }
+.cat-unknown          { background: #eceff1; }
+
+/* ---- Hover Tooltip ---- */
+#pt-tooltip {
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+    max-width: 220px;
+    background: #1a202c;
+    color: #f7fafc;
+    border-radius: 10px;
+    padding: 10px 13px;
+    font-size: 0.82em;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    line-height: 1.5;
+    display: none;
+}
+
+#pt-tooltip .tip-symbol {
+    font-size: 1.8em;
+    font-weight: 800;
+    display: block;
+    line-height: 1;
+    margin-bottom: 3px;
+}
+
+#pt-tooltip .tip-name {
+    font-size: 1.05em;
+    font-weight: 600;
+}
+
+#pt-tooltip .tip-category {
+    font-size: 0.85em;
+    opacity: 0.75;
+    margin-bottom: 5px;
+}
+
+#pt-tooltip .tip-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85em;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 4px;
+    margin-top: 4px;
+    gap: 8px;
+}
+
+#pt-tooltip .tip-hint {
+    margin-top: 6px;
+    font-size: 0.75em;
+    opacity: 0.55;
+    text-align: center;
+}
+
+/* ---- Detail Modal ---- */
+#pt-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#pt-modal-overlay.open {
+    display: flex;
+}
+
+#pt-modal {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    max-width: 560px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: modalPop 0.2s ease-out;
+}
+
+@keyframes modalPop {
+    from { opacity: 0; transform: scale(0.88); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 22px 24px 16px;
+    border-radius: 18px 18px 0 0;
+}
+
+.modal-element-symbol {
+    width: 74px;
+    height: 74px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2.5px solid rgba(0,0,0,0.15);
+    flex-shrink: 0;
+}
+
+.modal-element-symbol .m-num {
+    font-size: 0.7em;
+    color: rgba(0,0,0,0.5);
+    align-self: flex-start;
+    padding-left: 5px;
+    line-height: 1;
+}
+
+.modal-element-symbol .m-sym {
+    font-size: 2em;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.modal-element-symbol .m-mass {
+    font-size: 0.6em;
+    color: rgba(0,0,0,0.5);
+}
+
+.modal-title h2 {
+    font-size: 1.6em;
+    color: #2d3748;
+    margin: 0 0 4px;
+}
+
+.modal-title .modal-category {
+    font-size: 0.85em;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    border: 1.5px solid rgba(0,0,0,0.12);
+    color: #444;
+}
+
+.modal-close {
+    margin-left: auto;
+    background: none;
+    border: none;
+    font-size: 1.6em;
+    cursor: pointer;
+    color: #a0aec0;
+    padding: 4px 8px;
+    border-radius: 8px;
+    line-height: 1;
+    align-self: flex-start;
+    transition: color 0.2s, background 0.2s;
+}
+
+.modal-close:hover {
+    color: #e53e3e;
+    background: #fff5f5;
+}
+
+.modal-body {
+    padding: 0 24px 24px;
+}
+
+.modal-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.stat-box {
+    background: #f7fafc;
+    border-radius: 10px;
+    padding: 10px 14px;
+    border: 1.5px solid #e2e8f0;
+}
+
+.stat-box .stat-label {
+    font-size: 0.7em;
+    color: #718096;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 2px;
+}
+
+.stat-box .stat-value {
+    font-size: 1em;
+    font-weight: 700;
+    color: #2d3748;
+}
+
+.modal-description {
+    background: #f0faf4;
+    border-left: 4px solid #48bb78;
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-size: 0.92em;
+    color: #2d3748;
+    line-height: 1.6;
+    margin-bottom: 14px;
+}
+
+.modal-fun-fact {
+    background: #fef9e7;
+    border-left: 4px solid #f6c90e;
+    border-radius: 0 10px 10px 0;
+    padding: 10px 15px;
+    font-size: 0.88em;
+    color: #5d4d00;
+    line-height: 1.5;
+}
+
+.modal-fun-fact strong {
+    display: block;
+    margin-bottom: 3px;
+    color: #7d6400;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.modal-config {
+    margin-top: 14px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.82em;
+    background: #1a202c;
+    color: #68d391;
+    padding: 10px 14px;
+    border-radius: 8px;
+}
+
+.modal-config .config-label {
+    color: #90cdf4;
+    margin-bottom: 3px;
+    font-family: inherit;
+    font-size: 0.85em;
+}
+
+/* ---- Period / Group labels ---- */
+.pt-group-label, .pt-period-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65em;
+    color: #999;
+    font-weight: 600;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .modal-stats {
+        grid-template-columns: 1fr;
+    }
+    .pt-legend {
+        gap: 6px 12px;
+    }
+}
