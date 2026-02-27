@@ -1,0 +1,255 @@
+/* ====================================
+   Logic Subject Styles
+   Reuses grammar-lesson.css patterns,
+   overrides accent colors to teal/cyan.
+   ==================================== */
+
+/* ---- Accent overrides ---- */
+.lesson-section h2 {
+    border-bottom-color: #0d9488;
+}
+
+.info-box {
+    background: linear-gradient(135deg, rgba(13,148,136,0.1) 0%, rgba(6,182,212,0.1) 100%);
+    border-left-color: #0d9488;
+}
+
+.example-box h3 {
+    color: #0d9488;
+}
+
+.sentence-example {
+    border-left-color: #0d9488;
+}
+
+.tip-box {
+    background: linear-gradient(135deg, rgba(245,158,11,0.1) 0%, rgba(251,191,36,0.1) 100%);
+    border-left-color: #d97706;
+}
+
+.tip-box h4 {
+    color: #b45309;
+}
+
+.practice-item:hover {
+    border-color: #0d9488;
+}
+
+/* ---- Truth-table ---- */
+.truth-table-wrap {
+    overflow-x: auto;
+    margin: 18px 0;
+}
+
+table.truth-table {
+    border-collapse: collapse;
+    font-size: 1rem;
+    min-width: 320px;
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+table.truth-table th {
+    background: #0d9488;
+    color: #fff;
+    padding: 10px 16px;
+    text-align: center;
+    font-size: 1em;
+    letter-spacing: 0.03em;
+}
+
+table.truth-table td {
+    padding: 9px 16px;
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 0.98em;
+    color: #374151;
+}
+
+table.truth-table tr:last-child td {
+    border-bottom: none;
+}
+
+table.truth-table tr:nth-child(even) td {
+    background: #f0fdfa;
+}
+
+table.truth-table td.result-T {
+    color: #059669;
+    font-weight: 700;
+}
+
+table.truth-table td.result-F {
+    color: #dc2626;
+    font-weight: 700;
+}
+
+/* ---- Operator symbol badge ---- */
+.op-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 1em;
+    margin: 0 3px;
+}
+
+.op-and  { background: #d1fae5; color: #065f46; }
+.op-or   { background: #dbeafe; color: #1e40af; }
+.op-not  { background: #fee2e2; color: #991b1b; }
+.op-if   { background: #fef3c7; color: #78350f; }
+.op-iff  { background: #ede9fe; color: #5b21b6; }
+
+/* ---- Argument box (syllogism) ---- */
+.argument-box {
+    background: #f0fdfa;
+    border: 2px solid #99f6e4;
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 16px 0;
+    font-size: 1em;
+    line-height: 1.9;
+}
+
+.argument-box .premise {
+    color: #134e4a;
+}
+
+.argument-box .conclusion {
+    border-top: 2px solid #0d9488;
+    margin-top: 8px;
+    padding-top: 8px;
+    font-weight: 700;
+    color: #0f766e;
+}
+
+.argument-box .label {
+    font-size: 0.72em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b7280;
+    display: block;
+}
+
+/* ---- Fallacy card ---- */
+.fallacy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    margin: 20px 0;
+}
+
+.fallacy-card {
+    background: #fff;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 18px 20px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.fallacy-card:hover {
+    border-color: #0d9488;
+    box-shadow: 0 4px 12px rgba(13,148,136,0.15);
+}
+
+.fallacy-card h4 {
+    color: #0d9488;
+    font-size: 1.05em;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.fallacy-card .fallacy-def {
+    font-size: 0.88em;
+    color: #6b7280;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.fallacy-card .fallacy-example {
+    background: #fef9c3;
+    border-left: 3px solid #facc15;
+    border-radius: 0 6px 6px 0;
+    padding: 7px 10px;
+    font-size: 0.85em;
+    color: #374151;
+    font-style: italic;
+    line-height: 1.5;
+}
+
+/* ---- Valid / Invalid tags ---- */
+.tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.78em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+.tag-valid   { background: #d1fae5; color: #065f46; }
+.tag-invalid { background: #fee2e2; color: #991b1b; }
+.tag-strong  { background: #dbeafe; color: #1e40af; }
+.tag-weak    { background: #fef3c7; color: #78350f; }
+
+/* ---- Takeaway box override ---- */
+.takeaway-box {
+    background: linear-gradient(135deg, rgba(13,148,136,0.08) 0%, rgba(6,182,212,0.08) 100%);
+    border-left: 5px solid #0d9488;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.takeaway-box ul {
+    padding-left: 22px;
+}
+
+.takeaway-box li {
+    margin: 9px 0;
+    color: #374151;
+    font-size: 1.02rem;
+    line-height: 1.6;
+}
+
+/* ---- Nav between lessons ---- */
+.lesson-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.lesson-nav a {
+    display: inline-block;
+    padding: 10px 22px;
+    background: #f0fdfa;
+    border: 2px solid #0d9488;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #0d9488;
+    font-weight: 700;
+    transition: all 0.2s ease;
+    font-size: 0.95em;
+}
+
+.lesson-nav a:hover {
+    background: #0d9488;
+    color: #fff;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 640px) {
+    .fallacy-grid {
+        grid-template-columns: 1fr;
+    }
+}

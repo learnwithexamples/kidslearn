@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deductive Reasoning - Logic - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/logic.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏛️ Deductive Reasoning</h1>
+            <p class="subtitle">Drawing certain conclusions from general rules</p>
+            <a href="logic.html" class="back-link">← Back to Logic</a>
+        </header>
+
+        <main class="lesson-content">
+
+            <!-- Intro -->
+            <section class="lesson-section">
+                <h2>🔭 What Is Deductive Reasoning?</h2>
+                <div class="info-box">
+                    <p><strong>Deductive reasoning</strong> starts from a <em>general rule</em> (or set of accepted facts) and applies it to a <em>specific case</em> to reach a <strong>guaranteed conclusion</strong>.</p>
+                    <p>If the premises (starting facts) are true and the argument is valid, the conclusion <em>must</em> be true — no exceptions.</p>
+                    <ul>
+                        <li>⬇️ General → Specific</li>
+                        <li>⬇️ Rules → Facts → Conclusion</li>
+                        <li>⬇️ Used in math proofs, law, and science</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Syllogism -->
+            <section class="lesson-section">
+                <h2>🏺 Syllogisms</h2>
+                <p>The most classic form of deductive reasoning is the <strong>syllogism</strong> — an argument with two premises and a conclusion.</p>
+
+                <div class="argument-box">
+                    <span class="label">Major Premise (general rule)</span>
+                    <div class="premise">All mammals are warm-blooded.</div>
+                    <span class="label" style="margin-top:6px;">Minor Premise (specific fact)</span>
+                    <div class="premise">Dolphins are mammals.</div>
+                    <div class="conclusion">∴ Therefore, dolphins are warm-blooded.</div>
+                </div>
+
+                <div class="argument-box">
+                    <span class="label">Major Premise</span>
+                    <div class="premise">All prime numbers greater than 2 are odd.</div>
+                    <span class="label" style="margin-top:6px;">Minor Premise</span>
+                    <div class="premise">7 is a prime number greater than 2.</div>
+                    <div class="conclusion">∴ Therefore, 7 is odd.</div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>∴ The Symbol for "Therefore"</h4>
+                    <p>The three-dot triangle symbol <strong>∴</strong> means "therefore" and introduces the conclusion of an argument.</p>
+                </div>
+            </section>
+
+            <!-- Valid vs Invalid -->
+            <section class="lesson-section">
+                <h2>✅ Valid vs. ❌ Invalid Arguments</h2>
+                <p>An argument is <strong>valid</strong> if the conclusion logically follows from the premises — regardless of whether the premises are actually true in the real world.</p>
+                <p>An argument is <strong>sound</strong> if it is valid <em>and</em> the premises are actually true.</p>
+
+                <div class="comparison-box">
+                    <div class="comparison-column">
+                        <h3>Valid <span class="tag tag-valid">Valid</span></h3>
+                        <div class="argument-box">
+                            <div class="premise">All cats have wings.</div>
+                            <div class="premise">Whiskers is a cat.</div>
+                            <div class="conclusion">∴ Whiskers has wings.</div>
+                        </div>
+                        <p>The structure is correct — conclusion follows from premises. But it is <strong>not sound</strong> because the first premise is false.</p>
+                    </div>
+                    <div class="comparison-column">
+                        <h3>Invalid <span class="tag tag-invalid">Invalid</span></h3>
+                        <div class="argument-box">
+                            <div class="premise">All dogs are animals.</div>
+                            <div class="premise">All cats are animals.</div>
+                            <div class="conclusion">∴ All dogs are cats. ❌</div>
+                        </div>
+                        <p>The conclusion does NOT follow from the premises. Even though all three sentences sound reasonable, the logic is broken.</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <p><strong>Valid + True Premises = Sound argument</strong><br>
+                    A <em>sound</em> argument guarantees a true conclusion. Validity alone only guarantees the conclusion follows the structure.</p>
+                </div>
+            </section>
+
+            <!-- Law of Detachment -->
+            <section class="lesson-section">
+                <h2>🔑 Law of Detachment (Modus Ponens)</h2>
+                <p>If a conditional <strong>p → q</strong> is true, and the hypothesis <strong>p</strong> is true, then the conclusion <strong>q</strong> must be true.</p>
+
+                <div class="argument-box">
+                    <span class="label">Given</span>
+                    <div class="premise">If it is raining, then the streets are wet. (p → q)</div>
+                    <span class="label" style="margin-top:6px;">Given</span>
+                    <div class="premise">It is raining. (p is TRUE)</div>
+                    <div class="conclusion">∴ The streets are wet. (q must be TRUE)</div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>⚠️ Common Mistake: Affirming the Consequent</h4>
+                    <p>You <strong>cannot</strong> run this in reverse! Knowing "the streets are wet" does NOT mean "it is raining" — the streets could be wet from a fire hydrant.</p>
+                </div>
+            </section>
+
+            <!-- Law of Syllogism -->
+            <section class="lesson-section">
+                <h2>🔗 Law of Syllogism (Chain Rule)</h2>
+                <p>If <strong>p → q</strong> and <strong>q → r</strong> are both true, then <strong>p → r</strong> is also true. You can chain conditionals together.</p>
+
+                <div class="argument-box">
+                    <span class="label">Premise 1</span>
+                    <div class="premise">If you practice every day, then you will improve. (p → q)</div>
+                    <span class="label" style="margin-top:6px;">Premise 2</span>
+                    <div class="premise">If you improve, then you will make the team. (q → r)</div>
+                    <div class="conclusion">∴ If you practice every day, then you will make the team. (p → r)</div>
+                </div>
+
+                <div class="example-box">
+                    <h3>Math Example</h3>
+                    <div class="sentence-example">
+                        <p>If a number is divisible by 4, then it is divisible by 2. &nbsp;(p → q)<br>
+                        If a number is divisible by 2, then it is even. &nbsp;(q → r)<br>
+                        <strong>∴ If a number is divisible by 4, then it is even.</strong> &nbsp;(p → r)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Modus Tollens -->
+            <section class="lesson-section">
+                <h2>🔄 Law of Contraposition (Modus Tollens)</h2>
+                <p>If <strong>p → q</strong> is true and <strong>q is false</strong>, then <strong>p must also be false</strong>. This is using the contrapositive.</p>
+
+                <div class="argument-box">
+                    <span class="label">Given</span>
+                    <div class="premise">If the alarm goes off, then there is a fire. (p → q)</div>
+                    <span class="label" style="margin-top:6px;">Given</span>
+                    <div class="premise">There is no fire. (¬q)</div>
+                    <div class="conclusion">∴ The alarm did not go off. (¬p)</div>
+                </div>
+            </section>
+
+            <!-- Practice -->
+            <section class="lesson-section">
+                <h2>✏️ Practice — Click to Reveal Answers</h2>
+
+                <div class="practice-exercises">
+                    <div class="practice-item" onclick="this.classList.toggle('revealed')">
+                        <p class="question">1. Is this argument valid?<br>"All fish live in water. Sharks are fish. ∴ Sharks live in water."</p>
+                        <div class="answer">
+                            <p><strong>Yes, valid — and sound!</strong> The structure is a correct syllogism, and both premises are true.</p>
+                        </div>
+                    </div>
+
+                    <div class="practice-item" onclick="this.classList.toggle('revealed')">
+                        <p class="question">2. Is this argument valid?<br>"All birds have wings. Penguins have wings. ∴ Penguins are birds."</p>
+                        <div class="answer">
+                            <p><strong>No, invalid.</strong> Having wings doesn't mean you're a bird — bats and butterflies have wings too. The conclusion does not logically follow.</p>
+                        </div>
+                    </div>
+
+                    <div class="practice-item" onclick="this.classList.toggle('revealed')">
+                        <p class="question">3. Apply the Law of Detachment:<br>"If a student scores above 90, they get an A. Maria scored 95."</p>
+                        <div class="answer">
+                            <p><strong>∴ Maria gets an A.</strong><br>
+                            p → q is true. p is true (Maria scored 95 &gt; 90). Therefore q (she gets an A) is true.</p>
+                        </div>
+                    </div>
+
+                    <div class="practice-item" onclick="this.classList.toggle('revealed')">
+                        <p class="question">4. Apply the Law of Syllogism:<br>"If it is a rose, then it is a flower. If it is a flower, then it needs sunlight."</p>
+                        <div class="answer">
+                            <p><strong>∴ If it is a rose, then it needs sunlight.</strong> (p → r chained through q)</p>
+                        </div>
+                    </div>
+
+                    <div class="practice-item" onclick="this.classList.toggle('revealed')">
+                        <p class="question">5. Apply Modus Tollens:<br>"If the power is on, the light glows. The light is not glowing."</p>
+                        <div class="answer">
+                            <p><strong>∴ The power is not on.</strong><br>
+                            ¬q is given. Since p → q, by contrapositive (¬q → ¬p), we conclude ¬p.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Takeaways -->
+            <section class="lesson-section">
+                <h2>🎯 Key Takeaways</h2>
+                <div class="takeaway-box">
+                    <ul>
+                        <li><strong>Deductive reasoning</strong> moves from general rules to specific conclusions.</li>
+                        <li>A <strong>syllogism</strong> has two premises and one conclusion (∴).</li>
+                        <li>An argument is <strong>valid</strong> if the conclusion follows from the premises; <strong>sound</strong> if also the premises are true.</li>
+                        <li><strong>Law of Detachment:</strong> p → q is true, p is true → q is true.</li>
+                        <li><strong>Law of Syllogism:</strong> (p → q) and (q → r) → (p → r).</li>
+                        <li><strong>Modus Tollens:</strong> p → q is true, q is false → p is false.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <div class="lesson-nav">
+                <a href="conditionals.html">← If-Then Statements</a>
+                <a href="inductive-reasoning.html">Next: Inductive Reasoning →</a>
+            </div>
+
+        </main>
+
+        <footer>
+            <p>Valid reasoning leads to certain conclusions. 🏛️</p>
+        </footer>
+    </div>
+</body>
+</html>

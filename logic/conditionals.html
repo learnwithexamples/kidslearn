@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>If-Then Statements - Logic - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/logic.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>➡️ If-Then Statements</h1>
+            <p class="subtitle">Conditional logic — the engine of reasoning</p>
+            <a href="logic.html" class="back-link">← Back to Logic</a>
+        </header>
+
+        <main class="lesson-content">
+
+            <!-- Intro -->
+            <section class="lesson-section">
+                <h2>💬 What Is a Conditional Statement?</h2>
+                <div class="info-box">
+                    <p>A <strong>conditional statement</strong> (also called an <em>if-then statement</em>) links two statements together with a cause-and-effect relationship.</p>
+                    <p><strong>Form:</strong> <span class="op-badge op-if">If p, then q</span> — written as <strong>p → q</strong></p>
+                    <ul>
+                        <li><strong>p</strong> is called the <strong>hypothesis</strong> (the condition / the "if" part)</li>
+                        <li><strong>q</strong> is called the <strong>conclusion</strong> (the result / the "then" part)</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h3>Examples</h3>
+                    <div class="sentence-example">
+                        <p><strong>If</strong> it rains, <strong>then</strong> the ground gets wet.<br>
+                        <em>p = "It rains" &nbsp;|&nbsp; q = "The ground gets wet"</em></p>
+                    </div>
+                    <div class="sentence-example">
+                        <p><strong>If</strong> a number is divisible by 4, <strong>then</strong> it is even.<br>
+                        <em>Always true — this is a mathematical conditional.</em></p>
+                    </div>
+                    <div class="sentence-example">
+                        <p><strong>If</strong> you study hard, <strong>then</strong> you will pass the test.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Truth table of conditional -->
+            <section class="lesson-section">
+                <h2>📊 When Is p → q True?</h2>
+                <p>This is the trickiest truth table in basic logic. The conditional is <strong>false only when the hypothesis is true but the conclusion is false</strong>. In all other cases, it is true.</p>
+
+                <div class="truth-table-wrap">
+                    <table class="truth-table">
+                        <thead><tr><th>p (If…)</th><th>q (…then)</th><th>p → q</th></tr></thead>
+                        <tbody>
+                            <tr><td class="result-T">T</td><td class="result-T">T</td><td class="result-T">T</td></tr>
+                            <tr><td class="result-T">T</td><td class="result-F">F</td><td class="result-F">F</td></tr>
+                            <tr><td class="result-F">F</td><td class="result-T">T</td><td class="result-T">T</td></tr>
+                            <tr><td class="result-F">F</td><td class="result-F">F</td><td class="result-T">T</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Why is F → T true?</h4>
+                    <p>Think of a promise: "If you clean your room, I'll give you ice cream." If you never clean your room, the promise was never broken — regardless of whether you got ice cream or not. A false hypothesis makes the whole conditional <strong>vacuously true</strong>.</p>
+                </div>
+
+                <div class="example-box">
+                    <h3>Applying the Truth Table</h3>
+                    <div class="sentence-example">
+                        <p>"If a shape is a square, then it has four sides." — T → T = <strong style="color:#059669;">TRUE</strong> ✅</p>
+                    </div>
+                    <div class="sentence-example">
+                        <p>"If you are in Tokyo, then you are in France." — T → F = <strong style="color:#dc2626;">FALSE</strong> ❌</p>
+                    </div>
+                    <div class="sentence-example">
+                        <p>"If 2 + 2 = 5, then the moon is made of cheese." — F → F = <strong style="color:#059669;">TRUE</strong> ✅ (vacuously)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Related conditionals -->
+            <section class="lesson-section">
+                <h2>🔃 The Four Related Conditionals</h2>
+                <p>From any conditional <strong>p → q</strong>, we can form three related statements by swapping or negating:</p>
+
+                <div class="example-box">
+                    <h3>Original (Conditional): p → q</h3>
+                    <div class="sentence-example">
+                        <p>"<strong>If</strong> it is a dog, <strong>then</strong> it is a mammal."</p>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h3>Converse: q → p &nbsp;<em>(swap p and q)</em></h3>
+                    <div class="sentence-example">
+                        <p>"<strong>If</strong> it is a mammal, <strong>then</strong> it is a dog." &nbsp;— <strong style="color:#dc2626;">FALSE</strong> (cats are mammals too!)</p>
+                        <p class="explanation">The converse is <strong>not necessarily equivalent</strong> to the original.</p>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h3>Inverse: ¬p → ¬q &nbsp;<em>(negate both)</em></h3>
+                    <div class="sentence-example">
+                        <p>"<strong>If</strong> it is <u>not</u> a dog, <strong>then</strong> it is <u>not</u> a mammal." &nbsp;— <strong style="color:#dc2626;">FALSE</strong></p>
+                        <p class="explanation">The inverse is <strong>not necessarily equivalent</strong> to the original either.</p>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h3>Contrapositive: ¬q → ¬p &nbsp;<em>(swap AND negate)</em></h3>
+                    <div class="sentence-example">
+                        <p>"<strong>If</strong> it is <u>not</u> a mammal, <strong>then</strong> it is <u>not</u> a dog." &nbsp;— <strong style="color:#059669;">TRUE</strong></p>
+                        <p class="explanation">The contrapositive is <strong>always logically equivalent</strong> to the original. If the original is true, the contrapositive is true — and vice versa.</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <p><strong>Key Equivalent Pairs:</strong></p>
+                    <ul>
+                        <li>Original <strong>p → q</strong> &nbsp;≡&nbsp; Contrapositive <strong>¬q → ¬p</strong> (always equivalent)</li>
+                        <li>Converse <strong>q → p</strong> &nbsp;≡&nbsp; Inverse <strong>¬p → ¬q</strong> (these two are equivalent to each other, but not to the original)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Biconditional -->
+            <section class="lesson-section">
+                <h2>↔️ Biconditional: If and Only If &nbsp;<span class="op-badge op-iff">p ↔ q</span></h2>
+                <p>A <strong>biconditional</strong> says both directions are true at the same time — "p if and only if q" means <em>p → q</em> AND <em>q → p</em>.</p>
+                <p>It is true when both statements have the <strong>same truth value</strong>.</p>
+
+                <div class="truth-table-wrap">
+                    <table class="truth-table">
+                        <thead><tr><th>p</th><th>q</th><th>p ↔ q</th></tr></thead>
+                        <tbody>
+                            <tr><td class="result-T">T</td><td class="result-T">T</td><td class="result-T">T</td></tr>
+                            <tr><td class="result-T">T</td><td class="result-F">F</td><td class="result-F">F</td></tr>
+                            <tr><td class="result-F">F</td><td class="result-T">T</td><td class="result-F">F</td></tr>
+                            <tr><td class="result-F">F</td><td class="result-F">F</td><td class="result-T">T</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="example-box">
+                    <h3>Example</h3>
+                    <div class="sentence-example">
+                        <p>"A shape is a square <strong>if and only if</strong> it has four equal sides and four right angles."<br>
+                        <em>If it's a square → it has those properties. If it has those properties → it's a square. Both directions hold.</em></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Practice -->
+            <section class="lesson-section">
+                <h2>✏️ Practice — Click to Reveal Answers</h2>
+
+                <div class="practice-exercises">
+                    <div class="practice-item" onclick="this.classList.toggle('revealed')">
+                        <p class="question">1. Identify the hypothesis and conclusion: "If it is snowing, then school is cancelled."</p>
+                        <div class="answer">
+                            <p><strong>Hypothesis (p):</strong> "It is snowing."<br>
+                            <strong>Conclusion (q):</strong> "School is cancelled."</p>
+                        </div>
+                    </div>
+
+                    <div class="practice-item" onclick="this.classList.toggle('revealed')">
+                        <p class="question">2. Write the contrapositive of: "If a polygon is a triangle, then it has exactly 3 sides."</p>
+                        <div class="answer">
+                            <p><strong>Contrapositive:</strong> "If a polygon does <u>not</u> have exactly 3 sides, then it is <u>not</u> a triangle."<br>
+                            <em>This is TRUE and logically equivalent to the original.</em></p>
+                        </div>
+                    </div>
+
+                    <div class="practice-item" onclick="this.classList.toggle('revealed')">
+                        <p class="question">3. p → q where p = TRUE and q = FALSE. What is the truth value?</p>
+                        <div class="answer">
+                            <p><strong>FALSE.</strong> A conditional is only false when the hypothesis is true and the conclusion is false.</p>
+                        </div>
+                    </div>
+
+                    <div class="practice-item" onclick="this.classList.toggle('revealed')">
+                        <p class="question">4. Are the converse and the inverse logically equivalent to each other?</p>
+                        <div class="answer">
+                            <p><strong>Yes!</strong> The converse (q → p) and the inverse (¬p → ¬q) always have the same truth value — they are logically equivalent to <em>each other</em>, though not to the original conditional.</p>
+                        </div>
+                    </div>
+
+                    <div class="practice-item" onclick="this.classList.toggle('revealed')">
+                        <p class="question">5. "A number is even if and only if it is divisible by 2." Is this a true biconditional?</p>
+                        <div class="answer">
+                            <p><strong>Yes!</strong> Both directions hold:<br>
+                            • If a number is even → it is divisible by 2. ✓<br>
+                            • If a number is divisible by 2 → it is even. ✓<br>
+                            So p ↔ q is TRUE.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Takeaways -->
+            <section class="lesson-section">
+                <h2>🎯 Key Takeaways</h2>
+                <div class="takeaway-box">
+                    <ul>
+                        <li>A conditional <strong>p → q</strong> is false <em>only</em> when p is true and q is false.</li>
+                        <li><strong>Hypothesis</strong> = the "if" part; <strong>Conclusion</strong> = the "then" part.</li>
+                        <li><strong>Contrapositive (¬q → ¬p)</strong> is always equivalent to the original.</li>
+                        <li><strong>Converse (q → p)</strong> and <strong>Inverse (¬p → ¬q)</strong> are equivalent to each other but not to the original.</li>
+                        <li>A <strong>biconditional (p ↔ q)</strong> is true when both statements share the same truth value.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <div class="lesson-nav">
+                <a href="logical-operators.html">← Logical Operators</a>
+                <a href="deductive-reasoning.html">Next: Deductive Reasoning →</a>
+            </div>
+
+        </main>
+
+        <footer>
+            <p>If you understand conditionals, then you understand logic! ➡️</p>
+        </footer>
+    </div>
+</body>
+</html>

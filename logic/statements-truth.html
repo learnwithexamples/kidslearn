@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statements &amp; Truth Values - Logic - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/logic.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔤 Statements &amp; Truth Values</h1>
+            <p class="subtitle">The building blocks of all logical thinking</p>
+            <a href="logic.html" class="back-link">← Back to Logic</a>
+        </header>
+
+        <main class="lesson-content">
+
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>🧠 What Is Logic?</h2>
+                <div class="info-box">
+                    <p><strong>Logic</strong> is the study of correct reasoning. It gives us tools to figure out whether an argument is <em>valid</em> — whether the conclusion really follows from the evidence — regardless of whether the topic is math, science, law, or everyday life.</p>
+                    <p>The most basic building block of logic is the <strong>statement</strong>.</p>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>📋 What Is a Statement?</h2>
+                <p>A <strong>statement</strong> (also called a <em>proposition</em>) is a sentence that is either definitely <strong>true</strong> or definitely <strong>false</strong> — not both, not neither.</p>
+
+                <div class="comparison-box">
+                    <div class="comparison-column">
+                        <h3>✅ Statements</h3>
+                        <div class="example-box">
+                            <p>"The Earth orbits the Sun." <strong>(True)</strong></p>
+                        </div>
+                        <div class="example-box">
+                            <p>"A triangle has four sides." <strong>(False)</strong></p>
+                        </div>
+                        <div class="example-box">
+                            <p>"5 + 3 = 8." <strong>(True)</strong></p>
+                        </div>
+                        <div class="example-box">
+                            <p>"Whales are fish." <strong>(False)</strong></p>
+                        </div>
+                    </div>
+                    <div class="comparison-column">
+                        <h3>❌ Not Statements</h3>
+                        <div class="example-box">
+                            <p>"Close the door!" <em>(command — not true/false)</em></p>
+                        </div>
+                        <div class="example-box">
+                            <p>"Is it raining?" <em>(question — not true/false)</em></p>
+                        </div>
+                        <div class="example-box">
+                            <p>"Wow, that's amazing!" <em>(exclamation — not true/false)</em></p>
+                        </div>
+                        <div class="example-box">
+                            <p>"She is tall." <em>(relative/vague — can't judge without context)</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Quick Test</h4>
+                    <p>Ask yourself: <em>"Can I say this is definitely true or definitely false?"</em> If yes, it's a statement. If it's a question, command, opinion, or too vague to judge, it is <strong>not</strong> a logical statement.</p>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>⚖️ Truth Values</h2>
+                <p>Every statement has exactly one <strong>truth value</strong>: either <strong>True (T)</strong> or <strong>False (F)</strong>. There is no middle ground in classical logic.</p>
+
+                <div class="example-box">
+                    <h3>Assigning Truth Values</h3>
+                    <div class="sentence-example">
+                        <p>"Paris is the capital of France." → <strong style="color:#059669;">TRUE</strong></p>
+                    </div>
+                    <div class="sentence-example">
+                        <p>"The moon is made of cheese." → <strong style="color:#dc2626;">FALSE</strong></p>
+                    </div>
+                    <div class="sentence-example">
+                        <p>"2 × 6 = 11." → <strong style="color:#dc2626;">FALSE</strong></p>
+                    </div>
+                    <div class="sentence-example">
+                        <p>"Sharks are a type of fish." → <strong style="color:#059669;">TRUE</strong></p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <p>In logic, we often use variables like <strong>p</strong>, <strong>q</strong>, and <strong>r</strong> to stand for any statement, just like algebra uses <em>x</em> and <em>y</em> for unknown numbers.</p>
+                    <ul>
+                        <li>Let <strong>p</strong> = "It is raining."</li>
+                        <li>Let <strong>q</strong> = "The ground is wet."</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>🔄 Negation: Flipping the Truth</h2>
+                <p>The <strong>negation</strong> of a statement is its opposite. If a statement is true, its negation is false — and vice versa.</p>
+                <p>We write the negation of statement <strong>p</strong> as <strong>¬p</strong> (read: "not p").</p>
+
+                <div class="example-box">
+                    <h3>Examples of Negation</h3>
+                    <div class="sentence-example">
+                        <p><strong>p:</strong> "The cat is sleeping." (True)<br>
+                           <strong>¬p:</strong> "The cat is <u>not</u> sleeping." (False)</p>
+                    </div>
+                    <div class="sentence-example">
+                        <p><strong>p:</strong> "7 is an even number." (False)<br>
+                           <strong>¬p:</strong> "7 is <u>not</u> an even number." (True)</p>
+                    </div>
+                </div>
+
+                <div class="truth-table-wrap">
+                    <table class="truth-table">
+                        <thead>
+                            <tr><th>p</th><th>¬p (NOT p)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="result-T">T</td><td class="result-F">F</td></tr>
+                            <tr><td class="result-F">F</td><td class="result-T">T</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tip-box">
+                    <h4>⚠️ Watch Out!</h4>
+                    <p>Negation is not always just adding "not." <br>
+                    <strong>p:</strong> "All birds can fly." &nbsp;→&nbsp; <strong>¬p:</strong> "Some birds <em>cannot</em> fly." (not "No birds can fly!")</p>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>📂 Open vs. Closed Statements</h2>
+
+                <div class="comparison-box">
+                    <div class="comparison-column">
+                        <h3>Closed Statement</h3>
+                        <p>Has a definite, fixed truth value.</p>
+                        <div class="example-box">
+                            <p>"The sum of angles in a triangle is 180°."  <strong>(Always True)</strong></p>
+                        </div>
+                    </div>
+                    <div class="comparison-column">
+                        <h3>Open Statement</h3>
+                        <p>Contains a variable; truth value depends on what the variable represents.</p>
+                        <div class="example-box">
+                            <p>"<em>x</em> + 5 = 12" — True if x = 7, False otherwise.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <p>In logic, we work mostly with <strong>closed statements</strong> that have definite truth values. Open statements become closed once you substitute a specific value.</p>
+                </div>
+            </section>
+
+            <!-- Section 6 - Practice -->
+            <section class="lesson-section">
+                <h2>✏️ Practice — Click to Reveal Answers</h2>
+
+                <div class="practice-exercises">
+                    <div class="practice-item" onclick="this.classList.toggle('revealed')">
+                        <p class="question">1. Is "Stop making so much noise!" a logical statement?</p>
+                        <div class="answer">
+                            <p><strong>No.</strong> It is a command. It cannot be judged as true or false.</p>
+                        </div>
+                    </div>
+
+                    <div class="practice-item" onclick="this.classList.toggle('revealed')">
+                        <p class="question">2. What is the truth value of "The Pacific Ocean is the largest ocean on Earth"?</p>
+                        <div class="answer">
+                            <p><strong>True.</strong> The Pacific Ocean covers more area than any other ocean.</p>
+                        </div>
+                    </div>
+
+                    <div class="practice-item" onclick="this.classList.toggle('revealed')">
+                        <p class="question">3. Write the negation of: "All squares are rectangles."</p>
+                        <div class="answer">
+                            <p><strong>¬p:</strong> "Not all squares are rectangles." (equivalently: "Some squares are not rectangles.")<br>
+                            <em>Note: "No squares are rectangles" would be too strong — that's not the direct negation.</em></p>
+                        </div>
+                    </div>
+
+                    <div class="practice-item" onclick="this.classList.toggle('revealed')">
+                        <p class="question">4. If p is FALSE, what is ¬p?</p>
+                        <div class="answer">
+                            <p><strong>¬p is TRUE.</strong> Negation always flips the truth value.</p>
+                        </div>
+                    </div>
+
+                    <div class="practice-item" onclick="this.classList.toggle('revealed')">
+                        <p class="question">5. Is "x > 10" a statement? Explain.</p>
+                        <div class="answer">
+                            <p><strong>It is an open statement</strong> — it has a variable (x), so its truth value changes depending on what x is. It becomes a closed statement (with a definite truth value) once we substitute a specific number.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>🎯 Key Takeaways</h2>
+                <div class="takeaway-box">
+                    <ul>
+                        <li>A <strong>statement (proposition)</strong> is a sentence that is either true or false — not both, not neither.</li>
+                        <li>Questions, commands, and exclamations are <strong>not</strong> logical statements.</li>
+                        <li>Every statement has a <strong>truth value</strong>: T or F.</li>
+                        <li>The <strong>negation (¬p)</strong> of a statement flips its truth value.</li>
+                        <li>An <strong>open statement</strong> contains a variable; it becomes closed when the variable is replaced.</li>
+                        <li>Logic variables like <strong>p, q, r</strong> stand in for any statement.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <div class="lesson-nav">
+                <span></span>
+                <a href="logical-operators.html">Next: Logical Operators →</a>
+            </div>
+
+        </main>
+
+        <footer>
+            <p>Every great argument begins with a clear statement! 💡</p>
+        </footer>
+    </div>
+</body>
+</html>

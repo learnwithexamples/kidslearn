@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logical Operators - Logic - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/logic.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚙️ Logical Operators</h1>
+            <p class="subtitle">AND, OR, and NOT — the tools that connect logical statements</p>
+            <a href="logic.html" class="back-link">← Back to Logic</a>
+        </header>
+
+        <main class="lesson-content">
+
+            <!-- Intro -->
+            <section class="lesson-section">
+                <h2>🔗 Combining Statements</h2>
+                <div class="info-box">
+                    <p>Just as arithmetic has operators like + and × to combine numbers, logic has <strong>logical operators</strong> to combine statements. The three fundamental operators are:</p>
+                    <ul>
+                        <li><span class="op-badge op-and">AND</span> — conjunction (symbol: <strong>∧</strong>)</li>
+                        <li><span class="op-badge op-or">OR</span> — disjunction (symbol: <strong>∨</strong>)</li>
+                        <li><span class="op-badge op-not">NOT</span> — negation (symbol: <strong>¬</strong>)</li>
+                    </ul>
+                    <p>We'll use two statements throughout this lesson:<br>
+                    <strong>p</strong> = "It is raining." &nbsp;|&nbsp; <strong>q</strong> = "I have an umbrella."</p>
+                </div>
+            </section>
+
+            <!-- AND -->
+            <section class="lesson-section">
+                <h2>🤝 AND (Conjunction) &nbsp;<span class="op-badge op-and">p ∧ q</span></h2>
+                <p>A <strong>conjunction</strong> is true only when <em>both</em> statements are true. If even one is false, the whole conjunction is false.</p>
+
+                <div class="example-box">
+                    <h3>Example</h3>
+                    <div class="sentence-example">
+                        <p><strong>p ∧ q:</strong> "It is raining <u>AND</u> I have an umbrella."</p>
+                        <p class="explanation">Both must be true at the same time for this to be true.</p>
+                    </div>
+                    <div class="sentence-example">
+                        <p>"I like pizza <u>and</u> I like ice cream." — True only if you like <em>both</em>.</p>
+                    </div>
+                </div>
+
+                <div class="truth-table-wrap">
+                    <table class="truth-table">
+                        <thead><tr><th>p</th><th>q</th><th>p ∧ q (AND)</th></tr></thead>
+                        <tbody>
+                            <tr><td class="result-T">T</td><td class="result-T">T</td><td class="result-T">T</td></tr>
+                            <tr><td class="result-T">T</td><td class="result-F">F</td><td class="result-F">F</td></tr>
+                            <tr><td class="result-F">F</td><td class="result-T">T</td><td class="result-F">F</td></tr>
+                            <tr><td class="result-F">F</td><td class="result-F">F</td><td class="result-F">F</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Memory Tip</h4>
+                    <p>AND is like a <strong>strict teacher</strong> — both students must raise their hand, or the answer is no!</p>
+                </div>
+            </section>
+
+            <!-- OR -->
+            <section class="lesson-section">
+                <h2>🔀 OR (Disjunction) &nbsp;<span class="op-badge op-or">p ∨ q</span></h2>
+                <p>A <strong>disjunction</strong> is true when <em>at least one</em> statement is true. It is only false when <em>both</em> are false.</p>
+
+                <div class="example-box">
+                    <h3>Example</h3>
+                    <div class="sentence-example">
+                        <p><strong>p ∨ q:</strong> "It is raining <u>OR</u> I have an umbrella."</p>
+                        <p class="explanation">This is true even if only one of those things is true.</p>
+                    </div>
+                    <div class="sentence-example">
+                        <p>"You can have cake OR pie." — In logic, you could have both (inclusive OR).</p>
+                    </div>
+                </div>
+
+                <div class="truth-table-wrap">
+                    <table class="truth-table">
+                        <thead><tr><th>p</th><th>q</th><th>p ∨ q (OR)</th></tr></thead>
+                        <tbody>
+                            <tr><td class="result-T">T</td><td class="result-T">T</td><td class="result-T">T</td></tr>
+                            <tr><td class="result-T">T</td><td class="result-F">F</td><td class="result-T">T</td></tr>
+                            <tr><td class="result-F">F</td><td class="result-T">T</td><td class="result-T">T</td></tr>
+                            <tr><td class="result-F">F</td><td class="result-F">F</td><td class="result-F">F</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box">
+                    <p><strong>Inclusive OR vs. Exclusive OR (XOR):</strong><br>
+                    Logic's OR is <strong>inclusive</strong> — it allows both to be true. Everyday English sometimes uses <em>exclusive</em> or ("you can have coffee <em>or</em> tea" often implies not both). In logic, OR always means "at least one."</p>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Memory Tip</h4>
+                    <p>OR is like a <strong>lenient teacher</strong> — even one student raising their hand is enough!</p>
+                </div>
+            </section>
+
+            <!-- NOT -->
+            <section class="lesson-section">
+                <h2>🔁 NOT (Negation) &nbsp;<span class="op-badge op-not">¬p</span></h2>
+                <p>You already saw negation in the previous lesson! NOT simply flips a statement's truth value.</p>
+
+                <div class="example-box">
+                    <h3>Example</h3>
+                    <div class="sentence-example">
+                        <p><strong>¬p:</strong> "It is <u>not</u> raining."</p>
+                    </div>
+                    <div class="sentence-example">
+                        <p><strong>¬q:</strong> "I do <u>not</u> have an umbrella."</p>
+                    </div>
+                </div>
+
+                <div class="truth-table-wrap">
+                    <table class="truth-table">
+                        <thead><tr><th>p</th><th>¬p (NOT p)</th></tr></thead>
+                        <tbody>
+                            <tr><td class="result-T">T</td><td class="result-F">F</td></tr>
+                            <tr><td class="result-F">F</td><td class="result-T">T</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Combining operators -->
+            <section class="lesson-section">
+                <h2>🔢 Combining Operators</h2>
+                <p>You can nest operators together to create complex logical expressions — just like using parentheses in math.</p>
+
+                <div class="example-box">
+                    <h3>Example: ¬p ∧ q</h3>
+                    <p>"It is <strong>not</strong> raining <strong>and</strong> I have an umbrella."</p>
+                    <div class="truth-table-wrap">
+                        <table class="truth-table">
+                            <thead><tr><th>p</th><th>q</th><th>¬p</th><th>¬p ∧ q</th></tr></thead>
+                            <tbody>
+                                <tr><td class="result-T">T</td><td class="result-T">T</td><td class="result-F">F</td><td class="result-F">F</td></tr>
+                                <tr><td class="result-T">T</td><td class="result-F">F</td><td class="result-F">F</td><td class="result-F">F</td></tr>
+                                <tr><td class="result-F">F</td><td class="result-T">T</td><td class="result-T">T</td><td class="result-T">T</td></tr>
+                                <tr><td class="result-F">F</td><td class="result-F">F</td><td class="result-T">T</td><td class="result-F">F</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h3>Example: ¬(p ∨ q)  — De Morgan's Law</h3>
+                    <p>The negation of "p OR q" equals "NOT p AND NOT q" — one of De Morgan's famous laws:</p>
+                    <div class="sentence-example">
+                        <p><strong>¬(p ∨ q) ≡ ¬p ∧ ¬q</strong></p>
+                        <p class="explanation">"It is NOT the case that it's raining or I have an umbrella" = "It's not raining AND I don't have an umbrella."</p>
+                    </div>
+                    <div class="sentence-example">
+                        <p><strong>¬(p ∧ q) ≡ ¬p ∨ ¬q</strong></p>
+                        <p class="explanation">"It is NOT the case that it's BOTH raining AND I have an umbrella" = "It's not raining OR I don't have an umbrella."</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Practice -->
+            <section class="lesson-section">
+                <h2>✏️ Practice — Click to Reveal Answers</h2>
+                <p>Let <strong>p</strong> = "The light is on." (True) and <strong>q</strong> = "The door is open." (False).</p>
+
+                <div class="practice-exercises">
+                    <div class="practice-item" onclick="this.classList.toggle('revealed')">
+                        <p class="question">1. What is the truth value of p ∧ q?</p>
+                        <div class="answer">
+                            <p><strong>FALSE.</strong> AND requires both to be true. Since q is false, p ∧ q is false.</p>
+                        </div>
+                    </div>
+
+                    <div class="practice-item" onclick="this.classList.toggle('revealed')">
+                        <p class="question">2. What is the truth value of p ∨ q?</p>
+                        <div class="answer">
+                            <p><strong>TRUE.</strong> OR only needs at least one true. Since p is true, p ∨ q is true.</p>
+                        </div>
+                    </div>
+
+                    <div class="practice-item" onclick="this.classList.toggle('revealed')">
+                        <p class="question">3. What is the truth value of ¬p ∨ ¬q?</p>
+                        <div class="answer">
+                            <p><strong>TRUE.</strong> ¬p = F, ¬q = T. F ∨ T = <strong>TRUE</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div class="practice-item" onclick="this.classList.toggle('revealed')">
+                        <p class="question">4. What is the truth value of ¬(p ∧ q)?</p>
+                        <div class="answer">
+                            <p>p ∧ q = F (from question 1). So ¬(p ∧ q) = <strong>TRUE</strong>.<br>
+                            By De Morgan: ¬(p ∧ q) = ¬p ∨ ¬q = F ∨ T = TRUE ✓</p>
+                        </div>
+                    </div>
+
+                    <div class="practice-item" onclick="this.classList.toggle('revealed')">
+                        <p class="question">5. Write a real-world sentence for: ¬p ∧ q</p>
+                        <div class="answer">
+                            <p><strong>"The light is NOT on AND the door is open."</strong><br>
+                            Truth value: ¬p = F, so F ∧ F = <strong>FALSE</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Takeaways -->
+            <section class="lesson-section">
+                <h2>🎯 Key Takeaways</h2>
+                <div class="takeaway-box">
+                    <ul>
+                        <li><span class="op-badge op-and">AND (∧)</span> — true only when <strong>both</strong> statements are true.</li>
+                        <li><span class="op-badge op-or">OR (∨)</span> — true when <strong>at least one</strong> statement is true.</li>
+                        <li><span class="op-badge op-not">NOT (¬)</span> — flips the truth value of a statement.</li>
+                        <li>Operators can be combined with parentheses — evaluate inner parentheses first.</li>
+                        <li><strong>De Morgan's Laws:</strong> ¬(p ∨ q) ≡ ¬p ∧ ¬q &nbsp;and&nbsp; ¬(p ∧ q) ≡ ¬p ∨ ¬q</li>
+                    </ul>
+                </div>
+            </section>
+
+            <div class="lesson-nav">
+                <a href="statements-truth.html">← Statements &amp; Truth Values</a>
+                <a href="conditionals.html">Next: If-Then Statements →</a>
+            </div>
+
+        </main>
+
+        <footer>
+            <p>Logic operators are the grammar of reasoning! ⚙️</p>
+        </footer>
+    </div>
+</body>
+</html>
