@@ -18,17 +18,11 @@
         <!-- Legend -->
         <div class="pt-legend">
             <h3>Element Categories</h3>
-            <div class="legend-item"><div class="legend-swatch cat-alkali-metal"></div> Alkali Metal</div>
-            <div class="legend-item"><div class="legend-swatch cat-alkaline-earth"></div> Alkaline Earth</div>
-            <div class="legend-item"><div class="legend-swatch cat-transition"></div> Transition Metal</div>
-            <div class="legend-item"><div class="legend-swatch cat-post-trans"></div> Post-transition Metal</div>
+            <div class="legend-item"><div class="legend-swatch cat-metal"></div> Metal</div>
             <div class="legend-item"><div class="legend-swatch cat-metalloid"></div> Metalloid</div>
-            <div class="legend-item"><div class="legend-swatch cat-nonmetal"></div> Reactive Nonmetal</div>
-            <div class="legend-item"><div class="legend-swatch cat-halogen"></div> Halogen</div>
-            <div class="legend-item"><div class="legend-swatch cat-noble-gas"></div> Noble Gas</div>
-            <div class="legend-item"><div class="legend-swatch cat-lanthanide"></div> Lanthanide</div>
-            <div class="legend-item"><div class="legend-swatch cat-actinide"></div> Actinide</div>
-            <div class="legend-item"><div class="legend-swatch cat-unknown"></div> Unknown Properties</div>
+            <div class="legend-item"><div class="legend-swatch cat-nonmetal"></div> Nonmetal</div>
+            <div class="legend-item"><div class="legend-swatch cat-rare-earth"></div> Rare Earth Metal</div>
+            <div class="legend-item"><div class="legend-swatch cat-actinide"></div> Actinide Metal</div>
         </div>
 
         <!-- Periodic Table -->
@@ -462,18 +456,26 @@
     // =====================================================================
     //  Category Display Names & Colors
     // =====================================================================
+    // Maps original detailed categories → 5 simplified display categories
+    const CAT_MAP = {
+      'alkali-metal':   'metal',
+      'alkaline-earth': 'metal',
+      'transition':     'metal',
+      'post-trans':     'metal',
+      'unknown':        'metal',
+      'halogen':        'nonmetal',
+      'noble-gas':      'nonmetal',
+      'lanthanide':     'rare-earth',
+      // 'metalloid', 'nonmetal', 'actinide' are unchanged
+    };
+    function getSimpleCat(cat) { return CAT_MAP[cat] || cat; }
+
     const CAT_INFO = {
-      'nonmetal':      { label:'Reactive Nonmetal',     cls:'cat-nonmetal'      },
-      'noble-gas':     { label:'Noble Gas',             cls:'cat-noble-gas'     },
-      'alkali-metal':  { label:'Alkali Metal',          cls:'cat-alkali-metal'  },
-      'alkaline-earth':{ label:'Alkaline Earth Metal',  cls:'cat-alkaline-earth'},
-      'metalloid':     { label:'Metalloid',             cls:'cat-metalloid'     },
-      'halogen':       { label:'Halogen',               cls:'cat-halogen'       },
-      'post-trans':    { label:'Post-transition Metal', cls:'cat-post-trans'    },
-      'transition':    { label:'Transition Metal',      cls:'cat-transition'    },
-      'lanthanide':    { label:'Lanthanide',            cls:'cat-lanthanide'    },
-      'actinide':      { label:'Actinide',              cls:'cat-actinide'      },
-      'unknown':       { label:'Unknown Properties',    cls:'cat-unknown'       },
+      'metal':      { label:'Metal',           cls:'cat-metal'     },
+      'metalloid':  { label:'Metalloid',        cls:'cat-metalloid' },
+      'nonmetal':   { label:'Nonmetal',         cls:'cat-nonmetal'  },
+      'rare-earth': { label:'Rare Earth Metal', cls:'cat-rare-earth'},
+      'actinide':   { label:'Actinide Metal',   cls:'cat-actinide'  },
     };
 
     const STATE_ICON = { solid:'🪨', liquid:'💧', gas:'💨', unknown:'❓' };
@@ -486,7 +488,7 @@
 
       ELEMENTS.forEach(el => {
         const cell = document.createElement('div');
-        const catCls = CAT_INFO[el.cat]?.cls || 'cat-unknown';
+        const catCls = CAT_INFO[getSimpleCat(el.cat)]?.cls || 'cat-metal';
         cell.className = 'element ' + catCls + (el.isPlaceholder ? ' placeholder' : '');
         cell.style.gridColumn = el.col;
         cell.style.gridRow = el.row;
@@ -527,7 +529,7 @@
     function showTooltip(e, el) {
       document.getElementById('tip-symbol').textContent   = el.sym;
       document.getElementById('tip-name').textContent     = el.name;
-      document.getElementById('tip-category').textContent = CAT_INFO[el.cat]?.label || el.cat;
+      document.getElementById('tip-category').textContent = CAT_INFO[getSimpleCat(el.cat)]?.label || el.cat;
       document.getElementById('tip-num').textContent      = el.num;
       document.getElementById('tip-mass').textContent     = el.mass;
       document.getElementById('tip-state').textContent    = (STATE_ICON[el.state] || '❓') + ' ' + (el.state || 'unknown');
@@ -562,7 +564,7 @@
 
     function openModal(el) {
       hideTooltip();
-      const catInfo  = CAT_INFO[el.cat] || { label: el.cat, cls: 'cat-unknown' };
+      const catInfo  = CAT_INFO[getSimpleCat(el.cat)] || { label: el.cat, cls: 'cat-metal' };
       const catCls   = catInfo.cls;
 
       // Symbol box

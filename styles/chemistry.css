@@ -140,17 +140,20 @@
 }
 
 /* ---- Category Colors ---- */
-.cat-nonmetal         { background: #c8f0d8; }
-.cat-noble-gas        { background: #b3d9ff; }
-.cat-alkali-metal     { background: #ffcdd2; }
-.cat-alkaline-earth   { background: #ffe0b2; }
+.cat-metal            { background: #d6eaf8; }
 .cat-metalloid        { background: #b2dfdb; }
-.cat-halogen          { background: #f0f4ad; }
-.cat-post-trans       { background: #cfd8dc; }
-.cat-transition       { background: #f8bbd0; }
-.cat-lanthanide       { background: #e1bee7; }
+.cat-nonmetal         { background: #c8f0d8; }
+.cat-rare-earth       { background: #e1bee7; }
 .cat-actinide         { background: #d1c4e9; }
-.cat-unknown          { background: #eceff1; }
+/* Legacy aliases kept so any stray references don't break */
+.cat-alkali-metal     { background: #d6eaf8; }
+.cat-alkaline-earth   { background: #d6eaf8; }
+.cat-transition       { background: #d6eaf8; }
+.cat-post-trans       { background: #d6eaf8; }
+.cat-halogen          { background: #c8f0d8; }
+.cat-noble-gas        { background: #c8f0d8; }
+.cat-lanthanide       { background: #e1bee7; }
+.cat-unknown          { background: #d6eaf8; }
 
 /* ---- Hover Tooltip ---- */
 #pt-tooltip {
