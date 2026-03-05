@@ -1877,39 +1877,67 @@ const vocabularyData = {
               "meaning": "",
               "words": [
                 {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
+                  "word": "copious",
+                  "pronunciation": "KOH-pee-uhs",
+                  "partOfSpeech": "adjective",
+                  "definition": "abundant in supply or quantity",
+                  "example": "She took copious notes during the lecture."
                 },
                 {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
+                  "word": "macrocosm",
+                  "pronunciation": "MAK-roh-koh-zum",
+                  "partOfSpeech": "noun",
+                  "definition": "the whole of a complex structure, especially the world or universe, contrasted with a small or representative part of it",
+                  "example": "The city is a macrocosm of the country's diverse culture."
                 },
                 {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
+                  "word": "magnanimous",
+                  "pronunciation": "mag-NAN-uh-muhs",
+                  "partOfSpeech": "adjective",
+                  "definition": "generous or forgiving, especially towards a rival or less powerful person",
+                  "example": "She was magnanimous in victory, praising her opponent's efforts."
                 },
                 {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
+                  "word": "magnate",
+                  "pronunciation": "MAG-nayt",
+                  "partOfSpeech": "noun",
+                  "definition": "a wealthy and influential person, especially in business",
+                  "example": "The media magnate owned several major newspapers."
                 },
                 {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
+                  "word": "magnitude",
+                  "pronunciation": "MAG-ni-tood",
+                  "partOfSpeech": "noun",
+                  "definition": "the great size or extent of something",
+                  "example": "The earthquake was of a magnitude that caused widespread damage."
+                },
+                {
+                  "word": "megalomania",
+                  "pronunciation": "MEG-uh-loh-MAY-nee-uh",
+                  "partOfSpeech": "noun",
+                  "definition": "a delusional mental disorder characterized by feelings of power, importance, or omnipotence",
+                  "example": "The dictator's megalomania led to disastrous decisions for the country."
+                },
+                {
+                  "word": "polygamy",
+                  "pronunciation": "puh-LIG-uh-mee",
+                  "partOfSpeech": "noun",
+                  "definition": "the practice of having more than one spouse at the same time",
+                  "example": "In some cultures, polygamy is legally and socially accepted."
+                },
+                {
+                  "word": "polygon",
+                  "pronunciation": "POL-ih-gon",
+                  "partOfSpeech": "noun",
+                  "definition": "a plane figure with at least three straight sides and angles, and typically five or more",
+                  "example": "The classroom activity involved drawing different types of polygons."
+                },
+                {
+                  "word": "antebellum",
+                  "pronunciation": "an-tee-BEL-um",
+                  "partOfSpeech": "adjective",
+                  "definition": "occurring or existing before a particular war, especially the American Civil War",
+                  "example": "The antebellum architecture in the southern United States is notable for its grandeur."
                 }
               ]
             }
