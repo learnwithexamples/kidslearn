@@ -1829,18 +1829,18 @@ const vocabularyData = {
                   "example": "The small village was a microcosm of the entire country."
                 },
                 {
-                  "word": "miniscule",
+                  "word": "minuscule",
                   "pronunciation": "MIN-ih-skyool",
                   "partOfSpeech": "adjective",
                   "definition": "extremely small",
-                  "example": "The amount of sugar in the recipe was miniscule."
+                  "example": "The amount of sugar in the recipe was minuscule."
                 },
                 {
                   "word": "minutia",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
+                  "pronunciation": "mi-NOO-shee-uh",
+                  "partOfSpeech": "noun",
+                  "definition": "a small or trivial detail",
+                  "example": "The detective paid attention to every minutia of the crime scene."
                 },
                 {
                   "word": "replete",
@@ -1862,6 +1862,62 @@ const vocabularyData = {
                   "partOfSpeech": "adjective",
                   "definition": "very weak or slight",
                   "example": "The evidence for the theory was tenuous at best."
+                },
+                {
+                  "word": "comply",
+                  "pronunciation": "kuhm-PLAI",
+                  "partOfSpeech": "verb",
+                  "definition": "to act in accordance with a wish or command",
+                  "example": "The employees were asked to comply with the new company policies."
+                },
+                {
+                  "word": "satisfaction",
+                  "pronunciation": "SAT-uhs-fak-shuhn",
+                  "partOfSpeech": "noun",
+                  "definition": "the fulfillment of one's wishes, expectations, or needs",
+                  "example": "She felt a sense of satisfaction after completing the project."
+                },
+                {
+                  "word": "replenish",
+                  "pronunciation": "ri-PLE-nish",
+                  "partOfSpeech": "verb",
+                  "definition": "to fill up again or restore to a former level",
+                  "example": "The store needs to replenish its stock of fresh produce."
+                },
+                {
+                  "word": "accomplish",
+                  "pronunciation": "uh-KOM-plish",
+                  "partOfSpeech": "verb",
+                  "definition": "to achieve or complete successfully",
+                  "example": "She was able to accomplish all her goals for the year."
+                },
+                {
+                  "word": "diminish",
+                  "pronunciation": "di-MIN-ish",
+                  "partOfSpeech": "verb",
+                  "definition": "to make or become less",
+                  "example": "The company's profits began to diminish after the economic downturn."
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
                 }
               ]
             }
@@ -1877,74 +1933,182 @@ const vocabularyData = {
               "meaning": "",
               "words": [
                 {
-                  "word": "copious",
-                  "pronunciation": "KOH-pee-uhs",
-                  "partOfSpeech": "adjective",
-                  "definition": "abundant in supply or quantity",
-                  "example": "She took copious notes during the lecture."
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
                 },
                 {
-                  "word": "macrocosm",
-                  "pronunciation": "MAK-roh-koh-zum",
-                  "partOfSpeech": "noun",
-                  "definition": "the whole of a complex structure, especially the world or universe, contrasted with a small or representative part of it",
-                  "example": "The city is a macrocosm of the country's diverse culture."
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
                 },
                 {
-                  "word": "magnanimous",
-                  "pronunciation": "mag-NAN-uh-muhs",
-                  "partOfSpeech": "adjective",
-                  "definition": "generous or forgiving, especially towards a rival or less powerful person",
-                  "example": "She was magnanimous in victory, praising her opponent's efforts."
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
                 },
                 {
-                  "word": "magnate",
-                  "pronunciation": "MAG-nayt",
-                  "partOfSpeech": "noun",
-                  "definition": "a wealthy and influential person, especially in business",
-                  "example": "The media magnate owned several major newspapers."
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
                 },
                 {
-                  "word": "magnitude",
-                  "pronunciation": "MAG-ni-tood",
-                  "partOfSpeech": "noun",
-                  "definition": "the great size or extent of something",
-                  "example": "The earthquake was of a magnitude that caused widespread damage."
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
                 },
                 {
-                  "word": "megalomania",
-                  "pronunciation": "MEG-uh-loh-MAY-nee-uh",
-                  "partOfSpeech": "noun",
-                  "definition": "a delusional mental disorder characterized by feelings of power, importance, or omnipotence",
-                  "example": "The dictator's megalomania led to disastrous decisions for the country."
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
                 },
                 {
-                  "word": "polygamy",
-                  "pronunciation": "puh-LIG-uh-mee",
-                  "partOfSpeech": "noun",
-                  "definition": "the practice of having more than one spouse at the same time",
-                  "example": "In some cultures, polygamy is legally and socially accepted."
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },{
+                  "word": "",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
                 },
-                {
-                  "word": "polygon",
-                  "pronunciation": "POL-ih-gon",
-                  "partOfSpeech": "noun",
-                  "definition": "a plane figure with at least three straight sides and angles, and typically five or more",
-                  "example": "The classroom activity involved drawing different types of polygons."
-                },
-                {
-                  "word": "antebellum",
-                  "pronunciation": "an-tee-BEL-um",
-                  "partOfSpeech": "adjective",
-                  "definition": "occurring or existing before a particular war, especially the American Civil War",
-                  "example": "The antebellum architecture in the southern United States is notable for its grandeur."
-                }
               ]
             }
           ]
-        }
-      ]
-    },
+        },
+        {
+          "number": 8,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "premier",
+                  "pronunciation": " PREE-mee-er",
+                  "partOfSpeech": "adjective",
+                  "definition": " first in importance, order, or position; leading",
+                  "example": " The premier of the new movie was attended by many celebrities."
+                },
+                {
+                  "word": "primate",
+                  "pronunciation": " PRAHY-meyt",
+                  "partOfSpeech": "noun",
+                  "definition": " a member of the order of mammals that includes humans, apes, and monkeys",
+                  "example": " The chimpanzee is a well-known primate."
+                },
+                {
+                  "word": "prime",
+                  "pronunciation": " PRAHYM",
+                  "partOfSpeech": "adjective",
+                  "definition": " of the best possible quality; excellent",
+                  "example": " She is in the prime of her career."
+                },
+                {
+                  "word": "primieval",
+                  "pronunciation": "PRI-muh-vuhl",
+                  "partOfSpeech": "adjective",
+                  "definition": " of or relating to the earliest ages; ancient",
+                  "example": " The primieval forest was untouched by human activity."
+                },
+                {
+                  "word": "primorial",
+                  "pronunciation": "PRI-mor-ee-uhl",
+                  "partOfSpeech": "adjective",
+                  "definition": " of or relating to the earliest stages or beginnings",
+                  "example": " The primorial development of the city laid the foundation for its future growth."
+                },
+                {
+                  "word": "Prime Meridian",
+                  "pronunciation": " PRAHYM muh-RID-ee-uhn",
+                  "partOfSpeech": "noun",
+                  "definition": " the meridian (line of longitude) at which longitude is defined to be 0°",
+                  "example": " The Prime Meridian passes through Greenwich, England."
+                },
+                {
+                  "word": "prima donna",
+                  "pronunciation": "PREE-muh DON-uh",
+                  "partOfSpeech": "noun",
+                  "definition": "a very temperamental person with an inflated view of their own talent or importance",
+                  "example": "The lead singer was a true prima donna, demanding special treatment backstage."
+                },
+                {
+                  "word": "primitive",
+                  "pronunciation": "PRIM-i-tiv",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to, denoting, or preserving the character of an early stage in the evolutionary or historical development of something",
+                  "example": "The primitive tools were made of stone and wood."
+                },
+                {
+                  "word": "primary",
+                  "pronunciation": "PRY-muh-ree",
+                  "partOfSpeech": "adjective",
+                  "definition": "of chief importance; principal",
+                  "example": "The primary goal of the project is to improve community health."
+                },
+                {
+                  "word": "posterior",
+                  "pronunciation": "poh-STEER-ee-ur",
+                  "partOfSpeech": "adjective",
+                  "definition": "situated behind or at the back",
+                  "example": "The posterior part of the brain is responsible for processing visual information."
+                },
+                {
+                  "word": "posteary",
+                  "pronunciation": " poh-STEER-ee",
+                  "partOfSpeech": "noun",
+                  "definition": " a person who lives after the death of another",
+                  "example": "  The poet's works were published posthumously, gaining recognition after his death."
+                },
+                {
+                  "word": "posthumous",
+                  "pronunciation": "POS-chuh-muhs",
+                  "partOfSpeech": "adjective",
+                  "definition": "occurring, awarded, or appearing after the death of the originator",
+                  "example": "The author received a posthumous award for his contributions to literature."
+                },
+                {
+                  "word": "postone",
+                  "pronunciation": " pohs-TOHN",
+                  "partOfSpeech": "verb",
+                  "definition": "to delay or defer something",
+                  "example": "The meeting was postponed due to unforeseen circumstances."
+                },
+                {
+                  "word": "postmortem",
+                  "pronunciation": " pohst-MAWR-tuhm",
+                  "partOfSpeech": "noun",
+                  "definition": "an examination of a body after death to determine the cause of death",
+                  "example": "The doctor conducted a postmortem to understand the cause of the sudden death."
+                },
+                {
+                  "word": "postbellum",
+                  "pronunciation": " pohst-BEL-uhm",
+                  "partOfSpeech": "adjective",
+                  "definition": "occurring or existing after a war, especially the American Civil War",
+                  "example": "The postbellum period saw significant social and economic changes."
+                },
+              ]
+            }
+          ]
+        },
     "book-b": {
       "title": "Book B",
       "level": "grade 5",
