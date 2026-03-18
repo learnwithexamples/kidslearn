@@ -2109,6 +2109,7 @@ const vocabularyData = {
             }
           ]
         },
+      ],
     "book-b": {
       "title": "Book B",
       "level": "grade 5",
