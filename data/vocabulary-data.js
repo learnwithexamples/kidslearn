@@ -2232,5 +2232,6 @@ const vocabularyData = {
         }
       ]
     }
+    }
   }
-};
+}
