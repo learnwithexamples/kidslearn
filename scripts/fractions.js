@@ -185,6 +185,7 @@ function updateConfig() {
 function gcd(a, b) {
     a = Math.abs(a);
     b = Math.abs(b);
+    if (isNaN(a) || isNaN(b)) return 1;
     while (b !== 0) {
         let temp = b;
         b = a % b;
