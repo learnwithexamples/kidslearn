@@ -2914,11 +2914,1340 @@ const vocabularyData = {
                   "partOfSpeech": "adjective",
                   "definition": "having or showing the ability to use language clearly and effectively",
                   "example": "The speaker gave an eloquent speech that moved the audience."
+                },
+                {
+                  "word": "contend",
+                  "pronunciation": "kun-TEND",
+                  "partOfSpeech": "verb",
+                  "definition": "to struggle or compete; to argue or maintain",
+                  "example": "The two teams contend for the championship every year."
+                },
+                {
+                  "word": "defer",
+                  "pronunciation": "dih-FUR",
+                  "partOfSpeech": "verb",
+                  "definition": "to put off to a later time; to yield to another's judgment",
+                  "example": "She decided to defer her college enrollment for a year."
+                },
+                {
+                  "word": "dilatory",
+                  "pronunciation": "DIL-uh-tor-ee",
+                  "partOfSpeech": "adjective",
+                  "definition": "slow to act; tending to delay",
+                  "example": "His dilatory habits caused him to miss several important deadlines."
+                },
+                {
+                  "word": "elation",
+                  "pronunciation": "ih-LAY-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "a feeling of great happiness and excitement",
+                  "example": "The crowd felt pure elation when their team scored the winning goal."
+                },
+                {
+                  "word": "infer",
+                  "pronunciation": "in-FUR",
+                  "partOfSpeech": "verb",
+                  "definition": "to deduce a conclusion from evidence or reasoning",
+                  "example": "From her tone you could infer that she was displeased with the result."
+                },
+                {
+                  "word": "intent",
+                  "pronunciation": "in-TENT",
+                  "partOfSpeech": "noun/adjective",
+                  "definition": "a purpose or goal; determined to do something",
+                  "example": "His intent was to finish the project before the weekend."
+                },
+                {
+                  "word": "percussion",
+                  "pronunciation": "per-KUSH-un",
+                  "partOfSpeech": "noun",
+                  "definition": "musical instruments played by striking; the act of striking forcefully",
+                  "example": "The percussion section of the orchestra kept the rhythm for the whole piece."
+                },
+                {
+                  "word": "perennial",
+                  "pronunciation": "puh-REN-ee-ul",
+                  "partOfSpeech": "adjective/noun",
+                  "definition": "lasting for a long time; a plant that lives more than two years",
+                  "example": "The feud between the two families was a perennial source of tension."
+                },
+                {
+                  "word": "permeate",
+                  "pronunciation": "PUR-mee-ayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to spread throughout; to penetrate every part of",
+                  "example": "The smell of fresh bread began to permeate the entire house."
+                },
+                {
+                  "word": "persevere",
+                  "pronunciation": "pur-suh-VEER",
+                  "partOfSpeech": "verb",
+                  "definition": "to continue in a course of action despite difficulty",
+                  "example": "She had to persevere through many setbacks before finally succeeding."
                 }
               ]
             }
           ]
-        }
+        },
+        {
+          "number": 2,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "adversity",
+                  "pronunciation": "ad-VUR-sih-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "a difficult or unpleasant situation; misfortune",
+                  "example": "Many great leaders developed character through adversity."
+                },
+                {
+                  "word": "avert",
+                  "pronunciation": "uh-VURT",
+                  "partOfSpeech": "verb",
+                  "definition": "to prevent or ward off; to turn away",
+                  "example": "Quick thinking helped avert a serious accident on the highway."
+                },
+                {
+                  "word": "contort",
+                  "pronunciation": "kun-TORT",
+                  "partOfSpeech": "verb",
+                  "definition": "to twist or bend out of normal shape",
+                  "example": "The acrobat could contort her body into impossible positions."
+                },
+                {
+                  "word": "distort",
+                  "pronunciation": "dih-STORT",
+                  "partOfSpeech": "verb",
+                  "definition": "to give a misleading account; to pull out of shape",
+                  "example": "The fun-house mirror would distort your reflection in amusing ways."
+                },
+                {
+                  "word": "introvert",
+                  "pronunciation": "IN-troh-vurt",
+                  "partOfSpeech": "noun",
+                  "definition": "a person who tends to be inward-thinking and prefers solitude",
+                  "example": "As an introvert he preferred a quiet evening reading to a loud party."
+                },
+                {
+                  "word": "perverse",
+                  "pronunciation": "pur-VURS",
+                  "partOfSpeech": "adjective",
+                  "definition": "showing a stubborn desire to behave in an unacceptable way",
+                  "example": "It was perverse of him to enjoy long traffic jams."
+                },
+                {
+                  "word": "prose",
+                  "pronunciation": "prohz",
+                  "partOfSpeech": "noun",
+                  "definition": "ordinary written or spoken language as opposed to poetry",
+                  "example": "His prose style was crisp, clear, and easy to follow."
+                },
+                {
+                  "word": "retort",
+                  "pronunciation": "rih-TORT",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "a sharp or witty reply; to make such a reply",
+                  "example": "She had a quick retort for every criticism thrown her way."
+                },
+                {
+                  "word": "subservient",
+                  "pronunciation": "sub-SUR-vee-ent",
+                  "partOfSpeech": "adjective",
+                  "definition": "obsequiously submissive; serving a secondary purpose",
+                  "example": "The assistant's subservient attitude made others uncomfortable."
+                },
+                {
+                  "word": "subvert",
+                  "pronunciation": "sub-VURT",
+                  "partOfSpeech": "verb",
+                  "definition": "to undermine the power and authority of an established system",
+                  "example": "The rebels tried to subvert the government's control over the region."
+                },
+                {
+                  "word": "tortuous",
+                  "pronunciation": "TOR-choo-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "full of twists and turns; excessively complex",
+                  "example": "The tortuous mountain road made many passengers carsick."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "compound",
+                  "pronunciation": "KOM-pownd",
+                  "partOfSpeech": "noun/verb/adjective",
+                  "definition": "a combination of two or more things; to add to or increase",
+                  "example": "The doctor warned that stress could compound his medical condition."
+                },
+                {
+                  "word": "excerpt",
+                  "pronunciation": "EK-surpt",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "a short passage taken from a longer work; to extract a passage",
+                  "example": "She read an excerpt from her novel at the literary festival."
+                },
+                {
+                  "word": "exhilarate",
+                  "pronunciation": "ig-ZIL-uh-rayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to make someone feel very happy and full of energy",
+                  "example": "The roller coaster ride seemed to exhilarate even the most nervous riders."
+                },
+                {
+                  "word": "exonerate",
+                  "pronunciation": "ig-ZON-uh-rayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to officially absolve from blame or criminal charge",
+                  "example": "New evidence helped exonerate the man who had been wrongly convicted."
+                },
+                {
+                  "word": "exorbitant",
+                  "pronunciation": "ig-ZOR-bih-tent",
+                  "partOfSpeech": "adjective",
+                  "definition": "unreasonably high; exceeding what is fair",
+                  "example": "The restaurant's exorbitant prices shocked the tourists."
+                },
+                {
+                  "word": "exposition",
+                  "pronunciation": "eks-puh-ZIH-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "a comprehensive description and explanation; the part of a story that introduces setting and characters",
+                  "example": "The teacher praised the student's clear and detailed exposition of the problem."
+                },
+                {
+                  "word": "expound",
+                  "pronunciation": "ik-SPOWND",
+                  "partOfSpeech": "verb",
+                  "definition": "to present and explain a theory or idea in detail",
+                  "example": "The professor spent an hour expounding on the causes of the war."
+                },
+                {
+                  "word": "extraneous",
+                  "pronunciation": "ik-STRAY-nee-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "irrelevant or unrelated to the subject",
+                  "example": "The editor removed all extraneous details from the article to sharpen the focus."
+                },
+                {
+                  "word": "impose",
+                  "pronunciation": "im-POHZ",
+                  "partOfSpeech": "verb",
+                  "definition": "to put something in place by force; to take unfair advantage",
+                  "example": "It would be rude to impose on your hosts by staying too long."
+                },
+                {
+                  "word": "imposter",
+                  "pronunciation": "im-POS-ter",
+                  "partOfSpeech": "noun",
+                  "definition": "a person who pretends to be someone else in order to deceive",
+                  "example": "The imposter used a false identity to gain entry to the building."
+                },
+                {
+                  "word": "proponent",
+                  "pronunciation": "proh-POH-nent",
+                  "partOfSpeech": "noun",
+                  "definition": "a person who advocates for something",
+                  "example": "She was a vocal proponent of renewable energy sources."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "extraterrestrial",
+                  "pronunciation": "eks-truh-tuh-RES-tree-ul",
+                  "partOfSpeech": "adjective/noun",
+                  "definition": "originating from outside Earth; a being from outer space",
+                  "example": "Scientists search for signs of extraterrestrial life in distant galaxies."
+                },
+                {
+                  "word": "extrovert",
+                  "pronunciation": "EKS-troh-vurt",
+                  "partOfSpeech": "noun",
+                  "definition": "an outgoing and socially confident person",
+                  "example": "As an extrovert he thrived in large social gatherings."
+                },
+                {
+                  "word": "mediate",
+                  "pronunciation": "MEE-dee-ayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to intervene to help resolve a dispute",
+                  "example": "A neutral third party was brought in to mediate the labor dispute."
+                },
+                {
+                  "word": "mediocrity",
+                  "pronunciation": "mee-dee-OK-rih-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "the quality of being only moderately good; ordinariness",
+                  "example": "He refused to settle for mediocrity and always pushed for excellence."
+                },
+                {
+                  "word": "medium",
+                  "pronunciation": "MEE-dee-um",
+                  "partOfSpeech": "noun/adjective",
+                  "definition": "the middle point or degree; a means of communication",
+                  "example": "Television became the dominant medium for news in the 20th century."
+                },
+                {
+                  "word": "non sequitur",
+                  "pronunciation": "non-SEK-wih-ter",
+                  "partOfSpeech": "noun",
+                  "definition": "a statement that does not follow logically from what preceded it",
+                  "example": "His sudden comment about the weather was a complete non sequitur in the middle of the debate."
+                },
+                {
+                  "word": "obsequious",
+                  "pronunciation": "ob-SEE-kwee-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "excessively eager to please or obey; fawning",
+                  "example": "The obsequious waiter hovered constantly, refilling water glasses after every sip."
+                },
+                {
+                  "word": "sequester",
+                  "pronunciation": "sih-KWES-ter",
+                  "partOfSpeech": "verb",
+                  "definition": "to isolate or hide away; to take legal possession of assets",
+                  "example": "The jury was sequestered to prevent outside influence during the high-profile trial."
+                },
+                {
+                  "word": "subsequent",
+                  "pronunciation": "SUB-sih-kwent",
+                  "partOfSpeech": "adjective",
+                  "definition": "coming after something in time or order",
+                  "example": "The initial storm caused flooding and subsequent power outages across the region."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "abstain",
+                  "pronunciation": "ab-STAYN",
+                  "partOfSpeech": "verb",
+                  "definition": "to refrain voluntarily from doing something; to choose not to vote",
+                  "example": "Members who had a conflict of interest were asked to abstain from voting."
+                },
+                {
+                  "word": "coherent",
+                  "pronunciation": "koh-HEER-ent",
+                  "partOfSpeech": "adjective",
+                  "definition": "logical and consistent; forming a unified whole",
+                  "example": "Her argument was coherent and well-supported by evidence."
+                },
+                {
+                  "word": "colloquial",
+                  "pronunciation": "kuh-LOH-kwee-ul",
+                  "partOfSpeech": "adjective",
+                  "definition": "used in ordinary conversation rather than formal speech",
+                  "example": "Using colloquial expressions in a formal essay made the writing seem unprofessional."
+                },
+                {
+                  "word": "commiserate",
+                  "pronunciation": "kuh-MIZ-uh-rayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to express sympathy for someone in sorrow or disappointment",
+                  "example": "Friends gathered to commiserate with him after his team's playoff loss."
+                },
+                {
+                  "word": "commodious",
+                  "pronunciation": "kuh-MOH-dee-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "roomy and comfortable",
+                  "example": "The house had a commodious living room perfect for hosting gatherings."
+                },
+                {
+                  "word": "condone",
+                  "pronunciation": "kun-DOHN",
+                  "partOfSpeech": "verb",
+                  "definition": "to accept or allow behavior considered wrong",
+                  "example": "The school did not condone bullying of any kind."
+                },
+                {
+                  "word": "contrite",
+                  "pronunciation": "kun-TRYT",
+                  "partOfSpeech": "adjective",
+                  "definition": "feeling genuine remorse for wrongdoing",
+                  "example": "The contrite student apologized sincerely for cheating on the exam."
+                },
+                {
+                  "word": "impertinent",
+                  "pronunciation": "im-PUR-tih-nent",
+                  "partOfSpeech": "adjective",
+                  "definition": "not respectful; not relevant to the matter at hand",
+                  "example": "His impertinent remarks during the meeting offended several colleagues."
+                },
+                {
+                  "word": "pertinacious",
+                  "pronunciation": "pur-tih-NAY-shus",
+                  "partOfSpeech": "adjective",
+                  "definition": "stubbornly persistent in a course of action",
+                  "example": "Her pertinacious effort to master the piano finally paid off after years of practice."
+                },
+                {
+                  "word": "tenacity",
+                  "pronunciation": "tuh-NAS-ih-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "the quality of being persistent and determined",
+                  "example": "The athlete's tenacity carried her through the grueling final miles of the marathon."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "adjunct",
+                  "pronunciation": "AJ-ungkt",
+                  "partOfSpeech": "noun/adjective",
+                  "definition": "something added to another thing but not essential; supplementary",
+                  "example": "The writing workshop was an adjunct to the main literature course."
+                },
+                {
+                  "word": "aptitude",
+                  "pronunciation": "AP-tih-tood",
+                  "partOfSpeech": "noun",
+                  "definition": "a natural ability to learn or excel at something",
+                  "example": "She showed a remarkable aptitude for mathematics at an early age."
+                },
+                {
+                  "word": "astringent",
+                  "pronunciation": "uh-STRIN-jent",
+                  "partOfSpeech": "adjective/noun",
+                  "definition": "harsh or severe; a substance that tightens body tissues",
+                  "example": "His astringent criticism left little room for encouragement."
+                },
+                {
+                  "word": "conjugate",
+                  "pronunciation": "KON-juh-gayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to give the different forms of a verb; to combine",
+                  "example": "Students must learn to conjugate irregular verbs in Spanish."
+                },
+                {
+                  "word": "injunction",
+                  "pronunciation": "in-JUNK-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "an authoritative warning or order; a court order prohibiting an action",
+                  "example": "The court issued an injunction preventing the company from dumping waste in the river."
+                },
+                {
+                  "word": "inept",
+                  "pronunciation": "in-EPT",
+                  "partOfSpeech": "adjective",
+                  "definition": "having no skill; clumsy; inappropriate",
+                  "example": "The inept chef managed to burn even the simplest dishes."
+                },
+                {
+                  "word": "juncture",
+                  "pronunciation": "JUNGK-cher",
+                  "partOfSpeech": "noun",
+                  "definition": "a point in time especially a critical one; a place where things join",
+                  "example": "At this juncture it is essential that we make the right decision."
+                },
+                {
+                  "word": "strait",
+                  "pronunciation": "strayt",
+                  "partOfSpeech": "noun/adjective",
+                  "definition": "a narrow body of water connecting two seas; strict or difficult",
+                  "example": "The ship navigated carefully through the narrow strait."
+                },
+                {
+                  "word": "stringent",
+                  "pronunciation": "STRIN-jent",
+                  "partOfSpeech": "adjective",
+                  "definition": "extremely strict and precise",
+                  "example": "The organization maintained stringent safety standards in all its facilities."
+                },
+                {
+                  "word": "subjugate",
+                  "pronunciation": "SUB-juh-gayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to bring under domination or control",
+                  "example": "Historically powerful empires tried to subjugate neighboring peoples."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 7,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "abhor",
+                  "pronunciation": "ab-HOR",
+                  "partOfSpeech": "verb",
+                  "definition": "to regard with extreme disgust and hatred",
+                  "example": "She abhorred any act of cruelty toward animals."
+                },
+                {
+                  "word": "abound",
+                  "pronunciation": "uh-BOWND",
+                  "partOfSpeech": "verb",
+                  "definition": "to exist in large numbers; to be richly supplied",
+                  "example": "Wildlife abounds in the national park along the river."
+                },
+                {
+                  "word": "abrasive",
+                  "pronunciation": "uh-BRAY-siv",
+                  "partOfSpeech": "adjective/noun",
+                  "definition": "tending to scratch or wear down; blunt and unfeeling in manner",
+                  "example": "His abrasive personality made it hard to maintain close friendships."
+                },
+                {
+                  "word": "abscond",
+                  "pronunciation": "ab-SKOND",
+                  "partOfSpeech": "verb",
+                  "definition": "to leave suddenly and secretly in order to escape",
+                  "example": "The suspect absconded before police arrived at his apartment."
+                },
+                {
+                  "word": "abstemious",
+                  "pronunciation": "ab-STEE-mee-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "not self-indulgent; moderate in eating and drinking",
+                  "example": "The abstemious monk ate only a simple meal of bread and water each day."
+                },
+                {
+                  "word": "ascertain",
+                  "pronunciation": "as-er-TAYN",
+                  "partOfSpeech": "verb",
+                  "definition": "to find out for certain; to discover with confidence",
+                  "example": "Investigators worked to ascertain the exact cause of the fire."
+                },
+                {
+                  "word": "discern",
+                  "pronunciation": "dih-SURN",
+                  "partOfSpeech": "verb",
+                  "definition": "to recognize or perceive clearly; to distinguish",
+                  "example": "She could discern a faint outline through the fog."
+                },
+                {
+                  "word": "discreet",
+                  "pronunciation": "dih-SKREET",
+                  "partOfSpeech": "adjective",
+                  "definition": "careful and prudent in speech or behavior",
+                  "example": "Please be discreet about the surprise party — do not tell anyone."
+                },
+                {
+                  "word": "infraction",
+                  "pronunciation": "in-FRAK-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "a violation of a law or agreement",
+                  "example": "Parking in a no-parking zone is a minor traffic infraction."
+                },
+                {
+                  "word": "infringe",
+                  "pronunciation": "in-FRINJ",
+                  "partOfSpeech": "verb",
+                  "definition": "to actively break the terms of a law or right",
+                  "example": "Using copyrighted music without permission can infringe on an artist's rights."
+                },
+                {
+                  "word": "suffrage",
+                  "pronunciation": "SUF-rij",
+                  "partOfSpeech": "noun",
+                  "definition": "the right to vote in political elections",
+                  "example": "The women's suffrage movement fought for decades to win women the vote."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 8,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "absolve",
+                  "pronunciation": "ab-ZOLV",
+                  "partOfSpeech": "verb",
+                  "definition": "to declare someone free from blame or obligation",
+                  "example": "The judge absolved the defendant of all charges due to insufficient evidence."
+                },
+                {
+                  "word": "analyze",
+                  "pronunciation": "AN-uh-lyz",
+                  "partOfSpeech": "verb",
+                  "definition": "to examine in detail in order to explain and interpret",
+                  "example": "The scientist began to analyze the water samples from the river."
+                },
+                {
+                  "word": "catalyst",
+                  "pronunciation": "KAT-uh-list",
+                  "partOfSpeech": "noun",
+                  "definition": "a substance that speeds up a chemical reaction; a person or event that causes change",
+                  "example": "The speech acted as a catalyst for widespread social reform."
+                },
+                {
+                  "word": "concise",
+                  "pronunciation": "kun-SYS",
+                  "partOfSpeech": "adjective",
+                  "definition": "giving much information clearly and briefly",
+                  "example": "His concise explanation made a difficult concept easy to understand."
+                },
+                {
+                  "word": "herbicide",
+                  "pronunciation": "HUR-bih-syd",
+                  "partOfSpeech": "noun",
+                  "definition": "a chemical substance used to destroy unwanted plants or weeds",
+                  "example": "Farmers sometimes use herbicide to control weeds in their fields."
+                },
+                {
+                  "word": "precise",
+                  "pronunciation": "prih-SYS",
+                  "partOfSpeech": "adjective",
+                  "definition": "exact, accurate, and careful about details",
+                  "example": "The surgeon's precise movements were essential to the success of the operation."
+                },
+                {
+                  "word": "resolute",
+                  "pronunciation": "REZ-uh-loot",
+                  "partOfSpeech": "adjective",
+                  "definition": "firmly determined; unwavering in purpose",
+                  "example": "The resolute explorer pressed on despite harsh weather conditions."
+                },
+                {
+                  "word": "resolve",
+                  "pronunciation": "rih-ZOLV",
+                  "partOfSpeech": "verb/noun",
+                  "definition": "to settle a problem or dispute; firm determination",
+                  "example": "With great resolve she committed to finishing the project on time."
+                },
+                {
+                  "word": "superfluous",
+                  "pronunciation": "soo-PUR-floo-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "unnecessary; more than what is needed",
+                  "example": "The editor removed all superfluous adjectives to sharpen the prose."
+                },
+                {
+                  "word": "superlative",
+                  "pronunciation": "soo-PUR-luh-tiv",
+                  "partOfSpeech": "adjective/noun",
+                  "definition": "of the highest quality; the highest or extreme degree of something",
+                  "example": "Her performance was described by critics as simply superlative."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 9,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "improvise",
+                  "pronunciation": "IM-pruh-vyz",
+                  "partOfSpeech": "verb",
+                  "definition": "to create or perform something without preparation",
+                  "example": "The jazz musician was known to improvise brilliantly during live concerts."
+                },
+                {
+                  "word": "ostensible",
+                  "pronunciation": "ah-STEN-sih-bul",
+                  "partOfSpeech": "adjective",
+                  "definition": "stated or appearing to be true but not necessarily so",
+                  "example": "Her ostensible reason for leaving early was a headache."
+                },
+                {
+                  "word": "ostentatious",
+                  "pronunciation": "os-ten-TAY-shus",
+                  "partOfSpeech": "adjective",
+                  "definition": "characterized by a vulgar display of wealth or knowledge to impress others",
+                  "example": "The ostentatious mansion featured gold-plated fixtures in every room."
+                },
+                {
+                  "word": "refute",
+                  "pronunciation": "rih-FYOOT",
+                  "partOfSpeech": "verb",
+                  "definition": "to prove a statement or theory to be wrong",
+                  "example": "The lawyer worked hard to refute the prosecution's evidence."
+                },
+                {
+                  "word": "reiterate",
+                  "pronunciation": "ree-IT-uh-rayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to say or do something again for emphasis",
+                  "example": "She had to reiterate her instructions because the student had not been listening."
+                },
+                {
+                  "word": "repartee",
+                  "pronunciation": "rep-er-TEE",
+                  "partOfSpeech": "noun",
+                  "definition": "quick witty remarks exchanged in conversation",
+                  "example": "His sparkling repartee made him the most entertaining guest at every party."
+                },
+                {
+                  "word": "repertoire",
+                  "pronunciation": "REP-er-twahr",
+                  "partOfSpeech": "noun",
+                  "definition": "the body of works known or regularly performed by a performer",
+                  "example": "The pianist's repertoire included compositions from three centuries of music."
+                },
+                {
+                  "word": "repose",
+                  "pronunciation": "rih-POHZ",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "a state of rest or calm; to lie at rest",
+                  "example": "The cat found its repose in the sunniest corner of the room."
+                },
+                {
+                  "word": "reticent",
+                  "pronunciation": "RET-ih-sent",
+                  "partOfSpeech": "adjective",
+                  "definition": "not revealing one's thoughts easily; reserved in speech",
+                  "example": "The reticent witness refused to answer several questions from the prosecutor."
+                },
+                {
+                  "word": "visionary",
+                  "pronunciation": "VIZH-uh-ner-ee",
+                  "partOfSpeech": "noun/adjective",
+                  "definition": "a person with original ideas about the future; showing foresight",
+                  "example": "The visionary architect designed buildings that looked decades ahead of their time."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 10,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "auspicious",
+                  "pronunciation": "aw-SPISH-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "presenting favorable circumstances; giving a good omen",
+                  "example": "The sunny weather felt like an auspicious start to their road trip."
+                },
+                {
+                  "word": "introspection",
+                  "pronunciation": "in-troh-SPEK-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "the examination of one's own mental state and feelings",
+                  "example": "After the argument he spent hours in quiet introspection."
+                },
+                {
+                  "word": "retrospect",
+                  "pronunciation": "RET-roh-spekt",
+                  "partOfSpeech": "noun",
+                  "definition": "a survey or review of past events or situations",
+                  "example": "In retrospect she realized how foolish the decision had been."
+                },
+                {
+                  "word": "specimen",
+                  "pronunciation": "SPES-ih-men",
+                  "partOfSpeech": "noun",
+                  "definition": "an individual animal or plant used as an example; a sample for study",
+                  "example": "The biologist collected a specimen of each insect found in the meadow."
+                },
+                {
+                  "word": "specter",
+                  "pronunciation": "SPEK-ter",
+                  "partOfSpeech": "noun",
+                  "definition": "a ghost; something that haunts or disturbs the mind",
+                  "example": "The specter of failure haunted him throughout the competition."
+                },
+                {
+                  "word": "spectrum",
+                  "pronunciation": "SPEK-trum",
+                  "partOfSpeech": "noun",
+                  "definition": "a band of colors or a range of values arranged in order",
+                  "example": "The debate touched on issues across the entire political spectrum."
+                },
+                {
+                  "word": "speculate",
+                  "pronunciation": "SPEK-yuh-layt",
+                  "partOfSpeech": "verb",
+                  "definition": "to form a theory without firm evidence; to invest in risky ventures",
+                  "example": "Reporters began to speculate about the cause of the plane's disappearance."
+                },
+                {
+                  "word": "surveillance",
+                  "pronunciation": "ser-VAY-lens",
+                  "partOfSpeech": "noun",
+                  "definition": "close observation especially of a suspected person or group",
+                  "example": "Security cameras provide round-the-clock surveillance of the building."
+                },
+                {
+                  "word": "vigil",
+                  "pronunciation": "VIJ-ul",
+                  "partOfSpeech": "noun",
+                  "definition": "a period of staying awake to keep watch or pray",
+                  "example": "Villagers held an overnight vigil outside the hospital waiting for news."
+                },
+                {
+                  "word": "vigilant",
+                  "pronunciation": "VIJ-uh-lent",
+                  "partOfSpeech": "adjective",
+                  "definition": "keeping careful watch for possible danger or difficulty",
+                  "example": "Hikers must remain vigilant for sudden changes in mountain weather."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 11,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "ad hoc",
+                  "pronunciation": "ad-HOK",
+                  "partOfSpeech": "adjective/adverb",
+                  "definition": "created or done for a particular purpose without prior planning",
+                  "example": "An ad hoc committee was formed to deal with the unexpected crisis."
+                },
+                {
+                  "word": "admonish",
+                  "pronunciation": "ad-MON-ish",
+                  "partOfSpeech": "verb",
+                  "definition": "to warn or reprimand firmly but kindly",
+                  "example": "The coach admonished the players for arriving late to practice."
+                },
+                {
+                  "word": "advocate",
+                  "pronunciation": "AD-vuh-kayt",
+                  "partOfSpeech": "verb/noun",
+                  "definition": "to publicly recommend a cause; a person who publicly supports a cause",
+                  "example": "She became a strong advocate for children's rights after her own experience."
+                },
+                {
+                  "word": "assimilate",
+                  "pronunciation": "uh-SIM-ih-layt",
+                  "partOfSpeech": "verb",
+                  "definition": "to take in and understand; to absorb into a culture",
+                  "example": "It took the new immigrants several years to assimilate into their adopted country."
+                },
+                {
+                  "word": "evoke",
+                  "pronunciation": "ih-VOHK",
+                  "partOfSpeech": "verb",
+                  "definition": "to bring a feeling, memory, or image to mind",
+                  "example": "The old photograph evoked memories of long summer days at the beach."
+                },
+                {
+                  "word": "olfactory",
+                  "pronunciation": "ol-FAK-tor-ee",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to the sense of smell",
+                  "example": "The olfactory system is remarkably sensitive and closely tied to memory."
+                },
+                {
+                  "word": "provocative",
+                  "pronunciation": "pruh-VOK-uh-tiv",
+                  "partOfSpeech": "adjective",
+                  "definition": "causing a strong reaction; intended to arouse interest or controversy",
+                  "example": "The author's provocative essay sparked a national debate."
+                },
+                {
+                  "word": "redolent",
+                  "pronunciation": "RED-uh-lent",
+                  "partOfSpeech": "adjective",
+                  "definition": "strongly suggestive of; having a strong smell of something",
+                  "example": "The attic was redolent of old books and cedar chests."
+                },
+                {
+                  "word": "resonate",
+                  "pronunciation": "REZ-uh-nayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to produce or evoke a strong response; to produce resonance",
+                  "example": "Her speech resonated with the audience long after the event ended."
+                },
+                {
+                  "word": "sonic",
+                  "pronunciation": "SON-ik",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to sound waves or the speed of sound",
+                  "example": "The sonic boom shook the windows as the jet passed overhead."
+                },
+                {
+                  "word": "vociferous",
+                  "pronunciation": "voh-SIF-er-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "making or characterized by a loud and vehement outcry",
+                  "example": "Vociferous protesters gathered outside the government building."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 12,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "assent",
+                  "pronunciation": "uh-SENT",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "agreement; to agree or consent",
+                  "example": "The committee gave its assent to the proposed budget changes."
+                },
+                {
+                  "word": "contiguous",
+                  "pronunciation": "kun-TIG-yoo-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "sharing a common border; touching; next to each other",
+                  "example": "The two contiguous properties were separated by a low stone wall."
+                },
+                {
+                  "word": "dissent",
+                  "pronunciation": "dih-SENT",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "disagreement with a prevailing opinion; to disagree formally",
+                  "example": "One juror's dissent prevented the court from reaching a unanimous verdict."
+                },
+                {
+                  "word": "presentiment",
+                  "pronunciation": "prih-ZEN-tih-ment",
+                  "partOfSpeech": "noun",
+                  "definition": "a feeling that something unpleasant is about to happen; a premonition",
+                  "example": "She had a strange presentiment that the trip would end badly."
+                },
+                {
+                  "word": "sensuous",
+                  "pronunciation": "SEN-shoo-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to or affecting the senses in a pleasing way",
+                  "example": "The painting had a sensuous quality that drew viewers in immediately."
+                },
+                {
+                  "word": "sentinel",
+                  "pronunciation": "SEN-tih-nel",
+                  "partOfSpeech": "noun",
+                  "definition": "a soldier or guard standing watch",
+                  "example": "The lone sentinel stood motionless at the palace gate all through the night."
+                },
+                {
+                  "word": "tactile",
+                  "pronunciation": "TAK-tyl",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to the sense of touch",
+                  "example": "Pottery is a highly tactile craft that requires sensitive hands."
+                },
+                {
+                  "word": "tangent",
+                  "pronunciation": "TAN-jent",
+                  "partOfSpeech": "noun/adjective",
+                  "definition": "a line that touches a curve at one point; a completely different subject",
+                  "example": "He went off on a tangent about medieval history during the science class."
+                },
+                {
+                  "word": "tangible",
+                  "pronunciation": "TAN-jih-bul",
+                  "partOfSpeech": "adjective",
+                  "definition": "perceptible by touch; clear and definite; real",
+                  "example": "After months of effort they finally saw tangible results from their work."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 13,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "assuage",
+                  "pronunciation": "uh-SWAYJ",
+                  "partOfSpeech": "verb",
+                  "definition": "to make an unpleasant feeling less intense",
+                  "example": "She tried to assuage her friend's fears with calming words."
+                },
+                {
+                  "word": "festoon",
+                  "pronunciation": "feh-STOON",
+                  "partOfSpeech": "verb/noun",
+                  "definition": "to decorate with ribbons or flowers; a chain of decorations",
+                  "example": "The hall was festooned with colorful banners and streamers."
+                },
+                {
+                  "word": "fete",
+                  "pronunciation": "fayt",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "a celebration or festival; to honor with a celebration",
+                  "example": "The town held a grand fete to honor the returning hero."
+                },
+                {
+                  "word": "jeopardy",
+                  "pronunciation": "JEP-er-dee",
+                  "partOfSpeech": "noun",
+                  "definition": "danger of harm, loss, or failure",
+                  "example": "Reckless spending put the entire project in jeopardy."
+                },
+                {
+                  "word": "jocular",
+                  "pronunciation": "JOK-yuh-ler",
+                  "partOfSpeech": "adjective",
+                  "definition": "fond of joking; characterized by humor",
+                  "example": "His jocular tone helped lighten the mood during a tense meeting."
+                },
+                {
+                  "word": "procrastinate",
+                  "pronunciation": "proh-KRAS-tih-nayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to delay doing something that should be done",
+                  "example": "She tended to procrastinate on assignments until the last possible minute."
+                },
+                {
+                  "word": "prodigal",
+                  "pronunciation": "PROD-ih-gul",
+                  "partOfSpeech": "adjective/noun",
+                  "definition": "wasteful and extravagant; a person who spends recklessly",
+                  "example": "His prodigal lifestyle drained his entire inheritance within two years."
+                },
+                {
+                  "word": "prodigy",
+                  "pronunciation": "PROD-ih-jee",
+                  "partOfSpeech": "noun",
+                  "definition": "a person with exceptional talent; a highly talented young person",
+                  "example": "The young chess prodigy defeated every adult opponent in the tournament."
+                },
+                {
+                  "word": "profane",
+                  "pronunciation": "proh-FAYN",
+                  "partOfSpeech": "adjective/verb",
+                  "definition": "not respectful of religious practice; to treat something sacred with disrespect",
+                  "example": "Using profane language in the ceremony offended many in attendance."
+                },
+                {
+                  "word": "profuse",
+                  "pronunciation": "proh-FYOOS",
+                  "partOfSpeech": "adjective",
+                  "definition": "produced freely and in large amounts; generous",
+                  "example": "She offered profuse apologies after accidentally knocking over the display."
+                },
+                {
+                  "word": "suave",
+                  "pronunciation": "swahv",
+                  "partOfSpeech": "adjective",
+                  "definition": "charming, confident, and sophisticated in manner",
+                  "example": "The suave diplomat knew exactly what to say to smooth over the situation."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 14,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "condole",
+                  "pronunciation": "kun-DOHL",
+                  "partOfSpeech": "verb",
+                  "definition": "to express sympathy; to grieve with someone who has suffered a loss",
+                  "example": "Friends and family came to condole with the bereaved family."
+                },
+                {
+                  "word": "doleful",
+                  "pronunciation": "DOHL-ful",
+                  "partOfSpeech": "adjective",
+                  "definition": "expressing sorrow; mournful",
+                  "example": "The dog gave a doleful whine when its owner left for work."
+                },
+                {
+                  "word": "irascible",
+                  "pronunciation": "ih-RAS-ih-bul",
+                  "partOfSpeech": "adjective",
+                  "definition": "having or showing a tendency to be easily angered",
+                  "example": "The irascible professor would snap at students who came late to class."
+                },
+                {
+                  "word": "irate",
+                  "pronunciation": "eye-RAYT",
+                  "partOfSpeech": "adjective",
+                  "definition": "feeling or characterized by great anger",
+                  "example": "The irate customer demanded to speak with the manager immediately."
+                },
+                {
+                  "word": "ire",
+                  "pronunciation": "yr",
+                  "partOfSpeech": "noun",
+                  "definition": "anger; intense displeasure",
+                  "example": "He could barely contain his ire when he discovered the mistake."
+                },
+                {
+                  "word": "malevolent",
+                  "pronunciation": "muh-LEV-uh-lent",
+                  "partOfSpeech": "adjective",
+                  "definition": "having or showing a wish to do evil to others",
+                  "example": "The antagonist in the story was driven by a malevolent desire for revenge."
+                },
+                {
+                  "word": "volition",
+                  "pronunciation": "voh-LISH-un",
+                  "partOfSpeech": "noun",
+                  "definition": "the faculty or power of using one's will; a conscious choice",
+                  "example": "She chose to leave the company entirely of her own volition."
+                },
+                {
+                  "word": "zeal",
+                  "pronunciation": "zeel",
+                  "partOfSpeech": "noun",
+                  "definition": "great energy or enthusiasm for a cause or objective",
+                  "example": "The young teacher approached every lesson with infectious zeal."
+                },
+                {
+                  "word": "zealot",
+                  "pronunciation": "ZEL-ut",
+                  "partOfSpeech": "noun",
+                  "definition": "a person who is fanatically devoted to a cause",
+                  "example": "The political zealot refused to consider any viewpoint other than his own."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 15,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "circuitous",
+                  "pronunciation": "ser-KYOO-ih-tus",
+                  "partOfSpeech": "adjective",
+                  "definition": "longer than the most direct way; roundabout",
+                  "example": "The circuitous route through the mountains added hours to their journey."
+                },
+                {
+                  "word": "circumference",
+                  "pronunciation": "ser-KUM-fer-ens",
+                  "partOfSpeech": "noun",
+                  "definition": "the boundary line of a circle; the distance around something circular",
+                  "example": "The circumference of the Earth at the equator is about 40,000 kilometers."
+                },
+                {
+                  "word": "circumspect",
+                  "pronunciation": "SUR-kum-spekt",
+                  "partOfSpeech": "adjective",
+                  "definition": "wary and unwilling to take risks; cautious and careful",
+                  "example": "A circumspect investor researches thoroughly before committing funds."
+                },
+                {
+                  "word": "configuration",
+                  "pronunciation": "kun-fig-yuh-RAY-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "an arrangement of parts; the shape or outline of something",
+                  "example": "The configuration of the new office space improved collaboration among teams."
+                },
+                {
+                  "word": "cyclic",
+                  "pronunciation": "SY-klik",
+                  "partOfSpeech": "adjective",
+                  "definition": "occurring in cycles; regularly repeated",
+                  "example": "The cyclic pattern of the seasons governs much of agricultural life."
+                },
+                {
+                  "word": "encyclopedic",
+                  "pronunciation": "en-sy-kloh-PEE-dik",
+                  "partOfSpeech": "adjective",
+                  "definition": "covering a wide range of subjects in great detail; comprehensive",
+                  "example": "His encyclopedic knowledge of history impressed even his professors."
+                },
+                {
+                  "word": "figurative",
+                  "pronunciation": "FIG-yuh-ruh-tiv",
+                  "partOfSpeech": "adjective",
+                  "definition": "used in a way that is not literal; using metaphors or figures of speech",
+                  "example": "'He is drowning in homework' is a figurative expression."
+                },
+                {
+                  "word": "orb",
+                  "pronunciation": "orb",
+                  "partOfSpeech": "noun",
+                  "definition": "a spherical object; a globe",
+                  "example": "The moon appeared as a pale orb in the cloudless night sky."
+                },
+                {
+                  "word": "orbit",
+                  "pronunciation": "OR-bit",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "the curved path of a celestial body around another; to travel in a circle around",
+                  "example": "Satellites orbit the Earth at varying altitudes."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 16,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "cavernous",
+                  "pronunciation": "KAV-er-nus",
+                  "partOfSpeech": "adjective",
+                  "definition": "like a cavern; vast and dark or hollow",
+                  "example": "The cavernous warehouse echoed with the sound of machinery."
+                },
+                {
+                  "word": "concave",
+                  "pronunciation": "kon-KAYV",
+                  "partOfSpeech": "adjective",
+                  "definition": "having a surface that curves inward like the inside of a bowl",
+                  "example": "A concave mirror focuses light to a single point."
+                },
+                {
+                  "word": "effigy",
+                  "pronunciation": "EF-ih-jee",
+                  "partOfSpeech": "noun",
+                  "definition": "a model or dummy representing a hated person; a sculpture of a person",
+                  "example": "Angry protesters burned an effigy of the reviled politician in the town square."
+                },
+                {
+                  "word": "excavate",
+                  "pronunciation": "EKS-kuh-vayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to dig out material from the ground; to uncover by digging",
+                  "example": "Archaeologists excavated the ancient ruins buried beneath the desert sand."
+                },
+                {
+                  "word": "feign",
+                  "pronunciation": "fayn",
+                  "partOfSpeech": "verb",
+                  "definition": "to pretend to be affected by a feeling or condition",
+                  "example": "She tried to feign indifference but her excitement was obvious."
+                },
+                {
+                  "word": "feint",
+                  "pronunciation": "faynt",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "a deceptive or pretended move to distract an opponent; to make such a move",
+                  "example": "The boxer used a feint to trick his opponent before landing the real punch."
+                },
+                {
+                  "word": "ideology",
+                  "pronunciation": "eye-dee-OL-uh-jee",
+                  "partOfSpeech": "noun",
+                  "definition": "a system of ideas forming the basis of an economic or political theory",
+                  "example": "The two parties were separated not just by policy but by deep ideology."
+                },
+                {
+                  "word": "idyll",
+                  "pronunciation": "EYE-dul",
+                  "partOfSpeech": "noun",
+                  "definition": "an extremely happy or peaceful period; a short poem describing rural life",
+                  "example": "The summer they spent on the farm was a perfect rural idyll."
+                },
+                {
+                  "word": "rote",
+                  "pronunciation": "roht",
+                  "partOfSpeech": "noun/adjective",
+                  "definition": "learning by mechanical repetition without deep understanding",
+                  "example": "He memorized the multiplication tables by rote until they were automatic."
+                },
+                {
+                  "word": "rotund",
+                  "pronunciation": "roh-TUND",
+                  "partOfSpeech": "adjective",
+                  "definition": "large and round in shape; plump",
+                  "example": "A rotund figure in a red suit is one familiar image of Santa Claus."
+                },
+                {
+                  "word": "rotunda",
+                  "pronunciation": "roh-TUN-duh",
+                  "partOfSpeech": "noun",
+                  "definition": "a round building or room with a dome",
+                  "example": "The Capitol's famous rotunda is one of the most photographed spaces in Washington D.C."
+                }
+              ]
+            }
+          ]
+        },
       ]
     },
     "book-c": {
