@@ -4229,7 +4229,7 @@ const vocabularyData = {
         },
       ]
     },
-    "book-c": {
+        "book-c": {
       "title": "Book C",
       "level": "Middle School",
       "description": "Middle school level vocabulary from Greek and Latin roots",
@@ -4249,6 +4249,1846 @@ const vocabularyData = {
                   "partOfSpeech": "noun",
                   "definition": "a written account of someone's life",
                   "example": "She wrote a biography of Abraham Lincoln."
+                },
+                {
+                  "word": "anthropology",
+                  "pronunciation": "an-thruh-POL-uh-jee",
+                  "partOfSpeech": "noun",
+                  "definition": "the study of human societies, cultures, and origins",
+                  "example": "Anthropology helped her understand the customs of ancient civilizations."
+                },
+                {
+                  "word": "autocrat",
+                  "pronunciation": "AW-toh-krat",
+                  "partOfSpeech": "noun",
+                  "definition": "a ruler who has absolute power",
+                  "example": "The autocrat ruled the country without any regard for its citizens' rights."
+                },
+                {
+                  "word": "automaton",
+                  "pronunciation": "aw-TOM-uh-ton",
+                  "partOfSpeech": "noun",
+                  "definition": "a moving mechanical device that resembles a human; a person who acts mechanically",
+                  "example": "The workers on the assembly line moved like automatons, repeating the same motions endlessly."
+                },
+                {
+                  "word": "autonomy",
+                  "pronunciation": "aw-TON-uh-mee",
+                  "partOfSpeech": "noun",
+                  "definition": "the right or condition of self-government; personal independence",
+                  "example": "The teenager yearned for more autonomy and less supervision from her parents."
+                },
+                {
+                  "word": "autopsy",
+                  "pronunciation": "AW-top-see",
+                  "partOfSpeech": "noun",
+                  "definition": "an examination of a body after death to determine the cause of death",
+                  "example": "The medical examiner performed an autopsy to establish the exact cause of death."
+                },
+                {
+                  "word": "egoism",
+                  "pronunciation": "EE-goh-iz-um",
+                  "partOfSpeech": "noun",
+                  "definition": "the habit of valuing everything only in relation to one's personal interest; self-centeredness",
+                  "example": "His egoism prevented him from ever truly listening to those around him."
+                },
+                {
+                  "word": "feminism",
+                  "pronunciation": "FEM-ih-niz-um",
+                  "partOfSpeech": "noun",
+                  "definition": "the advocacy of women's rights and equality with men",
+                  "example": "The history class covered the key figures in the early feminism movement."
+                },
+                {
+                  "word": "feminist",
+                  "pronunciation": "FEM-ih-nist",
+                  "partOfSpeech": "noun/adjective",
+                  "definition": "a person who advocates for women's rights and equality",
+                  "example": "She became a passionate feminist after studying the history of women's suffrage."
+                },
+                {
+                  "word": "gynecology",
+                  "pronunciation": "gy-nuh-KOL-uh-jee",
+                  "partOfSpeech": "noun",
+                  "definition": "the branch of medicine dealing with the health of the female reproductive system",
+                  "example": "She chose to specialize in gynecology after completing her medical degree."
+                },
+                {
+                  "word": "homicide",
+                  "pronunciation": "HOM-ih-syd",
+                  "partOfSpeech": "noun",
+                  "definition": "the killing of one person by another",
+                  "example": "The detective was assigned to investigate the homicide that occurred near the waterfront."
+                },
+                {
+                  "word": "humane",
+                  "pronunciation": "hyoo-MAYN",
+                  "partOfSpeech": "adjective",
+                  "definition": "having compassion and benevolence toward people or animals",
+                  "example": "The organization's mission was to promote humane treatment of all living creatures."
+                },
+                {
+                  "word": "humanism",
+                  "pronunciation": "HYOO-muh-niz-um",
+                  "partOfSpeech": "noun",
+                  "definition": "a philosophy that emphasizes human reason, dignity, and potential",
+                  "example": "Renaissance humanism shifted intellectual focus from divine authority to human capability."
+                },
+                {
+                  "word": "humanities",
+                  "pronunciation": "hyoo-MAN-ih-teez",
+                  "partOfSpeech": "noun",
+                  "definition": "academic subjects such as literature, philosophy, art, and history",
+                  "example": "She majored in the humanities because she loved studying literature, art, and history."
+                },
+                {
+                  "word": "misanthrope",
+                  "pronunciation": "MIS-un-throhp",
+                  "partOfSpeech": "noun",
+                  "definition": "a person who dislikes and distrusts other people in general",
+                  "example": "The misanthrope rarely left his house and avoided all social interaction."
+                },
+                {
+                  "word": "virile",
+                  "pronunciation": "VIR-ul",
+                  "partOfSpeech": "adjective",
+                  "definition": "having strength and vigor; strongly masculine",
+                  "example": "The novel's hero was portrayed as virile, courageous, and resourceful."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "congenital",
+                  "pronunciation": "kun-JEN-ih-tul",
+                  "partOfSpeech": "adjective",
+                  "definition": "present from birth; innate",
+                  "example": "The child was born with a congenital heart defect that required surgery."
+                },
+                {
+                  "word": "engender",
+                  "pronunciation": "en-JEN-der",
+                  "partOfSpeech": "verb",
+                  "definition": "to cause or give rise to a feeling or situation",
+                  "example": "The mayor's speech was meant to engender trust between citizens and police."
+                },
+                {
+                  "word": "genealogy",
+                  "pronunciation": "jee-nee-AL-uh-jee",
+                  "partOfSpeech": "noun",
+                  "definition": "the study of family origins and history; a line of descent",
+                  "example": "He spent years tracing his genealogy and discovered relatives on three continents."
+                },
+                {
+                  "word": "genesis",
+                  "pronunciation": "JEN-ih-sis",
+                  "partOfSpeech": "noun",
+                  "definition": "the origin or beginning of something",
+                  "example": "The documentary traced the genesis of jazz back to New Orleans in the early 1900s."
+                },
+                {
+                  "word": "genocide",
+                  "pronunciation": "JEN-uh-syd",
+                  "partOfSpeech": "noun",
+                  "definition": "the deliberate killing of a large group based on ethnicity or nationality",
+                  "example": "The international tribunal was established to prosecute those responsible for genocide."
+                },
+                {
+                  "word": "genre",
+                  "pronunciation": "ZHON-ruh",
+                  "partOfSpeech": "noun",
+                  "definition": "a category of artistic composition characterized by a particular style or subject matter",
+                  "example": "Mystery is her favorite literary genre because she loves solving puzzles."
+                },
+                {
+                  "word": "genteel",
+                  "pronunciation": "jen-TEEL",
+                  "partOfSpeech": "adjective",
+                  "definition": "polite and refined in manner; characteristic of the upper class",
+                  "example": "The genteel hostess greeted every guest with practiced elegance."
+                },
+                {
+                  "word": "gentile",
+                  "pronunciation": "JEN-tyl",
+                  "partOfSpeech": "noun/adjective",
+                  "definition": "a person who is not Jewish; relating to non-Jewish people",
+                  "example": "The ancient text described customs observed by both Jewish people and gentiles."
+                },
+                {
+                  "word": "gentry",
+                  "pronunciation": "JEN-tree",
+                  "partOfSpeech": "noun",
+                  "definition": "people of good social position just below the nobility; the upper class",
+                  "example": "The local gentry attended the annual ball held at the manor house."
+                },
+                {
+                  "word": "heterogeneous",
+                  "pronunciation": "het-er-oh-JEE-nee-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "diverse in character or content; made up of different kinds",
+                  "example": "The class was a heterogeneous group of students from many different backgrounds."
+                },
+                {
+                  "word": "homogeneous",
+                  "pronunciation": "hoh-moh-JEE-nee-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "of the same kind; uniform in structure or composition",
+                  "example": "The neighborhood had once been a homogeneous community but had grown more diverse over time."
+                },
+                {
+                  "word": "indigenous",
+                  "pronunciation": "in-DIJ-uh-nus",
+                  "partOfSpeech": "adjective",
+                  "definition": "originating or occurring naturally in a particular place; native",
+                  "example": "The museum featured artifacts from indigenous peoples who had lived in the region for thousands of years."
+                },
+                {
+                  "word": "ingenious",
+                  "pronunciation": "in-JEEN-yus",
+                  "partOfSpeech": "adjective",
+                  "definition": "clever, original, and inventive",
+                  "example": "The engineer devised an ingenious solution to the drainage problem."
+                },
+                {
+                  "word": "progenitor",
+                  "pronunciation": "proh-JEN-ih-ter",
+                  "partOfSpeech": "noun",
+                  "definition": "a person or thing from which others descend or originate; an ancestor",
+                  "example": "Historians consider Darwin the progenitor of modern evolutionary theory."
+                },
+                {
+                  "word": "progeny",
+                  "pronunciation": "PROJ-uh-nee",
+                  "partOfSpeech": "noun",
+                  "definition": "a person's offspring or descendants",
+                  "example": "The wealthy patriarch divided his estate equally among his progeny."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "avuncular",
+                  "pronunciation": "uh-VUNK-yuh-ler",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to an uncle; kind and friendly toward younger people",
+                  "example": "The avuncular professor always had time to offer advice to struggling students."
+                },
+                {
+                  "word": "bigamy",
+                  "pronunciation": "BIG-uh-mee",
+                  "partOfSpeech": "noun",
+                  "definition": "the offense of marrying someone while already married to another person",
+                  "example": "He was charged with bigamy after it was discovered he had two wives in different cities."
+                },
+                {
+                  "word": "familial",
+                  "pronunciation": "fuh-MIL-ee-ul",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to or characteristic of a family",
+                  "example": "The reunion centered on familial bonds that years of distance had not weakened."
+                },
+                {
+                  "word": "fraternal",
+                  "pronunciation": "fruh-TUR-nul",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to brothers; brotherly in nature",
+                  "example": "The two soldiers shared a fraternal bond forged through years of service together."
+                },
+                {
+                  "word": "fraternize",
+                  "pronunciation": "FRAT-er-nyz",
+                  "partOfSpeech": "verb",
+                  "definition": "to associate or form a friendship with others especially when this is discouraged",
+                  "example": "The opposing players were seen fraternizing on the field after the game."
+                },
+                {
+                  "word": "matriarchy",
+                  "pronunciation": "MAY-tree-ar-kee",
+                  "partOfSpeech": "noun",
+                  "definition": "a system of society or government ruled by women",
+                  "example": "Some anthropologists have described ancient Minoan society as a matriarchy."
+                },
+                {
+                  "word": "matriculate",
+                  "pronunciation": "muh-TRIK-yuh-layt",
+                  "partOfSpeech": "verb",
+                  "definition": "to be enrolled at a college or university",
+                  "example": "She was the first in her family to matriculate at a four-year university."
+                },
+                {
+                  "word": "matrix",
+                  "pronunciation": "MAY-triks",
+                  "partOfSpeech": "noun",
+                  "definition": "an environment in which something develops; a rectangular array of numbers",
+                  "example": "The city's transportation grid formed the matrix on which the whole economy depended."
+                },
+                {
+                  "word": "monogamy",
+                  "pronunciation": "muh-NOG-uh-mee",
+                  "partOfSpeech": "noun",
+                  "definition": "the practice of being married to only one person at a time",
+                  "example": "Most Western legal systems are built around the expectation of monogamy."
+                },
+                {
+                  "word": "patriarch",
+                  "pronunciation": "PAY-tree-ark",
+                  "partOfSpeech": "noun",
+                  "definition": "a man who rules a family or group; a founder or father figure",
+                  "example": "The elderly patriarch presided over every family gathering with quiet authority."
+                },
+                {
+                  "word": "patrimony",
+                  "pronunciation": "PA-trih-moh-nee",
+                  "partOfSpeech": "noun",
+                  "definition": "property or cultural legacy inherited from one's father or ancestors",
+                  "example": "The old estate had been part of the family's patrimony for two centuries."
+                },
+                {
+                  "word": "patronage",
+                  "pronunciation": "PAY-truh-nij",
+                  "partOfSpeech": "noun",
+                  "definition": "the support given by a patron to an artist or institution; regular business given to a shop",
+                  "example": "The museum depended heavily on the patronage of wealthy local donors."
+                },
+                {
+                  "word": "patronize",
+                  "pronunciation": "PAY-truh-nyz",
+                  "partOfSpeech": "verb",
+                  "definition": "to treat in a condescending way; to be a regular customer of",
+                  "example": "She refused to patronize any store that treated its workers poorly."
+                },
+                {
+                  "word": "patronymic",
+                  "pronunciation": "pa-truh-NIM-ik",
+                  "partOfSpeech": "noun/adjective",
+                  "definition": "a name derived from one's father's name; relating to such a name",
+                  "example": "In many cultures a patronymic surname links children directly to their fathers."
+                },
+                {
+                  "word": "uxorious",
+                  "pronunciation": "uk-SOR-ee-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "excessively fond of or submissive to one's wife",
+                  "example": "His uxorious behavior earned teasing from friends who joked he never made a decision without consulting her."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "entity",
+                  "pronunciation": "EN-tih-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "a thing with distinct and independent existence",
+                  "example": "The corporation was recognized as a legal entity separate from its owners."
+                },
+                {
+                  "word": "essence",
+                  "pronunciation": "ES-ens",
+                  "partOfSpeech": "noun",
+                  "definition": "the intrinsic nature of something; the most important quality",
+                  "example": "Simplicity is the essence of good design."
+                },
+                {
+                  "word": "euthanasia",
+                  "pronunciation": "yoo-thuh-NAY-zhuh",
+                  "partOfSpeech": "noun",
+                  "definition": "the painless killing of a patient suffering from an incurable illness",
+                  "example": "The ethics of euthanasia continues to be debated by medical professionals and lawmakers."
+                },
+                {
+                  "word": "innate",
+                  "pronunciation": "ih-NAYT",
+                  "partOfSpeech": "adjective",
+                  "definition": "inborn; existing from birth; natural",
+                  "example": "She had an innate talent for music that no formal training could fully explain."
+                },
+                {
+                  "word": "moribund",
+                  "pronunciation": "MOR-ih-bund",
+                  "partOfSpeech": "adjective",
+                  "definition": "at the point of death; in terminal decline",
+                  "example": "The once-thriving newspaper industry appeared moribund in the digital age."
+                },
+                {
+                  "word": "mortify",
+                  "pronunciation": "MOR-tih-fy",
+                  "partOfSpeech": "verb",
+                  "definition": "to cause someone to feel deeply embarrassed or ashamed",
+                  "example": "He was mortified when he tripped and fell in front of the entire school."
+                },
+                {
+                  "word": "naive",
+                  "pronunciation": "nah-EEV",
+                  "partOfSpeech": "adjective",
+                  "definition": "showing a lack of experience or wisdom; innocent and unsuspecting",
+                  "example": "It was naive of her to trust a stranger with her personal information."
+                },
+                {
+                  "word": "nascent",
+                  "pronunciation": "NAY-sent",
+                  "partOfSpeech": "adjective",
+                  "definition": "just coming into existence; beginning to develop",
+                  "example": "The nascent technology company had only five employees and one product."
+                },
+                {
+                  "word": "nonentity",
+                  "pronunciation": "non-EN-tih-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "a person or thing of no importance",
+                  "example": "Before his breakthrough role the actor had been a complete nonentity in Hollywood."
+                },
+                {
+                  "word": "orthopedics",
+                  "pronunciation": "or-thoh-PEE-diks",
+                  "partOfSpeech": "noun",
+                  "definition": "the branch of medicine dealing with the correction of bone and muscle deformities",
+                  "example": "After the accident she was referred to an orthopedics specialist for her broken wrist."
+                },
+                {
+                  "word": "pedagogue",
+                  "pronunciation": "PED-uh-gog",
+                  "partOfSpeech": "noun",
+                  "definition": "a teacher especially one who is overly formal or strict",
+                  "example": "The old pedagogue demanded perfect grammar in every written assignment."
+                },
+                {
+                  "word": "pedant",
+                  "pronunciation": "PED-unt",
+                  "partOfSpeech": "noun",
+                  "definition": "a person excessively concerned with rules and minor details",
+                  "example": "The pedant corrected every grammatical slip in casual conversation much to everyone's annoyance."
+                },
+                {
+                  "word": "postmortem",
+                  "pronunciation": "pohst-MOR-tum",
+                  "partOfSpeech": "noun/adjective",
+                  "definition": "an examination performed after death; an analysis done after an event is over",
+                  "example": "The team held a postmortem review to understand why the project had failed."
+                },
+                {
+                  "word": "puerile",
+                  "pronunciation": "PYOO-er-ul",
+                  "partOfSpeech": "adjective",
+                  "definition": "childishly silly and immature",
+                  "example": "His puerile jokes were met with eye rolls from the adults in the room."
+                },
+                {
+                  "word": "renaissance",
+                  "pronunciation": "REN-uh-sahns",
+                  "partOfSpeech": "noun",
+                  "definition": "a revival or renewed interest especially in culture, art, and learning",
+                  "example": "The city experienced a cultural renaissance after the new arts district opened."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "acrophobia",
+                  "pronunciation": "ak-roh-FOH-bee-uh",
+                  "partOfSpeech": "noun",
+                  "definition": "an extreme or irrational fear of heights",
+                  "example": "His acrophobia made it impossible for him to climb even a short ladder."
+                },
+                {
+                  "word": "amicable",
+                  "pronunciation": "AM-ih-kuh-bul",
+                  "partOfSpeech": "adjective",
+                  "definition": "having a friendly and pleasant manner; showing goodwill",
+                  "example": "After months of dispute the neighbors reached an amicable agreement."
+                },
+                {
+                  "word": "amity",
+                  "pronunciation": "AM-ih-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "a friendly relationship between people or countries",
+                  "example": "The treaty was signed in a spirit of international amity."
+                },
+                {
+                  "word": "appease",
+                  "pronunciation": "uh-PEEZ",
+                  "partOfSpeech": "verb",
+                  "definition": "to relieve or satisfy a demand by making concessions; to soothe",
+                  "example": "She brought cookies to the meeting hoping to appease her irritated colleagues."
+                },
+                {
+                  "word": "bibliophile",
+                  "pronunciation": "BIB-lee-oh-fyl",
+                  "partOfSpeech": "noun",
+                  "definition": "a person who collects or has a great love of books",
+                  "example": "The bibliophile's home was packed from floor to ceiling with carefully organized volumes."
+                },
+                {
+                  "word": "enamored",
+                  "pronunciation": "ih-NAM-erd",
+                  "partOfSpeech": "adjective",
+                  "definition": "filled with love and admiration for someone or something",
+                  "example": "He was completely enamored of the coastal town and vowed to return every summer."
+                },
+                {
+                  "word": "hydrophobia",
+                  "pronunciation": "hy-droh-FOH-bee-uh",
+                  "partOfSpeech": "noun",
+                  "definition": "extreme fear of water; a symptom of rabies",
+                  "example": "The infected animal displayed hydrophobia and refused to drink despite its thirst."
+                },
+                {
+                  "word": "inimical",
+                  "pronunciation": "ih-NIM-ih-kul",
+                  "partOfSpeech": "adjective",
+                  "definition": "tending to obstruct or harm; hostile",
+                  "example": "Sitting for twelve hours a day is inimical to good health."
+                },
+                {
+                  "word": "odious",
+                  "pronunciation": "OH-dee-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "extremely unpleasant; offensive or repulsive",
+                  "example": "The odious smell from the landfill drifted across the entire neighborhood."
+                },
+                {
+                  "word": "pacific",
+                  "pronunciation": "puh-SIF-ik",
+                  "partOfSpeech": "adjective",
+                  "definition": "peaceful in character or intent; tending to avoid conflict",
+                  "example": "She had a pacific personality and always sought compromise over confrontation."
+                },
+                {
+                  "word": "pacify",
+                  "pronunciation": "PAS-ih-fy",
+                  "partOfSpeech": "verb",
+                  "definition": "to bring peace or calm to a situation or person",
+                  "example": "The parents tried to pacify the crying child with a favorite toy."
+                },
+                {
+                  "word": "philanthropy",
+                  "pronunciation": "fih-LAN-thruh-pee",
+                  "partOfSpeech": "noun",
+                  "definition": "the desire to promote the well-being of others especially through charitable donations",
+                  "example": "His philanthropy funded hospitals and schools across three continents."
+                },
+                {
+                  "word": "phobia",
+                  "pronunciation": "FOH-bee-uh",
+                  "partOfSpeech": "noun",
+                  "definition": "an extreme or irrational fear of or aversion to something",
+                  "example": "She developed a phobia of flying after a turbulent flight as a child."
+                },
+                {
+                  "word": "xenophobia",
+                  "pronunciation": "zen-oh-FOH-bee-uh",
+                  "partOfSpeech": "noun",
+                  "definition": "a deep dislike or fear of foreigners or strangers",
+                  "example": "The speech was criticized for encouraging xenophobia rather than tolerance."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "antipathy",
+                  "pronunciation": "an-TIP-uh-thee",
+                  "partOfSpeech": "noun",
+                  "definition": "a deep-seated feeling of aversion or dislike",
+                  "example": "She felt a strong antipathy toward dishonesty in any form."
+                },
+                {
+                  "word": "apathy",
+                  "pronunciation": "AP-uh-thee",
+                  "partOfSpeech": "noun",
+                  "definition": "lack of interest, enthusiasm, or concern",
+                  "example": "Voter apathy reached an all-time high as turnout dropped below thirty percent."
+                },
+                {
+                  "word": "complacent",
+                  "pronunciation": "kum-PLAY-sent",
+                  "partOfSpeech": "adjective",
+                  "definition": "showing smug or uncritical satisfaction with oneself; not sufficiently alert to danger",
+                  "example": "The team became complacent after an early lead and nearly lost the game."
+                },
+                {
+                  "word": "covet",
+                  "pronunciation": "KUV-et",
+                  "partOfSpeech": "verb",
+                  "definition": "to yearn to possess something belonging to another",
+                  "example": "He tried not to covet his neighbor's brand-new sports car."
+                },
+                {
+                  "word": "cupidity",
+                  "pronunciation": "kyoo-PID-ih-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "greed for money or possessions",
+                  "example": "The manager's cupidity led him to embezzle funds from the company over several years."
+                },
+                {
+                  "word": "dysentery",
+                  "pronunciation": "DIS-en-ter-ee",
+                  "partOfSpeech": "noun",
+                  "definition": "an intestinal infection causing severe diarrhea",
+                  "example": "Contaminated water supplies led to an outbreak of dysentery in the refugee camp."
+                },
+                {
+                  "word": "dyslexia",
+                  "pronunciation": "dis-LEK-see-uh",
+                  "partOfSpeech": "noun",
+                  "definition": "a learning difficulty that primarily affects reading and spelling",
+                  "example": "With proper support children with dyslexia can develop strong reading skills."
+                },
+                {
+                  "word": "empathy",
+                  "pronunciation": "EM-puh-thee",
+                  "partOfSpeech": "noun",
+                  "definition": "the ability to understand and share the feelings of another",
+                  "example": "Good counselors must be capable of empathy as well as sound advice."
+                },
+                {
+                  "word": "implacable",
+                  "pronunciation": "im-PLAK-uh-bul",
+                  "partOfSpeech": "adjective",
+                  "definition": "unable to be appeased; relentlessly harsh",
+                  "example": "The implacable critic found fault with every performance regardless of its quality."
+                },
+                {
+                  "word": "misogamy",
+                  "pronunciation": "mih-SOG-uh-mee",
+                  "partOfSpeech": "noun",
+                  "definition": "a dislike or hatred of marriage",
+                  "example": "His lifelong misogamy meant he preferred the freedom of living alone."
+                },
+                {
+                  "word": "misogyny",
+                  "pronunciation": "mih-SOJ-ih-nee",
+                  "partOfSpeech": "noun",
+                  "definition": "dislike or prejudice against women",
+                  "example": "The organization worked to expose and combat misogyny in the workplace."
+                },
+                {
+                  "word": "pathological",
+                  "pronunciation": "path-uh-LOJ-ih-kul",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to or caused by disease; compulsive",
+                  "example": "His pathological need to control every situation made teamwork nearly impossible."
+                },
+                {
+                  "word": "pathos",
+                  "pronunciation": "PAY-thos",
+                  "partOfSpeech": "noun",
+                  "definition": "a quality that evokes pity, sadness, or sympathy",
+                  "example": "The final scene of the film was full of pathos that left the audience in tears."
+                },
+                {
+                  "word": "placate",
+                  "pronunciation": "PLAY-kayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to make someone less angry; to appease",
+                  "example": "The manager tried to placate the upset client with a full refund."
+                },
+                {
+                  "word": "placid",
+                  "pronunciation": "PLAS-id",
+                  "partOfSpeech": "adjective",
+                  "definition": "not easily upset or excited; calm and peaceful",
+                  "example": "The placid surface of the lake reflected the mountains perfectly."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 7,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "ablution",
+                  "pronunciation": "uh-BLOO-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "the act of washing oneself; a ceremonial washing",
+                  "example": "Morning ablutions were part of his strict daily routine."
+                },
+                {
+                  "word": "deluge",
+                  "pronunciation": "DEL-yooj",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "a severe flood or heavy rainfall; to overwhelm with a great quantity",
+                  "example": "The city was deluged with calls after the emergency announcement."
+                },
+                {
+                  "word": "divest",
+                  "pronunciation": "dih-VEST",
+                  "partOfSpeech": "verb",
+                  "definition": "to deprive someone of power or possessions; to sell off a business interest",
+                  "example": "The court ordered the company to divest its holdings in the foreign subsidiary."
+                },
+                {
+                  "word": "domain",
+                  "pronunciation": "doh-MAYN",
+                  "partOfSpeech": "noun",
+                  "definition": "an area of knowledge or activity; a territory controlled by a ruler",
+                  "example": "Quantum physics is not within the domain of everyday experience."
+                },
+                {
+                  "word": "domestic",
+                  "pronunciation": "duh-MES-tik",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to the home; not foreign",
+                  "example": "She preferred domestic travel to the stress of international airports."
+                },
+                {
+                  "word": "domicile",
+                  "pronunciation": "DOM-ih-syl",
+                  "partOfSpeech": "noun",
+                  "definition": "a place of permanent residence; a person's home",
+                  "example": "The legal documents listed the countryside estate as his official domicile."
+                },
+                {
+                  "word": "domineer",
+                  "pronunciation": "dom-ih-NEER",
+                  "partOfSpeech": "verb",
+                  "definition": "to assert authority over others in an arrogant way",
+                  "example": "She refused to let her older brother domineer over her decisions."
+                },
+                {
+                  "word": "dominion",
+                  "pronunciation": "duh-MIN-yun",
+                  "partOfSpeech": "noun",
+                  "definition": "sovereignty or control; a territory under a ruler's power",
+                  "example": "The ancient empire extended its dominion across most of the known world."
+                },
+                {
+                  "word": "dormant",
+                  "pronunciation": "DOR-ment",
+                  "partOfSpeech": "adjective",
+                  "definition": "temporarily inactive; in a state of rest or sleep",
+                  "example": "The volcano had been dormant for centuries before suddenly showing signs of activity."
+                },
+                {
+                  "word": "investiture",
+                  "pronunciation": "in-VES-tih-cher",
+                  "partOfSpeech": "noun",
+                  "definition": "the formal ceremony of investing a person with an office, rank, or honor",
+                  "example": "The investiture ceremony celebrated the prince's elevation to his new title."
+                },
+                {
+                  "word": "somnambulate",
+                  "pronunciation": "som-NAM-byuh-layt",
+                  "partOfSpeech": "verb",
+                  "definition": "to walk and carry out actions while asleep; to sleepwalk",
+                  "example": "His roommate was alarmed to discover him somnambulating through the halls at midnight."
+                },
+                {
+                  "word": "somnolent",
+                  "pronunciation": "SOM-nuh-lent",
+                  "partOfSpeech": "adjective",
+                  "definition": "sleepy; inducing drowsiness",
+                  "example": "The somnolent hum of the air conditioner made it hard to stay awake during the lecture."
+                },
+                {
+                  "word": "travesty",
+                  "pronunciation": "TRAV-uh-stee",
+                  "partOfSpeech": "noun",
+                  "definition": "a false or distorted representation of something; a mockery",
+                  "example": "The rushed trial was described as a travesty of justice by human rights observers."
+                },
+                {
+                  "word": "vested",
+                  "pronunciation": "VES-ted",
+                  "partOfSpeech": "adjective",
+                  "definition": "having a personal stake in or fixed rights to something",
+                  "example": "She had a vested interest in the outcome because her savings were tied to the company."
+                },
+                {
+                  "word": "vestment",
+                  "pronunciation": "VEST-ment",
+                  "partOfSpeech": "noun",
+                  "definition": "a robe or garment worn by clergy during a church service",
+                  "example": "The priest adjusted his vestment before leading the congregation in prayer."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 8,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "allude",
+                  "pronunciation": "uh-LOOD",
+                  "partOfSpeech": "verb",
+                  "definition": "to make an indirect reference to something",
+                  "example": "Without naming names the speaker alluded to recent scandals in the department."
+                },
+                {
+                  "word": "carnivorous",
+                  "pronunciation": "kar-NIV-er-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "feeding on other animals; flesh-eating",
+                  "example": "Lions and tigers are carnivorous animals that hunt prey in the wild."
+                },
+                {
+                  "word": "collusion",
+                  "pronunciation": "kuh-LOO-zhun",
+                  "partOfSpeech": "noun",
+                  "definition": "secret cooperation for an illegal or deceitful purpose",
+                  "example": "The investigation uncovered evidence of collusion between the contractors and city officials."
+                },
+                {
+                  "word": "concoct",
+                  "pronunciation": "kun-KOKT",
+                  "partOfSpeech": "verb",
+                  "definition": "to create or devise by combining ingredients or ideas",
+                  "example": "She concocted a plausible excuse for arriving late to the meeting."
+                },
+                {
+                  "word": "cuisine",
+                  "pronunciation": "kwih-ZEEN",
+                  "partOfSpeech": "noun",
+                  "definition": "a style of cooking associated with a particular country or culture",
+                  "example": "The restaurant offered authentic French cuisine prepared by a classically trained chef."
+                },
+                {
+                  "word": "delusion",
+                  "pronunciation": "dih-LOO-zhun",
+                  "partOfSpeech": "noun",
+                  "definition": "a belief held despite evidence to the contrary",
+                  "example": "His delusion that he was being followed made everyday life extremely difficult."
+                },
+                {
+                  "word": "herbivorous",
+                  "pronunciation": "her-BIV-er-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "feeding on plants",
+                  "example": "Cows, deer, and rabbits are herbivorous animals that graze on grass and vegetation."
+                },
+                {
+                  "word": "imbibe",
+                  "pronunciation": "im-BYB",
+                  "partOfSpeech": "verb",
+                  "definition": "to drink especially alcoholic drinks; to absorb ideas",
+                  "example": "She loved to imbibe the atmosphere of old libraries filled with leather-bound books."
+                },
+                {
+                  "word": "mellifluous",
+                  "pronunciation": "muh-LIF-loo-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "sweet or musical in sound; pleasingly smooth",
+                  "example": "The singer's mellifluous voice filled the concert hall with ease."
+                },
+                {
+                  "word": "potable",
+                  "pronunciation": "POH-tuh-bul",
+                  "partOfSpeech": "adjective",
+                  "definition": "safe to drink",
+                  "example": "The hikers carried purification tablets to make stream water potable."
+                },
+                {
+                  "word": "potion",
+                  "pronunciation": "POH-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "a liquid with healing or magical powers; a medicinal drink",
+                  "example": "The folk tale described a love potion that could make any two people fall in love."
+                },
+                {
+                  "word": "precocious",
+                  "pronunciation": "prih-KOH-shus",
+                  "partOfSpeech": "adjective",
+                  "definition": "having developed certain abilities at an earlier age than usual",
+                  "example": "The precocious child was reading chapter books before her fourth birthday."
+                },
+                {
+                  "word": "saline",
+                  "pronunciation": "SAY-lyn",
+                  "partOfSpeech": "adjective/noun",
+                  "definition": "containing salt; a salt solution used in medical treatment",
+                  "example": "The nurse administered a saline solution through the patient's IV drip."
+                },
+                {
+                  "word": "voracious",
+                  "pronunciation": "vor-AY-shus",
+                  "partOfSpeech": "adjective",
+                  "definition": "wanting or devouring great quantities; very eager",
+                  "example": "He was a voracious reader who finished three novels every week."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 9,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "affront",
+                  "pronunciation": "uh-FRUNT",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "an action or remark that causes offense; to offend publicly",
+                  "example": "He took her dismissive comment as a personal affront to his professionalism."
+                },
+                {
+                  "word": "capitalist",
+                  "pronunciation": "KAP-ih-tuh-list",
+                  "partOfSpeech": "noun/adjective",
+                  "definition": "a person who uses wealth to invest in trade; relating to capitalism",
+                  "example": "As a capitalist he believed that free markets drove innovation and prosperity."
+                },
+                {
+                  "word": "capitulation",
+                  "pronunciation": "kuh-pich-uh-LAY-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "the act of surrendering or giving in to demands",
+                  "example": "The capitulation of the fortress ended three months of siege."
+                },
+                {
+                  "word": "cerebral",
+                  "pronunciation": "SER-uh-brul",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to the brain; intellectual rather than emotional",
+                  "example": "Chess is considered a cerebral game that requires careful strategic thinking."
+                },
+                {
+                  "word": "cerebration",
+                  "pronunciation": "ser-uh-BRAY-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "the working of the brain; thinking",
+                  "example": "After hours of intense cerebration he finally solved the mathematical puzzle."
+                },
+                {
+                  "word": "confront",
+                  "pronunciation": "kun-FRUNT",
+                  "partOfSpeech": "verb",
+                  "definition": "to face up to and deal with a problem; to challenge someone directly",
+                  "example": "She knew she had to confront her fear of public speaking if she wanted to advance."
+                },
+                {
+                  "word": "decapitate",
+                  "pronunciation": "dih-KAP-ih-tayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to cut off the head of; to behead",
+                  "example": "History's most notorious tyrants used decapitation as a public punishment."
+                },
+                {
+                  "word": "deface",
+                  "pronunciation": "dih-FAYS",
+                  "partOfSpeech": "verb",
+                  "definition": "to mar the surface or appearance of something; to vandalize",
+                  "example": "Vandals defaced the public mural with graffiti overnight."
+                },
+                {
+                  "word": "efface",
+                  "pronunciation": "ih-FAYS",
+                  "partOfSpeech": "verb",
+                  "definition": "to erase or obliterate; to make oneself inconspicuous",
+                  "example": "Time had effaced the carved inscription on the ancient stone tablet."
+                },
+                {
+                  "word": "effrontery",
+                  "pronunciation": "ih-FRUN-ter-ee",
+                  "partOfSpeech": "noun",
+                  "definition": "rude and shameless boldness",
+                  "example": "The student had the effrontery to demand extra credit after skipping most of the classes."
+                },
+                {
+                  "word": "facade",
+                  "pronunciation": "fuh-SAHD",
+                  "partOfSpeech": "noun",
+                  "definition": "the front of a building; an outward appearance that hides the true nature",
+                  "example": "The cheerful facade he presented at work masked his deep personal struggles."
+                },
+                {
+                  "word": "facet",
+                  "pronunciation": "FAS-it",
+                  "partOfSpeech": "noun",
+                  "definition": "one side of a cut gem; a particular aspect of something",
+                  "example": "Every facet of the negotiation had to be carefully considered before signing."
+                },
+                {
+                  "word": "precipice",
+                  "pronunciation": "PRES-ih-pis",
+                  "partOfSpeech": "noun",
+                  "definition": "a very steep rock face or cliff; a dangerous situation",
+                  "example": "The hikers stood at the edge of the precipice and looked down into the valley."
+                },
+                {
+                  "word": "precipitate",
+                  "pronunciation": "prih-SIP-ih-tayt",
+                  "partOfSpeech": "verb/adjective",
+                  "definition": "to cause to happen suddenly; done without due deliberation; rash",
+                  "example": "His precipitate decision to resign without another job lined up shocked his colleagues."
+                },
+                {
+                  "word": "recapitulation",
+                  "pronunciation": "ree-kuh-pich-uh-LAY-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "a summary or repetition of the main points of something",
+                  "example": "The final chapter served as a recapitulation of all the book's major themes."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 10,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "disgorge",
+                  "pronunciation": "dis-GORJ",
+                  "partOfSpeech": "verb",
+                  "definition": "to discharge or pour out violently; to eject from the throat",
+                  "example": "The factory pipe disgorged waste into the river for decades before the violation was discovered."
+                },
+                {
+                  "word": "gargantuan",
+                  "pronunciation": "gar-GAN-choo-un",
+                  "partOfSpeech": "adjective",
+                  "definition": "enormous; gigantic",
+                  "example": "The gargantuan cruise ship dwarfed every other vessel in the harbor."
+                },
+                {
+                  "word": "gargoyle",
+                  "pronunciation": "GAR-goyl",
+                  "partOfSpeech": "noun",
+                  "definition": "a grotesque carved stone figure used as a rainwater spout on buildings",
+                  "example": "Students sketched the gargoyle perched high on the cathedral's stone facade."
+                },
+                {
+                  "word": "gorge",
+                  "pronunciation": "gorj",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "a narrow valley with steep rocky walls; to eat greedily",
+                  "example": "After the long hike he sat down and gorged himself on sandwiches and fruit."
+                },
+                {
+                  "word": "indentation",
+                  "pronunciation": "in-den-TAY-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "a notch or recess in a surface; a deep inward curve",
+                  "example": "The first paragraph begins with an indentation of five spaces."
+                },
+                {
+                  "word": "indenture",
+                  "pronunciation": "in-DEN-cher",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "a formal legal agreement binding one party to work for another; to bind by such contract",
+                  "example": "Indentured servants were bound by indenture to work for a master for a set number of years."
+                },
+                {
+                  "word": "inexorable",
+                  "pronunciation": "in-EK-ser-uh-bul",
+                  "partOfSpeech": "adjective",
+                  "definition": "impossible to stop or prevent; relentless",
+                  "example": "The inexorable rise of sea levels threatens low-lying coastal cities around the world."
+                },
+                {
+                  "word": "oracle",
+                  "pronunciation": "OR-uh-kul",
+                  "partOfSpeech": "noun",
+                  "definition": "a priest or shrine through which a deity gives advice; a wise and authoritative person",
+                  "example": "The oracle at Delphi was consulted by rulers from across the ancient world."
+                },
+                {
+                  "word": "oration",
+                  "pronunciation": "or-AY-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "a formal speech given on a ceremonial occasion",
+                  "example": "The graduation oration moved many in the audience to tears."
+                },
+                {
+                  "word": "orifice",
+                  "pronunciation": "OR-ih-fis",
+                  "partOfSpeech": "noun",
+                  "definition": "an opening especially a natural one in the body",
+                  "example": "The doctor examined each orifice carefully during the routine physical examination."
+                },
+                {
+                  "word": "orthodontist",
+                  "pronunciation": "or-thoh-DON-tist",
+                  "partOfSpeech": "noun",
+                  "definition": "a dentist who specializes in correcting irregularities of the teeth",
+                  "example": "The orthodontist recommended braces to correct the misalignment of her teeth."
+                },
+                {
+                  "word": "osculate",
+                  "pronunciation": "OS-kyuh-layt",
+                  "partOfSpeech": "verb",
+                  "definition": "to kiss; in mathematics to touch at a single point without crossing",
+                  "example": "The two curves osculate at exactly one point on the graph."
+                },
+                {
+                  "word": "regurgitate",
+                  "pronunciation": "rih-GUR-jih-tayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to bring swallowed food back up; to repeat information without understanding it",
+                  "example": "Students who merely regurgitate facts without analysis rarely earn top marks."
+                },
+                {
+                  "word": "supercilious",
+                  "pronunciation": "soo-per-SIL-ee-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "behaving as though one is superior to others; condescending",
+                  "example": "His supercilious smirk irritated everyone who worked with him."
+                },
+                {
+                  "word": "trident",
+                  "pronunciation": "TRY-dent",
+                  "partOfSpeech": "noun",
+                  "definition": "a three-pronged spear",
+                  "example": "In Roman mythology Neptune carried a trident as a symbol of his power over the sea."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 11,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "accolade",
+                  "pronunciation": "AK-uh-layd",
+                  "partOfSpeech": "noun",
+                  "definition": "an award or expression of praise; a ceremony of knighthood",
+                  "example": "The film received every major accolade including Best Picture at the awards ceremony."
+                },
+                {
+                  "word": "accord",
+                  "pronunciation": "uh-KORD",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "agreement; to give or grant",
+                  "example": "The two nations signed an accord to end the conflict and establish trade relations."
+                },
+                {
+                  "word": "carnage",
+                  "pronunciation": "KAR-nij",
+                  "partOfSpeech": "noun",
+                  "definition": "the killing of a large number of people; great slaughter",
+                  "example": "The battlefield was a scene of carnage that shocked even the most experienced soldiers."
+                },
+                {
+                  "word": "carrion",
+                  "pronunciation": "KAR-ee-un",
+                  "partOfSpeech": "noun",
+                  "definition": "the decaying flesh of dead animals",
+                  "example": "Vultures circle overhead drawn by the smell of carrion on the desert floor."
+                },
+                {
+                  "word": "concordance",
+                  "pronunciation": "kon-KOR-dens",
+                  "partOfSpeech": "noun",
+                  "definition": "agreement; an alphabetical index of the main words in a text",
+                  "example": "The scholars used a biblical concordance to locate every passage containing the word 'mercy'."
+                },
+                {
+                  "word": "cordial",
+                  "pronunciation": "KOR-jee-ul",
+                  "partOfSpeech": "adjective/noun",
+                  "definition": "warm and friendly; a sweet fruit-flavored drink",
+                  "example": "The cordial welcome extended to every new employee made the office feel like a community."
+                },
+                {
+                  "word": "corporal",
+                  "pronunciation": "KOR-per-ul",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to the human body; of or for a non-commissioned military officer",
+                  "example": "Corporal punishment in schools has been banned in many countries."
+                },
+                {
+                  "word": "corporeal",
+                  "pronunciation": "kor-POR-ee-ul",
+                  "partOfSpeech": "adjective",
+                  "definition": "having a physical material form; relating to the body",
+                  "example": "The ghost story raised questions about whether a corporeal form was needed to experience pain."
+                },
+                {
+                  "word": "corps",
+                  "pronunciation": "kor",
+                  "partOfSpeech": "noun",
+                  "definition": "a body of people engaged in a particular activity; a military unit",
+                  "example": "She joined the Peace Corps after graduating and served in West Africa for two years."
+                },
+                {
+                  "word": "corpulent",
+                  "pronunciation": "KOR-pyuh-lent",
+                  "partOfSpeech": "adjective",
+                  "definition": "excessively overweight; fat",
+                  "example": "The corpulent figure in the old portrait suggested a life of great wealth and indulgence."
+                },
+                {
+                  "word": "corpus",
+                  "pronunciation": "KOR-pus",
+                  "partOfSpeech": "noun",
+                  "definition": "a collection of written texts; the main body of something",
+                  "example": "The linguist analyzed a large corpus of historical documents to study language change."
+                },
+                {
+                  "word": "decolletage",
+                  "pronunciation": "day-kol-uh-TAHZH",
+                  "partOfSpeech": "noun",
+                  "definition": "a low neckline on a woman's dress; a woman's neck and chest revealed by this",
+                  "example": "The formal gown featured an elegant decolletage that was sophisticated and understated."
+                },
+                {
+                  "word": "incarnate",
+                  "pronunciation": "in-KAR-nit",
+                  "partOfSpeech": "adjective/verb",
+                  "definition": "embodied in human form; to embody in flesh",
+                  "example": "Many fans considered him the spirit of rock and roll incarnate."
+                },
+                {
+                  "word": "ossify",
+                  "pronunciation": "OS-ih-fy",
+                  "partOfSpeech": "verb",
+                  "definition": "to turn to bone; to become rigid and unable to change",
+                  "example": "Bureaucracies tend to ossify over time and resist any new ideas or methods."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 12,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "assiduous",
+                  "pronunciation": "uh-SIJ-oo-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "showing great care and perseverance",
+                  "example": "The assiduous student reviewed her notes every night without fail."
+                },
+                {
+                  "word": "consanguinity",
+                  "pronunciation": "kon-sang-GWIN-ih-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "the quality of being descended from the same ancestor; close kinship",
+                  "example": "Marriage between close relatives is prohibited by laws against consanguinity in most societies."
+                },
+                {
+                  "word": "dermatology",
+                  "pronunciation": "dur-muh-TOL-uh-jee",
+                  "partOfSpeech": "noun",
+                  "definition": "the branch of medicine dealing with skin disorders",
+                  "example": "After developing a rare rash she was referred to a specialist in dermatology."
+                },
+                {
+                  "word": "dissident",
+                  "pronunciation": "DIS-ih-dent",
+                  "partOfSpeech": "noun/adjective",
+                  "definition": "a person who opposes official policy; opposed to official policy",
+                  "example": "The dissident was imprisoned for publishing essays critical of the government."
+                },
+                {
+                  "word": "dorsal",
+                  "pronunciation": "DOR-sul",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to the upper side or back of an animal",
+                  "example": "A shark's dorsal fin cutting through the water is an unmistakable sight."
+                },
+                {
+                  "word": "dossier",
+                  "pronunciation": "DOS-ee-ay",
+                  "partOfSpeech": "noun",
+                  "definition": "a collection of documents about a particular person, event, or subject",
+                  "example": "The spy agency maintained a detailed dossier on every person of interest."
+                },
+                {
+                  "word": "endorse",
+                  "pronunciation": "en-DORS",
+                  "partOfSpeech": "verb",
+                  "definition": "to declare public support for; to sign the back of a check",
+                  "example": "The popular athlete was paid handsomely to endorse the new sports drink."
+                },
+                {
+                  "word": "enervate",
+                  "pronunciation": "EN-er-vayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to make someone feel drained of energy or vitality",
+                  "example": "The relentless summer heat enervated the entire team before practice even began."
+                },
+                {
+                  "word": "epidermis",
+                  "pronunciation": "ep-ih-DUR-mis",
+                  "partOfSpeech": "noun",
+                  "definition": "the outer layer of the skin; the outer layer of a plant",
+                  "example": "A sunburn damages the epidermis causing redness, peeling, and pain."
+                },
+                {
+                  "word": "gastric",
+                  "pronunciation": "GAS-trik",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to the stomach",
+                  "example": "The patient complained of severe gastric pain after eating the spoiled food."
+                },
+                {
+                  "word": "gastronome",
+                  "pronunciation": "GAS-truh-nohm",
+                  "partOfSpeech": "noun",
+                  "definition": "a connoisseur of good food",
+                  "example": "As a dedicated gastronome he traveled to three cities just to sample the local specialties."
+                },
+                {
+                  "word": "sanguine",
+                  "pronunciation": "SANG-gwin",
+                  "partOfSpeech": "adjective",
+                  "definition": "optimistic especially in a difficult situation; blood-red in color",
+                  "example": "Despite the setbacks she remained sanguine about the project's ultimate success."
+                },
+                {
+                  "word": "seance",
+                  "pronunciation": "SAY-ons",
+                  "partOfSpeech": "noun",
+                  "definition": "a meeting at which people attempt to communicate with the dead",
+                  "example": "The characters in the novel held a seance to contact the spirit of the old general."
+                },
+                {
+                  "word": "sedentary",
+                  "pronunciation": "SED-en-ter-ee",
+                  "partOfSpeech": "adjective",
+                  "definition": "tending to spend much time seated; requiring little physical activity",
+                  "example": "A sedentary lifestyle combined with a poor diet increases the risk of heart disease."
+                },
+                {
+                  "word": "supersede",
+                  "pronunciation": "soo-per-SEED",
+                  "partOfSpeech": "verb",
+                  "definition": "to take the place of something previously in authority or use",
+                  "example": "Digital streaming has largely superseded physical media like DVDs."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 13,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "ambidextrous",
+                  "pronunciation": "am-bih-DEK-strus",
+                  "partOfSpeech": "adjective",
+                  "definition": "able to use both hands equally well",
+                  "example": "The ambidextrous tennis player could switch her racket between hands during long rallies."
+                },
+                {
+                  "word": "deflect",
+                  "pronunciation": "dih-FLEKT",
+                  "partOfSpeech": "verb",
+                  "definition": "to cause something to change direction; to turn aside",
+                  "example": "The goalkeeper deflected the ball just over the crossbar with a brilliant save."
+                },
+                {
+                  "word": "dexterity",
+                  "pronunciation": "dek-STER-ih-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "skill and grace in physical movement especially with the hands",
+                  "example": "Surgeons must have extraordinary dexterity to perform delicate operations."
+                },
+                {
+                  "word": "digital",
+                  "pronunciation": "DIJ-ih-tul",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to fingers; relating to data expressed as numerical digits",
+                  "example": "The digital revolution transformed how people communicate, work, and learn."
+                },
+                {
+                  "word": "emancipate",
+                  "pronunciation": "ih-MAN-sih-payt",
+                  "partOfSpeech": "verb",
+                  "definition": "to set free from legal, social, or political restriction",
+                  "example": "Lincoln's Emancipation Proclamation sought to emancipate enslaved people in Confederate states."
+                },
+                {
+                  "word": "genuflect",
+                  "pronunciation": "JEN-yuh-flekt",
+                  "partOfSpeech": "verb",
+                  "definition": "to lower one knee briefly as a sign of reverence; to be servilely obedient",
+                  "example": "Parishioners genuflect before entering the pew as a sign of reverence."
+                },
+                {
+                  "word": "inflection",
+                  "pronunciation": "in-FLEK-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "a change in the form of a word; a change in pitch or tone of voice",
+                  "example": "His voice carried an upward inflection at the end of every sentence."
+                },
+                {
+                  "word": "manacle",
+                  "pronunciation": "MAN-uh-kul",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "a metal band fastened around a prisoner's wrist; to restrain with manacles",
+                  "example": "The prisoner's wrists were bound in manacles during the courtroom hearing."
+                },
+                {
+                  "word": "mandate",
+                  "pronunciation": "MAN-dayt",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "an official order or authority; to give official authorization",
+                  "example": "The new law mandated that all public buildings install wheelchair ramps."
+                },
+                {
+                  "word": "manifest",
+                  "pronunciation": "MAN-ih-fest",
+                  "partOfSpeech": "adjective/verb",
+                  "definition": "clear and obvious; to make clear or evident",
+                  "example": "Her frustration began to manifest itself in short, clipped answers to every question."
+                },
+                {
+                  "word": "manipulate",
+                  "pronunciation": "muh-NIP-yuh-layt",
+                  "partOfSpeech": "verb",
+                  "definition": "to handle skillfully; to influence or manage in a clever way",
+                  "example": "He knew how to manipulate statistics to make his argument seem stronger than it was."
+                },
+                {
+                  "word": "rapacious",
+                  "pronunciation": "ruh-PAY-shus",
+                  "partOfSpeech": "adjective",
+                  "definition": "aggressively greedy; disposed to seize by force",
+                  "example": "The rapacious developer bought up every piece of land in the neighborhood."
+                },
+                {
+                  "word": "rapt",
+                  "pronunciation": "rapt",
+                  "partOfSpeech": "adjective",
+                  "definition": "completely absorbed; entranced",
+                  "example": "The children sat in rapt attention as the storyteller described the dragon's lair."
+                },
+                {
+                  "word": "reflection",
+                  "pronunciation": "rih-FLEK-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "the throwing back of light; serious thought; an image in a mirror",
+                  "example": "After the argument she spent the evening in quiet reflection on her own behavior."
+                },
+                {
+                  "word": "surreptitious",
+                  "pronunciation": "sur-ep-TISH-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "done secretly and without permission",
+                  "example": "He cast a surreptitious glance at his neighbor's exam paper."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 14,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "apprehend",
+                  "pronunciation": "ap-rih-HEND",
+                  "partOfSpeech": "verb",
+                  "definition": "to arrest or seize; to grasp mentally; to anticipate with fear",
+                  "example": "Police apprehended the suspect within hours of the robbery."
+                },
+                {
+                  "word": "complicity",
+                  "pronunciation": "kum-PLIS-ih-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "involvement in an illegal act or wrongdoing",
+                  "example": "Evidence of his complicity in the fraud scheme was found on his computer."
+                },
+                {
+                  "word": "comprise",
+                  "pronunciation": "kum-PRYZ",
+                  "partOfSpeech": "verb",
+                  "definition": "to consist of; to make up",
+                  "example": "The committee comprises twelve members from five different departments."
+                },
+                {
+                  "word": "duplicity",
+                  "pronunciation": "doo-PLIS-ih-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "deceitfulness; saying one thing while meaning or doing another",
+                  "example": "The duplicity of the double agent was revealed only after years of investigation."
+                },
+                {
+                  "word": "entrepreneur",
+                  "pronunciation": "on-truh-pruh-NUR",
+                  "partOfSpeech": "noun",
+                  "definition": "a person who starts and runs a business taking on financial risk",
+                  "example": "The young entrepreneur launched her app with nothing more than a laptop and a good idea."
+                },
+                {
+                  "word": "explicate",
+                  "pronunciation": "EK-splih-kayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to explain and analyze in detail",
+                  "example": "The professor took thirty minutes to explicate the dense passage from the medieval text."
+                },
+                {
+                  "word": "explicit",
+                  "pronunciation": "ik-SPLIS-it",
+                  "partOfSpeech": "adjective",
+                  "definition": "stated clearly and in detail; not implied or ambiguous",
+                  "example": "The contract included an explicit clause about prohibited uses of the intellectual property."
+                },
+                {
+                  "word": "exploit",
+                  "pronunciation": "EK-sployt",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "a bold achievement; to make full use of; to take unfair advantage of",
+                  "example": "The company was accused of exploiting cheap foreign labor to maximize profits."
+                },
+                {
+                  "word": "imply",
+                  "pronunciation": "im-PLY",
+                  "partOfSpeech": "verb",
+                  "definition": "to suggest or indicate something indirectly",
+                  "example": "Her tone implied that she was disappointed even though she said nothing critical."
+                },
+                {
+                  "word": "impregnable",
+                  "pronunciation": "im-PREG-nuh-bul",
+                  "partOfSpeech": "adjective",
+                  "definition": "unable to be captured; too strong to overcome",
+                  "example": "The castle's thick stone walls and deep moat made it virtually impregnable."
+                },
+                {
+                  "word": "ploy",
+                  "pronunciation": "ploy",
+                  "partOfSpeech": "noun",
+                  "definition": "a cunning plan or strategy intended to gain an advantage",
+                  "example": "Asking for a glass of water was just a ploy to delay bedtime."
+                },
+                {
+                  "word": "ply",
+                  "pronunciation": "ply",
+                  "partOfSpeech": "verb/noun",
+                  "definition": "to work steadily at a trade; to travel regularly over a route; a layer of material",
+                  "example": "The ferryboat plied the river between the two cities all day long."
+                },
+                {
+                  "word": "reprehend",
+                  "pronunciation": "rep-rih-HEND",
+                  "partOfSpeech": "verb",
+                  "definition": "to express sharp disapproval or criticism of",
+                  "example": "The editorial board strongly reprehended the senator's inflammatory remarks."
+                },
+                {
+                  "word": "reprisal",
+                  "pronunciation": "rih-PRY-zul",
+                  "partOfSpeech": "noun",
+                  "definition": "an act of retaliation",
+                  "example": "The bombing was feared to trigger a reprisal that could escalate into full-scale war."
+                },
+                {
+                  "word": "supplicate",
+                  "pronunciation": "SUP-lih-kayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to ask or beg for something earnestly and humbly",
+                  "example": "The villagers supplicated the king to reduce their tax burden after the failed harvest."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 15,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "aggression",
+                  "pronunciation": "uh-GRESH-un",
+                  "partOfSpeech": "noun",
+                  "definition": "hostile or violent behavior; forceful pursuit of aims",
+                  "example": "Random acts of aggression on the streets prompted increased police patrols."
+                },
+                {
+                  "word": "antipodes",
+                  "pronunciation": "an-TIP-oh-deez",
+                  "partOfSpeech": "noun",
+                  "definition": "the opposite side of the Earth; a direct opposite",
+                  "example": "Australia and New Zealand are sometimes called the antipodes because of their position relative to Europe."
+                },
+                {
+                  "word": "degradation",
+                  "pronunciation": "deg-ruh-DAY-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "the process of becoming worse; humiliation; decomposition",
+                  "example": "Soil degradation caused by overfarming threatens food production worldwide."
+                },
+                {
+                  "word": "digress",
+                  "pronunciation": "dy-GRES",
+                  "partOfSpeech": "verb",
+                  "definition": "to depart from the main subject in speech or writing",
+                  "example": "The professor tended to digress into personal anecdotes much to his students' amusement."
+                },
+                {
+                  "word": "expedient",
+                  "pronunciation": "ik-SPEE-dee-ent",
+                  "partOfSpeech": "adjective/noun",
+                  "definition": "convenient and practical though possibly improper; a means of achieving an end",
+                  "example": "Raising tuition was seen as politically expedient but educationally damaging."
+                },
+                {
+                  "word": "expedite",
+                  "pronunciation": "EK-spih-dyt",
+                  "partOfSpeech": "verb",
+                  "definition": "to make an action happen sooner; to assist the progress of",
+                  "example": "Please expedite this order — the client needs it by Friday without fail."
+                },
+                {
+                  "word": "gradation",
+                  "pronunciation": "gruh-DAY-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "a scale of successive changes; a change by degrees or stages",
+                  "example": "The artist achieved a beautiful gradation of color from deep blue to pale white."
+                },
+                {
+                  "word": "gradient",
+                  "pronunciation": "GRAY-dee-ent",
+                  "partOfSpeech": "noun",
+                  "definition": "a sloping surface; the rate of change of a variable quantity",
+                  "example": "The steep gradient of the road made cycling up the hill extremely difficult."
+                },
+                {
+                  "word": "impede",
+                  "pronunciation": "im-PEED",
+                  "partOfSpeech": "verb",
+                  "definition": "to delay or prevent by obstructing",
+                  "example": "Fallen trees blocked the road and impeded the rescue vehicles for hours."
+                },
+                {
+                  "word": "pedigree",
+                  "pronunciation": "PED-ih-gree",
+                  "partOfSpeech": "noun",
+                  "definition": "the ancestry of a person or animal; a background of distinguished lineage",
+                  "example": "The show dog's impressive pedigree traced back to three national champions."
+                },
+                {
+                  "word": "pedometer",
+                  "pronunciation": "pih-DOM-ih-ter",
+                  "partOfSpeech": "noun",
+                  "definition": "an instrument that counts the number of steps taken",
+                  "example": "She wore a pedometer to track her goal of ten thousand steps each day."
+                },
+                {
+                  "word": "podiatry",
+                  "pronunciation": "poh-DY-uh-tree",
+                  "partOfSpeech": "noun",
+                  "definition": "the branch of medicine dealing with disorders of the foot and lower leg",
+                  "example": "After months of foot pain she finally made an appointment with a podiatry specialist."
+                },
+                {
+                  "word": "podium",
+                  "pronunciation": "POH-dee-um",
+                  "partOfSpeech": "noun",
+                  "definition": "a small platform on which a speaker or conductor stands; an Olympic medal position",
+                  "example": "The gold medalist stepped up to the highest tier of the podium to receive her medal."
+                },
+                {
+                  "word": "regress",
+                  "pronunciation": "rih-GRES",
+                  "partOfSpeech": "verb/noun",
+                  "definition": "to return to an earlier or less developed state",
+                  "example": "Under extreme stress some adults regress to childlike behavior."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 16,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "ambulatory",
+                  "pronunciation": "AM-byuh-luh-tor-ee",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to walking; able to walk",
+                  "example": "The patient was ambulatory within two days of the surgery."
+                },
+                {
+                  "word": "constituent",
+                  "pronunciation": "kun-STICH-oo-ent",
+                  "partOfSpeech": "noun/adjective",
+                  "definition": "a member of a constituency; a component or ingredient",
+                  "example": "Every elected official is accountable to his or her constituents."
+                },
+                {
+                  "word": "desist",
+                  "pronunciation": "dih-SIST",
+                  "partOfSpeech": "verb",
+                  "definition": "to stop or abstain from doing something",
+                  "example": "The lawyer sent a cease-and-desist letter ordering them to stop using the trademarked name."
+                },
+                {
+                  "word": "destitute",
+                  "pronunciation": "DES-tih-toot",
+                  "partOfSpeech": "adjective",
+                  "definition": "extremely poor and lacking basic necessities",
+                  "example": "The earthquake left thousands of families destitute, without shelter or food."
+                },
+                {
+                  "word": "interstice",
+                  "pronunciation": "in-TUR-stis",
+                  "partOfSpeech": "noun",
+                  "definition": "a small gap or crack in a structure",
+                  "example": "Moss grew in every interstice between the old cobblestones of the courtyard."
+                },
+                {
+                  "word": "obstinate",
+                  "pronunciation": "OB-stih-nit",
+                  "partOfSpeech": "adjective",
+                  "definition": "stubbornly refusing to change one's opinion or course of action",
+                  "example": "The obstinate mule refused to move no matter how much the farmer coaxed it."
+                },
+                {
+                  "word": "oust",
+                  "pronunciation": "owst",
+                  "partOfSpeech": "verb",
+                  "definition": "to drive out or remove from a position",
+                  "example": "The board voted to oust the CEO following the financial scandal."
+                },
+                {
+                  "word": "preamble",
+                  "pronunciation": "PREE-am-bul",
+                  "partOfSpeech": "noun",
+                  "definition": "a preliminary statement especially the introduction to a formal document",
+                  "example": "The preamble to the Constitution explains the purpose and principles of the document."
+                },
+                {
+                  "word": "recalcitrant",
+                  "pronunciation": "rih-KAL-sih-trent",
+                  "partOfSpeech": "adjective",
+                  "definition": "having an obstinately uncooperative attitude toward authority",
+                  "example": "The recalcitrant student refused to follow classroom rules despite repeated warnings."
+                },
+                {
+                  "word": "restitution",
+                  "pronunciation": "res-tih-TOO-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "the restoration of something lost or stolen; making amends",
+                  "example": "As part of his sentence he was ordered to pay restitution to all of his victims."
+                },
+                {
+                  "word": "restive",
+                  "pronunciation": "RES-tiv",
+                  "partOfSpeech": "adjective",
+                  "definition": "unable to keep still; restless or impatient",
+                  "example": "The long delay made the crowd increasingly restive and difficult to manage."
+                },
+                {
+                  "word": "stance",
+                  "pronunciation": "stans",
+                  "partOfSpeech": "noun",
+                  "definition": "the way in which someone stands; a person's position or attitude on an issue",
+                  "example": "The candidate's stance on healthcare reform was the central issue of the debate."
+                },
+                {
+                  "word": "static",
+                  "pronunciation": "STAT-ik",
+                  "partOfSpeech": "adjective/noun",
+                  "definition": "lacking movement or change; electrical interference causing noise",
+                  "example": "House prices remained static throughout the year despite rising demand."
+                },
+                {
+                  "word": "subsist",
+                  "pronunciation": "sub-SIST",
+                  "partOfSpeech": "verb",
+                  "definition": "to maintain or support oneself especially at a minimal level",
+                  "example": "The survivors had to subsist on berries and insects for three weeks before being rescued."
                 }
               ]
             }
