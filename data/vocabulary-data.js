@@ -1683,7 +1683,7 @@ const vocabularyData = {
                   "example": "The inception of the new project was marked by a grand opening ceremony."
                 },
                 {
-                  "word": "incipiant",
+                  "word": "incipient",
                   "pronunciation": "in-SIP-ee-uhnt",
                   "partOfSpeech": "adjective",
                   "definition": "beginning to develop or exist",
@@ -1897,27 +1897,6 @@ const vocabularyData = {
                   "partOfSpeech": "verb",
                   "definition": "to make or become less",
                   "example": "The company's profits began to diminish after the economic downturn."
-                },
-                {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
-                },
-                {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
-                },
-                {
-                  "word": "",
-                  "pronunciation": "",
-                  "partOfSpeech": "",
-                  "definition": "",
-                  "example": ""
                 }
               ]
             }
@@ -2113,11 +2092,11 @@ const vocabularyData = {
                   "example": " She is in the prime of her career."
                 },
                 {
-                  "word": "primieval",
+                  "word": "primeval",
                   "pronunciation": "PRI-muh-vuhl",
                   "partOfSpeech": "adjective",
                   "definition": " of or relating to the earliest ages; ancient",
-                  "example": " The primieval forest was untouched by human activity."
+                  "example": " The primeval forest was untouched by human activity."
                 },
                 {
                   "word": "primorial",
@@ -2162,10 +2141,10 @@ const vocabularyData = {
                   "example": "The posterior part of the brain is responsible for processing visual information."
                 },
                 {
-                  "word": "posteary",
-                  "pronunciation": " poh-STEER-ee",
+                  "word": "posterity",
+                  "pronunciation": " poh-STEER-i-tgitee",
                   "partOfSpeech": "noun",
-                  "definition": " a person who lives after the death of another",
+                  "definition": "all future generations of people",
                   "example": "  The poet's works were published posthumously, gaining recognition after his death."
                 },
                 {
@@ -2176,7 +2155,7 @@ const vocabularyData = {
                   "example": "The author received a posthumous award for his contributions to literature."
                 },
                 {
-                  "word": "postone",
+                  "word": "postpone",
                   "pronunciation": " pohs-TOHN",
                   "partOfSpeech": "verb",
                   "definition": "to delay or defer something",
