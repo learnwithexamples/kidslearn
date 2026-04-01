@@ -892,7 +892,7 @@ const vocabularyData = {
         }
       ]
     },
-    "book-5": {
+        "book-5": {
       "title": "Book 5",
       "level": "Elementary",
       "description": "Elementary level vocabulary from Greek and Latin roots",
@@ -919,6 +919,842 @@ const vocabularyData = {
                   "partOfSpeech": "verb",
                   "definition": "to join together to form a single unit",
                   "example": "The two companies will unite to form a larger corporation."
+                },
+                {
+                  "word": "circuit",
+                  "pronunciation": "SUR-kit",
+                  "partOfSpeech": "noun",
+                  "definition": "a roughly circular path or route; the complete path of an electric current",
+                  "example": "The electrician checked every circuit in the house for faulty wiring."
+                },
+                {
+                  "word": "circular",
+                  "pronunciation": "SUR-kyuh-ler",
+                  "partOfSpeech": "adjective",
+                  "definition": "having the form of a circle; moving in a circle",
+                  "example": "The circular track at the park is exactly one mile around."
+                },
+                {
+                  "word": "circulate",
+                  "pronunciation": "SUR-kyuh-layt",
+                  "partOfSpeech": "verb",
+                  "definition": "to move continuously in a closed path; to pass from place to place",
+                  "example": "Blood circulates through the heart and lungs many times each minute."
+                },
+                {
+                  "word": "cycle",
+                  "pronunciation": "SY-kul",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "a series of events that repeats; to ride a bicycle",
+                  "example": "The water cycle moves moisture from oceans to clouds to rain and back again."
+                },
+                {
+                  "word": "cyclone",
+                  "pronunciation": "SY-klohn",
+                  "partOfSpeech": "noun",
+                  "definition": "a system of winds rotating around a center of low pressure; a violent tropical storm",
+                  "example": "The cyclone brought high winds and heavy rain to the coastal towns."
+                },
+                {
+                  "word": "recycle",
+                  "pronunciation": "ree-SY-kul",
+                  "partOfSpeech": "verb",
+                  "definition": "to convert waste into reusable material; to use again",
+                  "example": "Our school encourages students to recycle paper, cans, and plastic bottles."
+                },
+                {
+                  "word": "semicircle",
+                  "pronunciation": "SEM-ee-sur-kul",
+                  "partOfSpeech": "noun",
+                  "definition": "half of a circle",
+                  "example": "The students arranged their desks in a semicircle facing the board."
+                },
+                {
+                  "word": "unicycle",
+                  "pronunciation": "YOO-nih-sy-kul",
+                  "partOfSpeech": "noun",
+                  "definition": "a cycle with a single wheel, propelled by pedaling",
+                  "example": "Learning to balance on a unicycle takes a great deal of practice."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "dependent",
+                  "pronunciation": "dih-PEN-dent",
+                  "partOfSpeech": "adjective",
+                  "definition": "relying on another for support; conditional on something",
+                  "example": "Young children are dependent on adults to meet their basic needs."
+                },
+                {
+                  "word": "equality",
+                  "pronunciation": "ih-KWOL-ih-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "the state of being equal in rights, opportunities, or status",
+                  "example": "The civil rights movement fought for equality for all citizens."
+                },
+                {
+                  "word": "equate",
+                  "pronunciation": "ih-KWAYT",
+                  "partOfSpeech": "verb",
+                  "definition": "to consider or treat as equal or equivalent",
+                  "example": "You should not equate price with quality — some cheap products are excellent."
+                },
+                {
+                  "word": "equator",
+                  "pronunciation": "ih-KWAY-ter",
+                  "partOfSpeech": "noun",
+                  "definition": "the imaginary line around the middle of the Earth equidistant from both poles",
+                  "example": "Countries near the equator experience warm temperatures throughout the year."
+                },
+                {
+                  "word": "equidistant",
+                  "pronunciation": "ee-kwih-DIS-tent",
+                  "partOfSpeech": "adjective",
+                  "definition": "at equal distances from two or more places",
+                  "example": "The referee placed the ball at a point equidistant from both goal posts."
+                },
+                {
+                  "word": "equilateral",
+                  "pronunciation": "ee-kwih-LAT-er-ul",
+                  "partOfSpeech": "adjective",
+                  "definition": "having all sides equal in length",
+                  "example": "An equilateral triangle has three sides of exactly the same length."
+                },
+                {
+                  "word": "pending",
+                  "pronunciation": "PEN-ding",
+                  "partOfSpeech": "adjective/preposition",
+                  "definition": "awaiting a decision or outcome; while waiting for",
+                  "example": "The contract is pending approval from the company's board of directors."
+                },
+                {
+                  "word": "pendulum",
+                  "pronunciation": "PEN-juh-lum",
+                  "partOfSpeech": "noun",
+                  "definition": "a weight hung from a fixed point that swings freely; something that shifts from one extreme to another",
+                  "example": "The pendulum of the grandfather clock swung back and forth with a steady tick."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "interactive",
+                  "pronunciation": "in-ter-AK-tiv",
+                  "partOfSpeech": "adjective",
+                  "definition": "allowing communication between a computer and a user; involving people working together",
+                  "example": "The interactive exhibit let visitors control the display with hand gestures."
+                },
+                {
+                  "word": "interfere",
+                  "pronunciation": "in-ter-FEER",
+                  "partOfSpeech": "verb",
+                  "definition": "to get in the way of; to involve oneself without being asked",
+                  "example": "Please do not interfere with the experiment once it has started."
+                },
+                {
+                  "word": "intermittent",
+                  "pronunciation": "in-ter-MIT-ent",
+                  "partOfSpeech": "adjective",
+                  "definition": "stopping and starting at irregular intervals",
+                  "example": "The forecast called for intermittent showers throughout the afternoon."
+                },
+                {
+                  "word": "intersect",
+                  "pronunciation": "in-ter-SEKT",
+                  "partOfSpeech": "verb",
+                  "definition": "to cross or divide by passing through; to meet at a point",
+                  "example": "Main Street and Oak Avenue intersect right in the center of town."
+                },
+                {
+                  "word": "interval",
+                  "pronunciation": "IN-ter-vul",
+                  "partOfSpeech": "noun",
+                  "definition": "a space of time between events; the difference in pitch between two musical notes",
+                  "example": "The bus arrives at fifteen-minute intervals during rush hour."
+                },
+                {
+                  "word": "transact",
+                  "pronunciation": "tran-ZAKT",
+                  "partOfSpeech": "verb",
+                  "definition": "to conduct or carry out business or dealings",
+                  "example": "You can now transact almost any banking task online without visiting a branch."
+                },
+                {
+                  "word": "transfer",
+                  "pronunciation": "TRANS-fer",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "moving something from one place or person to another; to move",
+                  "example": "She arranged a transfer of funds to her savings account."
+                },
+                {
+                  "word": "transfusion",
+                  "pronunciation": "trans-FYOO-zhun",
+                  "partOfSpeech": "noun",
+                  "definition": "a process of transferring blood or fluid into a person's bloodstream",
+                  "example": "The accident victim required an emergency blood transfusion during surgery."
+                },
+                {
+                  "word": "transmit",
+                  "pronunciation": "trans-MIT",
+                  "partOfSpeech": "verb",
+                  "definition": "to cause to pass from one place or person to another; to broadcast",
+                  "example": "Satellites transmit signals around the world in a fraction of a second."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "aquaculture",
+                  "pronunciation": "AK-wuh-kul-cher",
+                  "partOfSpeech": "noun",
+                  "definition": "the farming of fish and other aquatic organisms in controlled conditions",
+                  "example": "Aquaculture supplies much of the salmon and shrimp sold in supermarkets today."
+                },
+                {
+                  "word": "aquamarine",
+                  "pronunciation": "ak-wuh-muh-REEN",
+                  "partOfSpeech": "noun/adjective",
+                  "definition": "a blue-green gemstone or color; light blue-green",
+                  "example": "The artist used an aquamarine paint to capture the color of the tropical sea."
+                },
+                {
+                  "word": "aquatic",
+                  "pronunciation": "uh-KWAT-ik",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to water; living or taking place in water",
+                  "example": "Dolphins are aquatic mammals that breathe air but spend their entire lives in the ocean."
+                },
+                {
+                  "word": "Mediterranean",
+                  "pronunciation": "med-ih-tuh-RAY-nee-un",
+                  "partOfSpeech": "adjective/noun",
+                  "definition": "relating to the Mediterranean Sea or the countries around it",
+                  "example": "Mediterranean cuisine uses olive oil, fresh vegetables, and herbs abundantly."
+                },
+                {
+                  "word": "subterranean",
+                  "pronunciation": "sub-tuh-RAY-nee-un",
+                  "partOfSpeech": "adjective",
+                  "definition": "existing, occurring, or done underground",
+                  "example": "The hikers discovered a subterranean cave hidden beneath the rocky hillside."
+                },
+                {
+                  "word": "terrace",
+                  "pronunciation": "TER-is",
+                  "partOfSpeech": "noun",
+                  "definition": "a flat area next to a building used as an outdoor space; a raised flat platform of earth",
+                  "example": "The family ate dinner on the terrace and watched the sunset over the valley."
+                },
+                {
+                  "word": "terrain",
+                  "pronunciation": "tuh-RAYN",
+                  "partOfSpeech": "noun",
+                  "definition": "the physical features of a stretch of land",
+                  "example": "The mountain terrain made the hike far more challenging than expected."
+                },
+                {
+                  "word": "territory",
+                  "pronunciation": "TER-ih-tor-ee",
+                  "partOfSpeech": "noun",
+                  "definition": "an area of land under the control of a particular ruler or state; the area an animal defends",
+                  "example": "The hawk marked out its territory and drove away any rival birds."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "astronaut",
+                  "pronunciation": "AS-troh-nawt",
+                  "partOfSpeech": "noun",
+                  "definition": "a person trained to travel in spacecraft",
+                  "example": "The astronaut spent six months aboard the International Space Station."
+                },
+                {
+                  "word": "astronomical",
+                  "pronunciation": "as-troh-NOM-ih-kul",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to astronomy; very large",
+                  "example": "The cost of replacing every window in the skyscraper was astronomical."
+                },
+                {
+                  "word": "astronomy",
+                  "pronunciation": "uh-STRON-oh-mee",
+                  "partOfSpeech": "noun",
+                  "definition": "the scientific study of stars, planets, and the universe",
+                  "example": "She bought a telescope so she could pursue her interest in astronomy."
+                },
+                {
+                  "word": "telecast",
+                  "pronunciation": "TEL-ih-kast",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "a television broadcast; to broadcast by television",
+                  "example": "The championship game was telecast live to viewers in thirty countries."
+                },
+                {
+                  "word": "teleconference",
+                  "pronunciation": "tel-ih-KON-fer-ens",
+                  "partOfSpeech": "noun",
+                  "definition": "a conference in which participants in different locations are linked by telecommunications",
+                  "example": "The team held a teleconference to review the project with colleagues overseas."
+                },
+                {
+                  "word": "telegraph",
+                  "pronunciation": "TEL-ih-graf",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "a system for sending messages using electrical signals; to send such a message",
+                  "example": "In the 1800s, news was transmitted across the country by telegraph."
+                },
+                {
+                  "word": "telemarketing",
+                  "pronunciation": "tel-ih-MAR-kih-ting",
+                  "partOfSpeech": "noun",
+                  "definition": "the marketing of goods or services by telephone",
+                  "example": "The company's telemarketing team called hundreds of potential customers each day."
+                },
+                {
+                  "word": "telescope",
+                  "pronunciation": "TEL-ih-skohp",
+                  "partOfSpeech": "noun",
+                  "definition": "an optical instrument for observing distant objects",
+                  "example": "With a small telescope you can see the craters on the surface of the moon."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 7,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "inactive",
+                  "pronunciation": "in-AK-tiv",
+                  "partOfSpeech": "adjective",
+                  "definition": "not active; not working or in use",
+                  "example": "The volcano has been inactive for more than three hundred years."
+                },
+                {
+                  "word": "informal",
+                  "pronunciation": "in-FOR-mul",
+                  "partOfSpeech": "adjective",
+                  "definition": "not official or formal; relaxed and casual",
+                  "example": "The meeting was informal, so employees were encouraged to share ideas freely."
+                },
+                {
+                  "word": "insignificant",
+                  "pronunciation": "in-sig-NIF-ih-kent",
+                  "partOfSpeech": "adjective",
+                  "definition": "too small or unimportant to be worth attention",
+                  "example": "The town was so small it seemed insignificant on the national map."
+                },
+                {
+                  "word": "insomnia",
+                  "pronunciation": "in-SOM-nee-uh",
+                  "partOfSpeech": "noun",
+                  "definition": "inability to sleep",
+                  "example": "Stress and worry are common causes of insomnia in students before exams."
+                },
+                {
+                  "word": "semiannual",
+                  "pronunciation": "sem-ee-AN-yoo-ul",
+                  "partOfSpeech": "adjective",
+                  "definition": "occurring twice a year",
+                  "example": "The dentist recommended semiannual checkups to keep her teeth healthy."
+                },
+                {
+                  "word": "semicolon",
+                  "pronunciation": "SEM-ee-koh-lun",
+                  "partOfSpeech": "noun",
+                  "definition": "a punctuation mark (;) used to link two closely related independent clauses",
+                  "example": "She used a semicolon to join the two sentences without making them completely separate."
+                },
+                {
+                  "word": "semiconscious",
+                  "pronunciation": "sem-ee-KON-shus",
+                  "partOfSpeech": "adjective",
+                  "definition": "partially conscious; not fully awake or aware",
+                  "example": "The patient was semiconscious when the paramedics arrived on the scene."
+                },
+                {
+                  "word": "semiformal",
+                  "pronunciation": "sem-ee-FOR-mul",
+                  "partOfSpeech": "adjective",
+                  "definition": "partly formal; less formal than formal but more formal than casual",
+                  "example": "The dance was semiformal, so students wore dresses and dress shirts but not tuxedos."
+                },
+                {
+                  "word": "semiprecious",
+                  "pronunciation": "sem-ee-PRESH-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "having value but considered less valuable than precious gems",
+                  "example": "Amethyst and turquoise are examples of semiprecious stones used in jewelry."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 9,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "civics",
+                  "pronunciation": "SIV-iks",
+                  "partOfSpeech": "noun",
+                  "definition": "the study of rights and duties of citizenship",
+                  "example": "The civics class taught students how local and national government functions."
+                },
+                {
+                  "word": "civil",
+                  "pronunciation": "SIV-ul",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to ordinary citizens; polite and courteous",
+                  "example": "Even during the heated debate, both sides managed to remain civil."
+                },
+                {
+                  "word": "civilian",
+                  "pronunciation": "sih-VIL-yun",
+                  "partOfSpeech": "noun/adjective",
+                  "definition": "a person not in the armed forces or police; relating to civilians",
+                  "example": "After years of military service he returned to civilian life and started a business."
+                },
+                {
+                  "word": "civility",
+                  "pronunciation": "sih-VIL-ih-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "polite and courteous behavior; formal politeness",
+                  "example": "The teacher insisted on civility in all classroom discussions, no matter how heated."
+                },
+                {
+                  "word": "coordinate",
+                  "pronunciation": "koh-OR-dih-nayt",
+                  "partOfSpeech": "verb/noun",
+                  "definition": "to organize people or things to work together effectively; a set of values locating a point",
+                  "example": "She volunteered to coordinate the school's community service project."
+                },
+                {
+                  "word": "extraordinary",
+                  "pronunciation": "ek-STROR-dih-ner-ee",
+                  "partOfSpeech": "adjective",
+                  "definition": "very unusual or remarkable; beyond the ordinary",
+                  "example": "The young pianist gave an extraordinary performance that stunned the audience."
+                },
+                {
+                  "word": "ordinarily",
+                  "pronunciation": "or-dih-NAIR-ih-lee",
+                  "partOfSpeech": "adverb",
+                  "definition": "in the usual course of events; normally",
+                  "example": "Ordinarily she walked to school, but today she took the bus because of the rain."
+                },
+                {
+                  "word": "uncivilized",
+                  "pronunciation": "un-SIV-ih-lyzd",
+                  "partOfSpeech": "adjective",
+                  "definition": "not considered to behave according to civilized norms; barbaric",
+                  "example": "The explorer described the remote island as wild and uncivilized by modern standards."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 10,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "diameter",
+                  "pronunciation": "dy-AM-ih-ter",
+                  "partOfSpeech": "noun",
+                  "definition": "a straight line passing through the center of a circle from side to side",
+                  "example": "The pizza had a diameter of twelve inches — enough for four people."
+                },
+                {
+                  "word": "geometry",
+                  "pronunciation": "jee-OM-ih-tree",
+                  "partOfSpeech": "noun",
+                  "definition": "the branch of mathematics concerned with shapes, sizes, and properties of space",
+                  "example": "Geometry teaches students about angles, triangles, circles, and three-dimensional forms."
+                },
+                {
+                  "word": "metronome",
+                  "pronunciation": "MET-roh-nohm",
+                  "partOfSpeech": "noun",
+                  "definition": "a device that marks exact time in music with a regular tick",
+                  "example": "The piano student practiced her scales using a metronome set to sixty beats per minute."
+                },
+                {
+                  "word": "perimeter",
+                  "pronunciation": "puh-RIM-ih-ter",
+                  "partOfSpeech": "noun",
+                  "definition": "the continuous line forming the boundary of a closed figure; its total length",
+                  "example": "To find the perimeter of a rectangle, add the lengths of all four sides."
+                },
+                {
+                  "word": "symmetrical",
+                  "pronunciation": "sih-MET-rih-kul",
+                  "partOfSpeech": "adjective",
+                  "definition": "made up of exactly similar parts facing each other; balanced",
+                  "example": "A butterfly's wings are nearly perfectly symmetrical on either side of its body."
+                },
+                {
+                  "word": "thermal",
+                  "pronunciation": "THUR-mul",
+                  "partOfSpeech": "adjective/noun",
+                  "definition": "relating to heat; a rising current of warm air used by birds and gliders",
+                  "example": "The hawk rode a thermal high above the valley without flapping its wings."
+                },
+                {
+                  "word": "thermometer",
+                  "pronunciation": "ther-MOM-ih-ter",
+                  "partOfSpeech": "noun",
+                  "definition": "an instrument for measuring temperature",
+                  "example": "The nurse placed a thermometer under the patient's tongue to check for fever."
+                },
+                {
+                  "word": "thermostat",
+                  "pronunciation": "THUR-moh-stat",
+                  "partOfSpeech": "noun",
+                  "definition": "a device that automatically adjusts temperature by switching heating or cooling on and off",
+                  "example": "She set the thermostat to sixty-eight degrees before leaving for work."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 11,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "construction",
+                  "pronunciation": "kun-STRUK-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "the process of building something; a structure that has been built",
+                  "example": "The construction of the new bridge will take approximately three years."
+                },
+                {
+                  "word": "contraction",
+                  "pronunciation": "kun-TRAK-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "a shortening of a word by omission of letters; a shortening or tightening",
+                  "example": "The word 'don't' is a contraction of 'do not.'"
+                },
+                {
+                  "word": "destructive",
+                  "pronunciation": "dih-STRUK-tiv",
+                  "partOfSpeech": "adjective",
+                  "definition": "causing great damage; tending to destroy",
+                  "example": "The destructive tornado tore through the neighborhood in less than a minute."
+                },
+                {
+                  "word": "extract",
+                  "pronunciation": "EK-strakt",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "a preparation obtained from something; to remove or take out forcibly",
+                  "example": "The dentist had to extract the badly damaged tooth."
+                },
+                {
+                  "word": "protractor",
+                  "pronunciation": "proh-TRAK-ter",
+                  "partOfSpeech": "noun",
+                  "definition": "a semicircular instrument for measuring angles",
+                  "example": "Every student in geometry class used a protractor to measure the angles in the triangle."
+                },
+                {
+                  "word": "reconstruct",
+                  "pronunciation": "ree-kun-STRUKT",
+                  "partOfSpeech": "verb",
+                  "definition": "to build or form again after damage; to piece together past events",
+                  "example": "Archaeologists worked to reconstruct the ancient temple from thousands of fragments."
+                },
+                {
+                  "word": "retract",
+                  "pronunciation": "rih-TRAKT",
+                  "partOfSpeech": "verb",
+                  "definition": "to draw back; to withdraw a statement",
+                  "example": "The landing gear retracts automatically after the plane lifts off."
+                },
+                {
+                  "word": "structure",
+                  "pronunciation": "STRUK-cher",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "something built; the arrangement of parts; to arrange",
+                  "example": "The suspension bridge is an impressive structure spanning the entire river gorge."
+                },
+                {
+                  "word": "traction",
+                  "pronunciation": "TRAK-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "the grip of a wheel or tyre on a surface; pulling force; an idea gaining support",
+                  "example": "New snow tires gave the car better traction on the icy mountain road."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 13,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "abrupt",
+                  "pronunciation": "uh-BRUPT",
+                  "partOfSpeech": "adjective",
+                  "definition": "sudden and unexpected; not smooth; curt in manner",
+                  "example": "The meeting came to an abrupt end when the fire alarm went off."
+                },
+                {
+                  "word": "disrupt",
+                  "pronunciation": "dis-RUPT",
+                  "partOfSpeech": "verb",
+                  "definition": "to interrupt the normal course of something; to cause disorder",
+                  "example": "A loud noise from outside disrupted the test and caused everyone to look up."
+                },
+                {
+                  "word": "fractional",
+                  "pronunciation": "FRAK-shun-ul",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to a fraction; very small",
+                  "example": "There was only a fractional difference in time between the two swimmers."
+                },
+                {
+                  "word": "fracture",
+                  "pronunciation": "FRAK-cher",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "a break or crack in a bone or hard object; to break or crack",
+                  "example": "The x-ray revealed a hairline fracture in the bone just below her wrist."
+                },
+                {
+                  "word": "fragility",
+                  "pronunciation": "fruh-JIL-ih-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "the quality of being easily broken or damaged; delicateness",
+                  "example": "The fragility of the ancient vase made the museum staff handle it with extreme care."
+                },
+                {
+                  "word": "fragment",
+                  "pronunciation": "FRAG-ment",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "a small part broken off; to break into small pieces",
+                  "example": "Archaeologists found fragments of pottery scattered across the ancient site."
+                },
+                {
+                  "word": "interruption",
+                  "pronunciation": "in-tuh-RUP-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "a break in continuity; something that stops an activity temporarily",
+                  "example": "The interruption by a late arrival broke the speaker's concentration mid-sentence."
+                },
+                {
+                  "word": "rupture",
+                  "pronunciation": "RUP-cher",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "a break or breach; to break or burst suddenly",
+                  "example": "A water main rupture flooded the street and halted traffic for several hours."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 14,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "basement",
+                  "pronunciation": "BAYS-ment",
+                  "partOfSpeech": "noun",
+                  "definition": "the floor of a building that is below street level",
+                  "example": "The family kept their old furniture and holiday decorations in the basement."
+                },
+                {
+                  "word": "basis",
+                  "pronunciation": "BAY-sis",
+                  "partOfSpeech": "noun",
+                  "definition": "the underlying support for an idea or argument; the foundation",
+                  "example": "Hard work and honesty formed the basis of his philosophy for success."
+                },
+                {
+                  "word": "bass",
+                  "pronunciation": "bays",
+                  "partOfSpeech": "noun/adjective",
+                  "definition": "the lowest part in music; a type of freshwater fish; low in pitch",
+                  "example": "The bass guitar provides the deep rhythmic foundation for the rest of the band."
+                },
+                {
+                  "word": "composition",
+                  "pronunciation": "kom-puh-ZIH-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "a piece of writing or music; the way in which something is made up",
+                  "example": "The composition she wrote for the school concert was performed by the full orchestra."
+                },
+                {
+                  "word": "dispose",
+                  "pronunciation": "dih-SPOHZ",
+                  "partOfSpeech": "verb",
+                  "definition": "to get rid of; to place or arrange; to make willing",
+                  "example": "Please dispose of all litter in the bins provided along the trail."
+                },
+                {
+                  "word": "exposure",
+                  "pronunciation": "ek-SPOH-zher",
+                  "partOfSpeech": "noun",
+                  "definition": "the state of being exposed; the amount of time film is exposed to light",
+                  "example": "Long exposure to direct sunlight without sunscreen can damage the skin."
+                },
+                {
+                  "word": "position",
+                  "pronunciation": "puh-ZIH-shun",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "a place where someone or something is; a point of view; to place",
+                  "example": "She applied for the position of team captain at the start of the season."
+                },
+                {
+                  "word": "positive",
+                  "pronunciation": "POZ-ih-tiv",
+                  "partOfSpeech": "adjective",
+                  "definition": "constructive and confident; having a value greater than zero; certain",
+                  "example": "Maintaining a positive attitude helped him push through the hardest part of the race."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 15,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "committee",
+                  "pronunciation": "kuh-MIT-ee",
+                  "partOfSpeech": "noun",
+                  "definition": "a group selected to manage or investigate a particular matter",
+                  "example": "The school committee met to review the proposals for the new gymnasium."
+                },
+                {
+                  "word": "communicate",
+                  "pronunciation": "kuh-MYOO-nih-kayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to share or exchange information; to convey a feeling",
+                  "example": "Athletes learn to communicate effectively with their teammates during play."
+                },
+                {
+                  "word": "conjunction",
+                  "pronunciation": "kun-JUNGK-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "a word used to connect clauses; the occurrence of two events at the same time",
+                  "example": "The conjunction 'but' shows contrast between two ideas in a sentence."
+                },
+                {
+                  "word": "converse",
+                  "pronunciation": "kun-VURS",
+                  "partOfSpeech": "verb/noun",
+                  "definition": "to talk informally; the opposite or reverse of something",
+                  "example": "She loved to converse with her grandfather about his childhood adventures."
+                },
+                {
+                  "word": "reaction",
+                  "pronunciation": "ree-AK-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "a response to an event or situation; a chemical change",
+                  "example": "Her reaction to the surprise party was a mix of shock and delight."
+                },
+                {
+                  "word": "reelect",
+                  "pronunciation": "ree-ih-LEKT",
+                  "partOfSpeech": "verb",
+                  "definition": "to elect someone again to the same position",
+                  "example": "The community voted to reelect the mayor for a second four-year term."
+                },
+                {
+                  "word": "reflect",
+                  "pronunciation": "rih-FLEKT",
+                  "partOfSpeech": "verb",
+                  "definition": "to throw back light, heat, or sound; to think carefully; to bring credit or discredit",
+                  "example": "The still water reflected the mountains perfectly like a giant mirror."
+                },
+                {
+                  "word": "relate",
+                  "pronunciation": "rih-LAYT",
+                  "partOfSpeech": "verb",
+                  "definition": "to make or show a connection between; to feel sympathy with",
+                  "example": "She found it easy to relate to the main character in the novel."
                 }
               ]
             }
