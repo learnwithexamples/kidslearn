@@ -1,7 +1,7 @@
 // Vocabulary Data for Classical Roots Books
 const vocabularyData = {
   "books": {
-    "book-4": {
+        "book-4": {
       "title": "Book 4",
       "level": "Elementary",
       "description": "Elementary level vocabulary from Greek and Latin roots",
@@ -35,6 +35,62 @@ const vocabularyData = {
                   "partOfSpeech": "adjective",
                   "definition": "following proper rules or customs; official",
                   "example": "The wedding was a formal event requiring fancy dress."
+                },
+                {
+                  "word": "gradually",
+                  "pronunciation": "GRAJ-oo-uh-lee",
+                  "partOfSpeech": "adverb",
+                  "definition": "slowly and in small stages; by degrees",
+                  "example": "The weather gradually improved as the storm moved away."
+                },
+                {
+                  "word": "graduate",
+                  "pronunciation": "GRAJ-oo-ayt",
+                  "partOfSpeech": "verb/noun",
+                  "definition": "to earn a degree or diploma; a person who has done so",
+                  "example": "She worked hard to graduate at the top of her class."
+                },
+                {
+                  "word": "graduation",
+                  "pronunciation": "graj-oo-AY-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "the ceremony for receiving a degree or diploma",
+                  "example": "The whole family attended his graduation from middle school."
+                },
+                {
+                  "word": "sensation",
+                  "pronunciation": "sen-SAY-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "a physical feeling caused by something touching the body; great excitement",
+                  "example": "The ice-cold water created a tingling sensation on her skin."
+                },
+                {
+                  "word": "sensational",
+                  "pronunciation": "sen-SAY-shun-ul",
+                  "partOfSpeech": "adjective",
+                  "definition": "causing great excitement or interest",
+                  "example": "The magician performed a sensational trick that amazed the crowd."
+                },
+                {
+                  "word": "senseless",
+                  "pronunciation": "SEN-sles",
+                  "partOfSpeech": "adjective",
+                  "definition": "lacking common sense; unconscious",
+                  "example": "It was senseless to go outside without a coat in the snow."
+                },
+                {
+                  "word": "sensible",
+                  "pronunciation": "SEN-suh-bul",
+                  "partOfSpeech": "adjective",
+                  "definition": "showing good judgment; practical",
+                  "example": "Wearing a helmet when biking is the sensible thing to do."
+                },
+                {
+                  "word": "sensitive",
+                  "pronunciation": "SEN-suh-tiv",
+                  "partOfSpeech": "adjective",
+                  "definition": "quick to feel or notice; easily affected by others' feelings",
+                  "example": "She is very sensitive to criticism and takes it personally."
                 }
               ]
             },
@@ -83,6 +139,752 @@ const vocabularyData = {
                   "partOfSpeech": "noun",
                   "definition": "the act or process of moving",
                   "example": "The motion of the waves rocked the boat."
+                },
+                {
+                  "word": "motel",
+                  "pronunciation": "moh-TEL",
+                  "partOfSpeech": "noun",
+                  "definition": "a roadside hotel for motorists",
+                  "example": "The family stopped at a motel halfway through their long road trip."
+                },
+                {
+                  "word": "motionless",
+                  "pronunciation": "MOH-shun-les",
+                  "partOfSpeech": "adjective",
+                  "definition": "not moving; completely still",
+                  "example": "The deer stood motionless at the edge of the forest."
+                },
+                {
+                  "word": "motivate",
+                  "pronunciation": "MOH-tuh-vayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to cause someone to act or try harder",
+                  "example": "The coach's pep talk helped motivate the team before the big game."
+                },
+                {
+                  "word": "motive",
+                  "pronunciation": "MOH-tiv",
+                  "partOfSpeech": "noun",
+                  "definition": "a reason for doing something",
+                  "example": "The detective tried to find the motive behind the mysterious disappearance."
+                },
+                {
+                  "word": "motor",
+                  "pronunciation": "MOH-ter",
+                  "partOfSpeech": "noun",
+                  "definition": "a machine that produces power to make something move",
+                  "example": "The electric motor in the toy car made its wheels spin."
+                },
+                {
+                  "word": "numerator",
+                  "pronunciation": "NYOO-mer-ay-ter",
+                  "partOfSpeech": "noun",
+                  "definition": "the top number in a fraction that tells how many parts you have",
+                  "example": "In the fraction three-fourths, three is the numerator."
+                },
+                {
+                  "word": "numerical",
+                  "pronunciation": "nyoo-MER-ih-kul",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to or expressed as numbers",
+                  "example": "The students arranged the cards in numerical order from one to twenty."
+                },
+                {
+                  "word": "numerous",
+                  "pronunciation": "NYOO-mer-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "many; consisting of a great number",
+                  "example": "The park was home to numerous species of birds and butterflies."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "delicacy",
+                  "pronunciation": "DEL-ih-kuh-see",
+                  "partOfSpeech": "noun",
+                  "definition": "something that is fine or delicate; a rare, exotic food",
+                  "example": "Oysters are considered a delicacy in many parts of the world."
+                },
+                {
+                  "word": "delicate",
+                  "pronunciation": "DEL-ih-kit",
+                  "partOfSpeech": "adjective",
+                  "definition": "very fine in texture or structure; easily broken or damaged",
+                  "example": "The lace tablecloth was so delicate that she handled it with great care."
+                },
+                {
+                  "word": "delicatessen",
+                  "pronunciation": "del-ih-kuh-TES-en",
+                  "partOfSpeech": "noun",
+                  "definition": "a store or section of a store that sells prepared foods and specialty meats",
+                  "example": "Mom picked up sandwiches at the delicatessen on the way home."
+                },
+                {
+                  "word": "delicious",
+                  "pronunciation": "dih-LISH-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "highly pleasing to the taste or smell",
+                  "example": "The freshly baked cookies smelled absolutely delicious."
+                },
+                {
+                  "word": "delightful",
+                  "pronunciation": "dih-LYT-ful",
+                  "partOfSpeech": "adjective",
+                  "definition": "causing delight; charming and pleasant",
+                  "example": "We had a delightful afternoon picnicking in the sunny park."
+                },
+                {
+                  "word": "quest",
+                  "pronunciation": "kwest",
+                  "partOfSpeech": "noun",
+                  "definition": "a long search for something important",
+                  "example": "The knight set off on a quest to find the mysterious treasure."
+                },
+                {
+                  "word": "questionable",
+                  "pronunciation": "KWES-chun-uh-bul",
+                  "partOfSpeech": "adjective",
+                  "definition": "doubtful; not certain or reliable",
+                  "example": "His questionable excuse for missing practice didn't convince the coach."
+                },
+                {
+                  "word": "questionnaire",
+                  "pronunciation": "kwes-chun-AIR",
+                  "partOfSpeech": "noun",
+                  "definition": "a written set of questions used to gather information",
+                  "example": "Each student filled out a questionnaire about their favorite subjects."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "partial",
+                  "pronunciation": "PAR-shul",
+                  "partOfSpeech": "adjective",
+                  "definition": "not complete; favoring one side more than the other",
+                  "example": "He only finished a partial draft of the essay before time ran out."
+                },
+                {
+                  "word": "particle",
+                  "pronunciation": "PAR-tih-kul",
+                  "partOfSpeech": "noun",
+                  "definition": "a very small piece of something",
+                  "example": "A particle of dust floated in the beam of sunlight."
+                },
+                {
+                  "word": "particular",
+                  "pronunciation": "per-TIK-yuh-ler",
+                  "partOfSpeech": "adjective",
+                  "definition": "specific; more than others; hard to please",
+                  "example": "She was very particular about how her room was organized."
+                },
+                {
+                  "word": "partition",
+                  "pronunciation": "par-TISH-un",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "a dividing wall or screen; to divide into parts",
+                  "example": "The classroom was divided by a partition to create two separate spaces."
+                },
+                {
+                  "word": "partner",
+                  "pronunciation": "PAR-tner",
+                  "partOfSpeech": "noun",
+                  "definition": "a person who shares in an activity with another",
+                  "example": "She chose her best friend as her partner for the science project."
+                },
+                {
+                  "word": "studio",
+                  "pronunciation": "STOO-dee-oh",
+                  "partOfSpeech": "noun",
+                  "definition": "a room where an artist works or where recordings are made",
+                  "example": "The painter worked all day in her sunlit studio."
+                },
+                {
+                  "word": "studiousness",
+                  "pronunciation": "STOO-dee-us-nes",
+                  "partOfSpeech": "noun",
+                  "definition": "the quality of being diligent and hardworking in one's studies",
+                  "example": "His studiousness paid off when he earned straight A's on his report card."
+                },
+                {
+                  "word": "understudy",
+                  "pronunciation": "UN-der-stud-ee",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "an actor who learns another's role to replace them if needed; to learn a role this way",
+                  "example": "She served as the understudy for the lead in the school play."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "deserve",
+                  "pronunciation": "dih-ZURV",
+                  "partOfSpeech": "verb",
+                  "definition": "to have earned or be worthy of something",
+                  "example": "After months of hard work, the team deserved the championship trophy."
+                },
+                {
+                  "word": "server",
+                  "pronunciation": "SUR-ver",
+                  "partOfSpeech": "noun",
+                  "definition": "a person who serves food; a computer that provides data to others",
+                  "example": "The server brought the food to the table quickly and politely."
+                },
+                {
+                  "word": "service",
+                  "pronunciation": "SUR-vis",
+                  "partOfSpeech": "noun",
+                  "definition": "work done to help others; a system supplying public needs",
+                  "example": "The restaurant was known for its fast and friendly service."
+                },
+                {
+                  "word": "serviceable",
+                  "pronunciation": "SUR-vih-suh-bul",
+                  "partOfSpeech": "adjective",
+                  "definition": "functional and adequate; able to be used",
+                  "example": "The old bike was not flashy but perfectly serviceable for getting to school."
+                },
+                {
+                  "word": "variable",
+                  "pronunciation": "VAIR-ee-uh-bul",
+                  "partOfSpeech": "adjective/noun",
+                  "definition": "liable to change; an element that can vary",
+                  "example": "Rainfall in this region is highly variable from one year to the next."
+                },
+                {
+                  "word": "variation",
+                  "pronunciation": "vair-ee-AY-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "a change or difference in form, position, or condition",
+                  "example": "Each shell on the beach showed a beautiful variation in color and pattern."
+                },
+                {
+                  "word": "variety",
+                  "pronunciation": "vuh-RY-ih-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "a number of different things; diversity",
+                  "example": "The farmers' market offered a variety of fresh fruits and vegetables."
+                },
+                {
+                  "word": "various",
+                  "pronunciation": "VAIR-ee-us",
+                  "partOfSpeech": "adjective",
+                  "definition": "more than one; of different kinds",
+                  "example": "Students were given various options for their book report project."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 7,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "ease",
+                  "pronunciation": "eez",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "freedom from difficulty; to make less difficult",
+                  "example": "She solved the puzzle with ease, finishing in under two minutes."
+                },
+                {
+                  "word": "easiest",
+                  "pronunciation": "EE-zee-ist",
+                  "partOfSpeech": "adjective",
+                  "definition": "requiring the least effort; simplest",
+                  "example": "The easiest route to school takes only five minutes to walk."
+                },
+                {
+                  "word": "finale",
+                  "pronunciation": "fih-NAL-ee",
+                  "partOfSpeech": "noun",
+                  "definition": "the last section of a performance or event",
+                  "example": "The fireworks display was the grand finale of the Fourth of July celebration."
+                },
+                {
+                  "word": "finalist",
+                  "pronunciation": "FY-nuh-list",
+                  "partOfSpeech": "noun",
+                  "definition": "a competitor who reaches the final round",
+                  "example": "She was proud to be named a finalist in the national spelling bee."
+                },
+                {
+                  "word": "finally",
+                  "pronunciation": "FY-nuh-lee",
+                  "partOfSpeech": "adverb",
+                  "definition": "at the end; after a long time",
+                  "example": "After weeks of waiting, the package finally arrived at her door."
+                },
+                {
+                  "word": "finite",
+                  "pronunciation": "FY-nyt",
+                  "partOfSpeech": "adjective",
+                  "definition": "having limits or bounds; not infinite",
+                  "example": "The amount of water on Earth is finite, so we must use it wisely."
+                },
+                {
+                  "word": "uneasy",
+                  "pronunciation": "un-EE-zee",
+                  "partOfSpeech": "adjective",
+                  "definition": "feeling anxious or uncomfortable",
+                  "example": "He felt uneasy walking alone on the dark street at night."
+                },
+                {
+                  "word": "unfinished",
+                  "pronunciation": "un-FIN-isht",
+                  "partOfSpeech": "adjective",
+                  "definition": "not completed; still needing more work",
+                  "example": "She left the unfinished painting on her easel and went to bed."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 9,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "familiar",
+                  "pronunciation": "fuh-MIL-yer",
+                  "partOfSpeech": "adjective",
+                  "definition": "well known from long association; common; informal",
+                  "example": "The smell of her grandmother's cooking was warm and familiar."
+                },
+                {
+                  "word": "familiarity",
+                  "pronunciation": "fuh-mil-ee-AR-ih-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "close acquaintance with something; informal friendliness",
+                  "example": "His familiarity with the software made him the go-to person in the office."
+                },
+                {
+                  "word": "familiarize",
+                  "pronunciation": "fuh-MIL-yer-yz",
+                  "partOfSpeech": "verb",
+                  "definition": "to make someone knowledgeable about something",
+                  "example": "She spent the weekend familiarizing herself with the new math textbook."
+                },
+                {
+                  "word": "specialist",
+                  "pronunciation": "SPESH-uh-list",
+                  "partOfSpeech": "noun",
+                  "definition": "a person with expert knowledge in a particular area",
+                  "example": "The eye specialist recommended glasses to correct her vision."
+                },
+                {
+                  "word": "specialty",
+                  "pronunciation": "SPESH-ul-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "a product or skill that someone is especially known for",
+                  "example": "Fresh pasta is the chef's specialty at this Italian restaurant."
+                },
+                {
+                  "word": "species",
+                  "pronunciation": "SPEE-sheez",
+                  "partOfSpeech": "noun",
+                  "definition": "a group of living things that share common traits and can breed together",
+                  "example": "The giant panda is an endangered species protected by international law."
+                },
+                {
+                  "word": "specific",
+                  "pronunciation": "spuh-SIF-ik",
+                  "partOfSpeech": "adjective",
+                  "definition": "clearly defined; precise",
+                  "example": "The teacher gave specific instructions for completing the assignment."
+                },
+                {
+                  "word": "specify",
+                  "pronunciation": "SPES-uh-fy",
+                  "partOfSpeech": "verb",
+                  "definition": "to state exactly and in detail",
+                  "example": "Please specify which size shirt you want when placing your order."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 10,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "active",
+                  "pronunciation": "AK-tiv",
+                  "partOfSpeech": "adjective",
+                  "definition": "engaged in physical movement or action; working",
+                  "example": "The children stayed active all afternoon playing in the backyard."
+                },
+                {
+                  "word": "activity",
+                  "pronunciation": "ak-TIV-ih-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "the condition of being active; a specific task or exercise",
+                  "example": "Swimming is her favorite physical activity on hot summer days."
+                },
+                {
+                  "word": "actor",
+                  "pronunciation": "AK-ter",
+                  "partOfSpeech": "noun",
+                  "definition": "a person who performs in plays, movies, or other productions",
+                  "example": "The young actor memorized all of his lines in just two days."
+                },
+                {
+                  "word": "actually",
+                  "pronunciation": "AK-choo-uh-lee",
+                  "partOfSpeech": "adverb",
+                  "definition": "in fact; really; used for emphasis",
+                  "example": "I actually finished my homework before dinner for once."
+                },
+                {
+                  "word": "enact",
+                  "pronunciation": "en-AKT",
+                  "partOfSpeech": "verb",
+                  "definition": "to make a bill into law; to put into practice; to perform",
+                  "example": "Congress voted to enact the new environmental protection bill."
+                },
+                {
+                  "word": "officer",
+                  "pronunciation": "AW-fih-ser",
+                  "partOfSpeech": "noun",
+                  "definition": "a person in authority; a police officer or military officer",
+                  "example": "The police officer helped the lost child find her parents."
+                },
+                {
+                  "word": "official",
+                  "pronunciation": "uh-FISH-ul",
+                  "partOfSpeech": "adjective/noun",
+                  "definition": "authorized or approved; a person holding a position of authority",
+                  "example": "The official start time of the race was precisely eight o'clock."
+                },
+                {
+                  "word": "officiate",
+                  "pronunciation": "uh-FISH-ee-ayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to perform the duties of an official; to conduct a ceremony",
+                  "example": "The mayor was asked to officiate at the ribbon-cutting ceremony."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 11,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "captivate",
+                  "pronunciation": "KAP-tuh-vayt",
+                  "partOfSpeech": "verb",
+                  "definition": "to attract and hold the interest of someone strongly",
+                  "example": "The storyteller's vivid descriptions captivated every child in the room."
+                },
+                {
+                  "word": "captive",
+                  "pronunciation": "KAP-tiv",
+                  "partOfSpeech": "noun/adjective",
+                  "definition": "a person or animal kept in confinement; imprisoned",
+                  "example": "The captive bird was released back into the wild after it healed."
+                },
+                {
+                  "word": "captivity",
+                  "pronunciation": "kap-TIV-ih-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "the state of being kept captive or imprisoned",
+                  "example": "The animals at the rescue center had never known life outside of captivity."
+                },
+                {
+                  "word": "recapture",
+                  "pronunciation": "ree-KAP-cher",
+                  "partOfSpeech": "verb",
+                  "definition": "to capture again; to recover a previous feeling or time",
+                  "example": "The photo helped her recapture the joy she felt on that summer day."
+                },
+                {
+                  "word": "statement",
+                  "pronunciation": "STAYT-ment",
+                  "partOfSpeech": "noun",
+                  "definition": "a declaration of something; a written or spoken remark",
+                  "example": "The witness gave a detailed statement to the detective."
+                },
+                {
+                  "word": "stationary",
+                  "pronunciation": "STAY-shun-er-ee",
+                  "partOfSpeech": "adjective",
+                  "definition": "not moving or not intended to be moved",
+                  "example": "The exercise bicycle is stationary but it still provides a great workout."
+                },
+                {
+                  "word": "statue",
+                  "pronunciation": "STACH-oo",
+                  "partOfSpeech": "noun",
+                  "definition": "a carved or modeled figure of a person or animal",
+                  "example": "A bronze statue of the town founder stands in the center of the park."
+                },
+                {
+                  "word": "understate",
+                  "pronunciation": "un-der-STAYT",
+                  "partOfSpeech": "verb",
+                  "definition": "to express in restrained terms; to describe as less than it really is",
+                  "example": "To say he was disappointed would be to understate how he truly felt."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 13,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "classic",
+                  "pronunciation": "KLAS-ik",
+                  "partOfSpeech": "adjective/noun",
+                  "definition": "judged over time to be of the highest quality; a work of enduring excellence",
+                  "example": "The teacher assigned a classic novel that students still read a century later."
+                },
+                {
+                  "word": "classical",
+                  "pronunciation": "KLAS-ih-kul",
+                  "partOfSpeech": "adjective",
+                  "definition": "relating to ancient Greek and Roman culture; traditional in style",
+                  "example": "She enjoyed both classical music and modern pop songs."
+                },
+                {
+                  "word": "classification",
+                  "pronunciation": "klas-ih-fih-KAY-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "the action of sorting things into groups; a category",
+                  "example": "The library uses the Dewey Decimal classification system to organize its books."
+                },
+                {
+                  "word": "classify",
+                  "pronunciation": "KLAS-ih-fy",
+                  "partOfSpeech": "verb",
+                  "definition": "to arrange into groups based on shared qualities",
+                  "example": "Scientists classify living things into kingdoms, phyla, and other categories."
+                },
+                {
+                  "word": "gratify",
+                  "pronunciation": "GRAT-ih-fy",
+                  "partOfSpeech": "verb",
+                  "definition": "to please someone; to satisfy a desire",
+                  "example": "It gratified the teacher to see her students succeed."
+                },
+                {
+                  "word": "gratitude",
+                  "pronunciation": "GRAT-ih-tood",
+                  "partOfSpeech": "noun",
+                  "definition": "the quality of being thankful; appreciation for kindness",
+                  "example": "She expressed her gratitude with a heartfelt thank-you letter."
+                },
+                {
+                  "word": "gratuity",
+                  "pronunciation": "gruh-TOO-ih-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "a tip given to someone in return for a service",
+                  "example": "The satisfied diners left a generous gratuity for their attentive waiter."
+                },
+                {
+                  "word": "ungrateful",
+                  "pronunciation": "un-GRAYT-ful",
+                  "partOfSpeech": "adjective",
+                  "definition": "not showing thanks; not appreciating kindness received",
+                  "example": "It seemed ungrateful to complain after such a generous gift."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 14,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "disorganized",
+                  "pronunciation": "dis-OR-guh-nyzd",
+                  "partOfSpeech": "adjective",
+                  "definition": "not organized; lacking order or planning",
+                  "example": "His desk was so disorganized that he could never find what he needed."
+                },
+                {
+                  "word": "organ",
+                  "pronunciation": "OR-gun",
+                  "partOfSpeech": "noun",
+                  "definition": "a part of the body with a specific function; a large keyboard instrument",
+                  "example": "The heart is the organ responsible for pumping blood through the body."
+                },
+                {
+                  "word": "organism",
+                  "pronunciation": "OR-guh-niz-um",
+                  "partOfSpeech": "noun",
+                  "definition": "a living thing such as a plant, animal, or bacterium",
+                  "example": "A single drop of pond water can contain millions of tiny organisms."
+                },
+                {
+                  "word": "organist",
+                  "pronunciation": "OR-guh-nist",
+                  "partOfSpeech": "noun",
+                  "definition": "a person who plays the organ",
+                  "example": "The organist practiced for hours to prepare for the Sunday service."
+                },
+                {
+                  "word": "organization",
+                  "pronunciation": "or-guh-nih-ZAY-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "an organized group of people; the act of organizing",
+                  "example": "She joined a volunteer organization that helps feed families in need."
+                },
+                {
+                  "word": "probability",
+                  "pronunciation": "prob-uh-BIL-ih-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "the likelihood that something will happen",
+                  "example": "The weather forecast gave a high probability of rain for the weekend."
+                },
+                {
+                  "word": "probable",
+                  "pronunciation": "PROB-uh-bul",
+                  "partOfSpeech": "adjective",
+                  "definition": "likely to happen or be true",
+                  "example": "It seems probable that the game will be canceled because of the storm."
+                },
+                {
+                  "word": "probe",
+                  "pronunciation": "prohb",
+                  "partOfSpeech": "noun/verb",
+                  "definition": "a device used to explore; to investigate thoroughly",
+                  "example": "The scientist used a probe to measure the temperature deep in the ocean."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 15,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "local",
+                  "pronunciation": "LOH-kul",
+                  "partOfSpeech": "adjective/noun",
+                  "definition": "relating to a particular place or area; a local person",
+                  "example": "The local library offers free reading programs for children all summer."
+                },
+                {
+                  "word": "location",
+                  "pronunciation": "loh-KAY-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "a particular place or position",
+                  "example": "The new school will be built at a central location close to the bus routes."
+                },
+                {
+                  "word": "locomotion",
+                  "pronunciation": "loh-kuh-MOH-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "movement from one place to another",
+                  "example": "Wheels are one of humanity's greatest inventions for locomotion."
+                },
+                {
+                  "word": "relocate",
+                  "pronunciation": "ree-loh-KAYT",
+                  "partOfSpeech": "verb",
+                  "definition": "to move to a new place",
+                  "example": "The company decided to relocate its headquarters to a larger building."
+                },
+                {
+                  "word": "technicality",
+                  "pronunciation": "tek-nih-KAL-ih-tee",
+                  "partOfSpeech": "noun",
+                  "definition": "a point of procedure or detail based on rules; a minor detail",
+                  "example": "The case was dismissed on a legal technicality rather than on its merits."
+                },
+                {
+                  "word": "technician",
+                  "pronunciation": "tek-NISH-un",
+                  "partOfSpeech": "noun",
+                  "definition": "a worker skilled in a technical subject",
+                  "example": "The computer technician repaired the broken laptop in under an hour."
+                },
+                {
+                  "word": "technique",
+                  "pronunciation": "tek-NEEK",
+                  "partOfSpeech": "noun",
+                  "definition": "a particular way of doing something skillfully",
+                  "example": "The art teacher showed students a new brush technique for blending colors."
+                },
+                {
+                  "word": "technology",
+                  "pronunciation": "tek-NOL-oh-jee",
+                  "partOfSpeech": "noun",
+                  "definition": "the application of scientific knowledge for practical purposes; machinery and devices",
+                  "example": "Modern technology has made it easy to communicate with people around the world."
                 }
               ]
             }
