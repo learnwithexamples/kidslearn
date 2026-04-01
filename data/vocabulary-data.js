@@ -9643,26 +9643,1887 @@ const vocabularyData = {
       "lessons": [
         {
           "number": 1,
-          "title": "Power and Authority",
+          "title": "",
           "roots": [
             {
-              "root": "ARCH",
-              "origin": "Greek",
-              "meaning": "rule, govern",
+              "root": "",
+              "origin": "",
+              "meaning": "",
               "words": [
                 {
-                  "word": "anarchy",
-                  "pronunciation": "AN-er-kee",
-                  "partOfSpeech": "noun",
-                  "definition": "a state of disorder due to absence or non-recognition of authority",
-                  "example": "The country descended into anarchy after the revolution."
+                  "word": "abstruse",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
                 },
                 {
-                  "word": "hierarchy",
-                  "pronunciation": "HY-uh-rahr-kee",
-                  "partOfSpeech": "noun",
-                  "definition": "a system in which members are ranked according to status or authority",
-                  "example": "The corporate hierarchy has many levels of management."
+                  "word": "acquiesce",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "extrude",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "interloper",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "internecine",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "interpolate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "interpose",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "interregnum",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "juxtapose",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "obtrude",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "propinquity",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "quiescent",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "rapprochement",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "requiem",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "unrequited",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "altercation",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "altruism",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "anathema",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "antithesis",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "ephemeral",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "epitaph",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "epithet",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "epitome",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "eponymous",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "paradigm",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "paradox",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "paragon",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "parameter",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "peripatetic",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "peripheral",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "aggregation",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "anarchy",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "archaic",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "archetype",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "archipelago",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "archive",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "demagogue",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "demographer",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "egregious",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "endemic",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "gregarious",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "icon",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "iconoclastic",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "oligarchy",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "pandemic",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "annunciation",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "exegesis",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "hegemony",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "induce",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "politic",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "polity",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "potentate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "puissant",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "redoubt",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "regalia",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "regency",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "renunciation",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "traduce",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "viceroy",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "bas-relief",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "debase",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "declivity",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "echelon",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "imponderable",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "impunity",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "leaven",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "legerdemain",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "leverage",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "levitate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "levity",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "penchant",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "ponderous",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "preponderant",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "proclivity",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "transcendent",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "aver",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "cataclysm",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "catapult",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "hypochondria",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "hypothesis",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "incubus",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "incumbent",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "recumbent",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "subjective",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "sublimate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "suborn",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "subterfuge",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "succumb",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "verisimilitude",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "verity",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 7,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "acquisitive",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "demise",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "dynamo",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "dynasty",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "emissary",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "importune",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "inquisition",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "meretricious",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "meritorious",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "opportunist",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "premise",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "presumption",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "querulous",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "subsume",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "sumptuary",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 8,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "acerbic",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "acrid",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "acrimony",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "acumen",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "acute",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "comportment",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "exacerbate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "impecunious",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "pecuniary",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "peremptory",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "plutocrat",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "preempt",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "purport",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "redemption",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "technocracy",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 9,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "adumbrate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "denigrate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "elucidate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "lucent",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "lucid",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "luminary",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "luminescence",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "muster",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "necromancy",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "pall",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "palliate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "pallid",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "pellucid",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "remonstrate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "umbrage",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 10,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "apocalypse",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "apocryphal",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "apoplexy",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "apostate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "castigate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "chasten",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "clavier",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "conclave",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "conducive",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "diadem",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "diametrical",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "diaspora",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "diatribe",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "enclave",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "occlusion",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "recluse",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 11,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "abate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "battery",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "battlement",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "bellicose",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "belligerent",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "carte blanche",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "cartel",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "cartographer",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "daunt",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "forte",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "fortitude",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "impugn",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "indomitable",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "pugilist",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "pugnacious",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 12,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "accede",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "cadence",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "casuistry",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "cede",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "compunction",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "concession",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "decadent",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "depredation",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "expunge",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "intercede",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "Occident",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "predatory",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "punctilious",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "pungent",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "recidivism",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 13,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "aesthete",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "aesthetic",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "beatific",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "beatitude",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "benign",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "benignant",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "benison",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "bona fide",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "bonanza",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "bon vivant",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "boon",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "debonair",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "eugenics",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "euphemism",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "euphony",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 14,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "emendation",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "illicit",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "impeccable",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "licentious",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "maladroit",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "malaise",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "malapropism",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "malefactor",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "malevolent",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "malfeasance",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "malign",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "malinger",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "mendacious",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "mendicant",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "peccadillo",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 15,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "allege",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "approbation",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "censorious",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "censure",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "legate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "probity",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "punitive",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "relegate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "reprobate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "reproof",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "subpoena",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "vendetta",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "vindicate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "vindictive",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 16,
+          "title": "",
+          "roots": [
+            {
+              "root": "",
+              "origin": "",
+              "meaning": "",
+              "words": [
+                {
+                  "word": "abjure",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "abrogate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "adjudicate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "adjure",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "arbitrary",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "arbitrate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "arrogate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "conjure",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "exhort",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "hortatory",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "judicious",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "perjury",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "prerogative",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "rogue",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
+                },
+                {
+                  "word": "surrogate",
+                  "pronunciation": "",
+                  "partOfSpeech": "",
+                  "definition": "",
+                  "example": ""
                 }
               ]
             }
