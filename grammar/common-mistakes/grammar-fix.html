@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fix the Grammar – KidsLearn</title>
+  <link rel="stylesheet" href="../../styles/main.css">
+  <link rel="stylesheet" href="../../styles/grammar.css">
+  <style>
+    /* ── layout ── */
+    .gf-container { max-width: 900px; margin: 0 auto; }
+
+    /* ── setup panel ── */
+    .setup-panel {
+      background: linear-gradient(135deg, rgba(99,102,241,.08), rgba(168,85,247,.08));
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 28px;
+    }
+    .setup-panel h2 { color: #4c1d95; margin-bottom: 18px; font-size: 1.4rem; }
+    .setup-row { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .setup-field label { font-weight: 700; color: #374151; margin-right: 8px; }
+    .setup-field select,
+    .setup-field input[type=number] {
+      padding: 8px 12px; border: 2px solid #d1d5db; border-radius: 8px;
+      font-size: 1rem; background: white; color: #1f2937;
+    }
+    .setup-field input[type=number] { width: 80px; }
+    .btn-start {
+      padding: 10px 28px; background: #5a67d8; color: white;
+      border: none; border-radius: 10px; font-size: 1.05rem; font-weight: 700;
+      cursor: pointer; transition: background .2s;
+    }
+    .btn-start:hover { background: #4c51bf; }
+
+    /* ── filter chips ── */
+    .filter-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .chip {
+      padding: 5px 14px; border-radius: 20px; border: 2px solid #d1d5db;
+      cursor: pointer; font-size: .85rem; font-weight: 600; background: white;
+      color: #6b7280; transition: all .15s;
+    }
+    .chip.active { border-color: #5a67d8; background: #5a67d8; color: white; }
+    .chip[data-type=capital].active    { background:#7c3aed; border-color:#7c3aed; }
+    .chip[data-type=subject-verb].active { background:#db2777; border-color:#db2777; }
+    .chip[data-type=word-order].active { background:#d97706; border-color:#d97706; }
+    .chip[data-type=spelling].active   { background:#059669; border-color:#059669; }
+    .chip[data-type=adv-adj].active    { background:#0284c7; border-color:#0284c7; }
+    .chip[data-type=other].active      { background:#dc2626; border-color:#dc2626; }
+
+    /* ── progress bar ── */
+    .progress-bar-wrap {
+      background: #e5e7eb; border-radius: 8px; height: 10px;
+      margin-bottom: 20px; overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%; background: linear-gradient(90deg,#5a67d8,#7c3aed);
+      border-radius: 8px; transition: width .4s ease;
+    }
+    .progress-label { text-align: right; font-size: .82rem; color: #6b7280; margin-top: 4px; }
+
+    /* ── sentence card ── */
+    .sentence-card {
+      background: white; border: 2px solid #e5e7eb; border-radius: 14px;
+      padding: 22px 24px; margin-bottom: 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+      transition: border-color .2s;
+    }
+    .sentence-card.correct-card  { border-color: #10b981; background: #f0fdf4; }
+    .sentence-card.incorrect-card{ border-color: #ef4444; background: #fef2f2; }
+
+    .card-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px; gap: 10px; flex-wrap: wrap;
+    }
+    .card-num { font-size: .85rem; color: #9ca3af; font-weight: 600; }
+    .type-badge {
+      font-size: .75rem; padding: 3px 10px; border-radius: 12px;
+      font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+      color: white;
+    }
+    .badge-capital     { background:#7c3aed; }
+    .badge-subject-verb{ background:#db2777; }
+    .badge-word-order  { background:#d97706; }
+    .badge-spelling    { background:#059669; }
+    .badge-adv-adj     { background:#0284c7; }
+    .badge-other       { background:#dc2626; }
+
+    /* ── word tokens ── */
+    .word-area {
+      display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+      min-height: 42px; margin-bottom: 14px;
+    }
+    .word-token {
+      display: inline-flex; align-items: center; gap: 0;
+      cursor: pointer; border-radius: 6px; padding: 0;
+      user-select: none;
+    }
+    .word-text {
+      padding: 6px 10px; background: #f3f4f6; border: 2px solid #d1d5db;
+      border-radius: 6px; font-size: 1.05rem; transition: all .15s;
+      min-width: 24px; text-align: center;
+    }
+    .word-token:hover .word-text  { border-color: #5a67d8; background: #eef2ff; }
+    .word-token.selected .word-text {
+      border-color: #5a67d8; background: #c7d2fe; color: #1e1b4b;
+    }
+    .word-token.swap-first .word-text {
+      border-color: #d97706; background: #fef9c3; color: #78350f;
+    }
+    .word-token.editing .word-text { display: none; }
+
+    /* inline editor */
+    .word-input {
+      padding: 5px 8px; border: 2px solid #5a67d8; border-radius: 6px;
+      font-size: 1.05rem; min-width: 60px; width: auto;
+      background: #eef2ff; outline: none; display: none;
+    }
+    .word-token.editing .word-input { display: inline-block; }
+
+    .punct { 
+      font-size: 1.05rem; color: #374151; padding: 6px 0; 
+      align-self: center;
+    }
+
+    /* ── action toolbar ── */
+    .card-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
+    .btn-action {
+      padding: 7px 16px; border-radius: 8px; border: none; font-size: .9rem;
+      font-weight: 600; cursor: pointer; transition: all .15s;
+    }
+    .btn-swap   { background: #fef3c7; color: #92400e; }
+    .btn-swap:hover   { background: #fde68a; }
+    .btn-swap.active  { background: #fcd34d; color: #78350f; }
+    .btn-hint   { background: #ede9fe; color: #5b21b6; }
+    .btn-hint:hover   { background: #ddd6fe; }
+    .btn-check  { background: #5a67d8; color: white; }
+    .btn-check:hover  { background: #4c51bf; }
+    .btn-reset  { background: #f3f4f6; color: #6b7280; }
+    .btn-reset:hover  { background: #e5e7eb; }
+
+    /* ── feedback ── */
+    .hint-box {
+      display: none; background: #fefce8; border: 1px solid #fde68a;
+      border-radius: 8px; padding: 9px 14px; font-size: .9rem; color: #78350f;
+      margin-bottom: 8px;
+    }
+    .hint-box.show { display: block; }
+    .feedback-box {
+      display: none; padding: 9px 14px; border-radius: 8px; font-size: .9rem;
+      font-weight: 600; margin-top: 6px;
+    }
+    .feedback-box.show { display: block; }
+    .feedback-correct {
+      background: #dcfce7; border: 1px solid #86efac; color: #166534;
+    }
+    .feedback-wrong {
+      background: #fee2e2; border: 1px solid #fca5a5; color: #991b1b;
+    }
+    .feedback-answer { font-weight: normal; margin-top: 4px; color: #374151; }
+
+    /* ── score summary ── */
+    .score-panel {
+      display: none; background: linear-gradient(135deg,#667eea,#764ba2);
+      color: white; border-radius: 16px; padding: 30px; text-align: center;
+      margin-top: 24px;
+    }
+    .score-panel.show { display: block; }
+    .score-panel h2 { font-size: 2rem; margin-bottom: 8px; }
+    .score-big { font-size: 3.5rem; font-weight: 900; }
+    .score-sub { opacity: .85; margin-bottom: 18px; }
+    .btn-again {
+      padding: 12px 32px; background: white; color: #5a67d8;
+      border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 700;
+      cursor: pointer; transition: transform .15s;
+    }
+    .btn-again:hover { transform: scale(1.04); }
+
+    /* ── check-all ── */
+    .check-all-row { text-align: center; margin: 24px 0 8px; }
+    .btn-check-all {
+      padding: 12px 36px; background: #10b981; color: white;
+      border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 700;
+      cursor: pointer; transition: background .2s;
+    }
+    .btn-check-all:hover { background: #059669; }
+
+    /* responsive */
+    @media(max-width:600px){
+      .setup-row { flex-direction: column; align-items: flex-start; }
+      .card-actions { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>✏️ Fix the Grammar</h1>
+    <p class="subtitle">Find and correct the grammar mistake in each sentence</p>
+    <a href="../grammar.html" class="back-link">← Back to Grammar</a>
+  </header>
+
+  <main class="gf-container">
+
+    <!-- ── Setup Panel ── -->
+    <div class="setup-panel" id="setupPanel">
+      <h2>⚙️ Practice Settings</h2>
+      <div class="setup-row">
+        <div class="setup-field">
+          <label for="countInput">Number of sentences:</label>
+          <input type="number" id="countInput" min="5" max="100" value="20">
+        </div>
+        <button class="btn-start" id="btnStart">▶ Start Practice</button>
+      </div>
+      <div style="margin-top:16px;">
+        <div style="font-weight:700;color:#374151;margin-bottom:8px;">Filter by error type (all selected = mixed):</div>
+        <div class="filter-chips">
+          <div class="chip active" data-type="capital">🔠 Capital Letters</div>
+          <div class="chip active" data-type="subject-verb">👥 Subject–Verb</div>
+          <div class="chip active" data-type="word-order">🔀 Word Order</div>
+          <div class="chip active" data-type="spelling">🔤 Spelling</div>
+          <div class="chip active" data-type="adv-adj">✨ Adv vs Adj</div>
+          <div class="chip active" data-type="other">🔧 Other</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Exercise Area ── -->
+    <div id="exerciseArea" style="display:none;">
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <div class="progress-label" id="progressLabel"></div>
+      <div id="cardsContainer"></div>
+      <div class="check-all-row">
+        <button class="btn-check-all" id="btnCheckAll">✅ Check All Answers</button>
+      </div>
+      <div class="score-panel" id="scorePanel">
+        <h2>🎉 Practice Complete!</h2>
+        <div class="score-big" id="scoreBig"></div>
+        <div class="score-sub" id="scoreSub"></div>
+        <button class="btn-again" id="btnAgain">🔄 Try Again</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="../../data/grammar-fix-data.js"></script>
+<script>
+// ── Utilities ────────────────────────────────────────────────────────────────
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// Split sentence preserving punctuation tokens
+// Returns [{text, isPunct}]
+function tokenize(sentence) {
+  // Split: keep leading/trailing punctuation attached to words,
+  // but make sentence-ending punctuation a separate token
+  const tokens = [];
+  // We use a regex that splits into words and punctuation runs
+  const re = /([A-Za-z0-9''\u2019\-]+|[^A-Za-z0-9''\u2019\-\s]+|\s+)/g;
+  let match;
+  while ((match = re.exec(sentence)) !== null) {
+    const t = match[0];
+    if (/^\s+$/.test(t)) continue; // skip whitespace — gaps handled by flex
+    if (/^[A-Za-z0-9''\u2019\-]+$/.test(t)) {
+      tokens.push({ text: t, isPunct: false });
+    } else {
+      tokens.push({ text: t, isPunct: true });
+    }
+  }
+  return tokens;
+}
+
+// Reconstruct sentence from token array
+function reconstruct(tokens) {
+  let s = '';
+  for (let i = 0; i < tokens.length; i++) {
+    const t = tokens[i];
+    if (i > 0 && !t.isPunct && !tokens[i-1].isPunct) s += ' ';
+    else if (i > 0 && !t.isPunct) s += ' ';
+    s += t.text;
+  }
+  return s;
+}
+
+// Normalise for comparison (trim, collapse spaces, smart→straight quotes)
+function normalise(s) {
+  return s.trim()
+    .replace(/\s+/g, ' ')
+    .replace(/['']/g, "'")
+    .replace(/[""]/g, '"');
+}
+
+// ── State ────────────────────────────────────────────────────────────────────
+let currentSentences = [];   // selected sentence objects
+let cardStates = [];          // per-card token arrays (mutable)
+let swapFirstIdx = {};        // cardIndex → tokenIndex of first swap candidate
+
+// ── Setup ────────────────────────────────────────────────────────────────────
+const chips = document.querySelectorAll('.chip');
+chips.forEach(c => {
+  c.addEventListener('click', () => c.classList.toggle('active'));
+});
+
+document.getElementById('btnStart').addEventListener('click', startPractice);
+document.getElementById('btnCheckAll').addEventListener('click', checkAll);
+document.getElementById('btnAgain').addEventListener('click', () => {
+  document.getElementById('exerciseArea').style.display = 'none';
+  document.getElementById('setupPanel').style.display  = 'block';
+  document.getElementById('scorePanel').classList.remove('show');
+});
+
+function startPractice() {
+  const count = Math.min(100, Math.max(1, parseInt(document.getElementById('countInput').value) || 20));
+  const activeTypes = [...chips].filter(c => c.classList.contains('active')).map(c => c.dataset.type);
+  if (activeTypes.length === 0) { alert('Please select at least one error type.'); return; }
+
+  const pool = grammarFixData.filter(s => activeTypes.includes(s.type));
+  if (pool.length === 0) { alert('No sentences match the selected types.'); return; }
+
+  currentSentences = shuffle(pool).slice(0, count);
+  cardStates = currentSentences.map(s => tokenize(s.wrong));
+  swapFirstIdx = {};
+
+  document.getElementById('setupPanel').style.display  = 'none';
+  document.getElementById('exerciseArea').style.display = 'block';
+  document.getElementById('scorePanel').classList.remove('show');
+
+  renderCards();
+  updateProgress(0, count);
+}
+
+// ── Render ───────────────────────────────────────────────────────────────────
+function renderCards() {
+  const container = document.getElementById('cardsContainer');
+  container.innerHTML = '';
+
+  currentSentences.forEach((sent, ci) => {
+    const card = document.createElement('div');
+    card.className = 'sentence-card';
+    card.id = `card-${ci}`;
+
+    // header
+    const header = document.createElement('div');
+    header.className = 'card-header';
+    const num = document.createElement('div');
+    num.className = 'card-num';
+    num.textContent = `#${ci + 1}`;
+    const badge = document.createElement('div');
+    badge.className = `type-badge badge-${sent.type}`;
+    badge.textContent = typeLabel(sent.type);
+    header.appendChild(num);
+    header.appendChild(badge);
+    card.appendChild(header);
+
+    // word area
+    const wordArea = buildWordArea(ci);
+    card.appendChild(wordArea);
+
+    // hint box
+    const hintBox = document.createElement('div');
+    hintBox.className = 'hint-box';
+    hintBox.id = `hint-${ci}`;
+    hintBox.textContent = '💡 ' + sent.hint;
+    card.appendChild(hintBox);
+
+    // actions
+    const actions = document.createElement('div');
+    actions.className = 'card-actions';
+
+    const btnSwap = document.createElement('button');
+    btnSwap.className = 'btn-action btn-swap';
+    btnSwap.id = `btn-swap-${ci}`;
+    btnSwap.textContent = '⇌ Swap Words';
+    btnSwap.title = 'Click me, then click two words to swap their positions';
+    btnSwap.addEventListener('click', () => toggleSwapMode(ci));
+
+    const btnHint = document.createElement('button');
+    btnHint.className = 'btn-action btn-hint';
+    btnHint.textContent = '💡 Hint';
+    btnHint.addEventListener('click', () => {
+      hintBox.classList.toggle('show');
+    });
+
+    const btnCheck = document.createElement('button');
+    btnCheck.className = 'btn-action btn-check';
+    btnCheck.textContent = '✅ Check';
+    btnCheck.addEventListener('click', () => checkCard(ci));
+
+    const btnReset = document.createElement('button');
+    btnReset.className = 'btn-action btn-reset';
+    btnReset.textContent = '↩ Reset';
+    btnReset.addEventListener('click', () => resetCard(ci));
+
+    actions.append(btnSwap, btnHint, btnCheck, btnReset);
+    card.appendChild(actions);
+
+    // feedback
+    const fb = document.createElement('div');
+    fb.className = 'feedback-box';
+    fb.id = `fb-${ci}`;
+    card.appendChild(fb);
+
+    container.appendChild(card);
+  });
+}
+
+function buildWordArea(ci) {
+  const area = document.createElement('div');
+  area.className = 'word-area';
+  area.id = `word-area-${ci}`;
+
+  cardStates[ci].forEach((tok, ti) => {
+    if (tok.isPunct) {
+      const p = document.createElement('span');
+      p.className = 'punct';
+      p.id = `punct-${ci}-${ti}`;
+      p.textContent = tok.text;
+      area.appendChild(p);
+    } else {
+      const token = createWordToken(ci, ti);
+      area.appendChild(token);
+    }
+  });
+  return area;
+}
+
+function createWordToken(ci, ti) {
+  const tok = cardStates[ci][ti];
+  const wrapper = document.createElement('span');
+  wrapper.className = 'word-token';
+  wrapper.id = `tok-${ci}-${ti}`;
+  wrapper.dataset.ci = ci;
+  wrapper.dataset.ti = ti;
+
+  const textSpan = document.createElement('span');
+  textSpan.className = 'word-text';
+  textSpan.textContent = tok.text;
+
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.className = 'word-input';
+  input.value = tok.text;
+  input.style.width = Math.max(60, tok.text.length * 11 + 20) + 'px';
+
+  wrapper.appendChild(textSpan);
+  wrapper.appendChild(input);
+
+  // single click → select / swap
+  wrapper.addEventListener('click', (e) => {
+    // If currently editing, do nothing on click of the same token
+    if (wrapper.classList.contains('editing')) return;
+    handleTokenClick(ci, ti, wrapper);
+  });
+
+  // double-click → edit mode
+  wrapper.addEventListener('dblclick', (e) => {
+    e.stopPropagation();
+    enterEditMode(ci, ti, wrapper, textSpan, input);
+  });
+
+  input.addEventListener('blur', () => exitEditMode(ci, ti, wrapper, textSpan, input));
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') input.blur();
+    if (e.key === 'Escape') {
+      input.value = cardStates[ci][ti].text; // revert
+      input.blur();
+    }
+  });
+
+  return wrapper;
+}
+
+function enterEditMode(ci, ti, wrapper, textSpan, input) {
+  // Cancel any swap mode
+  cancelSwapMode(ci);
+  wrapper.classList.add('editing');
+  input.value = cardStates[ci][ti].text;
+  input.style.width = Math.max(60, input.value.length * 11 + 20) + 'px';
+  input.style.display = 'inline-block';
+  setTimeout(() => { input.focus(); input.select(); }, 10);
+}
+
+function exitEditMode(ci, ti, wrapper, textSpan, input) {
+  const newVal = input.value.trim();
+  if (newVal !== '') {
+    cardStates[ci][ti].text = newVal;
+    textSpan.textContent = newVal;
+  }
+  wrapper.classList.remove('editing');
+}
+
+function handleTokenClick(ci, ti, wrapper) {
+  const btnSwap = document.getElementById(`btn-swap-${ci}`);
+  if (btnSwap && btnSwap.classList.contains('active')) {
+    // Swap mode
+    if (swapFirstIdx[ci] === undefined) {
+      swapFirstIdx[ci] = ti;
+      wrapper.classList.add('swap-first');
+    } else {
+      const first = swapFirstIdx[ci];
+      if (first !== ti) {
+        performSwap(ci, first, ti);
+      }
+      cancelSwapMode(ci);
+    }
+  } else {
+    // Selection mode (for future extension – toggle selected class)
+    wrapper.classList.toggle('selected');
+  }
+}
+
+function toggleSwapMode(ci) {
+  const btn = document.getElementById(`btn-swap-${ci}`);
+  if (btn.classList.contains('active')) {
+    cancelSwapMode(ci);
+  } else {
+    cancelSwapMode(ci);
+    btn.classList.add('active');
+    btn.textContent = '⇌ Click two words…';
+    // Clear any word selections
+    document.querySelectorAll(`#word-area-${ci} .word-token.selected`)
+      .forEach(t => t.classList.remove('selected'));
+  }
+}
+
+function cancelSwapMode(ci) {
+  delete swapFirstIdx[ci];
+  const btn = document.getElementById(`btn-swap-${ci}`);
+  if (btn) { btn.classList.remove('active'); btn.textContent = '⇌ Swap Words'; }
+  document.querySelectorAll(`#word-area-${ci} .word-token.swap-first`)
+    .forEach(t => t.classList.remove('swap-first'));
+}
+
+function performSwap(ci, ti1, ti2) {
+  // Find the actual non-punct positions
+  // swap in cardStates
+  const tokens = cardStates[ci];
+  // swap text values only (keeps positions)
+  [tokens[ti1].text, tokens[ti2].text] = [tokens[ti2].text, tokens[ti1].text];
+  // update DOM
+  const t1El = document.getElementById(`tok-${ci}-${ti1}`);
+  const t2El = document.getElementById(`tok-${ci}-${ti2}`);
+  if (t1El && t2El) {
+    t1El.querySelector('.word-text').textContent = tokens[ti1].text;
+    t1El.querySelector('.word-input').value      = tokens[ti1].text;
+    t2El.querySelector('.word-text').textContent = tokens[ti2].text;
+    t2El.querySelector('.word-input').value      = tokens[ti2].text;
+  }
+}
+
+function resetCard(ci) {
+  cardStates[ci] = tokenize(currentSentences[ci].wrong);
+  cancelSwapMode(ci);
+  // Rebuild word area
+  const oldArea = document.getElementById(`word-area-${ci}`);
+  const newArea = buildWordArea(ci);
+  oldArea.replaceWith(newArea);
+  // Clear feedback
+  const fb = document.getElementById(`fb-${ci}`);
+  fb.className = 'feedback-box';
+  fb.innerHTML = '';
+  const card = document.getElementById(`card-${ci}`);
+  card.classList.remove('correct-card', 'incorrect-card');
+  document.getElementById(`hint-${ci}`).classList.remove('show');
+}
+
+// ── Check ────────────────────────────────────────────────────────────────────
+function checkCard(ci) {
+  const sent = currentSentences[ci];
+  const userTokens = cardStates[ci];
+  const userText = normalise(reconstruct(userTokens));
+  const correctText = normalise(sent.correct);
+  const isRight = userText === correctText;
+
+  const fb = document.getElementById(`fb-${ci}`);
+  const card = document.getElementById(`card-${ci}`);
+
+  card.classList.remove('correct-card', 'incorrect-card');
+  if (isRight) {
+    fb.className = 'feedback-box feedback-correct show';
+    fb.innerHTML = '✅ Correct! Well done.';
+    card.classList.add('correct-card');
+  } else {
+    fb.className = 'feedback-box feedback-wrong show';
+    fb.innerHTML = `❌ Not quite right.
+      <div class="feedback-answer">✔ Correct answer: <em>${escapeHtml(sent.correct)}</em></div>`;
+    card.classList.add('incorrect-card');
+  }
+}
+
+function checkAll() {
+  let correct = 0;
+  currentSentences.forEach((_, ci) => checkCard(ci));
+  currentSentences.forEach((_, ci) => {
+    if (document.getElementById(`card-${ci}`).classList.contains('correct-card')) correct++;
+  });
+  showScore(correct, currentSentences.length);
+  updateProgress(correct, currentSentences.length);
+  document.getElementById('btnCheckAll').style.display = 'none';
+  document.getElementById('scorePanel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function showScore(correct, total) {
+  const pct = Math.round((correct / total) * 100);
+  document.getElementById('scoreBig').textContent = `${correct} / ${total}`;
+  document.getElementById('scoreSub').textContent = `${pct}% — ${scoreMessage(pct)}`;
+  document.getElementById('scorePanel').classList.add('show');
+}
+
+function scoreMessage(pct) {
+  if (pct === 100) return 'Perfect score! 🌟';
+  if (pct >= 90)  return 'Outstanding! 🎉';
+  if (pct >= 75)  return 'Great job! 👍';
+  if (pct >= 60)  return 'Good effort! Keep practicing. 📚';
+  if (pct >= 40)  return "Not bad — review the hints and try again! 💪";
+  return "Keep practicing — you'll get there! 🌱";
+}
+
+function updateProgress(done, total) {
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `${done} / ${total} correct`;
+}
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function typeLabel(type) {
+  return {
+    'capital':     'Capital Letters',
+    'subject-verb':'Subject–Verb',
+    'word-order':  'Word Order',
+    'spelling':    'Spelling',
+    'adv-adj':     'Adv vs Adj',
+    'other':       'Other',
+  }[type] || type;
+}
+
+function escapeHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>
