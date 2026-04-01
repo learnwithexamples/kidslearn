@@ -3710,21 +3710,21 @@ const vocabularyData = {
               "words": [
                 {
                   "word": "premier",
-                  "pronunciation": " PREE-mee-er",
+                  "pronunciation": "PREE-mee-er",
                   "partOfSpeech": "adjective",
-                  "definition": " first in importance, order, or position; leading",
-                  "example": " The premier of the new movie was attended by many celebrities."
+                  "definition": "first in importance, order, or position; leading",
+                  "example": "The premier of the new movie was attended by many celebrities."
                 },
                 {
                   "word": "primate",
-                  "pronunciation": " PRAHY-meyt",
+                  "pronunciation": "PRAHY-meyt",
                   "partOfSpeech": "noun",
-                  "definition": " a member of the order of mammals that includes humans, apes, and monkeys",
-                  "example": " The chimpanzee is a well-known primate."
+                  "definition": "a member of the order of mammals that includes humans, apes, and monkeys",
+                  "example": "The chimpanzee is a well-known primate."
                 },
                 {
                   "word": "prime",
-                  "pronunciation": " PRAHYM",
+                  "pronunciation": "PRAHYM",
                   "partOfSpeech": "adjective",
                   "definition": " of the best possible quality; excellent",
                   "example": " She is in the prime of her career."
@@ -3737,15 +3737,15 @@ const vocabularyData = {
                   "example": " The primeval forest was untouched by human activity."
                 },
                 {
-                  "word": "primorial",
-                  "pronunciation": "PRI-mor-ee-uhl",
+                  "word": "primordial",
+                  "pronunciation": "pri-MAWR-dee-uhl",
                   "partOfSpeech": "adjective",
-                  "definition": " of or relating to the earliest stages or beginnings",
-                  "example": " The primorial development of the city laid the foundation for its future growth."
+                  "definition": "of or relating to the earliest stages or beginnings",
+                  "example": "The primordial development of the city laid the foundation for its future growth."
                 },
                 {
                   "word": "Prime Meridian",
-                  "pronunciation": " PRAHYM muh-RID-ee-uhn",
+                  "pronunciation": "PRAHYM muh-RID-ee-uhn",
                   "partOfSpeech": "noun",
                   "definition": " the meridian (line of longitude) at which longitude is defined to be 0°",
                   "example": " The Prime Meridian passes through Greenwich, England."
