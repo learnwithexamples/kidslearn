@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>课文学习 - 中文 - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="styles/chinese.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="page-title">📖 课文学习</h1>
+            <p class="subtitle" id="page-subtitle">Loading…</p>
+            <a href="grade2b.html" class="back-link" id="back-link">← 返回目录</a>
+        </header>
+
+        <!-- Lesson selector for multi-lesson units -->
+        <div id="lesson-selector" class="lesson-nav" style="flex-wrap:wrap;gap:8px;"></div>
+
+        <!-- Main lesson content -->
+        <div id="lesson-content" class="lesson-page"></div>
+    </div>
+
+    <!-- Hanzi Writer for stroke order -->
+    <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+    <script src="data/chinese-data.js"></script>
+    <script>
+    // ── State ──
+    const params = new URLSearchParams(location.search);
+    const unitNum = parseInt(params.get('unit')) || 10;
+    const initLesson = params.get('lesson');
+
+    let currentUnit = null;
+    let currentLesson = null;
+    let currentTab = 'reading';
+
+    // ── Init ──
+    function init() {
+        currentUnit = getUnitByNumber(unitNum);
+        if (!currentUnit) { document.getElementById('page-title').textContent = '⚠️ Unit not found'; return; }
+
+        document.title = `${currentUnit.title} - 中文 - KidsLearn`;
+        document.getElementById('page-title').textContent = `${currentUnit.title} · ${currentUnit.titleEn}`;
+        document.getElementById('page-subtitle').textContent = `主题：${currentUnit.theme} — ${currentUnit.themeEn}`;
+
+        buildLessonSelector();
+
+        const firstLesson = initLesson
+            ? currentUnit.lessons.find(l => l.id === initLesson) || currentUnit.lessons[0]
+            : currentUnit.lessons[0];
+        loadLesson(firstLesson);
+    }
+
+    function buildLessonSelector() {
+        const nav = document.getElementById('lesson-selector');
+        currentUnit.lessons.forEach(lesson => {
+            const btn = document.createElement('button');
+            btn.className = 'tab-btn';
+            btn.dataset.id = lesson.id;
+            btn.innerHTML = `${lesson.icon} ${lesson.title}`;
+            btn.onclick = () => loadLesson(lesson);
+            nav.appendChild(btn);
+        });
+    }
+
+    function loadLesson(lesson) {
+        currentLesson = lesson;
+        currentTab = 'reading';
+        // Highlight selector
+        document.querySelectorAll('#lesson-selector .tab-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.id === lesson.id);
+        });
+        renderLessonContent(lesson);
+    }
+
+    // ── Render ──
+    function renderLessonContent(lesson) {
+        const el = document.getElementById('lesson-content');
+        const typeLabel = { story: '课文', poem: '古诗/儿歌', fable: '寓言故事', informational: '说明文' }[lesson.type] || lesson.type;
+        const hasMoral = lesson.moral;
+        const hasFestivals = lesson.festivals;
+
+        el.innerHTML = `
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+                <span style="font-size:2em">${lesson.icon}</span>
+                <h2 style="margin:0;font-family:'STSong','SimSun',serif;color:#c53030;">${lesson.title}</h2>
+                <span style="font-size:0.9em;color:#718096;font-style:italic">${lesson.titleEn}</span>
+                <span class="type-badge type-${lesson.type}">${typeLabel}</span>
+            </div>
+
+            <!-- Tab navigation -->
+            <div class="lesson-nav" id="tab-nav">
+                <button class="tab-btn active" data-tab="reading">📖 阅读</button>
+                <button class="tab-btn" data-tab="characters">🔤 生字 (${lesson.characters.length})</button>
+                <button class="tab-btn" data-tab="vocabulary">📝 词语 (${lesson.vocabulary.length})</button>
+                <button class="tab-btn" data-tab="comprehension">❓ 理解</button>
+                ${hasFestivals ? '<button class="tab-btn" data-tab="festivals">🏮 节日</button>' : ''}
+                <button class="tab-btn" data-tab="strokes">✏️ 笔顺</button>
+                <button class="tab-btn" data-tab="practice">🎮 练习</button>
+            </div>
+
+            <!-- Reading tab -->
+            <div class="tab-panel active" data-panel="reading">
+                <div class="story-controls">
+                    <button class="speak-story-btn" id="speak-story-btn" onclick="speakStory()">
+                        🔊 朗读课文 Listen
+                    </button>
+                    <button class="speak-story-btn" style="background:#718096" onclick="stopSpeech()">
+                        ⏹ 停止 Stop
+                    </button>
+                </div>
+                <div class="story-box">${escapeHTML(lesson.text)}</div>
+                ${hasMoral ? `
+                <div class="moral-box">
+                    <div class="moral-title">📜 故事道理 / Moral of the Story</div>
+                    <p>${escapeHTML(lesson.moral)}</p>
+                    <p class="moral-en">${escapeHTML(lesson.moralEn)}</p>
+                </div>` : ''}
+            </div>
+
+            <!-- Characters tab -->
+            <div class="tab-panel" data-panel="characters">
+                <p style="color:#718096;margin-bottom:12px;">点击每个汉字卡片可以听读音 · Click a card to hear pronunciation</p>
+                <div class="char-grid" id="char-grid"></div>
+            </div>
+
+            <!-- Vocabulary tab -->
+            <div class="tab-panel" data-panel="vocabulary">
+                <p style="color:#718096;margin-bottom:12px;">点击 🔊 按钮听词语读音 · Click 🔊 to hear a word</p>
+                <table class="vocab-table">
+                    <thead>
+                        <tr>
+                            <th>词语</th>
+                            <th>拼音 Pinyin</th>
+                            <th>意思 Meaning</th>
+                            <th>English</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="vocab-tbody"></tbody>
+                </table>
+            </div>
+
+            <!-- Comprehension tab -->
+            <div class="tab-panel" data-panel="comprehension">
+                <p style="color:#718096;margin-bottom:12px;">点击问题查看答案 · Click a question to reveal the answer</p>
+                <ul class="qa-list" id="qa-list"></ul>
+            </div>
+
+            <!-- Festivals tab (only for U11L1) -->
+            ${hasFestivals ? `
+            <div class="tab-panel" data-panel="festivals">
+                <p style="color:#718096;margin-bottom:12px;">中国传统节日 · Chinese Traditional Festivals</p>
+                <div class="festival-grid" id="festival-grid"></div>
+            </div>` : ''}
+
+            <!-- Stroke order tab -->
+            <div class="tab-panel" data-panel="strokes">
+                <p style="color:#718096;margin-bottom:12px;">观看笔顺动画 — 点击 ▶ 按钮开始 · Click ▶ to animate stroke order</p>
+                <div class="hanzi-writer-container" id="hanzi-writers"></div>
+            </div>
+
+            <!-- Practice tab -->
+            <div class="tab-panel" data-panel="practice">
+                <p style="color:#718096;margin-bottom:16px;">选择练习方式 · Choose a practice activity</p>
+                <div class="practice-grid">
+                    <a href="flashcards.html?lesson=${lesson.id}" class="practice-card">
+                        <div class="practice-icon">🃏</div>
+                        <div class="practice-title">生字卡片 Flashcards</div>
+                        <div class="practice-desc">Flip cards to learn characters</div>
+                    </a>
+                    <a href="dictation.html?lesson=${lesson.id}" class="practice-card">
+                        <div class="practice-icon">🎤</div>
+                        <div class="practice-title">听写练习 Dictation</div>
+                        <div class="practice-desc">Listen and write characters</div>
+                    </a>
+                    <a href="quiz.html?lesson=${lesson.id}" class="practice-card">
+                        <div class="practice-icon">🎯</div>
+                        <div class="practice-title">拼音测验 Pinyin Quiz</div>
+                        <div class="practice-desc">Match characters to pinyin</div>
+                    </a>
+                    <a href="matching.html?lesson=${lesson.id}" class="practice-card">
+                        <div class="practice-icon">🔀</div>
+                        <div class="practice-title">词语配对 Matching</div>
+                        <div class="practice-desc">Match words to meanings</div>
+                    </a>
+                </div>
+            </div>
+        `;
+
+        // Wire tab buttons
+        document.querySelectorAll('#tab-nav .tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+        });
+
+        // Render character grid
+        renderCharGrid(lesson.characters);
+
+        // Render vocabulary table
+        renderVocabTable(lesson.vocabulary);
+
+        // Render Q&A
+        renderQA(lesson.comprehension);
+
+        // Render festivals if present
+        if (hasFestivals) renderFestivals(lesson.festivals);
+
+        // Render stroke order writers (lazy – on tab switch)
+    }
+
+    function switchTab(tab) {
+        document.querySelectorAll('#tab-nav .tab-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.tab === tab);
+        });
+        document.querySelectorAll('.tab-panel').forEach(panel => {
+            panel.classList.toggle('active', panel.dataset.panel === tab);
+        });
+        if (tab === 'strokes') renderHanziWriters(currentLesson.characters);
+    }
+
+    // ── Character Grid ──
+    function renderCharGrid(chars) {
+        const grid = document.getElementById('char-grid');
+        if (!grid) return;
+        grid.innerHTML = chars.map(c => `
+            <div class="char-card" onclick="speakText('${c.char}')">
+                <button class="char-speak-btn" onclick="event.stopPropagation();speakText('${c.char}')">🔊</button>
+                <span class="char-strokes">${c.strokes} 笔</span>
+                <div class="char-display">${c.char}</div>
+                <div class="char-pinyin">${c.pinyin}</div>
+                <div class="char-meaning">${c.meaning}</div>
+                <div class="char-example">${c.example}</div>
+            </div>
+        `).join('');
+    }
+
+    // ── Vocabulary Table ──
+    function renderVocabTable(vocab) {
+        const tbody = document.getElementById('vocab-tbody');
+        if (!tbody) return;
+        tbody.innerHTML = vocab.map(v => `
+            <tr>
+                <td><span class="vocab-word">${v.word}</span></td>
+                <td><span class="vocab-pinyin">${v.pinyin}</span></td>
+                <td style="font-family:'STSong','SimSun',serif">${v.meaning}</td>
+                <td style="font-size:0.9em;color:#4a5568">${v.meaningEn}</td>
+                <td><button class="vocab-speak" onclick="speakText('${v.word}')">🔊</button></td>
+            </tr>
+        `).join('');
+    }
+
+    // ── Q&A ──
+    function renderQA(questions) {
+        const list = document.getElementById('qa-list');
+        if (!list) return;
+        list.innerHTML = questions.map((q, i) => `
+            <li class="qa-item" id="qa-${i}">
+                <div class="qa-question" onclick="toggleQA(${i})">${i + 1}. ${q.question}</div>
+                <div class="qa-answer" style="font-family:'STSong','SimSun',serif">${q.answer}</div>
+            </li>
+        `).join('');
+    }
+
+    function toggleQA(i) {
+        const item = document.getElementById(`qa-${i}`);
+        const q = item.querySelector('.qa-question');
+        item.classList.toggle('open');
+        q.classList.toggle('open');
+    }
+
+    // ── Festivals ──
+    function renderFestivals(festivals) {
+        const grid = document.getElementById('festival-grid');
+        if (!grid) return;
+        grid.innerHTML = festivals.map(f => `
+            <div class="festival-card" onclick="speakText('${f.name}')">
+                <div class="festival-emoji">${f.emoji}</div>
+                <div class="festival-name">${f.name}</div>
+                <div class="festival-name-en">${f.nameEn}</div>
+                <div class="festival-date">📅 ${f.date}</div>
+                <div class="festival-customs" style="font-size:0.85em">${f.customs}</div>
+            </div>
+        `).join('');
+    }
+
+    // ── Hanzi Writer stroke order ──
+    let writersRendered = false;
+    function renderHanziWriters(chars) {
+        if (writersRendered) return;
+        writersRendered = true;
+        const container = document.getElementById('hanzi-writers');
+        if (!container) return;
+        container.innerHTML = '';
+
+        // Show only first 10 characters to avoid too much loading
+        const toShow = chars.slice(0, 12);
+        toShow.forEach(c => {
+            const wrap = document.createElement('div');
+            wrap.className = 'hanzi-char-writer';
+            const canvasId = `hw-${c.char.codePointAt(0)}`;
+            wrap.innerHTML = `
+                <div id="${canvasId}"></div>
+                <div class="hanzi-char-label">${c.char}  ${c.pinyin}</div>
+                <button class="hw-btn" onclick="animateChar('${canvasId}', '${c.char}')">▶ 动画</button>
+            `;
+            container.appendChild(wrap);
+
+            try {
+                const writer = HanziWriter.create(canvasId, c.char, {
+                    width: 120, height: 120,
+                    padding: 10,
+                    showCharacter: true,
+                    showOutline: true,
+                    strokeColor: '#c53030',
+                    outlineColor: '#fbd38d',
+                });
+                wrap._writer = writer;
+            } catch (err) {
+                // Character not available in HanziWriter
+                container.querySelector(`#${canvasId}`).textContent = c.char;
+            }
+        });
+    }
+
+    function animateChar(containerId, char) {
+        const wrap = document.querySelector(`#${containerId}`).closest('.hanzi-char-writer');
+        if (wrap && wrap._writer) {
+            wrap._writer.animateCharacter();
+        }
+    }
+
+    // ── Speech ──
+    function speakText(text, lang) {
+        if (!('speechSynthesis' in window)) return;
+        speechSynthesis.cancel();
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.lang = lang || 'zh-CN';
+        utt.rate = 0.8;
+        // Prefer Chinese voice
+        const voices = speechSynthesis.getVoices();
+        const zhVoice = voices.find(v => v.lang.startsWith('zh'));
+        if (zhVoice) utt.voice = zhVoice;
+        speechSynthesis.speak(utt);
+    }
+
+    function speakStory() {
+        if (!currentLesson) return;
+        speakText(currentLesson.text);
+    }
+    function stopSpeech() { speechSynthesis.cancel(); }
+
+    function escapeHTML(str) {
+        return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    // ── Bootstrap ──
+    // Load voices before init to ensure they're ready
+    if ('speechSynthesis' in window) {
+        speechSynthesis.getVoices();
+        speechSynthesis.addEventListener('voiceschanged', () => {});
+    }
+    init();
+    </script>
+</body>
+</html>

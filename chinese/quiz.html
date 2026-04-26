@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>词语测验 Quiz - 中文 - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="styles/chinese.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📝 词语测验 Quiz</h1>
+            <p class="subtitle">Test your Chinese vocabulary knowledge</p>
+            <a href="grade2b.html" class="back-link">← 返回目录</a>
+        </header>
+
+        <!-- Selector Panel -->
+        <div id="selector-panel" class="selector-panel">
+            <h3>选择练习范围 — Select content</h3>
+
+            <div style="margin-bottom:12px;">
+                <label style="font-weight:bold;margin-right:8px;">单元 Unit:</label>
+                <select id="unit-select" style="padding:6px 12px;border:2px solid #e2e8f0;border-radius:8px;font-size:1em;">
+                    <option value="all">All Units (所有单元)</option>
+                    <option value="10">Unit 10 — 第十单元</option>
+                    <option value="11">Unit 11 — 第十一单元</option>
+                    <option value="12">Unit 12 — 第十二单元</option>
+                    <option value="13">Unit 13 — 第十三单元</option>
+                </select>
+            </div>
+
+            <div id="lesson-checkboxes-wrap" style="margin-bottom:12px;">
+                <label style="font-weight:bold;display:block;margin-bottom:6px;">课文 Lessons:</label>
+                <div class="lesson-checkboxes" id="lesson-checkboxes"></div>
+            </div>
+
+            <div class="settings-row">
+                <label>题型 Type:</label>
+                <select id="quiz-type">
+                    <option value="char2pinyin">Character → Pinyin</option>
+                    <option value="pinyin2char">Pinyin → Character</option>
+                    <option value="char2meaning">Character → Meaning</option>
+                    <option value="meaning2char">Meaning → Character</option>
+                    <option value="mixed" selected>Mixed 综合</option>
+                </select>
+                <label style="margin-left:16px;">数量 Count:</label>
+                <select id="quiz-count">
+                    <option value="5">5 questions</option>
+                    <option value="10" selected>10 questions</option>
+                    <option value="20">20 questions</option>
+                </select>
+            </div>
+
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;">
+                <button class="primary-btn" onclick="startQuiz()">▶ 开始测验 Start Quiz</button>
+                <button class="unit-btn btn-outline" onclick="selectAll()">✓ 全选</button>
+                <button class="unit-btn btn-outline" onclick="deselectAll()">✗ 取消</button>
+            </div>
+        </div>
+
+        <!-- Quiz Area -->
+        <div id="quiz-area" class="hidden">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+                <div>
+                    <span style="font-weight:bold;" id="q-counter">1 / 10</span>
+                    &nbsp;·&nbsp;
+                    <span style="color:#718096;font-size:0.9em;" id="q-type-label"></span>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center;">
+                    <span style="color:#718096;font-size:0.85em;">得分: <strong id="q-score">0/0</strong></span>
+                    <button class="unit-btn btn-outline" onclick="exitQuiz()">✕ 退出</button>
+                </div>
+            </div>
+
+            <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" id="q-progress" style="width:0%"></div>
+            </div>
+
+            <!-- Question card -->
+            <div class="quiz-question-card">
+                <div id="q-prompt-label" style="color:#718096;font-size:0.85em;margin-bottom:8px;"></div>
+                <div id="q-char-display" class="quiz-char-display" onclick="speakText(currentItem && currentItem.word)"></div>
+                <div id="q-pinyin-display" class="pinyin" style="font-size:1.1em;margin:4px 0;"></div>
+                <div id="q-meaning-display" style="color:#2d3748;font-size:0.9em;margin-bottom:4px;"></div>
+            </div>
+
+            <!-- Choices -->
+            <div class="quiz-choices" id="quiz-choices"></div>
+
+            <!-- Feedback -->
+            <div id="q-feedback" class="quiz-feedback hidden">
+                <span id="q-feedback-text"></span>
+            </div>
+
+            <!-- Next -->
+            <div style="text-align:center;margin-top:16px;" id="q-next-wrap" class="hidden">
+                <button class="primary-btn" onclick="nextQuestion()">下一题 Next →</button>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div id="results-area" class="hidden">
+            <div class="results-card">
+                <h2 id="results-emoji">🎉</h2>
+                <h3 id="results-title" style="color:#c53030;margin-bottom:16px;">测验完成！</h3>
+                <div class="results-grid">
+                    <div class="result-item">
+                        <div class="result-label">✅ 正确</div>
+                        <div class="result-value" id="res-correct">0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">❌ 错误</div>
+                        <div class="result-value" id="res-wrong">0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">📊 总计</div>
+                        <div class="result-value" id="res-total">0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">⭐ 正确率</div>
+                        <div class="result-value" id="res-pct">0%</div>
+                    </div>
+                </div>
+
+                <div id="missed-section" class="hidden" style="margin:16px 0;text-align:left;">
+                    <h4 style="color:#c53030;margin-bottom:8px;">需要复习 — Review these:</h4>
+                    <div id="missed-list"></div>
+                </div>
+
+                <button class="primary-btn result-btn" onclick="startQuiz()">🔁 再来一次 Try Again</button>
+                <button class="unit-btn btn-outline result-btn" onclick="exitQuiz()">⬅ 返回设置</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="data/chinese-data.js"></script>
+    <script>
+    const params = new URLSearchParams(location.search);
+    const initUnit = params.get('unit');
+
+    let questions = [];
+    let currentIdx = 0;
+    let currentItem = null;
+    let score = { correct: 0, wrong: 0 };
+    let missedWords = [];
+    let answered = false;
+
+    function init() {
+        if (initUnit) document.getElementById('unit-select').value = initUnit;
+        updateLessonCheckboxes();
+        document.getElementById('unit-select').addEventListener('change', updateLessonCheckboxes);
+    }
+
+    function updateLessonCheckboxes() {
+        const unitVal = document.getElementById('unit-select').value;
+        const container = document.getElementById('lesson-checkboxes');
+        container.innerHTML = '';
+        const units = unitVal === 'all' ? chineseData.units : chineseData.units.filter(u => u.number === parseInt(unitVal));
+        units.forEach(unit => {
+            unit.lessons.forEach(lesson => {
+                const label = document.createElement('label');
+                label.className = 'lesson-check-label';
+                label.innerHTML = `<input type="checkbox" value="${lesson.id}" checked> ${lesson.icon} ${lesson.title}`;
+                container.appendChild(label);
+            });
+        });
+    }
+
+    function selectAll() { document.querySelectorAll('.lesson-check-label input').forEach(cb => cb.checked = true); }
+    function deselectAll() { document.querySelectorAll('.lesson-check-label input').forEach(cb => cb.checked = false); }
+
+    const QUESTION_TYPES = ['char2pinyin','pinyin2char','char2meaning','meaning2char'];
+    const TYPE_LABELS = {
+        char2pinyin: '看汉字，选拼音 / Choose the correct pinyin',
+        pinyin2char: '看拼音，选汉字 / Choose the correct character',
+        char2meaning: '看汉字，选意思 / Choose the meaning',
+        meaning2char: '看意思，选汉字 / Choose the character',
+    };
+
+    function buildPool() {
+        const selectedIds = Array.from(document.querySelectorAll('.lesson-check-label input:checked')).map(cb => cb.value);
+        let pool = [];
+        selectedIds.forEach(id => {
+            const found = getLessonById(id);
+            if (!found) return;
+            const { lesson } = found;
+            lesson.characters.forEach(c => pool.push({ word: c.char, pinyin: c.pinyin, meaning: c.meaning, type: 'char', lesson: lesson.title }));
+            lesson.vocabulary.forEach(v => pool.push({ word: v.word, pinyin: v.pinyin, meaning: v.meaning, type: 'vocab', lesson: lesson.title }));
+        });
+        return pool;
+    }
+
+    function buildQuestions() {
+        const pool = buildPool();
+        if (pool.length < 4) { alert('选择更多课文！Not enough content (need 4+).'); return null; }
+        const qtVal = document.getElementById('quiz-type').value;
+        const count = parseInt(document.getElementById('quiz-count').value);
+        const shuffled = shuffle([...pool]).slice(0, count);
+        return shuffled.map(item => {
+            const qt = qtVal === 'mixed' ? QUESTION_TYPES[Math.floor(Math.random() * QUESTION_TYPES.length)] : qtVal;
+            const distractors = shuffle(pool.filter(p => p.word !== item.word)).slice(0, 3);
+            return { item, qt, distractors };
+        });
+    }
+
+    function startQuiz() {
+        const q = buildQuestions();
+        if (!q) return;
+        questions = q;
+        currentIdx = 0;
+        score = { correct: 0, wrong: 0 };
+        missedWords = [];
+        answered = false;
+
+        document.getElementById('selector-panel').classList.add('hidden');
+        document.getElementById('results-area').classList.add('hidden');
+        document.getElementById('quiz-area').classList.remove('hidden');
+
+        showQuestion();
+    }
+
+    function exitQuiz() {
+        document.getElementById('quiz-area').classList.add('hidden');
+        document.getElementById('results-area').classList.add('hidden');
+        document.getElementById('selector-panel').classList.remove('hidden');
+    }
+
+    function showQuestion() {
+        if (currentIdx >= questions.length) { showResults(); return; }
+        const q = questions[currentIdx];
+        const item = q.item;
+        const qt = q.qt;
+        currentItem = item;
+        answered = false;
+
+        const total = questions.length;
+        document.getElementById('q-counter').textContent = `${currentIdx + 1} / ${total}`;
+        document.getElementById('q-progress').style.width = `${(currentIdx / total) * 100}%`;
+        document.getElementById('q-score').textContent = `${score.correct}/${currentIdx}`;
+        document.getElementById('q-feedback').classList.add('hidden');
+        document.getElementById('q-next-wrap').classList.add('hidden');
+        document.getElementById('q-type-label').textContent = TYPE_LABELS[qt] || '';
+
+        // Build choices
+        const choicePool = [item, ...q.distractors];
+        const shuffledChoices = shuffle(choicePool);
+
+        // Populate question display
+        const charDisplay = document.getElementById('q-char-display');
+        const pinyinDisplay = document.getElementById('q-pinyin-display');
+        const meaningDisplay = document.getElementById('q-meaning-display');
+
+        charDisplay.style.cursor = 'pointer';
+        charDisplay.title = 'Click to hear';
+
+        if (qt === 'char2pinyin' || qt === 'char2meaning') {
+            charDisplay.textContent = item.word;
+            charDisplay.style.display = 'block';
+            pinyinDisplay.textContent = '';
+            meaningDisplay.textContent = '';
+            document.getElementById('q-prompt-label').textContent = '这个字（词）是什么意思/拼音？';
+        } else if (qt === 'pinyin2char') {
+            charDisplay.textContent = '';
+            charDisplay.style.display = 'none';
+            pinyinDisplay.textContent = item.pinyin;
+            meaningDisplay.textContent = item.meaning;
+            document.getElementById('q-prompt-label').textContent = '哪个汉字/词对应这个拼音？';
+        } else if (qt === 'meaning2char') {
+            charDisplay.textContent = '';
+            charDisplay.style.display = 'none';
+            pinyinDisplay.textContent = '';
+            meaningDisplay.textContent = item.meaning;
+            document.getElementById('q-prompt-label').textContent = '哪个汉字/词有这个意思？';
+        }
+
+        setTimeout(() => speakText(item.word), 200);
+
+        // Choices
+        const choicesDiv = document.getElementById('quiz-choices');
+        choicesDiv.innerHTML = '';
+        shuffledChoices.forEach(choice => {
+            const btn = document.createElement('button');
+            btn.className = 'quiz-choice-btn';
+            if (qt === 'char2pinyin') {
+                btn.textContent = choice.pinyin;
+            } else if (qt === 'pinyin2char' || qt === 'meaning2char') {
+                btn.textContent = choice.word;
+                btn.style.fontFamily = "'STSong','SimSun','AR PL UMing CN','Noto Serif CJK SC',serif";
+            } else if (qt === 'char2meaning') {
+                btn.textContent = choice.meaning;
+            }
+            btn.onclick = () => selectChoice(btn, choice.word === item.word, item);
+            choicesDiv.appendChild(btn);
+        });
+    }
+
+    function selectChoice(btn, isCorrect, item) {
+        if (answered) return;
+        answered = true;
+
+        const allBtns = document.querySelectorAll('.quiz-choice-btn');
+        const fb = document.getElementById('q-feedback');
+
+        if (isCorrect) {
+            btn.classList.add('choice-correct');
+            score.correct++;
+            fb.className = 'quiz-feedback fb-correct';
+            document.getElementById('q-feedback-text').innerHTML = `🎉 正确！<span class="pinyin">${item.pinyin}</span> — ${item.meaning}`;
+        } else {
+            btn.classList.add('choice-wrong');
+            score.wrong++;
+            missedWords.push(item);
+            // Highlight correct
+            allBtns.forEach(b => {
+                const qt = questions[currentIdx].qt;
+                let correctText;
+                if (qt === 'char2pinyin') correctText = item.pinyin;
+                else if (qt === 'pinyin2char' || qt === 'meaning2char') correctText = item.word;
+                else correctText = item.meaning;
+                if (b.textContent === correctText) b.classList.add('choice-correct');
+            });
+            fb.className = 'quiz-feedback fb-wrong';
+            document.getElementById('q-feedback-text').innerHTML = `❌ 正确答案：<strong style="font-family:'STSong',serif">${item.word}</strong> <span class="pinyin">${item.pinyin}</span> — ${item.meaning}`;
+        }
+
+        fb.classList.remove('hidden');
+        document.getElementById('q-score').textContent = `${score.correct}/${currentIdx + 1}`;
+        document.getElementById('q-next-wrap').classList.remove('hidden');
+        allBtns.forEach(b => b.disabled = true);
+    }
+
+    function nextQuestion() {
+        currentIdx++;
+        showQuestion();
+    }
+
+    function showResults() {
+        document.getElementById('quiz-area').classList.add('hidden');
+        document.getElementById('results-area').classList.remove('hidden');
+
+        const total = score.correct + score.wrong;
+        const pct = total > 0 ? Math.round((score.correct / total) * 100) : 0;
+        document.getElementById('res-correct').textContent = score.correct;
+        document.getElementById('res-wrong').textContent = score.wrong;
+        document.getElementById('res-total').textContent = total;
+        document.getElementById('res-pct').textContent = pct + '%';
+        document.getElementById('results-emoji').textContent = pct >= 90 ? '🏆' : pct >= 70 ? '🎉' : pct >= 50 ? '👍' : '💪';
+        document.getElementById('results-title').textContent = pct >= 90 ? '太棒了！' : pct >= 70 ? '很好！' : '继续加油！';
+
+        if (missedWords.length > 0) {
+            document.getElementById('missed-section').classList.remove('hidden');
+            document.getElementById('missed-list').innerHTML = missedWords.map(w => `
+                <div style="display:inline-block;margin:4px;padding:8px 14px;background:#fff5f5;border:2px solid #fed7d7;border-radius:8px;cursor:pointer;"
+                    onclick="speakText('${w.word}')">
+                    <strong style="font-size:1.2em;font-family:'STSong',serif">${w.word}</strong>
+                    <span class="pinyin" style="margin-left:6px">${w.pinyin}</span>
+                    <span style="display:block;font-size:0.8em;color:#718096">${w.meaning}</span>
+                </div>`).join('');
+        }
+    }
+
+    function shuffle(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    function speakText(text, rate) {
+        if (!text || !('speechSynthesis' in window)) return;
+        speechSynthesis.cancel();
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.lang = 'zh-CN';
+        utt.rate = rate || 0.8;
+        const voices = speechSynthesis.getVoices();
+        const zhVoice = voices.find(v => v.lang.startsWith('zh'));
+        if (zhVoice) utt.voice = zhVoice;
+        speechSynthesis.speak(utt);
+    }
+
+    if ('speechSynthesis' in window) speechSynthesis.getVoices();
+    init();
+    </script>
+</body>
+</html>

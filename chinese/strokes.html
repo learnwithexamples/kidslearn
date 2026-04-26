@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>笔顺练习 Stroke Order - 中文 - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="styles/chinese.css">
+    <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+    <style>
+        .stroke-char-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0;
+        }
+        .stroke-char-pill {
+            padding: 8px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'STSong','SimSun',serif;
+            font-size: 1.2em;
+            transition: all 0.2s;
+            background: #fff;
+        }
+        .stroke-char-pill:hover { border-color: #c53030; background: #fff5f5; }
+        .stroke-char-pill.active { border-color: #c53030; background: #c53030; color: #fff; }
+
+        #writer-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            padding: 24px;
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            margin: 16px 0;
+        }
+        #writer-target { border: 1px dashed #cbd5e0; border-radius: 8px; }
+        #char-info-panel { text-align: center; }
+        #char-info-panel .char-big { font-family: 'STSong','SimSun',serif; font-size: 2em; }
+        .stroke-controls { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        .stroke-controls button { padding: 8px 16px; border-radius: 8px; font-size: 0.9em; cursor: pointer; border: 2px solid; }
+        .btn-animate { background: #c53030; color: #fff; border-color: #c53030; }
+        .btn-animate:hover { background: #9b2c2c; border-color: #9b2c2c; }
+        .btn-quiz-mode { background: #d69e2e; color: #fff; border-color: #d69e2e; }
+        .btn-quiz-mode:hover { background: #b7791f; }
+        .btn-neutral { background: #fff; color: #2d3748; border-color: #e2e8f0; }
+        .btn-neutral:hover { border-color: #a0aec0; }
+
+        #quiz-result { font-weight: bold; min-height: 30px; margin-top: 8px; font-size: 1em; }
+        #stroke-count-display { color: #718096; font-size: 0.85em; }
+
+        .unit-lesson-picker { margin-bottom: 16px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✍️ 笔顺练习 Stroke Order</h1>
+            <p class="subtitle">Learn &amp; practice Chinese character stroke order</p>
+            <a href="grade2b.html" class="back-link">← 返回目录</a>
+        </header>
+
+        <!-- Unit / Lesson Picker -->
+        <div class="unit-lesson-picker">
+            <div>
+                <label style="font-weight:bold;margin-right:6px;">单元 Unit:</label>
+                <select id="unit-select" style="padding:6px 12px;border:2px solid #e2e8f0;border-radius:8px;font-size:1em;">
+                    <option value="10">Unit 10 — 第十单元</option>
+                    <option value="11">Unit 11 — 第十一单元</option>
+                    <option value="12">Unit 12 — 第十二单元</option>
+                    <option value="13">Unit 13 — 第十三单元</option>
+                </select>
+            </div>
+            <div>
+                <label style="font-weight:bold;margin-right:6px;">课文 Lesson:</label>
+                <select id="lesson-select" style="padding:6px 12px;border:2px solid #e2e8f0;border-radius:8px;font-size:1em;"></select>
+            </div>
+        </div>
+
+        <!-- Character Picker -->
+        <div>
+            <label style="font-weight:bold;display:block;margin-bottom:6px;">选择生字 Select character:</label>
+            <div class="stroke-char-grid" id="char-grid"></div>
+        </div>
+
+        <!-- Controls for all chars in lesson -->
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;">
+            <button class="stroke-controls btn-neutral" style="border:2px solid #e2e8f0;padding:8px 16px;border-radius:8px;cursor:pointer;" onclick="animateAll()">▶▶ 播放全部 Animate All</button>
+            <button class="stroke-controls btn-neutral" style="border:2px solid #e2e8f0;padding:8px 16px;border-radius:8px;cursor:pointer;" onclick="stopAnimation()">⏹ 停止 Stop</button>
+        </div>
+
+        <!-- Writer Area -->
+        <div id="writer-area">
+            <div id="char-info-panel">
+                <div id="no-char-msg" style="color:#a0aec0;font-size:1em;">← 点击上方选择字 / Select a character above</div>
+                <div id="char-detail" class="hidden">
+                    <div class="char-big" id="detail-char"></div>
+                    <div class="pinyin" id="detail-pinyin" style="font-size:1.1em;margin:4px 0;"></div>
+                    <div id="detail-meaning" style="color:#4a5568;font-size:0.9em;"></div>
+                    <div id="stroke-count-display"></div>
+                </div>
+            </div>
+
+            <svg id="writer-target" width="220" height="220"></svg>
+
+            <div class="stroke-controls">
+                <button class="btn-animate" onclick="animateCharacter()">▶ 演示笔顺 Animate</button>
+                <button class="btn-neutral" style="border:2px solid #e2e8f0;" onclick="loopAnimation()">🔁 循环 Loop</button>
+                <button class="btn-quiz-mode" onclick="enterQuizMode()">✏️ 练习模式 Practice</button>
+                <button class="btn-neutral" style="border:2px solid #e2e8f0;" onclick="showCharacter()">👁 显示 Show</button>
+                <button class="btn-neutral" style="border:2px solid #e2e8f0;" onclick="hideCharacter()">🙈 隐藏 Hide</button>
+                <button class="btn-neutral" style="border:2px solid #e2e8f0;" onclick="speakCurrent()">🔊</button>
+            </div>
+            <div id="quiz-result"></div>
+        </div>
+
+        <!-- Stroke by stroke controls -->
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin:8px 0;align-items:center;">
+            <span style="font-weight:bold;font-size:0.9em;">分步练习:</span>
+            <button class="unit-btn btn-outline" onclick="prevStroke()">← 上一笔</button>
+            <button class="unit-btn btn-outline" onclick="nextStroke()">下一笔 →</button>
+        </div>
+
+        <!-- Reference Table -->
+        <div id="ref-table-section" style="margin-top:24px;">
+            <h3 style="color:#c53030;margin-bottom:8px;">本课生字一览 — All characters in this lesson</h3>
+            <div class="char-grid" id="lesson-char-grid"></div>
+        </div>
+    </div>
+
+    <script src="data/chinese-data.js"></script>
+    <script>
+    const params = new URLSearchParams(location.search);
+    const initUnit = params.get('unit');
+    const initLesson = params.get('lesson');
+
+    let currentWriter = null;
+    let currentChar = null;
+    let currentLesson = null;
+    let loopHandle = null;
+    let currentStrokeNum = 0;
+
+    // ── Init ──
+    function init() {
+        const unitSel = document.getElementById('unit-select');
+        if (initUnit) unitSel.value = initUnit;
+
+        unitSel.addEventListener('change', () => { populateLessons(); loadLesson(); });
+        document.getElementById('lesson-select').addEventListener('change', loadLesson);
+
+        populateLessons();
+        loadLesson();
+    }
+
+    function populateLessons() {
+        const unitNum = parseInt(document.getElementById('unit-select').value);
+        const unit = chineseData.units.find(u => u.number === unitNum);
+        const sel = document.getElementById('lesson-select');
+        sel.innerHTML = '';
+        if (!unit) return;
+        unit.lessons.forEach(lesson => {
+            const opt = document.createElement('option');
+            opt.value = lesson.id;
+            opt.textContent = `${lesson.icon} ${lesson.title}`;
+            sel.appendChild(opt);
+        });
+        if (initLesson) sel.value = initLesson;
+    }
+
+    function loadLesson() {
+        const lessonId = document.getElementById('lesson-select').value;
+        const found = getLessonById(lessonId);
+        if (!found) return;
+        currentLesson = found.lesson;
+        currentChar = null;
+        currentWriter = null;
+
+        // Char pill grid
+        const grid = document.getElementById('char-grid');
+        grid.innerHTML = '';
+        currentLesson.characters.forEach(c => {
+            const pill = document.createElement('div');
+            pill.className = 'stroke-char-pill';
+            pill.textContent = c.char;
+            pill.title = `${c.pinyin} — ${c.meaning}`;
+            pill.onclick = () => selectChar(c, pill);
+            grid.appendChild(pill);
+        });
+
+        // Reference table
+        const refGrid = document.getElementById('lesson-char-grid');
+        refGrid.innerHTML = '';
+        currentLesson.characters.forEach(c => {
+            const card = document.createElement('div');
+            card.className = 'char-card';
+            card.style.cursor = 'pointer';
+            card.innerHTML = `
+                <div class="char-display" onclick="selectCharFromRef('${c.char}')">${c.char}</div>
+                <div class="char-pinyin">${c.pinyin}</div>
+                <div class="char-meaning">${c.meaning}</div>`;
+            refGrid.appendChild(card);
+        });
+
+        // Reset writer area
+        document.getElementById('no-char-msg').style.display = 'block';
+        document.getElementById('char-detail').classList.add('hidden');
+        document.getElementById('quiz-result').textContent = '';
+    }
+
+    function selectChar(charObj, pillEl) {
+        currentChar = charObj;
+        currentStrokeNum = 0;
+
+        // Update pills
+        document.querySelectorAll('.stroke-char-pill').forEach(p => p.classList.remove('active'));
+        if (pillEl) pillEl.classList.add('active');
+
+        // Update info panel
+        document.getElementById('no-char-msg').style.display = 'none';
+        document.getElementById('char-detail').classList.remove('hidden');
+        document.getElementById('detail-char').textContent = charObj.char;
+        document.getElementById('detail-pinyin').textContent = charObj.pinyin;
+        document.getElementById('detail-meaning').textContent = charObj.meaning;
+        document.getElementById('quiz-result').textContent = '';
+
+        // Call speakText at selection
+        speakText(charObj.char);
+
+        // Create HanziWriter
+        if (loopHandle) { clearTimeout(loopHandle); loopHandle = null; }
+        const svgEl = document.getElementById('writer-target');
+        svgEl.innerHTML = '';
+
+        try {
+            currentWriter = HanziWriter.create('writer-target', charObj.char, {
+                width: 220,
+                height: 220,
+                padding: 20,
+                showOutline: true,
+                strokeAnimationSpeed: 1,
+                delayBetweenStrokes: 300,
+                strokeColor: '#c53030',
+                outlineColor: '#e2e8f0',
+                drawingColor: '#6b46c1',
+                drawingWidth: 8,
+                rendererType: 'svg',
+            });
+
+            currentWriter.hideCharacter();
+            currentWriter.showOutline();
+
+            // Try to get stroke count from writer after load
+            setTimeout(() => {
+                try {
+                    const sc = currentWriter._character && currentWriter._character.strokes ? currentWriter._character.strokes.length : '?';
+                    document.getElementById('stroke-count-display').textContent = `${sc} 笔 strokes`;
+                } catch(e) {}
+            }, 600);
+        } catch(e) {
+            document.getElementById('detail-char').textContent = charObj.char;
+            console.warn('HanziWriter error for char:', charObj.char, e);
+        }
+    }
+
+    function selectCharFromRef(char) {
+        if (!currentLesson) return;
+        const charObj = currentLesson.characters.find(c => c.char === char);
+        if (!charObj) return;
+        const pill = Array.from(document.querySelectorAll('.stroke-char-pill')).find(p => p.textContent === char);
+        selectChar(charObj, pill);
+        window.scrollTo({ top: document.getElementById('writer-area').offsetTop - 20, behavior: 'smooth' });
+    }
+
+    function animateCharacter() {
+        if (!currentWriter) return;
+        clearLoop();
+        currentWriter.showCharacter();
+        currentWriter.animateCharacter();
+    }
+
+    function loopAnimation() {
+        if (!currentWriter) return;
+        clearLoop();
+        function doLoop() {
+            if (!currentWriter) return;
+            currentWriter.hideCharacter();
+            currentWriter.animateCharacter({
+                onComplete: () => {
+                    loopHandle = setTimeout(doLoop, 800);
+                }
+            });
+        }
+        doLoop();
+    }
+
+    function clearLoop() {
+        if (loopHandle) { clearTimeout(loopHandle); loopHandle = null; }
+    }
+
+    function stopAnimation() {
+        clearLoop();
+        if (currentWriter) currentWriter.pauseAnimation();
+    }
+
+    function showCharacter() {
+        if (currentWriter) { clearLoop(); currentWriter.showCharacter(); }
+    }
+
+    function hideCharacter() {
+        if (currentWriter) { clearLoop(); currentWriter.hideCharacter(); }
+    }
+
+    function enterQuizMode() {
+        if (!currentWriter) return;
+        clearLoop();
+        document.getElementById('quiz-result').textContent = '✏️ 练习：在方框内按笔顺写字 | Trace the strokes in order...';
+        currentWriter.quiz({
+            onMistake: function(strokeData) {
+                document.getElementById('quiz-result').textContent = `❌ 第 ${strokeData.strokeNum + 1} 笔错了，重试！`;
+            },
+            onCorrectStroke: function(strokeData) {
+                document.getElementById('quiz-result').textContent = `✅ 第 ${strokeData.strokeNum + 1} 笔正确！`;
+            },
+            onComplete: function(summaryData) {
+                document.getElementById('quiz-result').textContent = `🎉 完成！${summaryData.totalMistakes === 0 ? '零错误！' : `${summaryData.totalMistakes} 个错误`}`;
+            }
+        });
+    }
+
+    function nextStroke() {
+        if (!currentWriter) return;
+        currentWriter.animateStroke(currentStrokeNum++);
+    }
+
+    function prevStroke() {
+        if (currentStrokeNum > 0) currentStrokeNum--;
+    }
+
+    function animateAll() {
+        if (!currentLesson || currentLesson.characters.length === 0) return;
+        let i = 0;
+        function next() {
+            if (i >= currentLesson.characters.length) return;
+            const charObj = currentLesson.characters[i];
+            const pill = Array.from(document.querySelectorAll('.stroke-char-pill')).find(p => p.textContent === charObj.char);
+            selectChar(charObj, pill);
+            i++;
+            setTimeout(() => {
+                if (currentWriter) {
+                    currentWriter.animateCharacter({ onComplete: () => setTimeout(next, 500) });
+                } else {
+                    next();
+                }
+            }, 700);
+        }
+        next();
+    }
+
+    function speakCurrent() {
+        if (currentChar) speakText(currentChar.char);
+    }
+
+    function speakText(text, rate) {
+        if (!text || !('speechSynthesis' in window)) return;
+        speechSynthesis.cancel();
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.lang = 'zh-CN';
+        utt.rate = rate || 0.75;
+        const voices = speechSynthesis.getVoices();
+        const zhVoice = voices.find(v => v.lang.startsWith('zh'));
+        if (zhVoice) utt.voice = zhVoice;
+        speechSynthesis.speak(utt);
+    }
+
+    if ('speechSynthesis' in window) speechSynthesis.getVoices();
+    init();
+    </script>
+</body>
+</html>

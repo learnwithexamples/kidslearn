@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>词语配对 Matching - 中文 - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="styles/chinese.css">
+    <style>
+        .match-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px; }
+        .match-col { display:flex; flex-direction:column; gap:8px; }
+        .match-tile {
+            padding:16px 12px; border:3px solid #e2e8f0; border-radius:12px;
+            background:#fff; cursor:pointer; text-align:center; transition:all 0.2s;
+            font-size:1.1em; user-select:none; min-height:52px;
+            display:flex; align-items:center; justify-content:center;
+        }
+        .match-tile:hover:not(.disabled):not(.matched) { border-color:#c53030; background:#fff5f5; transform:translateY(-1px); }
+        .match-tile.selected { border-color:#c53030; background:#fff5f5; box-shadow:0 0 0 3px rgba(197,48,48,0.2); }
+        .match-tile.matched { border-color:#38a169; background:#f0fff4; color:#276749; cursor:default; }
+        .match-tile.wrong-flash { border-color:#e53e3e; background:#fff5f5; animation:wrongShake 0.3s ease; }
+        .match-tile.disabled { opacity:0.4; cursor:default; }
+        .match-tile .match-char { font-family:'STSong','SimSun','AR PL UMing CN','Noto Serif CJK SC',serif; font-size:1.3em; }
+        .match-tile .match-pinyin { font-size:0.8em; color:#718096; margin-top:2px; }
+        @keyframes wrongShake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+        #timer-display { font-size:1.1em; font-weight:bold; color:#c53030; }
+        #progress-text { font-size:0.9em; color:#718096; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔗 词语配对 Matching</h1>
+            <p class="subtitle">Match Chinese words to their meanings</p>
+            <a href="grade2b.html" class="back-link">← 返回目录</a>
+        </header>
+
+        <!-- Selector Panel -->
+        <div id="selector-panel" class="selector-panel">
+            <h3>选择练习范围 — Select content</h3>
+
+            <div style="margin-bottom:12px;">
+                <label style="font-weight:bold;margin-right:8px;">单元 Unit:</label>
+                <select id="unit-select" style="padding:6px 12px;border:2px solid #e2e8f0;border-radius:8px;font-size:1em;">
+                    <option value="all">All Units (所有单元)</option>
+                    <option value="10">Unit 10 — 第十单元</option>
+                    <option value="11">Unit 11 — 第十一单元</option>
+                    <option value="12">Unit 12 — 第十二单元</option>
+                    <option value="13">Unit 13 — 第十三单元</option>
+                </select>
+            </div>
+
+            <div id="lesson-checkboxes-wrap" style="margin-bottom:12px;">
+                <label style="font-weight:bold;display:block;margin-bottom:6px;">课文 Lessons:</label>
+                <div class="lesson-checkboxes" id="lesson-checkboxes"></div>
+            </div>
+
+            <div class="settings-row">
+                <label>配对方式 Match:</label>
+                <select id="match-type">
+                    <option value="word2meaning" selected>Word ↔ Meaning</option>
+                    <option value="word2pinyin">Word ↔ Pinyin</option>
+                    <option value="char2both">Character ↔ Pinyin &amp; Meaning</option>
+                </select>
+                <label style="margin-left:16px;">每组对数 Pairs:</label>
+                <select id="pair-count">
+                    <option value="4">4 pairs</option>
+                    <option value="6" selected>6 pairs</option>
+                    <option value="8">8 pairs</option>
+                </select>
+            </div>
+
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;">
+                <button class="primary-btn" onclick="startGame()">▶ 开始配对 Start</button>
+                <button class="unit-btn btn-outline" onclick="selectAll()">✓ 全选</button>
+                <button class="unit-btn btn-outline" onclick="deselectAll()">✗ 取消</button>
+            </div>
+        </div>
+
+        <!-- Game Area -->
+        <div id="game-area" class="hidden">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+                <div>
+                    <span id="progress-text">0 / 0 pairs matched</span>
+                </div>
+                <div style="display:flex;gap:12px;align-items:center;">
+                    <span id="timer-display">0s</span>
+                    <span style="color:#718096;font-size:0.85em;">错误: <strong id="error-count">0</strong></span>
+                    <button class="unit-btn btn-outline" onclick="nextRound()">⏭ 换一组 Next</button>
+                    <button class="unit-btn btn-outline" onclick="exitGame()">✕ 退出</button>
+                </div>
+            </div>
+
+            <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" id="game-progress" style="width:0%"></div>
+            </div>
+
+            <p style="text-align:center;color:#718096;font-size:0.9em;margin:8px 0;">
+                点击左边的中文，再点击右边配对的意思<br>
+                <em>Click a word on the left, then click its match on the right</em>
+            </p>
+
+            <div class="match-grid">
+                <div class="match-col" id="left-col"></div>
+                <div class="match-col" id="right-col"></div>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div id="results-area" class="hidden">
+            <div class="results-card">
+                <h2 id="results-emoji">🎉</h2>
+                <h3 id="results-title" style="color:#c53030;margin-bottom:16px;">配对完成！</h3>
+                <div class="results-grid">
+                    <div class="result-item">
+                        <div class="result-label">⏱ 用时 Time</div>
+                        <div class="result-value" id="res-time">0s</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">❌ 错误 Errors</div>
+                        <div class="result-value" id="res-errors">0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">✅ 配对数 Pairs</div>
+                        <div class="result-value" id="res-pairs">0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">⭐ 评级 Rating</div>
+                        <div class="result-value" id="res-stars">⭐⭐⭐</div>
+                    </div>
+                </div>
+                <button class="primary-btn result-btn" onclick="nextRound()">🔁 下一组 Next Round</button>
+                <button class="unit-btn btn-outline result-btn" onclick="exitGame()">⬅ 返回设置</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="data/chinese-data.js"></script>
+    <script>
+    const params = new URLSearchParams(location.search);
+    const initUnit = params.get('unit');
+
+    let pool = [];
+    let currentPairs = [];
+    let selectedLeft = null;
+    let selectedRight = null;
+    let matchedCount = 0;
+    let errorCount = 0;
+    let timerInterval = null;
+    let elapsedSeconds = 0;
+    let roundResults = [];
+
+    function init() {
+        if (initUnit) document.getElementById('unit-select').value = initUnit;
+        updateLessonCheckboxes();
+        document.getElementById('unit-select').addEventListener('change', updateLessonCheckboxes);
+    }
+
+    function updateLessonCheckboxes() {
+        const unitVal = document.getElementById('unit-select').value;
+        const container = document.getElementById('lesson-checkboxes');
+        container.innerHTML = '';
+        const units = unitVal === 'all' ? chineseData.units : chineseData.units.filter(u => u.number === parseInt(unitVal));
+        units.forEach(unit => {
+            unit.lessons.forEach(lesson => {
+                const label = document.createElement('label');
+                label.className = 'lesson-check-label';
+                label.innerHTML = `<input type="checkbox" value="${lesson.id}" checked> ${lesson.icon} ${lesson.title}`;
+                container.appendChild(label);
+            });
+        });
+    }
+
+    function selectAll() { document.querySelectorAll('.lesson-check-label input').forEach(cb => cb.checked = true); }
+    function deselectAll() { document.querySelectorAll('.lesson-check-label input').forEach(cb => cb.checked = false); }
+
+    function buildPool() {
+        const selectedIds = Array.from(document.querySelectorAll('.lesson-check-label input:checked')).map(cb => cb.value);
+        const matchType = document.getElementById('match-type').value;
+        pool = [];
+        selectedIds.forEach(id => {
+            const found = getLessonById(id);
+            if (!found) return;
+            const { lesson } = found;
+            if (matchType === 'char2both') {
+                lesson.characters.forEach(c => pool.push({ left: c.char, right: `${c.pinyin} — ${c.meaning}`, word: c.char, pinyin: c.pinyin }));
+            } else if (matchType === 'word2pinyin') {
+                lesson.vocabulary.forEach(v => pool.push({ left: v.word, right: v.pinyin, word: v.word, pinyin: v.pinyin }));
+            } else {
+                lesson.vocabulary.forEach(v => pool.push({ left: v.word, right: v.meaning, word: v.word, pinyin: v.pinyin }));
+                lesson.characters.forEach(c => pool.push({ left: c.char, right: c.meaning, word: c.char, pinyin: c.pinyin }));
+            }
+        });
+        return pool;
+    }
+
+    function startGame() {
+        buildPool();
+        if (pool.length < 4) { alert('选择更多课文！Need at least 4 vocabulary items.'); return; }
+        matchedCount = 0; errorCount = 0; elapsedSeconds = 0; roundResults = [];
+        selectedLeft = null; selectedRight = null;
+
+        document.getElementById('selector-panel').classList.add('hidden');
+        document.getElementById('results-area').classList.add('hidden');
+        document.getElementById('game-area').classList.remove('hidden');
+
+        startTimer();
+        dealRound();
+    }
+
+    function exitGame() {
+        clearInterval(timerInterval);
+        document.getElementById('game-area').classList.add('hidden');
+        document.getElementById('results-area').classList.add('hidden');
+        document.getElementById('selector-panel').classList.remove('hidden');
+    }
+
+    function startTimer() {
+        clearInterval(timerInterval);
+        elapsedSeconds = 0;
+        timerInterval = setInterval(() => {
+            elapsedSeconds++;
+            document.getElementById('timer-display').textContent = `${elapsedSeconds}s`;
+        }, 1000);
+    }
+
+    function dealRound() {
+        const pairCount = parseInt(document.getElementById('pair-count').value);
+        const available = shuffle([...pool]).slice(0, pairCount);
+        currentPairs = available;
+        matchedCount = 0;
+
+        const leftItems = shuffle([...available]);
+        const rightItems = shuffle([...available]);
+
+        document.getElementById('error-count').textContent = errorCount;
+        updateProgress(0, available.length);
+
+        renderColumn('left-col', leftItems, 'left');
+        renderColumn('right-col', rightItems, 'right');
+    }
+
+    function renderColumn(colId, items, side) {
+        const col = document.getElementById(colId);
+        col.innerHTML = '';
+        items.forEach(item => {
+            const tile = document.createElement('div');
+            tile.className = 'match-tile';
+            tile.dataset.word = item.word;
+            tile.dataset.side = side;
+
+            if (side === 'left') {
+                tile.innerHTML = `<div class="match-char">${item.left}</div>`;
+                tile.onclick = () => { speakText(item.word); selectTile(tile, side); };
+            } else {
+                tile.innerHTML = `<div>${item.right}</div>`;
+                tile.onclick = () => selectTile(tile, side);
+            }
+            col.appendChild(tile);
+        });
+    }
+
+    function selectTile(tile, side) {
+        if (tile.classList.contains('matched') || tile.classList.contains('disabled')) return;
+
+        if (side === 'left') {
+            // Deselect previous left
+            document.querySelectorAll('[data-side=left].selected').forEach(t => t.classList.remove('selected'));
+            tile.classList.add('selected');
+            selectedLeft = tile;
+            // If right already selected, try match
+            if (selectedRight) tryMatch();
+        } else {
+            document.querySelectorAll('[data-side=right].selected').forEach(t => t.classList.remove('selected'));
+            tile.classList.add('selected');
+            selectedRight = tile;
+            if (selectedLeft) tryMatch();
+        }
+    }
+
+    function tryMatch() {
+        const leftWord = selectedLeft.dataset.word;
+        const rightWord = selectedRight.dataset.word;
+
+        if (leftWord === rightWord) {
+            // Correct!
+            selectedLeft.classList.remove('selected');
+            selectedRight.classList.remove('selected');
+            selectedLeft.classList.add('matched');
+            selectedRight.classList.add('matched');
+            selectedLeft.style.pointerEvents = 'none';
+            selectedRight.style.pointerEvents = 'none';
+
+            const item = currentPairs.find(p => p.word === leftWord);
+            if (item) speakText(item.word);
+
+            matchedCount++;
+            selectedLeft = null;
+            selectedRight = null;
+            updateProgress(matchedCount, currentPairs.length);
+
+            if (matchedCount >= currentPairs.length) {
+                setTimeout(showRoundResults, 600);
+            }
+        } else {
+            // Wrong
+            errorCount++;
+            document.getElementById('error-count').textContent = errorCount;
+            const lTile = selectedLeft;
+            const rTile = selectedRight;
+            lTile.classList.add('wrong-flash');
+            rTile.classList.add('wrong-flash');
+            setTimeout(() => {
+                lTile.classList.remove('wrong-flash', 'selected');
+                rTile.classList.remove('wrong-flash', 'selected');
+            }, 500);
+            selectedLeft = null;
+            selectedRight = null;
+        }
+    }
+
+    function updateProgress(matched, total) {
+        document.getElementById('progress-text').textContent = `${matched} / ${total} pairs matched`;
+        document.getElementById('game-progress').style.width = `${(matched / total) * 100}%`;
+    }
+
+    function nextRound() {
+        clearInterval(timerInterval);
+        document.getElementById('results-area').classList.add('hidden');
+        startTimer();
+        errorCount = 0;
+        dealRound();
+    }
+
+    function showRoundResults() {
+        clearInterval(timerInterval);
+        document.getElementById('game-area').classList.add('hidden');
+        document.getElementById('results-area').classList.remove('hidden');
+
+        const stars = errorCount === 0 ? '⭐⭐⭐' : errorCount <= 2 ? '⭐⭐' : '⭐';
+        const emoji = errorCount === 0 ? '🏆' : errorCount <= 3 ? '🎉' : '👍';
+
+        document.getElementById('res-time').textContent = `${elapsedSeconds}s`;
+        document.getElementById('res-errors').textContent = errorCount;
+        document.getElementById('res-pairs').textContent = currentPairs.length;
+        document.getElementById('res-stars').textContent = stars;
+        document.getElementById('results-emoji').textContent = emoji;
+        document.getElementById('results-title').textContent = errorCount === 0 ? '全对！完美！' : errorCount <= 3 ? '完成了！' : '已配对！再来一次？';
+    }
+
+    function shuffle(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    function speakText(text, rate) {
+        if (!text || !('speechSynthesis' in window)) return;
+        speechSynthesis.cancel();
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.lang = 'zh-CN';
+        utt.rate = rate || 0.8;
+        const voices = speechSynthesis.getVoices();
+        const zhVoice = voices.find(v => v.lang.startsWith('zh'));
+        if (zhVoice) utt.voice = zhVoice;
+        speechSynthesis.speak(utt);
+    }
+
+    if ('speechSynthesis' in window) speechSynthesis.getVoices();
+    init();
+    </script>
+</body>
+</html>

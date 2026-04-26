@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生字卡片 Flashcards - 中文 - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="styles/chinese.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🃏 生字卡片 Flashcards</h1>
+            <p class="subtitle" id="subtitle">Chinese Character Flashcards</p>
+            <a href="grade2b.html" class="back-link" id="back-link">← 返回目录</a>
+        </header>
+
+        <!-- Selector Panel -->
+        <div id="selector-panel" class="selector-panel">
+            <h3>选择练习范围 — Select content to study</h3>
+
+            <div style="margin-bottom:12px;">
+                <label style="font-weight:bold;margin-right:8px;">单元 Unit:</label>
+                <select id="unit-select" style="padding:6px 12px;border:2px solid #e2e8f0;border-radius:8px;font-size:1em;">
+                    <option value="all">All Units (所有单元)</option>
+                    <option value="10">Unit 10 — 第十单元</option>
+                    <option value="11">Unit 11 — 第十一单元</option>
+                    <option value="12">Unit 12 — 第十二单元</option>
+                    <option value="13">Unit 13 — 第十三单元</option>
+                </select>
+            </div>
+
+            <div id="lesson-checkboxes-wrap" style="margin-bottom:12px;">
+                <label style="font-weight:bold;display:block;margin-bottom:6px;">课文 Lessons:</label>
+                <div class="lesson-checkboxes" id="lesson-checkboxes"></div>
+            </div>
+
+            <div class="settings-row">
+                <label>卡片类型 Card type:</label>
+                <select id="card-mode">
+                    <option value="char">生字 Characters</option>
+                    <option value="vocab">词语 Vocabulary Words</option>
+                    <option value="both">Both 二者都有</option>
+                </select>
+                <label style="margin-left:16px;">每次 Count:</label>
+                <select id="card-count">
+                    <option value="10">10 cards</option>
+                    <option value="20" selected>20 cards</option>
+                    <option value="40">40 cards</option>
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;">
+                <button class="primary-btn" onclick="startFlashcards()">▶ 开始 Start</button>
+                <button class="unit-btn btn-outline" onclick="selectAll()">✓ 全选 All</button>
+                <button class="unit-btn btn-outline" onclick="deselectAll()">✗ 取消 None</button>
+            </div>
+        </div>
+
+        <!-- Flashcard Area -->
+        <div id="flashcard-area" class="hidden">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+                <div class="fc-progress">
+                    <span id="fc-counter">Card 1 / 20</span>
+                    &nbsp;·&nbsp;
+                    <span id="fc-lesson-info"></span>
+                </div>
+                <div style="display:flex;gap:8px;">
+                    <button class="fc-btn fc-nav" onclick="shuffleCards()">🔀 打乱 Shuffle</button>
+                    <button class="fc-btn fc-nav" onclick="exitFlashcards()">✕ 退出 Exit</button>
+                </div>
+            </div>
+
+            <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" id="fc-progress-bar" style="width:0%"></div>
+            </div>
+
+            <!-- Flashcard -->
+            <div class="flashcard-container" onclick="flipCard()">
+                <div class="flashcard" id="flashcard">
+                    <div class="flashcard-front">
+                        <div style="text-align:center">
+                            <div class="fc-char" id="fc-front-char">字</div>
+                            <div class="fc-hint">点击翻转 · Click to flip</div>
+                        </div>
+                    </div>
+                    <div class="flashcard-back">
+                        <div class="fc-back-content">
+                            <div class="fc-pinyin" id="fc-pinyin">pīnyīn</div>
+                            <div class="fc-meaning" id="fc-meaning">meaning</div>
+                            <div class="fc-example" id="fc-example">example</div>
+                            <div class="fc-hint" style="margin-top:12px;font-size:0.8em" id="fc-en-meaning"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flashcard-controls">
+                <button class="fc-btn fc-nav" onclick="prevCard()">← 上一张</button>
+                <button class="fc-btn fc-speak" onclick="speakCurrent()">🔊 朗读</button>
+                <button class="fc-btn fc-flip" onclick="flipCard()">🔄 翻转 Flip</button>
+                <button class="fc-btn fc-nav" onclick="nextCard()">下一张 →</button>
+            </div>
+
+            <div style="text-align:center;color:#a0aec0;font-size:0.85em;margin-top:8px;">
+                💡 按 <kbd>Space</kbd> 翻转 · <kbd>←</kbd><kbd>→</kbd> 切换 · <kbd>S</kbd> 朗读
+            </div>
+
+            <!-- Self-rating row -->
+            <div style="text-align:center;margin:16px 0;">
+                <p style="color:#718096;font-size:0.9em;margin-bottom:8px;">你记住了吗？Did you remember it?</p>
+                <div style="display:flex;justify-content:center;gap:12px;">
+                    <button class="fc-btn" style="background:#38a169;color:white" onclick="rateCard('know')">✅ 会了 Got it!</button>
+                    <button class="fc-btn" style="background:#e53e3e;color:white" onclick="rateCard('review')">🔁 再练 Review</button>
+                </div>
+            </div>
+
+            <!-- Mini stats -->
+            <div style="display:flex;justify-content:center;gap:24px;color:#718096;font-size:0.85em;margin-top:8px;">
+                <span>✅ 会了: <strong id="stat-know">0</strong></span>
+                <span>🔁 再练: <strong id="stat-review">0</strong></span>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div id="results-area" class="hidden">
+            <div class="results-card">
+                <h2>🎉 练习完成！</h2>
+                <div class="results-grid">
+                    <div class="result-item">
+                        <div class="result-label">✅ 会了 / Got it</div>
+                        <div class="result-value" id="res-know">0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">🔁 需复习 / Review</div>
+                        <div class="result-value" id="res-review">0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">📊 总体 / Total</div>
+                        <div class="result-value" id="res-total">0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">⭐ 掌握率 / Mastery</div>
+                        <div class="result-value" id="res-pct">0%</div>
+                    </div>
+                </div>
+                <button class="primary-btn result-btn" onclick="startFlashcards()">🔁 再来一遍 Again</button>
+                <button class="unit-btn btn-outline result-btn" onclick="exitFlashcards()" style="margin-top:4px">⬅ 返回设置</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="data/chinese-data.js"></script>
+    <script>
+    // ── State ──
+    const params = new URLSearchParams(location.search);
+    const initUnit = params.get('unit');
+    const initLesson = params.get('lesson');
+
+    let cards = [];
+    let currentIdx = 0;
+    let isFlipped = false;
+    let stats = { know: 0, review: 0 };
+
+    // ── Populate selector from URL params ──
+    function init() {
+        if (initUnit) document.getElementById('unit-select').value = initUnit;
+        updateLessonCheckboxes();
+        document.getElementById('unit-select').addEventListener('change', updateLessonCheckboxes);
+
+        if (initLesson) {
+            // Pre-select specific lesson
+            setTimeout(() => {
+                document.querySelectorAll('.lesson-check-label input').forEach(cb => {
+                    cb.checked = cb.value === initLesson;
+                });
+            }, 50);
+        }
+    }
+
+    function updateLessonCheckboxes() {
+        const unitVal = document.getElementById('unit-select').value;
+        const container = document.getElementById('lesson-checkboxes');
+        container.innerHTML = '';
+
+        const units = unitVal === 'all'
+            ? chineseData.units
+            : chineseData.units.filter(u => u.number === parseInt(unitVal));
+
+        units.forEach(unit => {
+            unit.lessons.forEach(lesson => {
+                const label = document.createElement('label');
+                label.className = 'lesson-check-label';
+                label.innerHTML = `<input type="checkbox" value="${lesson.id}" checked>
+                    ${lesson.icon} ${lesson.title}`;
+                container.appendChild(label);
+            });
+        });
+    }
+
+    function selectAll() {
+        document.querySelectorAll('.lesson-check-label input').forEach(cb => cb.checked = true);
+    }
+    function deselectAll() {
+        document.querySelectorAll('.lesson-check-label input').forEach(cb => cb.checked = false);
+    }
+
+    // ── Build cards from selections ──
+    function buildCards() {
+        const selectedIds = Array.from(document.querySelectorAll('.lesson-check-label input:checked')).map(cb => cb.value);
+        const mode = document.getElementById('card-mode').value;
+        const countVal = document.getElementById('card-count').value;
+
+        cards = [];
+
+        selectedIds.forEach(id => {
+            const found = getLessonById(id);
+            if (!found) return;
+            const { lesson } = found;
+
+            if (mode === 'char' || mode === 'both') {
+                lesson.characters.forEach(c => cards.push({
+                    type: 'char',
+                    front: c.char,
+                    pinyin: c.pinyin,
+                    meaning: c.meaning,
+                    example: c.example,
+                    meaningEn: '',
+                    lessonTitle: lesson.title
+                }));
+            }
+            if (mode === 'vocab' || mode === 'both') {
+                lesson.vocabulary.forEach(v => cards.push({
+                    type: 'vocab',
+                    front: v.word,
+                    pinyin: v.pinyin,
+                    meaning: v.meaning,
+                    example: '',
+                    meaningEn: v.meaningEn,
+                    lessonTitle: lesson.title
+                }));
+            }
+        });
+
+        // Shuffle
+        shuffleArray(cards);
+
+        // Limit count
+        if (countVal !== 'all') {
+            const n = parseInt(countVal);
+            cards = cards.slice(0, n);
+        }
+    }
+
+    function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+    }
+
+    // ── Start ──
+    function startFlashcards() {
+        buildCards();
+        if (cards.length === 0) { alert('没有选择任何卡片！No cards selected!'); return; }
+        currentIdx = 0;
+        stats = { know: 0, review: 0 };
+        isFlipped = false;
+        document.getElementById('selector-panel').classList.add('hidden');
+        document.getElementById('results-area').classList.add('hidden');
+        document.getElementById('flashcard-area').classList.remove('hidden');
+        updateStatsDisplay();
+        showCard();
+    }
+
+    function exitFlashcards() {
+        document.getElementById('flashcard-area').classList.add('hidden');
+        document.getElementById('results-area').classList.add('hidden');
+        document.getElementById('selector-panel').classList.remove('hidden');
+        isFlipped = false;
+        document.getElementById('flashcard').classList.remove('flipped');
+    }
+
+    function shuffleCards() {
+        shuffleArray(cards);
+        currentIdx = 0;
+        isFlipped = false;
+        document.getElementById('flashcard').classList.remove('flipped');
+        showCard();
+    }
+
+    // ── Show card ──
+    function showCard() {
+        if (cards.length === 0) return;
+        const card = cards[currentIdx];
+
+        // Reset flip
+        isFlipped = false;
+        document.getElementById('flashcard').classList.remove('flipped');
+
+        const total = cards.length;
+        document.getElementById('fc-counter').textContent = `${currentIdx + 1} / ${total}`;
+        document.getElementById('fc-lesson-info').textContent = card.lessonTitle;
+        document.getElementById('fc-progress-bar').style.width = `${((currentIdx + 1) / total) * 100}%`;
+
+        document.getElementById('fc-front-char').textContent = card.front;
+        document.getElementById('fc-pinyin').textContent = card.pinyin;
+        document.getElementById('fc-meaning').textContent = card.meaning;
+        document.getElementById('fc-example').textContent = card.example || '';
+        document.getElementById('fc-en-meaning').textContent = card.meaningEn ? `🇺🇸 ${card.meaningEn}` : '';
+    }
+
+    function flipCard() {
+        isFlipped = !isFlipped;
+        document.getElementById('flashcard').classList.toggle('flipped', isFlipped);
+        if (isFlipped) speakCurrent();
+    }
+
+    function nextCard() {
+        if (currentIdx < cards.length - 1) {
+            currentIdx++;
+            showCard();
+        } else {
+            showResults();
+        }
+    }
+
+    function prevCard() {
+        if (currentIdx > 0) {
+            currentIdx--;
+            showCard();
+        }
+    }
+
+    function speakCurrent() {
+        if (cards.length === 0) return;
+        speakText(cards[currentIdx].front);
+    }
+
+    function rateCard(rating) {
+        stats[rating]++;
+        updateStatsDisplay();
+        nextCard();
+    }
+
+    function updateStatsDisplay() {
+        document.getElementById('stat-know').textContent = stats.know;
+        document.getElementById('stat-review').textContent = stats.review;
+    }
+
+    function showResults() {
+        document.getElementById('flashcard-area').classList.add('hidden');
+        document.getElementById('results-area').classList.remove('hidden');
+        const total = stats.know + stats.review;
+        const pct = total > 0 ? Math.round((stats.know / total) * 100) : 0;
+        document.getElementById('res-know').textContent = stats.know;
+        document.getElementById('res-review').textContent = stats.review;
+        document.getElementById('res-total').textContent = total;
+        document.getElementById('res-pct').textContent = pct + '%';
+    }
+
+    // ── Speech ──
+    function speakText(text) {
+        if (!('speechSynthesis' in window)) return;
+        speechSynthesis.cancel();
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.lang = 'zh-CN';
+        utt.rate = 0.75;
+        const voices = speechSynthesis.getVoices();
+        const zhVoice = voices.find(v => v.lang.startsWith('zh'));
+        if (zhVoice) utt.voice = zhVoice;
+        speechSynthesis.speak(utt);
+    }
+
+    // ── Keyboard shortcuts ──
+    document.addEventListener('keydown', e => {
+        if (document.getElementById('flashcard-area').classList.contains('hidden')) return;
+        if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flipCard(); }
+        else if (e.key === 'ArrowRight') nextCard();
+        else if (e.key === 'ArrowLeft') prevCard();
+        else if (e.key.toLowerCase() === 's') speakCurrent();
+        else if (e.key.toLowerCase() === 'k') rateCard('know');
+        else if (e.key.toLowerCase() === 'r') rateCard('review');
+    });
+
+    if ('speechSynthesis' in window) speechSynthesis.getVoices();
+    init();
+    </script>
+</body>
+</html>

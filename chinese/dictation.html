@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>听写练习 Dictation - 中文 - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="styles/chinese.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎤 听写练习 Dictation</h1>
+            <p class="subtitle">Listen to Chinese words and write them</p>
+            <a href="grade2b.html" class="back-link">← 返回目录</a>
+        </header>
+
+        <!-- Selector Panel -->
+        <div id="selector-panel" class="selector-panel">
+            <h3>选择练习范围 — Select content</h3>
+
+            <div style="margin-bottom:12px;">
+                <label style="font-weight:bold;margin-right:8px;">单元 Unit:</label>
+                <select id="unit-select" style="padding:6px 12px;border:2px solid #e2e8f0;border-radius:8px;font-size:1em;">
+                    <option value="all">All Units (所有单元)</option>
+                    <option value="10">Unit 10 — 第十单元</option>
+                    <option value="11">Unit 11 — 第十一单元</option>
+                    <option value="12">Unit 12 — 第十二单元</option>
+                    <option value="13">Unit 13 — 第十三单元</option>
+                </select>
+            </div>
+
+            <div id="lesson-checkboxes-wrap" style="margin-bottom:12px;">
+                <label style="font-weight:bold;display:block;margin-bottom:6px;">课文 Lessons:</label>
+                <div class="lesson-checkboxes" id="lesson-checkboxes"></div>
+            </div>
+
+            <div class="settings-row">
+                <label>练习类型 Mode:</label>
+                <select id="dict-mode">
+                    <option value="char">生字 Characters</option>
+                    <option value="vocab">词语 Vocabulary</option>
+                    <option value="both">Both 二者都有</option>
+                </select>
+                <label style="margin-left:16px;">数量 Count:</label>
+                <select id="dict-count">
+                    <option value="5">5 words</option>
+                    <option value="10" selected>10 words</option>
+                    <option value="20">20 words</option>
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;">
+                <button class="primary-btn" onclick="startDictation()">▶ 开始听写 Start</button>
+                <button class="unit-btn btn-outline" onclick="selectAll()">✓ 全选</button>
+                <button class="unit-btn btn-outline" onclick="deselectAll()">✗ 取消</button>
+            </div>
+        </div>
+
+        <!-- Dictation Area -->
+        <div id="dictation-area" class="hidden">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+                <div>
+                    <span id="dict-counter" style="font-weight:bold;">1 / 10</span>
+                    &nbsp;·&nbsp;
+                    <span id="dict-lesson" style="color:#718096;font-size:0.9em;"></span>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center;">
+                    <span style="color:#718096;font-size:0.85em;">得分 Score: <strong id="score-display">0/0</strong></span>
+                    <button class="unit-btn btn-outline" onclick="exitDictation()">✕ 退出</button>
+                </div>
+            </div>
+
+            <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" id="dict-progress-bar" style="width:0%"></div>
+            </div>
+
+            <!-- Word audio section -->
+            <div class="dictation-word-display">
+                <p style="color:#718096;margin-bottom:12px;font-size:0.9em;">
+                    听音频，然后用中文写出这个字或词语<br>
+                    <em>Listen to the audio, then write the character/word in Chinese</em>
+                </p>
+                <button class="dict-play-btn" id="play-btn" onclick="playCurrentWord()">
+                    <span class="big-icon">🔊</span>
+                    <span>播放 Play Word</span>
+                </button>
+                <button class="dict-play-btn" style="background:#718096;display:inline-flex;align-items:center;gap:8px;margin-left:8px;" onclick="playCurrentWordSlow()">
+                    <span>🐢</span>
+                    <span>慢速 Slow</span>
+                </button>
+
+                <!-- Hint button (shows pinyin) -->
+                <div style="margin-top:8px;">
+                    <button class="unit-btn btn-outline" onclick="showHint()" id="hint-btn">💡 拼音提示 Pinyin Hint</button>
+                    <span id="pinyin-hint" class="pinyin" style="margin-left:10px;font-size:1.1em;visibility:hidden;"></span>
+                </div>
+            </div>
+
+            <!-- Input area -->
+            <div class="dict-input-area">
+                <input type="text" class="dict-input" id="dict-input"
+                    placeholder="在此写答案…"
+                    autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+                    onkeydown="if(event.key==='Enter') checkAnswer()">
+                <button class="dict-check-btn" onclick="checkAnswer()">✓ 检查 Check</button>
+            </div>
+
+            <!-- Feedback -->
+            <div id="dict-feedback" class="dict-feedback hidden">
+                <div id="feedback-icon" style="font-size:2em;margin-bottom:8px;"></div>
+                <div id="feedback-text" style="font-size:1em;"></div>
+                <div id="correct-display" class="dict-correct-display"></div>
+                <div id="feedback-meaning" style="color:#718096;font-size:0.9em;margin-top:6px;"></div>
+            </div>
+
+            <!-- Next button -->
+            <div style="text-align:center;margin:16px 0;" id="next-btn-wrap" style="display:none;">
+                <button class="primary-btn" onclick="nextWord()">下一个 Next →</button>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div id="results-area" class="hidden">
+            <div class="results-card">
+                <h2 id="results-emoji">🎉</h2>
+                <h3 id="results-title" style="color:#c53030;margin-bottom:16px;">听写完成！</h3>
+                <div class="results-grid">
+                    <div class="result-item">
+                        <div class="result-label">✅ 正确 Correct</div>
+                        <div class="result-value" id="res-correct">0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">❌ 错误 Wrong</div>
+                        <div class="result-value" id="res-wrong">0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">📊 总计 Total</div>
+                        <div class="result-value" id="res-total">0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">⭐ 正确率 Score</div>
+                        <div class="result-value" id="res-pct">0%</div>
+                    </div>
+                </div>
+
+                <!-- Review missed words -->
+                <div id="missed-section" class="hidden" style="margin:16px 0;text-align:left;">
+                    <h4 style="color:#c53030;margin-bottom:8px;">需要复习的字词 — Words to review:</h4>
+                    <div id="missed-list"></div>
+                </div>
+
+                <button class="primary-btn result-btn" onclick="startDictation()">🔁 再来一次 Try Again</button>
+                <button class="unit-btn btn-outline result-btn" onclick="exitDictation()" style="margin-top:4px">⬅ 返回设置</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="data/chinese-data.js"></script>
+    <script>
+    // ── State ──
+    const params = new URLSearchParams(location.search);
+    const initUnit = params.get('unit');
+    const initLesson = params.get('lesson');
+
+    let wordList = [];
+    let currentWordIdx = 0;
+    let score = { correct: 0, wrong: 0 };
+    let missedWords = [];
+    let answered = false;
+
+    // ── Init ──
+    function init() {
+        if (initUnit) document.getElementById('unit-select').value = initUnit;
+        updateLessonCheckboxes();
+        document.getElementById('unit-select').addEventListener('change', updateLessonCheckboxes);
+        if (initLesson) {
+            setTimeout(() => {
+                document.querySelectorAll('.lesson-check-label input').forEach(cb => {
+                    cb.checked = cb.value === initLesson;
+                });
+            }, 50);
+        }
+    }
+
+    function updateLessonCheckboxes() {
+        const unitVal = document.getElementById('unit-select').value;
+        const container = document.getElementById('lesson-checkboxes');
+        container.innerHTML = '';
+        const units = unitVal === 'all'
+            ? chineseData.units
+            : chineseData.units.filter(u => u.number === parseInt(unitVal));
+        units.forEach(unit => {
+            unit.lessons.forEach(lesson => {
+                const label = document.createElement('label');
+                label.className = 'lesson-check-label';
+                label.innerHTML = `<input type="checkbox" value="${lesson.id}" checked>
+                    ${lesson.icon} ${lesson.title}`;
+                container.appendChild(label);
+            });
+        });
+    }
+
+    function selectAll() { document.querySelectorAll('.lesson-check-label input').forEach(cb => cb.checked = true); }
+    function deselectAll() { document.querySelectorAll('.lesson-check-label input').forEach(cb => cb.checked = false); }
+
+    // ── Build word list ──
+    function buildWordList() {
+        const selectedIds = Array.from(document.querySelectorAll('.lesson-check-label input:checked')).map(cb => cb.value);
+        const mode = document.getElementById('dict-mode').value;
+        const countVal = document.getElementById('dict-count').value;
+
+        wordList = [];
+        selectedIds.forEach(id => {
+            const found = getLessonById(id);
+            if (!found) return;
+            const { lesson } = found;
+
+            if (mode === 'char' || mode === 'both') {
+                lesson.characters.forEach(c => wordList.push({
+                    word: c.char, pinyin: c.pinyin, meaning: c.meaning, example: c.example,
+                    lessonTitle: lesson.title, type: 'char'
+                }));
+            }
+            if (mode === 'vocab' || mode === 'both') {
+                lesson.vocabulary.forEach(v => wordList.push({
+                    word: v.word, pinyin: v.pinyin, meaning: v.meaning, example: '',
+                    lessonTitle: lesson.title, type: 'vocab'
+                }));
+            }
+        });
+
+        // Shuffle
+        for (let i = wordList.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [wordList[i], wordList[j]] = [wordList[j], wordList[i]];
+        }
+
+        if (countVal !== 'all') wordList = wordList.slice(0, parseInt(countVal));
+    }
+
+    // ── Start ──
+    function startDictation() {
+        buildWordList();
+        if (wordList.length === 0) { alert('没有选择任何内容！No content selected!'); return; }
+        currentWordIdx = 0;
+        score = { correct: 0, wrong: 0 };
+        missedWords = [];
+        answered = false;
+
+        document.getElementById('selector-panel').classList.add('hidden');
+        document.getElementById('results-area').classList.add('hidden');
+        document.getElementById('dictation-area').classList.remove('hidden');
+
+        showWord();
+    }
+
+    function exitDictation() {
+        speechSynthesis.cancel();
+        document.getElementById('dictation-area').classList.add('hidden');
+        document.getElementById('results-area').classList.add('hidden');
+        document.getElementById('selector-panel').classList.remove('hidden');
+    }
+
+    // ── Show word ──
+    function showWord() {
+        if (currentWordIdx >= wordList.length) { showResults(); return; }
+        const item = wordList[currentWordIdx];
+        const total = wordList.length;
+
+        answered = false;
+        document.getElementById('dict-counter').textContent = `${currentWordIdx + 1} / ${total}`;
+        document.getElementById('dict-lesson').textContent = `${item.lessonTitle} · ${item.type === 'char' ? '生字' : '词语'}`;
+        document.getElementById('dict-progress-bar').style.width = `${(currentWordIdx / total) * 100}%`;
+        document.getElementById('score-display').textContent = `${score.correct}/${currentWordIdx}`;
+
+        // Reset UI
+        const input = document.getElementById('dict-input');
+        input.value = '';
+        input.className = 'dict-input';
+        input.disabled = false;
+        input.focus();
+
+        document.getElementById('dict-feedback').classList.add('hidden');
+        document.getElementById('next-btn-wrap').style.display = 'none';
+        document.getElementById('pinyin-hint').style.visibility = 'hidden';
+        document.getElementById('pinyin-hint').textContent = item.pinyin;
+        document.getElementById('hint-btn').disabled = false;
+
+        // Auto-play after short delay
+        setTimeout(playCurrentWord, 300);
+    }
+
+    function playCurrentWord() {
+        if (currentWordIdx >= wordList.length) return;
+        speakText(wordList[currentWordIdx].word);
+    }
+    function playCurrentWordSlow() {
+        if (currentWordIdx >= wordList.length) return;
+        speakText(wordList[currentWordIdx].word, 0.5);
+    }
+    function showHint() {
+        document.getElementById('pinyin-hint').style.visibility = 'visible';
+        document.getElementById('hint-btn').disabled = true;
+    }
+
+    // ── Check answer ──
+    function checkAnswer() {
+        if (answered) { nextWord(); return; }
+        const item = wordList[currentWordIdx];
+        const input = document.getElementById('dict-input');
+        const userAnswer = input.value.trim();
+
+        if (!userAnswer) { playCurrentWord(); return; }
+
+        answered = true;
+        input.disabled = true;
+
+        const correct = userAnswer === item.word;
+        const feedback = document.getElementById('dict-feedback');
+
+        feedback.classList.remove('hidden', 'correct-fb', 'incorrect-fb');
+
+        if (correct) {
+            score.correct++;
+            input.classList.add('correct');
+            feedback.classList.add('correct-fb');
+            document.getElementById('feedback-icon').textContent = '🎉';
+            document.getElementById('feedback-text').textContent = '正确！Correct!';
+            document.getElementById('correct-display').textContent = '';
+            document.getElementById('feedback-meaning').textContent = item.meaning;
+        } else {
+            score.wrong++;
+            missedWords.push(item);
+            input.classList.add('incorrect');
+            feedback.classList.add('incorrect-fb');
+            document.getElementById('feedback-icon').textContent = '❌';
+            document.getElementById('feedback-text').textContent = `答案是 / The answer is:`;
+            document.getElementById('correct-display').textContent = item.word;
+            document.getElementById('feedback-meaning').textContent = `${item.pinyin} — ${item.meaning}`;
+            speakText(item.word);
+        }
+
+        document.getElementById('score-display').textContent = `${score.correct}/${currentWordIdx + 1}`;
+        document.getElementById('next-btn-wrap').style.display = 'block';
+    }
+
+    function nextWord() {
+        currentWordIdx++;
+        showWord();
+    }
+
+    // ── Results ──
+    function showResults() {
+        document.getElementById('dictation-area').classList.add('hidden');
+        document.getElementById('results-area').classList.remove('hidden');
+
+        const total = score.correct + score.wrong;
+        const pct = total > 0 ? Math.round((score.correct / total) * 100) : 0;
+
+        document.getElementById('res-correct').textContent = score.correct;
+        document.getElementById('res-wrong').textContent = score.wrong;
+        document.getElementById('res-total').textContent = total;
+        document.getElementById('res-pct').textContent = pct + '%';
+
+        const emoji = pct >= 90 ? '🏆' : pct >= 70 ? '🎉' : pct >= 50 ? '👍' : '💪';
+        document.getElementById('results-emoji').textContent = emoji;
+        document.getElementById('results-title').textContent = pct >= 90 ? '太棒了！' : pct >= 70 ? '很好！' : '继续加油！';
+
+        if (missedWords.length > 0) {
+            const missedSection = document.getElementById('missed-section');
+            missedSection.classList.remove('hidden');
+            const missedList = document.getElementById('missed-list');
+            missedList.innerHTML = missedWords.map(w => `
+                <div style="display:inline-block;margin:4px;padding:8px 14px;background:#fff5f5;border:2px solid #fed7d7;border-radius:8px;cursor:pointer;font-family:'STSong','SimSun',serif;"
+                    onclick="speakText('${w.word}')">
+                    <strong style="font-size:1.2em">${w.word}</strong>
+                    <span class="pinyin" style="margin-left:6px">${w.pinyin}</span>
+                    <span style="display:block;font-size:0.8em;color:#718096">${w.meaning}</span>
+                </div>
+            `).join('');
+        }
+    }
+
+    // ── Speech ──
+    function speakText(text, rate) {
+        if (!('speechSynthesis' in window)) return;
+        speechSynthesis.cancel();
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.lang = 'zh-CN';
+        utt.rate = rate || 0.75;
+        const voices = speechSynthesis.getVoices();
+        const zhVoice = voices.find(v => v.lang.startsWith('zh'));
+        if (zhVoice) utt.voice = zhVoice;
+        speechSynthesis.speak(utt);
+    }
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', e => {
+        if (document.getElementById('dictation-area').classList.contains('hidden')) return;
+        if (e.key === 'F2' || (e.key.toLowerCase() === 'p' && !document.getElementById('dict-input') === document.activeElement)) {
+            playCurrentWord();
+        }
+    });
+
+    if ('speechSynthesis' in window) speechSynthesis.getVoices();
+    init();
+    </script>
+</body>
+</html>

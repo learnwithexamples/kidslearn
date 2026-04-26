@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二年级下册 - 中文学习 - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="styles/chinese.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 部编版语文二年级下册</h1>
+            <p class="subtitle">PEP Chinese Language · Grade 2 Semester 2</p>
+            <a href="chinese.html" class="back-link">← Back to Chinese</a>
+        </header>
+
+        <div id="units-container" class="topics-grid"></div>
+
+        <footer>
+            <p>好好学习，天天向上！🌟</p>
+        </footer>
+    </div>
+
+    <script src="data/chinese-data.js"></script>
+    <script>
+    const typeLabels = { story: '课文', poem: '古诗/儿歌', fable: '寓言', informational: '说明文' };
+
+    function buildUnits() {
+        const container = document.getElementById('units-container');
+        chineseData.units.forEach(unit => {
+            const card = document.createElement('div');
+            card.className = 'topic-card unit-card';
+            card.style.setProperty('--unit-color', unit.color);
+
+            const lessonsHTML = unit.lessons.map(l => {
+                const badge = `<span class="type-badge type-${l.type}">${typeLabels[l.type] || l.type}</span>`;
+                return `<li><span class="lesson-icon">${l.icon}</span><span class="chinese-text">${l.title}</span>${badge}</li>`;
+            }).join('');
+
+            card.innerHTML = `
+                <div class="unit-header">
+                    <div class="unit-number" style="background:${unit.color}">${unit.number}</div>
+                    <div>
+                        <h2 style="margin:0;color:${unit.color}">${unit.title}</h2>
+                        <div class="unit-theme">主题：${unit.theme} · <em>${unit.themeEn}</em></div>
+                    </div>
+                </div>
+                <ul class="lesson-list">${lessonsHTML}</ul>
+                <div class="unit-actions">
+                    <a href="unit.html?unit=${unit.number}" class="unit-btn btn-primary">📖 课文学习</a>
+                    <a href="flashcards.html?unit=${unit.number}" class="unit-btn btn-outline">🃏 生字卡片</a>
+                    <a href="dictation.html?unit=${unit.number}" class="unit-btn btn-outline">🎤 听写</a>
+                    <a href="quiz.html?unit=${unit.number}" class="unit-btn btn-outline">🎯 测验</a>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    buildUnits();
+    </script>
+</body>
+</html>
