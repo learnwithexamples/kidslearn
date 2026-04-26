@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生字练习 Vocab Practice - KidsLearn</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="styles/chinese.css">
+  <style>
+    /* ── Layout ── */
+    .vp-wrap { max-width: 860px; margin: 0 auto; }
+
+    /* ── Selector ── */
+    .selector-panel { background:#fff8f0; border:2px solid #fed7aa; border-radius:16px; padding:24px; margin-bottom:24px; }
+    .selector-panel h3 { margin:0 0 16px; color:#c53030; }
+    .unit-section { margin-bottom:12px; }
+    .unit-label { font-weight:700; color:#744210; margin-bottom:6px; display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none; }
+    .lesson-grid { display:flex; flex-wrap:wrap; gap:8px; padding-left:20px; }
+    .lesson-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 12px; border:2px solid #e2e8f0; border-radius:20px; cursor:pointer; font-size:.9em; transition:.15s; user-select:none; }
+    .lesson-chip input { accent-color:#c53030; }
+    .lesson-chip:has(input:checked) { border-color:#c53030; background:#fff5f5; font-weight:600; }
+    .mode-tabs { display:flex; gap:8px; flex-wrap:wrap; margin:16px 0 8px; }
+    .mode-tab { padding:10px 20px; border:2px solid #e2e8f0; border-radius:20px; cursor:pointer; font-size:.95em; background:#fff; transition:.15s; }
+    .mode-tab.active { border-color:#c53030; background:#c53030; color:#fff; font-weight:700; }
+    .selector-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+
+    /* ── Activity area ── */
+    #activity-area { display:none; }
+    .activity-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:8px; }
+    .progress-bar { background:#e2e8f0; border-radius:10px; height:10px; flex:1; min-width:120px; overflow:hidden; }
+    .progress-fill { height:100%; background:#c53030; border-radius:10px; transition:.3s; }
+    .progress-text { font-size:.85em; color:#718096; white-space:nowrap; }
+
+    /* ── Flashcard ── */
+    .flashcard-scene { perspective:900px; width:100%; max-width:400px; margin:0 auto 24px; }
+    .flashcard { width:100%; aspect-ratio:3/2; position:relative; transform-style:preserve-3d; transition:transform .45s; cursor:pointer; }
+    .flashcard.flipped { transform:rotateY(180deg); }
+    .fc-face { position:absolute; inset:0; border-radius:20px; display:flex; flex-direction:column; align-items:center; justify-content:center; backface-visibility:hidden; padding:20px; box-shadow:0 4px 20px rgba(0,0,0,.12); }
+    .fc-front { background:linear-gradient(135deg,#fff5f5,#fed7d7); border:3px solid #fc8181; }
+    .fc-back  { background:linear-gradient(135deg,#f0fff4,#c6f6d5); border:3px solid #68d391; transform:rotateY(180deg); }
+    .fc-char  { font-size:5em; line-height:1; font-family:'STSong','SimSun',serif; }
+    .fc-pinyin { font-size:1.3em; color:#c53030; margin-top:4px; }
+    .fc-hint  { font-size:.8em; color:#a0aec0; margin-top:8px; }
+    .fc-meaning { font-size:1.1em; color:#276749; text-align:center; margin-top:8px; }
+    .fc-example { font-size:.9em; color:#4a5568; margin-top:6px; font-family:'STSong','SimSun',serif; }
+    .fc-nav { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:8px; }
+    .fc-rating { display:flex; gap:12px; justify-content:center; margin-top:16px; }
+    .btn-know { background:#38a169; color:#fff; border:none; padding:10px 28px; border-radius:20px; font-size:1em; cursor:pointer; }
+    .btn-again { background:#e53e3e; color:#fff; border:none; padding:10px 28px; border-radius:20px; font-size:1em; cursor:pointer; }
+    .btn-speak { background:none; border:2px solid #c53030; color:#c53030; padding:6px 14px; border-radius:16px; font-size:.85em; cursor:pointer; }
+
+    /* ── Quiz ── */
+    .quiz-card { background:#fff; border-radius:16px; box-shadow:0 2px 16px rgba(0,0,0,.1); padding:32px 24px; text-align:center; }
+    .quiz-prompt-label { font-size:.85em; color:#718096; margin-bottom:6px; }
+    .quiz-char-big { font-size:5em; font-family:'STSong','SimSun',serif; line-height:1.1; color:#1a202c; }
+    .quiz-pinyin-big { font-size:1.4em; color:#c53030; margin:4px 0 12px; }
+    .quiz-choices { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:20px; }
+    .qchoice { padding:14px; border:2px solid #e2e8f0; border-radius:12px; font-size:1em; cursor:pointer; background:#fff; transition:.15s; text-align:center; }
+    .qchoice:hover { border-color:#c53030; }
+    .qchoice.correct { background:#c6f6d5; border-color:#38a169; color:#276749; font-weight:700; }
+    .qchoice.wrong   { background:#fed7d7; border-color:#e53e3e; color:#9b2c2c; }
+    .quiz-feedback { margin-top:16px; font-size:1.05em; font-weight:600; min-height:1.4em; }
+    .quiz-feedback.ok  { color:#276749; }
+    .quiz-feedback.bad { color:#9b2c2c; }
+
+    /* ── Dictation ── */
+    .dict-card { background:#fff; border-radius:16px; box-shadow:0 2px 16px rgba(0,0,0,.1); padding:32px 24px; text-align:center; }
+    .dict-play-btn { font-size:4em; background:none; border:none; cursor:pointer; line-height:1; display:block; margin:0 auto 8px; }
+    .dict-hint { font-size:.85em; color:#a0aec0; margin-bottom:16px; }
+    .dict-input-row { display:flex; gap:8px; justify-content:center; align-items:center; flex-wrap:wrap; }
+    .dict-input { font-size:1.8em; font-family:'STSong','SimSun',serif; border:3px solid #e2e8f0; border-radius:12px; padding:8px 14px; text-align:center; width:160px; outline:none; transition:.2s; }
+    .dict-input:focus { border-color:#c53030; }
+    .dict-check-btn { padding:10px 24px; background:#c53030; color:#fff; border:none; border-radius:12px; font-size:1em; cursor:pointer; }
+    .dict-feedback { margin-top:16px; font-size:1.1em; font-weight:600; min-height:1.4em; }
+    .dict-feedback.ok  { color:#276749; }
+    .dict-feedback.bad { color:#9b2c2c; }
+    .dict-reveal { font-size:2.5em; font-family:'STSong','SimSun',serif; margin-top:8px; }
+
+    /* ── Matching ── */
+    .match-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .match-col { display:flex; flex-direction:column; gap:10px; }
+    .match-tile { padding:14px 12px; border:2px solid #e2e8f0; border-radius:12px; text-align:center; cursor:pointer; transition:.15s; font-size:1em; background:#fff; }
+    .match-tile.char-tile { font-size:1.6em; font-family:'STSong','SimSun',serif; }
+    .match-tile.selected  { border-color:#c53030; background:#fff5f5; }
+    .match-tile.matched   { border-color:#38a169; background:#f0fff4; color:#276749; opacity:.7; cursor:default; }
+    .match-tile.wrong-flash { animation:wrongflash .4s; }
+    @keyframes wrongflash { 0%,100%{background:#fff} 50%{background:#fed7d7;border-color:#e53e3e;} }
+    .match-score { text-align:center; font-size:1em; color:#718096; margin-top:12px; }
+
+    /* ── Results ── */
+    .results-card { background:#fff; border-radius:16px; box-shadow:0 2px 16px rgba(0,0,0,.1); padding:32px 24px; text-align:center; }
+    .result-stars { font-size:2.5em; margin:8px 0; }
+    .result-score { font-size:2em; font-weight:800; color:#c53030; margin:8px 0; }
+    .missed-list { text-align:left; background:#fff5f5; border-radius:12px; padding:16px; margin-top:16px; }
+    .missed-item { display:flex; align-items:baseline; gap:12px; padding:6px 0; border-bottom:1px solid #fed7d7; font-size:.95em; }
+    .missed-char { font-size:1.6em; font-family:'STSong','SimSun',serif; color:#c53030; min-width:36px; }
+
+    /* ── Shared Nav/Button ── */
+    .primary-btn { padding:12px 28px; background:#c53030; color:#fff; border:none; border-radius:20px; font-size:1em; font-weight:700; cursor:pointer; }
+    .secondary-btn { padding:10px 22px; background:#fff; color:#c53030; border:2px solid #c53030; border-radius:20px; font-size:.95em; font-weight:600; cursor:pointer; }
+    .nav-btn { padding:10px 20px; background:#edf2f7; border:none; border-radius:16px; font-size:.9em; cursor:pointer; }
+    .nav-btn:disabled { opacity:.4; cursor:default; }
+
+    @media(max-width:520px){
+      .quiz-choices { grid-template-columns:1fr; }
+      .match-grid { grid-template-columns:1fr 1fr; }
+      .fc-char { font-size:3.5em; }
+    }
+  </style>
+</head>
+<body>
+<div class="container vp-wrap">
+  <header>
+    <h1>📝 生字练习</h1>
+    <p class="subtitle">Vocabulary Practice — 二年级下册</p>
+    <a href="chinese.html" class="back-link">← 返回中文</a>
+  </header>
+
+  <!-- ══ SELECTOR ══ -->
+  <div id="selector-panel" class="selector-panel">
+    <h3>选择课文 · 选择练习方式</h3>
+
+    <div id="unit-list"></div>
+
+    <div style="display:flex;gap:8px;margin:10px 0 16px;flex-wrap:wrap;">
+      <button class="secondary-btn" onclick="selectAll()">✓ 全选</button>
+      <button class="secondary-btn" onclick="deselectAll()">✗ 取消</button>
+    </div>
+
+    <div style="font-weight:700;color:#744210;margin-bottom:8px;">练习方式 Activity:</div>
+    <div class="mode-tabs">
+      <div class="mode-tab active" data-mode="flashcard" onclick="setMode('flashcard')">🃏 闪卡 Flashcard</div>
+      <div class="mode-tab" data-mode="quiz"      onclick="setMode('quiz')">🎯 测验 Quiz</div>
+      <div class="mode-tab" data-mode="dictation" onclick="setMode('dictation')">🎤 听写 Dictation</div>
+      <div class="mode-tab" data-mode="matching"  onclick="setMode('matching')">🔀 配对 Matching</div>
+    </div>
+
+    <div class="selector-actions">
+      <button class="primary-btn" onclick="startActivity()">▶ 开始 Start</button>
+    </div>
+  </div>
+
+  <!-- ══ ACTIVITY AREA ══ -->
+  <div id="activity-area">
+
+    <div class="activity-header">
+      <button class="secondary-btn" onclick="backToSelector()">← 返回</button>
+      <div id="activity-title" style="font-weight:700;font-size:1.05em;color:#c53030;"></div>
+      <div style="display:flex;align-items:center;gap:10px;flex:1;justify-content:flex-end;">
+        <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+        <div class="progress-text" id="prog-text">0 / 0</div>
+      </div>
+    </div>
+
+    <!-- Flashcard -->
+    <div id="mode-flashcard" style="display:none;">
+      <div class="flashcard-scene">
+        <div class="flashcard" id="flashcard" onclick="flipCard()">
+          <div class="fc-face fc-front">
+            <div class="fc-char" id="fc-char">字</div>
+            <div class="fc-pinyin" id="fc-pinyin"></div>
+            <div class="fc-hint">点击翻转 · tap to flip</div>
+          </div>
+          <div class="fc-face fc-back">
+            <div class="fc-meaning" id="fc-meaning"></div>
+            <div class="fc-example" id="fc-example"></div>
+            <div id="fc-meaning-en" style="font-size:.85em;color:#718096;margin-top:4px;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="fc-nav">
+        <button class="nav-btn" id="fc-prev" onclick="fcMove(-1)">◀ 上一个</button>
+        <button class="btn-speak" onclick="speakCurrent()">🔊 朗读</button>
+        <button class="nav-btn" id="fc-next" onclick="fcMove(1)">下一个 ▶</button>
+      </div>
+      <div class="fc-rating">
+        <button class="btn-again" onclick="markCard(false)">🔁 再练</button>
+        <button class="btn-know"  onclick="markCard(true)">✅ 会了</button>
+      </div>
+      <div id="fc-summary" style="text-align:center;margin-top:16px;color:#718096;font-size:.9em;"></div>
+    </div>
+
+    <!-- Quiz -->
+    <div id="mode-quiz" style="display:none;">
+      <div class="quiz-card">
+        <div class="quiz-prompt-label" id="q-label">字 → 意思</div>
+        <div class="quiz-char-big" id="q-char"></div>
+        <div class="quiz-pinyin-big" id="q-pinyin" style="display:none;"></div>
+        <div class="quiz-choices" id="q-choices"></div>
+        <div class="quiz-feedback" id="q-feedback"></div>
+      </div>
+      <div style="text-align:center;margin-top:16px;">
+        <button class="nav-btn" id="q-next-btn" onclick="nextQuiz()" style="display:none;">下一题 ▶</button>
+      </div>
+    </div>
+
+    <!-- Dictation -->
+    <div id="mode-dictation" style="display:none;">
+      <div class="dict-card">
+        <button class="dict-play-btn" id="dict-play" onclick="dictSpeak()">🔊</button>
+        <div class="dict-hint" id="dict-hint">听音写字 · Listen and write the character</div>
+        <div class="dict-input-row">
+          <input class="dict-input" id="dict-input" type="text" maxlength="4"
+            placeholder="写字" onkeydown="if(event.key==='Enter')checkDict()">
+          <button class="dict-check-btn" onclick="checkDict()">检查</button>
+        </div>
+        <div class="dict-feedback" id="dict-feedback"></div>
+        <div class="dict-reveal" id="dict-reveal" style="display:none;"></div>
+        <div style="text-align:center;margin-top:16px;">
+          <button class="nav-btn" id="dict-next-btn" onclick="nextDict()" style="display:none;">下一个 ▶</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Matching -->
+    <div id="mode-matching" style="display:none;">
+      <div class="match-grid">
+        <div class="match-col" id="match-left"></div>
+        <div class="match-col" id="match-right"></div>
+      </div>
+      <div class="match-score" id="match-score"></div>
+      <div style="text-align:center;margin-top:16px;display:none;" id="match-next-wrap">
+        <button class="primary-btn" onclick="nextMatchRound()">下一组 ▶</button>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div id="mode-results" style="display:none;">
+      <div class="results-card">
+        <div style="font-size:1.4em;font-weight:700;color:#c53030;">练习完成！</div>
+        <div class="result-stars" id="res-stars">⭐⭐⭐</div>
+        <div class="result-score" id="res-score"></div>
+        <div id="res-missed" class="missed-list" style="display:none;"></div>
+        <div style="display:flex;gap:12px;justify-content:center;margin-top:20px;flex-wrap:wrap;">
+          <button class="primary-btn" onclick="restartSame()">🔄 再来一次</button>
+          <button class="secondary-btn" onclick="backToSelector()">← 换一组</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /activity-area -->
+
+  <footer><p>学而时习之，不亦说乎！🌟 Keep practicing every day!</p></footer>
+</div>
+
+<script src="data/vocab-data.js"></script>
+<script>
+// ════════════════════════════════════════════════════════════
+//  STATE
+// ════════════════════════════════════════════════════════════
+let currentMode = 'flashcard';
+let pool = [];       // words selected for this session
+let idx = 0;
+let score = 0;
+let missed = [];
+
+// flashcard
+let fcKnown = new Set();
+let fcAgain = [];
+
+// quiz
+let qType = '';      // 'char→meaning','pinyin→char','char→pinyin','meaning→char'
+const Q_TYPES = ['char→meaning','char→pinyin','pinyin→char','meaning→char'];
+
+// matching
+let matchLeft = [], matchRight = [], matchAnswers = {};
+let matchSel = null;
+let matchErrors = 0;
+let matchRoundOffset = 0;
+const MATCH_SIZE = 6;
+
+// ════════════════════════════════════════════════════════════
+//  BUILD SELECTOR
+// ════════════════════════════════════════════════════════════
+const lessons = chineseVocabData.books['grade2b'].lessons;
+const units = [...new Set(lessons.map(l => l.unit))];
+
+function buildSelector() {
+  const unitEl = document.getElementById('unit-list');
+  unitEl.innerHTML = '';
+  units.forEach(u => {
+    const uLessons = lessons.filter(l => l.unit === u && l.words.length > 0);
+    if (!uLessons.length) return;
+    const sec = document.createElement('div');
+    sec.className = 'unit-section';
+    const label = document.createElement('div');
+    label.className = 'unit-label';
+    label.innerHTML = `<span>第${['一','二','三','四','五','六','七'][u-1]}单元 Unit ${u}</span>`;
+    const grid = document.createElement('div');
+    grid.className = 'lesson-grid';
+    uLessons.forEach(l => {
+      const chip = document.createElement('label');
+      chip.className = 'lesson-chip';
+      chip.innerHTML = `<input type="checkbox" value="${l.number}" checked>
+        第${l.number}课 ${l.title} <span style="color:#a0aec0;font-size:.85em;">(${l.words.length}字)</span>`;
+      grid.appendChild(chip);
+    });
+    sec.appendChild(label);
+    sec.appendChild(grid);
+    unitEl.appendChild(sec);
+  });
+}
+
+function getSelected() {
+  return [...document.querySelectorAll('#unit-list input:checked')].map(cb => parseInt(cb.value));
+}
+
+function selectAll()   { document.querySelectorAll('#unit-list input').forEach(c=>c.checked=true); }
+function deselectAll() { document.querySelectorAll('#unit-list input').forEach(c=>c.checked=false); }
+
+function setMode(m) {
+  currentMode = m;
+  document.querySelectorAll('.mode-tab').forEach(t => t.classList.toggle('active', t.dataset.mode === m));
+}
+
+// ════════════════════════════════════════════════════════════
+//  START / BACK
+// ════════════════════════════════════════════════════════════
+function startActivity() {
+  const sel = getSelected();
+  if (!sel.length) { alert('请先选择至少一课！Select at least one lesson.'); return; }
+  pool = lessons.filter(l => sel.includes(l.number)).flatMap(l => l.words);
+  pool = shuffle([...pool]);
+  if (!pool.length) { alert('所选课文暂无生字。No words in selected lessons.'); return; }
+
+  score = 0; missed = []; idx = 0; fcKnown = new Set(); fcAgain = [];
+  matchRoundOffset = 0; matchErrors = 0;
+
+  document.getElementById('selector-panel').style.display = 'none';
+  document.getElementById('activity-area').style.display = 'block';
+  document.getElementById('activity-title').textContent =
+    { flashcard:'🃏 闪卡', quiz:'🎯 测验', dictation:'🎤 听写', matching:'🔀 配对' }[currentMode];
+
+  showMode(currentMode);
+
+  if (currentMode === 'flashcard') initFlashcard();
+  else if (currentMode === 'quiz')  initQuiz();
+  else if (currentMode === 'dictation') initDictation();
+  else if (currentMode === 'matching')  initMatching();
+}
+
+function backToSelector() {
+  document.getElementById('selector-panel').style.display = 'block';
+  document.getElementById('activity-area').style.display = 'none';
+  showMode('none');
+}
+
+function showMode(m) {
+  ['flashcard','quiz','dictation','matching','results'].forEach(id => {
+    document.getElementById('mode-'+id).style.display = (id === m) ? 'block' : 'none';
+  });
+}
+
+function updateProgress(cur, total) {
+  const pct = total ? Math.round(cur/total*100) : 0;
+  document.getElementById('prog-fill').style.width = pct+'%';
+  document.getElementById('prog-text').textContent = `${cur} / ${total}`;
+}
+
+// ════════════════════════════════════════════════════════════
+//  FLASHCARD
+// ════════════════════════════════════════════════════════════
+function initFlashcard() {
+  showMode('flashcard');
+  idx = 0;
+  renderCard();
+}
+
+function renderCard() {
+  const w = pool[idx];
+  document.getElementById('fc-char').textContent    = w.char;
+  document.getElementById('fc-pinyin').textContent  = w.pinyin;
+  document.getElementById('fc-meaning').textContent = w.meaning;
+  document.getElementById('fc-example').textContent = w.example + '  ' + w.examplePinyin;
+  document.getElementById('fc-meaning-en').textContent = w.meaningEn + ' · ' + w.exampleMeaning;
+  document.getElementById('flashcard').classList.remove('flipped');
+  document.getElementById('fc-prev').disabled = idx === 0;
+  document.getElementById('fc-next').disabled = idx === pool.length - 1;
+  const kn = fcKnown.size;
+  document.getElementById('fc-summary').textContent =
+    `已掌握 ${kn} / ${pool.length} · Known: ${kn} of ${pool.length}`;
+  updateProgress(idx+1, pool.length);
+}
+
+function flipCard() { document.getElementById('flashcard').classList.toggle('flipped'); }
+
+function fcMove(dir) {
+  idx = Math.max(0, Math.min(pool.length-1, idx+dir));
+  renderCard();
+}
+
+function markCard(known) {
+  const w = pool[idx];
+  if (known) fcKnown.add(w.char);
+  else { fcKnown.delete(w.char); if(!fcAgain.includes(w)) fcAgain.push(w); }
+  if (idx < pool.length-1) { idx++; renderCard(); }
+  else { showFCResults(); }
+}
+
+function showFCResults() {
+  const total = pool.length;
+  const kn = fcKnown.size;
+  const pct = Math.round(kn/total*100);
+  score = kn; missed = pool.filter(w => !fcKnown.has(w.char));
+  showResults(kn, total, missed, `✅ 已掌握 ${kn}/${total} (${pct}%)`);
+}
+
+// ════════════════════════════════════════════════════════════
+//  QUIZ
+// ════════════════════════════════════════════════════════════
+function initQuiz() {
+  showMode('quiz');
+  idx = 0; score = 0; missed = [];
+  updateProgress(0, pool.length);
+  renderQuiz();
+}
+
+function renderQuiz() {
+  if (idx >= pool.length) { showResults(score, pool.length, missed); return; }
+  const w = pool[idx];
+  qType = Q_TYPES[idx % Q_TYPES.length];
+  updateProgress(idx, pool.length);
+
+  const labels = { 'char→meaning':'字 → 意思', 'char→pinyin':'字 → 拼音', 'pinyin→char':'拼音 → 字', 'meaning→char':'意思 → 字' };
+  document.getElementById('q-label').textContent = labels[qType];
+  document.getElementById('q-feedback').textContent = '';
+  document.getElementById('q-next-btn').style.display = 'none';
+
+  // Prompt
+  const charEl   = document.getElementById('q-char');
+  const pinyinEl = document.getElementById('q-pinyin');
+  if (qType === 'char→meaning' || qType === 'char→pinyin') {
+    charEl.textContent   = w.char;   charEl.style.display   = 'block';
+    pinyinEl.textContent = '';       pinyinEl.style.display = 'none';
+  } else if (qType === 'pinyin→char') {
+    charEl.textContent   = w.pinyin; charEl.style.display   = 'block';
+    charEl.style.fontSize = '2.5em';
+    pinyinEl.style.display = 'none';
+  } else { // meaning→char
+    charEl.textContent   = w.meaningEn || w.meaning;
+    charEl.style.fontSize = '1.4em'; charEl.style.display = 'block';
+    pinyinEl.style.display = 'none';
+  }
+
+  // Choices
+  const allWords = getAllCNWords().filter(x => x.char !== w.char);
+  const distractors = shuffle(allWords).slice(0, 3);
+  const choices = shuffle([w, ...distractors]);
+
+  const container = document.getElementById('q-choices');
+  container.innerHTML = '';
+  choices.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'qchoice';
+    if (qType === 'char→meaning' || qType === 'pinyin→char')
+      btn.textContent = c.char;
+    else if (qType === 'char→pinyin')
+      btn.textContent = c.pinyin;
+    else
+      btn.innerHTML = `<span style="font-family:'STSong','SimSun',serif;font-size:1.3em;">${c.char}</span>`;
+
+    btn.onclick = () => handleQuizAnswer(btn, c === w, w);
+    container.appendChild(btn);
+  });
+}
+
+function handleQuizAnswer(btn, correct, word) {
+  document.querySelectorAll('.qchoice').forEach(b => b.onclick = null);
+  if (correct) {
+    btn.classList.add('correct');
+    document.getElementById('q-feedback').textContent = '✅ 正确！Correct!';
+    document.getElementById('q-feedback').className = 'quiz-feedback ok';
+    score++;
+  } else {
+    btn.classList.add('wrong');
+    document.getElementById('q-feedback').textContent = `❌ 正确答案：${word.char} (${word.pinyin}) — ${word.meaningEn}`;
+    document.getElementById('q-feedback').className = 'quiz-feedback bad';
+    missed.push(word);
+    // highlight correct
+    document.querySelectorAll('.qchoice').forEach(b => {
+      const txt = b.textContent.trim();
+      if ([word.char, word.pinyin, word.meaningEn, word.meaning].includes(txt) ||
+          b.querySelector && b.querySelector('span') && b.querySelector('span').textContent === word.char)
+        b.classList.add('correct');
+    });
+  }
+  speakChar(word.char);
+  document.getElementById('q-next-btn').style.display = 'inline-block';
+  idx++;
+}
+
+function nextQuiz() { renderQuiz(); }
+
+// ════════════════════════════════════════════════════════════
+//  DICTATION
+// ════════════════════════════════════════════════════════════
+function initDictation() {
+  showMode('dictation');
+  idx = 0; score = 0; missed = [];
+  renderDict();
+}
+
+function renderDict() {
+  if (idx >= pool.length) { showResults(score, pool.length, missed); return; }
+  const w = pool[idx];
+  updateProgress(idx, pool.length);
+  document.getElementById('dict-hint').textContent  = `听音写字 · 例词：${w.example}`;
+  document.getElementById('dict-input').value       = '';
+  document.getElementById('dict-feedback').textContent = '';
+  document.getElementById('dict-feedback').className   = 'dict-feedback';
+  document.getElementById('dict-reveal').style.display = 'none';
+  document.getElementById('dict-next-btn').style.display = 'none';
+  document.getElementById('dict-input').focus();
+  setTimeout(() => speakWord(w.example), 300);
+}
+
+function dictSpeak() { speakWord(pool[idx].example); }
+
+function checkDict() {
+  const w = pool[idx];
+  const val = document.getElementById('dict-input').value.trim();
+  if (!val) return;
+  const fb = document.getElementById('dict-feedback');
+  const reveal = document.getElementById('dict-reveal');
+  if (val === w.char) {
+    fb.textContent = '✅ 正确！'; fb.className = 'dict-feedback ok';
+    score++;
+  } else {
+    fb.textContent = `❌ 应该是：`; fb.className = 'dict-feedback bad';
+    reveal.textContent = w.char + '  ' + w.pinyin;
+    reveal.style.display = 'block';
+    missed.push(w);
+  }
+  document.getElementById('dict-next-btn').style.display = 'inline-block';
+  idx++;
+}
+
+function nextDict() { renderDict(); }
+
+// ════════════════════════════════════════════════════════════
+//  MATCHING
+// ════════════════════════════════════════════════════════════
+function initMatching() {
+  showMode('matching');
+  matchRoundOffset = 0; matchErrors = 0;
+  renderMatchRound();
+}
+
+function renderMatchRound() {
+  const slice = pool.slice(matchRoundOffset, matchRoundOffset + MATCH_SIZE);
+  if (!slice.length) { showResults(score, pool.length, missed); return; }
+
+  matchSel = null;
+  matchAnswers = {};
+  slice.forEach(w => matchAnswers[w.char] = w.meaningEn || w.meaning);
+
+  matchLeft  = shuffle([...slice]);
+  matchRight = shuffle([...slice]);
+
+  const leftCol  = document.getElementById('match-left');
+  const rightCol = document.getElementById('match-right');
+  leftCol.innerHTML = rightCol.innerHTML = '';
+
+  matchLeft.forEach(w => {
+    const t = document.createElement('div');
+    t.className = 'match-tile char-tile';
+    t.textContent = w.char;
+    t.dataset.key = 'L_' + w.char;
+    t.dataset.char = w.char;
+    t.onclick = () => handleMatchClick(t, 'left', w.char);
+    leftCol.appendChild(t);
+  });
+  matchRight.forEach(w => {
+    const t = document.createElement('div');
+    t.className = 'match-tile';
+    t.textContent = w.meaningEn || w.meaning;
+    t.dataset.key = 'R_' + w.char;
+    t.dataset.char = w.char;
+    t.onclick = () => handleMatchClick(t, 'right', w.char);
+    rightCol.appendChild(t);
+  });
+
+  document.getElementById('match-score').textContent = `第 ${Math.floor(matchRoundOffset/MATCH_SIZE)+1} 组 / Total ${pool.length} 字`;
+  document.getElementById('match-next-wrap').style.display = 'none';
+  updateProgress(matchRoundOffset, pool.length);
+}
+
+let matchSelSide = null, matchSelChar = null, matchSelEl = null;
+
+function handleMatchClick(el, side, char) {
+  if (el.classList.contains('matched')) return;
+
+  if (!matchSelEl) {
+    // first selection
+    matchSelEl = el; matchSelSide = side; matchSelChar = char;
+    el.classList.add('selected');
+    return;
+  }
+
+  if (matchSelSide === side) {
+    // same column, swap selection
+    matchSelEl.classList.remove('selected');
+    matchSelEl = el; matchSelSide = side; matchSelChar = char;
+    el.classList.add('selected');
+    return;
+  }
+
+  // two different sides — check match
+  const leftChar  = side === 'right' ? matchSelChar : char;
+  const rightChar = side === 'right' ? char : matchSelChar;
+  const leftEl    = side === 'right' ? matchSelEl : el;
+  const rightEl   = side === 'right' ? el : matchSelEl;
+
+  matchSelEl.classList.remove('selected');
+  matchSelEl = null;
+
+  if (leftChar === rightChar) {
+    // correct
+    leftEl.classList.add('matched');
+    rightEl.classList.add('matched');
+    score++;
+    // check if round complete
+    const total = document.querySelectorAll('#match-left .match-tile').length;
+    const done  = document.querySelectorAll('#match-left .matched').length;
+    if (done >= total) {
+      matchRoundOffset += MATCH_SIZE;
+      setTimeout(() => {
+        if (matchRoundOffset < pool.length) {
+          document.getElementById('match-next-wrap').style.display = 'block';
+        } else {
+          showResults(score, pool.length, missed, `配对完成！ ${score}/${pool.length}`);
+        }
+      }, 500);
+    }
+  } else {
+    // wrong
+    matchErrors++;
+    missed.push(pool.find(w => w.char === leftChar));
+    leftEl.classList.add('wrong-flash');
+    rightEl.classList.add('wrong-flash');
+    setTimeout(() => {
+      leftEl.classList.remove('wrong-flash');
+      rightEl.classList.remove('wrong-flash');
+    }, 400);
+  }
+}
+
+function nextMatchRound() { renderMatchRound(); }
+
+// ════════════════════════════════════════════════════════════
+//  RESULTS
+// ════════════════════════════════════════════════════════════
+function showResults(correct, total, missedWords, customMsg) {
+  showMode('results');
+  const pct = total ? Math.round(correct/total*100) : 0;
+  const stars = pct >= 90 ? '⭐⭐⭐' : pct >= 70 ? '⭐⭐' : '⭐';
+  document.getElementById('res-stars').textContent = stars;
+  document.getElementById('res-score').textContent = customMsg || `${correct} / ${total}  (${pct}%)`;
+
+  const missEl = document.getElementById('res-missed');
+  const uniq = [...new Map((missedWords||[]).filter(Boolean).map(w=>[w.char,w])).values()];
+  if (uniq.length) {
+    missEl.style.display = 'block';
+    missEl.innerHTML = '<div style="font-weight:700;color:#c53030;margin-bottom:8px;">需要复习 · Review these:</div>' +
+      uniq.map(w=>`<div class="missed-item">
+        <span class="missed-char">${w.char}</span>
+        <span style="color:#c53030;">${w.pinyin}</span>
+        <span>${w.meaningEn}</span>
+        <span style="font-family:\'STSong\',serif;color:#718096;">${w.example}</span>
+      </div>`).join('');
+  } else {
+    missEl.style.display = 'none';
+  }
+  updateProgress(total, total);
+}
+
+function restartSame() {
+  pool = shuffle([...pool]);
+  score = 0; missed = []; idx = 0; fcKnown = new Set(); fcAgain = [];
+  matchRoundOffset = 0; matchErrors = 0;
+  document.getElementById('activity-title').textContent =
+    { flashcard:'🃏 闪卡', quiz:'🎯 测验', dictation:'🎤 听写', matching:'🔀 配对' }[currentMode];
+  if (currentMode === 'flashcard') initFlashcard();
+  else if (currentMode === 'quiz')  initQuiz();
+  else if (currentMode === 'dictation') initDictation();
+  else if (currentMode === 'matching')  initMatching();
+}
+
+// ════════════════════════════════════════════════════════════
+//  SPEECH
+// ════════════════════════════════════════════════════════════
+function speakChar(text) {
+  if (!window.speechSynthesis || !text) return;
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'zh-CN'; u.rate = 0.8;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+}
+function speakWord(text) { speakChar(text); }
+function speakCurrent() {
+  if (pool[idx]) speakChar(pool[idx].example || pool[idx].char);
+}
+
+// ════════════════════════════════════════════════════════════
+//  UTILS
+// ════════════════════════════════════════════════════════════
+function shuffle(arr) {
+  for (let i = arr.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]] = [arr[j],arr[i]];
+  }
+  return arr;
+}
+
+// ════════════════════════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════════════════════════
+buildSelector();
+</script>
+</body>
+</html>
