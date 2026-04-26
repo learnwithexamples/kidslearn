@@ -80,7 +80,7 @@
             <!-- Question card -->
             <div class="quiz-question-card">
                 <div id="q-prompt-label" style="color:#718096;font-size:0.85em;margin-bottom:8px;"></div>
-                <div id="q-char-display" class="quiz-char-display" onclick="speakText(currentItem && currentItem.word)"></div>
+                <div id="q-char-display" class="quiz-char-display" onclick="speakText(currentItem && currentItem.audioText)"></div>
                 <div id="q-pinyin-display" class="pinyin" style="font-size:1.1em;margin:4px 0;"></div>
                 <div id="q-meaning-display" style="color:#2d3748;font-size:0.9em;margin-bottom:4px;"></div>
             </div>
@@ -180,13 +180,29 @@
 
     function buildPool() {
         const selectedIds = Array.from(document.querySelectorAll('.lesson-check-label input:checked')).map(cb => cb.value);
+        // Collect all vocab words from selected lessons for multi-example lookup
+        const allVocabWords = [];
+        selectedIds.forEach(id => {
+            const found = getLessonById(id);
+            if (found) allVocabWords.push(...found.lesson.vocabulary.map(v => v.word));
+        });
         let pool = [];
         selectedIds.forEach(id => {
             const found = getLessonById(id);
             if (!found) return;
             const { lesson } = found;
-            lesson.characters.forEach(c => pool.push({ word: c.char, pinyin: c.pinyin, meaning: c.meaning, type: 'char', lesson: lesson.title }));
-            lesson.vocabulary.forEach(v => pool.push({ word: v.word, pinyin: v.pinyin, meaning: v.meaning, type: 'vocab', lesson: lesson.title }));
+            lesson.characters.forEach(c => {
+                const primary = c.example || '';
+                const extras = allVocabWords.filter(w => w.includes(c.char) && w !== primary);
+                const exList = primary
+                    ? [primary, ...new Set(extras)].slice(0, 3)
+                    : [...new Set(extras)].slice(0, 3);
+                const audioText = exList.length
+                    ? c.char + '，例如，' + exList.join('，')
+                    : c.char;
+                pool.push({ word: c.char, pinyin: c.pinyin, meaning: c.meaning, example: c.example, audioText, type: 'char', lesson: lesson.title });
+            });
+            lesson.vocabulary.forEach(v => pool.push({ word: v.word, pinyin: v.pinyin, meaning: v.meaning, example: '', audioText: v.word, type: 'vocab', lesson: lesson.title }));
         });
         return pool;
     }
@@ -274,7 +290,7 @@
             document.getElementById('q-prompt-label').textContent = '哪个汉字/词有这个意思？';
         }
 
-        setTimeout(() => speakText(item.word), 200);
+        setTimeout(() => speakText(item.audioText), 200);
 
         // Choices
         const choicesDiv = document.getElementById('quiz-choices');
@@ -352,7 +368,7 @@
             document.getElementById('missed-section').classList.remove('hidden');
             document.getElementById('missed-list').innerHTML = missedWords.map(w => `
                 <div style="display:inline-block;margin:4px;padding:8px 14px;background:#fff5f5;border:2px solid #fed7d7;border-radius:8px;cursor:pointer;"
-                    onclick="speakText('${w.word}')">
+                    onclick="speakText('${w.audioText}')">
                     <strong style="font-size:1.2em;font-family:'STSong',serif">${w.word}</strong>
                     <span class="pinyin" style="margin-left:6px">${w.pinyin}</span>
                     <span style="display:block;font-size:0.8em;color:#718096">${w.meaning}</span>
@@ -368,19 +384,46 @@
         return arr;
     }
 
+    let _bestChineseVoice = null;
+
+    function _loadBestChineseVoice() {
+        const voices = speechSynthesis.getVoices();
+        if (!voices.length) return;
+        const preferred = [
+            'Google 普通话（中国大陆）',
+            'Google Chinese',
+            'Microsoft Yaoyao',
+            'Microsoft Huihui',
+            'Microsoft Kangkang',
+            'Tingting',
+            'Meijia',
+        ];
+        for (const name of preferred) {
+            const v = voices.find(v => v.name.includes(name));
+            if (v) { _bestChineseVoice = v; return; }
+        }
+        _bestChineseVoice = voices.find(v => v.lang === 'zh-CN') ||
+                            voices.find(v => v.lang.startsWith('zh')) ||
+                            null;
+    }
+
+    function getBestChineseVoice() { return _bestChineseVoice; }
+
     function speakText(text, rate) {
         if (!text || !('speechSynthesis' in window)) return;
         speechSynthesis.cancel();
         const utt = new SpeechSynthesisUtterance(text);
         utt.lang = 'zh-CN';
-        utt.rate = rate || 0.8;
-        const voices = speechSynthesis.getVoices();
-        const zhVoice = voices.find(v => v.lang.startsWith('zh'));
-        if (zhVoice) utt.voice = zhVoice;
+        utt.rate = rate || 0.5;
+        const voice = getBestChineseVoice();
+        if (voice) utt.voice = voice;
         speechSynthesis.speak(utt);
     }
 
-    if ('speechSynthesis' in window) speechSynthesis.getVoices();
+    if ('speechSynthesis' in window) {
+        speechSynthesis.onvoiceschanged = _loadBestChineseVoice;
+        _loadBestChineseVoice();
+    }
     init();
     </script>
 </body>

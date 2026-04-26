@@ -452,13 +452,21 @@ function renderQuiz() {
   choices.forEach(c => {
     const btn = document.createElement('button');
     btn.className = 'qchoice';
-    if (qType === 'char→meaning' || qType === 'pinyin→char')
-      btn.textContent = c.char;
-    else if (qType === 'char→pinyin')
+    // answer choices must match what the question is asking FOR
+    if (qType === 'char→meaning' || qType === 'pinyin→char') {
+      // prompt is char or pinyin → answer is meaning
+      btn.textContent = c.meaningEn || c.meaning;
+      btn.style.fontSize = '.9em';
+    } else if (qType === 'char→pinyin') {
+      // prompt is char → answer is pinyin
       btn.textContent = c.pinyin;
-    else
-      btn.innerHTML = `<span style="font-family:'STSong','SimSun',serif;font-size:1.3em;">${c.char}</span>`;
-
+    } else {
+      // meaning→char → answer is char
+      btn.style.fontFamily = "'STSong','SimSun',serif";
+      btn.style.fontSize = '1.5em';
+      btn.textContent = c.char;
+    }
+    btn.dataset.correct = (c === w) ? '1' : '0';
     btn.onclick = () => handleQuizAnswer(btn, c === w, w);
     container.appendChild(btn);
   });
@@ -476,12 +484,9 @@ function handleQuizAnswer(btn, correct, word) {
     document.getElementById('q-feedback').textContent = `❌ 正确答案：${word.char} (${word.pinyin}) — ${word.meaningEn}`;
     document.getElementById('q-feedback').className = 'quiz-feedback bad';
     missed.push(word);
-    // highlight correct
+    // highlight the correct button
     document.querySelectorAll('.qchoice').forEach(b => {
-      const txt = b.textContent.trim();
-      if ([word.char, word.pinyin, word.meaningEn, word.meaning].includes(txt) ||
-          b.querySelector && b.querySelector('span') && b.querySelector('span').textContent === word.char)
-        b.classList.add('correct');
+      if (b.dataset.correct === '1') b.classList.add('correct');
     });
   }
   speakChar(word.char);
@@ -504,17 +509,20 @@ function renderDict() {
   if (idx >= pool.length) { showResults(score, pool.length, missed); return; }
   const w = pool[idx];
   updateProgress(idx, pool.length);
-  document.getElementById('dict-hint').textContent  = `听音写字 · 例词：${w.example}`;
+  document.getElementById('dict-hint').textContent  = '听音写字 · Listen and write the character';
   document.getElementById('dict-input').value       = '';
   document.getElementById('dict-feedback').textContent = '';
   document.getElementById('dict-feedback').className   = 'dict-feedback';
   document.getElementById('dict-reveal').style.display = 'none';
   document.getElementById('dict-next-btn').style.display = 'none';
   document.getElementById('dict-input').focus();
-  setTimeout(() => speakWord(w.example), 300);
+  setTimeout(() => speakWord(w.char + '，例如，' + (w.examples || [w.example]).join('，')), 300);
 }
 
-function dictSpeak() { speakWord(pool[idx].example); }
+function dictSpeak() {
+  const w = pool[idx];
+  speakWord(w.char + '，例如，' + (w.examples || [w.example]).join('，'));
+}
 
 function checkDict() {
   const w = pool[idx];
@@ -689,16 +697,44 @@ function restartSame() {
 // ════════════════════════════════════════════════════════════
 //  SPEECH
 // ════════════════════════════════════════════════════════════
+let _bestChineseVoice = null;
+
+function _loadBestChineseVoice() {
+  const voices = speechSynthesis.getVoices();
+  if (!voices.length) return;
+  const preferred = [
+    'Google 普通话（中国大陆）',
+    'Google Chinese',
+    'Microsoft Yaoyao',
+    'Microsoft Huihui',
+    'Microsoft Kangkang',
+    'Tingting',
+    'Meijia',
+  ];
+  for (const name of preferred) {
+    const v = voices.find(v => v.name.includes(name));
+    if (v) { _bestChineseVoice = v; return; }
+  }
+  _bestChineseVoice = voices.find(v => v.lang === 'zh-CN') ||
+                      voices.find(v => v.lang.startsWith('zh')) ||
+                      null;
+}
+
+function getBestChineseVoice() { return _bestChineseVoice; }
+
 function speakChar(text) {
   if (!window.speechSynthesis || !text) return;
   const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'zh-CN'; u.rate = 0.8;
+  u.lang = 'zh-CN'; u.rate = 0.5;
+  const voice = getBestChineseVoice();
+  if (voice) u.voice = voice;
   speechSynthesis.cancel();
   speechSynthesis.speak(u);
 }
 function speakWord(text) { speakChar(text); }
 function speakCurrent() {
-  if (pool[idx]) speakChar(pool[idx].example || pool[idx].char);
+  const w = pool[idx];
+  if (w) speakChar(w.char + '，例如，' + (w.examples || [w.example]).join('，'));
 }
 
 // ════════════════════════════════════════════════════════════
@@ -712,9 +748,17 @@ function shuffle(arr) {
   return arr;
 }
 
+function getAllCNWords() {
+  return chineseVocabData.books['grade2b'].lessons.flatMap(l => l.words);
+}
+
 // ════════════════════════════════════════════════════════════
 //  INIT
 // ════════════════════════════════════════════════════════════
+if ('speechSynthesis' in window) {
+  speechSynthesis.onvoiceschanged = _loadBestChineseVoice;
+  _loadBestChineseVoice();
+}
 buildSelector();
 </script>
 </body>

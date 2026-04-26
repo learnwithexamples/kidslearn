@@ -211,6 +211,13 @@
         const mode = document.getElementById('dict-mode').value;
         const countVal = document.getElementById('dict-count').value;
 
+        // Collect all vocab words from selected lessons for multi-example lookup
+        const allVocabWords = [];
+        selectedIds.forEach(id => {
+            const found = getLessonById(id);
+            if (found) allVocabWords.push(...found.lesson.vocabulary.map(v => v.word));
+        });
+
         wordList = [];
         selectedIds.forEach(id => {
             const found = getLessonById(id);
@@ -218,14 +225,25 @@
             const { lesson } = found;
 
             if (mode === 'char' || mode === 'both') {
-                lesson.characters.forEach(c => wordList.push({
-                    word: c.char, pinyin: c.pinyin, meaning: c.meaning, example: c.example,
-                    lessonTitle: lesson.title, type: 'char'
-                }));
+                lesson.characters.forEach(c => {
+                    const primary = c.example || '';
+                    const extras = allVocabWords.filter(w => w.includes(c.char) && w !== primary);
+                    const exList = primary
+                        ? [primary, ...new Set(extras)].slice(0, 3)
+                        : [...new Set(extras)].slice(0, 3);
+                    const audioText = exList.length
+                        ? c.char + '，例如，' + exList.join('，')
+                        : c.char;
+                    wordList.push({
+                        word: c.char, pinyin: c.pinyin, meaning: c.meaning, example: c.example,
+                        audioText, lessonTitle: lesson.title, type: 'char'
+                    });
+                });
             }
             if (mode === 'vocab' || mode === 'both') {
                 lesson.vocabulary.forEach(v => wordList.push({
                     word: v.word, pinyin: v.pinyin, meaning: v.meaning, example: '',
+                    audioText: v.word,
                     lessonTitle: lesson.title, type: 'vocab'
                 }));
             }
@@ -288,17 +306,20 @@
         document.getElementById('pinyin-hint').textContent = item.pinyin;
         document.getElementById('hint-btn').disabled = false;
 
-        // Auto-play after short delay
-        setTimeout(playCurrentWord, 300);
+        // Auto-play: capture audioText NOW so a stale currentWordIdx can't cause mismatch
+        const audioText = item.audioText || item.word;
+        setTimeout(() => speakText(audioText), 300);
     }
 
     function playCurrentWord() {
         if (currentWordIdx >= wordList.length) return;
-        speakText(wordList[currentWordIdx].word);
+        const item = wordList[currentWordIdx];
+        speakText(item.audioText || item.word);
     }
     function playCurrentWordSlow() {
         if (currentWordIdx >= wordList.length) return;
-        speakText(wordList[currentWordIdx].word, 0.5);
+        const item = wordList[currentWordIdx];
+        speakText(item.audioText || item.word, 0.5);
     }
     function showHint() {
         document.getElementById('pinyin-hint').style.visibility = 'visible';
@@ -339,7 +360,7 @@
             document.getElementById('feedback-text').textContent = `答案是 / The answer is:`;
             document.getElementById('correct-display').textContent = item.word;
             document.getElementById('feedback-meaning').textContent = `${item.pinyin} — ${item.meaning}`;
-            speakText(item.word);
+            speakText(item.audioText);
         }
 
         document.getElementById('score-display').textContent = `${score.correct}/${currentWordIdx + 1}`;
@@ -374,7 +395,7 @@
             const missedList = document.getElementById('missed-list');
             missedList.innerHTML = missedWords.map(w => `
                 <div style="display:inline-block;margin:4px;padding:8px 14px;background:#fff5f5;border:2px solid #fed7d7;border-radius:8px;cursor:pointer;font-family:'STSong','SimSun',serif;"
-                    onclick="speakText('${w.word}')">
+                    onclick="speakText('${w.audioText}')">
                     <strong style="font-size:1.2em">${w.word}</strong>
                     <span class="pinyin" style="margin-left:6px">${w.pinyin}</span>
                     <span style="display:block;font-size:0.8em;color:#718096">${w.meaning}</span>
@@ -384,15 +405,39 @@
     }
 
     // ── Speech ──
+    let _bestChineseVoice = null;
+
+    function _loadBestChineseVoice() {
+        const voices = speechSynthesis.getVoices();
+        if (!voices.length) return;
+        const preferred = [
+            'Google 普通话（中国大陆）', // Chrome zh-CN
+            'Google Chinese',     // Chrome fallback label
+            'Microsoft Yaoyao',   // Windows
+            'Microsoft Huihui',   // Windows
+            'Microsoft Kangkang', // Windows
+            'Tingting',           // macOS fallback
+            'Meijia',             // macOS Taiwan fallback
+        ];
+        for (const name of preferred) {
+            const v = voices.find(v => v.name.includes(name));
+            if (v) { _bestChineseVoice = v; return; }
+        }
+        _bestChineseVoice = voices.find(v => v.lang === 'zh-CN') ||
+                            voices.find(v => v.lang.startsWith('zh')) ||
+                            null;
+    }
+
+    function getBestChineseVoice() { return _bestChineseVoice; }
+
     function speakText(text, rate) {
         if (!('speechSynthesis' in window)) return;
         speechSynthesis.cancel();
         const utt = new SpeechSynthesisUtterance(text);
         utt.lang = 'zh-CN';
-        utt.rate = rate || 0.75;
-        const voices = speechSynthesis.getVoices();
-        const zhVoice = voices.find(v => v.lang.startsWith('zh'));
-        if (zhVoice) utt.voice = zhVoice;
+        utt.rate = rate || 0.5;
+        const voice = getBestChineseVoice();
+        if (voice) utt.voice = voice;
         speechSynthesis.speak(utt);
     }
 
@@ -404,7 +449,10 @@
         }
     });
 
-    if ('speechSynthesis' in window) speechSynthesis.getVoices();
+    if ('speechSynthesis' in window) {
+        speechSynthesis.onvoiceschanged = _loadBestChineseVoice;
+        _loadBestChineseVoice();
+    }
     init();
     </script>
 </body>
