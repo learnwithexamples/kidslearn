@@ -1,11 +1,13 @@
 // Grammar Fix Sentences Data
-// Each entry: { wrong, correct, types, hints }
+// Each entry: { wrong: "sentence with error", correct: "corrected sentence", type: "error category", hint: "what to look for" }
 // Error types: capital, subject-verb, word-order, spelling, adv-adj, other
 
 const grammarFixData = [
 
-  // ─── CAPITAL + SUBJECT-VERB ──────────────────────────────────────────────────
-  { wrong: "the dog run across the yard.", correct: "The dog runs across the yard.", types: ["capital","subject-verb"], hints: ["Sentences must begin with a capital letter.", "Third-person singular: 'run'→'runs'."] },
+  // ─── CAPITAL LETTERS (100 sentences) ────────────────────────────────────────
+
+  // Missing capital at sentence start (30)
+  { wrong: "the dog ran across the yard.", correct: "The dog ran across the yard.", type: "capital", hint: "Sentences must begin with a capital letter." },
   { wrong: "my favorite season is autumn.", correct: "My favorite season is autumn.", type: "capital", hint: "Sentences must begin with a capital letter." },
   { wrong: "she loves reading books.", correct: "She loves reading books.", type: "capital", hint: "Sentences must begin with a capital letter." },
   { wrong: "we went to the park yesterday.", correct: "We went to the park yesterday.", type: "capital", hint: "Sentences must begin with a capital letter." },

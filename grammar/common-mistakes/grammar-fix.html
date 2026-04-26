@@ -196,7 +196,7 @@
 <div class="container">
   <header>
     <h1>✏️ Fix the Grammar</h1>
-    <p class="subtitle">Find and correct the grammar mistake in each sentence</p>
+    <p class="subtitle">Find and correct all grammar mistakes in each sentence</p>
     <a href="../grammar.html" class="back-link">← Back to Grammar</a>
   </header>
 
@@ -324,7 +324,10 @@ function startPractice() {
   const activeTypes = [...chips].filter(c => c.classList.contains('active')).map(c => c.dataset.type);
   if (activeTypes.length === 0) { alert('Please select at least one error type.'); return; }
 
-  const pool = grammarFixData.filter(s => activeTypes.includes(s.type));
+  const pool = grammarFixData.filter(s => {
+    const types = Array.isArray(s.types) ? s.types : [s.type];
+    return types.some(t => activeTypes.includes(t));
+  });
   if (pool.length === 0) { alert('No sentences match the selected types.'); return; }
 
   currentSentences = shuffle(pool).slice(0, count);
@@ -354,12 +357,18 @@ function renderCards() {
     header.className = 'card-header';
     const num = document.createElement('div');
     num.className = 'card-num';
-    num.textContent = `#${ci + 1}`;
-    const badge = document.createElement('div');
-    badge.className = `type-badge badge-${sent.type}`;
-    badge.textContent = typeLabel(sent.type);
+    const types = Array.isArray(sent.types) ? sent.types : [sent.type];
+    num.textContent = `#${ci + 1}` + (types.length > 1 ? ` · ${types.length} errors` : '');
+    const badgeWrap = document.createElement('div');
+    badgeWrap.style.cssText = 'display:flex;gap:4px;flex-wrap:wrap;align-items:center;';
+    types.forEach(type => {
+      const badge = document.createElement('div');
+      badge.className = `type-badge badge-${type}`;
+      badge.textContent = typeLabel(type);
+      badgeWrap.appendChild(badge);
+    });
     header.appendChild(num);
-    header.appendChild(badge);
+    header.appendChild(badgeWrap);
     card.appendChild(header);
 
     // word area
@@ -370,7 +379,14 @@ function renderCards() {
     const hintBox = document.createElement('div');
     hintBox.className = 'hint-box';
     hintBox.id = `hint-${ci}`;
-    hintBox.textContent = '💡 ' + sent.hint;
+    const hints = Array.isArray(sent.hints) ? sent.hints : [sent.hint];
+    if (hints.length === 1) {
+      hintBox.textContent = '💡 ' + hints[0];
+    } else {
+      hintBox.innerHTML = hints.map((h, i) =>
+        `<div style="margin-bottom:3px">💡 <strong>Error ${i+1}:</strong> ${escapeHtml(h)}</div>`
+      ).join('');
+    }
     card.appendChild(hintBox);
 
     // actions
