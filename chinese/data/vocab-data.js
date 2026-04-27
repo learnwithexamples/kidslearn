@@ -378,6 +378,7 @@ const chineseVocabData = {
             },
           ]
         },
+        // unit 2
         {
           number: 5,
           unit: 2,
@@ -670,10 +671,10 @@ const chineseVocabData = {
           ]
         },
 
-        // ── Unit 2 ────────────────────────────────────────────────
+        // ── Unit 3 ────────────────────────────────────────────────
         {
           number: 1,
-          unit: 2,
+          unit: 3,
           title: '神州谣',
           words: [
             {
@@ -770,7 +771,7 @@ const chineseVocabData = {
         },
         {
           number: 2,
-          unit: 2,
+          unit: 3,
           title: '传统节日',
           words: [
             {
@@ -867,7 +868,7 @@ const chineseVocabData = {
         },
         {
           number: 3,
-          unit: 2,
+          unit: 3,
           title: '"贝"的故事',
           words: [
             {
@@ -962,10 +963,27 @@ const chineseVocabData = {
             },
           ]
         },
-        // ── Unit 3 ────────────────────────────────────────────────
+        {
+          number: 4,
+          unit: 3,
+          title: '中国美食',
+          words: [
+            {
+              char: '',
+              pinyin: '',
+              meaning: '',
+              meaningEn: '',
+              example: '',
+              examplePinyin: '',
+              exampleMeaning: '',
+              examples: []
+            },
+          ]
+        },
+        // ── Unit 4 ────────────────────────────────────────────────
         {
           number: 8,
-          unit: 3,
+          unit: 4,
           title: '彩色的梦',
           words: [
             {
@@ -1062,7 +1080,7 @@ const chineseVocabData = {
         },
         {
           number: 9,
-          unit: 3,
+          unit: 4,
           title: '枫树上的喜鹊',
           words: [
             {
@@ -1149,7 +1167,7 @@ const chineseVocabData = {
         },
         {
           number: 10,
-          unit: 3,
+          unit: 4,
           title: '沙滩上的童话',
           words: [
             {
@@ -1246,7 +1264,7 @@ const chineseVocabData = {
         },
         {
           number: 11,
-          unit: 3,
+          unit: 4,
           title: '我是一只小虫子',
           words: [
             {
@@ -1331,9 +1349,10 @@ const chineseVocabData = {
             },
           ]
         },
+        // unit 5
         {
           number: 12,
-          unit: 3,
+          unit: 5,
           title: '寓言二则',
           words: [
             {
@@ -1420,7 +1439,7 @@ const chineseVocabData = {
         },
         {
           number: 13,
-          unit: 3,
+          unit: 5,
           title: '画杨桃',
           words: [
             {
