@@ -4055,7 +4055,7 @@ const vocabularyData = {
                   "definition": "to go beyond the limits set by a rule or law; to sin",
                   "example": "Anyone who transgresses the code of conduct will face consequences."
                 },
-                {
+                { 
                   "word": "transient",
                   "pronunciation": "TRAN-shent",
                   "partOfSpeech": "adjective/noun",
@@ -5362,6 +5362,41 @@ const vocabularyData = {
                   "partOfSpeech": "adjective",
                   "definition": "keeping careful watch for possible danger or difficulty",
                   "example": "Hikers must remain vigilant for sudden changes in mountain weather."
+                },
+                {
+                  "word": "adolescence",
+                  "pronunciation": "ad-uh-LES-uhns",
+                  "partOfSpeech": "noun",
+                  "definition": "the period of life between childhood and adulthood",
+                  "example": "Adolescence is often marked by rapid physical and emotional changes."
+                },
+                {
+                  "word": "faction",
+                  "pronunciation": "FAK-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "a small, organized, dissenting group within a larger one",
+                  "example": "The political party was divided into several factions."
+                },
+                {
+                  "word": "counterfeit",
+                  "pronunciation": "KOWN-ter-fit",
+                  "partOfSpeech": "adjective/verb",
+                  "definition": "made in imitation of something valuable with the intent to deceive; to make an illegal copy",
+                  "example": "The police seized a large shipment of counterfeit goods."
+                },
+                {
+                  "word": "textile",
+                  "pronunciation": "TEK-style",
+                  "partOfSpeech": "noun",
+                  "definition": "a type of cloth or woven fabric",
+                  "example": "The factory produces a wide range of textiles for clothing and home furnishings."
+                },
+                {
+                  "word": "efficient",
+                  "pronunciation": "ih-FISH-uhnt",
+                  "partOfSpeech": "adjective",
+                  "definition": "performing or functioning in the best possible manner with the least waste of time and effort",
+                  "example": "The new software is much more efficient than the old version."
                 }
               ]
             }
