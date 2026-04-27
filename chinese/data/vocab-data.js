@@ -378,6 +378,12 @@ const chineseVocabData = {
             },
           ]
         },
+        {
+          number: 0,
+          unit: 1,
+          title: '语文园地一',
+          words: []
+        },
         // unit 2
         {
           number: 5,
@@ -669,6 +675,12 @@ const chineseVocabData = {
               examples: ["舍不得","宿舍","舍去"]
             },
           ]
+        },
+        {
+          number: 0,
+          unit: 2,
+          title: '语文园地二',
+          words: []
         },
 
         // ── Unit 3 ────────────────────────────────────────────────
@@ -1060,6 +1072,12 @@ const chineseVocabData = {
             },
           ]
         },
+        {
+          number: 0,
+          unit: 3,
+          title: '语文园地三',
+          words: []
+        },
         // ── Unit 4 ────────────────────────────────────────────────
         {
           number: 8,
@@ -1428,6 +1446,12 @@ const chineseVocabData = {
               examples: ["劲头","干劲","用劲"]
             },
           ]
+        },
+        {
+          number: 0,
+          unit: 4,
+          title: '语文园地四',
+          words: []
         },
         // unit 5
         {
@@ -1820,6 +1844,12 @@ const chineseVocabData = {
               examples: ["掉下","掉落","丢掉"]
             },
           ]
+        },
+        {
+          number: 0,
+          unit: 5,
+          title: '语文园地五',
+          words: []
         },
         {
           number: 15,
@@ -2478,6 +2508,12 @@ const chineseVocabData = {
               examples: ["容易","简易","不易"]
             },
           ]
+        },
+        {
+          number: 0,
+          unit: 6,
+          title: '语文园地六',
+          words: []
         },
         {
           number: 19,
@@ -3318,6 +3354,12 @@ const chineseVocabData = {
           ]
         },
         {
+          number: 0,
+          unit: 7,
+          title: '语文园地七',
+          words: []
+        },
+        {
           number: 23,
           unit: 8,
           title: '祖先的摇篮',
@@ -3827,6 +3869,12 @@ const chineseVocabData = {
               examples: ["因此","此时","如此"]
             },
           ]
+        },
+        {
+          number: 0,
+          unit: 8,
+          title: '语文园地八',
+          words: []
         },
       ]
     }
