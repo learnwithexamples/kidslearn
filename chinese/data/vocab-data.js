@@ -969,14 +969,94 @@ const chineseVocabData = {
           title: '中国美食',
           words: [
             {
-              char: '',
-              pinyin: '',
-              meaning: '',
-              meaningEn: '',
-              example: '',
-              examplePinyin: '',
-              exampleMeaning: '',
-              examples: []
+              char: '烧',
+              pinyin: 'shāo',
+              meaning: '加热烹调；燃烧',
+              meaningEn: 'to cook; to roast; to burn',
+              example: '红烧',
+              examplePinyin: 'hóng shāo',
+              exampleMeaning: 'red-braised; braised in soy sauce',
+              examples: ["红烧","烧烤","烧饭"]
+            },
+            {
+              char: '烤',
+              pinyin: 'kǎo',
+              meaning: '用火或热气烹制食物',
+              meaningEn: 'to roast; to grill; to bake',
+              example: '烧烤',
+              examplePinyin: 'shāo kǎo',
+              exampleMeaning: 'barbecue; grilled food',
+              examples: ["烧烤","烤鸭","烤肉"]
+            },
+            {
+              char: '肉',
+              pinyin: 'ròu',
+              meaning: '动物或人体的肌肉组织',
+              meaningEn: 'meat; flesh',
+              example: '猪肉',
+              examplePinyin: 'zhū ròu',
+              exampleMeaning: 'pork',
+              examples: ["猪肉","牛肉","烤肉"]
+            },
+            {
+              char: '蛋',
+              pinyin: 'dàn',
+              meaning: '鸟类或爬行动物产的卵',
+              meaningEn: 'egg',
+              example: '鸡蛋',
+              examplePinyin: 'jī dàn',
+              exampleMeaning: 'chicken egg',
+              examples: ["鸡蛋","蛋糕","炒蛋"]
+            },
+            {
+              char: '饭',
+              pinyin: 'fàn',
+              meaning: '煮熟的米；一餐',
+              meaningEn: 'cooked rice; meal',
+              example: '米饭',
+              examplePinyin: 'mǐ fàn',
+              exampleMeaning: 'cooked rice',
+              examples: ["米饭","炒饭","吃饭"]
+            },
+            {
+              char: '茄',
+              pinyin: 'qié',
+              meaning: '茄子；茄科植物',
+              meaningEn: 'eggplant; aubergine',
+              example: '茄子',
+              examplePinyin: 'qié zi',
+              exampleMeaning: 'eggplant; aubergine',
+              examples: ["茄子","番茄","炒茄子"]
+            },
+            {
+              char: '鸭',
+              pinyin: 'yā',
+              meaning: '一种水禽；家禽',
+              meaningEn: 'duck',
+              example: '烤鸭',
+              examplePinyin: 'kǎo yā',
+              exampleMeaning: 'roast duck (Peking duck)',
+              examples: ["烤鸭","鸭蛋","北京烤鸭"]
+            },
+            {
+              char: '鸡',
+              pinyin: 'jī',
+              meaning: '一种常见家禽',
+              meaningEn: 'chicken',
+              example: '鸡肉',
+              examplePinyin: 'jī ròu',
+              exampleMeaning: 'chicken meat',
+              examples: ["鸡肉","鸡蛋","炸鸡"]
+            },
+            {
+              char: '炒',
+              pinyin: 'chǎo',
+              meaning: '用油在锅里快速翻炒',
+              meaningEn: 'to stir-fry; to sauté',
+              example: '炒菜',
+              examplePinyin: 'chǎo cài',
+              exampleMeaning: 'stir-fried vegetables; cooked dish',
+              examples: ["炒菜","炒饭","炒蛋"]
             },
           ]
         },
