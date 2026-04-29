@@ -4458,6 +4458,16 @@ const chineseVocabData = {
               exampleMeaning: 'to welcome; to greet',
               examples: ["迎接","欢迎","迎面"]
             },
+            {
+              char: '鸟',
+              pinyin: 'niǎo',
+              meaning: '小鸟；鸟巢；飞鸟',
+              meaningEn: 'bird',
+              example: '小鸟',
+              examplePinyin: 'xiǎo niǎo',
+              exampleMeaning: 'small bird; little bird',
+              examples: ["小鸟","鸟巢","飞鸟"]
+            },
           ]
         },
         {
