@@ -1228,6 +1228,136 @@ const chineseVocabData = {
               exampleMeaning: 'vegetables',
               examples: ["蔬菜","炒菜","菜肴"]
             },
+            {
+              char: '糕',
+              pinyin: 'gāo',
+              meaning: '糕点；蛋糕；千人糕',
+              meaningEn: 'cake; pastry',
+              example: '蛋糕',
+              examplePinyin: 'dàn gāo',
+              exampleMeaning: 'cake',
+              examples: ["蛋糕","糕点","年糕"]
+            },
+            {
+              char: '特',
+              pinyin: 'tè',
+              meaning: '特别；特殊；特点',
+              meaningEn: 'special; particular; unique',
+              example: '特别',
+              examplePinyin: 'tè bié',
+              exampleMeaning: 'special; especially',
+              examples: ["特别","特殊","特点"]
+            },
+            {
+              char: '嘛',
+              pinyin: 'ma',
+              meaning: '嘛！表示语气；当然嘛',
+              meaningEn: 'particle expressing obviousness or mild assertion',
+              example: '当然嘛',
+              examplePinyin: 'dāng rán ma',
+              exampleMeaning: 'of course! naturally!',
+              examples: ["当然嘛","是嘛","好嘛"]
+            },
+            {
+              char: '粉',
+              pinyin: 'fěn',
+              meaning: '米粉；粉末；面粉',
+              meaningEn: 'powder; flour; noodles',
+              example: '面粉',
+              examplePinyin: 'miàn fěn',
+              exampleMeaning: 'wheat flour',
+              examples: ["面粉","米粉","粉末"]
+            },
+            {
+              char: '糖',
+              pinyin: 'táng',
+              meaning: '糖果；白糖；糖分',
+              meaningEn: 'sugar; candy; sweets',
+              example: '糖果',
+              examplePinyin: 'táng guǒ',
+              exampleMeaning: 'candy; sweets',
+              examples: ["糖果","白糖","糖分"]
+            },
+            {
+              char: '蔗',
+              pinyin: 'zhè',
+              meaning: '甘蔗；蔗糖；蔗汁',
+              meaningEn: 'sugarcane',
+              example: '甘蔗',
+              examplePinyin: 'gān zhè',
+              exampleMeaning: 'sugarcane',
+              examples: ["甘蔗","蔗糖","蔗汁"]
+            },
+            {
+              char: '汁',
+              pinyin: 'zhī',
+              meaning: '果汁；蔗汁；汁液',
+              meaningEn: 'juice; liquid; sap',
+              example: '果汁',
+              examplePinyin: 'guǒ zhī',
+              exampleMeaning: 'fruit juice',
+              examples: ["果汁","蔗汁","汁液"]
+            },
+            {
+              char: '熬',
+              pinyin: 'áo',
+              meaning: '熬糖；熬夜；熬煮',
+              meaningEn: 'to boil; to simmer; to endure',
+              example: '熬夜',
+              examplePinyin: 'áo yè',
+              exampleMeaning: 'to stay up late; to burn the midnight oil',
+              examples: ["熬夜","熬糖","熬煮"]
+            },
+            {
+              char: '算',
+              pinyin: 'suàn',
+              meaning: '算一算；计算；算法',
+              meaningEn: 'to calculate; to count; to figure',
+              example: '计算',
+              examplePinyin: 'jì suàn',
+              exampleMeaning: 'to calculate; to compute',
+              examples: ["计算","算一算","算法"]
+            },
+            {
+              char: '销',
+              pinyin: 'xiāo',
+              meaning: '销售；销路；畅销',
+              meaningEn: 'to sell; to market; sales',
+              example: '销售',
+              examplePinyin: 'xiāo shòu',
+              exampleMeaning: 'to sell; sales',
+              examples: ["销售","销路","畅销"]
+            },
+            {
+              char: '的',
+              pinyin: 'dí',
+              meaning: '的确；确实；真的',
+              meaningEn: 'indeed; truly; really (pronunciation: dí in 的确)',
+              example: '的确',
+              examplePinyin: 'dí què',
+              exampleMeaning: 'indeed; truly; certainly',
+              examples: ["的确","的确如此","确实"]
+            },
+            {
+              char: '确',
+              pinyin: 'què',
+              meaning: '的确；确实；确认',
+              meaningEn: 'indeed; certain; to confirm',
+              example: '确实',
+              examplePinyin: 'què shí',
+              exampleMeaning: 'indeed; truly; in fact',
+              examples: ["确实","的确","确认"]
+            },
+            {
+              char: '应',
+              pinyin: 'yīng',
+              meaning: '应该；应当；应有',
+              meaningEn: 'should; ought to; must',
+              example: '应该',
+              examplePinyin: 'yīng gāi',
+              exampleMeaning: 'should; ought to',
+              examples: ["应该","应当","应有"]
+            },
           ]
         },
         {
@@ -1325,13 +1455,224 @@ const chineseVocabData = {
               exampleMeaning: 'reluctant to part with',
               examples: ["舍不得","宿舍","舍去"]
             },
+            {
+              char: '郊',
+              pinyin: 'jiāo',
+              meaning: '郊外；郊区；城郊',
+              meaningEn: 'suburbs; outskirts; countryside',
+              example: '郊外',
+              examplePinyin: 'jiāo wài',
+              exampleMeaning: 'outskirts; countryside outside a city',
+              examples: ["郊外","郊区","城郊"]
+            },
+            {
+              char: '泛',
+              pinyin: 'fàn',
+              meaning: '泛舟；泛起；泛滥',
+              meaningEn: 'to float; to ripple; to be suffused with',
+              example: '泛舟',
+              examplePinyin: 'fàn zhōu',
+              exampleMeaning: 'to go boating; to sail',
+              examples: ["泛舟","泛起","泛滥"]
+            },
+            {
+              char: '葱',
+              pinyin: 'cōng',
+              meaning: '葱绿；葱茏；葱白',
+              meaningEn: 'green onion; lush green; verdant',
+              example: '葱绿',
+              examplePinyin: 'cōng lǜ',
+              exampleMeaning: 'lush green; verdant',
+              examples: ["葱绿","葱茏","大葱"]
+            },
+            {
+              char: '软',
+              pinyin: 'ruǎn',
+              meaning: '柔软；软绵绵；软化',
+              meaningEn: 'soft; flexible; gentle',
+              example: '柔软',
+              examplePinyin: 'róu ruǎn',
+              exampleMeaning: 'soft; flexible; pliable',
+              examples: ["柔软","软绵绵","软化"]
+            },
+            {
+              char: '毯',
+              pinyin: 'tǎn',
+              meaning: '绒毯；草毯；毛毯',
+              meaningEn: 'blanket; carpet; rug',
+              example: '毛毯',
+              examplePinyin: 'máo tǎn',
+              exampleMeaning: 'woolen blanket',
+              examples: ["毛毯","绒毯","地毯"]
+            },
+            {
+              char: '异',
+              pinyin: 'yì',
+              meaning: '异乡；奇异；异常',
+              meaningEn: 'different; strange; foreign; unusual',
+              example: '异乡',
+              examplePinyin: 'yì xiāng',
+              exampleMeaning: 'foreign land; place away from home',
+              examples: ["异乡","奇异","异常"]
+            },
+            {
+              char: '株',
+              pinyin: 'zhū',
+              meaning: '守株待兔；株连；一株树',
+              meaningEn: 'tree trunk; (measure word for plants); to involve',
+              example: '守株待兔',
+              examplePinyin: 'shǒu zhū dài tù',
+              exampleMeaning: 'to wait for gains without working (idiom)',
+              examples: ["守株待兔","一株树","株连"]
+            },
+            {
+              char: '拾',
+              pinyin: 'shí',
+              meaning: '拾起；捡拾；拾穗',
+              meaningEn: 'to pick up; to collect; to tidy',
+              example: '拾起',
+              examplePinyin: 'shí qǐ',
+              exampleMeaning: 'to pick up; to retrieve',
+              examples: ["拾起","捡拾","拾穗"]
+            },
+            {
+              char: '骑',
+              pinyin: 'qí',
+              meaning: '骑马；骑车；骑行',
+              meaningEn: 'to ride (a horse, bike)',
+              example: '骑马',
+              examplePinyin: 'qí mǎ',
+              exampleMeaning: 'to ride a horse',
+              examples: ["骑马","骑车","骑行"]
+            },
+            {
+              char: '跨',
+              pinyin: 'kuà',
+              meaning: '跨过；跨越；跨步',
+              meaningEn: 'to stride over; to step across; to span',
+              example: '跨过',
+              examplePinyin: 'kuà guò',
+              exampleMeaning: 'to step over; to cross',
+              examples: ["跨过","跨越","跨步"]
+            },
           ]
         },
         {
           number: 0,
           unit: 2,
           title: '语文园地二',
-          words: []
+          words: [
+            {
+              char: '程',
+              pinyin: 'chéng',
+              meaning: '程序；工程；课程',
+              meaningEn: 'process; procedure; course; journey',
+              example: '程序',
+              examplePinyin: 'chéng xù',
+              exampleMeaning: 'procedure; process; program',
+              examples: ["程序","工程","课程"]
+            },
+            {
+              char: '魔',
+              pinyin: 'mó',
+              meaning: '魔术；魔法；魔力',
+              meaningEn: 'magic; demon; supernatural',
+              example: '魔术',
+              examplePinyin: 'mó shù',
+              exampleMeaning: 'magic; conjuring',
+              examples: ["魔术","魔法","魔力"]
+            },
+            {
+              char: '术',
+              pinyin: 'shù',
+              meaning: '魔术；技术；艺术',
+              meaningEn: 'skill; art; technique; magic',
+              example: '技术',
+              examplePinyin: 'jì shù',
+              exampleMeaning: 'technology; technique; skill',
+              examples: ["技术","魔术","艺术"]
+            },
+            {
+              char: '建',
+              pinyin: 'jiàn',
+              meaning: '建筑；建设；建立',
+              meaningEn: 'to build; to establish; to construct',
+              example: '建设',
+              examplePinyin: 'jiàn shè',
+              exampleMeaning: 'to build; to develop; construction',
+              examples: ["建设","建筑","建立"]
+            },
+            {
+              char: '筑',
+              pinyin: 'zhù',
+              meaning: '建筑；筑巢；筑路',
+              meaningEn: 'to build; to construct; architecture',
+              example: '建筑',
+              examplePinyin: 'jiàn zhù',
+              exampleMeaning: 'building; architecture; construction',
+              examples: ["建筑","筑巢","筑路"]
+            },
+            {
+              char: '演',
+              pinyin: 'yǎn',
+              meaning: '表演；演出；演员',
+              meaningEn: 'to perform; to act; to演 演show',
+              example: '表演',
+              examplePinyin: 'biǎo yǎn',
+              exampleMeaning: 'to perform; performance',
+              examples: ["表演","演出","演员"]
+            },
+            {
+              char: '营',
+              pinyin: 'yíng',
+              meaning: '营地；夏令营；营救',
+              meaningEn: 'camp; to manage; to operate',
+              example: '夏令营',
+              examplePinyin: 'xià lìng yíng',
+              exampleMeaning: 'summer camp',
+              examples: ["夏令营","营地","营救"]
+            },
+            {
+              char: '务',
+              pinyin: 'wù',
+              meaning: '任务；服务；务必',
+              meaningEn: 'task; duty; service; must',
+              example: '任务',
+              examplePinyin: 'rèn wu',
+              exampleMeaning: 'task; mission; assignment',
+              examples: ["任务","服务","务必"]
+            },
+            {
+              char: '判',
+              pinyin: 'pàn',
+              meaning: '判断；裁判；判决',
+              meaningEn: 'to judge; to determine; verdict',
+              example: '判断',
+              examplePinyin: 'pàn duàn',
+              exampleMeaning: 'to judge; to determine; judgement',
+              examples: ["判断","裁判","判决"]
+            },
+            {
+              char: '饲',
+              pinyin: 'sì',
+              meaning: '饲养；饲料；饲育',
+              meaningEn: 'to feed (animals); to raise',
+              example: '饲养',
+              examplePinyin: 'sì yǎng',
+              exampleMeaning: 'to raise; to rear (animals)',
+              examples: ["饲养","饲料","饲育"]
+            },
+            {
+              char: '养',
+              pinyin: 'yǎng',
+              meaning: '饲养；养育；培养',
+              meaningEn: 'to raise; to nurture; to cultivate',
+              example: '培养',
+              examplePinyin: 'péi yǎng',
+              exampleMeaning: 'to cultivate; to train; to nurture',
+              examples: ["培养","饲养","养育"]
+            },
+          ]
         },
 
         // ── Unit 3 ────────────────────────────────────────────────
@@ -1430,6 +1771,96 @@ const chineseVocabData = {
               exampleMeaning: 'of one mind; united',
               examples: ["齐心","整齐","一齐"]
             },
+            {
+              char: '涌',
+              pinyin: 'yǒng',
+              meaning: '涌现；汹涌；涌出',
+              meaningEn: 'to surge; to gush; to well up',
+              example: '涌现',
+              examplePinyin: 'yǒng xiàn',
+              exampleMeaning: 'to emerge in large numbers; to spring up',
+              examples: ["涌现","汹涌","涌出"]
+            },
+            {
+              char: '峰',
+              pinyin: 'fēng',
+              meaning: '山峰；峰顶；高峰',
+              meaningEn: 'peak; summit; mountain top',
+              example: '山峰',
+              examplePinyin: 'shān fēng',
+              exampleMeaning: 'mountain peak',
+              examples: ["山峰","高峰","峰顶"]
+            },
+            {
+              char: '耸',
+              pinyin: 'sǒng',
+              meaning: '耸立；高耸；耸动',
+              meaningEn: 'to tower; to stand tall; to soar',
+              example: '耸立',
+              examplePinyin: 'sǒng lì',
+              exampleMeaning: 'to tower; to stand tall',
+              examples: ["耸立","高耸","耸入云端"]
+            },
+            {
+              char: '阁',
+              pinyin: 'gé',
+              meaning: '楼阁；阁楼；阁下',
+              meaningEn: 'pavilion; attic; cabinet',
+              example: '楼阁',
+              examplePinyin: 'lóu gé',
+              exampleMeaning: 'tower; pavilion; multi-storied building',
+              examples: ["楼阁","阁楼","亭台楼阁"]
+            },
+            {
+              char: '与',
+              pinyin: 'yǔ',
+              meaning: '与其；参与；与众不同',
+              meaningEn: 'and; with; to give; to participate',
+              example: '参与',
+              examplePinyin: 'cān yǔ',
+              exampleMeaning: 'to participate; to take part',
+              examples: ["参与","与其","与众不同"]
+            },
+            {
+              char: '陆',
+              pinyin: 'lù',
+              meaning: '大陆；陆地；内陆',
+              meaningEn: 'land; continent; mainland',
+              example: '大陆',
+              examplePinyin: 'dà lù',
+              exampleMeaning: 'continent; mainland',
+              examples: ["大陆","陆地","内陆"]
+            },
+            {
+              char: '浓',
+              pinyin: 'nóng',
+              meaning: '浓情；浓厚；浓密',
+              meaningEn: 'deep; thick; strong; rich',
+              example: '浓情',
+              examplePinyin: 'nóng qíng',
+              exampleMeaning: 'deep affection; strong feeling',
+              examples: ["浓情","浓厚","浓密"]
+            },
+            {
+              char: '繁',
+              pinyin: 'fán',
+              meaning: '繁荣；繁忙；繁华',
+              meaningEn: 'prosperous; busy; flourishing',
+              example: '繁荣',
+              examplePinyin: 'fán róng',
+              exampleMeaning: 'prosperous; flourishing; thriving',
+              examples: ["繁荣","繁忙","繁华"]
+            },
+            {
+              char: '荣',
+              pinyin: 'róng',
+              meaning: '繁荣；荣誉；光荣',
+              meaningEn: 'prosperous; glory; honor',
+              example: '光荣',
+              examplePinyin: 'guāng róng',
+              exampleMeaning: 'glorious; honorable',
+              examples: ["光荣","繁荣","荣誉"]
+            },
           ]
         },
         {
@@ -1526,6 +1957,126 @@ const chineseVocabData = {
               examplePinyin: 'rè nào',
               exampleMeaning: 'lively; bustling',
               examples: ["热情","热爱","炎热"]
+            },
+            {
+              char: '传',
+              pinyin: 'chuán',
+              meaning: '传统；流传；传说',
+              meaningEn: 'to pass on; to transmit; tradition',
+              example: '流传',
+              examplePinyin: 'liú chuán',
+              exampleMeaning: 'to spread; to be passed down',
+              examples: ["流传","传统","传说"]
+            },
+            {
+              char: '统',
+              pinyin: 'tǒng',
+              meaning: '传统；统一；系统',
+              meaningEn: 'tradition; to unite; system',
+              example: '传统',
+              examplePinyin: 'chuán tǒng',
+              exampleMeaning: 'tradition; traditional',
+              examples: ["传统","统一","系统"]
+            },
+            {
+              char: '宵',
+              pinyin: 'xiāo',
+              meaning: '元宵；通宵；宵禁',
+              meaningEn: 'night; (in 元宵: Lantern Festival)',
+              example: '元宵',
+              examplePinyin: 'yuán xiāo',
+              exampleMeaning: 'Lantern Festival; glutinous rice ball',
+              examples: ["元宵","元宵节","通宵"]
+            },
+            {
+              char: '巷',
+              pinyin: 'xiàng',
+              meaning: '小巷；街巷；巷子',
+              meaningEn: 'alley; lane; narrow street',
+              example: '小巷',
+              examplePinyin: 'xiǎo xiàng',
+              exampleMeaning: 'alley; narrow lane',
+              examples: ["小巷","街巷","巷子"]
+            },
+            {
+              char: '祭',
+              pinyin: 'jì',
+              meaning: '祭扫；祭祀；祭奠',
+              meaningEn: 'to offer sacrifice; to worship ancestors',
+              example: '祭扫',
+              examplePinyin: 'jì sǎo',
+              exampleMeaning: 'to visit and clean ancestral graves',
+              examples: ["祭扫","祭祀","祭奠"]
+            },
+            {
+              char: '堂',
+              pinyin: 'táng',
+              meaning: '堂屋；课堂；堂兄',
+              meaningEn: 'hall; main room; classroom',
+              example: '课堂',
+              examplePinyin: 'kè táng',
+              exampleMeaning: 'classroom; class',
+              examples: ["课堂","堂屋","礼堂"]
+            },
+            {
+              char: '乞',
+              pinyin: 'qǐ',
+              meaning: '乞巧；乞求；乞丐',
+              meaningEn: 'to beg; to implore; (in 乞巧: Qixi Festival custom)',
+              example: '乞巧',
+              examplePinyin: 'qǐ qiǎo',
+              exampleMeaning: 'to pray for skill (Qixi tradition)',
+              examples: ["乞巧","乞求","乞丐"]
+            },
+            {
+              char: '巧',
+              pinyin: 'qiǎo',
+              meaning: '乞巧；灵巧；巧妙',
+              meaningEn: 'skillful; clever; ingenious',
+              example: '灵巧',
+              examplePinyin: 'líng qiǎo',
+              exampleMeaning: 'nimble; deft; dexterous',
+              examples: ["灵巧","巧妙","乞巧"]
+            },
+            {
+              char: '郎',
+              pinyin: 'láng',
+              meaning: '牛郎；郎君；新郎',
+              meaningEn: 'young man; bridegroom; (in 牛郎: cowherd)',
+              example: '牛郎',
+              examplePinyin: 'niú láng',
+              exampleMeaning: 'Cowherd (character in Qixi legend)',
+              examples: ["牛郎","新郎","郎君"]
+            },
+            {
+              char: '饼',
+              pinyin: 'bǐng',
+              meaning: '月饼；饼干；烙饼',
+              meaningEn: 'cake; pastry; flat bread',
+              example: '月饼',
+              examplePinyin: 'yuè bǐng',
+              exampleMeaning: 'mooncake (Mid-Autumn Festival)',
+              examples: ["月饼","饼干","烙饼"]
+            },
+            {
+              char: '赏',
+              pinyin: 'shǎng',
+              meaning: '赏月；欣赏；赏花',
+              meaningEn: 'to enjoy; to appreciate; to admire',
+              example: '赏月',
+              examplePinyin: 'shǎng yuè',
+              exampleMeaning: 'to admire the moon',
+              examples: ["赏月","欣赏","赏花"]
+            },
+            {
+              char: '菊',
+              pinyin: 'jú',
+              meaning: '菊花；赏菊；菊展',
+              meaningEn: 'chrysanthemum',
+              example: '菊花',
+              examplePinyin: 'jú huā',
+              exampleMeaning: 'chrysanthemum',
+              examples: ["菊花","赏菊","菊展"]
             },
           ]
         },
@@ -1624,6 +2175,126 @@ const chineseVocabData = {
               exampleMeaning: 'wealth; riches',
               examples: ["财富","钱财","发财"]
             },
+            {
+              char: '类',
+              pinyin: 'lèi',
+              meaning: '种类；人类；类似',
+              meaningEn: 'kind; type; category',
+              example: '种类',
+              examplePinyin: 'zhǒng lèi',
+              exampleMeaning: 'kind; type; variety',
+              examples: ["种类","人类","类似"]
+            },
+            {
+              char: '漂',
+              pinyin: 'piào',
+              meaning: '漂亮；漂白；漂浮',
+              meaningEn: 'pretty; to bleach; to float',
+              example: '漂亮',
+              examplePinyin: 'piào liang',
+              exampleMeaning: 'pretty; beautiful; good-looking',
+              examples: ["漂亮","漂白","漂浮"]
+            },
+            {
+              char: '珍',
+              pinyin: 'zhēn',
+              meaning: '珍贵；珍惜；珍品',
+              meaningEn: 'precious; to treasure; rare',
+              example: '珍贵',
+              examplePinyin: 'zhēn guì',
+              exampleMeaning: 'precious; valuable',
+              examples: ["珍贵","珍惜","珍品"]
+            },
+            {
+              char: '饰',
+              pinyin: 'shì',
+              meaning: '装饰；首饰；饰品',
+              meaningEn: 'ornament; to decorate; jewelry',
+              example: '装饰',
+              examplePinyin: 'zhuāng shì',
+              exampleMeaning: 'to decorate; decoration',
+              examples: ["装饰","首饰","饰品"]
+            },
+            {
+              char: '品',
+              pinyin: 'pǐn',
+              meaning: '品质；物品；产品',
+              meaningEn: 'product; quality; article; to taste',
+              example: '物品',
+              examplePinyin: 'wù pǐn',
+              exampleMeaning: 'article; item; goods',
+              examples: ["物品","品质","产品"]
+            },
+            {
+              char: '随',
+              pinyin: 'suí',
+              meaning: '随着；随意；随手',
+              meaningEn: 'to follow; along with; at will',
+              example: '随着',
+              examplePinyin: 'suí zhe',
+              exampleMeaning: 'along with; following',
+              examples: ["随着","随意","随手"]
+            },
+            {
+              char: '易',
+              pinyin: 'yì',
+              meaning: '容易；交易；不易',
+              meaningEn: 'easy; to exchange; trade',
+              example: '交易',
+              examplePinyin: 'jiāo yì',
+              exampleMeaning: 'trade; transaction; deal',
+              examples: ["交易","容易","不易"]
+            },
+            {
+              char: '损',
+              pinyin: 'sǔn',
+              meaning: '损失；破损；损坏',
+              meaningEn: 'to lose; to damage; loss',
+              example: '损失',
+              examplePinyin: 'sǔn shī',
+              exampleMeaning: 'loss; damage',
+              examples: ["损失","破损","损坏"]
+            },
+            {
+              char: '赚',
+              pinyin: 'zhuàn',
+              meaning: '赚钱；赚到；赚取',
+              meaningEn: 'to earn; to make a profit',
+              example: '赚钱',
+              examplePinyin: 'zhuàn qián',
+              exampleMeaning: 'to make money; to earn money',
+              examples: ["赚钱","赚到","赚取"]
+            },
+            {
+              char: '赔',
+              pinyin: 'péi',
+              meaning: '赔钱；赔偿；亏赔',
+              meaningEn: 'to lose money; to compensate; at a loss',
+              example: '赔钱',
+              examplePinyin: 'péi qián',
+              exampleMeaning: 'to lose money; to take a loss',
+              examples: ["赔钱","赔偿","亏赔"]
+            },
+            {
+              char: '购',
+              pinyin: 'gòu',
+              meaning: '购买；购物；购入',
+              meaningEn: 'to purchase; to buy',
+              example: '购买',
+              examplePinyin: 'gòu mǎi',
+              exampleMeaning: 'to purchase; to buy',
+              examples: ["购买","购物","购入"]
+            },
+            {
+              char: '贫',
+              pinyin: 'pín',
+              meaning: '贫穷；贫困；贫乏',
+              meaningEn: 'poor; impoverished; lacking',
+              example: '贫穷',
+              examplePinyin: 'pín qióng',
+              exampleMeaning: 'poor; poverty-stricken',
+              examples: ["贫穷","贫困","贫乏"]
+            },
           ]
         },
         {
@@ -1721,13 +2392,234 @@ const chineseVocabData = {
               exampleMeaning: 'stir-fried vegetables; cooked dish',
               examples: ["炒菜","炒饭","炒蛋"]
             },
+            {
+              char: '菠',
+              pinyin: 'bō',
+              meaning: '菠菜；菠萝；菠菜汁',
+              meaningEn: 'spinach (in 菠菜); pineapple (in 菠萝)',
+              example: '菠菜',
+              examplePinyin: 'bō cài',
+              exampleMeaning: 'spinach',
+              examples: ["菠菜","菠萝","菠菜汁"]
+            },
+            {
+              char: '煎',
+              pinyin: 'jiān',
+              meaning: '煎蛋；煎饼；香煎',
+              meaningEn: 'to pan-fry; to fry in shallow oil',
+              example: '煎蛋',
+              examplePinyin: 'jiān dàn',
+              exampleMeaning: 'fried egg',
+              examples: ["煎蛋","煎饼","香煎"]
+            },
+            {
+              char: '腐',
+              pinyin: 'fǔ',
+              meaning: '豆腐；腐烂；腐败',
+              meaningEn: 'tofu; rotten; corrupt',
+              example: '豆腐',
+              examplePinyin: 'dòu fu',
+              exampleMeaning: 'tofu; bean curd',
+              examples: ["豆腐","腐烂","腐败"]
+            },
+            {
+              char: '煮',
+              pinyin: 'zhǔ',
+              meaning: '煮饭；煮熟；水煮',
+              meaningEn: 'to boil; to cook',
+              example: '煮饭',
+              examplePinyin: 'zhǔ fàn',
+              exampleMeaning: 'to cook rice; to cook a meal',
+              examples: ["煮饭","水煮","煮熟"]
+            },
+            {
+              char: '爆',
+              pinyin: 'bào',
+              meaning: '爆炒；爆米花；爆发',
+              meaningEn: 'to explode; to quick-fry; to burst',
+              example: '爆炒',
+              examplePinyin: 'bào chǎo',
+              exampleMeaning: 'to stir-fry over high heat',
+              examples: ["爆炒","爆米花","爆发"]
+            },
+            {
+              char: '炖',
+              pinyin: 'dùn',
+              meaning: '炖肉；慢炖；炖汤',
+              meaningEn: 'to stew; to braise',
+              example: '炖肉',
+              examplePinyin: 'dùn ròu',
+              exampleMeaning: 'stewed meat; braised meat',
+              examples: ["炖肉","慢炖","炖汤"]
+            },
+            {
+              char: '蘑',
+              pinyin: 'mó',
+              meaning: '蘑菇；香蘑；蘑菇汤',
+              meaningEn: 'mushroom (first character of 蘑菇)',
+              example: '蘑菇',
+              examplePinyin: 'mó gu',
+              exampleMeaning: 'mushroom',
+              examples: ["蘑菇","香蘑","蘑菇汤"]
+            },
+            {
+              char: '菇',
+              pinyin: 'gū',
+              meaning: '蘑菇；香菇；金针菇',
+              meaningEn: 'mushroom (second character of 蘑菇)',
+              example: '香菇',
+              examplePinyin: 'xiāng gū',
+              exampleMeaning: 'shiitake mushroom',
+              examples: ["香菇","蘑菇","金针菇"]
+            },
+            {
+              char: '蒸',
+              pinyin: 'zhēng',
+              meaning: '蒸饺；蒸熟；蒸汽',
+              meaningEn: 'to steam',
+              example: '蒸饺',
+              examplePinyin: 'zhēng jiǎo',
+              exampleMeaning: 'steamed dumplings',
+              examples: ["蒸饺","蒸熟","蒸汽"]
+            },
+            {
+              char: '饺',
+              pinyin: 'jiǎo',
+              meaning: '饺子；蒸饺；水饺',
+              meaningEn: 'dumpling',
+              example: '饺子',
+              examplePinyin: 'jiǎo zi',
+              exampleMeaning: 'dumpling',
+              examples: ["饺子","水饺","蒸饺"]
+            },
+            {
+              char: '炸',
+              pinyin: 'zhá',
+              meaning: '油炸；炸鸡；炸酱',
+              meaningEn: 'to deep-fry',
+              example: '油炸',
+              examplePinyin: 'yóu zhá',
+              exampleMeaning: 'deep-fried',
+              examples: ["油炸","炸鸡","炸酱"]
+            },
+            {
+              char: '酱',
+              pinyin: 'jiàng',
+              meaning: '炸酱；酱油；豆瓣酱',
+              meaningEn: 'sauce; paste; soy sauce',
+              example: '酱油',
+              examplePinyin: 'jiàng yóu',
+              exampleMeaning: 'soy sauce',
+              examples: ["酱油","炸酱","豆瓣酱"]
+            },
+            {
+              char: '粥',
+              pinyin: 'zhōu',
+              meaning: '稀饭；八宝粥；白粥',
+              meaningEn: 'porridge; congee',
+              example: '白粥',
+              examplePinyin: 'bái zhōu',
+              exampleMeaning: 'plain congee; plain rice porridge',
+              examples: ["白粥","八宝粥","稀粥"]
+            },
           ]
         },
         {
           number: 0,
           unit: 3,
           title: '语文园地三',
-          words: []
+          words: [
+            {
+              char: '津',
+              pinyin: 'jīn',
+              meaning: '津津有味；天津；津贴',
+              meaningEn: 'with relish; (place name Tianjin); subsidy',
+              example: '津津有味',
+              examplePinyin: 'jīn jīn yǒu wèi',
+              exampleMeaning: 'with great relish; with keen interest',
+              examples: ["津津有味","天津","津贴"]
+            },
+            {
+              char: '溜',
+              pinyin: 'liū',
+              meaning: '香喷喷；溜走；溜冰',
+              meaningEn: 'smooth; to sneak away; to skate',
+              example: '溜走',
+              examplePinyin: 'liū zǒu',
+              exampleMeaning: 'to slip away; to sneak off',
+              examples: ["溜走","溜冰","滑溜"]
+            },
+            {
+              char: '辣',
+              pinyin: 'là',
+              meaning: '辣椒；麻辣；香辣',
+              meaningEn: 'spicy; hot; pungent',
+              example: '辣椒',
+              examplePinyin: 'là jiāo',
+              exampleMeaning: 'chili pepper',
+              examples: ["辣椒","麻辣","香辣"]
+            },
+            {
+              char: '乎',
+              pinyin: 'hū',
+              meaning: '香喷喷乎乎；乎其；似乎',
+              meaningEn: 'particle indicating state; seemingly',
+              example: '似乎',
+              examplePinyin: 'sì hū',
+              exampleMeaning: 'seemingly; as if; it seems',
+              examples: ["似乎","热乎乎","香喷喷"]
+            },
+            {
+              char: '喷',
+              pinyin: 'pèn',
+              meaning: '香喷喷；喷香；喷出',
+              meaningEn: 'fragrant; to spray; to spurt',
+              example: '香喷喷',
+              examplePinyin: 'xiāng pèn pèn',
+              exampleMeaning: 'deliciously fragrant; appetizingly aromatic',
+              examples: ["香喷喷","喷香","喷出"]
+            },
+            {
+              char: '腻',
+              pinyin: 'nì',
+              meaning: '油腻；腻味；细腻',
+              meaningEn: 'greasy; oily; tired of; smooth',
+              example: '油腻',
+              examplePinyin: 'yóu nì',
+              exampleMeaning: 'greasy; oily',
+              examples: ["油腻","细腻","腻味"]
+            },
+            {
+              char: '绵',
+              pinyin: 'mián',
+              meaning: '软绵绵；绵延；丝绵',
+              meaningEn: 'soft; continuous; silk floss',
+              example: '软绵绵',
+              examplePinyin: 'ruǎn mián mián',
+              exampleMeaning: 'soft and fluffy; cottony soft',
+              examples: ["软绵绵","绵延","丝绵"]
+            },
+            {
+              char: '脆',
+              pinyin: 'cuì',
+              meaning: '香脆；脆嫩；清脆',
+              meaningEn: 'crispy; crunchy; brittle',
+              example: '香脆',
+              examplePinyin: 'xiāng cuì',
+              exampleMeaning: 'crispy and delicious',
+              examples: ["香脆","脆嫩","清脆"]
+            },
+            {
+              char: '邦',
+              pinyin: 'bāng',
+              meaning: '邦国；友邦；联邦',
+              meaningEn: 'country; nation; state',
+              example: '联邦',
+              examplePinyin: 'lián bāng',
+              exampleMeaning: 'federation; federal',
+              examples: ["联邦","友邦","邦国"]
+            },
+          ]
         },
         // ── Unit 4 ────────────────────────────────────────────────
         {
@@ -1825,6 +2717,76 @@ const chineseVocabData = {
               exampleMeaning: 'elf; sprite; clever creature',
               examples: ["精彩","精神","精心"]
             },
+            {
+              char: '盒',
+              pinyin: 'hé',
+              meaning: '盒子；礼盒；铅笔盒',
+              meaningEn: 'box; case; container',
+              example: '盒子',
+              examplePinyin: 'hé zi',
+              exampleMeaning: 'box; case',
+              examples: ["盒子","礼盒","铅笔盒"]
+            },
+            {
+              char: '聊',
+              pinyin: 'liáo',
+              meaning: '聊天；闲聊；聊一聊',
+              meaningEn: 'to chat; to talk casually',
+              example: '聊天',
+              examplePinyin: 'liáo tiān',
+              exampleMeaning: 'to chat; to have a conversation',
+              examples: ["聊天","闲聊","聊一聊"]
+            },
+            {
+              char: '坪',
+              pinyin: 'píng',
+              meaning: '草坪；坪地；停机坪',
+              meaningEn: 'flat ground; lawn; tarmac',
+              example: '草坪',
+              examplePinyin: 'cǎo píng',
+              exampleMeaning: 'lawn; grass field',
+              examples: ["草坪","停机坪","坪地"]
+            },
+            {
+              char: '郁',
+              pinyin: 'yù',
+              meaning: '郁金香；郁郁葱葱；郁闷',
+              meaningEn: 'fragrant; lush; (in 郁金香: tulip)',
+              example: '郁金香',
+              examplePinyin: 'yù jīn xiāng',
+              exampleMeaning: 'tulip',
+              examples: ["郁金香","郁郁葱葱","郁闷"]
+            },
+            {
+              char: '囱',
+              pinyin: 'cōng',
+              meaning: '烟囱；烟囱口；大烟囱',
+              meaningEn: 'chimney; flue',
+              example: '烟囱',
+              examplePinyin: 'yān cōng',
+              exampleMeaning: 'chimney; smokestack',
+              examples: ["烟囱","烟囱口","大烟囱"]
+            },
+            {
+              char: '叮',
+              pinyin: 'dīng',
+              meaning: '叮咛；叮嘱；叮叮当当',
+              meaningEn: 'to urge; to remind; tinkling sound',
+              example: '叮嘱',
+              examplePinyin: 'dīng zhǔ',
+              exampleMeaning: 'to urge; to warn; to remind',
+              examples: ["叮嘱","叮咛","叮叮当当"]
+            },
+            {
+              char: '咛',
+              pinyin: 'níng',
+              meaning: '叮咛；千叮咛；再三叮咛',
+              meaningEn: '(in 叮咛: to urge repeatedly)',
+              example: '叮咛',
+              examplePinyin: 'dīng níng',
+              exampleMeaning: 'to urge; to exhort; to remind repeatedly',
+              examples: ["叮咛","千叮咛","再三叮咛"]
+            },
           ]
         },
         {
@@ -1911,6 +2873,86 @@ const chineseVocabData = {
               examplePinyin: 'mǔ qīn',
               exampleMeaning: 'mother',
               examples: ["母亲","父母","祖母"]
+            },
+            {
+              char: '渡',
+              pinyin: 'dù',
+              meaning: '渡口；渡船；渡过',
+              meaningEn: 'ferry crossing; to cross (water)',
+              example: '渡口',
+              examplePinyin: 'dù kǒu',
+              exampleMeaning: 'ferry crossing; ford',
+              examples: ["渡口","渡船","渡过"]
+            },
+            {
+              char: '荫',
+              pinyin: 'yìn',
+              meaning: '树荫；绿荫；荫凉',
+              meaningEn: 'shade; shelter of a tree',
+              example: '树荫',
+              examplePinyin: 'shù yìn',
+              exampleMeaning: 'shade of a tree',
+              examples: ["树荫","绿荫","荫凉"]
+            },
+            {
+              char: '蔽',
+              pinyin: 'bì',
+              meaning: '遮蔽；隐蔽；蔽日',
+              meaningEn: 'to cover; to hide; to block',
+              example: '遮蔽',
+              examplePinyin: 'zhē bì',
+              exampleMeaning: 'to block; to shield; to cover',
+              examples: ["遮蔽","隐蔽","蔽日"]
+            },
+            {
+              char: '撑',
+              pinyin: 'chēng',
+              meaning: '撑开；支撑；撑伞',
+              meaningEn: 'to prop open; to support; to pole',
+              example: '支撑',
+              examplePinyin: 'zhī chēng',
+              exampleMeaning: 'to support; to prop up; to sustain',
+              examples: ["支撑","撑开","撑伞"]
+            },
+            {
+              char: '拼',
+              pinyin: 'pīn',
+              meaning: '拼音；拼命；拼写',
+              meaningEn: 'to spell; to piece together; to risk',
+              example: '拼音',
+              examplePinyin: 'pīn yīn',
+              exampleMeaning: 'pinyin; phonetic spelling',
+              examples: ["拼音","拼命","拼写"]
+            },
+            {
+              char: '冈',
+              pinyin: 'gāng',
+              meaning: '山冈；冈峦；土冈',
+              meaningEn: 'ridge; hill; low mountain',
+              example: '山冈',
+              examplePinyin: 'shān gāng',
+              exampleMeaning: 'low hill; ridge',
+              examples: ["山冈","冈峦","土冈"]
+            },
+            {
+              char: '懂',
+              pinyin: 'dǒng',
+              meaning: '懂得；懂事；看懂',
+              meaningEn: 'to understand; to know',
+              example: '懂得',
+              examplePinyin: 'dǒng de',
+              exampleMeaning: 'to understand; to know',
+              examples: ["懂得","懂事","看懂"]
+            },
+            {
+              char: '案',
+              pinyin: 'àn',
+              meaning: '答案；方案；案例',
+              meaningEn: 'answer; plan; case; desk',
+              example: '答案',
+              examplePinyin: 'dá àn',
+              exampleMeaning: 'answer; correct answer',
+              examples: ["答案","方案","案例"]
             },
           ]
         },
@@ -2009,6 +3051,106 @@ const chineseVocabData = {
               exampleMeaning: 'to die; to pass away',
               examples: ["死亡","生死"]
             },
+            {
+              char: '堡',
+              pinyin: 'bǎo',
+              meaning: '城堡；堡垒；碉堡',
+              meaningEn: 'castle; fort; fortress',
+              example: '城堡',
+              examplePinyin: 'chéng bǎo',
+              exampleMeaning: 'castle',
+              examples: ["城堡","堡垒","碉堡"]
+            },
+            {
+              char: '插',
+              pinyin: 'chā',
+              meaning: '插入；插画；插话',
+              meaningEn: 'to insert; to plug in; to interrupt',
+              example: '插入',
+              examplePinyin: 'chā rù',
+              exampleMeaning: 'to insert; to put in',
+              examples: ["插入","插画","插话"]
+            },
+            {
+              char: '凶',
+              pinyin: 'xiōng',
+              meaning: '凶猛；凶狠；凶悍',
+              meaningEn: 'fierce; ferocious; ominous',
+              example: '凶猛',
+              examplePinyin: 'xiōng měng',
+              exampleMeaning: 'fierce; ferocious; violent',
+              examples: ["凶猛","凶狠","凶悍"]
+            },
+            {
+              char: '狠',
+              pinyin: 'hěn',
+              meaning: '狠心；凶狠；下狠心',
+              meaningEn: 'ruthless; cruel; fierce',
+              example: '狠心',
+              examplePinyin: 'hěn xīn',
+              exampleMeaning: 'heartless; ruthless; hardhearted',
+              examples: ["狠心","凶狠","下狠心"]
+            },
+            {
+              char: '攻',
+              pinyin: 'gōng',
+              meaning: '进攻；攻击；攻克',
+              meaningEn: 'to attack; to assault; to overcome',
+              example: '进攻',
+              examplePinyin: 'jìn gōng',
+              exampleMeaning: 'to attack; to advance on',
+              examples: ["进攻","攻击","攻克"]
+            },
+            {
+              char: '商',
+              pinyin: 'shāng',
+              meaning: '商量；商议；商店',
+              meaningEn: 'to discuss; commerce; merchant',
+              example: '商量',
+              examplePinyin: 'shāng liáng',
+              exampleMeaning: 'to discuss; to consult',
+              examples: ["商量","商议","商店"]
+            },
+            {
+              char: '量',
+              pinyin: 'liáng',
+              meaning: '商量；测量；量力',
+              meaningEn: 'to measure; to estimate; capacity',
+              example: '商量',
+              examplePinyin: 'shāng liáng',
+              exampleMeaning: 'to discuss; to consult with',
+              examples: ["商量","测量","量力"]
+            },
+            {
+              char: '驾',
+              pinyin: 'jià',
+              meaning: '驾驶；驾车；驾到',
+              meaningEn: 'to drive; to pilot; to harness',
+              example: '驾驶',
+              examplePinyin: 'jià shǐ',
+              exampleMeaning: 'to drive; to pilot',
+              examples: ["驾驶","驾车","驾到"]
+            },
+            {
+              char: '轰',
+              pinyin: 'hōng',
+              meaning: '轰炸；轰鸣；轰动',
+              meaningEn: 'to bomb; loud roar; to make a sensation',
+              example: '轰炸',
+              examplePinyin: 'hōng zhà',
+              exampleMeaning: 'to bomb; to bombard',
+              examples: ["轰炸","轰鸣","轰动"]
+            },
+            {
+              char: '驳',
+              pinyin: 'bó',
+              meaning: '反驳；驳斥；批驳',
+              meaningEn: 'to refute; to retort; to rebut',
+              example: '反驳',
+              examplePinyin: 'fǎn bó',
+              exampleMeaning: 'to refute; to argue against',
+              examples: ["反驳","驳斥","批驳"]
+            },
           ]
         },
         {
@@ -2096,13 +3238,244 @@ const chineseVocabData = {
               exampleMeaning: 'to exert force; to try hard',
               examples: ["劲头","干劲","用劲"]
             },
+            {
+              char: '昏',
+              pinyin: 'hūn',
+              meaning: '昏迷；昏暗；昏沉',
+              meaningEn: 'dark; dizzy; unconscious',
+              example: '昏迷',
+              examplePinyin: 'hūn mí',
+              exampleMeaning: 'unconscious; in a coma',
+              examples: ["昏迷","昏暗","昏沉"]
+            },
+            {
+              char: '泡',
+              pinyin: 'pào',
+              meaning: '泡泡；泡沫；泡水',
+              meaningEn: 'bubble; foam; to soak',
+              example: '泡泡',
+              examplePinyin: 'pào pao',
+              exampleMeaning: 'bubble',
+              examples: ["泡泡","泡沫","泡水"]
+            },
+            {
+              char: '茸',
+              pinyin: 'róng',
+              meaning: '毛茸茸；鹿茸；茸毛',
+              meaningEn: 'fluffy; downy; velvet antler',
+              example: '毛茸茸',
+              examplePinyin: 'máo róng róng',
+              exampleMeaning: 'fluffy; fuzzy; shaggy',
+              examples: ["毛茸茸","鹿茸","茸毛"]
+            },
+            {
+              char: '醒',
+              pinyin: 'xǐng',
+              meaning: '醒来；清醒；唤醒',
+              meaningEn: 'to wake up; to sober up; awake',
+              example: '醒来',
+              examplePinyin: 'xǐng lái',
+              exampleMeaning: 'to wake up; to come to',
+              examples: ["醒来","清醒","唤醒"]
+            },
+            {
+              char: '晃',
+              pinyin: 'huàng',
+              meaning: '摇晃；晃动；晃荡',
+              meaningEn: 'to sway; to shake; to rock',
+              example: '摇晃',
+              examplePinyin: 'yáo huàng',
+              exampleMeaning: 'to rock; to sway; to shake',
+              examples: ["摇晃","晃动","晃荡"]
+            },
+            {
+              char: '免',
+              pinyin: 'miǎn',
+              meaning: '免费；免除；避免',
+              meaningEn: 'free of charge; to exempt; to avoid',
+              example: '免费',
+              examplePinyin: 'miǎn fèi',
+              exampleMeaning: 'free of charge; no cost',
+              examples: ["免费","免除","避免"]
+            },
+            {
+              char: '费',
+              pinyin: 'fèi',
+              meaning: '费用；花费；免费',
+              meaningEn: 'expense; fee; to cost; to spend',
+              example: '费用',
+              examplePinyin: 'fèi yòng',
+              exampleMeaning: 'expense; cost; fee',
+              examples: ["费用","花费","免费"]
+            },
+            {
+              char: '列',
+              pinyin: 'liè',
+              meaning: '排列；列举；行列',
+              meaningEn: 'to arrange; row; column; to list',
+              example: '排列',
+              examplePinyin: 'pái liè',
+              exampleMeaning: 'to arrange; to line up',
+              examples: ["排列","列举","行列"]
+            },
+            {
+              char: '撞',
+              pinyin: 'zhuàng',
+              meaning: '碰撞；撞击；撞上',
+              meaningEn: 'to bump into; to collide; to crash',
+              example: '碰撞',
+              examplePinyin: 'pèng zhuàng',
+              exampleMeaning: 'to bump; to collide',
+              examples: ["碰撞","撞击","撞上"]
+            },
+            {
+              char: '贪',
+              pinyin: 'tān',
+              meaning: '贪心；贪玩；贪婪',
+              meaningEn: 'greedy; to covet; avaricious',
+              example: '贪心',
+              examplePinyin: 'tān xīn',
+              exampleMeaning: 'greedy; covetous',
+              examples: ["贪心","贪玩","贪婪"]
+            },
+            {
+              char: '脾',
+              pinyin: 'pí',
+              meaning: '脾气；好脾气；脾脏',
+              meaningEn: 'temper; spleen',
+              example: '脾气',
+              examplePinyin: 'pí qi',
+              exampleMeaning: 'temper; temperament',
+              examples: ["脾气","好脾气","脾脏"]
+            },
+            {
+              char: '婶',
+              pinyin: 'shěn',
+              meaning: '婶婶；婶子；大婶',
+              meaningEn: "aunt (father's younger brother's wife)",
+              example: '婶婶',
+              examplePinyin: 'shěn shen',
+              exampleMeaning: 'aunt',
+              examples: ["婶婶","婶子","大婶"]
+            },
           ]
         },
         {
           number: 0,
           unit: 4,
           title: '语文园地四',
-          words: []
+          words: [
+            {
+              char: '陀',
+              pinyin: 'tuó',
+              meaning: '陀螺；陀螺仪；转陀螺',
+              meaningEn: 'spinning top (toy)',
+              example: '陀螺',
+              examplePinyin: 'tuó luó',
+              exampleMeaning: 'spinning top (toy)',
+              examples: ["陀螺","陀螺仪","转陀螺"]
+            },
+            {
+              char: '螺',
+              pinyin: 'luó',
+              meaning: '陀螺；螺旋；螺蛳',
+              meaningEn: 'spiral; snail; (in 陀螺: spinning top)',
+              example: '陀螺',
+              examplePinyin: 'tuó luó',
+              exampleMeaning: 'spinning top (toy)',
+              examples: ["陀螺","螺旋","螺蛳"]
+            },
+            {
+              char: '毽',
+              pinyin: 'jiàn',
+              meaning: '毽子；踢毽；毽球',
+              meaningEn: 'shuttlecock (for kicking)',
+              example: '毽子',
+              examplePinyin: 'jiàn zi',
+              exampleMeaning: 'shuttlecock; hacky sack',
+              examples: ["毽子","踢毽","毽球"]
+            },
+            {
+              char: '倒',
+              pinyin: 'dǎo',
+              meaning: '倒翁；摔倒；倒立',
+              meaningEn: 'to fall; (in 倒翁: tumbler toy)',
+              example: '倒翁',
+              examplePinyin: 'dǎo wēng',
+              exampleMeaning: 'tumbler toy; roly-poly',
+              examples: ["倒翁","摔倒","倒立"]
+            },
+            {
+              char: '翁',
+              pinyin: 'wēng',
+              meaning: '倒翁；老翁；翁婿',
+              meaningEn: 'old man; (in 倒翁: tumbler toy)',
+              example: '倒翁',
+              examplePinyin: 'dǎo wēng',
+              exampleMeaning: 'tumbler toy; roly-poly',
+              examples: ["倒翁","老翁","翁婿"]
+            },
+            {
+              char: '枪',
+              pinyin: 'qiāng',
+              meaning: '水枪；玩具枪；枪支',
+              meaningEn: 'gun; rifle; water gun',
+              example: '水枪',
+              examplePinyin: 'shuǐ qiāng',
+              exampleMeaning: 'water gun; water pistol',
+              examples: ["水枪","玩具枪","枪支"]
+            },
+            {
+              char: '橡',
+              pinyin: 'xiàng',
+              meaning: '橡皮；橡皮筋；橡树',
+              meaningEn: 'rubber; oak tree; eraser',
+              example: '橡皮',
+              examplePinyin: 'xiàng pí',
+              exampleMeaning: 'rubber eraser',
+              examples: ["橡皮","橡皮筋","橡树"]
+            },
+            {
+              char: '板',
+              pinyin: 'bǎn',
+              meaning: '滑板；黑板；平板',
+              meaningEn: 'board; plank; slab',
+              example: '滑板',
+              examplePinyin: 'huá bǎn',
+              exampleMeaning: 'skateboard; snowboard',
+              examples: ["滑板","黑板","平板"]
+            },
+            {
+              char: '控',
+              pinyin: 'kòng',
+              meaning: '遥控；控制；掌控',
+              meaningEn: 'to control; remote control',
+              example: '遥控',
+              examplePinyin: 'yáo kòng',
+              exampleMeaning: 'remote control',
+              examples: ["遥控","控制","掌控"]
+            },
+            {
+              char: '坦',
+              pinyin: 'tǎn',
+              meaning: '坦克；坦白；坦然',
+              meaningEn: 'flat; frank; (in 坦克: tank)',
+              example: '坦克',
+              examplePinyin: 'tǎn kè',
+              exampleMeaning: 'tank (military vehicle)',
+              examples: ["坦克","坦白","坦然"]
+            },
+            {
+              char: '克',
+              pinyin: 'kè',
+              meaning: '坦克；克服；攻克',
+              meaningEn: 'to overcome; gram; (in 坦克: tank)',
+              example: '坦克',
+              examplePinyin: 'tǎn kè',
+              exampleMeaning: 'tank (military vehicle)',
+              examples: ["坦克","克服","攻克"]
+            },
+          ]
         },
         // unit 5
         {
@@ -2189,6 +3562,106 @@ const chineseVocabData = {
               examplePinyin: 'pí láo',
               exampleMeaning: 'fatigue; tired',
               examples: ["疲劳","疲惫","疲倦"]
+            },
+            {
+              char: '寓',
+              pinyin: 'yù',
+              meaning: '寓言；寓意；公寓',
+              meaningEn: 'fable; to imply; apartment',
+              example: '寓言',
+              examplePinyin: 'yù yán',
+              exampleMeaning: 'fable; parable',
+              examples: ["寓言","寓意","公寓"]
+            },
+            {
+              char: '则',
+              pinyin: 'zé',
+              meaning: '原则；规则；法则',
+              meaningEn: 'rule; principle; standard',
+              example: '原则',
+              examplePinyin: 'yuán zé',
+              exampleMeaning: 'principle; rule; standard',
+              examples: ["原则","规则","法则"]
+            },
+            {
+              char: '圈',
+              pinyin: 'juān',
+              meaning: '羊圈；圈养；圈子',
+              meaningEn: 'enclosure; pen; circle',
+              example: '羊圈',
+              examplePinyin: 'yáng juān',
+              exampleMeaning: 'sheep pen; sheepfold',
+              examples: ["羊圈","圈养","圈子"]
+            },
+            {
+              char: '叼',
+              pinyin: 'diāo',
+              meaning: '叼着；叼走；叼住',
+              meaningEn: 'to hold in the mouth',
+              example: '叼着',
+              examplePinyin: 'diāo zhe',
+              exampleMeaning: 'holding in the mouth',
+              examples: ["叼着","叼走","叼住"]
+            },
+            {
+              char: '坊',
+              pinyin: 'fāng',
+              meaning: '作坊；坊间；豆腐坊',
+              meaningEn: 'workshop; lane; neighborhood',
+              example: '作坊',
+              examplePinyin: 'zuō fāng',
+              exampleMeaning: 'small workshop; artisan shop',
+              examples: ["作坊","坊间","豆腐坊"]
+            },
+            {
+              char: '悔',
+              pinyin: 'huǐ',
+              meaning: '后悔；悔恨；悔改',
+              meaningEn: 'to regret; to repent',
+              example: '后悔',
+              examplePinyin: 'hòu huǐ',
+              exampleMeaning: 'to regret; to feel regret',
+              examples: ["后悔","悔恨","悔改"]
+            },
+            {
+              char: '此',
+              pinyin: 'cǐ',
+              meaning: '此时；因此；此处',
+              meaningEn: 'this; here; now',
+              example: '因此',
+              examplePinyin: 'yīn cǐ',
+              exampleMeaning: 'therefore; for this reason',
+              examples: ["因此","此时","此处"]
+            },
+            {
+              char: '焦',
+              pinyin: 'jiāo',
+              meaning: '焦急；焦虑；焦点',
+              meaningEn: 'anxious; scorched; focus',
+              example: '焦急',
+              examplePinyin: 'jiāo jí',
+              exampleMeaning: 'anxious; worried; impatient',
+              examples: ["焦急","焦虑","焦点"]
+            },
+            {
+              char: '喘',
+              pinyin: 'chuǎn',
+              meaning: '喘气；喘息；气喘',
+              meaningEn: 'to pant; to gasp; to breathe heavily',
+              example: '喘气',
+              examplePinyin: 'chuǎn qì',
+              exampleMeaning: 'to pant; to gasp for breath',
+              examples: ["喘气","喘息","气喘"]
+            },
+            {
+              char: '截',
+              pinyin: 'jié',
+              meaning: '截断；截止；截取',
+              meaningEn: 'to cut off; to intercept; deadline',
+              example: '截断',
+              examplePinyin: 'jié duàn',
+              exampleMeaning: 'to cut off; to sever',
+              examples: ["截断","截止","截取"]
             },
           ]
         },
@@ -2296,6 +3769,106 @@ const chineseVocabData = {
               examplePinyin: 'xī xī',
               exampleMeaning: 'hee hee (giggling)',
               examples: ["嘻嘻","嘻嘻哈哈"]
+            },
+            {
+              char: '靠',
+              pinyin: 'kào',
+              meaning: '靠近；依靠；靠边',
+              meaningEn: 'to lean on; to approach; to rely on',
+              example: '靠近',
+              examplePinyin: 'kào jìn',
+              exampleMeaning: 'to approach; to get close to',
+              examples: ["靠近","依靠","靠边"]
+            },
+            {
+              char: '而',
+              pinyin: 'ér',
+              meaning: '而且；然而；因而',
+              meaningEn: 'and; but; yet; while',
+              example: '而且',
+              examplePinyin: 'ér qiě',
+              exampleMeaning: 'moreover; furthermore; and',
+              examples: ["而且","然而","因而"]
+            },
+            {
+              char: '班',
+              pinyin: 'bān',
+              meaning: '班级；班长；全班',
+              meaningEn: 'class; team; squad',
+              example: '班级',
+              examplePinyin: 'bān jí',
+              exampleMeaning: 'class (in school); grade',
+              examples: ["班级","班长","全班"]
+            },
+            {
+              char: '倒',
+              pinyin: 'dào',
+              meaning: '倒过来；倒映；倒序',
+              meaningEn: 'upside-down; reversed; inverted',
+              example: '倒过来',
+              examplePinyin: 'dào guò lái',
+              exampleMeaning: 'turned over; reversed; upside-down',
+              examples: ["倒过来","倒映","倒立"]
+            },
+            {
+              char: '审',
+              pinyin: 'shěn',
+              meaning: '审视；审查；审批',
+              meaningEn: 'to examine; to review; to audit',
+              example: '审视',
+              examplePinyin: 'shěn shì',
+              exampleMeaning: 'to look at carefully; to scrutinize',
+              examples: ["审视","审查","审批"]
+            },
+            {
+              char: '视',
+              pinyin: 'shì',
+              meaning: '视力；注视；审视',
+              meaningEn: 'vision; to look; to regard',
+              example: '注视',
+              examplePinyin: 'zhù shì',
+              exampleMeaning: 'to gaze at; to watch attentively',
+              examples: ["注视","视力","审视"]
+            },
+            {
+              char: '肃',
+              pinyin: 'sù',
+              meaning: '严肃；肃静；肃立',
+              meaningEn: 'solemn; strict; stern',
+              example: '严肃',
+              examplePinyin: 'yán sù',
+              exampleMeaning: 'serious; solemn; stern',
+              examples: ["严肃","肃静","肃立"]
+            },
+            {
+              char: '晌',
+              pinyin: 'shǎng',
+              meaning: '晌午；晌饭；大晌午',
+              meaningEn: 'noon; midday',
+              example: '晌午',
+              examplePinyin: 'shǎng wǔ',
+              exampleMeaning: 'noon; midday',
+              examples: ["晌午","晌饭","大晌午"]
+            },
+            {
+              char: '悦',
+              pinyin: 'yuè',
+              meaning: '愉悦；悦耳；喜悦',
+              meaningEn: 'happy; pleasant; pleasing',
+              example: '愉悦',
+              examplePinyin: 'yú yuè',
+              exampleMeaning: 'joyful; happy; delighted',
+              examples: ["愉悦","悦耳","喜悦"]
+            },
+            {
+              char: '诲',
+              pinyin: 'huì',
+              meaning: '教诲；诲人不倦；谆谆教诲',
+              meaningEn: 'to teach; to instruct; to guide',
+              example: '教诲',
+              examplePinyin: 'jiào huì',
+              exampleMeaning: 'teaching; instruction; guidance',
+              examples: ["教诲","诲人不倦","谆谆教诲"]
             },
           ]
         },
@@ -2494,13 +4067,114 @@ const chineseVocabData = {
               exampleMeaning: 'to fall down; to drop',
               examples: ["掉下","掉落","丢掉"]
             },
+            {
+              char: '驮',
+              pinyin: 'tuó',
+              meaning: '驮着；驮运；背驮',
+              meaningEn: 'to carry on the back',
+              example: '驮着',
+              examplePinyin: 'tuó zhe',
+              exampleMeaning: 'carrying on the back',
+              examples: ["驮着","驮运","背驮"]
+            },
           ]
         },
         {
           number: 0,
           unit: 5,
           title: '语文园地五',
-          words: []
+          words: [
+            {
+              char: '厨',
+              pinyin: 'chú',
+              meaning: '厨房；厨师；厨具',
+              meaningEn: 'kitchen; cook; chef',
+              example: '厨房',
+              examplePinyin: 'chú fáng',
+              exampleMeaning: 'kitchen',
+              examples: ["厨房","厨师","厨具"]
+            },
+            {
+              char: '厕',
+              pinyin: 'cè',
+              meaning: '厕所；公厕；上厕所',
+              meaningEn: 'toilet; restroom; bathroom',
+              example: '厕所',
+              examplePinyin: 'cè suǒ',
+              exampleMeaning: 'toilet; restroom; bathroom',
+              examples: ["厕所","公厕","上厕所"]
+            },
+            {
+              char: '厢',
+              pinyin: 'xiāng',
+              meaning: '车厢；包厢；厢房',
+              meaningEn: 'car (of a train); compartment; wing room',
+              example: '车厢',
+              examplePinyin: 'chē xiāng',
+              exampleMeaning: 'train car; railway carriage',
+              examples: ["车厢","包厢","厢房"]
+            },
+            {
+              char: '厦',
+              pinyin: 'shà',
+              meaning: '大厦；高楼大厦；厦门',
+              meaningEn: 'tall building; mansion',
+              example: '大厦',
+              examplePinyin: 'dà shà',
+              exampleMeaning: 'large building; mansion; tower',
+              examples: ["大厦","高楼大厦","大厦里"]
+            },
+            {
+              char: '穴',
+              pinyin: 'xué',
+              meaning: '洞穴；穴位；穴道',
+              meaningEn: 'cave; den; acupuncture point',
+              example: '洞穴',
+              examplePinyin: 'dòng xué',
+              exampleMeaning: 'cave; cavern; lair',
+              examples: ["洞穴","穴位","穴道"]
+            },
+            {
+              char: '窟',
+              pinyin: 'kū',
+              meaning: '石窟；窟窩；洞窟',
+              meaningEn: 'cave; den; (in 窟窩: hole)',
+              example: '石窟',
+              examplePinyin: 'shí kū',
+              exampleMeaning: 'rock cave; grotto',
+              examples: ["石窟","窟窿","洞窟"]
+            },
+            {
+              char: '窿',
+              pinyin: 'lóng',
+              meaning: '窟窿；穿窟窿；破窟窿',
+              meaningEn: '(in 窟窿: hole; gap)',
+              example: '窟窿',
+              examplePinyin: 'kū long',
+              exampleMeaning: 'hole; gap; leak',
+              examples: ["窟窿","穿窟窿","破窟窿"]
+            },
+            {
+              char: '窑',
+              pinyin: 'yáo',
+              meaning: '窑洞；陶窑；砖窑',
+              meaningEn: 'kiln; cave dwelling',
+              example: '窑洞',
+              examplePinyin: 'yáo dòng',
+              exampleMeaning: 'cave dwelling; yaodong',
+              examples: ["窑洞","陶窑","砖窑"]
+            },
+            {
+              char: '窄',
+              pinyin: 'zhǎi',
+              meaning: '狭窄；窄小；宽窄',
+              meaningEn: 'narrow; tight; limited',
+              example: '狭窄',
+              examplePinyin: 'xiá zhǎi',
+              exampleMeaning: 'narrow; confined',
+              examples: ["狭窄","窄小","宽窄"]
+            },
+          ]
         },
         {
           number: 15,
@@ -3164,7 +4838,98 @@ const chineseVocabData = {
           number: 0,
           unit: 6,
           title: '语文园地六',
-          words: []
+          words: [
+            {
+              char: '博',
+              pinyin: 'bó',
+              meaning: '博物馆；博学；博览',
+              meaningEn: 'rich; abundant; broad; museum',
+              example: '博物馆',
+              examplePinyin: 'bó wù guǎn',
+              exampleMeaning: 'museum',
+              examples: ["博物馆","博学","博览"]
+            },
+            {
+              char: '馆',
+              pinyin: 'guǎn',
+              meaning: '博物馆；图书馆；餐馆',
+              meaningEn: 'hall; building; restaurant; museum',
+              example: '博物馆',
+              examplePinyin: 'bó wù guǎn',
+              exampleMeaning: 'museum',
+              examples: ["博物馆","图书馆","餐馆"]
+            },
+            {
+              char: '览',
+              pinyin: 'lǎn',
+              meaning: '展览；博览；游览',
+              meaningEn: 'to view; to look at; exhibition',
+              example: '展览',
+              examplePinyin: 'zhǎn lǎn',
+              exampleMeaning: 'exhibition; to exhibit',
+              examples: ["展览","博览","游览"]
+            },
+            {
+              char: '技',
+              pinyin: 'jì',
+              meaning: '科技；技术；技能',
+              meaningEn: 'skill; technique; technology',
+              example: '科技',
+              examplePinyin: 'kē jì',
+              exampleMeaning: 'science and technology',
+              examples: ["科技","技术","技能"]
+            },
+            {
+              char: '育',
+              pinyin: 'yù',
+              meaning: '体育馆；教育；育人',
+              meaningEn: 'to educate; to raise; sports',
+              example: '体育馆',
+              examplePinyin: 'tǐ yù guǎn',
+              exampleMeaning: 'gymnasium; sports hall',
+              examples: ["体育馆","教育","育人"]
+            },
+            {
+              char: '研',
+              pinyin: 'yán',
+              meaning: '研究；科研；研究所',
+              meaningEn: 'to research; to study; to grind',
+              example: '研究',
+              examplePinyin: 'yán jiū',
+              exampleMeaning: 'research; to study; to investigate',
+              examples: ["研究","科研","研究所"]
+            },
+            {
+              char: '究',
+              pinyin: 'jiū',
+              meaning: '研究；究竟；探究',
+              meaningEn: 'to study; to investigate; after all',
+              example: '究竟',
+              examplePinyin: 'jiū jìng',
+              exampleMeaning: 'after all; in the end; exactly',
+              examples: ["究竟","研究","探究"]
+            },
+            {
+              char: '哨',
+              pinyin: 'shào',
+              meaning: '哨所；口哨；站哨',
+              meaningEn: 'whistle; sentinel; sentry post',
+              example: '口哨',
+              examplePinyin: 'kǒu shào',
+              exampleMeaning: 'whistle (made with mouth)',
+              examples: ["口哨","哨所","站哨"]
+            },
+            {
+              char: '诊',
+              pinyin: 'zhěn',
+              meaning: '诊所；门诊；诊断',
+              meaningEn: 'to diagnose; diagnosis; clinic',
+              example: '诊所',
+              examplePinyin: 'zhěn suǒ',
+              exampleMeaning: 'clinic; doctor\'s office',
+              examples: ["诊所","门诊","诊断"]
+            },
+          ]
         },
         {
           number: 19,
@@ -4008,7 +5773,108 @@ const chineseVocabData = {
           number: 0,
           unit: 7,
           title: '语文园地七',
-          words: []
+          words: [
+            {
+              char: '扫',
+              pinyin: 'sǎo',
+              meaning: '打扫；扫地；扫除',
+              meaningEn: 'to sweep; to clean',
+              example: '打扫',
+              examplePinyin: 'dǎ sǎo',
+              exampleMeaning: 'to clean; to sweep',
+              examples: ["打扫","扫地","扫除"]
+            },
+            {
+              char: '帚',
+              pinyin: 'zhǒu',
+              meaning: '扫帚；竹帚；扫帚星',
+              meaningEn: 'broom',
+              example: '扫帚',
+              examplePinyin: 'sào zhou',
+              exampleMeaning: 'broom',
+              examples: ["扫帚","竹帚","扫帚星"]
+            },
+            {
+              char: '抹',
+              pinyin: 'mā',
+              meaning: '抹布；擦抹；涂抹',
+              meaningEn: 'to wipe; cleaning rag; to smear',
+              example: '抹布',
+              examplePinyin: 'mā bù',
+              exampleMeaning: 'cleaning rag; dishcloth',
+              examples: ["抹布","擦抹","涂抹"]
+            },
+            {
+              char: '拖',
+              pinyin: 'tuō',
+              meaning: '拖把；拖地；拖曳',
+              meaningEn: 'to drag; to mop; mop',
+              example: '拖把',
+              examplePinyin: 'tuō bǎ',
+              exampleMeaning: 'mop (for floor)',
+              examples: ["拖把","拖地","拖曳"]
+            },
+            {
+              char: '簸',
+              pinyin: 'bǒ',
+              meaning: '簸箕；颠簸；簸动',
+              meaningEn: 'dustpan; to winnow; to jolt',
+              example: '簸箕',
+              examplePinyin: 'bǒ jī',
+              exampleMeaning: 'dustpan',
+              examples: ["簸箕","颠簸","簸动"]
+            },
+            {
+              char: '箕',
+              pinyin: 'jī',
+              meaning: '簸箕；畚箕；垃圾箕',
+              meaningEn: 'dustpan; winnowing basket',
+              example: '簸箕',
+              examplePinyin: 'bǒ jī',
+              exampleMeaning: 'dustpan',
+              examples: ["簸箕","畚箕","垃圾箕"]
+            },
+            {
+              char: '玻',
+              pinyin: 'bō',
+              meaning: '玻璃；玻璃杯；玻璃窗',
+              meaningEn: 'glass (in 玻璃)',
+              example: '玻璃',
+              examplePinyin: 'bō li',
+              exampleMeaning: 'glass; glassware',
+              examples: ["玻璃","玻璃杯","玻璃窗"]
+            },
+            {
+              char: '璃',
+              pinyin: 'lí',
+              meaning: '玻璃；玻璃瓶；玻璃杯',
+              meaningEn: 'glass (in 玻璃)',
+              example: '玻璃',
+              examplePinyin: 'bō li',
+              exampleMeaning: 'glass; glassware',
+              examples: ["玻璃","玻璃瓶","玻璃杯"]
+            },
+            {
+              char: '垃',
+              pinyin: 'lā',
+              meaning: '垃圾；垃圾桶；垃圾箱',
+              meaningEn: 'garbage; trash (in 垃圾)',
+              example: '垃圾',
+              examplePinyin: 'lā jī',
+              exampleMeaning: 'garbage; trash; rubbish',
+              examples: ["垃圾","垃圾桶","垃圾箱"]
+            },
+            {
+              char: '圾',
+              pinyin: 'jī',
+              meaning: '垃圾；垃圾堆；生活垃圾',
+              meaningEn: 'garbage; rubbish (in 垃圾)',
+              example: '垃圾',
+              examplePinyin: 'lā jī',
+              exampleMeaning: 'garbage; rubbish; waste',
+              examples: ["垃圾","垃圾堆","生活垃圾"]
+            },
+          ]
         },
         {
           number: 23,
@@ -4525,7 +6391,108 @@ const chineseVocabData = {
           number: 0,
           unit: 8,
           title: '语文园地八',
-          words: []
+          words: [
+            {
+              char: '钩',
+              pinyin: 'gōu',
+              meaning: '鱼钩；钩子；弯钩',
+              meaningEn: 'hook; to hook',
+              example: '鱼钩',
+              examplePinyin: 'yú gōu',
+              exampleMeaning: 'fishhook',
+              examples: ["鱼钩","钩子","弯钩"]
+            },
+            {
+              char: '铲',
+              pinyin: 'chǎn',
+              meaning: '铁铲；铲子；铲除',
+              meaningEn: 'shovel; spade; to shovel',
+              example: '铁铲',
+              examplePinyin: 'tiě chǎn',
+              exampleMeaning: 'iron shovel; spade',
+              examples: ["铁铲","铲子","铲除"]
+            },
+            {
+              char: '梅',
+              pinyin: 'méi',
+              meaning: '梅花；梅雨；腊梅',
+              meaningEn: 'plum; plum blossom',
+              example: '梅花',
+              examplePinyin: 'méi huā',
+              exampleMeaning: 'plum blossom',
+              examples: ["梅花","梅雨","腊梅"]
+            },
+            {
+              char: '柿',
+              pinyin: 'shì',
+              meaning: '柿子；柿饼；柿子树',
+              meaningEn: 'persimmon',
+              example: '柿子',
+              examplePinyin: 'shì zi',
+              exampleMeaning: 'persimmon (fruit)',
+              examples: ["柿子","柿饼","柿子树"]
+            },
+            {
+              char: '源',
+              pinyin: 'yuán',
+              meaning: '水源；资源；来源',
+              meaningEn: 'source; origin; resource',
+              example: '资源',
+              examplePinyin: 'zī yuán',
+              exampleMeaning: 'resource; natural resource',
+              examples: ["资源","水源","来源"]
+            },
+            {
+              char: '涨',
+              pinyin: 'zhǎng',
+              meaning: '上涨；涨水；涨潮',
+              meaningEn: 'to rise; to swell; to flood',
+              example: '上涨',
+              examplePinyin: 'shàng zhǎng',
+              exampleMeaning: 'to rise; to go up; to increase',
+              examples: ["上涨","涨水","涨潮"]
+            },
+            {
+              char: '炬',
+              pinyin: 'jù',
+              meaning: '火炬；火炬手；火炬传递',
+              meaningEn: 'torch',
+              example: '火炬',
+              examplePinyin: 'huǒ jù',
+              exampleMeaning: 'torch; Olympic torch',
+              examples: ["火炬","火炬手","火炬传递"]
+            },
+            {
+              char: '灿',
+              pinyin: 'càn',
+              meaning: '灿烂；光灿灿；灿灿',
+              meaningEn: 'bright; brilliant; splendid',
+              example: '灿烂',
+              examplePinyin: 'càn làn',
+              exampleMeaning: 'brilliant; resplendent; splendid',
+              examples: ["灿烂","光灿灿","灿灿"]
+            },
+            {
+              char: '垮',
+              pinyin: 'kuǎ',
+              meaning: '垮塌；垮台；倒垮',
+              meaningEn: 'to collapse; to fall apart',
+              example: '垮塌',
+              examplePinyin: 'kuǎ tā',
+              exampleMeaning: 'to collapse; to cave in',
+              examples: ["垮塌","垮台","倒垮"]
+            },
+            {
+              char: '坟',
+              pinyin: 'fén',
+              meaning: '坟墓；上坟；扫坟',
+              meaningEn: 'grave; tomb',
+              example: '坟墓',
+              examplePinyin: 'fén mù',
+              exampleMeaning: 'grave; tomb',
+              examples: ["坟墓","上坟","扫坟"]
+            },
+          ]
         },
       ]
     }
