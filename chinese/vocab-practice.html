@@ -106,6 +106,13 @@
       .match-grid { grid-template-columns:1fr 1fr; }
       .fc-char { font-size:3.5em; }
     }
+
+    /* ── Phrase display ── */
+    .fc-char--phrase { font-size:2.6em; letter-spacing:.05em; }
+    .quiz-char-big--phrase { font-size:2.8em; }
+    .content-tabs { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 16px; }
+    .content-tab { padding:8px 16px; border:2px solid #e2e8f0; border-radius:20px; cursor:pointer; font-size:.9em; background:#fff; transition:.15s; }
+    .content-tab.active { border-color:#744210; background:#744210; color:#fff; font-weight:700; }
   </style>
 </head>
 <body>
@@ -126,7 +133,12 @@
       <button class="secondary-btn" onclick="selectAll()">✓ 全选</button>
       <button class="secondary-btn" onclick="deselectAll()">✗ 取消</button>
     </div>
-
+    <div style="font-weight:700;color:#744210;margin-bottom:8px;">练习内容 Content:</div>
+    <div class="content-tabs">
+      <div class="content-tab active" data-content="chars" onclick="setContent('chars')">生字 Characters</div>
+      <div class="content-tab" data-content="phrases" onclick="setContent('phrases')">词语 词语</div>
+      <div class="content-tab" data-content="all" onclick="setContent('all')">全部 All</div>
+    </div>
     <div style="font-weight:700;color:#744210;margin-bottom:8px;">练习方式 Activity:</div>
     <div class="mode-tabs">
       <div class="mode-tab active" data-mode="flashcard" onclick="setMode('flashcard')">🃏 闪卡 Flashcard</div>
@@ -249,6 +261,7 @@
 //  STATE
 // ════════════════════════════════════════════════════════════
 let currentMode = 'flashcard';
+let contentType = 'chars';  // 'chars' | 'phrases' | 'all'
 let pool = [];       // words selected for this session
 let idx = 0;
 let score = 0;
@@ -279,7 +292,7 @@ function buildSelector() {
   const unitEl = document.getElementById('unit-list');
   unitEl.innerHTML = '';
   units.forEach(u => {
-    const uLessons = lessons.filter(l => l.unit === u && l.words.length > 0);
+    const uLessons = lessons.filter(l => l.unit === u && (l.words.length > 0 || (l.phrases && l.phrases.length > 0)));
     if (!uLessons.length) return;
     const sec = document.createElement('div');
     sec.className = 'unit-section';
@@ -291,8 +304,10 @@ function buildSelector() {
     uLessons.forEach(l => {
       const chip = document.createElement('label');
       chip.className = 'lesson-chip';
+      const phraseCount = l.phrases ? l.phrases.length : 0;
+      const countStr = `${l.words.length}字${phraseCount ? ` · ${phraseCount}词` : ''}`;
       chip.innerHTML = `<input type="checkbox" value="${l.number}" checked>
-        第${l.number}课 ${l.title} <span style="color:#a0aec0;font-size:.85em;">(${l.words.length}字)</span>`;
+        第${l.number || '园'}课 ${l.title} <span style="color:#a0aec0;font-size:.85em;">(${countStr})</span>`;
       grid.appendChild(chip);
     });
     sec.appendChild(label);
@@ -313,15 +328,39 @@ function setMode(m) {
   document.querySelectorAll('.mode-tab').forEach(t => t.classList.toggle('active', t.dataset.mode === m));
 }
 
+function setContent(c) {
+  contentType = c;
+  document.querySelectorAll('.content-tab').forEach(t => t.classList.toggle('active', t.dataset.content === c));
+}
+
 // ════════════════════════════════════════════════════════════
 //  START / BACK
 // ════════════════════════════════════════════════════════════
 function startActivity() {
   const sel = getSelected();
   if (!sel.length) { alert('请先选择至少一课！Select at least one lesson.'); return; }
-  pool = lessons.filter(l => sel.includes(l.number)).flatMap(l => l.words);
+  const selLessons = lessons.filter(l => sel.includes(l.number));
+  pool = [];
+  for (const l of selLessons) {
+    if (contentType === 'chars' || contentType === 'all') {
+      pool.push(...l.words);
+    }
+    if ((contentType === 'phrases' || contentType === 'all') && l.phrases && l.phrases.length) {
+      pool.push(...l.phrases.map(p => ({
+        char: p.phrase,
+        pinyin: p.pinyin,
+        meaning: p.meaning,
+        meaningEn: p.meaningEn,
+        example: p.phrase,
+        examplePinyin: p.pinyin,
+        exampleMeaning: p.meaningEn,
+        examples: [p.phrase],
+        isPhrase: true
+      })));
+    }
+  }
   pool = shuffle([...pool]);
-  if (!pool.length) { alert('所选课文暂无生字。No words in selected lessons.'); return; }
+  if (!pool.length) { alert('所选课文暂无练习内容。No words in selected lessons.'); return; }
 
   score = 0; missed = []; idx = 0; fcKnown = new Set(); fcAgain = [];
   matchRoundOffset = 0; matchErrors = 0;
@@ -368,11 +407,13 @@ function initFlashcard() {
 
 function renderCard() {
   const w = pool[idx];
-  document.getElementById('fc-char').textContent    = w.char;
+  const charEl = document.getElementById('fc-char');
+  charEl.textContent   = w.char;
+  charEl.className     = 'fc-char' + (w.isPhrase ? ' fc-char--phrase' : '');
   document.getElementById('fc-pinyin').textContent  = w.pinyin;
   document.getElementById('fc-meaning').textContent = w.meaning;
-  document.getElementById('fc-example').textContent = w.example + '  ' + w.examplePinyin;
-  document.getElementById('fc-meaning-en').textContent = w.meaningEn + ' · ' + w.exampleMeaning;
+  document.getElementById('fc-example').textContent = w.isPhrase ? w.char + '  ' + w.pinyin : w.example + '  ' + w.examplePinyin;
+  document.getElementById('fc-meaning-en').textContent = w.meaningEn + (w.isPhrase ? '' : ' · ' + w.exampleMeaning);
   document.getElementById('flashcard').classList.remove('flipped');
   document.getElementById('fc-prev').disabled = idx === 0;
   document.getElementById('fc-next').disabled = idx === pool.length - 1;
@@ -431,10 +472,11 @@ function renderQuiz() {
   const pinyinEl = document.getElementById('q-pinyin');
   if (qType === 'char→meaning' || qType === 'char→pinyin') {
     charEl.textContent   = w.char;   charEl.style.display   = 'block';
+    charEl.style.fontSize = w.isPhrase && w.char.length > 3 ? '2.5em' : '';
     pinyinEl.textContent = '';       pinyinEl.style.display = 'none';
   } else if (qType === 'pinyin→char') {
     charEl.textContent   = w.pinyin; charEl.style.display   = 'block';
-    charEl.style.fontSize = '2.5em';
+    charEl.style.fontSize = '2em';
     pinyinEl.style.display = 'none';
   } else { // meaning→char
     charEl.textContent   = w.meaningEn || w.meaning;
@@ -461,9 +503,9 @@ function renderQuiz() {
       // prompt is char → answer is pinyin
       btn.textContent = c.pinyin;
     } else {
-      // meaning→char → answer is char
+      // meaning→char → answer is char (or phrase)
       btn.style.fontFamily = "'STSong','SimSun',serif";
-      btn.style.fontSize = '1.5em';
+      btn.style.fontSize = c.isPhrase ? '1.1em' : '1.5em';
       btn.textContent = c.char;
     }
     btn.dataset.correct = (c === w) ? '1' : '0';
@@ -509,19 +551,24 @@ function renderDict() {
   if (idx >= pool.length) { showResults(score, pool.length, missed); return; }
   const w = pool[idx];
   updateProgress(idx, pool.length);
-  document.getElementById('dict-hint').textContent  = '听音写字 · Listen and write the character';
+  document.getElementById('dict-hint').textContent  = w.isPhrase
+    ? '听音写词语 · Listen and write the phrase'
+    : '听音写字 · Listen and write the character';
+  document.getElementById('dict-input').maxLength   = w.isPhrase ? w.char.length + 1 : 2;
   document.getElementById('dict-input').value       = '';
   document.getElementById('dict-feedback').textContent = '';
   document.getElementById('dict-feedback').className   = 'dict-feedback';
   document.getElementById('dict-reveal').style.display = 'none';
   document.getElementById('dict-next-btn').style.display = 'none';
   document.getElementById('dict-input').focus();
-  setTimeout(() => speakWord(w.char + '，例如，' + (w.examples || [w.example]).join('，')), 300);
+  const speakText = w.isPhrase ? w.char : w.char + '，例如，' + (w.examples || [w.example]).join('，');
+  setTimeout(() => speakWord(speakText), 300);
 }
 
 function dictSpeak() {
   const w = pool[idx];
-  speakWord(w.char + '，例如，' + (w.examples || [w.example]).join('，'));
+  const speakText = w.isPhrase ? w.char : w.char + '，例如，' + (w.examples || [w.example]).join('，');
+  speakWord(speakText);
 }
 
 function checkDict() {
@@ -734,7 +781,9 @@ function speakChar(text) {
 function speakWord(text) { speakChar(text); }
 function speakCurrent() {
   const w = pool[idx];
-  if (w) speakChar(w.char + '，例如，' + (w.examples || [w.example]).join('，'));
+  if (!w) return;
+  const speakText = w.isPhrase ? w.char : w.char + '，例如，' + (w.examples || [w.example]).join('，');
+  speakChar(speakText);
 }
 
 // ════════════════════════════════════════════════════════════

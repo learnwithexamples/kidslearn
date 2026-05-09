@@ -392,6 +392,15 @@ const chineseVocabData = {
               exampleMeaning: 'azalea (flower) or cuckoo (bird)',
               examples: ["杜鹃","杜鹃花","杜鹃鸟"]
             },
+          ],
+          phrases: [
+            { phrase: '春天', pinyin: 'chūn tiān', meaning: '一年四季的第一个季节', meaningEn: 'spring; first season of the year' },
+            { phrase: '寻找', pinyin: 'xún zhǎo', meaning: '搜寻，找寻', meaningEn: 'to look for; to search' },
+            { phrase: '姑娘', pinyin: 'gū niáng', meaning: '年轻的女子，女孩', meaningEn: 'girl; young woman' },
+            { phrase: '野花', pinyin: 'yě huā', meaning: '野外自然生长的花', meaningEn: 'wildflower' },
+            { phrase: '柳枝', pinyin: 'liǔ zhī', meaning: '柳树的枝条', meaningEn: 'willow branch' },
+            { phrase: '桃花', pinyin: 'táo huā', meaning: '桃树开的花', meaningEn: 'peach blossom' },
+            { phrase: '杏花', pinyin: 'xìng huā', meaning: '杏树开的花', meaningEn: 'apricot blossom' },
           ]
         },
         {
@@ -589,6 +598,20 @@ const chineseVocabData = {
               exampleMeaning: 'flower seeds',
               examples: ["花籽","种籽","草籽"]
             },
+          ],
+          phrases: [
+            { phrase: '鲜花', pinyin: 'xiān huā', meaning: '新鲜的花', meaningEn: 'fresh flowers; fresh blossoms' },
+            { phrase: '邮递员', pinyin: 'yóu dì yuán', meaning: '负责送信送包裹的人', meaningEn: 'postman; mail carrier' },
+            { phrase: '先生', pinyin: 'xiān shēng', meaning: '对男性的尊称', meaningEn: 'Mr.; teacher; sir' },
+            { phrase: '原来', pinyin: 'yuán lái', meaning: '本来；居然', meaningEn: 'originally; as it turns out' },
+            { phrase: '大叔', pinyin: 'dà shū', meaning: '对中年男性的称呼', meaningEn: 'uncle; middle-aged man (polite form)' },
+            { phrase: '邮局', pinyin: 'yóu jú', meaning: '办理邮寄业务的地方', meaningEn: 'post office' },
+            { phrase: '太太', pinyin: 'tài tai', meaning: '已婚妇女的尊称', meaningEn: 'Mrs.; wife (polite form)' },
+            { phrase: '做客', pinyin: 'zuò kè', meaning: '到别人家里去拜访', meaningEn: 'to be a guest; to visit someone' },
+            { phrase: '惊奇', pinyin: 'jīng qí', meaning: '感到奇怪和惊讶', meaningEn: 'amazed; astonished; surprised' },
+            { phrase: '快活', pinyin: 'kuài huó', meaning: '高兴，愉快', meaningEn: 'happy; cheerful; joyful' },
+            { phrase: '美好', pinyin: 'měi hǎo', meaning: '美丽而令人满意', meaningEn: 'beautiful; wonderful; good' },
+            { phrase: '礼物', pinyin: 'lǐ wù', meaning: '送给别人表示心意的物品', meaningEn: 'gift; present' },
           ]
         },
         {
@@ -796,6 +819,20 @@ const chineseVocabData = {
               exampleMeaning: 'to support; to help someone walk',
               examples: ["搀扶","扶起","扶树"]
             },
+          ],
+          phrases: [
+            { phrase: '爷爷', pinyin: 'yé ye', meaning: '父亲的父亲', meaningEn: 'grandfather; grandpa' },
+            { phrase: '植树', pinyin: 'zhí shù', meaning: '种植树木', meaningEn: 'to plant trees; tree planting' },
+            { phrase: '碧空如洗', pinyin: 'bì kōng rú xǐ', meaning: '像被清洗过一样蔚蓝的天空', meaningEn: 'clear blue sky; spotless blue sky' },
+            { phrase: '万里无云', pinyin: 'wàn lǐ wú yún', meaning: '天空中没有云彩，十分晴朗', meaningEn: 'cloudless sky; clear skies for miles' },
+            { phrase: '公园', pinyin: 'gōng yuán', meaning: '供市民游览休息的园地', meaningEn: 'park; public garden' },
+            { phrase: '格外', pinyin: 'gé wài', meaning: '特别，更加', meaningEn: 'especially; particularly; extra' },
+            { phrase: '引人注目', pinyin: 'yǐn rén zhù mù', meaning: '特别引起人们的关注', meaningEn: 'eye-catching; attention-grabbing' },
+            { phrase: '汗珠', pinyin: 'hàn zhū', meaning: '汗水凝成的珠状水滴', meaningEn: 'bead of sweat; drop of perspiration' },
+            { phrase: '休息', pinyin: 'xiū xi', meaning: '暂停活动，让身体放松', meaningEn: 'to rest; to take a break' },
+            { phrase: '树苗', pinyin: 'shù miáo', meaning: '刚长出不久的小树', meaningEn: 'sapling; tree seedling' },
+            { phrase: '小心', pinyin: 'xiǎo xīn', meaning: '注意，谨慎', meaningEn: 'careful; be careful; watch out' },
+            { phrase: '笔直', pinyin: 'bǐ zhí', meaning: '非常直，没有弯曲', meaningEn: 'very straight; straight as a ruler' },
           ]
         },
         {
@@ -1131,6 +1168,14 @@ const chineseVocabData = {
               exampleMeaning: 'to dedicate; to devote; contribution',
               examples: ["奉献","献出","献花"]
             },
+          ],
+          phrases: [
+            { phrase: '叔叔', pinyin: 'shū shu', meaning: '父亲的弟弟，或对年长男性的称呼', meaningEn: 'uncle; father\'s younger brother' },
+            { phrase: '足迹', pinyin: 'zú jì', meaning: '脚留下的印迹', meaningEn: 'footprint; footstep; trace' },
+            { phrase: '昨天', pinyin: 'zuó tiān', meaning: '今天的前一天', meaningEn: 'yesterday' },
+            { phrase: '迷路', pinyin: 'mí lù', meaning: '走错了路，不知道方向', meaningEn: 'to get lost; to lose one\'s way' },
+            { phrase: '温暖', pinyin: 'wēn nuǎn', meaning: '温度适宜，使人舒服；也指感情上的关怀', meaningEn: 'warm; warmth' },
+            { phrase: '爱心', pinyin: 'ài xīn', meaning: '关心爱护他人的心意', meaningEn: 'love; compassion; caring heart' },
           ]
         },
         {
@@ -1358,6 +1403,21 @@ const chineseVocabData = {
               exampleMeaning: 'should; ought to',
               examples: ["应该","应当","应有"]
             },
+          ],
+          phrases: [
+            { phrase: '也许', pinyin: 'yě xǔ', meaning: '可能，大概', meaningEn: 'perhaps; maybe; probably' },
+            { phrase: '桌子', pinyin: 'zhuō zi', meaning: '有腿的平面家具，用于放东西', meaningEn: 'table; desk' },
+            { phrase: '平时', pinyin: 'píng shí', meaning: '通常情况下；平常时候', meaningEn: 'usually; ordinarily; normally' },
+            { phrase: '难道', pinyin: 'nán dào', meaning: '表示反问的语气', meaningEn: 'could it be that; is it possible that' },
+            { phrase: '味道', pinyin: 'wèi dào', meaning: '食物的滋味；气味', meaningEn: 'taste; flavor; smell' },
+            { phrase: '就是', pinyin: 'jiù shì', meaning: '正是；恰好是', meaningEn: 'exactly; precisely; just' },
+            { phrase: '加工', pinyin: 'jiā gōng', meaning: '对原料进行处理，制成产品', meaningEn: 'to process; to manufacture' },
+            { phrase: '种子', pinyin: 'zhǒng zi', meaning: '植物繁殖的器官，可以发芽长成新植物', meaningEn: 'seed' },
+            { phrase: '农具', pinyin: 'nóng jù', meaning: '进行农业生产使用的工具', meaningEn: 'farming tools; agricultural implements' },
+            { phrase: '甜菜', pinyin: 'tián cài', meaning: '一种可以制糖的植物', meaningEn: 'sugar beet; beet' },
+            { phrase: '工具', pinyin: 'gōng jù', meaning: '进行劳动生产所用的器具', meaningEn: 'tool; instrument; implement' },
+            { phrase: '劳动', pinyin: 'láo dòng', meaning: '用体力或脑力做事情', meaningEn: 'labor; work; to work' },
+            { phrase: '经过', pinyin: 'jīng guò', meaning: '通过某地方；某事经历某个过程', meaningEn: 'to pass through; after; through; via' },
           ]
         },
         {
@@ -1555,6 +1615,19 @@ const chineseVocabData = {
               exampleMeaning: 'to step over; to cross',
               examples: ["跨过","跨越","跨步"]
             },
+          ],
+          phrases: [
+            { phrase: '出色', pinyin: 'chū sè', meaning: '成绩突出，超过一般水平', meaningEn: 'outstanding; remarkable; excellent' },
+            { phrase: '妹妹', pinyin: 'mèi mei', meaning: '比自己年龄小的姐妹', meaningEn: 'younger sister' },
+            { phrase: '河水', pinyin: 'hé shuǐ', meaning: '河里的水', meaningEn: 'river water' },
+            { phrase: '碧绿', pinyin: 'bì lǜ', meaning: '鲜艳而有光泽的绿色', meaningEn: 'bright green; vivid green' },
+            { phrase: '波纹', pinyin: 'bō wén', meaning: '水面轻微起伏的纹路', meaningEn: 'ripple; wave pattern' },
+            { phrase: '河岸', pinyin: 'hé àn', meaning: '河边的岸地', meaningEn: 'river bank; riverbank' },
+            { phrase: '柳叶', pinyin: 'liǔ yè', meaning: '柳树的叶子，细长', meaningEn: 'willow leaf' },
+            { phrase: '景色', pinyin: 'jǐng sè', meaning: '自然界的风景', meaningEn: 'scenery; landscape; view' },
+            { phrase: '恋恋不舍', pinyin: 'liàn liàn bù shě', meaning: '非常留恋，不愿意离开', meaningEn: 'reluctant to part; loath to leave' },
+            { phrase: '柳树', pinyin: 'liǔ shù', meaning: '一种叶子细长的树，多生长在水边', meaningEn: 'willow tree' },
+            { phrase: '枝条', pinyin: 'zhī tiáo', meaning: '树木的枝干', meaningEn: 'branch; twig; shoot' },
           ]
         },
         {

@@ -4165,7 +4165,57 @@ const vocabularyData = {
                   "partOfSpeech": "noun",
                   "definition": "the supposed transmission of thoughts or feelings between minds without physical contact",
                   "example": "Twins sometimes claim to experience telepathy with each other."
-                }
+                },
+                {
+                  "word": "venturesome",
+                  "pronunciation": "VEN-chur-sum",
+                  "partOfSpeech": "adjective",
+                  "definition": "willing to take risks or embark on difficult journeys",
+                  "example": "The venturesome explorer set out to discover uncharted territories."
+                },
+                {
+                  "word": "advent",
+                  "pronunciation": "AD-vent",
+                  "partOfSpeech": "noun",
+                  "definition": "the arrival of a notable person, thing, or event",
+                  "example": "The advent of the internet has revolutionized communication."
+                },
+                {
+                  "word": "invention",
+                  "pronunciation": "in-VEN-shun",
+                  "partOfSpeech": "noun",
+                  "definition": "the action of creating something new, typically a device or machine",
+                  "example": "The invention of the telephone revolutionized communication."
+                },
+                {
+                  "word": "intervene",
+                  "pronunciation": "in-ter-VEEN",
+                  "partOfSpeech": "verb",
+                  "definition": "to come between so as to prevent or alter a result or course of events",
+                  "example": "The mediator intervened to help resolve the conflict."
+                },
+                {
+                  "word": "convenient",
+                  "pronunciation": "kuhn-VEEN-yuhnt",
+                  "partOfSpeech": "adjective",
+                  "definition": "suitable for one's needs; making life easier or more comfortable",
+                  "example": "The hotel is conveniently located near the airport."
+                },
+                {
+                  "word": "previous",
+                  "pronunciation": "PREE-vee-uhs",
+                  "partOfSpeech": "adjective",
+                  "definition": "existing or occurring before in time or order",
+                  "example": "She referred to the previous chapter for context."
+                },
+                {
+                  "word": "adventure",
+                  "pronunciation": "ad-VEN-chur",
+                  "partOfSpeech": "noun",
+                  "definition": "an unusual and exciting, typically hazardous, experience or activity",
+                  "example": "They went on an adventure through the Amazon rainforest."
+                },
+
               ]
             }
           ]
