@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trigonometry - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/fact-sheet.css">
+    <style>
+        .topic-tabs {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .topic-tab {
+            padding: 10px 20px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+
+        .topic-tab:hover {
+            border-color: #667eea;
+            background: #f5f7ff;
+        }
+
+        .topic-tab.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .secondary-btn {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+
+        .secondary-btn:hover { background: #f5f7ff; }
+
+        .feedback-message {
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            min-height: 1.5em;
+            margin: 15px 0;
+        }
+
+        .feedback-message.correct { color: #2e7d32; }
+        .feedback-message.incorrect { color: #c62828; }
+
+        .triangle-display {
+            width: 100%;
+            max-width: 420px;
+            height: 320px;
+            margin: 20px auto;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .triangle-canvas { width: 100%; height: 100%; }
+
+        .question-info {
+            text-align: center;
+            font-size: 1.2em;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .answer-section { max-width: 500px; margin: 20px auto; }
+
+        .answer-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .answer-row label {
+            min-width: 130px;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .answer-row input {
+            width: 130px;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1.1em;
+            text-align: center;
+        }
+
+        .answer-row input:focus { outline: none; border-color: #667eea; }
+        .answer-row .unit { min-width: 70px; color: #666; }
+
+        .steps-box {
+            background: #fff8e1;
+            border-left: 4px solid #ffb300;
+            padding: 15px 20px;
+            margin: 20px auto;
+            border-radius: 6px;
+            max-width: 560px;
+            line-height: 1.8;
+        }
+
+        .steps-box code {
+            background: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .reference-section {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .sohcahtoa {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .sohcahtoa-card {
+            background: #f5f7ff;
+            border-radius: 10px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .sohcahtoa-card .big {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #667eea;
+            letter-spacing: 2px;
+        }
+
+        .sohcahtoa-card .ratio {
+            margin-top: 8px;
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .formula-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .formula-card {
+            background: #f9f9f9;
+            padding: 18px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .formula-card h4 { margin-top: 0; color: #667eea; }
+
+        .formula-card code {
+            background: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: block;
+            margin: 6px 0;
+            font-size: 1.05em;
+        }
+
+        .value-table {
+            width: 100%;
+            max-width: 560px;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        .value-table th, .value-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .value-table th { background: #667eea; color: white; }
+        .value-table tr:nth-child(even) { background: #f5f7ff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📐 Trigonometry</h1>
+            <p class="subtitle">Sine, cosine, tangent &amp; right triangles</p>
+            <a href="math.html" class="back-link">← Back to Math Topics</a>
+        </header>
+
+        <!-- Topic Selection -->
+        <div class="topic-tabs">
+            <button class="topic-tab active" data-tab="practice">🎯 Practice Problems</button>
+            <button class="topic-tab" data-tab="reference">📚 Learn the Basics</button>
+        </div>
+
+        <!-- Practice Section -->
+        <div id="practice-section">
+            <div class="controls-panel">
+                <div class="control-section">
+                    <h3>Problem Type</h3>
+                    <div class="button-group">
+                        <button class="type-btn operation-btn active" data-type="side">Find a Side</button>
+                        <button class="type-btn operation-btn" data-type="angle">Find an Angle</button>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <button id="generate-btn" class="primary-btn">🎲 New Problem</button>
+                    <button id="steps-btn" class="secondary-btn">💡 Show Steps</button>
+                </div>
+            </div>
+
+            <div class="triangle-display">
+                <canvas id="triangle-canvas" class="triangle-canvas"></canvas>
+            </div>
+
+            <div class="question-info" id="question-info">
+                Click "New Problem" to begin
+            </div>
+
+            <div class="answer-section">
+                <div class="answer-row">
+                    <label id="answer-label" for="answer">Answer =</label>
+                    <input type="text" id="answer" placeholder="?" autocomplete="off">
+                    <span class="unit" id="answer-unit"></span>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <button id="check-btn" class="primary-btn">✓ Check Answer</button>
+                </div>
+
+                <div id="feedback" class="feedback-message"></div>
+                <div id="steps" class="steps-box" style="display: none;"></div>
+            </div>
+
+            <div class="quiz-header" style="margin-top: 30px;">
+                <div class="timer-display">
+                    <span>Score: <span id="score">0</span>/<span id="total">0</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reference Section -->
+        <div id="reference-section" style="display: none;">
+            <div class="reference-section">
+                <h2>SOH · CAH · TOA</h2>
+                <p>In a right triangle, the three main trig ratios connect an angle to
+                   the sides. Remember them with <strong>SOH-CAH-TOA</strong>:</p>
+
+                <div class="sohcahtoa">
+                    <div class="sohcahtoa-card">
+                        <div class="big">SOH</div>
+                        <div class="ratio">sin θ = Opposite ÷ Hypotenuse</div>
+                    </div>
+                    <div class="sohcahtoa-card">
+                        <div class="big">CAH</div>
+                        <div class="ratio">cos θ = Adjacent ÷ Hypotenuse</div>
+                    </div>
+                    <div class="sohcahtoa-card">
+                        <div class="big">TOA</div>
+                        <div class="ratio">tan θ = Opposite ÷ Adjacent</div>
+                    </div>
+                </div>
+
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>Hypotenuse</h4>
+                        <code>The longest side</code>
+                        <p><small>Always opposite the right angle (90°).</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Opposite</h4>
+                        <code>Across from angle θ</code>
+                        <p><small>The side that does not touch the angle you are using.</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Adjacent</h4>
+                        <code>Next to angle θ</code>
+                        <p><small>The side touching θ that is not the hypotenuse.</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Pythagorean Theorem</h4>
+                        <code>a² + b² = c²</code>
+                        <p><small>c is the hypotenuse. Find a missing side without angles.</small></p>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">Finding a Missing Angle</h2>
+                <p>Use the inverse functions on your calculator:</p>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>Inverse Sine</h4>
+                        <code>θ = sin⁻¹(opp ÷ hyp)</code>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Inverse Cosine</h4>
+                        <code>θ = cos⁻¹(adj ÷ hyp)</code>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Inverse Tangent</h4>
+                        <code>θ = tan⁻¹(opp ÷ adj)</code>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">Special Angle Values</h2>
+                <table class="value-table">
+                    <thead>
+                        <tr><th>θ</th><th>sin θ</th><th>cos θ</th><th>tan θ</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>0°</td><td>0</td><td>1</td><td>0</td></tr>
+                        <tr><td>30°</td><td>0.5</td><td>0.866</td><td>0.577</td></tr>
+                        <tr><td>45°</td><td>0.707</td><td>0.707</td><td>1</td></tr>
+                        <tr><td>60°</td><td>0.866</td><td>0.5</td><td>1.732</td></tr>
+                        <tr><td>90°</td><td>1</td><td>0</td><td>undefined</td></tr>
+                    </tbody>
+                </table>
+
+                <h2 style="margin-top: 40px;">Worked Example</h2>
+                <p>A right triangle has an angle of 30° and a hypotenuse of 10. Find the
+                   side opposite the 30° angle.</p>
+                <div class="steps-box">
+                    <div>1. We know the angle and the hypotenuse, and want the opposite
+                         → use <strong>SOH</strong>.</div>
+                    <div>2. <code>sin 30° = opposite ÷ 10</code></div>
+                    <div>3. <code>opposite = 10 × sin 30° = 10 × 0.5</code></div>
+                    <div>4. <code>opposite = 5</code></div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Master trigonometry! 📐</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/trigonometry.js"></script>
+</body>
+</html>

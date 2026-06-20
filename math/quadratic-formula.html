@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadratic Formula - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/fact-sheet.css">
+    <style>
+        .topic-tabs {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .topic-tab {
+            padding: 10px 20px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+
+        .topic-tab:hover {
+            border-color: #667eea;
+            background: #f5f7ff;
+        }
+
+        .topic-tab.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .secondary-btn {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+
+        .secondary-btn:hover {
+            background: #f5f7ff;
+        }
+
+        .feedback-message {
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            min-height: 1.5em;
+            margin: 15px 0;
+        }
+
+        .feedback-message.correct { color: #2e7d32; }
+        .feedback-message.incorrect { color: #c62828; }
+
+        .equation-display {
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+            margin: 25px auto;
+            padding: 20px;
+            background: #f5f7ff;
+            border-radius: 12px;
+            max-width: 500px;
+        }
+
+        .answer-section {
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        .answer-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .answer-row label {
+            min-width: 70px;
+            text-align: right;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .answer-row input {
+            width: 130px;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1.1em;
+            text-align: center;
+        }
+
+        .answer-row input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .steps-box {
+            background: #fff8e1;
+            border-left: 4px solid #ffb300;
+            padding: 15px 20px;
+            margin: 20px auto;
+            border-radius: 6px;
+            max-width: 560px;
+            line-height: 1.8;
+        }
+
+        .steps-box code {
+            background: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 1.05em;
+        }
+
+        .reference-section {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .big-formula {
+            text-align: center;
+            font-size: 2.2em;
+            color: #667eea;
+            margin: 25px 0;
+            font-weight: bold;
+        }
+
+        .formula-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .formula-card {
+            background: #f9f9f9;
+            padding: 18px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .formula-card h4 {
+            margin-top: 0;
+            color: #667eea;
+        }
+
+        .formula-card code {
+            background: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: block;
+            margin: 6px 0;
+            font-size: 1.05em;
+        }
+
+        .frac {
+            display: inline-flex;
+            flex-direction: column;
+            vertical-align: middle;
+            text-align: center;
+            margin: 0 4px;
+        }
+
+        .frac .num { border-bottom: 2px solid currentColor; padding: 0 6px; }
+        .frac .den { padding: 0 6px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>➗ Quadratic Formula</h1>
+            <p class="subtitle">Solve equations of the form ax² + bx + c = 0</p>
+            <a href="math.html" class="back-link">← Back to Math Topics</a>
+        </header>
+
+        <!-- Topic Selection -->
+        <div class="topic-tabs">
+            <button class="topic-tab active" data-tab="practice">🎯 Practice Problems</button>
+            <button class="topic-tab" data-tab="reference">📚 Learn the Formula</button>
+        </div>
+
+        <!-- Practice Section -->
+        <div id="practice-section">
+            <div class="controls-panel">
+                <div class="control-section">
+                    <h3>Difficulty</h3>
+                    <div class="button-group">
+                        <button class="operation-btn active" data-difficulty="easy">Easy</button>
+                        <button class="operation-btn" data-difficulty="medium">Medium</button>
+                        <button class="operation-btn" data-difficulty="hard">Hard</button>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <button id="generate-btn" class="primary-btn">🎲 New Equation</button>
+                    <button id="steps-btn" class="secondary-btn">💡 Show Steps</button>
+                </div>
+            </div>
+
+            <div class="equation-display" id="equation-display">
+                Click "New Equation" to begin
+            </div>
+
+            <div class="answer-section">
+                <p style="text-align: center; color: #666;">
+                    Enter the two solutions (order doesn't matter). If there is one repeated
+                    solution, enter the same value twice.
+                </p>
+                <div class="answer-row">
+                    <label for="x1">x₁ =</label>
+                    <input type="text" id="x1" placeholder="?" autocomplete="off">
+                </div>
+                <div class="answer-row">
+                    <label for="x2">x₂ =</label>
+                    <input type="text" id="x2" placeholder="?" autocomplete="off">
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <button id="check-btn" class="primary-btn">✓ Check Answer</button>
+                </div>
+
+                <div id="feedback" class="feedback-message"></div>
+                <div id="steps" class="steps-box" style="display: none;"></div>
+            </div>
+
+            <div class="quiz-header" style="margin-top: 30px;">
+                <div class="timer-display">
+                    <span>Score: <span id="score">0</span>/<span id="total">0</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reference Section -->
+        <div id="reference-section" style="display: none;">
+            <div class="reference-section">
+                <h2>The Quadratic Formula</h2>
+                <p>Any quadratic equation written as <code>ax² + bx + c = 0</code> (where
+                   <code>a ≠ 0</code>) can be solved with this formula:</p>
+
+                <div class="big-formula">
+                    x =
+                    <span class="frac">
+                        <span class="num">−b ± √(b² − 4ac)</span>
+                        <span class="den">2a</span>
+                    </span>
+                </div>
+
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>The Coefficients</h4>
+                        <code>a = number in front of x²</code>
+                        <code>b = number in front of x</code>
+                        <code>c = the constant term</code>
+                    </div>
+
+                    <div class="formula-card">
+                        <h4>The Discriminant</h4>
+                        <code>Δ = b² − 4ac</code>
+                        <p><small>The part under the square root tells you how many
+                           real solutions there are.</small></p>
+                    </div>
+
+                    <div class="formula-card">
+                        <h4>Δ &gt; 0</h4>
+                        <code>Two real solutions</code>
+                        <p><small>The ± gives two different answers.</small></p>
+                    </div>
+
+                    <div class="formula-card">
+                        <h4>Δ = 0</h4>
+                        <code>One repeated solution</code>
+                        <p><small>x = −b / 2a</small></p>
+                    </div>
+
+                    <div class="formula-card">
+                        <h4>Δ &lt; 0</h4>
+                        <code>No real solutions</code>
+                        <p><small>The square root of a negative number is not
+                           a real number.</small></p>
+                    </div>
+
+                    <div class="formula-card">
+                        <h4>Vertex (turning point)</h4>
+                        <code>x = −b / 2a</code>
+                        <p><small>The lowest or highest point of the parabola.</small></p>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">Worked Example</h2>
+                <p>Solve <code>x² − 5x + 6 = 0</code></p>
+                <div class="steps-box">
+                    <div>1. Identify the coefficients: <code>a = 1</code>,
+                         <code>b = −5</code>, <code>c = 6</code></div>
+                    <div>2. Discriminant: <code>Δ = (−5)² − 4(1)(6) = 25 − 24 = 1</code></div>
+                    <div>3. Square root: <code>√1 = 1</code></div>
+                    <div>4. Apply the formula: <code>x = (5 ± 1) / 2</code></div>
+                    <div>5. Two solutions: <code>x = 6/2 = 3</code> and
+                         <code>x = 4/2 = 2</code></div>
+                </div>
+
+                <h2 style="margin-top: 40px;">Tips</h2>
+                <ul style="line-height: 1.9;">
+                    <li>Watch the signs! A negative <code>b</code> becomes positive
+                        when you compute <code>−b</code>.</li>
+                    <li>Always rearrange the equation so one side equals 0 first.</li>
+                    <li>If <code>b² − 4ac</code> is a perfect square, the answers
+                        will be nice whole numbers or fractions.</li>
+                    <li>You can check your answers by substituting them back into
+                        the original equation.</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            <p>Master the quadratic formula! ➗</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/quadratic-formula.js"></script>
+</body>
+</html>
