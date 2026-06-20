@@ -174,6 +174,31 @@
             font-size: 1.05em;
         }
 
+        .factor-form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 4px;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 20px auto;
+        }
+
+        .factor-input {
+            width: 60px;
+            padding: 6px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.7em;
+            text-align: center;
+        }
+
+        .factor-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
     </style>
 </head>
 <body>
@@ -188,17 +213,26 @@
         <div class="topic-tabs">
             <button class="topic-tab active" data-tab="practice">🎯 Practice Problems</button>
             <button class="topic-tab" data-tab="reference">📚 Learn the Formula</button>
+            <button class="topic-tab" data-tab="factoring">✏️ Factoring</button>
         </div>
 
         <!-- Practice Section -->
         <div id="practice-section">
             <div class="controls-panel">
                 <div class="control-section">
+                    <h3>Method</h3>
+                    <div class="button-group">
+                        <button class="method-btn operation-btn active" data-method="solve">🔢 Find Solutions</button>
+                        <button class="method-btn operation-btn" data-method="factor">✏️ Factoring</button>
+                    </div>
+                </div>
+
+                <div class="control-section">
                     <h3>Difficulty</h3>
                     <div class="button-group">
-                        <button class="operation-btn active" data-difficulty="easy">Easy</button>
-                        <button class="operation-btn" data-difficulty="medium">Medium</button>
-                        <button class="operation-btn" data-difficulty="hard">Hard</button>
+                        <button class="difficulty-btn operation-btn active" data-difficulty="easy">Easy</button>
+                        <button class="difficulty-btn operation-btn" data-difficulty="medium">Medium</button>
+                        <button class="difficulty-btn operation-btn" data-difficulty="hard">Hard</button>
                     </div>
                 </div>
 
@@ -212,10 +246,11 @@
                 Click "New Equation" to begin
             </div>
 
-            <div class="answer-section">
+            <!-- Find-solutions answer UI -->
+            <div class="answer-section" id="solve-answer">
                 <p style="text-align: center; color: #666;">
                     Enter the two solutions (order doesn't matter). If there is one repeated
-                    solution, enter the same value twice.
+                    solution, enter the same value twice. Fractions like <code>3/2</code> are fine.
                 </p>
                 <div class="answer-row">
                     <label for="x1">x₁ =</label>
@@ -225,14 +260,29 @@
                     <label for="x2">x₂ =</label>
                     <input type="text" id="x2" placeholder="?" autocomplete="off">
                 </div>
-
-                <div style="text-align: center; margin-top: 20px;">
-                    <button id="check-btn" class="primary-btn">✓ Check Answer</button>
-                </div>
-
-                <div id="feedback" class="feedback-message"></div>
-                <div id="steps" class="steps-box" style="display: none;"></div>
             </div>
+
+            <!-- Factoring answer UI -->
+            <div class="answer-section" id="factor-answer" style="display: none;">
+                <p style="text-align: center; color: #666;">
+                    Find two numbers that add to \(b\) and multiply to \(c\), then fill
+                    in the brackets. (They may be negative — order doesn't matter.)
+                </p>
+                <div class="factor-form">
+                    (x +
+                    <input type="text" id="fact-p" class="factor-input" placeholder="?" autocomplete="off">
+                    )(x +
+                    <input type="text" id="fact-q" class="factor-input" placeholder="?" autocomplete="off">
+                    ) = 0
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <button id="check-btn" class="primary-btn">✓ Check Answer</button>
+            </div>
+
+            <div id="feedback" class="feedback-message"></div>
+            <div id="steps" class="steps-box" style="display: none;"></div>
 
             <div class="quiz-header" style="margin-top: 30px;">
                 <div class="timer-display">
@@ -315,6 +365,83 @@
                     <li>You can check your answers by substituting them back into
                         the original equation.</li>
                 </ul>
+            </div>
+        </div>
+
+        <!-- Factoring Section -->
+        <div id="factoring-section" style="display: none;">
+            <div class="reference-section">
+                <h2>Solving by Factoring</h2>
+                <p>Many quadratics can be solved <em>without</em> the big formula.
+                   The idea is to rewrite \(x^2 + bx + c = 0\) as a product of two
+                   brackets:</p>
+
+                <div class="big-formula">
+                    \[ x^2 + bx + c = (x + p)(x + q) = 0 \]
+                </div>
+
+                <p>Then, because a product is zero only when one of its factors is
+                   zero, the solutions are \(x = -p\) or \(x = -q\).</p>
+
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>The Key Trick</h4>
+                        <code>\(p + q = b\)</code>
+                        <code>\(p \times q = c\)</code>
+                        <p><small>Find two numbers that <strong>add</strong> to \(b\)
+                           and <strong>multiply</strong> to \(c\).</small></p>
+                    </div>
+
+                    <div class="formula-card">
+                        <h4>Zero-Product Rule</h4>
+                        <code>If \(A \times B = 0\)</code>
+                        <code>then \(A = 0\) or \(B = 0\)</code>
+                        <p><small>This is why factoring solves the equation.</small></p>
+                    </div>
+
+                    <div class="formula-card">
+                        <h4>The Solutions</h4>
+                        <code>\(x + p = 0 \Rightarrow x = -p\)</code>
+                        <code>\(x + q = 0 \Rightarrow x = -q\)</code>
+                        <p><small>Flip the sign of each bracket number.</small></p>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">⚠️ Limitations</h2>
+                <p>Factoring is fast and neat, but it doesn't work for
+                   <em>every</em> quadratic:</p>
+                <ul style="line-height: 1.9;">
+                    <li>It only works easily when \(c\) splits into two whole numbers
+                        that also add to \(b\). If no such pair exists, you can't
+                        factor with simple integers.</li>
+                    <li>The roots must be <strong>rational</strong>. Equations like
+                        \(x^2 - 2 = 0\) (roots \(\pm\sqrt{2}\)) cannot be factored
+                        with whole numbers.</li>
+                    <li>If the discriminant \(b^2 - 4ac\) is <strong>negative</strong>
+                        there are no real solutions, so there is nothing to factor.</li>
+                    <li>When the leading coefficient is not 1 (\(a \neq 1\)), factoring
+                        takes extra steps. The factoring practice keeps \(a = 1\) so the
+                        method always works.</li>
+                </ul>
+                <p>When factoring fails, fall back on the quadratic formula — it
+                   always works.</p>
+
+                <h2 style="margin-top: 40px;">Worked Example</h2>
+                <p>Solve \(x^2 + 5x + 6 = 0\)</p>
+                <div class="steps-box">
+                    <div>1. We need two numbers that multiply to \(6\) and add to
+                         \(5\).</div>
+                    <div>2. Those numbers are \(2\) and \(3\) (since \(2 \times 3 = 6\)
+                         and \(2 + 3 = 5\)).</div>
+                    <div>3. Factor: \((x + 2)(x + 3) = 0\)</div>
+                    <div>4. Set each factor to zero: \(x + 2 = 0\) or
+                         \(x + 3 = 0\)</div>
+                    <div>5. Solutions: \(x = -2\) and \(x = -3\)</div>
+                </div>
+
+                <p style="margin-top: 30px;">Try it yourself on the
+                   <strong>🎯 Practice Problems</strong> tab — pick the
+                   <strong>✏️ Factoring</strong> method.</p>
             </div>
         </div>
 

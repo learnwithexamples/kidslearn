@@ -1,8 +1,10 @@
 // Quadratic Formula Practice
 // Generates ax² + bx + c = 0 with rational roots so answers are clean.
+// Two practice methods: "solve" (enter the roots) and "factor" (fill brackets).
 
+let method = 'solve';        // 'solve' | 'factor'
 let difficulty = 'easy';
-let current = null;          // { a, b, c, roots: [r1, r2] }
+let current = null;          // { mode, a, b, c, roots:[r1,r2], p?, q? }
 let score = 0;
 let total = 0;
 
@@ -32,42 +34,88 @@ function fmt(val) {
     return parseFloat(val.toFixed(4)).toString();
 }
 
-// ─────────────────────────────────────────────────────────────
-// Problem generation
-// Build from factored form a(x − r1)(x − r2) = 0 so roots are tidy.
-// ─────────────────────────────────────────────────────────────
-
-function rootRange() {
-    if (difficulty === 'medium') return [-8, 8];
-    if (difficulty === 'hard')   return [-12, 12];
-    return [-6, 6];
+// Format a root as a tidy fraction when it isn't a whole number
+// (hard problems have denominators 2, 3 or 4).
+function fmtRoot(val) {
+    if (Math.abs(val - Math.round(val)) < 1e-9) return String(Math.round(val));
+    for (const d of [2, 3, 4]) {
+        const n = val * d;
+        if (Math.abs(n - Math.round(n)) < 1e-9) {
+            return `${Math.round(n)}/${d}`;
+        }
+    }
+    return fmt(val);
 }
 
+// ─────────────────────────────────────────────────────────────
+// Problem generation
+// ─────────────────────────────────────────────────────────────
+
 function generate() {
-    const [lo, hi] = rootRange();
-    let a, r1, r2, b, c;
-
-    do {
-        // Leading coefficient: 1 for easy, small for harder levels.
-        if (difficulty === 'easy') {
-            a = 1;
-        } else if (difficulty === 'medium') {
-            a = randInt(1, 3);
-        } else {
-            a = nonZero(-3, 3);
-        }
-
-        r1 = randInt(lo, hi);
-        r2 = randInt(lo, hi);
-
-        // a(x - r1)(x - r2) = a x² - a(r1 + r2) x + a r1 r2
-        b = -a * (r1 + r2);
-        c = a * r1 * r2;
-    } while (b === 0 && c === 0); // avoid the trivial a x² = 0 every time
-
-    current = { a, b, c, roots: [r1, r2] };
+    if (method === 'factor') {
+        generateFactor();
+    } else {
+        generateSolve();
+    }
     renderEquation();
     clearAnswer();
+}
+
+// Build  a·x² + b·x + c = 0  with rational roots.
+//   easy   – monic, small integer roots
+//   medium – non-monic (a ≥ 2), larger integer roots
+//   hard   – non-monic with at least one fractional root
+function generateSolve() {
+    let a, b, c, roots;
+
+    if (difficulty === 'easy') {
+        a = 1;
+        let r1, r2;
+        do {
+            r1 = nonZero(-6, 6);
+            r2 = nonZero(-6, 6);
+        } while (r1 === 0 && r2 === 0);
+        b = -(r1 + r2);
+        c = r1 * r2;
+        roots = [r1, r2];
+    } else if (difficulty === 'medium') {
+        a = randInt(2, 4);
+        const r1 = nonZero(-9, 9);
+        const r2 = nonZero(-9, 9);
+        b = -a * (r1 + r2);
+        c = a * r1 * r2;
+        roots = [r1, r2];
+    } else {
+        // Hard: roots m/a and n, where m is NOT a multiple of a → a real fraction.
+        a = randInt(2, 4);
+        let m;
+        do { m = nonZero(-9, 9); } while (m % a === 0);
+        const n = nonZero(-7, 7);
+        // (a·x − m)(x − n) = a·x² − (a·n + m)·x + m·n
+        b = -(a * n + m);
+        c = m * n;
+        roots = [m / a, n];
+    }
+
+    current = { mode: 'solve', a, b, c, roots };
+}
+
+// Build a monic factorable quadratic  x² + bx + c = (x + p)(x + q) = 0.
+//   easy   – small positive bracket numbers
+//   medium – mixed signs, medium range
+//   hard   – mixed signs, larger range
+function generateFactor() {
+    let lo, hi;
+    if (difficulty === 'easy')      { lo = 1;   hi = 7; }
+    else if (difficulty === 'medium') { lo = -9; hi = 9; }
+    else                            { lo = -13; hi = 13; }
+
+    const p = nonZero(lo, hi);
+    const q = nonZero(lo, hi);
+    const b = p + q;          // (x + p)(x + q) = x² + (p+q)x + pq
+    const c = p * q;
+
+    current = { mode: 'factor', a: 1, b, c, p, q, roots: [-p, -q] };
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -100,10 +148,16 @@ function renderEquation() {
 function clearAnswer() {
     document.getElementById('x1').value = '';
     document.getElementById('x2').value = '';
+    document.getElementById('fact-p').value = '';
+    document.getElementById('fact-q').value = '';
     document.getElementById('feedback').textContent = '';
     document.getElementById('feedback').className = 'feedback-message';
     document.getElementById('steps').style.display = 'none';
-    document.getElementById('x1').focus();
+
+    const factoring = current && current.mode === 'factor';
+    document.getElementById('solve-answer').style.display = factoring ? 'none' : 'block';
+    document.getElementById('factor-answer').style.display = factoring ? 'block' : 'none';
+    document.getElementById(factoring ? 'fact-p' : 'x1').focus();
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -129,7 +183,14 @@ function parseValue(raw) {
 
 function checkAnswer() {
     if (!current) return;
+    if (current.mode === 'factor') {
+        checkFactor();
+    } else {
+        checkSolve();
+    }
+}
 
+function checkSolve() {
     const a1 = parseValue(document.getElementById('x1').value);
     const a2 = parseValue(document.getElementById('x2').value);
     const feedback = document.getElementById('feedback');
@@ -153,7 +214,36 @@ function checkAnswer() {
     } else {
         const sorted = [r1, r2].sort((p, q) => p - q);
         feedback.textContent =
-            `Not quite. The solutions are x = ${fmt(sorted[0])} and x = ${fmt(sorted[1])}.`;
+            `Not quite. The solutions are x = ${fmtRoot(sorted[0])} and x = ${fmtRoot(sorted[1])}.`;
+        feedback.className = 'feedback-message incorrect';
+        showSteps();
+    }
+    updateScore();
+}
+
+function checkFactor() {
+    const a1 = parseValue(document.getElementById('fact-p').value);
+    const a2 = parseValue(document.getElementById('fact-q').value);
+    const feedback = document.getElementById('feedback');
+
+    if (a1 === null || a2 === null) {
+        feedback.textContent = 'Fill in both brackets with a number.';
+        feedback.className = 'feedback-message incorrect';
+        return;
+    }
+
+    // Correct when the two numbers add to b and multiply to c (any order).
+    const { b, c } = current;
+    const ok = Math.abs(a1 + a2 - b) < 0.01 && Math.abs(a1 * a2 - c) < 0.01;
+
+    total++;
+    if (ok) {
+        score++;
+        feedback.textContent = '🎉 Correct! Nicely factored.';
+        feedback.className = 'feedback-message correct';
+    } else {
+        feedback.textContent =
+            `Not quite. Look for two numbers that add to ${b} and multiply to ${c}.`;
         feedback.className = 'feedback-message incorrect';
         showSteps();
     }
@@ -171,6 +261,14 @@ function updateScore() {
 
 function showSteps() {
     if (!current) return;
+    if (current.mode === 'factor') {
+        showFactorSteps();
+    } else {
+        showSolveSteps();
+    }
+}
+
+function showSolveSteps() {
     const { a, b, c, roots } = current;
     const disc = b * b - 4 * a * c;
     const sqrt = Math.sqrt(disc);
@@ -182,7 +280,20 @@ function showSteps() {
         <div>2. Discriminant: \\(\\Delta = b^2 - 4ac = (${b})^2 - 4(${a})(${c}) = ${disc}\\)</div>
         <div>3. Square root: \\(\\sqrt{${disc}} = ${fmt(sqrt)}\\)</div>
         <div>4. Formula: \\(x = \\dfrac{-(${b}) \\pm ${fmt(sqrt)}}{2 \\times ${a}}\\)</div>
-        <div>5. Solutions: \\(x = ${fmt(sorted[0])}\\) and \\(x = ${fmt(sorted[1])}\\)</div>
+        <div>5. Solutions: \(x = ${fmtRoot(sorted[0])}\) and \(x = ${fmtRoot(sorted[1])}\)</div>
+    `;
+    box.style.display = 'block';
+    renderMath(box);
+}
+
+function showFactorSteps() {
+    const { b, c, p, q } = current;
+    const box = document.getElementById('steps');
+    box.innerHTML = `
+        <div>1. We need two numbers that multiply to \\(${c}\\) and add to \\(${b}\\).</div>
+        <div>2. Those numbers are \\(${p}\\) and \\(${q}\\).</div>
+        <div>3. Factor: \\((x ${p < 0 ? '-' : '+'} ${Math.abs(p)})(x ${q < 0 ? '-' : '+'} ${Math.abs(q)}) = 0\\)</div>
+        <div>4. Set each factor to zero: \\(x = ${-p}\\) or \\(x = ${-q}\\)</div>
     `;
     box.style.display = 'block';
     renderMath(box);
@@ -216,14 +327,25 @@ function setupTabs() {
                 which === 'practice' ? 'block' : 'none';
             document.getElementById('reference-section').style.display =
                 which === 'reference' ? 'block' : 'none';
+            document.getElementById('factoring-section').style.display =
+                which === 'factoring' ? 'block' : 'none';
         });
     });
 }
 
 function setupEvents() {
-    document.querySelectorAll('.operation-btn').forEach(btn => {
+    document.querySelectorAll('.method-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            document.querySelectorAll('.operation-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            method = btn.dataset.method;
+            generate();
+        });
+    });
+
+    document.querySelectorAll('.difficulty-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.difficulty-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             difficulty = btn.dataset.difficulty;
             generate();
@@ -237,7 +359,7 @@ function setupEvents() {
         showSteps();
     });
 
-    ['x1', 'x2'].forEach(id => {
+    ['x1', 'x2', 'fact-p', 'fact-q'].forEach(id => {
         document.getElementById(id).addEventListener('keydown', e => {
             if (e.key === 'Enter') checkAnswer();
         });
