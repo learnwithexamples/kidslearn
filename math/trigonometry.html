@@ -6,6 +6,11 @@
     <title>Trigonometry - KidsLearn</title>
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/fact-sheet.css">
+    <!-- KaTeX for proper math/equation rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css" integrity="sha384-vlBdW0r3AcZO/HboRPznQNowvexd3fY8qHOWkBi5q7KGgqJ+F48+DceybYmrVbmB" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js" integrity="sha384-AtrdNsnxl/75rvBneBVH7DtOvCxSVahR2zWqle1coBKd8DEmLoviqNeJSx64gNAs" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, { ignoredTags: ['script','noscript','style','textarea','pre','option'], throwOnError: false });"></script>
     <style>
         .topic-tabs {
             display: flex;
@@ -216,6 +221,7 @@
         <div class="topic-tabs">
             <button class="topic-tab active" data-tab="practice">🎯 Practice Problems</button>
             <button class="topic-tab" data-tab="reference">📚 Learn the Basics</button>
+            <button class="topic-tab" data-tab="advanced">🚀 Advanced</button>
         </div>
 
         <!-- Practice Section -->
@@ -272,18 +278,25 @@
                 <p>In a right triangle, the three main trig ratios connect an angle to
                    the sides. Remember them with <strong>SOH-CAH-TOA</strong>:</p>
 
+                <div class="triangle-display" style="max-width: 460px; height: 340px;">
+                    <canvas id="reference-canvas" class="triangle-canvas"></canvas>
+                </div>
+                <p style="text-align: center; color: #666; margin-top: -5px;">
+                    The names of the sides depend on angle θ.
+                </p>
+
                 <div class="sohcahtoa">
                     <div class="sohcahtoa-card">
                         <div class="big">SOH</div>
-                        <div class="ratio">sin θ = Opposite ÷ Hypotenuse</div>
+                        <div class="ratio">\(\sin\theta = \dfrac{\text{Opp}}{\text{Hyp}}\)</div>
                     </div>
                     <div class="sohcahtoa-card">
                         <div class="big">CAH</div>
-                        <div class="ratio">cos θ = Adjacent ÷ Hypotenuse</div>
+                        <div class="ratio">\(\cos\theta = \dfrac{\text{Adj}}{\text{Hyp}}\)</div>
                     </div>
                     <div class="sohcahtoa-card">
                         <div class="big">TOA</div>
-                        <div class="ratio">tan θ = Opposite ÷ Adjacent</div>
+                        <div class="ratio">\(\tan\theta = \dfrac{\text{Opp}}{\text{Adj}}\)</div>
                     </div>
                 </div>
 
@@ -305,7 +318,7 @@
                     </div>
                     <div class="formula-card">
                         <h4>Pythagorean Theorem</h4>
-                        <code>a² + b² = c²</code>
+                        <code>\(a^2 + b^2 = c^2\)</code>
                         <p><small>c is the hypotenuse. Find a missing side without angles.</small></p>
                     </div>
                 </div>
@@ -315,15 +328,15 @@
                 <div class="formula-grid">
                     <div class="formula-card">
                         <h4>Inverse Sine</h4>
-                        <code>θ = sin⁻¹(opp ÷ hyp)</code>
+                        <code>\(\theta = \sin^{-1}\!\left(\dfrac{\text{opp}}{\text{hyp}}\right)\)</code>
                     </div>
                     <div class="formula-card">
                         <h4>Inverse Cosine</h4>
-                        <code>θ = cos⁻¹(adj ÷ hyp)</code>
+                        <code>\(\theta = \cos^{-1}\!\left(\dfrac{\text{adj}}{\text{hyp}}\right)\)</code>
                     </div>
                     <div class="formula-card">
                         <h4>Inverse Tangent</h4>
-                        <code>θ = tan⁻¹(opp ÷ adj)</code>
+                        <code>\(\theta = \tan^{-1}\!\left(\dfrac{\text{opp}}{\text{adj}}\right)\)</code>
                     </div>
                 </div>
 
@@ -347,9 +360,133 @@
                 <div class="steps-box">
                     <div>1. We know the angle and the hypotenuse, and want the opposite
                          → use <strong>SOH</strong>.</div>
-                    <div>2. <code>sin 30° = opposite ÷ 10</code></div>
-                    <div>3. <code>opposite = 10 × sin 30° = 10 × 0.5</code></div>
-                    <div>4. <code>opposite = 5</code></div>
+                    <div>2. \(\sin 30^\circ = \dfrac{\text{opposite}}{10}\)</div>
+                    <div>3. \(\text{opposite} = 10 \times \sin 30^\circ = 10 \times 0.5\)</div>
+                    <div>4. \(\text{opposite} = 5\)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Section -->
+        <div id="advanced-section" style="display: none;">
+            <div class="reference-section">
+                <h2>Reciprocal &amp; Quotient Identities</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>Reciprocals</h4>
+                        <code>\(\csc\theta = \dfrac{1}{\sin\theta}\)</code>
+                        <code>\(\sec\theta = \dfrac{1}{\cos\theta}\)</code>
+                        <code>\(\cot\theta = \dfrac{1}{\tan\theta}\)</code>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Quotients</h4>
+                        <code>\(\tan\theta = \dfrac{\sin\theta}{\cos\theta}\)</code>
+                        <code>\(\cot\theta = \dfrac{\cos\theta}{\sin\theta}\)</code>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">Pythagorean Identities</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>Main Identity</h4>
+                        <code>\(\sin^2\theta + \cos^2\theta = 1\)</code>
+                        <p><small>Here \(\sin^2\theta\) means \((\sin\theta)^2\).</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Tangent Form</h4>
+                        <code>\(1 + \tan^2\theta = \sec^2\theta\)</code>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Cotangent Form</h4>
+                        <code>\(1 + \cot^2\theta = \csc^2\theta\)</code>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">Double-Angle Formulas</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>Sine</h4>
+                        <code>\(\sin 2\theta = 2\sin\theta\cos\theta\)</code>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Cosine</h4>
+                        <code>\(\cos 2\theta = \cos^2\theta - \sin^2\theta\)</code>
+                        <code>\(\cos 2\theta = 2\cos^2\theta - 1\)</code>
+                        <code>\(\cos 2\theta = 1 - 2\sin^2\theta\)</code>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Tangent</h4>
+                        <code>\(\tan 2\theta = \dfrac{2\tan\theta}{1 - \tan^2\theta}\)</code>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">Half-Angle Formulas</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>Sine</h4>
+                        <code>\(\sin\dfrac{\theta}{2} = \pm\sqrt{\dfrac{1 - \cos\theta}{2}}\)</code>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Cosine</h4>
+                        <code>\(\cos\dfrac{\theta}{2} = \pm\sqrt{\dfrac{1 + \cos\theta}{2}}\)</code>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Tangent</h4>
+                        <code>\(\tan\dfrac{\theta}{2} = \dfrac{1 - \cos\theta}{\sin\theta}\)</code>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">Angle Sum &amp; Difference</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>Sine</h4>
+                        <code>\(\sin(A \pm B) = \sin A\cos B \pm \cos A\sin B\)</code>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Cosine</h4>
+                        <code>\(\cos(A \pm B) = \cos A\cos B \mp \sin A\sin B\)</code>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Tangent</h4>
+                        <code>\(\tan(A \pm B) = \dfrac{\tan A \pm \tan B}{1 \mp \tan A\tan B}\)</code>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">Laws for Any Triangle</h2>
+                <p>These work for <em>all</em> triangles, not just right triangles.
+                   Sides \(a, b, c\) are opposite angles \(A, B, C\).</p>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>Law of Sines</h4>
+                        <code>\(\dfrac{a}{\sin A} = \dfrac{b}{\sin B} = \dfrac{c}{\sin C}\)</code>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Law of Cosines</h4>
+                        <code>\(c^2 = a^2 + b^2 - 2ab\cos C\)</code>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">Symmetry &amp; Co-Function Rules</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>Even / Odd</h4>
+                        <code>\(\cos(-\theta) = \cos\theta\)</code>
+                        <code>\(\sin(-\theta) = -\sin\theta\)</code>
+                        <code>\(\tan(-\theta) = -\tan\theta\)</code>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Co-Functions</h4>
+                        <code>\(\sin(90^\circ - \theta) = \cos\theta\)</code>
+                        <code>\(\cos(90^\circ - \theta) = \sin\theta\)</code>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">Worked Example: Double Angle</h2>
+                <p>If \(\sin\theta = 0.6\) and \(\cos\theta = 0.8\), find \(\sin 2\theta\).</p>
+                <div class="steps-box">
+                    <div>1. Use the formula: \(\sin 2\theta = 2\sin\theta\cos\theta\)</div>
+                    <div>2. Substitute: \(\sin 2\theta = 2 \times 0.6 \times 0.8\)</div>
+                    <div>3. Answer: \(\sin 2\theta = 0.96\)</div>
                 </div>
             </div>
         </div>

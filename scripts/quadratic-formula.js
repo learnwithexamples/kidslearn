@@ -74,32 +74,27 @@ function generate() {
 // Rendering
 // ─────────────────────────────────────────────────────────────
 
-function term(coef, variable) {
-    // Returns a signed term like " + 3x", " - x", "" (when coef is 0).
+// Build the LaTeX for a quadratic term with the right sign and coefficient.
+function latexTerm(coef, variable, leading) {
     if (coef === 0) return '';
-    const sign = coef > 0 ? ' + ' : ' − ';
-    let mag = Math.abs(coef);
-    let magStr;
-    if (variable && mag === 1) magStr = '';
-    else magStr = String(mag);
-    return `${sign}${magStr}${variable}`;
-}
-
-function leadingTerm(coef, variable) {
-    if (coef === 0) return '';
-    const sign = coef < 0 ? '−' : '';
-    let mag = Math.abs(coef);
-    let magStr = (variable && mag === 1) ? '' : String(mag);
-    return `${sign}${magStr}${variable}`;
+    const mag = Math.abs(coef);
+    const magStr = (variable && mag === 1) ? '' : String(mag);
+    if (leading) {
+        return `${coef < 0 ? '-' : ''}${magStr}${variable}`;
+    }
+    const sign = coef > 0 ? '+' : '-';
+    return ` ${sign} ${magStr}${variable}`;
 }
 
 function renderEquation() {
     const { a, b, c } = current;
-    let eq = leadingTerm(a, 'x²');
-    eq += term(b, 'x');
-    eq += term(c, '');
-    eq += ' = 0';
-    document.getElementById('equation-display').textContent = eq;
+    let latex = latexTerm(a, 'x^2', true);
+    latex += latexTerm(b, 'x', false);
+    latex += latexTerm(c, '', false);
+    latex += ' = 0';
+    const el = document.getElementById('equation-display');
+    el.innerHTML = `\\(${latex}\\)`;
+    renderMath(el);
 }
 
 function clearAnswer() {
@@ -183,13 +178,28 @@ function showSteps() {
 
     const box = document.getElementById('steps');
     box.innerHTML = `
-        <div>1. Coefficients: <code>a = ${a}</code>, <code>b = ${b}</code>, <code>c = ${c}</code></div>
-        <div>2. Discriminant: <code>Δ = b² − 4ac = (${b})² − 4(${a})(${c}) = ${disc}</code></div>
-        <div>3. Square root: <code>√${disc} = ${fmt(sqrt)}</code></div>
-        <div>4. Formula: <code>x = (−(${b}) ± ${fmt(sqrt)}) / (2 × ${a})</code></div>
-        <div>5. Solutions: <code>x = ${fmt(sorted[0])}</code> and <code>x = ${fmt(sorted[1])}</code></div>
+        <div>1. Coefficients: \\(a = ${a}\\), \\(b = ${b}\\), \\(c = ${c}\\)</div>
+        <div>2. Discriminant: \\(\\Delta = b^2 - 4ac = (${b})^2 - 4(${a})(${c}) = ${disc}\\)</div>
+        <div>3. Square root: \\(\\sqrt{${disc}} = ${fmt(sqrt)}\\)</div>
+        <div>4. Formula: \\(x = \\dfrac{-(${b}) \\pm ${fmt(sqrt)}}{2 \\times ${a}}\\)</div>
+        <div>5. Solutions: \\(x = ${fmt(sorted[0])}\\) and \\(x = ${fmt(sorted[1])}\\)</div>
     `;
     box.style.display = 'block';
+    renderMath(box);
+}
+
+// Render any KaTeX math inside an element (auto-render loads via CDN, deferred).
+function renderMath(el) {
+    if (window.renderMathInElement) {
+        renderMathInElement(el, {
+            delimiters: [
+                { left: '\\(', right: '\\)', display: false },
+                { left: '\\[', right: '\\]', display: true },
+            ],
+            ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'option'],
+            throwOnError: false,
+        });
+    }
 }
 
 // ─────────────────────────────────────────────────────────────

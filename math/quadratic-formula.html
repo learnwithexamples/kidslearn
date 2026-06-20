@@ -6,6 +6,11 @@
     <title>Quadratic Formula - KidsLearn</title>
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/fact-sheet.css">
+    <!-- KaTeX for proper math/equation rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css" integrity="sha384-vlBdW0r3AcZO/HboRPznQNowvexd3fY8qHOWkBi5q7KGgqJ+F48+DceybYmrVbmB" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js" integrity="sha384-AtrdNsnxl/75rvBneBVH7DtOvCxSVahR2zWqle1coBKd8DEmLoviqNeJSx64gNAs" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, { ignoredTags: ['script','noscript','style','textarea','pre','option'], throwOnError: false });"></script>
     <style>
         .topic-tabs {
             display: flex;
@@ -136,10 +141,9 @@
 
         .big-formula {
             text-align: center;
-            font-size: 2.2em;
+            font-size: 1.6em;
             color: #667eea;
             margin: 25px 0;
-            font-weight: bold;
         }
 
         .formula-grid {
@@ -170,23 +174,13 @@
             font-size: 1.05em;
         }
 
-        .frac {
-            display: inline-flex;
-            flex-direction: column;
-            vertical-align: middle;
-            text-align: center;
-            margin: 0 4px;
-        }
-
-        .frac .num { border-bottom: 2px solid currentColor; padding: 0 6px; }
-        .frac .den { padding: 0 6px; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>➗ Quadratic Formula</h1>
-            <p class="subtitle">Solve equations of the form ax² + bx + c = 0</p>
+            <p class="subtitle">Solve equations of the form \(ax^2 + bx + c = 0\)</p>
             <a href="math.html" class="back-link">← Back to Math Topics</a>
         </header>
 
@@ -251,46 +245,42 @@
         <div id="reference-section" style="display: none;">
             <div class="reference-section">
                 <h2>The Quadratic Formula</h2>
-                <p>Any quadratic equation written as <code>ax² + bx + c = 0</code> (where
-                   <code>a ≠ 0</code>) can be solved with this formula:</p>
+                <p>Any quadratic equation written as \(ax^2 + bx + c = 0\) (where
+                   \(a \neq 0\)) can be solved with this formula:</p>
 
                 <div class="big-formula">
-                    x =
-                    <span class="frac">
-                        <span class="num">−b ± √(b² − 4ac)</span>
-                        <span class="den">2a</span>
-                    </span>
+                    \[ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]
                 </div>
 
                 <div class="formula-grid">
                     <div class="formula-card">
                         <h4>The Coefficients</h4>
-                        <code>a = number in front of x²</code>
-                        <code>b = number in front of x</code>
-                        <code>c = the constant term</code>
+                        <code>\(a\) = number in front of \(x^2\)</code>
+                        <code>\(b\) = number in front of \(x\)</code>
+                        <code>\(c\) = the constant term</code>
                     </div>
 
                     <div class="formula-card">
                         <h4>The Discriminant</h4>
-                        <code>Δ = b² − 4ac</code>
+                        <code>\(\Delta = b^2 - 4ac\)</code>
                         <p><small>The part under the square root tells you how many
                            real solutions there are.</small></p>
                     </div>
 
                     <div class="formula-card">
-                        <h4>Δ &gt; 0</h4>
+                        <h4>\(\Delta > 0\)</h4>
                         <code>Two real solutions</code>
-                        <p><small>The ± gives two different answers.</small></p>
+                        <p><small>The \(\pm\) gives two different answers.</small></p>
                     </div>
 
                     <div class="formula-card">
-                        <h4>Δ = 0</h4>
+                        <h4>\(\Delta = 0\)</h4>
                         <code>One repeated solution</code>
-                        <p><small>x = −b / 2a</small></p>
+                        <p><small>\(x = \dfrac{-b}{2a}\)</small></p>
                     </div>
 
                     <div class="formula-card">
-                        <h4>Δ &lt; 0</h4>
+                        <h4>\(\Delta < 0\)</h4>
                         <code>No real solutions</code>
                         <p><small>The square root of a negative number is not
                            a real number.</small></p>
@@ -298,29 +288,29 @@
 
                     <div class="formula-card">
                         <h4>Vertex (turning point)</h4>
-                        <code>x = −b / 2a</code>
+                        <code>\(x = \dfrac{-b}{2a}\)</code>
                         <p><small>The lowest or highest point of the parabola.</small></p>
                     </div>
                 </div>
 
                 <h2 style="margin-top: 40px;">Worked Example</h2>
-                <p>Solve <code>x² − 5x + 6 = 0</code></p>
+                <p>Solve \(x^2 - 5x + 6 = 0\)</p>
                 <div class="steps-box">
-                    <div>1. Identify the coefficients: <code>a = 1</code>,
-                         <code>b = −5</code>, <code>c = 6</code></div>
-                    <div>2. Discriminant: <code>Δ = (−5)² − 4(1)(6) = 25 − 24 = 1</code></div>
-                    <div>3. Square root: <code>√1 = 1</code></div>
-                    <div>4. Apply the formula: <code>x = (5 ± 1) / 2</code></div>
-                    <div>5. Two solutions: <code>x = 6/2 = 3</code> and
-                         <code>x = 4/2 = 2</code></div>
+                    <div>1. Identify the coefficients: \(a = 1\),
+                         \(b = -5\), \(c = 6\)</div>
+                    <div>2. Discriminant: \(\Delta = (-5)^2 - 4(1)(6) = 25 - 24 = 1\)</div>
+                    <div>3. Square root: \(\sqrt{1} = 1\)</div>
+                    <div>4. Apply the formula: \(x = \dfrac{5 \pm 1}{2}\)</div>
+                    <div>5. Two solutions: \(x = \dfrac{6}{2} = 3\) and
+                         \(x = \dfrac{4}{2} = 2\)</div>
                 </div>
 
                 <h2 style="margin-top: 40px;">Tips</h2>
                 <ul style="line-height: 1.9;">
-                    <li>Watch the signs! A negative <code>b</code> becomes positive
-                        when you compute <code>−b</code>.</li>
+                    <li>Watch the signs! A negative \(b\) becomes positive
+                        when you compute \(-b\).</li>
                     <li>Always rearrange the equation so one side equals 0 first.</li>
-                    <li>If <code>b² − 4ac</code> is a perfect square, the answers
+                    <li>If \(b^2 - 4ac\) is a perfect square, the answers
                         will be nice whole numbers or fractions.</li>
                     <li>You can check your answers by substituting them back into
                         the original equation.</li>

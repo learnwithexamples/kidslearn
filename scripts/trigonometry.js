@@ -261,6 +261,97 @@ function drawTriangle() {
     ctx.fillText(thetaText, A.x + 42, A.y - 16);
 }
 
+// Static labelled triangle for the "Learn the Basics" tab.
+function drawReferenceTriangle() {
+    const canvas = document.getElementById('reference-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width || 440;
+    canvas.height = rect.height || 340;
+
+    const W = canvas.width;
+    const H = canvas.height;
+    ctx.clearRect(0, 0, W, H);
+
+    const padX = 70;
+    const padY = 55;
+    const theta = 35 * Math.PI / 180; // fixed, just for a clear picture
+
+    let base = W - padX * 2;
+    let height = base * Math.tan(theta);
+    const maxHeight = H - padY * 2;
+    if (height > maxHeight) {
+        height = maxHeight;
+        base = height / Math.tan(theta);
+    }
+
+    const A = { x: padX, y: H - padY };               // bottom-left (θ)
+    const B = { x: padX + base, y: H - padY };        // bottom-right (right angle)
+    const C = { x: padX + base, y: H - padY - height }; // top-right
+
+    // Triangle
+    ctx.beginPath();
+    ctx.moveTo(A.x, A.y);
+    ctx.lineTo(B.x, B.y);
+    ctx.lineTo(C.x, C.y);
+    ctx.closePath();
+    ctx.fillStyle = '#e8ecff';
+    ctx.fill();
+    ctx.lineWidth = 2.5;
+    ctx.strokeStyle = '#667eea';
+    ctx.stroke();
+
+    // Right-angle marker at B
+    const m = 14;
+    ctx.beginPath();
+    ctx.moveTo(B.x - m, B.y);
+    ctx.lineTo(B.x - m, B.y - m);
+    ctx.lineTo(B.x, B.y - m);
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Angle θ arc at A
+    ctx.beginPath();
+    ctx.arc(A.x, A.y, 28, -theta, 0);
+    ctx.strokeStyle = '#c62828';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.font = 'bold 15px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    // Adjacent (AB) — bottom, next to θ
+    ctx.fillStyle = '#333';
+    ctx.fillText('Adjacent', (A.x + B.x) / 2, A.y + 22);
+
+    // Opposite (BC) — right, across from θ
+    ctx.save();
+    ctx.translate(B.x + 18, (B.y + C.y) / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText('Opposite', 0, 0);
+    ctx.restore();
+
+    // Hypotenuse (AC) — slanted, longest side
+    const angle = Math.atan2(C.y - A.y, C.x - A.x);
+    ctx.save();
+    ctx.translate((A.x + C.x) / 2, (A.y + C.y) / 2 - 14);
+    ctx.rotate(angle);
+    ctx.fillStyle = '#667eea';
+    ctx.fillText('Hypotenuse', 0, 0);
+    ctx.restore();
+
+    // θ label and right-angle note
+    ctx.fillStyle = '#c62828';
+    ctx.fillText('θ', A.x + 46, A.y - 16);
+    ctx.fillStyle = '#333';
+    ctx.font = '13px sans-serif';
+    ctx.fillText('90°', B.x - 24, B.y - 24);
+}
+
 // ─────────────────────────────────────────────────────────────
 // Answer checking
 // ─────────────────────────────────────────────────────────────
@@ -308,29 +399,44 @@ function showSteps() {
     let html = '';
 
     if (current.kind === 'side') {
-        const { ratio, theta, given, givenLen, find, answer } = current;
+        const { ratio, theta, given, find, givenLen, answer } = current;
         const ratioName = { sin: 'SOH (sine)', cos: 'CAH (cosine)', tan: 'TOA (tangent)' }[ratio];
+        const ratioVal = round1(Math[ratio](theta * Math.PI / 180));
         html += `<div>1. We know the ${SIDE_NAME[given]} and want the ${SIDE_NAME[find]} → use ${ratioName}.</div>`;
-        html += `<div>2. Ratio: <code>${ratio} ${theta}° = ${round1(Math[ratio](theta * Math.PI / 180))}</code></div>`;
+        html += `<div>2. Ratio: \\(\\${ratio} ${theta}^\\circ = ${ratioVal}\\)</div>`;
         html += `<div>3. Rearrange and solve with the known side (${givenLen}).</div>`;
-        html += `<div>4. Answer: <code>${answer} units</code></div>`;
+        html += `<div>4. Answer: \\(${answer}\\) units</div>`;
     } else {
         const { ratio, shown, sides, answer } = current;
-        const inv = { sin: 'sin⁻¹', cos: 'cos⁻¹', tan: 'tan⁻¹' }[ratio];
         const [s1, s2] = shown;
         const frac = ratio === 'tan'
-            ? `${sides.opp} ÷ ${sides.adj}`
+            ? `\\dfrac{${sides.opp}}{${sides.adj}}`
             : ratio === 'sin'
-                ? `${sides.opp} ÷ ${sides.hyp}`
-                : `${sides.adj} ÷ ${sides.hyp}`;
+                ? `\\dfrac{${sides.opp}}{${sides.hyp}}`
+                : `\\dfrac{${sides.adj}}{${sides.hyp}}`;
         html += `<div>1. We know the ${SIDE_NAME[s1]} and ${SIDE_NAME[s2]} → use ${ratio.toUpperCase()}.</div>`;
-        html += `<div>2. <code>${ratio} θ = ${frac}</code></div>`;
-        html += `<div>3. <code>θ = ${inv}(${frac})</code></div>`;
-        html += `<div>4. Answer: <code>θ ≈ ${answer}°</code></div>`;
+        html += `<div>2. \\(\\${ratio}\\,\\theta = ${frac}\\)</div>`;
+        html += `<div>3. \\(\\theta = \\${ratio}^{-1}\\!\\left(${frac}\\right)\\)</div>`;
+        html += `<div>4. Answer: \\(\\theta \\approx ${answer}^\\circ\\)</div>`;
     }
 
     box.innerHTML = html;
     box.style.display = 'block';
+    renderMath(box);
+}
+
+// Render any KaTeX math inside an element (auto-render loads via CDN, deferred).
+function renderMath(el) {
+    if (window.renderMathInElement) {
+        renderMathInElement(el, {
+            delimiters: [
+                { left: '\\(', right: '\\)', display: false },
+                { left: '\\[', right: '\\]', display: true },
+            ],
+            ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'option'],
+            throwOnError: false,
+        });
+    }
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -347,7 +453,10 @@ function setupTabs() {
                 which === 'practice' ? 'block' : 'none';
             document.getElementById('reference-section').style.display =
                 which === 'reference' ? 'block' : 'none';
+            document.getElementById('advanced-section').style.display =
+                which === 'advanced' ? 'block' : 'none';
             if (which === 'practice') drawTriangle();
+            if (which === 'reference') drawReferenceTriangle();
         });
     });
 }
@@ -374,6 +483,9 @@ function setupEvents() {
 
     window.addEventListener('resize', () => {
         if (current) drawTriangle();
+        if (document.getElementById('reference-section').style.display !== 'none') {
+            drawReferenceTriangle();
+        }
     });
 }
 
