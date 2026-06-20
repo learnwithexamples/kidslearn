@@ -88,6 +88,88 @@
             font-weight: bold;
         }
 
+        .trig-hint {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 14px;
+            background: #fff8e1;
+            border: 1px solid #ffe082;
+            border-radius: 10px;
+            font-size: 0.85em;
+            font-weight: normal;
+            color: #6d4c00;
+        }
+
+        .trig-table-hint {
+            font-size: 0.8em;
+            font-weight: normal;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .helper-tools {
+            max-width: 520px;
+            margin: 24px auto 0;
+            text-align: center;
+        }
+
+        .helper-toggle {
+            background: #eef1ff;
+            border: 1px solid #c5cdff;
+            color: #3a3f8f;
+            font-weight: bold;
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.95em;
+        }
+
+        .helper-toggle:hover {
+            background: #e2e7ff;
+        }
+
+        .helper-body {
+            margin-top: 12px;
+            padding: 16px;
+            background: #fafbff;
+            border: 1px solid #d7ddff;
+            border-radius: 12px;
+        }
+
+        .helper-hint {
+            font-size: 0.85em;
+            color: #555;
+            margin: 0 0 12px;
+        }
+
+        .helper-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .helper-row select,
+        .helper-row input {
+            padding: 8px 10px;
+            border: 1px solid #c5cdff;
+            border-radius: 8px;
+            font-size: 0.95em;
+        }
+
+        .helper-row input {
+            width: 150px;
+        }
+
+        .helper-result {
+            margin-top: 12px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2e7d32;
+            min-height: 1.2em;
+        }
+
         .answer-section { max-width: 500px; margin: 20px auto; }
 
         .answer-row {
@@ -228,10 +310,20 @@
         <div id="practice-section">
             <div class="controls-panel">
                 <div class="control-section">
-                    <h3>Problem Type</h3>
+                    <h3>Basics</h3>
                     <div class="button-group">
                         <button class="type-btn operation-btn active" data-type="side">Find a Side</button>
                         <button class="type-btn operation-btn" data-type="angle">Find an Angle</button>
+                        <button class="type-btn operation-btn" data-type="ratio">From One Ratio</button>
+                        <button class="type-btn operation-btn" data-type="special">Special Angles</button>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h3>Advanced</h3>
+                    <div class="button-group">
+                        <button class="type-btn operation-btn" data-type="double">Double Angle</button>
+                        <button class="type-btn operation-btn" data-type="sum">Angle Sum &amp; Difference</button>
                     </div>
                 </div>
 
@@ -241,7 +333,7 @@
                 </div>
             </div>
 
-            <div class="triangle-display">
+            <div class="triangle-display" id="practice-triangle">
                 <canvas id="triangle-canvas" class="triangle-canvas"></canvas>
             </div>
 
@@ -262,6 +354,31 @@
 
                 <div id="feedback" class="feedback-message"></div>
                 <div id="steps" class="steps-box" style="display: none;"></div>
+            </div>
+
+            <div class="helper-tools" id="helper-tools">
+                <button type="button" class="helper-toggle" id="helper-toggle">
+                    🧮 Helper Calculator
+                </button>
+                <div class="helper-body" id="helper-body" style="display: none;">
+                    <p class="helper-hint">Stuck on the arithmetic? Use this mini
+                       calculator for square roots, trig values and inverse trig.</p>
+                    <div class="helper-row">
+                        <select id="helper-op">
+                            <option value="sqrt">√x  (square root)</option>
+                            <option value="square">x²  (square)</option>
+                            <option value="sin">sin(x°)</option>
+                            <option value="cos">cos(x°)</option>
+                            <option value="tan">tan(x°)</option>
+                            <option value="asin">sin⁻¹(x) → angle°</option>
+                            <option value="acos">cos⁻¹(x) → angle°</option>
+                            <option value="atan">tan⁻¹(x) → angle°</option>
+                        </select>
+                        <input type="text" id="helper-input" placeholder="number or fraction" autocomplete="off">
+                        <button type="button" id="helper-calc" class="secondary-btn">=</button>
+                    </div>
+                    <div class="helper-result" id="helper-result"></div>
+                </div>
             </div>
 
             <div class="quiz-header" style="margin-top: 30px;">
