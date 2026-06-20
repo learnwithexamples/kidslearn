@@ -176,6 +176,29 @@
             max-width: 100%;
             height: auto;
         }
+
+        .ef-form {
+            text-align: center;
+            font-size: 1.7em;
+            font-weight: bold;
+            color: #333;
+            margin: 20px auto;
+        }
+
+        .ef-input {
+            width: 64px;
+            padding: 6px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.85em;
+            text-align: center;
+            margin: 0 4px;
+        }
+
+        .ef-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
     </style>
 </head>
 <body>
@@ -190,6 +213,7 @@
         <div class="topic-tabs">
             <button class="topic-tab active" data-tab="practice">🎯 Practice Problems</button>
             <button class="topic-tab" data-tab="reference">📚 Learn to Balance</button>
+            <button class="topic-tab" data-tab="expand">📐 Expand &amp; Factor</button>
         </div>
 
         <!-- Practice Section -->
@@ -317,6 +341,147 @@
                     <li>Always <strong>check</strong> by putting your answer back into the
                         original equation.</li>
                 </ul>
+            </div>
+        </div>
+
+        <!-- Expand & Factor Section -->
+        <div id="expand-section" style="display: none;">
+            <div class="reference-section">
+                <h2>📐 Expanding &amp; Factoring</h2>
+                <p>“Expanding” means multiplying brackets out. “Factoring” is the
+                   reverse — writing an expression as a product of brackets. These
+                   identities are worth memorising:</p>
+
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>Distributive Law</h4>
+                        <code>\(a(b + c) = ab + ac\)</code>
+                        <p><small>Multiply the outside term into each inside term.</small></p>
+                    </div>
+
+                    <div class="formula-card">
+                        <h4>Two Binomials</h4>
+                        <code>\((x + a)(x + b)\)</code>
+                        <code>\(= x^2 + (a + b)x + ab\)</code>
+                        <p><small>Add for the middle term, multiply for the last.</small></p>
+                    </div>
+
+                    <div class="formula-card">
+                        <h4>Perfect Square</h4>
+                        <code>\((a + b)^2 = a^2 + 2ab + b^2\)</code>
+                        <code>\((a - b)^2 = a^2 - 2ab + b^2\)</code>
+                    </div>
+
+                    <div class="formula-card">
+                        <h4>Difference of Squares</h4>
+                        <code>\((a + b)(a - b) = a^2 - b^2\)</code>
+                    </div>
+
+                    <div class="formula-card">
+                        <h4>Perfect Cube</h4>
+                        <code>\((a + b)^3 = a^3 + 3a^2b + 3ab^2 + b^3\)</code>
+                        <code>\((a - b)^3 = a^3 - 3a^2b + 3ab^2 - b^3\)</code>
+                    </div>
+
+                    <div class="formula-card">
+                        <h4>Sum &amp; Difference of Cubes</h4>
+                        <code>\(a^3 + b^3 = (a + b)(a^2 - ab + b^2)\)</code>
+                        <code>\(a^3 - b^3 = (a - b)(a^2 + ab + b^2)\)</code>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px;">Worked Examples</h3>
+                <p>Expand \((x + 2)(x + 5)\):</p>
+                <div class="steps-box">
+                    <div>1. \((x + 2)(x + 5) = x^2 + (2 + 5)x + (2)(5)\)</div>
+                    <div>2. \(= x^2 + 7x + 10\)</div>
+                </div>
+                <p>Factor \(x^2 + 7x + 10\):</p>
+                <div class="steps-box">
+                    <div>1. Find two numbers that multiply to \(10\) and add to
+                         \(7\): \(2\) and \(5\).</div>
+                    <div>2. \(x^2 + 7x + 10 = (x + 2)(x + 5)\)</div>
+                </div>
+            </div>
+
+            <!-- Interactive practice -->
+            <div class="controls-panel">
+                <div class="control-section">
+                    <h3>Mode</h3>
+                    <div class="button-group">
+                        <button class="ef-mode-btn operation-btn active" data-mode="expand">✖️ Expand</button>
+                        <button class="ef-mode-btn operation-btn" data-mode="factor">✏️ Factor</button>
+                        <button class="ef-mode-btn operation-btn" data-mode="identity">📐 Identities</button>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h3>Difficulty</h3>
+                    <div class="button-group">
+                        <button class="ef-difficulty-btn operation-btn active" data-difficulty="easy">Easy</button>
+                        <button class="ef-difficulty-btn operation-btn" data-difficulty="medium">Medium</button>
+                        <button class="ef-difficulty-btn operation-btn" data-difficulty="hard">Hard</button>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <button id="ef-generate-btn" class="primary-btn">🎲 New Problem</button>
+                    <button id="ef-steps-btn" class="secondary-btn">💡 Show Steps</button>
+                </div>
+            </div>
+
+            <div class="equation-display" id="ef-equation">
+                Click "New Problem" to begin
+            </div>
+
+            <!-- Expand answer UI -->
+            <div class="answer-section" id="ef-expand-answer">
+                <p style="text-align: center; color: #666;">
+                    Multiply the brackets out. Fill in the missing coefficient and
+                    constant (they may be negative).
+                </p>
+                <div class="ef-form">
+                    x² +
+                    <input type="text" id="exp-b" class="ef-input" placeholder="?" autocomplete="off"> x +
+                    <input type="text" id="exp-c" class="ef-input" placeholder="?" autocomplete="off">
+                </div>
+            </div>
+
+            <!-- Factor answer UI -->
+            <div class="answer-section" id="ef-factor-answer" style="display: none;">
+                <p style="text-align: center; color: #666;">
+                    Write it as two brackets. (The numbers may be negative — order
+                    doesn't matter.)
+                </p>
+                <div class="ef-form">
+                    (x +
+                    <input type="text" id="fac-p" class="ef-input" placeholder="?" autocomplete="off">
+                    )(x +
+                    <input type="text" id="fac-q" class="ef-input" placeholder="?" autocomplete="off">
+                    )
+                </div>
+            </div>
+
+            <!-- Identity answer UI (the inputs are built by the script) -->
+            <div class="answer-section" id="ef-identity-answer" style="display: none;">
+                <p style="text-align: center; color: #666;">
+                    Expand the expression. Fill in each missing coefficient (they may
+                    be negative; enter <code>0</code> if a term disappears).
+                </p>
+                <div class="ef-form" id="ident-form"></div>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <button id="ef-check-btn" class="primary-btn">✓ Check Answer</button>
+            </div>
+
+            <div id="ef-feedback" class="feedback-message"></div>
+            <div id="ef-steps" class="steps-box" style="display: none;"></div>
+
+            <div class="quiz-header" style="margin-top: 30px;">
+                <div class="timer-display">
+                    <span>Score: <span id="ef-score">0</span>/<span id="ef-total">0</span></span>
+                </div>
             </div>
         </div>
 

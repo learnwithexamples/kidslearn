@@ -222,6 +222,11 @@ function generateFraction(maxNum = null, maxDen = null) {
 function generateSimplifiableFraction() {
     // factor must satisfy: factor*1 <= maxNumerator AND factor*2 <= maxDenominator
     const maxFactor = Math.min(6, config.maxNumerator, Math.floor(config.maxDenominator / 2));
+    // Too small to build a non-trivial simplifiable fraction within the limits
+    // (the smallest one is 2/4). Fall back to a plain fraction that respects the caps.
+    if (maxFactor < 2) {
+        return generateFraction();
+    }
     const factor = Math.floor(Math.random() * Math.max(1, maxFactor - 1)) + 2; // [2, maxFactor]
     const maxSimpleNum = Math.max(1, Math.floor(config.maxNumerator / factor));
     const maxSimpleDen = Math.max(2, Math.floor(config.maxDenominator / factor));
@@ -444,9 +449,22 @@ function generateCompareQuestion() {
 
 // Generate equivalent fraction question
 function generateEquivalentQuestion() {
-    const baseFrac = generateFraction();
-    const multiplier = Math.floor(Math.random() * 5) + 2;
-    
+    // Build the base small enough that the scaled-up equivalent fraction
+    // still respects the configured max numerator/denominator.
+    const baseMaxNum = Math.max(1, Math.floor(config.maxNumerator / 2));
+    const baseMaxDen = Math.max(2, Math.floor(config.maxDenominator / 2));
+    const baseFrac = generateFraction(baseMaxNum, baseMaxDen);
+
+    // Largest multiplier that keeps both parts within the limits.
+    const maxMultiplier = Math.min(
+        6,
+        Math.floor(config.maxNumerator / baseFrac.numerator),
+        Math.floor(config.maxDenominator / baseFrac.denominator)
+    );
+    const multiplier = maxMultiplier >= 2
+        ? Math.floor(Math.random() * (maxMultiplier - 1)) + 2 // [2, maxMultiplier]
+        : 1; // caps too small for a larger equivalent; keep within the limit
+
     const choice = Math.random() < 0.5;
     
     if (choice) {
