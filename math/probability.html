@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Probability - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/fact-sheet.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css" integrity="sha384-vlBdW0r3AcZO/HboRPznQNowvexd3fY8qHOWkBi5q7KGgqJ+F48+DceybYmrVbmB" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js" integrity="sha384-AtrdNsnxl/75rvBneBVH7DtOvCxSVahR2zWqle1coBKd8DEmLoviqNeJSx64gNAs" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, { ignoredTags: ['script','noscript','style','textarea','pre','option'], throwOnError: false });"></script>
+    <style>
+        .topic-tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+        .topic-tab { padding: 10px 20px; border: 2px solid #ddd; border-radius: 25px; background: white; cursor: pointer; transition: all 0.3s; font-size: 0.9em; }
+        .topic-tab:hover { border-color: #667eea; background: #f5f7ff; }
+        .topic-tab.active { background: #667eea; color: white; border-color: #667eea; }
+        .reference-section { background: white; border-radius: 10px; padding: 25px; margin: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .formula-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+        .formula-card { background: #f9f9f9; padding: 18px; border-radius: 8px; border-left: 4px solid #667eea; }
+        .formula-card h4 { margin-top: 0; color: #667eea; }
+        .formula-card code { background: white; padding: 5px 10px; border-radius: 4px; display: block; margin: 6px 0; font-size: 1.05em; }
+        .steps-box { background: #fff8e1; border-left: 4px solid #ffb300; padding: 15px 20px; margin: 20px auto; border-radius: 6px; max-width: 560px; line-height: 1.8; }
+        .feedback-message { text-align: center; font-size: 1.1em; font-weight: bold; min-height: 1.5em; margin: 15px 0; }
+        .feedback-message.correct { color: #2e7d32; }
+        .feedback-message.incorrect { color: #c62828; }
+        .secondary-btn { background: white; color: #667eea; border: 2px solid #667eea; padding: 12px 24px; border-radius: 8px; font-size: 1em; cursor: pointer; transition: all 0.3s; margin: 5px; }
+        .secondary-btn:hover { background: #f5f7ff; }
+        .primary-btn { background: #667eea; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 1em; cursor: pointer; margin: 5px; }
+        .primary-btn:hover { background: #556cd6; }
+        .answer-section { max-width: 520px; margin: 20px auto; text-align: center; }
+        .answer-section input { width: 160px; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 1.1em; text-align: center; }
+        .answer-section input:focus { outline: none; border-color: #667eea; }
+        .quiz-header { text-align: center; font-size: 1.1em; font-weight: bold; color: #667eea; margin: 10px 0; }
+        .control-section { margin: 14px 0; text-align: center; }
+        .control-section h3 { margin: 0 0 8px; font-size: 1em; color: #333; }
+        .button-group { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 10px 0; }
+        .operation-btn { padding: 8px 16px; border: 2px solid #ddd; border-radius: 20px; background: white; cursor: pointer; font-size: 0.9em; transition: all 0.3s; }
+        .operation-btn:hover { border-color: #667eea; }
+        .operation-btn.active { background: #667eea; color: white; border-color: #667eea; }
+        /* Probability scale */
+        .prob-scale { position: relative; height: 54px; max-width: 520px; margin: 24px auto 40px; border-radius: 27px;
+            background: linear-gradient(90deg, #e74c3c 0%, #f1c40f 50%, #2ecc71 100%); }
+        .prob-scale span { position: absolute; top: 60px; transform: translateX(-50%); font-size: 0.8em; color: #555; white-space: nowrap; }
+        .prob-scale span::before { content: ''; position: absolute; top: -64px; left: 50%; width: 2px; height: 54px; background: rgba(0,0,0,0.25); }
+        /* Hint / answer formatting */
+        .hint-note { text-align: center; color: #666; font-size: 0.9em; margin-top: 4px; }
+        .sim-result { text-align: center; font-size: 1.1em; line-height: 2; margin: 16px 0; }
+        .sim-result .big { font-size: 1.3em; font-weight: bold; color: #667eea; }
+        #sim-canvas { display: block; width: 100%; max-width: 520px; height: auto; margin: 10px auto; background: #fcfcff; border: 2px solid #e0e4f5; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎲 Probability</h1>
+            <p class="subtitle">How likely is it? Measure the chance!</p>
+            <a href="math.html" class="back-link">← Back to Math Topics</a>
+        </header>
+
+        <div class="topic-tabs">
+            <button class="topic-tab active" data-tab="learn">📚 Learn</button>
+            <button class="topic-tab" data-tab="experiment">🧪 Experiment</button>
+            <button class="topic-tab" data-tab="practice">✏️ Practice</button>
+        </div>
+
+        <!-- LEARN -->
+        <div id="learn-section">
+            <div class="reference-section">
+                <h2>What is Probability?</h2>
+                <p>Probability tells us <strong>how likely</strong> something is to happen. It is always a
+                   number from <strong>0</strong> (impossible) to <strong>1</strong> (certain). We can write
+                   it as a fraction, a decimal, or a percent.</p>
+
+                <div style="text-align:center; font-size:1.4em; margin:18px 0;">
+                    \(P(\text{event}) = \dfrac{\text{number of favorable outcomes}}{\text{total number of outcomes}}\)
+                </div>
+
+                <div class="prob-scale">
+                    <span style="left:0%;">0<br>Impossible</span>
+                    <span style="left:25%;">¼<br>Unlikely</span>
+                    <span style="left:50%;">½<br>Even chance</span>
+                    <span style="left:75%;">¾<br>Likely</span>
+                    <span style="left:100%;">1<br>Certain</span>
+                </div>
+
+                <h2 style="margin-top: 50px;">A Worked Example</h2>
+                <div class="steps-box">
+                    <div>A bag has <strong>3 red</strong> and <strong>2 blue</strong> marbles. What is the
+                        probability of drawing a red one?</div>
+                    <div>Favorable outcomes (red) = 3</div>
+                    <div>Total outcomes = 3 + 2 = 5</div>
+                    <div>\(P(\text{red}) = \dfrac{3}{5} = 0.6 = 60\%\)</div>
+                </div>
+
+                <h2 style="margin-top: 40px;">Key Ideas</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>Complement (NOT)</h4>
+                        <code>\(P(\text{not } A) = 1 - P(A)\)</code>
+                        <p><small>If \(P(\text{rain}) = 0.3\), then \(P(\text{no rain}) = 0.7\).</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Independent events (AND)</h4>
+                        <code>\(P(A \text{ and } B) = P(A) \times P(B)\)</code>
+                        <p><small>Two coins both heads: \(\tfrac12 \times \tfrac12 = \tfrac14\).</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Mutually exclusive (OR)</h4>
+                        <code>\(P(A \text{ or } B) = P(A) + P(B)\)</code>
+                        <p><small>Roll a 1 or a 2: \(\tfrac16 + \tfrac16 = \tfrac26 = \tfrac13\).</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Theoretical vs Experimental</h4>
+                        <code>Predicted vs actually observed</code>
+                        <p><small>The more trials you run, the closer experimental gets to theoretical.</small></p>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">Common Outcome Counts</h2>
+                <div class="formula-grid">
+                    <div class="formula-card"><h4>🪙 Coin</h4><p><small>2 outcomes: Heads, Tails. \(P(\text{H}) = \tfrac12\).</small></p></div>
+                    <div class="formula-card"><h4>🎲 Die</h4><p><small>6 outcomes: 1–6. \(P(4) = \tfrac16\).</small></p></div>
+                    <div class="formula-card"><h4>🃏 Card deck</h4><p><small>52 cards. \(P(\heartsuit) = \tfrac{13}{52} = \tfrac14\).</small></p></div>
+                </div>
+
+                <h2 style="margin-top: 40px;">Tips</h2>
+                <ul style="line-height: 1.9;">
+                    <li>Probability is never less than 0 or more than 1.</li>
+                    <li>All the probabilities of every outcome add up to <strong>1</strong>.</li>
+                    <li>Always simplify the fraction (e.g. \(\tfrac{2}{6} = \tfrac13\)).</li>
+                    <li>"Favorable" just means the outcome you are asking about — not always a "good" one.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- EXPERIMENT -->
+        <div id="experiment-section" style="display:none;">
+            <div class="reference-section">
+                <h2>🧪 Probability Experiment</h2>
+                <p style="text-align:center;">Run an experiment and compare what you <em>observe</em> with what
+                   the theory <em>predicts</em>.</p>
+                <div class="control-section">
+                    <h3>Choose an Experiment</h3>
+                    <div class="button-group" id="exp-group">
+                        <button class="operation-btn active" data-exp="coin">🪙 Flip a Coin (Heads)</button>
+                        <button class="operation-btn" data-exp="die">🎲 Roll a Die (Six)</button>
+                    </div>
+                </div>
+                <div class="control-section">
+                    <h3>Number of Trials</h3>
+                    <div class="button-group" id="trial-group">
+                        <button class="operation-btn" data-n="10">10</button>
+                        <button class="operation-btn active" data-n="100">100</button>
+                        <button class="operation-btn" data-n="1000">1000</button>
+                    </div>
+                </div>
+                <div style="text-align:center;">
+                    <button class="primary-btn" id="run-btn">▶ Run Experiment</button>
+                </div>
+                <canvas id="sim-canvas" width="520" height="200"></canvas>
+                <div class="sim-result" id="sim-result"></div>
+            </div>
+        </div>
+
+        <!-- PRACTICE -->
+        <div id="practice-section" style="display:none;">
+            <div class="reference-section">
+                <div class="button-group" id="mode-group">
+                    <button class="operation-btn active" data-mode="basic">Single Event</button>
+                    <button class="operation-btn" data-mode="complement">Complement</button>
+                    <button class="operation-btn" data-mode="combined">AND / OR</button>
+                    <button class="operation-btn" data-mode="mixed">Mixed</button>
+                </div>
+                <div class="quiz-header">Score: <span id="score">0</span>/<span id="total">0</span></div>
+                <div style="text-align:center; font-size:1.2em; font-weight:bold; margin:14px 0;" id="question"></div>
+                <p class="hint-note">Answer as a simplified fraction like <strong>1/4</strong> (or a decimal).</p>
+                <div class="answer-section">
+                    <input type="text" id="answer" placeholder="e.g. 1/4">
+                </div>
+                <div style="text-align:center;">
+                    <button class="primary-btn" id="check-btn">✓ Check</button>
+                    <button class="secondary-btn" id="new-btn">🎲 New Question</button>
+                    <button class="secondary-btn" id="steps-btn">💡 Show Steps</button>
+                </div>
+                <div class="feedback-message" id="feedback"></div>
+                <div class="steps-box" id="steps" style="display:none;"></div>
+            </div>
+        </div>
+
+        <footer>
+            <p>What are the odds? Now you can find out! 🎲</p>
+        </footer>
+    </div>
+
+    <script>
+    function renderMath(el) {
+        if (window.renderMathInElement) renderMathInElement(el, { ignoredTags: ['script','noscript','style','textarea','pre','option'], throwOnError: false });
+    }
+    function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) { [a, b] = [b, a % b]; } return a || 1; }
+    function fracLatex(n, d) { const g = gcd(n, d); n /= g; d /= g; return d === 1 ? '' + n : `\\frac{${n}}{${d}}`; }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const sections = { learn: 'learn-section', experiment: 'experiment-section', practice: 'practice-section' };
+        document.querySelectorAll('.topic-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.topic-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                Object.entries(sections).forEach(([k, id]) => {
+                    document.getElementById(id).style.display = tab.dataset.tab === k ? 'block' : 'none';
+                });
+            });
+        });
+
+        // ── Experiment ───────────────────────────────────────────
+        let exp = 'coin', trials = 100;
+        document.querySelectorAll('#exp-group .operation-btn').forEach(b => b.addEventListener('click', () => {
+            document.querySelectorAll('#exp-group .operation-btn').forEach(x => x.classList.remove('active'));
+            b.classList.add('active'); exp = b.dataset.exp;
+        }));
+        document.querySelectorAll('#trial-group .operation-btn').forEach(b => b.addEventListener('click', () => {
+            document.querySelectorAll('#trial-group .operation-btn').forEach(x => x.classList.remove('active'));
+            b.classList.add('active'); trials = parseInt(b.dataset.n);
+        }));
+
+        function runExperiment() {
+            const sides = exp === 'coin' ? 2 : 6;
+            const theory = 1 / sides;
+            let hits = 0;
+            for (let i = 0; i < trials; i++) if (Math.floor(Math.random() * sides) === 0) hits++;
+            const observed = hits / trials;
+            // draw comparison bars
+            const cv = document.getElementById('sim-canvas'), ctx = cv.getContext('2d');
+            const W = cv.width, H = cv.height; ctx.clearRect(0, 0, W, H);
+            const base = H - 36, maxH = H - 60;
+            function bar(x, val, color, label) {
+                const h = val * maxH;
+                ctx.fillStyle = color; ctx.fillRect(x, base - h, 120, h);
+                ctx.fillStyle = '#333'; ctx.font = 'bold 14px sans-serif'; ctx.textAlign = 'center';
+                ctx.fillText((val * 100).toFixed(1) + '%', x + 60, base - h - 8);
+                ctx.font = '13px sans-serif'; ctx.fillText(label, x + 60, base + 20);
+            }
+            bar(W / 2 - 160, theory, '#9b59b6', 'Theoretical');
+            bar(W / 2 + 40, observed, '#667eea', 'Experimental');
+            const target = exp === 'coin' ? 'Heads' : 'a Six';
+            document.getElementById('sim-result').innerHTML =
+                `In <strong>${trials}</strong> trials, ${target} came up <span class="big">${hits}</span> times.<br>` +
+                `Experimental probability = ${hits}/${trials} = <span class="big">${(observed * 100).toFixed(1)}%</span><br>` +
+                `Theoretical probability = <span class="big">${(theory * 100).toFixed(1)}%</span>`;
+        }
+        document.getElementById('run-btn').addEventListener('click', runExperiment);
+        runExperiment();
+
+        // ── Practice ─────────────────────────────────────────────
+        const rnd = (lo, hi) => Math.floor(Math.random() * (hi - lo + 1)) + lo;
+        let mode = 'basic', cur = null, score = 0, total = 0;
+        document.querySelectorAll('#mode-group .operation-btn').forEach(b => b.addEventListener('click', () => {
+            document.querySelectorAll('#mode-group .operation-btn').forEach(x => x.classList.remove('active'));
+            b.classList.add('active'); mode = b.dataset.mode; newQuestion();
+        }));
+
+        function newQuestion() {
+            let kind = mode === 'mixed' ? ['basic', 'complement', 'combined'][rnd(0, 2)] : mode;
+            let q, n, d, steps;
+            if (kind === 'basic') {
+                const colors = [['red', rnd(2, 5)], ['blue', rnd(2, 5)], ['green', rnd(1, 4)]];
+                const total_ = colors.reduce((s, c) => s + c[1], 0);
+                const pick = colors[rnd(0, 2)];
+                n = pick[1]; d = total_;
+                q = `\\(\\text{A bag has } ${colors.map(c => c[1] + ' ' + c[0]).join(',\\ ')} \\text{ marbles. } P(${pick[0]}) = ?\\)`;
+                steps = `\\(P(${pick[0]}) = \\dfrac{${n}}{${d}} = ${fracLatex(n, d)}\\)`;
+            } else if (kind === 'complement') {
+                const fav = rnd(1, 5), tot = fav + rnd(2, 6);
+                n = tot - fav; d = tot;
+                q = `\\(P(A) = \\dfrac{${fav}}{${tot}}. \\text{ What is } P(\\text{not } A)?\\)`;
+                steps = `\\(P(\\text{not } A) = 1 - \\dfrac{${fav}}{${tot}} = \\dfrac{${tot - fav}}{${tot}} = ${fracLatex(n, d)}\\)`;
+            } else { // combined
+                if (rnd(0, 1) === 0) {
+                    // OR on a die
+                    const k = rnd(2, 3);
+                    n = k; d = 6;
+                    q = `\\(\\text{Rolling a die, what is } P(\\text{one of } ${k} \\text{ chosen numbers})?\\)`;
+                    steps = `\\(${Array(k).fill('\\tfrac16').join(' + ')} = \\dfrac{${k}}{6} = ${fracLatex(n, d)}\\)`;
+                } else {
+                    // AND two coins / coin and die
+                    n = 1; d = 2 * 6;
+                    q = `\\(\\text{Flip a coin AND roll a die. } P(\\text{Heads and a } 4)?\\)`;
+                    steps = `\\(\\tfrac12 \\times \\tfrac16 = \\dfrac{1}{12} = ${fracLatex(n, d)}\\)`;
+                }
+            }
+            const g = gcd(n, d);
+            cur = { n: n / g, d: d / g, val: n / d, steps };
+            const qel = document.getElementById('question');
+            qel.textContent = q; renderMath(qel);
+            document.getElementById('answer').value = '';
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('steps').style.display = 'none';
+            document.getElementById('answer').focus();
+        }
+
+        function parseAnswer(str) {
+            str = str.trim();
+            if (!str) return NaN;
+            if (str.includes('/')) { const p = str.split('/'); return parseFloat(p[0]) / parseFloat(p[1]); }
+            if (str.includes('%')) return parseFloat(str) / 100;
+            return parseFloat(str);
+        }
+
+        document.getElementById('check-btn').addEventListener('click', () => {
+            if (!cur) return;
+            const v = parseAnswer(document.getElementById('answer').value);
+            const fb = document.getElementById('feedback');
+            if (isNaN(v)) { fb.textContent = 'Type a fraction like 1/4 or a decimal.'; fb.className = 'feedback-message incorrect'; return; }
+            total++;
+            if (Math.abs(v - cur.val) < 0.005) { score++; fb.textContent = '🎉 Correct!'; fb.className = 'feedback-message correct'; }
+            else {
+                const ans = cur.d === 1 ? '' + cur.n : `${cur.n}/${cur.d}`;
+                fb.textContent = `Not quite — the answer is ${ans}.`; fb.className = 'feedback-message incorrect';
+            }
+            document.getElementById('score').textContent = score;
+            document.getElementById('total').textContent = total;
+        });
+        document.getElementById('answer').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('check-btn').click(); });
+        document.getElementById('new-btn').addEventListener('click', newQuestion);
+        document.getElementById('steps-btn').addEventListener('click', () => {
+            if (!cur) return;
+            const s = document.getElementById('steps');
+            s.innerHTML = cur.steps; s.style.display = 'block'; renderMath(s);
+        });
+        newQuestion();
+    });
+    </script>
+</body>
+</html>

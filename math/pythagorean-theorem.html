@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pythagorean Theorem - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/fact-sheet.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css" integrity="sha384-vlBdW0r3AcZO/HboRPznQNowvexd3fY8qHOWkBi5q7KGgqJ+F48+DceybYmrVbmB" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js" integrity="sha384-AtrdNsnxl/75rvBneBVH7DtOvCxSVahR2zWqle1coBKd8DEmLoviqNeJSx64gNAs" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, { ignoredTags: ['script','noscript','style','textarea','pre','option'], throwOnError: false });"></script>
+    <style>
+        .topic-tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+        .topic-tab { padding: 10px 20px; border: 2px solid #ddd; border-radius: 25px; background: white; cursor: pointer; transition: all 0.3s; font-size: 0.9em; }
+        .topic-tab:hover { border-color: #667eea; background: #f5f7ff; }
+        .topic-tab.active { background: #667eea; color: white; border-color: #667eea; }
+        .reference-section { background: white; border-radius: 10px; padding: 25px; margin: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .big-formula { text-align: center; font-size: 1.7em; color: #667eea; margin: 25px 0; }
+        .formula-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+        .formula-card { background: #f9f9f9; padding: 18px; border-radius: 8px; border-left: 4px solid #667eea; }
+        .formula-card h4 { margin-top: 0; color: #667eea; }
+        .formula-card code { background: white; padding: 5px 10px; border-radius: 4px; display: block; margin: 6px 0; font-size: 1.05em; }
+        .steps-box { background: #fff8e1; border-left: 4px solid #ffb300; padding: 15px 20px; margin: 20px auto; border-radius: 6px; max-width: 560px; line-height: 1.8; }
+        .feedback-message { text-align: center; font-size: 1.1em; font-weight: bold; min-height: 1.5em; margin: 15px 0; }
+        .feedback-message.correct { color: #2e7d32; }
+        .feedback-message.incorrect { color: #c62828; }
+        .secondary-btn { background: white; color: #667eea; border: 2px solid #667eea; padding: 12px 24px; border-radius: 8px; font-size: 1em; cursor: pointer; transition: all 0.3s; margin: 5px; }
+        .secondary-btn:hover { background: #f5f7ff; }
+        .primary-btn { background: #667eea; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 1em; cursor: pointer; margin: 5px; }
+        .primary-btn:hover { background: #556cd6; }
+        .equation-display { text-align: center; font-size: 1.6em; font-weight: bold; color: #333; margin: 20px auto; padding: 18px; background: #f5f7ff; border-radius: 12px; max-width: 520px; }
+        .answer-section { max-width: 520px; margin: 20px auto; text-align: center; }
+        .answer-section input { width: 140px; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 1.1em; text-align: center; }
+        .answer-section input:focus { outline: none; border-color: #667eea; }
+        .quiz-header { text-align: center; font-size: 1.1em; font-weight: bold; color: #667eea; margin: 10px 0; }
+        .tri-canvas { display: block; width: 100%; max-width: 460px; height: auto; margin: 10px auto; background: #fcfcff; border: 2px solid #e0e4f5; border-radius: 10px; }
+        .calc-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: center; margin: 14px 0; }
+        .calc-row label { font-weight: bold; }
+        .calc-row input { width: 90px; padding: 8px; border: 2px solid #ddd; border-radius: 6px; font-size: 1em; text-align: center; }
+        .calc-row input:focus { outline: none; border-color: #667eea; }
+        .calc-result { text-align: center; font-size: 1.3em; font-weight: bold; color: #2e7d32; min-height: 1.4em; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📐 Pythagorean Theorem</h1>
+            <p class="subtitle">The rule of right triangles</p>
+            <a href="math.html" class="back-link">← Back to Math Topics</a>
+        </header>
+
+        <div class="topic-tabs">
+            <button class="topic-tab active" data-tab="learn">📚 Learn</button>
+            <button class="topic-tab" data-tab="calc">🧮 Calculator</button>
+            <button class="topic-tab" data-tab="practice">🎯 Practice</button>
+        </div>
+
+        <!-- LEARN -->
+        <div id="learn-section">
+            <div class="reference-section">
+                <h2>What is the Pythagorean Theorem?</h2>
+                <p>The Pythagorean theorem is a rule about <strong>right triangles</strong> — triangles
+                   that have one square corner (a 90° angle). It connects the lengths of the three
+                   sides.</p>
+                <ul style="line-height: 1.9;">
+                    <li>The two shorter sides that form the right angle are called the <strong>legs</strong>
+                        (\(a\) and \(b\)).</li>
+                    <li>The longest side, opposite the right angle, is the <strong>hypotenuse</strong> (\(c\)).</li>
+                </ul>
+
+                <div class="big-formula">\[ a^2 + b^2 = c^2 \]</div>
+
+                <canvas id="learn-canvas" class="tri-canvas" width="460" height="320"></canvas>
+                <p style="text-align:center;"><small>A classic <strong>3-4-5</strong> right triangle:
+                   \(3^2 + 4^2 = 9 + 16 = 25 = 5^2\)</small></p>
+
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>Find the hypotenuse</h4>
+                        <code>\(c = \sqrt{a^2 + b^2}\)</code>
+                        <p><small>Use this when you know both legs.</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Find a leg</h4>
+                        <code>\(a = \sqrt{c^2 - b^2}\)</code>
+                        <p><small>Use this when you know the hypotenuse and one leg.</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Right angle?</h4>
+                        <code>If \(a^2 + b^2 = c^2\)</code>
+                        <p><small>then the triangle has a right angle. If not, it doesn't!</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Common triples</h4>
+                        <code>3, 4, 5 &nbsp; · &nbsp; 5, 12, 13</code>
+                        <code>8, 15, 17 &nbsp; · &nbsp; 7, 24, 25</code>
+                        <p><small>Whole-number side lengths that always work.</small></p>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">Worked Example</h2>
+                <p>A ladder leans against a wall. Its base is <strong>6 m</strong> from the wall and it
+                   reaches <strong>8 m</strong> up. How long is the ladder?</p>
+                <div class="steps-box">
+                    <div>1. The ladder is the hypotenuse \(c\); the legs are \(a = 6\) and \(b = 8\).</div>
+                    <div>2. \(c^2 = a^2 + b^2 = 6^2 + 8^2 = 36 + 64 = 100\)</div>
+                    <div>3. \(c = \sqrt{100} = 10\)</div>
+                    <div>4. The ladder is <strong>10 m</strong> long.</div>
+                </div>
+
+                <h2 style="margin-top: 40px;">Tips</h2>
+                <ul style="line-height: 1.9;">
+                    <li>The theorem <strong>only</strong> works for right triangles.</li>
+                    <li>The hypotenuse \(c\) is always the longest side — across from the right angle.</li>
+                    <li>To find a leg, <strong>subtract</strong> inside the square root; to find the
+                        hypotenuse, <strong>add</strong>.</li>
+                    <li>Don't forget the final square root!</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CALCULATOR -->
+        <div id="calc-section" style="display:none;">
+            <div class="reference-section">
+                <h2>🧮 Pythagoras Calculator</h2>
+                <p>Enter any two sides and leave the unknown one blank. The calculator finds the
+                   missing side and draws the triangle.</p>
+                <div class="calc-row">
+                    <label>Leg a <input type="number" id="calc-a" min="0" step="any" placeholder="?"></label>
+                    <label>Leg b <input type="number" id="calc-b" min="0" step="any" placeholder="?"></label>
+                    <label>Hyp c <input type="number" id="calc-c" min="0" step="any" placeholder="?"></label>
+                </div>
+                <div style="text-align:center;">
+                    <button class="primary-btn" id="calc-btn">Calculate</button>
+                    <button class="secondary-btn" id="calc-clear">Clear</button>
+                </div>
+                <div class="calc-result" id="calc-result"></div>
+                <canvas id="calc-canvas" class="tri-canvas" width="460" height="320"></canvas>
+            </div>
+        </div>
+
+        <!-- PRACTICE -->
+        <div id="practice-section" style="display:none;">
+            <div class="reference-section">
+                <div class="quiz-header">Score: <span id="score">0</span>/<span id="total">0</span></div>
+                <canvas id="practice-canvas" class="tri-canvas" width="460" height="320"></canvas>
+                <div class="equation-display" id="question"></div>
+                <div class="answer-section">
+                    <p>Enter the missing side (round to 2 decimals if needed):</p>
+                    <input type="number" id="answer" step="any" placeholder="?">
+                </div>
+                <div style="text-align:center;">
+                    <button class="primary-btn" id="check-btn">✓ Check</button>
+                    <button class="secondary-btn" id="new-btn">🎲 New Question</button>
+                </div>
+                <div class="feedback-message" id="feedback"></div>
+                <div class="steps-box" id="steps" style="display:none;"></div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Right triangles, solved! 📐✨</p>
+        </footer>
+    </div>
+
+    <script>
+    // ── Triangle drawing ─────────────────────────────────────────
+    function drawTriangle(canvas, a, b, labels) {
+        const ctx = canvas.getContext('2d');
+        const W = canvas.width, H = canvas.height, pad = 60;
+        ctx.clearRect(0, 0, W, H);
+        // Scale so the longer leg fits nicely.
+        const maxLeg = Math.max(a, b);
+        const scale = Math.min((W - 2 * pad) / maxLeg, (H - 2 * pad) / maxLeg);
+        const bx = pad, by = H - pad;             // right-angle corner (bottom-left)
+        const horiz = bx + b * scale;             // along the base (leg b)
+        const topY = by - a * scale;              // up the side (leg a)
+        // Vertices: right angle at (bx,by), base end (horiz,by), top (bx,topY)
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = '#667eea';
+        ctx.fillStyle = 'rgba(102,126,234,0.12)';
+        ctx.beginPath();
+        ctx.moveTo(bx, by);
+        ctx.lineTo(horiz, by);
+        ctx.lineTo(bx, topY);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        // Right-angle marker
+        ctx.strokeStyle = '#999';
+        ctx.lineWidth = 2;
+        const m = 16;
+        ctx.strokeRect(bx, by - m, m, m);
+        // Labels
+        ctx.fillStyle = '#333';
+        ctx.font = 'bold 16px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(labels.b, (bx + horiz) / 2, by + 24);          // base = b
+        ctx.textAlign = 'right';
+        ctx.fillText(labels.a, bx - 10, (by + topY) / 2);           // vertical = a
+        ctx.textAlign = 'left';
+        ctx.fillText(labels.c, (horiz + bx) / 2 + 8, (by + topY) / 2 - 6); // hypotenuse
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Tabs
+        const sections = { learn: 'learn-section', calc: 'calc-section', practice: 'practice-section' };
+        document.querySelectorAll('.topic-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.topic-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                Object.entries(sections).forEach(([k, id]) => {
+                    document.getElementById(id).style.display = tab.dataset.tab === k ? 'block' : 'none';
+                });
+            });
+        });
+
+        drawTriangle(document.getElementById('learn-canvas'), 3, 4, { a: '3', b: '4', c: '5' });
+
+        // ── Calculator ───────────────────────────────────────────
+        const cA = document.getElementById('calc-a'), cB = document.getElementById('calc-b'), cC = document.getElementById('calc-c');
+        const cRes = document.getElementById('calc-result');
+        function runCalc() {
+            const a = parseFloat(cA.value), b = parseFloat(cB.value), c = parseFloat(cC.value);
+            const known = [!isNaN(a), !isNaN(b), !isNaN(c)].filter(Boolean).length;
+            if (known < 2) { cRes.textContent = 'Enter any two sides.'; cRes.style.color = '#c62828'; return; }
+            cRes.style.color = '#2e7d32';
+            let ra = a, rb = b, rc = c;
+            if (isNaN(c)) { rc = Math.sqrt(a * a + b * b); cRes.textContent = `Hypotenuse c = ${round(rc)}`; }
+            else if (isNaN(a)) {
+                if (c <= b) { cRes.textContent = 'The hypotenuse must be the longest side.'; cRes.style.color = '#c62828'; return; }
+                ra = Math.sqrt(c * c - b * b); cRes.textContent = `Leg a = ${round(ra)}`;
+            } else if (isNaN(b)) {
+                if (c <= a) { cRes.textContent = 'The hypotenuse must be the longest side.'; cRes.style.color = '#c62828'; return; }
+                rb = Math.sqrt(c * c - a * a); cRes.textContent = `Leg b = ${round(rb)}`;
+            } else {
+                const ok = Math.abs(a * a + b * b - c * c) < 1e-6;
+                cRes.textContent = ok ? '✓ These sides form a right triangle!' : '✗ Not a right triangle.';
+                cRes.style.color = ok ? '#2e7d32' : '#c62828';
+            }
+            drawTriangle(document.getElementById('calc-canvas'), ra || 1, rb || 1, { a: round(ra), b: round(rb), c: round(rc) });
+        }
+        function round(v) { return parseFloat(v.toFixed(3)).toString(); }
+        document.getElementById('calc-btn').addEventListener('click', runCalc);
+        document.getElementById('calc-clear').addEventListener('click', () => {
+            cA.value = cB.value = cC.value = ''; cRes.textContent = '';
+            document.getElementById('calc-canvas').getContext('2d').clearRect(0, 0, 460, 320);
+        });
+
+        // ── Practice ─────────────────────────────────────────────
+        let cur = null, score = 0, total = 0;
+        const triples = [[3, 4, 5], [6, 8, 10], [5, 12, 13], [8, 15, 17], [9, 12, 15], [7, 24, 25], [20, 21, 29], [10, 24, 26]];
+        function newQuestion() {
+            const t = triples[Math.floor(Math.random() * triples.length)];
+            const [a, b, c] = t;
+            const findHyp = Math.random() < 0.5;
+            if (findHyp) {
+                cur = { ans: c, a, b, type: 'hyp' };
+                drawTriangle(document.getElementById('practice-canvas'), a, b, { a: String(a), b: String(b), c: '?' });
+                document.getElementById('question').innerHTML = `Legs are \\(a = ${a}\\) and \\(b = ${b}\\). Find the hypotenuse \\(c\\).`;
+            } else {
+                cur = { ans: a, b, c, type: 'leg' };
+                drawTriangle(document.getElementById('practice-canvas'), a, b, { a: '?', b: String(b), c: String(c) });
+                document.getElementById('question').innerHTML = `Hypotenuse \\(c = ${c}\\) and leg \\(b = ${b}\\). Find leg \\(a\\).`;
+            }
+            renderMathInElement(document.getElementById('question'), { throwOnError: false });
+            document.getElementById('answer').value = '';
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('steps').style.display = 'none';
+            document.getElementById('answer').focus();
+        }
+        function check() {
+            if (!cur) return;
+            const v = parseFloat(document.getElementById('answer').value);
+            const fb = document.getElementById('feedback');
+            if (isNaN(v)) { fb.textContent = 'Type a number first.'; fb.className = 'feedback-message incorrect'; return; }
+            total++;
+            if (Math.abs(v - cur.ans) < 0.02) {
+                score++; fb.textContent = '🎉 Correct!'; fb.className = 'feedback-message correct';
+            } else {
+                fb.textContent = `Not quite — the answer is ${cur.ans}.`; fb.className = 'feedback-message incorrect';
+                const steps = document.getElementById('steps');
+                if (cur.type === 'hyp') {
+                    steps.innerHTML = `<div>\\(c = \\sqrt{a^2 + b^2} = \\sqrt{${cur.a}^2 + ${cur.b}^2} = \\sqrt{${cur.a * cur.a + cur.b * cur.b}} = ${cur.ans}\\)</div>`;
+                } else {
+                    steps.innerHTML = `<div>\\(a = \\sqrt{c^2 - b^2} = \\sqrt{${cur.c}^2 - ${cur.b}^2} = \\sqrt{${cur.c * cur.c - cur.b * cur.b}} = ${cur.ans}\\)</div>`;
+                }
+                steps.style.display = 'block';
+                renderMathInElement(steps, { throwOnError: false });
+            }
+            document.getElementById('score').textContent = score;
+            document.getElementById('total').textContent = total;
+        }
+        document.getElementById('check-btn').addEventListener('click', check);
+        document.getElementById('new-btn').addEventListener('click', newQuestion);
+        document.getElementById('answer').addEventListener('keydown', e => { if (e.key === 'Enter') check(); });
+        newQuestion();
+    });
+    </script>
+</body>
+</html>

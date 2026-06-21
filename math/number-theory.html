@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Theory - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/fact-sheet.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css" integrity="sha384-vlBdW0r3AcZO/HboRPznQNowvexd3fY8qHOWkBi5q7KGgqJ+F48+DceybYmrVbmB" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js" integrity="sha384-AtrdNsnxl/75rvBneBVH7DtOvCxSVahR2zWqle1coBKd8DEmLoviqNeJSx64gNAs" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, { ignoredTags: ['script','noscript','style','textarea','pre','option'], throwOnError: false });"></script>
+    <style>
+        .topic-tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+        .topic-tab { padding: 10px 20px; border: 2px solid #ddd; border-radius: 25px; background: white; cursor: pointer; transition: all 0.3s; font-size: 0.9em; }
+        .topic-tab:hover { border-color: #667eea; background: #f5f7ff; }
+        .topic-tab.active { background: #667eea; color: white; border-color: #667eea; }
+        .reference-section { background: white; border-radius: 10px; padding: 25px; margin: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .formula-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+        .formula-card { background: #f9f9f9; padding: 18px; border-radius: 8px; border-left: 4px solid #667eea; }
+        .formula-card h4 { margin-top: 0; color: #667eea; }
+        .formula-card code { background: white; padding: 5px 10px; border-radius: 4px; display: block; margin: 6px 0; font-size: 1.05em; }
+        .steps-box { background: #fff8e1; border-left: 4px solid #ffb300; padding: 15px 20px; margin: 20px auto; border-radius: 6px; max-width: 560px; line-height: 1.8; }
+        .feedback-message { text-align: center; font-size: 1.1em; font-weight: bold; min-height: 1.5em; margin: 15px 0; }
+        .feedback-message.correct { color: #2e7d32; }
+        .feedback-message.incorrect { color: #c62828; }
+        .secondary-btn { background: white; color: #667eea; border: 2px solid #667eea; padding: 12px 24px; border-radius: 8px; font-size: 1em; cursor: pointer; transition: all 0.3s; margin: 5px; }
+        .secondary-btn:hover { background: #f5f7ff; }
+        .primary-btn { background: #667eea; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 1em; cursor: pointer; margin: 5px; }
+        .primary-btn:hover { background: #556cd6; }
+        .equation-display { text-align: center; font-size: 1.6em; font-weight: bold; color: #333; margin: 20px auto; padding: 18px; background: #f5f7ff; border-radius: 12px; max-width: 560px; }
+        .answer-section { max-width: 520px; margin: 20px auto; text-align: center; }
+        .answer-section input { width: 160px; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 1.1em; text-align: center; }
+        .answer-section input:focus { outline: none; border-color: #667eea; }
+        .quiz-header { text-align: center; font-size: 1.1em; font-weight: bold; color: #667eea; margin: 10px 0; }
+        .control-section { margin: 14px 0; text-align: center; }
+        .control-section h3 { margin: 0 0 8px; font-size: 1em; color: #333; }
+        .button-group { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+        .operation-btn { padding: 8px 16px; border: 2px solid #ddd; border-radius: 20px; background: white; cursor: pointer; font-size: 0.9em; transition: all 0.3s; }
+        .operation-btn:hover { border-color: #667eea; }
+        .operation-btn.active { background: #667eea; color: white; border-color: #667eea; }
+        .value-table { width: 100%; max-width: 560px; margin: 20px auto; border-collapse: collapse; }
+        .value-table th, .value-table td { border: 1px solid #ddd; padding: 9px; text-align: center; }
+        .value-table th { background: #667eea; color: white; }
+        .tool-box { background: #fafbff; border: 1px solid #d7ddff; border-radius: 12px; padding: 18px; margin: 18px 0; }
+        .tool-box h3 { margin-top: 0; color: #3a3f8f; }
+        .tool-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; align-items: center; }
+        .tool-row input { width: 110px; padding: 8px 10px; border: 1px solid #c5cdff; border-radius: 8px; font-size: 1em; text-align: center; }
+        .tool-row input:focus { outline: none; border-color: #667eea; }
+        .tool-result { margin-top: 12px; text-align: center; font-size: 1.1em; font-weight: bold; color: #2e7d32; min-height: 1.3em; }
+        .tool-result .muted { color: #555; font-weight: normal; font-size: 0.92em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔍 Number Theory</h1>
+            <p class="subtitle">Factors, multiples, primes, GCF &amp; LCM</p>
+            <a href="math.html" class="back-link">← Back to Math Topics</a>
+        </header>
+
+        <div class="topic-tabs">
+            <button class="topic-tab active" data-tab="learn">📚 Learn</button>
+            <button class="topic-tab" data-tab="tools">🧰 Tools</button>
+            <button class="topic-tab" data-tab="practice">🎯 Practice</button>
+        </div>
+
+        <!-- LEARN -->
+        <div id="learn-section">
+            <div class="reference-section">
+                <h2>The Building Blocks of Numbers</h2>
+                <p>Number theory studies whole numbers and how they fit together. Let's meet the key ideas.</p>
+
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>Factors</h4>
+                        <code>Factors of 12: 1, 2, 3, 4, 6, 12</code>
+                        <p><small>Numbers that divide evenly with no remainder.</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Multiples</h4>
+                        <code>Multiples of 4: 4, 8, 12, 16, 20…</code>
+                        <p><small>What you get from the times table of a number.</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Prime Numbers</h4>
+                        <code>2, 3, 5, 7, 11, 13, 17, 19…</code>
+                        <p><small>Exactly two factors: 1 and itself.</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Composite Numbers</h4>
+                        <code>4, 6, 8, 9, 10, 12…</code>
+                        <p><small>More than two factors. (1 is neither prime nor composite.)</small></p>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">Prime Factorization</h2>
+                <p>Every whole number can be broken down into a product of <strong>prime numbers</strong>.
+                   This is like finding a number's DNA!</p>
+                <div class="steps-box">
+                    <div>\(36 = 4 \times 9 = (2 \times 2) \times (3 \times 3)\)</div>
+                    <div>So \(36 = 2^2 \times 3^2\)</div>
+                </div>
+
+                <h2 style="margin-top: 40px;">GCF and LCM</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>GCF — Greatest Common Factor</h4>
+                        <code>GCF(12, 18) = 6</code>
+                        <p><small>The biggest number that divides <strong>both</strong>. Great for
+                           simplifying fractions.</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>LCM — Least Common Multiple</h4>
+                        <code>LCM(4, 6) = 12</code>
+                        <p><small>The smallest number that <strong>both</strong> divide into. Great for
+                           adding fractions.</small></p>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">Divisibility Rules</h2>
+                <p>Quick tricks to check if one number divides another without doing the division:</p>
+                <table class="value-table">
+                    <tr><th>Divisible by</th><th>Rule</th><th>Example</th></tr>
+                    <tr><td>2</td><td>Ends in 0, 2, 4, 6, or 8</td><td>34 ✓</td></tr>
+                    <tr><td>3</td><td>Digit sum is divisible by 3</td><td>72 → 7+2=9 ✓</td></tr>
+                    <tr><td>4</td><td>Last two digits divisible by 4</td><td>128 → 28 ✓</td></tr>
+                    <tr><td>5</td><td>Ends in 0 or 5</td><td>85 ✓</td></tr>
+                    <tr><td>6</td><td>Divisible by both 2 and 3</td><td>54 ✓</td></tr>
+                    <tr><td>9</td><td>Digit sum is divisible by 9</td><td>81 → 8+1=9 ✓</td></tr>
+                    <tr><td>10</td><td>Ends in 0</td><td>250 ✓</td></tr>
+                </table>
+
+                <h2 style="margin-top: 40px;">Tips</h2>
+                <ul style="line-height: 1.9;">
+                    <li>1 is <strong>not</strong> a prime number.</li>
+                    <li>2 is the only <strong>even</strong> prime number.</li>
+                    <li>GCF \(\le\) the smaller number; LCM \(\ge\) the larger number.</li>
+                    <li>For any two numbers, \(\text{GCF} \times \text{LCM} = \) the product of the numbers.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TOOLS -->
+        <div id="tools-section" style="display:none;">
+            <div class="reference-section">
+                <div class="tool-box">
+                    <h3>🔎 Number Explorer</h3>
+                    <p style="text-align:center;"><small>Enter a whole number to see its factors, prime check, and prime factorization.</small></p>
+                    <div class="tool-row">
+                        <input type="number" id="explore-n" min="1" max="100000" placeholder="e.g. 36">
+                        <button class="primary-btn" id="explore-btn">Explore</button>
+                    </div>
+                    <div class="tool-result" id="explore-result"></div>
+                </div>
+
+                <div class="tool-box">
+                    <h3>🤝 GCF &amp; LCM Calculator</h3>
+                    <div class="tool-row">
+                        <input type="number" id="gl-a" min="1" max="100000" placeholder="number 1">
+                        <input type="number" id="gl-b" min="1" max="100000" placeholder="number 2">
+                        <button class="primary-btn" id="gl-btn">Calculate</button>
+                    </div>
+                    <div class="tool-result" id="gl-result"></div>
+                </div>
+
+                <div class="tool-box">
+                    <h3>➗ Divisibility Checker</h3>
+                    <div class="tool-row">
+                        <input type="number" id="div-n" min="1" placeholder="number">
+                        <input type="number" id="div-d" min="1" placeholder="divide by">
+                        <button class="primary-btn" id="div-btn">Check</button>
+                    </div>
+                    <div class="tool-result" id="div-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRACTICE -->
+        <div id="practice-section" style="display:none;">
+            <div class="reference-section">
+                <div class="control-section">
+                    <h3>Question Type</h3>
+                    <div class="button-group" id="type-group">
+                        <button class="operation-btn active" data-type="prime">Prime or Not</button>
+                        <button class="operation-btn" data-type="gcf">GCF</button>
+                        <button class="operation-btn" data-type="lcm">LCM</button>
+                        <button class="operation-btn" data-type="mixed">Mixed</button>
+                    </div>
+                </div>
+                <div class="quiz-header">Score: <span id="score">0</span>/<span id="total">0</span></div>
+                <div class="equation-display" id="question"></div>
+                <div class="answer-section">
+                    <input type="number" id="answer" step="1" placeholder="?">
+                    <div id="prime-buttons" style="display:none; margin-top:10px;">
+                        <button class="primary-btn" data-prime="yes">Prime ✓</button>
+                        <button class="secondary-btn" data-prime="no">Not Prime ✗</button>
+                    </div>
+                </div>
+                <div style="text-align:center;" id="check-wrap">
+                    <button class="primary-btn" id="check-btn">✓ Check</button>
+                    <button class="secondary-btn" id="new-btn">🎲 New Question</button>
+                </div>
+                <div class="feedback-message" id="feedback"></div>
+                <div class="steps-box" id="steps" style="display:none;"></div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Cracking the code of numbers! 🔢</p>
+        </footer>
+    </div>
+
+    <script>
+    function isPrime(n) {
+        if (n < 2) return false;
+        for (let i = 2; i * i <= n; i++) if (n % i === 0) return false;
+        return true;
+    }
+    function factorsOf(n) {
+        const f = [];
+        for (let i = 1; i <= n; i++) if (n % i === 0) f.push(i);
+        return f;
+    }
+    function primeFactorization(n) {
+        const parts = [];
+        let d = 2, x = n;
+        while (x > 1) {
+            let count = 0;
+            while (x % d === 0) { x /= d; count++; }
+            if (count > 0) parts.push([d, count]);
+            d++;
+            if (d * d > x && x > 1) { parts.push([x, 1]); break; }
+        }
+        return parts;
+    }
+    function pfLatex(n) {
+        if (n < 2) return String(n);
+        const parts = primeFactorization(n);
+        return parts.map(([p, c]) => c === 1 ? `${p}` : `${p}^{${c}}`).join(' \\times ');
+    }
+    function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) { [a, b] = [b, a % b]; } return a || 1; }
+    function lcm(a, b) { return Math.abs(a * b) / gcd(a, b); }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const sections = { learn: 'learn-section', tools: 'tools-section', practice: 'practice-section' };
+        document.querySelectorAll('.topic-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.topic-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                Object.entries(sections).forEach(([k, id]) => {
+                    document.getElementById(id).style.display = tab.dataset.tab === k ? 'block' : 'none';
+                });
+            });
+        });
+
+        // ── Tools ────────────────────────────────────────────────
+        document.getElementById('explore-btn').addEventListener('click', () => {
+            const n = parseInt(document.getElementById('explore-n').value, 10);
+            const out = document.getElementById('explore-result');
+            if (!Number.isInteger(n) || n < 1) { out.style.color = '#c62828'; out.textContent = 'Enter a whole number ≥ 1.'; return; }
+            out.style.color = '#2e7d32';
+            const factors = n <= 100000 ? factorsOf(n) : [];
+            const primeText = n === 1 ? '1 is neither prime nor composite' : (isPrime(n) ? 'PRIME ✓' : 'Composite');
+            out.innerHTML = `${n} is <strong>${primeText}</strong><br>` +
+                `<span class="muted">Factors: ${factors.join(', ')}</span><br>` +
+                `<span class="muted">Prime factorization: \\(${pfLatex(n)}\\)</span>`;
+            renderMathInElement(out, { throwOnError: false });
+        });
+
+        document.getElementById('gl-btn').addEventListener('click', () => {
+            const a = parseInt(document.getElementById('gl-a').value, 10);
+            const b = parseInt(document.getElementById('gl-b').value, 10);
+            const out = document.getElementById('gl-result');
+            if (!Number.isInteger(a) || !Number.isInteger(b) || a < 1 || b < 1) {
+                out.style.color = '#c62828'; out.textContent = 'Enter two whole numbers ≥ 1.'; return;
+            }
+            out.style.color = '#2e7d32';
+            out.innerHTML = `GCF(${a}, ${b}) = <strong>${gcd(a, b)}</strong> &nbsp;·&nbsp; LCM(${a}, ${b}) = <strong>${lcm(a, b)}</strong>`;
+        });
+
+        document.getElementById('div-btn').addEventListener('click', () => {
+            const n = parseInt(document.getElementById('div-n').value, 10);
+            const d = parseInt(document.getElementById('div-d').value, 10);
+            const out = document.getElementById('div-result');
+            if (!Number.isInteger(n) || !Number.isInteger(d) || d < 1) {
+                out.style.color = '#c62828'; out.textContent = 'Enter whole numbers (divisor ≥ 1).'; return;
+            }
+            const ok = n % d === 0;
+            out.style.color = ok ? '#2e7d32' : '#c62828';
+            out.innerHTML = ok ? `Yes — ${d} divides ${n} exactly (${n} ÷ ${d} = ${n / d}).`
+                               : `No — ${n} ÷ ${d} leaves a remainder of ${n % d}.`;
+        });
+
+        // ── Practice ─────────────────────────────────────────────
+        const rnd = (lo, hi) => Math.floor(Math.random() * (hi - lo + 1)) + lo;
+        let qType = 'prime', cur = null, score = 0, total = 0;
+        const primeBtns = document.getElementById('prime-buttons');
+        const numInput = document.getElementById('answer');
+        const checkWrap = document.getElementById('check-btn');
+
+        document.querySelectorAll('#type-group .operation-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('#type-group .operation-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                qType = btn.dataset.type;
+                newQuestion();
+            });
+        });
+
+        function newQuestion() {
+            let type = qType === 'mixed' ? ['prime', 'gcf', 'lcm'][rnd(0, 2)] : qType;
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('steps').style.display = 'none';
+            if (type === 'prime') {
+                const n = rnd(2, 60);
+                cur = { type, n, ans: isPrime(n) };
+                document.getElementById('question').innerHTML = `Is \\(${n}\\) a prime number?`;
+                primeBtns.style.display = 'block';
+                numInput.style.display = 'none';
+                checkWrap.style.display = 'none';
+            } else {
+                const a = rnd(4, 30), b = rnd(4, 30);
+                cur = { type, a, b, ans: type === 'gcf' ? gcd(a, b) : lcm(a, b) };
+                document.getElementById('question').innerHTML =
+                    `Find the <strong>${type.toUpperCase()}</strong> of \\(${a}\\) and \\(${b}\\).`;
+                primeBtns.style.display = 'none';
+                numInput.style.display = 'inline-block';
+                numInput.value = '';
+                checkWrap.style.display = 'inline-block';
+                numInput.focus();
+            }
+            renderMathInElement(document.getElementById('question'), { throwOnError: false });
+        }
+
+        function award(correct) {
+            const fb = document.getElementById('feedback');
+            total++;
+            if (correct) { score++; fb.textContent = '🎉 Correct!'; fb.className = 'feedback-message correct'; }
+            else {
+                fb.className = 'feedback-message incorrect';
+                if (cur.type === 'prime') {
+                    fb.textContent = `Not quite — ${cur.n} is ${cur.ans ? 'prime' : 'not prime'}.`;
+                    const steps = document.getElementById('steps');
+                    steps.innerHTML = `<div>\\(${cur.n} = ${pfLatex(cur.n)}\\)</div>`;
+                    steps.style.display = 'block';
+                    renderMathInElement(steps, { throwOnError: false });
+                } else {
+                    fb.textContent = `Not quite — the ${cur.type.toUpperCase()} is ${cur.ans}.`;
+                }
+            }
+            document.getElementById('score').textContent = score;
+            document.getElementById('total').textContent = total;
+        }
+
+        primeBtns.querySelectorAll('button').forEach(b => {
+            b.addEventListener('click', () => {
+                if (!cur || cur.type !== 'prime') return;
+                award((b.dataset.prime === 'yes') === cur.ans);
+            });
+        });
+        document.getElementById('check-btn').addEventListener('click', () => {
+            if (!cur || cur.type === 'prime') return;
+            const v = parseInt(numInput.value, 10);
+            if (!Number.isInteger(v)) { const fb = document.getElementById('feedback'); fb.textContent = 'Type a number first.'; fb.className = 'feedback-message incorrect'; return; }
+            award(v === cur.ans);
+        });
+        numInput.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('check-btn').click(); });
+        document.getElementById('new-btn').addEventListener('click', newQuestion);
+        newQuestion();
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order of Operations - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/fact-sheet.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css" integrity="sha384-vlBdW0r3AcZO/HboRPznQNowvexd3fY8qHOWkBi5q7KGgqJ+F48+DceybYmrVbmB" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js" integrity="sha384-AtrdNsnxl/75rvBneBVH7DtOvCxSVahR2zWqle1coBKd8DEmLoviqNeJSx64gNAs" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, { ignoredTags: ['script','noscript','style','textarea','pre','option'], throwOnError: false });"></script>
+    <style>
+        .topic-tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+        .topic-tab { padding: 10px 20px; border: 2px solid #ddd; border-radius: 25px; background: white; cursor: pointer; transition: all 0.3s; font-size: 0.9em; }
+        .topic-tab:hover { border-color: #667eea; background: #f5f7ff; }
+        .topic-tab.active { background: #667eea; color: white; border-color: #667eea; }
+        .reference-section { background: white; border-radius: 10px; padding: 25px; margin: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .formula-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+        .formula-card { background: #f9f9f9; padding: 18px; border-radius: 8px; border-left: 4px solid #667eea; }
+        .formula-card h4 { margin-top: 0; color: #667eea; }
+        .formula-card code { background: white; padding: 5px 10px; border-radius: 4px; display: block; margin: 6px 0; font-size: 1.05em; }
+        .steps-box { background: #fff8e1; border-left: 4px solid #ffb300; padding: 15px 20px; margin: 20px auto; border-radius: 6px; max-width: 560px; line-height: 1.8; }
+        .feedback-message { text-align: center; font-size: 1.1em; font-weight: bold; min-height: 1.5em; margin: 15px 0; }
+        .feedback-message.correct { color: #2e7d32; }
+        .feedback-message.incorrect { color: #c62828; }
+        .secondary-btn { background: white; color: #667eea; border: 2px solid #667eea; padding: 12px 24px; border-radius: 8px; font-size: 1em; cursor: pointer; transition: all 0.3s; margin: 5px; }
+        .secondary-btn:hover { background: #f5f7ff; }
+        .primary-btn { background: #667eea; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 1em; cursor: pointer; margin: 5px; }
+        .primary-btn:hover { background: #556cd6; }
+        .equation-display { text-align: center; font-size: 2em; font-weight: bold; color: #333; margin: 20px auto; padding: 18px; background: #f5f7ff; border-radius: 12px; max-width: 560px; }
+        .answer-section { max-width: 520px; margin: 20px auto; text-align: center; }
+        .answer-section input { width: 140px; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 1.1em; text-align: center; }
+        .answer-section input:focus { outline: none; border-color: #667eea; }
+        .quiz-header { text-align: center; font-size: 1.1em; font-weight: bold; color: #667eea; margin: 10px 0; }
+        .control-section { margin: 14px 0; text-align: center; }
+        .control-section h3 { margin: 0 0 8px; font-size: 1em; color: #333; }
+        .button-group { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+        .operation-btn { padding: 8px 16px; border: 2px solid #ddd; border-radius: 20px; background: white; cursor: pointer; font-size: 0.9em; transition: all 0.3s; }
+        .operation-btn:hover { border-color: #667eea; }
+        .operation-btn.active { background: #667eea; color: white; border-color: #667eea; }
+        .pemdas-ladder { max-width: 540px; margin: 20px auto; }
+        .pemdas-step { display: flex; align-items: center; gap: 16px; background: #f5f7ff; border-radius: 10px; padding: 14px 18px; margin: 10px 0; }
+        .pemdas-letter { font-size: 1.8em; font-weight: bold; color: #667eea; min-width: 44px; text-align: center; }
+        .pemdas-step .desc { font-size: 0.98em; }
+        .pemdas-step .desc strong { color: #333; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔢 Order of Operations</h1>
+            <p class="subtitle">PEMDAS / BODMAS — which step comes first?</p>
+            <a href="math.html" class="back-link">← Back to Math Topics</a>
+        </header>
+
+        <div class="topic-tabs">
+            <button class="topic-tab active" data-tab="learn">📚 Learn</button>
+            <button class="topic-tab" data-tab="practice">🎯 Practice</button>
+        </div>
+
+        <!-- LEARN -->
+        <div id="learn-section">
+            <div class="reference-section">
+                <h2>Why Do We Need an Order?</h2>
+                <p>If everyone solved a calculation in a different order, they would get different answers!
+                   Look at \(2 + 3 \times 4\):</p>
+                <div class="steps-box">
+                    <div>❌ Left to right: \(2 + 3 = 5\), then \(5 \times 4 = 20\)</div>
+                    <div>✅ Correct order: \(3 \times 4 = 12\), then \(2 + 12 = 14\)</div>
+                </div>
+                <p>To make sure everyone gets the <strong>same</strong> answer, we always follow the same
+                   order. Two popular ways to remember it are <strong>PEMDAS</strong> and <strong>BODMAS</strong>
+                   — they mean exactly the same thing.</p>
+
+                <div class="pemdas-ladder">
+                    <div class="pemdas-step">
+                        <div class="pemdas-letter">P/B</div>
+                        <div class="desc"><strong>Parentheses / Brackets</strong> — do anything inside \(( \; )\) first.</div>
+                    </div>
+                    <div class="pemdas-step">
+                        <div class="pemdas-letter">E/O</div>
+                        <div class="desc"><strong>Exponents / Orders</strong> — powers and roots like \(3^2\) or \(\sqrt{9}\).</div>
+                    </div>
+                    <div class="pemdas-step">
+                        <div class="pemdas-letter">MD</div>
+                        <div class="desc"><strong>Multiplication &amp; Division</strong> — left to right (they are equal rank).</div>
+                    </div>
+                    <div class="pemdas-step">
+                        <div class="pemdas-letter">AS</div>
+                        <div class="desc"><strong>Addition &amp; Subtraction</strong> — left to right (they are equal rank).</div>
+                    </div>
+                </div>
+
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>PEMDAS</h4>
+                        <code>Parentheses</code>
+                        <code>Exponents</code>
+                        <code>Multiply / Divide</code>
+                        <code>Add / Subtract</code>
+                    </div>
+                    <div class="formula-card">
+                        <h4>BODMAS</h4>
+                        <code>Brackets</code>
+                        <code>Orders</code>
+                        <code>Divide / Multiply</code>
+                        <code>Add / Subtract</code>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Watch Out!</h4>
+                        <code>× and ÷ are equal</code>
+                        <code>+ and − are equal</code>
+                        <p><small>When operations are equal rank, work <strong>left to right</strong>.</small></p>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">Worked Example</h2>
+                <p>Evaluate \(6 + 2 \times (3^2 - 4)\)</p>
+                <div class="steps-box">
+                    <div>1. <strong>Parentheses first</strong>, and inside them do the exponent:
+                         \(3^2 = 9\), so \((9 - 4) = 5\).</div>
+                    <div>2. Now: \(6 + 2 \times 5\).</div>
+                    <div>3. <strong>Multiplication</strong> before addition: \(2 \times 5 = 10\).</div>
+                    <div>4. <strong>Addition</strong>: \(6 + 10 = 16\).</div>
+                    <div>✅ Answer: <strong>16</strong></div>
+                </div>
+
+                <h2 style="margin-top: 40px;">Tips</h2>
+                <ul style="line-height: 1.9;">
+                    <li>Always scan for <strong>brackets</strong> and <strong>powers</strong> before
+                        adding or multiplying.</li>
+                    <li>Multiplication is <strong>not</strong> always before division — do whichever
+                        comes first reading left to right.</li>
+                    <li>Rewrite the whole expression after each step so you don't lose track.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- PRACTICE -->
+        <div id="practice-section" style="display:none;">
+            <div class="reference-section">
+                <div class="control-section">
+                    <h3>Difficulty</h3>
+                    <div class="button-group" id="diff-group">
+                        <button class="operation-btn active" data-diff="easy">⭐ Easy</button>
+                        <button class="operation-btn" data-diff="medium">⭐⭐ Medium</button>
+                        <button class="operation-btn" data-diff="hard">⭐⭐⭐ Hard</button>
+                    </div>
+                </div>
+                <div class="quiz-header">Score: <span id="score">0</span>/<span id="total">0</span></div>
+                <div class="equation-display" id="question"></div>
+                <div class="answer-section">
+                    <input type="number" id="answer" step="any" placeholder="?">
+                </div>
+                <div style="text-align:center;">
+                    <button class="primary-btn" id="check-btn">✓ Check</button>
+                    <button class="secondary-btn" id="steps-btn">💡 Show Steps</button>
+                    <button class="secondary-btn" id="new-btn">🎲 New Question</button>
+                </div>
+                <div class="feedback-message" id="feedback"></div>
+                <div class="steps-box" id="steps" style="display:none;"></div>
+            </div>
+        </div>
+
+        <footer>
+            <p>One step at a time — in the right order! 🪜</p>
+        </footer>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.topic-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.topic-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById('learn-section').style.display = tab.dataset.tab === 'learn' ? 'block' : 'none';
+                document.getElementById('practice-section').style.display = tab.dataset.tab === 'practice' ? 'block' : 'none';
+            });
+        });
+
+        const rnd = (lo, hi) => Math.floor(Math.random() * (hi - lo + 1)) + lo;
+        let diff = 'easy', cur = null, score = 0, total = 0;
+
+        document.querySelectorAll('#diff-group .operation-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('#diff-group .operation-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                diff = btn.dataset.diff;
+                newQuestion();
+            });
+        });
+
+        // Build a safe arithmetic expression string and its value.
+        function buildExpression() {
+            const a = rnd(2, 9), b = rnd(2, 9), c = rnd(2, 9), d = rnd(2, 6);
+            if (diff === 'easy') {
+                // a + b × c   or   a × b - c
+                if (Math.random() < 0.5) return { text: `${a} + ${b} \\times ${c}`, js: `${a}+${b}*${c}` };
+                return { text: `${a} \\times ${b} - ${c}`, js: `${a}*${b}-${c}` };
+            }
+            if (diff === 'medium') {
+                // (a + b) × c   or   a + b × c - d
+                if (Math.random() < 0.5) return { text: `(${a} + ${b}) \\times ${c}`, js: `(${a}+${b})*${c}` };
+                return { text: `${a} + ${b} \\times ${c} - ${d}`, js: `${a}+${b}*${c}-${d}` };
+            }
+            // hard: a + b × (c - d)  with an exponent
+            const e = rnd(2, 3);
+            if (Math.random() < 0.5) return { text: `${a} + ${b} \\times (${c}^{${2}} - ${d})`, js: `${a}+${b}*(${c}**2-${d})` };
+            return { text: `(${a} + ${b})^{${2}} \\div ${a} + ${c}`, js: `(${a}+${b})**2/${a}+${c}` };
+        }
+
+        function newQuestion() {
+            let expr, val;
+            // Keep regenerating until the answer is a clean integer (nice for kids).
+            let guard = 0;
+            do {
+                expr = buildExpression();
+                val = Function(`"use strict";return (${expr.js});`)();
+                guard++;
+            } while ((!Number.isInteger(val) || val < 0) && guard < 40);
+            cur = { ans: val, text: expr.text };
+            document.getElementById('question').innerHTML = `\\(${expr.text} = \\;?\\)`;
+            renderMathInElement(document.getElementById('question'), { throwOnError: false });
+            document.getElementById('answer').value = '';
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('steps').style.display = 'none';
+            document.getElementById('answer').focus();
+        }
+
+        function showSteps() {
+            if (!cur) return;
+            const steps = document.getElementById('steps');
+            steps.innerHTML = `<div>Work through PEMDAS — brackets &amp; exponents first, then × ÷ (left to right), then + − (left to right).</div>
+                               <div>\\(${cur.text} = ${cur.ans}\\)</div>`;
+            steps.style.display = 'block';
+            renderMathInElement(steps, { throwOnError: false });
+        }
+
+        function check() {
+            if (!cur) return;
+            const v = parseFloat(document.getElementById('answer').value);
+            const fb = document.getElementById('feedback');
+            if (isNaN(v)) { fb.textContent = 'Type a number first.'; fb.className = 'feedback-message incorrect'; return; }
+            total++;
+            if (Math.abs(v - cur.ans) < 1e-6) {
+                score++; fb.textContent = '🎉 Correct!'; fb.className = 'feedback-message correct';
+            } else {
+                fb.textContent = `Not quite — the answer is ${cur.ans}.`; fb.className = 'feedback-message incorrect';
+                showSteps();
+            }
+            document.getElementById('score').textContent = score;
+            document.getElementById('total').textContent = total;
+        }
+
+        document.getElementById('check-btn').addEventListener('click', check);
+        document.getElementById('steps-btn').addEventListener('click', showSteps);
+        document.getElementById('new-btn').addEventListener('click', newQuestion);
+        document.getElementById('answer').addEventListener('keydown', e => { if (e.key === 'Enter') check(); });
+        newQuestion();
+    });
+    </script>
+</body>
+</html>

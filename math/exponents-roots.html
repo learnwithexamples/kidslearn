@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exponents, Powers &amp; Roots - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/fact-sheet.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css" integrity="sha384-vlBdW0r3AcZO/HboRPznQNowvexd3fY8qHOWkBi5q7KGgqJ+F48+DceybYmrVbmB" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js" integrity="sha384-AtrdNsnxl/75rvBneBVH7DtOvCxSVahR2zWqle1coBKd8DEmLoviqNeJSx64gNAs" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, { ignoredTags: ['script','noscript','style','textarea','pre','option'], throwOnError: false });"></script>
+    <style>
+        .topic-tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+        .topic-tab { padding: 10px 20px; border: 2px solid #ddd; border-radius: 25px; background: white; cursor: pointer; transition: all 0.3s; font-size: 0.9em; }
+        .topic-tab:hover { border-color: #667eea; background: #f5f7ff; }
+        .topic-tab.active { background: #667eea; color: white; border-color: #667eea; }
+        .reference-section { background: white; border-radius: 10px; padding: 25px; margin: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .big-formula { text-align: center; font-size: 1.7em; color: #667eea; margin: 25px 0; }
+        .formula-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+        .formula-card { background: #f9f9f9; padding: 18px; border-radius: 8px; border-left: 4px solid #667eea; }
+        .formula-card h4 { margin-top: 0; color: #667eea; }
+        .formula-card code { background: white; padding: 5px 10px; border-radius: 4px; display: block; margin: 6px 0; font-size: 1.05em; }
+        .steps-box { background: #fff8e1; border-left: 4px solid #ffb300; padding: 15px 20px; margin: 20px auto; border-radius: 6px; max-width: 560px; line-height: 1.8; }
+        .feedback-message { text-align: center; font-size: 1.1em; font-weight: bold; min-height: 1.5em; margin: 15px 0; }
+        .feedback-message.correct { color: #2e7d32; }
+        .feedback-message.incorrect { color: #c62828; }
+        .secondary-btn { background: white; color: #667eea; border: 2px solid #667eea; padding: 12px 24px; border-radius: 8px; font-size: 1em; cursor: pointer; transition: all 0.3s; margin: 5px; }
+        .secondary-btn:hover { background: #f5f7ff; }
+        .primary-btn { background: #667eea; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 1em; cursor: pointer; margin: 5px; }
+        .primary-btn:hover { background: #556cd6; }
+        .equation-display { text-align: center; font-size: 2em; font-weight: bold; color: #333; margin: 20px auto; padding: 18px; background: #f5f7ff; border-radius: 12px; max-width: 520px; }
+        .answer-section { max-width: 520px; margin: 20px auto; text-align: center; }
+        .answer-section input { width: 140px; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 1.1em; text-align: center; }
+        .answer-section input:focus { outline: none; border-color: #667eea; }
+        .quiz-header { text-align: center; font-size: 1.1em; font-weight: bold; color: #667eea; margin: 10px 0; }
+        .control-section { margin: 14px 0; text-align: center; }
+        .control-section h3 { margin: 0 0 8px; font-size: 1em; color: #333; }
+        .button-group { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+        .operation-btn { padding: 8px 16px; border: 2px solid #ddd; border-radius: 20px; background: white; cursor: pointer; font-size: 0.9em; transition: all 0.3s; }
+        .operation-btn:hover { border-color: #667eea; }
+        .operation-btn.active { background: #667eea; color: white; border-color: #667eea; }
+        .value-table { width: 100%; max-width: 560px; margin: 20px auto; border-collapse: collapse; }
+        .value-table th, .value-table td { border: 1px solid #ddd; padding: 10px; text-align: center; }
+        .value-table th { background: #667eea; color: white; }
+        .value-table tr:nth-child(even) { background: #f5f7ff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔢 Exponents, Powers &amp; Roots</h1>
+            <p class="subtitle">Repeated multiplication made short</p>
+            <a href="math.html" class="back-link">← Back to Math Topics</a>
+        </header>
+
+        <div class="topic-tabs">
+            <button class="topic-tab active" data-tab="learn">📚 Learn</button>
+            <button class="topic-tab" data-tab="practice">🎯 Practice</button>
+        </div>
+
+        <!-- LEARN -->
+        <div id="learn-section">
+            <div class="reference-section">
+                <h2>What is an Exponent?</h2>
+                <p>An <strong>exponent</strong> (or power) tells you how many times to multiply a number
+                   by itself. The big number is the <strong>base</strong> and the small raised number is
+                   the <strong>exponent</strong>.</p>
+                <div class="big-formula">\[ 2^4 = 2 \times 2 \times 2 \times 2 = 16 \]</div>
+                <p>We read \(2^4\) as “two to the fourth power.” The base is \(2\) and the exponent is \(4\).</p>
+
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>Squared</h4>
+                        <code>\(5^2 = 5 \times 5 = 25\)</code>
+                        <p><small>An exponent of 2 is called “squared.”</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Cubed</h4>
+                        <code>\(2^3 = 2 \times 2 \times 2 = 8\)</code>
+                        <p><small>An exponent of 3 is called “cubed.”</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Power of 1</h4>
+                        <code>\(7^1 = 7\)</code>
+                        <p><small>Any number to the power 1 is itself.</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Power of 0</h4>
+                        <code>\(9^0 = 1\)</code>
+                        <p><small>Any number (except 0) to the power 0 equals 1.</small></p>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">The Laws of Indices</h2>
+                <p>These shortcut rules make working with powers much faster:</p>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>Product Rule</h4>
+                        <code>\(a^m \times a^n = a^{m+n}\)</code>
+                        <p><small>Same base? <strong>Add</strong> the exponents. \(2^3 \times 2^2 = 2^5 = 32\)</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Quotient Rule</h4>
+                        <code>\(a^m \div a^n = a^{m-n}\)</code>
+                        <p><small>Same base? <strong>Subtract</strong> the exponents. \(5^6 \div 5^4 = 5^2 = 25\)</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Power of a Power</h4>
+                        <code>\((a^m)^n = a^{m \times n}\)</code>
+                        <p><small><strong>Multiply</strong> the exponents. \((3^2)^3 = 3^6 = 729\)</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Power of a Product</h4>
+                        <code>\((ab)^n = a^n b^n\)</code>
+                        <p><small>Share the power. \((2 \times 5)^2 = 4 \times 25 = 100\)</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Negative Exponent</h4>
+                        <code>\(a^{-n} = \dfrac{1}{a^n}\)</code>
+                        <p><small>Flip it. \(2^{-3} = \dfrac{1}{8}\)</small></p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Fractional Exponent</h4>
+                        <code>\(a^{1/n} = \sqrt[n]{a}\)</code>
+                        <p><small>A root in disguise. \(9^{1/2} = \sqrt{9} = 3\)</small></p>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">Roots — Undoing Powers</h2>
+                <p>A <strong>root</strong> asks the opposite question: “what number, multiplied by itself,
+                   gives this?” The <strong>square root</strong> \(\sqrt{\;}\) undoes squaring, and the
+                   <strong>cube root</strong> \(\sqrt[3]{\;}\) undoes cubing.</p>
+                <div class="big-formula">\[ \sqrt{36} = 6 \quad\text{because}\quad 6^2 = 36 \]</div>
+                <div class="big-formula">\[ \sqrt[3]{27} = 3 \quad\text{because}\quad 3^3 = 27 \]</div>
+
+                <h2 style="margin-top: 40px;">Perfect Squares &amp; Cubes to Remember</h2>
+                <table class="value-table">
+                    <tr><th>n</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr>
+                    <tr><td>\(n^2\)</td><td>1</td><td>4</td><td>9</td><td>16</td><td>25</td><td>36</td><td>49</td><td>64</td><td>81</td><td>100</td></tr>
+                    <tr><td>\(n^3\)</td><td>1</td><td>8</td><td>27</td><td>64</td><td>125</td><td>216</td><td>343</td><td>512</td><td>729</td><td>1000</td></tr>
+                </table>
+
+                <h2 style="margin-top: 40px;">Tips</h2>
+                <ul style="line-height: 1.9;">
+                    <li>An exponent is <strong>not</strong> multiplication: \(2^3 = 8\), not \(2 \times 3 = 6\).</li>
+                    <li>The index rules only combine powers with the <strong>same base</strong>.</li>
+                    <li>Memorizing the squares and cubes above makes roots much easier to spot.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- PRACTICE -->
+        <div id="practice-section" style="display:none;">
+            <div class="reference-section">
+                <div class="control-section">
+                    <h3>Question Type</h3>
+                    <div class="button-group" id="type-group">
+                        <button class="operation-btn active" data-type="power">Powers</button>
+                        <button class="operation-btn" data-type="sqrt">Square Roots</button>
+                        <button class="operation-btn" data-type="cube">Cube Roots</button>
+                        <button class="operation-btn" data-type="laws">Index Laws</button>
+                        <button class="operation-btn" data-type="mixed">Mixed</button>
+                    </div>
+                </div>
+                <div class="quiz-header">Score: <span id="score">0</span>/<span id="total">0</span></div>
+                <div class="equation-display" id="question"></div>
+                <div class="answer-section">
+                    <input type="number" id="answer" step="any" placeholder="?">
+                </div>
+                <div style="text-align:center;">
+                    <button class="primary-btn" id="check-btn">✓ Check</button>
+                    <button class="secondary-btn" id="new-btn">🎲 New Question</button>
+                </div>
+                <div class="feedback-message" id="feedback"></div>
+                <div class="steps-box" id="steps" style="display:none;"></div>
+            </div>
+        </div>
+
+        <footer>
+            <p>You've got the power! ⚡</p>
+        </footer>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Tabs
+        document.querySelectorAll('.topic-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.topic-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById('learn-section').style.display = tab.dataset.tab === 'learn' ? 'block' : 'none';
+                document.getElementById('practice-section').style.display = tab.dataset.tab === 'practice' ? 'block' : 'none';
+            });
+        });
+
+        const rnd = (lo, hi) => Math.floor(Math.random() * (hi - lo + 1)) + lo;
+        let qType = 'power', cur = null, score = 0, total = 0;
+
+        document.querySelectorAll('#type-group .operation-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('#type-group .operation-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                qType = btn.dataset.type;
+                newQuestion();
+            });
+        });
+
+        function makeQuestion(type) {
+            if (type === 'mixed') type = ['power', 'sqrt', 'cube', 'laws'][rnd(0, 3)];
+            if (type === 'power') {
+                const base = rnd(2, 9), exp = rnd(2, 3);
+                return { q: `${base}^{${exp}}`, ans: Math.pow(base, exp),
+                         steps: `\\(${base}^{${exp}} = ${Array(exp).fill(base).join(' \\times ')} = ${Math.pow(base, exp)}\\)` };
+            }
+            if (type === 'sqrt') {
+                const r = rnd(2, 15);
+                return { q: `\\sqrt{${r * r}}`, ans: r, steps: `\\(\\sqrt{${r * r}} = ${r}\\) because \\(${r}^2 = ${r * r}\\)` };
+            }
+            if (type === 'cube') {
+                const r = rnd(2, 8);
+                return { q: `\\sqrt[3]{${r * r * r}}`, ans: r, steps: `\\(\\sqrt[3]{${r * r * r}} = ${r}\\) because \\(${r}^3 = ${r * r * r}\\)` };
+            }
+            // laws: product / quotient / power-of-power, ask for the final value
+            const which = rnd(0, 2), base = rnd(2, 4);
+            if (which === 0) {
+                const m = rnd(1, 3), n = rnd(1, 2);
+                return { q: `${base}^{${m}} \\times ${base}^{${n}}`, ans: Math.pow(base, m + n),
+                         steps: `\\(${base}^{${m}} \\times ${base}^{${n}} = ${base}^{${m + n}} = ${Math.pow(base, m + n)}\\)` };
+            } else if (which === 1) {
+                const n = rnd(1, 2), m = n + rnd(1, 2);
+                return { q: `${base}^{${m}} \\div ${base}^{${n}}`, ans: Math.pow(base, m - n),
+                         steps: `\\(${base}^{${m}} \\div ${base}^{${n}} = ${base}^{${m - n}} = ${Math.pow(base, m - n)}\\)` };
+            }
+            const m = rnd(2, 3), n = 2;
+            return { q: `(${base}^{${m}})^{${n}}`, ans: Math.pow(base, m * n),
+                     steps: `\\((${base}^{${m}})^{${n}} = ${base}^{${m * n}} = ${Math.pow(base, m * n)}\\)` };
+        }
+
+        function newQuestion() {
+            cur = makeQuestion(qType);
+            document.getElementById('question').innerHTML = `\\(${cur.q} = \\;?\\)`;
+            renderMathInElement(document.getElementById('question'), { throwOnError: false });
+            document.getElementById('answer').value = '';
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('steps').style.display = 'none';
+            document.getElementById('answer').focus();
+        }
+
+        function check() {
+            if (!cur) return;
+            const v = parseFloat(document.getElementById('answer').value);
+            const fb = document.getElementById('feedback');
+            if (isNaN(v)) { fb.textContent = 'Type a number first.'; fb.className = 'feedback-message incorrect'; return; }
+            total++;
+            if (Math.abs(v - cur.ans) < 1e-6) {
+                score++; fb.textContent = '🎉 Correct!'; fb.className = 'feedback-message correct';
+            } else {
+                fb.textContent = `Not quite — the answer is ${cur.ans}.`; fb.className = 'feedback-message incorrect';
+                const steps = document.getElementById('steps');
+                steps.innerHTML = `<div>${cur.steps}</div>`;
+                steps.style.display = 'block';
+                renderMathInElement(steps, { throwOnError: false });
+            }
+            document.getElementById('score').textContent = score;
+            document.getElementById('total').textContent = total;
+        }
+
+        document.getElementById('check-btn').addEventListener('click', check);
+        document.getElementById('new-btn').addEventListener('click', newQuestion);
+        document.getElementById('answer').addEventListener('keydown', e => { if (e.key === 'Enter') check(); });
+        newQuestion();
+    });
+    </script>
+</body>
+</html>
