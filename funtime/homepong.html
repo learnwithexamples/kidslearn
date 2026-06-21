@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Pong - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        .game-wrap { max-width: 940px; margin: 0 auto; }
+        .scoreboard { display: flex; justify-content: center; align-items: center; gap: 40px; margin: 10px 0 14px; }
+        .score-block { text-align: center; }
+        .score-block .who { font-size: 0.95em; font-weight: bold; }
+        .score-block .who.left { color: #2980b9; }
+        .score-block .who.right { color: #c0392b; }
+        .score-block .num { font-size: 2.4em; font-weight: bold; line-height: 1; }
+        .score-sep { font-size: 1.6em; color: #999; }
+        .canvas-holder { position: relative; }
+        #pong { display: block; width: 100%; height: auto; background: #1e7d3a; border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25); touch-action: none; }
+        .overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center;
+            justify-content: center; background: rgba(0,0,0,0.55); border-radius: 12px; color: white; text-align: center; padding: 20px; }
+        .overlay h2 { font-size: 2em; margin: 0 0 10px; }
+        .overlay p { font-size: 1.05em; margin: 4px 0; max-width: 520px; }
+        .overlay.hidden { display: none; }
+        .play-btn { margin-top: 18px; background: #f1c40f; color: #333; border: none; padding: 14px 34px;
+            border-radius: 30px; font-size: 1.2em; font-weight: bold; cursor: pointer; transition: transform 0.15s; }
+        .play-btn:hover { transform: scale(1.06); }
+        .controls-bar { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 18px; margin: 16px 0; }
+        .speed-ctl { display: flex; align-items: center; gap: 10px; background: white; padding: 8px 16px; border-radius: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .speed-ctl button { width: 34px; height: 34px; border-radius: 50%; border: 2px solid #667eea; background: white;
+            color: #667eea; font-size: 1.3em; font-weight: bold; cursor: pointer; line-height: 1; }
+        .speed-ctl button:hover { background: #667eea; color: white; }
+        .speed-ctl .label { font-weight: bold; color: #333; min-width: 92px; text-align: center; }
+        .reset-btn { background: white; color: #667eea; border: 2px solid #667eea; padding: 9px 20px; border-radius: 30px; font-size: 1em; cursor: pointer; }
+        .reset-btn:hover { background: #f5f7ff; }
+        .help-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 20px 0; }
+        .help-card { background: white; border-radius: 10px; padding: 16px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .help-card h3 { margin: 0 0 8px; }
+        .help-card.left-player h3 { color: #2980b9; }
+        .help-card.right-player h3 { color: #c0392b; }
+        .keys { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+        .key { display: inline-block; min-width: 26px; padding: 4px 8px; text-align: center; background: #f0f2f8;
+            border: 1px solid #d4d9ec; border-radius: 6px; font-family: monospace; font-weight: bold; font-size: 0.95em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚽ Home Pong</h1>
+            <p class="subtitle">Two-player soccer pong — first to 10 goals wins!</p>
+            <a href="funtime.html" class="back-link">← Back to Fun Time</a>
+        </header>
+
+        <div class="game-wrap">
+            <div class="scoreboard">
+                <div class="score-block">
+                    <div class="who left">🔵 Left (WASD)</div>
+                    <div class="num" id="score-left" style="color:#2980b9;">0</div>
+                </div>
+                <div class="score-sep">:</div>
+                <div class="score-block">
+                    <div class="who right">🔴 Right (Arrows)</div>
+                    <div class="num" id="score-right" style="color:#c0392b;">0</div>
+                </div>
+            </div>
+
+            <div class="canvas-holder">
+                <canvas id="pong" width="900" height="520"></canvas>
+                <div class="overlay" id="overlay">
+                    <h2 id="overlay-title">⚽ Home Pong</h2>
+                    <p id="overlay-msg">🔵 Left player uses <strong>W A S D</strong> &nbsp;•&nbsp; 🔴 Right player uses the <strong>arrow keys</strong>.</p>
+                    <p>Move your paddle to block the ball and bounce it into your opponent's goal. First to <strong>10</strong> wins!</p>
+                    <button class="play-btn" id="play-btn">▶ Start Game</button>
+                </div>
+            </div>
+
+            <div class="controls-bar">
+                <div class="speed-ctl">
+                    <button id="speed-down" title="Slower">−</button>
+                    <span class="label">Speed: <span id="speed-val">3</span></span>
+                    <button id="speed-up" title="Faster">+</button>
+                </div>
+                <button class="reset-btn" id="reset-btn">↺ Restart</button>
+            </div>
+
+            <div class="help-grid">
+                <div class="help-card left-player">
+                    <h3>🔵 Left Player</h3>
+                    <div class="keys">
+                        <span class="key">W</span><span class="key">A</span><span class="key">S</span><span class="key">D</span>
+                    </div>
+                    <p style="margin:8px 0 0; font-size:0.9em; color:#555;">Move up, left, down, right.</p>
+                </div>
+                <div class="help-card right-player">
+                    <h3>🔴 Right Player</h3>
+                    <div class="keys">
+                        <span class="key">↑</span><span class="key">←</span><span class="key">↓</span><span class="key">→</span>
+                    </div>
+                    <p style="margin:8px 0 0; font-size:0.9em; color:#555;">Move up, left, down, right.</p>
+                </div>
+                <div class="help-card">
+                    <h3>⚙️ Speed</h3>
+                    <div class="keys">
+                        <span class="key">+</span><span class="key">−</span>
+                    </div>
+                    <p style="margin:8px 0 0; font-size:0.9em; color:#555;">Or use the buttons. Range 1–8.</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Defend your goal — and shoot! ⚽</p>
+        </footer>
+    </div>
+
+    <script>
+    (function () {
+        const canvas = document.getElementById('pong');
+        const ctx = canvas.getContext('2d');
+        const W = canvas.width, H = canvas.height;
+        const BORDER = 10;                       // wall thickness
+        const px0 = BORDER, py0 = BORDER;        // play area top-left
+        const playW = W - 2 * BORDER;
+        const playH = H - 2 * BORDER;
+        const fieldL = px0, fieldR = W - BORDER; // inner wall x positions
+        const fieldT = py0, fieldB = H - BORDER; // inner wall y positions
+        const goalH = playH / 3;                 // goal opening height
+        const goalTop = (H - goalH) / 2;
+        const goalBot = goalTop + goalH;
+
+        const PADDLE_H = playH / 7;
+        const PADDLE_W = 14;
+        const PADDLE_SPEED = playH * 1.1;        // px per second
+        const BALL_R = 9;
+        const SPEED_MIN = 1, SPEED_MAX = 8;
+        const BASE_PXPS = playW * 0.20;          // px/sec per speed unit
+        const WIN_SCORE = 10;
+
+        let speedMult = 3;
+        let scoreL = 0, scoreR = 0;
+        let running = false, gameOver = false;
+        let servePause = 0;                      // seconds to wait before ball moves
+
+        // Paddles: {x, y} = top-left-ish anchor; bar spans [y, y+PADDLE_H]
+        const paddleL = { x: px0 + playW * (1 / 8), y: (H - PADDLE_H) / 2 };
+        const paddleR = { x: px0 + playW * (7 / 8), y: (H - PADDLE_H) / 2 };
+        const ball = { x: W / 2, y: H / 2, vx: 0, vy: 0 };
+
+        const keys = {};
+
+        function setBallVelocity(dir) {
+            // dir: +1 serve toward right, -1 toward left
+            const speed = BASE_PXPS * speedMult;
+            const ang = (Math.random() * 50 - 25) * Math.PI / 180; // -25°..25°
+            ball.vx = dir * speed * Math.cos(ang);
+            ball.vy = speed * Math.sin(ang);
+        }
+
+        function resetBall(dir) {
+            ball.x = W / 2; ball.y = H / 2;
+            setBallVelocity(dir);
+            servePause = 0.7;
+        }
+
+        function resetGame() {
+            scoreL = 0; scoreR = 0; gameOver = false;
+            paddleL.y = (H - PADDLE_H) / 2; paddleL.x = px0 + playW * (1 / 8);
+            paddleR.y = (H - PADDLE_H) / 2; paddleR.x = px0 + playW * (7 / 8);
+            updateScores();
+            resetBall(Math.random() < 0.5 ? 1 : -1);
+        }
+
+        function updateScores() {
+            document.getElementById('score-left').textContent = scoreL;
+            document.getElementById('score-right').textContent = scoreR;
+        }
+
+        function setSpeed(v) {
+            speedMult = Math.max(SPEED_MIN, Math.min(SPEED_MAX, v));
+            document.getElementById('speed-val').textContent = speedMult;
+            // rescale current ball velocity to the new speed, keep direction
+            const cur = Math.hypot(ball.vx, ball.vy);
+            if (cur > 0) {
+                const target = BASE_PXPS * speedMult;
+                ball.vx = ball.vx / cur * target;
+                ball.vy = ball.vy / cur * target;
+            }
+        }
+
+        function clampPaddle(p) {
+            p.x = Math.max(fieldL + PADDLE_W / 2, Math.min(fieldR - PADDLE_W / 2, p.x));
+            p.y = Math.max(fieldT, Math.min(fieldB - PADDLE_H, p.y));
+        }
+
+        function paddleHit(p) {
+            // ball center within paddle band?
+            const left = p.x - PADDLE_W / 2 - BALL_R;
+            const right = p.x + PADDLE_W / 2 + BALL_R;
+            return ball.x >= left && ball.x <= right && ball.y >= p.y - BALL_R && ball.y <= p.y + PADDLE_H + BALL_R;
+        }
+
+        function update(dt) {
+            // Move paddles from key state
+            if (keys['w']) paddleL.y -= PADDLE_SPEED * dt;
+            if (keys['s']) paddleL.y += PADDLE_SPEED * dt;
+            if (keys['a']) paddleL.x -= PADDLE_SPEED * dt;
+            if (keys['d']) paddleL.x += PADDLE_SPEED * dt;
+            if (keys['arrowup']) paddleR.y -= PADDLE_SPEED * dt;
+            if (keys['arrowdown']) paddleR.y += PADDLE_SPEED * dt;
+            if (keys['arrowleft']) paddleR.x -= PADDLE_SPEED * dt;
+            if (keys['arrowright']) paddleR.x += PADDLE_SPEED * dt;
+            clampPaddle(paddleL); clampPaddle(paddleR);
+
+            if (servePause > 0) { servePause -= dt; return; }
+
+            ball.x += ball.vx * dt;
+            ball.y += ball.vy * dt;
+
+            // Top / bottom walls
+            if (ball.y - BALL_R <= fieldT) { ball.y = fieldT + BALL_R; ball.vy = Math.abs(ball.vy); }
+            else if (ball.y + BALL_R >= fieldB) { ball.y = fieldB - BALL_R; ball.vy = -Math.abs(ball.vy); }
+
+            // Paddle collisions (reflect horizontally, push out)
+            if (ball.vx < 0 && paddleHit(paddleL)) {
+                ball.x = paddleL.x + PADDLE_W / 2 + BALL_R;
+                ball.vx = Math.abs(ball.vx);
+                addSpin(paddleL);
+            } else if (ball.vx > 0 && paddleHit(paddleR)) {
+                ball.x = paddleR.x - PADDLE_W / 2 - BALL_R;
+                ball.vx = -Math.abs(ball.vx);
+                addSpin(paddleR);
+            }
+
+            // Left wall / goal
+            if (ball.x - BALL_R <= fieldL) {
+                if (ball.y >= goalTop && ball.y <= goalBot) { scoreR++; goalScored(1); return; }
+                ball.x = fieldL + BALL_R; ball.vx = Math.abs(ball.vx);
+            }
+            // Right wall / goal
+            else if (ball.x + BALL_R >= fieldR) {
+                if (ball.y >= goalTop && ball.y <= goalBot) { scoreL++; goalScored(-1); return; }
+                ball.x = fieldR - BALL_R; ball.vx = -Math.abs(ball.vx);
+            }
+        }
+
+        function addSpin(p) {
+            // nudge vy based on where the ball struck the paddle, then renormalize speed
+            const center = p.y + PADDLE_H / 2;
+            const offset = (ball.y - center) / (PADDLE_H / 2); // -1..1
+            ball.vy += offset * BASE_PXPS * speedMult * 0.35;
+            const cur = Math.hypot(ball.vx, ball.vy);
+            const target = BASE_PXPS * speedMult;
+            ball.vx = ball.vx / cur * target;
+            ball.vy = ball.vy / cur * target;
+        }
+
+        function goalScored(dir) {
+            updateScores();
+            if (scoreL >= WIN_SCORE || scoreR >= WIN_SCORE) {
+                endGame();
+            } else {
+                resetBall(dir); // serve toward the side that was scored on
+            }
+        }
+
+        function endGame() {
+            running = false; gameOver = true;
+            const winner = scoreL >= WIN_SCORE ? '🔵 Left player' : '🔴 Right player';
+            document.getElementById('overlay-title').textContent = '🏆 ' + winner + ' wins!';
+            document.getElementById('overlay-msg').textContent = `Final score ${scoreL} : ${scoreR}`;
+            document.getElementById('play-btn').textContent = '▶ Play Again';
+            document.getElementById('overlay').classList.remove('hidden');
+        }
+
+        // ── Drawing ──────────────────────────────────────────────
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+            // field
+            ctx.fillStyle = '#1e7d3a';
+            ctx.fillRect(0, 0, W, H);
+            // perimeter walls
+            ctx.strokeStyle = '#ffffff'; ctx.lineWidth = BORDER;
+            ctx.strokeRect(BORDER / 2, BORDER / 2, W - BORDER, H - BORDER);
+            ctx.lineWidth = 4;
+            // center line
+            ctx.beginPath(); ctx.moveTo(W / 2, fieldT); ctx.lineTo(W / 2, fieldB); ctx.stroke();
+            // center circle
+            ctx.beginPath(); ctx.arc(W / 2, H / 2, playH / 6, 0, Math.PI * 2); ctx.stroke();
+            // center dot
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath(); ctx.arc(W / 2, H / 2, 4, 0, Math.PI * 2); ctx.fill();
+            // goals (white posts on the side walls)
+            ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 4;
+            const goalDepth = playW / 14;
+            // left goal box
+            ctx.strokeRect(fieldL, goalTop, goalDepth, goalH);
+            // right goal box
+            ctx.strokeRect(fieldR - goalDepth, goalTop, goalDepth, goalH);
+            // goal openings highlighted (faint)
+            ctx.fillStyle = 'rgba(255,255,255,0.12)';
+            ctx.fillRect(fieldL, goalTop, goalDepth, goalH);
+            ctx.fillRect(fieldR - goalDepth, goalTop, goalDepth, goalH);
+
+            // paddles
+            ctx.fillStyle = '#2980b9';
+            ctx.fillRect(paddleL.x - PADDLE_W / 2, paddleL.y, PADDLE_W, PADDLE_H);
+            ctx.fillStyle = '#c0392b';
+            ctx.fillRect(paddleR.x - PADDLE_W / 2, paddleR.y, PADDLE_W, PADDLE_H);
+
+            // ball
+            ctx.fillStyle = '#f5f5f5';
+            ctx.beginPath(); ctx.arc(ball.x, ball.y, BALL_R, 0, Math.PI * 2); ctx.fill();
+            ctx.strokeStyle = '#333'; ctx.lineWidth = 1.5; ctx.stroke();
+        }
+
+        // ── Loop ─────────────────────────────────────────────────
+        let last = 0;
+        function frame(ts) {
+            if (!last) last = ts;
+            let dt = (ts - last) / 1000;
+            last = ts;
+            if (dt > 0.05) dt = 0.05; // clamp big gaps
+            if (running) update(dt);
+            draw();
+            requestAnimationFrame(frame);
+        }
+
+        // ── Input ────────────────────────────────────────────────
+        const handledKeys = ['arrowup', 'arrowdown', 'arrowleft', 'arrowright', ' '];
+        window.addEventListener('keydown', e => {
+            const k = e.key.toLowerCase();
+            if (handledKeys.includes(k)) e.preventDefault();
+            keys[k] = true;
+            if (k === '+' || k === '=') setSpeed(speedMult + 1);
+            if (k === '-' || k === '_') setSpeed(speedMult - 1);
+            if (k === ' ' && !running) startGame();
+        });
+        window.addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
+
+        function startGame() {
+            if (gameOver || (scoreL === 0 && scoreR === 0)) resetGame();
+            document.getElementById('overlay').classList.add('hidden');
+            running = true;
+        }
+
+        document.getElementById('play-btn').addEventListener('click', startGame);
+        document.getElementById('reset-btn').addEventListener('click', () => {
+            resetGame(); running = false; gameOver = false;
+            document.getElementById('overlay-title').textContent = '⚽ Home Pong';
+            document.getElementById('overlay-msg').innerHTML = '🔵 Left player uses <strong>W A S D</strong> &nbsp;•&nbsp; 🔴 Right player uses the <strong>arrow keys</strong>.';
+            document.getElementById('play-btn').textContent = '▶ Start Game';
+            document.getElementById('overlay').classList.remove('hidden');
+        });
+        document.getElementById('speed-up').addEventListener('click', () => setSpeed(speedMult + 1));
+        document.getElementById('speed-down').addEventListener('click', () => setSpeed(speedMult - 1));
+
+        // init
+        resetBall(1);
+        running = false;
+        requestAnimationFrame(frame);
+    })();
+    </script>
+</body>
+</html>
