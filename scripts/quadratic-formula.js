@@ -366,8 +366,226 @@ function setupEvents() {
     });
 }
 
+// ─────────────────────────────────────────────────────────────
+// Graph Explorer (Learn the Formula tab)
+// Plots y = ax² + bx + c with adjustable coefficients and x-range.
+// ─────────────────────────────────────────────────────────────
+
+function setupGraph() {
+    const canvas = document.getElementById('parabola-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    const ids = ['coef-a', 'coef-b', 'coef-c', 'x-min', 'x-max'];
+    // Only the x-range sliders have a separate value read-out.
+    const valSpans = { 'x-min': 'val-xmin', 'x-max': 'val-xmax' };
+
+    function fmtCoef(v) {
+        return parseFloat(v.toFixed(2)).toString();
+    }
+
+    // Read an integer coefficient, clamped to the input's range.
+    function intCoef(id) {
+        const el = document.getElementById(id);
+        let v = Math.round(parseFloat(el.value));
+        if (!Number.isFinite(v)) v = 0;
+        const lo = parseFloat(el.min), hi = parseFloat(el.max);
+        if (Number.isFinite(lo)) v = Math.max(lo, v);
+        if (Number.isFinite(hi)) v = Math.min(hi, v);
+        return v;
+    }
+
+    function draw() {
+        let a = intCoef('coef-a');
+        const b = intCoef('coef-b');
+        const c = intCoef('coef-c');
+        let xMin = parseFloat(document.getElementById('x-min').value);
+        let xMax = parseFloat(document.getElementById('x-max').value);
+
+        // Update the value read-outs next to the x-range sliders.
+        Object.keys(valSpans).forEach(id => {
+            document.getElementById(valSpans[id]).textContent =
+                fmtCoef(parseFloat(document.getElementById(id).value));
+        });
+
+        if (xMax <= xMin) xMax = xMin + 1;
+
+        const f = x => a * x * x + b * x + c;
+
+        // Sample the curve to find the y-range, then pad it a little.
+        let yLo = Infinity, yHi = -Infinity;
+        const samples = 400;
+        for (let i = 0; i <= samples; i++) {
+            const x = xMin + (xMax - xMin) * (i / samples);
+            const y = f(x);
+            if (y < yLo) yLo = y;
+            if (y > yHi) yHi = y;
+        }
+        if (yLo === yHi) { yLo -= 1; yHi += 1; }
+        const padY = (yHi - yLo) * 0.1;
+        yLo -= padY;
+        yHi += padY;
+
+        const W = canvas.width, H = canvas.height;
+        const pad = 36;
+        const sx = x => pad + (x - xMin) / (xMax - xMin) * (W - 2 * pad);
+        const sy = y => H - pad - (y - yLo) / (yHi - yLo) * (H - 2 * pad);
+
+        ctx.clearRect(0, 0, W, H);
+
+        // Gridlines + axis numbers.
+        ctx.font = '11px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+        const xStep = niceStep((xMax - xMin) / 10);
+        ctx.strokeStyle = '#eef0f8';
+        ctx.fillStyle = '#999';
+        ctx.lineWidth = 1;
+        for (let x = Math.ceil(xMin / xStep) * xStep; x <= xMax; x += xStep) {
+            const px = sx(x);
+            ctx.beginPath();
+            ctx.moveTo(px, pad);
+            ctx.lineTo(px, H - pad);
+            ctx.stroke();
+            if (Math.abs(x) > 1e-9) ctx.fillText(fmtCoef(x), px, H - pad + 4);
+        }
+        const yStep = niceStep((yHi - yLo) / 8);
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'middle';
+        for (let y = Math.ceil(yLo / yStep) * yStep; y <= yHi; y += yStep) {
+            const py = sy(y);
+            ctx.beginPath();
+            ctx.moveTo(pad, py);
+            ctx.lineTo(W - pad, py);
+            ctx.stroke();
+            if (Math.abs(y) > 1e-9) ctx.fillText(fmtCoef(y), pad - 4, py);
+        }
+
+        // Axes (x = 0 and y = 0 if in view).
+        ctx.strokeStyle = '#bbb';
+        ctx.lineWidth = 1.5;
+        if (0 >= yLo && 0 <= yHi) {
+            const py = sy(0);
+            ctx.beginPath(); ctx.moveTo(pad, py); ctx.lineTo(W - pad, py); ctx.stroke();
+        }
+        if (0 >= xMin && 0 <= xMax) {
+            const px = sx(0);
+            ctx.beginPath(); ctx.moveTo(px, pad); ctx.lineTo(px, H - pad); ctx.stroke();
+        }
+
+        // The parabola.
+        ctx.strokeStyle = '#667eea';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        for (let i = 0; i <= samples; i++) {
+            const x = xMin + (xMax - xMin) * (i / samples);
+            const px = sx(x), py = sy(f(x));
+            if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+        }
+        ctx.stroke();
+
+        // Mark special points.
+        const eq = document.getElementById('graph-equation');
+        const readout = document.getElementById('graph-readout');
+
+        if (Math.abs(a) < 1e-9) {
+            // Degenerate: it's a straight line, not a parabola.
+            eq.innerHTML = `\\(y = ${termsLatex(0, b, c)}\\)`;
+            readout.innerHTML = 'With \\(a = 0\\) this is a straight line, not a parabola.';
+            renderGraphMath(eq, readout);
+            return;
+        }
+
+        // y-intercept (0, c)
+        if (0 >= xMin && 0 <= xMax) plotPoint(ctx, sx(0), sy(c), '#16a085');
+
+        // Vertex
+        const vx = -b / (2 * a);
+        const vy = f(vx);
+        if (vx >= xMin && vx <= xMax) plotPoint(ctx, sx(vx), sy(vy), '#e67e22');
+
+        // Roots (x-intercepts)
+        const disc = b * b - 4 * a * c;
+        let rootText;
+        if (disc > 1e-9) {
+            const r1 = (-b - Math.sqrt(disc)) / (2 * a);
+            const r2 = (-b + Math.sqrt(disc)) / (2 * a);
+            [r1, r2].forEach(r => {
+                if (r >= xMin && r <= xMax) plotPoint(ctx, sx(r), sy(0), '#c0392b');
+            });
+            rootText = `Two roots: \\(x = ${fmtCoef(r1)}\\) and \\(x = ${fmtCoef(r2)}\\)`;
+        } else if (Math.abs(disc) <= 1e-9) {
+            const r = -b / (2 * a);
+            if (r >= xMin && r <= xMax) plotPoint(ctx, sx(r), sy(0), '#c0392b');
+            rootText = `One repeated root: \\(x = ${fmtCoef(r)}\\)`;
+        } else {
+            rootText = 'No real roots (the curve never crosses the x-axis).';
+        }
+
+        eq.innerHTML = `\\(y = ${termsLatex(a, b, c)}\\)`;
+        readout.innerHTML =
+            `<span style="color:#e67e22">●</span> Vertex: \\((${fmtCoef(vx)},\\ ${fmtCoef(vy)})\\) &nbsp; ` +
+            `<span style="color:#16a085">●</span> y-intercept: \\((0,\\ ${fmtCoef(c)})\\)<br>` +
+            `<span style="color:#c0392b">●</span> ${rootText} &nbsp; ` +
+            `\\(\\Delta = ${fmtCoef(disc)}\\)`;
+        renderGraphMath(eq, readout);
+    }
+
+    function plotPoint(ctx, px, py, color) {
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.arc(px, py, 5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'white';
+        ctx.stroke();
+    }
+
+    ids.forEach(id => document.getElementById(id).addEventListener('input', draw));
+    draw();
+}
+
+// A "nice" step size (1, 2, 5 × 10ⁿ) for gridlines.
+function niceStep(raw) {
+    if (!(raw > 0)) return 1;
+    const pow = Math.pow(10, Math.floor(Math.log10(raw)));
+    const n = raw / pow;
+    const step = n < 1.5 ? 1 : n < 3 ? 2 : n < 7 ? 5 : 10;
+    return step * pow;
+}
+
+// LaTeX for ax² + bx + c with tidy signs.
+function termsLatex(a, b, c) {
+    const fc = v => parseFloat(v.toFixed(2)).toString();
+    let s = '';
+    if (Math.abs(a) > 1e-9) {
+        s += (a === 1 ? '' : a === -1 ? '-' : fc(a)) + 'x^2';
+    }
+    if (Math.abs(b) > 1e-9) {
+        const sign = b < 0 ? '-' : (s ? '+' : '');
+        const mag = Math.abs(b);
+        s += `${sign} ${mag === 1 ? '' : fc(mag)}x`;
+    }
+    if (Math.abs(c) > 1e-9 || s === '') {
+        const sign = c < 0 ? '-' : (s ? '+' : '');
+        s += `${sign} ${fc(Math.abs(c))}`;
+    }
+    return s.trim();
+}
+
+function renderGraphMath(...els) {
+    if (typeof renderMathInElement === 'function') {
+        els.forEach(el => renderMathInElement(el, {
+            ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'option'],
+            throwOnError: false,
+        }));
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     setupTabs();
     setupEvents();
+    setupGraph();
     generate();
 });
+

@@ -199,6 +199,86 @@
             border-color: #667eea;
         }
 
+        /* Graph Explorer */
+        .graph-explorer {
+            margin: 20px auto;
+            max-width: 680px;
+        }
+
+        .graph-equation {
+            text-align: center;
+            font-size: 1.5em;
+            color: #667eea;
+            margin: 10px 0 18px;
+            min-height: 1.4em;
+        }
+
+        #parabola-canvas {
+            display: block;
+            width: 100%;
+            height: auto;
+            background: #fcfcff;
+            border: 2px solid #e0e4f5;
+            border-radius: 10px;
+            touch-action: none;
+        }
+
+        .graph-readout {
+            text-align: center;
+            margin: 14px 0 6px;
+            color: #444;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+
+        .graph-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 10px 24px;
+            margin-top: 16px;
+        }
+
+        .graph-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .graph-control label {
+            min-width: 48px;
+            font-weight: bold;
+            color: #333;
+            font-size: 1.05em;
+        }
+
+        .graph-control input[type="range"] {
+            flex: 1;
+            accent-color: #667eea;
+        }
+
+        .graph-control input[type="number"] {
+            flex: 1;
+            min-width: 0;
+            padding: 6px 8px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1.05em;
+            text-align: center;
+        }
+
+        .graph-control input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .graph-value {
+            min-width: 42px;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+            font-weight: bold;
+            color: #667eea;
+        }
+
     </style>
 </head>
 <body>
@@ -365,6 +445,44 @@
                     <li>You can check your answers by substituting them back into
                         the original equation.</li>
                 </ul>
+
+                <h2 style="margin-top: 40px;">📈 Graph Explorer</h2>
+                <p>Drag the sliders to change \(a\), \(b\) and \(c\) and watch the
+                   parabola \(y = ax^2 + bx + c\) change shape. Adjust the
+                   \(x\)-range sliders to zoom in or out.</p>
+
+                <div class="graph-explorer">
+                    <div class="graph-equation" id="graph-equation"></div>
+
+                    <canvas id="parabola-canvas" width="640" height="440"></canvas>
+
+                    <div class="graph-readout" id="graph-readout"></div>
+
+                    <div class="graph-controls">
+                        <div class="graph-control">
+                            <label for="coef-a">a</label>
+                            <input type="number" id="coef-a" min="-100" max="100" step="1" value="1">
+                        </div>
+                        <div class="graph-control">
+                            <label for="coef-b">b</label>
+                            <input type="number" id="coef-b" min="-100" max="100" step="1" value="0">
+                        </div>
+                        <div class="graph-control">
+                            <label for="coef-c">c</label>
+                            <input type="number" id="coef-c" min="-100" max="100" step="1" value="-4">
+                        </div>
+                        <div class="graph-control">
+                            <label for="x-min">x min</label>
+                            <input type="range" id="x-min" min="-50" max="-1" step="1" value="-10">
+                            <span class="graph-value" id="val-xmin">-10</span>
+                        </div>
+                        <div class="graph-control">
+                            <label for="x-max">x max</label>
+                            <input type="range" id="x-max" min="1" max="50" step="1" value="10">
+                            <span class="graph-value" id="val-xmax">10</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

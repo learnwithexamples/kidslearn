@@ -65,6 +65,15 @@
     flex-grow: 1;
 }
 
+/* Section heading between topic grids */
+.section-heading {
+    text-align: center;
+    color: #fff;
+    margin: 2.5rem 0 1.5rem;
+    font-size: 1.6rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 /* Lesson Content */
 .lesson-content {
     max-width: 900px;
