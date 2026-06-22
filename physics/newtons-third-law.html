@@ -6,6 +6,30 @@
     <title>Newton's Third Law - Motion & Forces - KidsLearn</title>
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/physics.css">
+    <style>
+        .topic-tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+        .topic-tab { padding: 10px 24px; border: 2px solid rgba(255,255,255,0.6); border-radius: 25px;
+            background: rgba(255,255,255,0.15); color: #fff; cursor: pointer; transition: all 0.25s; font-size: 1em; }
+        .topic-tab:hover { background: rgba(255,255,255,0.3); }
+        .topic-tab.active { background: #fff; color: #1565c0; border-color: #fff; font-weight: bold; }
+        .quiz-card { background: #fff; border-radius: 14px; padding: 24px 26px; margin: 20px 0; box-shadow: 0 3px 14px rgba(0,0,0,0.12); }
+        .quiz-intro { text-align: center; color: #555; margin-bottom: 18px; }
+        .quiz-score { text-align: center; font-weight: bold; color: #1565c0; margin: 10px 0; }
+        .quiz-question { text-align: center; font-size: 1.2em; font-weight: bold; margin: 16px 0; color: #333; line-height: 1.6; }
+        .quiz-choices { display: grid; gap: 10px; max-width: 480px; margin: 0 auto; }
+        .choice-btn { padding: 12px 18px; border: 2px solid #cdd6ec; border-radius: 10px; background: #fff; cursor: pointer; font-size: 1em; text-align: left; transition: all 0.2s; }
+        .choice-btn:hover { border-color: #1565c0; background: #f1f6ff; }
+        .choice-btn.correct { border-color: #2e7d32; background: #e8f5e9; }
+        .choice-btn.incorrect { border-color: #c62828; background: #fdecea; }
+        .choice-btn:disabled { cursor: default; }
+        .quiz-buttons { text-align: center; margin: 12px 0; }
+        .btn-primary { background: #1565c0; color: #fff; border: none; padding: 11px 24px; border-radius: 24px; font-size: 1em; font-weight: bold; cursor: pointer; margin: 4px; transition: background 0.2s; }
+        .btn-primary:hover { background: #0d47a1; }
+        .quiz-feedback { text-align: center; font-size: 1.1em; font-weight: bold; min-height: 1.4em; margin: 14px 0; }
+        .quiz-feedback.correct { color: #2e7d32; }
+        .quiz-feedback.incorrect { color: #c62828; }
+        .quiz-steps { background: #f1f6ff; border-left: 5px solid #1565c0; border-radius: 8px; padding: 14px 20px; margin: 14px auto; max-width: 560px; line-height: 1.9; display: none; }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -15,7 +39,13 @@
             <a href="motion.html" class="back-link">← Back to Motion &amp; Forces</a>
         </header>
 
+        <div class="topic-tabs">
+            <button class="topic-tab active" data-tab="lesson">📚 Learn</button>
+            <button class="topic-tab" data-tab="practice">3️⃣ Practice</button>
+        </div>
+
         <main class="lesson-content">
+            <div id="lesson-view">
             <section class="lesson-section intro-box">
                 <h2>🍎 Newton's Third Law</h2>
                 <p>The <strong>third law</strong> is all about pairs of forces. It tells us that forces always come in twos — whenever one object pushes on another, the second object pushes back just as hard!</p>
@@ -116,11 +146,123 @@
                     </div>
                 </div>
             </section>
+            </div><!-- /lesson-view -->
+
+            <div id="practice-view" style="display:none;">
+                <div class="quiz-card">
+                    <p class="quiz-intro">Test what you know about action and reaction. Pick the best answer!</p>
+                    <div class="quiz-score">Score: <span id="mc-score">0</span>/<span id="mc-total">0</span></div>
+                    <div class="quiz-question" id="mc-q"></div>
+                    <div class="quiz-choices" id="mc-choices"></div>
+                    <div class="quiz-feedback" id="mc-feedback"></div>
+                    <div class="quiz-steps" id="mc-steps"></div>
+                    <div class="quiz-buttons"><button class="btn-primary" id="mc-next">Next Question →</button></div>
+                </div>
+            </div><!-- /practice-view -->
         </main>
 
         <footer>
             <p>You've mastered all three of Newton's laws! 🍎🎉</p>
         </footer>
     </div>
+
+    <script>
+    (function () {
+        var views = { lesson: 'lesson-view', practice: 'practice-view' };
+        document.querySelectorAll('.topic-tab').forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                document.querySelectorAll('.topic-tab').forEach(function (t) { t.classList.remove('active'); });
+                tab.classList.add('active');
+                var pick = tab.dataset.tab;
+                Object.keys(views).forEach(function (k) {
+                    document.getElementById(views[k]).style.display = (k === pick) ? '' : 'none';
+                });
+            });
+        });
+
+        var POOL = [
+            {
+                q: 'What does Newton\u2019s Third Law state?',
+                choices: ['Objects keep moving forever', 'For every action there is an equal and opposite reaction', 'Force equals mass times acceleration', 'Heavy things fall faster'],
+                correct: 1,
+                explain: 'Newton\u2019s Third Law: for every action force there is an equal and opposite reaction force.'
+            },
+            {
+                q: 'The two forces in an action\u2013reaction pair are always...',
+                choices: ['Equal in size and opposite in direction', 'Equal in size and the same direction', 'Different sizes', 'Pointing the same way'],
+                correct: 0,
+                explain: 'Action\u2013reaction forces are always equal in strength but point in opposite directions.'
+            },
+            {
+                q: 'When you swim, you push the water backward. What pushes you forward?',
+                choices: ['Gravity', 'The water pushing back on you', 'Your inertia', 'The air'],
+                correct: 1,
+                explain: 'You push the water back (action) and the water pushes you forward (reaction).'
+            },
+            {
+                q: 'How does a rocket move forward in empty space?',
+                choices: ['It pushes against the air', 'It pushes exhaust gas out and the gas pushes the rocket forward', 'It pulls itself with gravity', 'It uses inertia'],
+                correct: 1,
+                explain: 'The rocket pushes gas out the back (action); the gas pushes the rocket forward (reaction) \u2014 no air needed!'
+            },
+            {
+                q: 'You jump forward off a small boat and the boat shoots backward. Why?',
+                choices: ['The boat is too light', 'You pushed the boat back, so it pushed you forward', 'Gravity pulled the boat', 'The water moved the boat'],
+                correct: 1,
+                explain: 'Your push on the boat (action) is matched by the boat\u2019s push on you (reaction) in the opposite direction.'
+            },
+            {
+                q: 'In an action\u2013reaction pair, the two forces act on...',
+                choices: ['The same object', 'Two different objects', 'Nothing at all', 'Only the heavier object'],
+                correct: 1,
+                explain: 'The action force acts on one object and the reaction force acts on the other \u2014 two different objects.'
+            },
+            {
+                q: 'When you walk, your feet push backward on the ground. What moves you forward?',
+                choices: ['The ground pushing forward on your feet', 'The wind', 'Your own weight', 'Friction disappearing'],
+                correct: 0,
+                explain: 'Your feet push back on the ground (action); the ground pushes you forward (reaction).'
+            },
+            {
+                q: 'A balloon lets air rush out one end and zooms off the other way. This shows...',
+                choices: ['Newton\u2019s First Law', 'Newton\u2019s Second Law', 'Newton\u2019s Third Law', 'No law at all'],
+                correct: 2,
+                explain: 'The air rushes out one way (action) and the balloon is pushed the opposite way (reaction) \u2014 Newton\u2019s Third Law.'
+            }
+        ];
+
+        var score = 0, total = 0, order = [], idx = 0, answered = false;
+        function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+        function indices() { return shuffle(POOL.map(function (_, i) { return i; })); }
+        function load() {
+            if (idx >= order.length) { order = indices(); idx = 0; }
+            var item = POOL[order[idx]];
+            answered = false;
+            document.getElementById('mc-q').textContent = item.q;
+            var box = document.getElementById('mc-choices'); box.innerHTML = '';
+            item.choices.forEach(function (c, i) {
+                var b = document.createElement('button'); b.className = 'choice-btn'; b.textContent = c;
+                b.addEventListener('click', function () { choose(i, b); });
+                box.appendChild(b);
+            });
+            document.getElementById('mc-feedback').textContent = '';
+            document.getElementById('mc-steps').style.display = 'none';
+        }
+        function choose(i, btn) {
+            if (answered) return; answered = true;
+            var item = POOL[order[idx]]; total++;
+            var btns = document.querySelectorAll('#mc-choices .choice-btn');
+            btns.forEach(function (b) { b.disabled = true; });
+            var fb = document.getElementById('mc-feedback');
+            if (i === item.correct) { score++; btn.classList.add('correct'); fb.textContent = '🎉 Correct!'; fb.className = 'quiz-feedback correct'; }
+            else { btn.classList.add('incorrect'); btns[item.correct].classList.add('correct'); fb.textContent = 'Not quite.'; fb.className = 'quiz-feedback incorrect'; }
+            var s = document.getElementById('mc-steps'); s.innerHTML = item.explain; s.style.display = 'block';
+            document.getElementById('mc-score').textContent = score;
+            document.getElementById('mc-total').textContent = total;
+        }
+        document.getElementById('mc-next').addEventListener('click', function () { idx++; load(); });
+        order = indices(); load();
+    })();
+    </script>
 </body>
 </html>

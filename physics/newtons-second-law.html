@@ -6,6 +6,38 @@
     <title>Newton's Second Law - Motion & Forces - KidsLearn</title>
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/physics.css">
+    <!-- KaTeX for proper math/equation rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css" integrity="sha384-vlBdW0r3AcZO/HboRPznQNowvexd3fY8qHOWkBi5q7KGgqJ+F48+DceybYmrVbmB" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js" integrity="sha384-AtrdNsnxl/75rvBneBVH7DtOvCxSVahR2zWqle1coBKd8DEmLoviqNeJSx64gNAs" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, { ignoredTags: ['script','noscript','style','textarea','pre','option'], throwOnError: false });"></script>
+    <style>
+        .topic-tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+        .topic-tab { padding: 10px 24px; border: 2px solid rgba(255,255,255,0.6); border-radius: 25px;
+            background: rgba(255,255,255,0.15); color: #fff; cursor: pointer; transition: all 0.25s; font-size: 1em; }
+        .topic-tab:hover { background: rgba(255,255,255,0.3); }
+        .topic-tab.active { background: #fff; color: #1565c0; border-color: #fff; font-weight: bold; }
+        .quiz-card { background: #fff; border-radius: 14px; padding: 24px 26px; margin: 20px 0; box-shadow: 0 3px 14px rgba(0,0,0,0.12); }
+        .quiz-intro { text-align: center; color: #555; margin-bottom: 18px; }
+        .mode-group { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 18px; }
+        .mode-btn { padding: 8px 16px; border: 2px solid #cdd6ec; border-radius: 20px; background: #fff; cursor: pointer; font-size: 0.95em; transition: all 0.2s; }
+        .mode-btn:hover { border-color: #1565c0; }
+        .mode-btn.active { background: #1565c0; color: #fff; border-color: #1565c0; }
+        .quiz-score { text-align: center; font-weight: bold; color: #1565c0; margin: 10px 0; }
+        .quiz-question { text-align: center; font-size: 1.2em; font-weight: bold; margin: 16px 0; color: #333; line-height: 1.6; }
+        .quiz-answer { text-align: center; margin: 16px 0; }
+        .quiz-answer input { width: 150px; padding: 10px; border: 2px solid #cdd6ec; border-radius: 8px; font-size: 1.1em; text-align: center; }
+        .quiz-answer input:focus { outline: none; border-color: #1565c0; }
+        .quiz-buttons { text-align: center; margin: 8px 0; }
+        .btn-primary { background: #1565c0; color: #fff; border: none; padding: 11px 24px; border-radius: 24px; font-size: 1em; font-weight: bold; cursor: pointer; margin: 4px; transition: background 0.2s; }
+        .btn-primary:hover { background: #0d47a1; }
+        .btn-secondary { background: #fff; color: #1565c0; border: 2px solid #1565c0; padding: 11px 22px; border-radius: 24px; font-size: 1em; cursor: pointer; margin: 4px; transition: all 0.2s; }
+        .btn-secondary:hover { background: #f1f6ff; }
+        .quiz-feedback { text-align: center; font-size: 1.1em; font-weight: bold; min-height: 1.4em; margin: 14px 0; }
+        .quiz-feedback.correct { color: #2e7d32; }
+        .quiz-feedback.incorrect { color: #c62828; }
+        .quiz-steps { background: #f1f6ff; border-left: 5px solid #1565c0; border-radius: 8px; padding: 14px 20px; margin: 14px auto; max-width: 560px; line-height: 1.9; display: none; }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -15,7 +47,13 @@
             <a href="motion.html" class="back-link">← Back to Motion &amp; Forces</a>
         </header>
 
+        <div class="topic-tabs">
+            <button class="topic-tab active" data-tab="lesson">📚 Learn</button>
+            <button class="topic-tab" data-tab="practice">2️⃣ Practice</button>
+        </div>
+
         <main class="lesson-content">
+            <div id="lesson-view">
             <section class="lesson-section intro-box">
                 <h2>🍎 Newton's Second Law</h2>
                 <p>The first law told us that a <strong>force</strong> is needed to change motion. The <strong>second law</strong> tells us exactly how much an object will accelerate when you push or pull it. It connects three things: <strong>force</strong>, <strong>mass</strong>, and <strong>acceleration</strong>.</p>
@@ -29,8 +67,8 @@
                 <div class="concept-content">
                     <div class="formula-box">
                         <h3>📜 Newton's Second Law:</h3>
-                        <p class="formula">Force = Mass × Acceleration</p>
-                        <p class="formula">F = m × a</p>
+                        <p class="formula">\( \text{Force} = \text{Mass} \times \text{Acceleration} \)</p>
+                        <p class="formula">\( F = m \times a \)</p>
                         <p>Force is measured in <strong>newtons (N)</strong>, named after Isaac Newton himself!</p>
                     </div>
                     <p>This formula tells us two important things:</p>
@@ -55,7 +93,7 @@
                     <div class="example-box">
                         <h3>📝 Let's Try It:</h3>
                         <p>You push a <strong>2 kg</strong> toy car so it accelerates at <strong>3 m/s²</strong>. The force you used is:</p>
-                        <p class="formula">F = 2 kg × 3 m/s² = 6 newtons</p>
+                        <p class="formula">\( F = 2\ \text{kg} \times 3\ \text{m/s}^2 = 6\ \text{newtons} \)</p>
                         <p>If the car were heavier — say 4 kg — the same 6 N force would only give it half the acceleration!</p>
                     </div>
                 </div>
@@ -69,9 +107,9 @@
                 <div class="concept-content">
                     <p>Just like speed, distance, and time, the parts of F = m × a can be rearranged to find whichever value you need:</p>
                     <div class="formula-box">
-                        <p class="formula">Force = Mass × Acceleration</p>
-                        <p class="formula">Acceleration = Force ÷ Mass</p>
-                        <p class="formula">Mass = Force ÷ Acceleration</p>
+                        <p class="formula">\( \text{Force} = \text{Mass} \times \text{Acceleration} \)</p>
+                        <p class="formula">\( \text{Acceleration} = \dfrac{\text{Force}}{\text{Mass}} \)</p>
+                        <p class="formula">\( \text{Mass} = \dfrac{\text{Force}}{\text{Acceleration}} \)</p>
                     </div>
 
                     <div class="fun-fact">
@@ -89,7 +127,7 @@
                     </div>
                     <div class="summary-card">
                         <h3>🧮 Formula</h3>
-                        <p>F = m × a</p>
+                        <p>\( F = m \times a \)</p>
                     </div>
                     <div class="summary-card">
                         <h3>📐 Units</h3>
@@ -119,11 +157,116 @@
                     </div>
                 </div>
             </section>
+            </div><!-- /lesson-view -->
+
+            <div id="practice-view" style="display:none;">
+                <div class="quiz-card">
+                    <p class="quiz-intro">Use <strong>F = m × a</strong> (and its rearrangements) to solve each problem!</p>
+                    <div class="mode-group">
+                        <button class="mode-btn active" data-mode="force">Find Force</button>
+                        <button class="mode-btn" data-mode="accel">Find Acceleration</button>
+                        <button class="mode-btn" data-mode="mass">Find Mass</button>
+                        <button class="mode-btn" data-mode="mixed">🎲 Mixed</button>
+                    </div>
+                    <div class="quiz-score">Score: <span id="q-score">0</span>/<span id="q-total">0</span></div>
+                    <div class="quiz-question" id="q-text"></div>
+                    <div class="quiz-answer"><input type="number" id="q-answer" step="any" placeholder="?"></div>
+                    <div class="quiz-buttons">
+                        <button class="btn-primary" id="check-btn">✓ Check</button>
+                        <button class="btn-secondary" id="new-btn">🎲 New Question</button>
+                        <button class="btn-secondary" id="steps-btn">💡 Show Steps</button>
+                    </div>
+                    <div class="quiz-feedback" id="q-feedback"></div>
+                    <div class="quiz-steps" id="q-steps"></div>
+                </div>
+            </div><!-- /practice-view -->
         </main>
 
         <footer>
             <p>May the force be with you! 🍎💪</p>
         </footer>
     </div>
+
+    <script>
+    (function () {
+        var views = { lesson: 'lesson-view', practice: 'practice-view' };
+        document.querySelectorAll('.topic-tab').forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                document.querySelectorAll('.topic-tab').forEach(function (t) { t.classList.remove('active'); });
+                tab.classList.add('active');
+                var pick = tab.dataset.tab;
+                Object.keys(views).forEach(function (k) {
+                    document.getElementById(views[k]).style.display = (k === pick) ? '' : 'none';
+                });
+            });
+        });
+
+        var rnd = function (lo, hi) { return Math.floor(Math.random() * (hi - lo + 1)) + lo; };
+        var r2 = function (n) { return Math.round(n * 100) / 100; };
+        var score = 0, total = 0, mode = 'force', cur = null;
+        var modeKeys = ['force', 'accel', 'mass'];
+
+        var gens = {
+            force: function () {
+                var m = rnd(1, 12), a = rnd(1, 10), F = m * a;
+                return {
+                    q: 'A <strong>' + m + ' kg</strong> object accelerates at <strong>' + a + ' m/s²</strong>. What force is needed? (newtons)',
+                    ans: F, unit: 'N',
+                    steps: 'F = m × a<br>F = ' + m + ' × ' + a + ' = <strong>' + F + ' N</strong>'
+                };
+            },
+            accel: function () {
+                var m = rnd(1, 10), a = rnd(1, 10), F = m * a;
+                return {
+                    q: 'A force of <strong>' + F + ' N</strong> pushes a <strong>' + m + ' kg</strong> object. What is its acceleration? (m/s²)',
+                    ans: a, unit: 'm/s²',
+                    steps: 'a = F ÷ m<br>a = ' + F + ' ÷ ' + m + ' = <strong>' + a + ' m/s²</strong>'
+                };
+            },
+            mass: function () {
+                var m = rnd(1, 10), a = rnd(1, 10), F = m * a;
+                return {
+                    q: 'A force of <strong>' + F + ' N</strong> gives an object an acceleration of <strong>' + a + ' m/s²</strong>. What is its mass? (kg)',
+                    ans: m, unit: 'kg',
+                    steps: 'm = F ÷ a<br>m = ' + F + ' ÷ ' + a + ' = <strong>' + m + ' kg</strong>'
+                };
+            }
+        };
+
+        function pickMode() { return mode === 'mixed' ? modeKeys[rnd(0, modeKeys.length - 1)] : mode; }
+        function newQ() {
+            cur = gens[pickMode()]();
+            document.getElementById('q-text').innerHTML = cur.q;
+            document.getElementById('q-answer').value = '';
+            document.getElementById('q-feedback').textContent = '';
+            document.getElementById('q-steps').style.display = 'none';
+            document.getElementById('q-answer').focus();
+        }
+        document.querySelectorAll('.mode-btn').forEach(function (b) {
+            b.addEventListener('click', function () {
+                document.querySelectorAll('.mode-btn').forEach(function (x) { x.classList.remove('active'); });
+                b.classList.add('active'); mode = b.dataset.mode; newQ();
+            });
+        });
+        document.getElementById('check-btn').addEventListener('click', function () {
+            if (!cur) return;
+            var v = parseFloat(document.getElementById('q-answer').value);
+            var fb = document.getElementById('q-feedback');
+            if (isNaN(v)) { fb.textContent = 'Type a number first.'; fb.className = 'quiz-feedback incorrect'; return; }
+            total++;
+            if (Math.abs(v - cur.ans) < 0.02) { score++; fb.textContent = '🎉 Correct!'; fb.className = 'quiz-feedback correct'; }
+            else { fb.textContent = 'Not quite — the answer is ' + r2(cur.ans) + ' ' + cur.unit + '.'; fb.className = 'quiz-feedback incorrect'; }
+            document.getElementById('q-score').textContent = score;
+            document.getElementById('q-total').textContent = total;
+        });
+        document.getElementById('q-answer').addEventListener('keydown', function (e) { if (e.key === 'Enter') document.getElementById('check-btn').click(); });
+        document.getElementById('new-btn').addEventListener('click', newQ);
+        document.getElementById('steps-btn').addEventListener('click', function () {
+            if (!cur) return;
+            var s = document.getElementById('q-steps'); s.innerHTML = cur.steps; s.style.display = 'block';
+        });
+        newQ();
+    })();
+    </script>
 </body>
 </html>

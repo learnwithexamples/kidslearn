@@ -6,6 +6,37 @@
     <title>Distance - Motion & Forces - KidsLearn</title>
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/physics.css">
+    <!-- KaTeX for proper math/equation rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css" integrity="sha384-vlBdW0r3AcZO/HboRPznQNowvexd3fY8qHOWkBi5q7KGgqJ+F48+DceybYmrVbmB" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js" integrity="sha384-AtrdNsnxl/75rvBneBVH7DtOvCxSVahR2zWqle1coBKd8DEmLoviqNeJSx64gNAs" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, { ignoredTags: ['script','noscript','style','textarea','pre','option'], throwOnError: false });"></script>
+    <style>
+        .topic-tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+        .topic-tab { padding: 10px 24px; border: 2px solid rgba(255,255,255,0.6); border-radius: 25px;
+            background: rgba(255,255,255,0.15); color: #fff; cursor: pointer; transition: all 0.25s; font-size: 1em; }
+        .topic-tab:hover { background: rgba(255,255,255,0.3); }
+        .topic-tab.active { background: #fff; color: #1565c0; border-color: #fff; font-weight: bold; }
+        .practice-problem { background: #fff; border-radius: 14px; padding: 22px 26px; margin: 20px 0;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.12); }
+        .practice-problem h2 { margin-top: 0; color: #1565c0; }
+        .practice-problem .scenario { font-size: 1.1em; line-height: 2.1; color: #333; }
+        .practice-problem input.num { width: 78px; padding: 6px 8px; border: 2px solid #cdd6ec; border-radius: 8px;
+            font-size: 1em; text-align: center; margin: 0 2px; }
+        .practice-problem input.num:focus { outline: none; border-color: #1565c0; }
+        .practice-problem .ask { margin-top: 12px; font-weight: bold; color: #1565c0; }
+        .solve-btn { background: #1565c0; color: #fff; border: none; padding: 11px 26px; border-radius: 24px;
+            font-size: 1em; font-weight: bold; cursor: pointer; margin-top: 14px; transition: background 0.2s; }
+        .solve-btn:hover { background: #0d47a1; }
+        .result-box { margin-top: 16px; padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+            background: #f1f6ff; border-radius: 10px; }
+        .result-box.open { max-height: 600px; padding: 16px 20px; border-left: 5px solid #1565c0; }
+        .result-box .answer { font-size: 1.25em; font-weight: bold; color: #0d47a1; margin-bottom: 8px; }
+        .result-box .step { line-height: 1.9; color: #333; }
+        .result-box.error { background: #fdecea; border-left-color: #c62828; }
+        .result-box.error .answer { color: #c62828; }
+        .hint { font-size: 0.9em; color: #777; margin-top: 4px; }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -15,7 +46,13 @@
             <a href="motion.html" class="back-link">← Back to Motion &amp; Forces</a>
         </header>
 
+        <div class="topic-tabs">
+            <button class="topic-tab active" data-tab="lesson">📚 Lesson</button>
+            <button class="topic-tab" data-tab="practice">🏃 Practice</button>
+        </div>
+
         <main class="lesson-content">
+            <div id="lesson-view">
             <section class="lesson-section intro-box">
                 <h2>📏 What is Distance?</h2>
                 <p><strong>Distance</strong> is how far an object travels. It's the total length of the path something moves along. When you walk from your bedroom to the kitchen, the distance is the length of the route your feet take to get there!</p>
@@ -51,14 +88,14 @@
 
                     <div class="formula-box">
                         <h3>🧮 Distance Formula:</h3>
-                        <p class="formula">Distance = Speed × Time</p>
-                        <p class="formula">d = s × t</p>
+                        <p class="formula">\( \text{Distance} = \text{Speed} \times \text{Time} \)</p>
+                        <p class="formula">\( d = s \times t \)</p>
                     </div>
 
                     <div class="example-box">
                         <h3>📝 Let's Try It:</h3>
                         <p>If a car travels at <strong>20 m/s</strong> for <strong>30 seconds</strong>, the distance is:</p>
-                        <p class="formula">20 m/s × 30 s = 600 meters</p>
+                        <p class="formula">\( 20\ \text{m/s} \times 30\ \text{s} = 600\ \text{meters} \)</p>
                         <p>The car traveled 600 meters — that's about 6 football fields!</p>
                     </div>
                 </div>
@@ -94,7 +131,7 @@
                     </div>
                     <div class="summary-card">
                         <h3>🧮 Formula</h3>
-                        <p>Distance = Speed × Time (d = s × t)</p>
+                        <p>Distance = Speed × Time \( (d = s \times t) \)</p>
                     </div>
                     <div class="summary-card">
                         <h3>📐 Units</h3>
@@ -124,11 +161,206 @@
                     </div>
                 </div>
             </section>
+            </div><!-- /lesson-view -->
+
+            <div id="practice-view" style="display:none;">
+                <section class="lesson-section intro-box">
+                    <h2>🏃 Distance Challenges</h2>
+                    <p>Change the numbers in each puzzle, then press <strong>Solve</strong> to see the answer
+                       worked out step by step. Try your own values and see what happens!</p>
+                    <p class="hint">Tip: the key formulas are <strong>distance = speed × time</strong> and
+                       <strong>time = distance ÷ speed</strong>.</p>
+                </section>
+
+                <div class="practice-problem">
+                    <h2>① Lapping the Track</h2>
+                    <p class="scenario">Runner A and Runner B race around a track that is
+                        <input class="num" id="p1-L" type="number" value="400" min="1"> m long.
+                        Runner A runs at <input class="num" id="p1-a" type="number" value="3" min="0" step="0.1"> m/s
+                        and Runner B runs at <input class="num" id="p1-b" type="number" value="5" min="0" step="0.1"> m/s.</p>
+                    <p class="ask">How long until B has run exactly one extra lap more than A (B "laps" A)?
+                        How far has each runner gone by then?</p>
+                    <button class="solve-btn" data-solve="p1">Solve</button>
+                    <div class="result-box" id="p1-res"></div>
+                </div>
+
+                <div class="practice-problem">
+                    <h2>② Meeting Head-On</h2>
+                    <p class="scenario">A and B start at the same spot on a
+                        <input class="num" id="p2-L" type="number" value="400" min="1"> m circular track,
+                        but run in <strong>opposite directions</strong>. A runs at
+                        <input class="num" id="p2-a" type="number" value="4" min="0" step="0.1"> m/s and B runs at
+                        <input class="num" id="p2-b" type="number" value="6" min="0" step="0.1"> m/s.</p>
+                    <p class="ask">How long until they first meet again? How far has each run?</p>
+                    <button class="solve-btn" data-solve="p2">Solve</button>
+                    <div class="result-box" id="p2-res"></div>
+                </div>
+
+                <div class="practice-problem">
+                    <h2>③ The Head Start</h2>
+                    <p class="scenario">Runner A gets a head start and is
+                        <input class="num" id="p3-d" type="number" value="50" min="0"> m ahead. A jogs at
+                        <input class="num" id="p3-a" type="number" value="4" min="0" step="0.1"> m/s while
+                        B chases at <input class="num" id="p3-b" type="number" value="6" min="0" step="0.1"> m/s.</p>
+                    <p class="ask">How long until B catches up to A? How far does B run to do it?</p>
+                    <button class="solve-btn" data-solve="p3">Solve</button>
+                    <div class="result-box" id="p3-res"></div>
+                </div>
+
+                <div class="practice-problem">
+                    <h2>④ The Round Trip</h2>
+                    <p class="scenario">You jog from home to the park, which is
+                        <input class="num" id="p4-d" type="number" value="600" min="0"> m away, at
+                        <input class="num" id="p4-a" type="number" value="3" min="0" step="0.1"> m/s,
+                        then jog straight back home at
+                        <input class="num" id="p4-b" type="number" value="2" min="0" step="0.1"> m/s.</p>
+                    <p class="ask">What is your total <strong>distance</strong>, your total time, and your
+                        <strong>displacement</strong> at the end?</p>
+                    <button class="solve-btn" data-solve="p4">Solve</button>
+                    <div class="result-box" id="p4-res"></div>
+                </div>
+
+                <div class="practice-problem">
+                    <h2>⑤ Counting Laps</h2>
+                    <p class="scenario">A runner moves at
+                        <input class="num" id="p5-s" type="number" value="5" min="0" step="0.1"> m/s for
+                        <input class="num" id="p5-t" type="number" value="120" min="0"> seconds around a
+                        <input class="num" id="p5-L" type="number" value="400" min="1"> m track.</p>
+                    <p class="ask">What total distance is covered, and how many full laps is that?</p>
+                    <button class="solve-btn" data-solve="p5">Solve</button>
+                    <div class="result-box" id="p5-res"></div>
+                </div>
+
+                <div class="practice-problem">
+                    <h2>⑥ How Many Times Lapped?</h2>
+                    <p class="scenario">On a <input class="num" id="p6-L" type="number" value="400" min="1"> m track,
+                        A runs at <input class="num" id="p6-a" type="number" value="3" min="0" step="0.1"> m/s and
+                        B runs at <input class="num" id="p6-b" type="number" value="5" min="0" step="0.1"> m/s for
+                        <input class="num" id="p6-t" type="number" value="600" min="0"> seconds.</p>
+                    <p class="ask">How many full times does B lap A? How far does each run?</p>
+                    <button class="solve-btn" data-solve="p6">Solve</button>
+                    <div class="result-box" id="p6-res"></div>
+                </div>
+            </div><!-- /practice-view -->
         </main>
 
         <footer>
             <p>You've gone the distance! 📏🎉</p>
         </footer>
     </div>
+
+    <script>
+    (function () {
+        // Tab switching
+        const views = { lesson: 'lesson-view', practice: 'practice-view' };
+        document.querySelectorAll('.topic-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.topic-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                Object.entries(views).forEach(([k, id]) => {
+                    document.getElementById(id).style.display = tab.dataset.tab === k ? 'block' : 'none';
+                });
+            });
+        });
+
+        // Helpers
+        const val = id => parseFloat(document.getElementById(id).value);
+        const r = (n, d = 2) => {
+            if (!isFinite(n)) return n;
+            return parseFloat(n.toFixed(d)).toString();
+        };
+        function show(id, html, isError) {
+            const box = document.getElementById(id);
+            box.innerHTML = html;
+            box.classList.add('open');
+            box.classList.toggle('error', !!isError);
+        }
+        const err = (id, msg) => show(id, `<div class="answer">⚠️ ${msg}</div>`, true);
+
+        const solvers = {
+            p1() {
+                const L = val('p1-L'), a = val('p1-a'), b = val('p1-b');
+                if ([L, a, b].some(isNaN) || L <= 0 || a < 0 || b < 0) return err('p1-res', 'Please enter valid positive numbers.');
+                if (b <= a) return err('p1-res', 'Runner B must be faster than A to lap them. Try a bigger speed for B.');
+                const rel = b - a;
+                const t = L / rel;
+                const dA = a * t, dB = b * t;
+                show('p1-res', `
+                    <div class="answer">⏱️ Time = ${r(t)} s</div>
+                    <div class="step">B gains on A at the <strong>relative speed</strong> ${r(b)} − ${r(a)} = ${r(rel)} m/s.</div>
+                    <div class="step">To gain one full lap (${r(L)} m): t = ${r(L)} ÷ ${r(rel)} = <strong>${r(t)} s</strong>.</div>
+                    <div class="step">By then A has run ${r(a)} × ${r(t)} = <strong>${r(dA)} m</strong> (${r(dA / L)} laps).</div>
+                    <div class="step">And B has run ${r(b)} × ${r(t)} = <strong>${r(dB)} m</strong> (${r(dB / L)} laps).</div>
+                    <div class="step">Notice B's distance − A's distance = ${r(dB - dA)} m = one lap. ✅</div>`);
+            },
+            p2() {
+                const L = val('p2-L'), a = val('p2-a'), b = val('p2-b');
+                if ([L, a, b].some(isNaN) || L <= 0 || a < 0 || b < 0) return err('p2-res', 'Please enter valid positive numbers.');
+                if (a + b === 0) return err('p2-res', 'At least one runner needs to be moving!');
+                const t = L / (a + b);
+                show('p2-res', `
+                    <div class="answer">⏱️ They meet after ${r(t)} s</div>
+                    <div class="step">Running toward each other, the gap closes at the <strong>combined speed</strong> ${r(a)} + ${r(b)} = ${r(a + b)} m/s.</div>
+                    <div class="step">Together they must cover one full lap (${r(L)} m): t = ${r(L)} ÷ ${r(a + b)} = <strong>${r(t)} s</strong>.</div>
+                    <div class="step">A runs ${r(a)} × ${r(t)} = <strong>${r(a * t)} m</strong>.</div>
+                    <div class="step">B runs ${r(b)} × ${r(t)} = <strong>${r(b * t)} m</strong>.</div>
+                    <div class="step">Their distances add up to ${r(a * t + b * t)} m = one lap. ✅</div>`);
+            },
+            p3() {
+                const d = val('p3-d'), a = val('p3-a'), b = val('p3-b');
+                if ([d, a, b].some(isNaN) || d < 0 || a < 0 || b < 0) return err('p3-res', 'Please enter valid positive numbers.');
+                if (b <= a) return err('p3-res', 'B must be faster than A to catch up. Try a bigger speed for B.');
+                const rel = b - a, t = d / rel;
+                show('p3-res', `
+                    <div class="answer">⏱️ B catches up after ${r(t)} s</div>
+                    <div class="step">B closes the ${r(d)} m gap at the <strong>relative speed</strong> ${r(b)} − ${r(a)} = ${r(rel)} m/s.</div>
+                    <div class="step">t = ${r(d)} ÷ ${r(rel)} = <strong>${r(t)} s</strong>.</div>
+                    <div class="step">In that time B runs ${r(b)} × ${r(t)} = <strong>${r(b * t)} m</strong>.</div>
+                    <div class="step">A runs ${r(a)} × ${r(t)} = ${r(a * t)} m, plus the ${r(d)} m head start = ${r(a * t + d)} m — same spot as B. ✅</div>`);
+            },
+            p4() {
+                const d = val('p4-d'), a = val('p4-a'), b = val('p4-b');
+                if ([d, a, b].some(isNaN) || d < 0 || a <= 0 || b <= 0) return err('p4-res', 'Please enter valid positive numbers (speeds must be more than 0).');
+                const tOut = d / a, tBack = d / b, tTotal = tOut + tBack;
+                const totalDist = 2 * d;
+                const avg = totalDist / tTotal;
+                show('p4-res', `
+                    <div class="answer">📏 Total distance = ${r(totalDist)} m &nbsp;•&nbsp; 🧭 Displacement = 0 m</div>
+                    <div class="step">Going there: t = ${r(d)} ÷ ${r(a)} = ${r(tOut)} s.</div>
+                    <div class="step">Coming back: t = ${r(d)} ÷ ${r(b)} = ${r(tBack)} s.</div>
+                    <div class="step">Total time = ${r(tOut)} + ${r(tBack)} = <strong>${r(tTotal)} s</strong>.</div>
+                    <div class="step">Total distance = ${r(d)} + ${r(d)} = <strong>${r(totalDist)} m</strong> (the whole path).</div>
+                    <div class="step">Displacement = <strong>0 m</strong> — you end up right back where you started! 🏠</div>
+                    <div class="step">Average speed = total distance ÷ total time = ${r(totalDist)} ÷ ${r(tTotal)} = ${r(avg)} m/s.</div>`);
+            },
+            p5() {
+                const s = val('p5-s'), t = val('p5-t'), L = val('p5-L');
+                if ([s, t, L].some(isNaN) || s < 0 || t < 0 || L <= 0) return err('p5-res', 'Please enter valid positive numbers.');
+                const dist = s * t, laps = dist / L;
+                show('p5-res', `
+                    <div class="answer">📏 Distance = ${r(dist)} m</div>
+                    <div class="step">distance = speed × time = ${r(s)} × ${r(t)} = <strong>${r(dist)} m</strong>.</div>
+                    <div class="step">laps = distance ÷ track length = ${r(dist)} ÷ ${r(L)} = ${r(laps)} laps.</div>
+                    <div class="step">That's <strong>${Math.floor(laps)} full lap${Math.floor(laps) === 1 ? '' : 's'}</strong> with ${r(dist - Math.floor(laps) * L)} m left over.</div>`);
+            },
+            p6() {
+                const L = val('p6-L'), a = val('p6-a'), b = val('p6-b'), t = val('p6-t');
+                if ([L, a, b, t].some(isNaN) || L <= 0 || a < 0 || b < 0 || t < 0) return err('p6-res', 'Please enter valid positive numbers.');
+                const dA = a * t, dB = b * t;
+                const lapsGained = (dB - dA) / L;
+                show('p6-res', `
+                    <div class="answer">🔁 B laps A ${Math.floor(lapsGained)} time(s)</div>
+                    <div class="step">A runs ${r(a)} × ${r(t)} = <strong>${r(dA)} m</strong> (${r(dA / L)} laps).</div>
+                    <div class="step">B runs ${r(b)} × ${r(t)} = <strong>${r(dB)} m</strong> (${r(dB / L)} laps).</div>
+                    <div class="step">B gets ahead by ${r(dB)} − ${r(dA)} = ${r(dB - dA)} m = ${r(lapsGained)} laps.</div>
+                    <div class="step">So B fully laps A <strong>${Math.floor(lapsGained)} time(s)</strong>. 🏁</div>`);
+            }
+        };
+
+        document.querySelectorAll('.solve-btn').forEach(btn => {
+            btn.addEventListener('click', () => solvers[btn.dataset.solve]());
+        });
+    })();
+    </script>
 </body>
 </html>

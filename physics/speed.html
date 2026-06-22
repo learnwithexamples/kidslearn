@@ -6,6 +6,37 @@
     <title>Speed - Motion & Forces - KidsLearn</title>
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/physics.css">
+    <!-- KaTeX for proper math/equation rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css" integrity="sha384-vlBdW0r3AcZO/HboRPznQNowvexd3fY8qHOWkBi5q7KGgqJ+F48+DceybYmrVbmB" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js" integrity="sha384-AtrdNsnxl/75rvBneBVH7DtOvCxSVahR2zWqle1coBKd8DEmLoviqNeJSx64gNAs" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, { ignoredTags: ['script','noscript','style','textarea','pre','option'], throwOnError: false });"></script>
+    <style>
+        .topic-tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+        .topic-tab { padding: 10px 24px; border: 2px solid rgba(255,255,255,0.6); border-radius: 25px;
+            background: rgba(255,255,255,0.15); color: #fff; cursor: pointer; transition: all 0.25s; font-size: 1em; }
+        .topic-tab:hover { background: rgba(255,255,255,0.3); }
+        .topic-tab.active { background: #fff; color: #1565c0; border-color: #fff; font-weight: bold; }
+        .practice-problem { background: #fff; border-radius: 14px; padding: 22px 26px; margin: 20px 0;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.12); }
+        .practice-problem h2 { margin-top: 0; color: #1565c0; }
+        .practice-problem .scenario { font-size: 1.1em; line-height: 2.1; color: #333; }
+        .practice-problem input.num { width: 78px; padding: 6px 8px; border: 2px solid #cdd6ec; border-radius: 8px;
+            font-size: 1em; text-align: center; margin: 0 2px; }
+        .practice-problem input.num:focus { outline: none; border-color: #1565c0; }
+        .practice-problem .ask { margin-top: 12px; font-weight: bold; color: #1565c0; }
+        .solve-btn { background: #1565c0; color: #fff; border: none; padding: 11px 26px; border-radius: 24px;
+            font-size: 1em; font-weight: bold; cursor: pointer; margin-top: 14px; transition: background 0.2s; }
+        .solve-btn:hover { background: #0d47a1; }
+        .result-box { margin-top: 16px; padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+            background: #f1f6ff; border-radius: 10px; }
+        .result-box.open { max-height: 600px; padding: 16px 20px; border-left: 5px solid #1565c0; }
+        .result-box .answer { font-size: 1.25em; font-weight: bold; color: #0d47a1; margin-bottom: 8px; }
+        .result-box .step { line-height: 1.9; color: #333; }
+        .result-box.error { background: #fdecea; border-left-color: #c62828; }
+        .result-box.error .answer { color: #c62828; }
+        .hint { font-size: 0.9em; color: #777; margin-top: 4px; }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -15,7 +46,13 @@
             <a href="motion.html" class="back-link">← Back to Motion &amp; Forces</a>
         </header>
 
+        <div class="topic-tabs">
+            <button class="topic-tab active" data-tab="lesson">📚 Lesson</button>
+            <button class="topic-tab" data-tab="practice">🏃 Practice</button>
+        </div>
+
         <main class="lesson-content">
+            <div id="lesson-view">
             <section class="lesson-section intro-box">
                 <h2>🏃 What is Speed?</h2>
                 <p><strong>Speed</strong> tells us how fast something is moving. It measures how much <strong>distance</strong> an object covers in a certain amount of <strong>time</strong>. A cheetah running across the grass has a high speed, while a snail crawling along has a very low speed!</p>
@@ -31,15 +68,15 @@
 
                     <div class="formula-box">
                         <h3>🧮 Speed Formula:</h3>
-                        <p class="formula">Speed = Distance ÷ Time</p>
-                        <p class="formula">s = d ÷ t</p>
+                        <p class="formula">\( \text{Speed} = \dfrac{\text{Distance}}{\text{Time}} \)</p>
+                        <p class="formula">\( s = \dfrac{d}{t} \)</p>
                         <p>Speed is usually measured in <strong>meters per second (m/s)</strong> or <strong>kilometers per hour (km/h)</strong>.</p>
                     </div>
 
                     <div class="example-box">
                         <h3>📝 Let's Try It:</h3>
                         <p>If you ride your bike <strong>100 meters</strong> in <strong>20 seconds</strong>, your speed is:</p>
-                        <p class="formula">100 m ÷ 20 s = 5 m/s</p>
+                        <p class="formula">\( \dfrac{100\ \text{m}}{20\ \text{s}} = 5\ \text{m/s} \)</p>
                         <p>That means you travel 5 meters every single second!</p>
                     </div>
                 </div>
@@ -96,7 +133,7 @@
                     </div>
                     <div class="summary-card">
                         <h3>🧮 Formula</h3>
-                        <p>Speed = Distance ÷ Time (s = d ÷ t)</p>
+                        <p>Speed = Distance ÷ Time \( (s = \dfrac{d}{t}) \)</p>
                     </div>
                     <div class="summary-card">
                         <h3>📐 Units</h3>
@@ -126,11 +163,189 @@
                     </div>
                 </div>
             </section>
+            </div><!-- /lesson-view -->
+
+            <div id="practice-view" style="display:none;">
+                <section class="lesson-section intro-box">
+                    <h2>🏃 Speed Challenges</h2>
+                    <p>Change the numbers in each puzzle, then press <strong>Solve</strong> to see the answer
+                       worked out step by step. Try your own values and watch the speed change!</p>
+                    <p class="hint">Key formula: <strong>speed = distance ÷ time</strong>.
+                       To swap between units: <strong>m/s × 3.6 = km/h</strong>.</p>
+                </section>
+
+                <div class="practice-problem">
+                    <h2>① Find Your Speed</h2>
+                    <p class="scenario">You ride your bike
+                        <input class="num" id="p1-d" type="number" value="100" min="0"> m in
+                        <input class="num" id="p1-t" type="number" value="20" min="0" step="0.1"> seconds.</p>
+                    <p class="ask">What is your speed in m/s — and how fast is that in km/h?</p>
+                    <button class="solve-btn" data-solve="p1">Solve</button>
+                    <div class="result-box" id="p1-res"></div>
+                </div>
+
+                <div class="practice-problem">
+                    <h2>② Who's Faster?</h2>
+                    <p class="scenario">Runner A covers
+                        <input class="num" id="p2-da" type="number" value="200" min="0"> m in
+                        <input class="num" id="p2-ta" type="number" value="40" min="0" step="0.1"> s.
+                        Runner B covers <input class="num" id="p2-db" type="number" value="150" min="0"> m in
+                        <input class="num" id="p2-tb" type="number" value="25" min="0" step="0.1"> s.</p>
+                    <p class="ask">What is each runner's speed, and who is faster?</p>
+                    <button class="solve-btn" data-solve="p2">Solve</button>
+                    <div class="result-box" id="p2-res"></div>
+                </div>
+
+                <div class="practice-problem">
+                    <h2>③ Speed Converter</h2>
+                    <p class="scenario">Convert <input class="num" id="p3-ms" type="number" value="10" min="0" step="0.1"> m/s
+                        into km/h, and convert <input class="num" id="p3-kmh" type="number" value="72" min="0" step="0.1"> km/h
+                        into m/s.</p>
+                    <p class="ask">What are the two converted speeds?</p>
+                    <button class="solve-btn" data-solve="p3">Solve</button>
+                    <div class="result-box" id="p3-res"></div>
+                </div>
+
+                <div class="practice-problem">
+                    <h2>④ What Speed Do You Need?</h2>
+                    <p class="scenario">The school bus leaves in
+                        <input class="num" id="p4-t" type="number" value="300" min="0" step="0.1"> seconds, and the stop is
+                        <input class="num" id="p4-d" type="number" value="450" min="0"> m away.</p>
+                    <p class="ask">What is the slowest speed you must keep to get there just in time?</p>
+                    <button class="solve-btn" data-solve="p4">Solve</button>
+                    <div class="result-box" id="p4-res"></div>
+                </div>
+
+                <div class="practice-problem">
+                    <h2>⑤ Average Speed of a Trip</h2>
+                    <p class="scenario">A car drives <input class="num" id="p5-d1" type="number" value="300" min="0"> m in
+                        <input class="num" id="p5-t1" type="number" value="20" min="0" step="0.1"> s, then
+                        <input class="num" id="p5-d2" type="number" value="500" min="0"> m in
+                        <input class="num" id="p5-t2" type="number" value="60" min="0" step="0.1"> s.</p>
+                    <p class="ask">What is the car's average speed over the whole trip?</p>
+                    <button class="solve-btn" data-solve="p5">Solve</button>
+                    <div class="result-box" id="p5-res"></div>
+                </div>
+
+                <div class="practice-problem">
+                    <h2>⑥ How Far Ahead?</h2>
+                    <p class="scenario">Two cars start together. The first goes
+                        <input class="num" id="p6-a" type="number" value="20" min="0" step="0.1"> m/s and the second goes
+                        <input class="num" id="p6-b" type="number" value="28" min="0" step="0.1"> m/s. They drive for
+                        <input class="num" id="p6-t" type="number" value="15" min="0" step="0.1"> seconds.</p>
+                    <p class="ask">How far has each car gone, and how far ahead is the faster one?</p>
+                    <button class="solve-btn" data-solve="p6">Solve</button>
+                    <div class="result-box" id="p6-res"></div>
+                </div>
+            </div><!-- /practice-view -->
         </main>
 
         <footer>
             <p>Now you know the need for speed! 🏃💨</p>
         </footer>
     </div>
+
+    <script>
+    (function () {
+        // ---- Tab switching ----
+        var views = { lesson: 'lesson-view', practice: 'practice-view' };
+        document.querySelectorAll('.topic-tab').forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                document.querySelectorAll('.topic-tab').forEach(function (t) { t.classList.remove('active'); });
+                tab.classList.add('active');
+                var pick = tab.dataset.tab;
+                Object.keys(views).forEach(function (k) {
+                    document.getElementById(views[k]).style.display = (k === pick) ? '' : 'none';
+                });
+            });
+        });
+
+        // ---- Helpers ----
+        function val(id) { return parseFloat(document.getElementById(id).value); }
+        function r(n, d) { d = (d === undefined) ? 2 : d; var f = Math.pow(10, d); return Math.round(n * f) / f; }
+        function show(id, html, isError) {
+            var box = document.getElementById(id);
+            box.innerHTML = html;
+            box.classList.add('open');
+            box.classList.toggle('error', !!isError);
+        }
+        function err(id, msg) { show(id, '<div class="answer">⚠️ ' + msg + '</div>', true); }
+
+        // ---- Solvers ----
+        var solvers = {
+            p1: function () {
+                var d = val('p1-d'), t = val('p1-t');
+                if (isNaN(d) || isNaN(t)) return err('p1-res', 'Please enter both numbers.');
+                if (t <= 0) return err('p1-res', 'Time must be greater than 0.');
+                var s = d / t, kmh = s * 3.6;
+                show('p1-res',
+                    '<div class="answer">Speed = ' + r(s) + ' m/s  (' + r(kmh) + ' km/h)</div>' +
+                    '<div class="step">speed = distance ÷ time = ' + d + ' m ÷ ' + t + ' s = <strong>' + r(s) + ' m/s</strong></div>' +
+                    '<div class="step">In km/h: ' + r(s) + ' × 3.6 = <strong>' + r(kmh) + ' km/h</strong></div>');
+            },
+            p2: function () {
+                var da = val('p2-da'), ta = val('p2-ta'), db = val('p2-db'), tb = val('p2-tb');
+                if ([da, ta, db, tb].some(isNaN)) return err('p2-res', 'Please fill in all four numbers.');
+                if (ta <= 0 || tb <= 0) return err('p2-res', 'Times must be greater than 0.');
+                var sa = da / ta, sb = db / tb;
+                var who = (sa > sb) ? 'Runner A is faster! 🏆'
+                        : (sb > sa) ? 'Runner B is faster! 🏆'
+                        : 'It\u2019s a tie! 🤝';
+                show('p2-res',
+                    '<div class="answer">' + who + '</div>' +
+                    '<div class="step">Runner A: ' + da + ' ÷ ' + ta + ' = <strong>' + r(sa) + ' m/s</strong></div>' +
+                    '<div class="step">Runner B: ' + db + ' ÷ ' + tb + ' = <strong>' + r(sb) + ' m/s</strong></div>');
+            },
+            p3: function () {
+                var ms = val('p3-ms'), kmh = val('p3-kmh');
+                if (isNaN(ms) || isNaN(kmh)) return err('p3-res', 'Please enter both speeds.');
+                show('p3-res',
+                    '<div class="answer">' + ms + ' m/s = ' + r(ms * 3.6) + ' km/h&nbsp; &nbsp; ' +
+                        kmh + ' km/h = ' + r(kmh / 3.6) + ' m/s</div>' +
+                    '<div class="step">m/s → km/h: multiply by 3.6 → ' + ms + ' × 3.6 = <strong>' + r(ms * 3.6) + ' km/h</strong></div>' +
+                    '<div class="step">km/h → m/s: divide by 3.6 → ' + kmh + ' ÷ 3.6 = <strong>' + r(kmh / 3.6) + ' m/s</strong></div>');
+            },
+            p4: function () {
+                var t = val('p4-t'), d = val('p4-d');
+                if (isNaN(t) || isNaN(d)) return err('p4-res', 'Please enter both numbers.');
+                if (t <= 0) return err('p4-res', 'Time must be greater than 0.');
+                var s = d / t;
+                show('p4-res',
+                    '<div class="answer">You need at least ' + r(s) + ' m/s  (' + r(s * 3.6) + ' km/h)</div>' +
+                    '<div class="step">speed = distance ÷ time = ' + d + ' m ÷ ' + t + ' s = <strong>' + r(s) + ' m/s</strong></div>' +
+                    '<div class="step">Any slower and you would miss the bus!</div>');
+            },
+            p5: function () {
+                var d1 = val('p5-d1'), t1 = val('p5-t1'), d2 = val('p5-d2'), t2 = val('p5-t2');
+                if ([d1, t1, d2, t2].some(isNaN)) return err('p5-res', 'Please fill in all four numbers.');
+                if (t1 + t2 <= 0) return err('p5-res', 'Total time must be greater than 0.');
+                var totD = d1 + d2, totT = t1 + t2, avg = totD / totT;
+                show('p5-res',
+                    '<div class="answer">Average speed = ' + r(avg) + ' m/s</div>' +
+                    '<div class="step">Total distance = ' + d1 + ' + ' + d2 + ' = <strong>' + totD + ' m</strong></div>' +
+                    '<div class="step">Total time = ' + t1 + ' + ' + t2 + ' = <strong>' + totT + ' s</strong></div>' +
+                    '<div class="step">Average speed = total distance ÷ total time = ' + totD + ' ÷ ' + totT +
+                        ' = <strong>' + r(avg) + ' m/s</strong></div>' +
+                    '<div class="hint">Tip: average speed is NOT just the average of the two speeds!</div>');
+            },
+            p6: function () {
+                var a = val('p6-a'), b = val('p6-b'), t = val('p6-t');
+                if ([a, b, t].some(isNaN)) return err('p6-res', 'Please fill in all three numbers.');
+                if (t < 0) return err('p6-res', 'Time cannot be negative.');
+                var da = a * t, db = b * t, gap = Math.abs(db - da);
+                show('p6-res',
+                    '<div class="answer">The faster car is ' + r(gap) + ' m ahead.</div>' +
+                    '<div class="step">First car: distance = speed × time = ' + a + ' × ' + t + ' = <strong>' + r(da) + ' m</strong></div>' +
+                    '<div class="step">Second car: distance = ' + b + ' × ' + t + ' = <strong>' + r(db) + ' m</strong></div>' +
+                    '<div class="step">Gap = ' + r(db) + ' − ' + r(da) + ' = <strong>' + r(gap) + ' m</strong>' +
+                        ' &nbsp;(or speed difference × time = ' + r(Math.abs(b - a)) + ' × ' + t + ')</div>');
+            }
+        };
+
+        document.querySelectorAll('.solve-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () { solvers[btn.dataset.solve](); });
+        });
+    })();
+    </script>
 </body>
 </html>

@@ -6,6 +6,38 @@
     <title>Acceleration - Motion & Forces - KidsLearn</title>
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/physics.css">
+    <!-- KaTeX for proper math/equation rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css" integrity="sha384-vlBdW0r3AcZO/HboRPznQNowvexd3fY8qHOWkBi5q7KGgqJ+F48+DceybYmrVbmB" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js" integrity="sha384-AtrdNsnxl/75rvBneBVH7DtOvCxSVahR2zWqle1coBKd8DEmLoviqNeJSx64gNAs" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, { ignoredTags: ['script','noscript','style','textarea','pre','option'], throwOnError: false });"></script>
+    <style>
+        .topic-tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+        .topic-tab { padding: 10px 24px; border: 2px solid rgba(255,255,255,0.6); border-radius: 25px;
+            background: rgba(255,255,255,0.15); color: #fff; cursor: pointer; transition: all 0.25s; font-size: 1em; }
+        .topic-tab:hover { background: rgba(255,255,255,0.3); }
+        .topic-tab.active { background: #fff; color: #1565c0; border-color: #fff; font-weight: bold; }
+        .quiz-card { background: #fff; border-radius: 14px; padding: 24px 26px; margin: 20px 0; box-shadow: 0 3px 14px rgba(0,0,0,0.12); }
+        .quiz-intro { text-align: center; color: #555; margin-bottom: 18px; }
+        .mode-group { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 18px; }
+        .mode-btn { padding: 8px 16px; border: 2px solid #cdd6ec; border-radius: 20px; background: #fff; cursor: pointer; font-size: 0.95em; transition: all 0.2s; }
+        .mode-btn:hover { border-color: #1565c0; }
+        .mode-btn.active { background: #1565c0; color: #fff; border-color: #1565c0; }
+        .quiz-score { text-align: center; font-weight: bold; color: #1565c0; margin: 10px 0; }
+        .quiz-question { text-align: center; font-size: 1.2em; font-weight: bold; margin: 16px 0; color: #333; line-height: 1.6; }
+        .quiz-answer { text-align: center; margin: 16px 0; }
+        .quiz-answer input { width: 150px; padding: 10px; border: 2px solid #cdd6ec; border-radius: 8px; font-size: 1.1em; text-align: center; }
+        .quiz-answer input:focus { outline: none; border-color: #1565c0; }
+        .quiz-buttons { text-align: center; margin: 8px 0; }
+        .btn-primary { background: #1565c0; color: #fff; border: none; padding: 11px 24px; border-radius: 24px; font-size: 1em; font-weight: bold; cursor: pointer; margin: 4px; transition: background 0.2s; }
+        .btn-primary:hover { background: #0d47a1; }
+        .btn-secondary { background: #fff; color: #1565c0; border: 2px solid #1565c0; padding: 11px 22px; border-radius: 24px; font-size: 1em; cursor: pointer; margin: 4px; transition: all 0.2s; }
+        .btn-secondary:hover { background: #f1f6ff; }
+        .quiz-feedback { text-align: center; font-size: 1.1em; font-weight: bold; min-height: 1.4em; margin: 14px 0; }
+        .quiz-feedback.correct { color: #2e7d32; }
+        .quiz-feedback.incorrect { color: #c62828; }
+        .quiz-steps { background: #f1f6ff; border-left: 5px solid #1565c0; border-radius: 8px; padding: 14px 20px; margin: 14px auto; max-width: 560px; line-height: 1.9; display: none; }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -15,7 +47,13 @@
             <a href="motion.html" class="back-link">← Back to Motion &amp; Forces</a>
         </header>
 
+        <div class="topic-tabs">
+            <button class="topic-tab active" data-tab="lesson">📚 Learn</button>
+            <button class="topic-tab" data-tab="practice">🚀 Practice</button>
+        </div>
+
         <main class="lesson-content">
+            <div id="lesson-view">
             <section class="lesson-section intro-box">
                 <h2>🚀 What is Acceleration?</h2>
                 <p><strong>Acceleration</strong> is how quickly an object's speed changes. When a car speeds up, slows down, or changes direction, it is accelerating. Anytime motion is changing, acceleration is happening!</p>
@@ -54,16 +92,47 @@
 
                     <div class="formula-box">
                         <h3>🧮 Acceleration Formula:</h3>
-                        <p class="formula">Acceleration = Change in Speed ÷ Time</p>
-                        <p class="formula">a = (final speed − starting speed) ÷ time</p>
+                        <p class="formula">\( \text{Acceleration} = \dfrac{\text{Change in Speed}}{\text{Time}} \)</p>
+                        <p class="formula">\( a = \dfrac{\text{final speed} - \text{starting speed}}{\text{time}} \)</p>
                         <p>Acceleration is measured in <strong>meters per second squared (m/s²)</strong>.</p>
                     </div>
 
                     <div class="example-box">
                         <h3>📝 Let's Try It:</h3>
                         <p>A car starts at <strong>0 m/s</strong> and speeds up to <strong>20 m/s</strong> in <strong>4 seconds</strong>. Its acceleration is:</p>
-                        <p class="formula">(20 m/s − 0 m/s) ÷ 4 s = 5 m/s²</p>
+                        <p class="formula">\( \dfrac{20\ \text{m/s} - 0\ \text{m/s}}{4\ \text{s}} = 5\ \text{m/s}^2 \)</p>
                         <p>This means the car's speed increases by 5 m/s every second!</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <div class="concept-header">
+                    <div class="concept-icon">📏</div>
+                    <h2>How Far Does It Travel?</h2>
+                </div>
+                <div class="concept-content">
+                    <p>If you know the <strong>starting speed</strong>, the <strong>acceleration</strong>, and the <strong>time</strong>, you can figure out the total <strong>distance</strong> an object travels while it speeds up or slows down:</p>
+
+                    <div class="formula-box">
+                        <h3>📏 Distance Formula:</h3>
+                        <p class="formula">\( \text{Distance} = (\text{Starting Speed} \times \text{Time}) + \tfrac{1}{2} \times \text{Acceleration} \times \text{Time}^2 \)</p>
+                        <p class="formula">\( d = v_0\,t + \tfrac{1}{2}\,a\,t^2 \)</p>
+                        <p>Here <strong>v₀</strong> (say "v-naught") is the starting speed, <strong>a</strong> is the acceleration, and <strong>t</strong> is the time.</p>
+                    </div>
+
+                    <div class="analogy-box">
+                        <h3>💡 Why Two Parts?</h3>
+                        <p>The first part, <strong>v₀ × t</strong>, is how far you'd go if your speed never changed. The second part, <strong>½ × a × t²</strong>, is the <em>extra</em> distance you cover because you keep speeding up (or the distance you lose if you're slowing down). Add them together to get the total!</p>
+                    </div>
+
+                    <div class="example-box">
+                        <h3>📝 Let's Try It:</h3>
+                        <p>A car starts at <strong>10 m/s</strong> and accelerates at <strong>2 m/s²</strong> for <strong>5 seconds</strong>. How far does it travel?</p>
+                        <p class="formula">\( d = (10 \times 5) + \tfrac{1}{2} \times 2 \times 5^2 \)</p>
+                        <p class="formula">\( d = 50 + \tfrac{1}{2} \times 2 \times 25 \)</p>
+                        <p class="formula">\( d = 50 + 25 = 75\ \text{meters} \)</p>
+                        <p>The car covers <strong>75 meters</strong> in those 5 seconds!</p>
                     </div>
                 </div>
             </section>
@@ -91,10 +160,14 @@
                     </div>
                     <div class="summary-card">
                         <h3>🧮 Formula</h3>
-                        <p>a = Change in Speed ÷ Time</p>
+                        <p>\( a = \dfrac{\text{Change in Speed}}{\text{Time}} \)</p>
                     </div>
                     <div class="summary-card">
-                        <h3>📐 Units</h3>
+                        <h3>� Distance</h3>
+                        <p>\( d = v_0\,t + \tfrac{1}{2}\,a\,t^2 \)</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>�📐 Units</h3>
                         <p>Measured in m/s²</p>
                     </div>
                     <div class="summary-card">
@@ -121,11 +194,117 @@
                     </div>
                 </div>
             </section>
+            </div><!-- /lesson-view -->
+
+            <div id="practice-view" style="display:none;">
+                <div class="quiz-card">
+                    <p class="quiz-intro">Pick a question type, work it out, then check your answer!</p>
+                    <div class="mode-group">
+                        <button class="mode-btn active" data-mode="accel">Find Acceleration</button>
+                        <button class="mode-btn" data-mode="finalv">Find Final Speed</button>
+                        <button class="mode-btn" data-mode="dist">Find Distance</button>
+                        <button class="mode-btn" data-mode="mixed">🎲 Mixed</button>
+                    </div>
+                    <div class="quiz-score">Score: <span id="q-score">0</span>/<span id="q-total">0</span></div>
+                    <div class="quiz-question" id="q-text"></div>
+                    <div class="quiz-answer"><input type="number" id="q-answer" step="any" placeholder="?"></div>
+                    <div class="quiz-buttons">
+                        <button class="btn-primary" id="check-btn">✓ Check</button>
+                        <button class="btn-secondary" id="new-btn">🎲 New Question</button>
+                        <button class="btn-secondary" id="steps-btn">💡 Show Steps</button>
+                    </div>
+                    <div class="quiz-feedback" id="q-feedback"></div>
+                    <div class="quiz-steps" id="q-steps"></div>
+                </div>
+            </div><!-- /practice-view -->
         </main>
 
         <footer>
             <p>You're picking up speed — and acceleration! 🚀💨</p>
         </footer>
     </div>
+
+    <script>
+    (function () {
+        var views = { lesson: 'lesson-view', practice: 'practice-view' };
+        document.querySelectorAll('.topic-tab').forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                document.querySelectorAll('.topic-tab').forEach(function (t) { t.classList.remove('active'); });
+                tab.classList.add('active');
+                var pick = tab.dataset.tab;
+                Object.keys(views).forEach(function (k) {
+                    document.getElementById(views[k]).style.display = (k === pick) ? '' : 'none';
+                });
+            });
+        });
+
+        var rnd = function (lo, hi) { return Math.floor(Math.random() * (hi - lo + 1)) + lo; };
+        var r2 = function (n) { return Math.round(n * 100) / 100; };
+        var score = 0, total = 0, mode = 'accel', cur = null;
+        var modeKeys = ['accel', 'finalv', 'dist'];
+
+        var gens = {
+            accel: function () {
+                var vi = rnd(0, 10), a = rnd(1, 6), t = rnd(2, 8), vf = vi + a * t;
+                return {
+                    q: 'A car speeds up from <strong>' + vi + ' m/s</strong> to <strong>' + vf + ' m/s</strong> in <strong>' + t + ' s</strong>. What is its acceleration (m/s²)?',
+                    ans: a, unit: 'm/s²',
+                    steps: 'a = (final speed − starting speed) ÷ time<br>a = (' + vf + ' − ' + vi + ') ÷ ' + t + ' = ' + (vf - vi) + ' ÷ ' + t + ' = <strong>' + a + ' m/s²</strong>'
+                };
+            },
+            finalv: function () {
+                var vi = rnd(0, 15), a = rnd(1, 6), t = rnd(1, 8), vf = vi + a * t;
+                return {
+                    q: 'An object starts at <strong>' + vi + ' m/s</strong> and accelerates at <strong>' + a + ' m/s²</strong> for <strong>' + t + ' s</strong>. What is its final speed (m/s)?',
+                    ans: vf, unit: 'm/s',
+                    steps: 'final speed = starting speed + (acceleration × time)<br>vf = ' + vi + ' + (' + a + ' × ' + t + ') = ' + vi + ' + ' + (a * t) + ' = <strong>' + vf + ' m/s</strong>'
+                };
+            },
+            dist: function () {
+                var vi = rnd(0, 12), a = [2, 4, 6][rnd(0, 2)], t = rnd(2, 7);
+                var d = vi * t + 0.5 * a * t * t;
+                return {
+                    q: 'A runner starts at <strong>' + vi + ' m/s</strong> and accelerates at <strong>' + a + ' m/s²</strong> for <strong>' + t + ' s</strong>. How far do they travel (m)?',
+                    ans: d, unit: 'm',
+                    steps: 'd = (v₀ × t) + ½ × a × t²<br>d = (' + vi + ' × ' + t + ') + ½ × ' + a + ' × ' + t + '²<br>d = ' + (vi * t) + ' + ' + (0.5 * a * t * t) + ' = <strong>' + d + ' m</strong>'
+                };
+            }
+        };
+
+        function pickMode() { return mode === 'mixed' ? modeKeys[rnd(0, modeKeys.length - 1)] : mode; }
+        function newQ() {
+            cur = gens[pickMode()]();
+            document.getElementById('q-text').innerHTML = cur.q;
+            document.getElementById('q-answer').value = '';
+            document.getElementById('q-feedback').textContent = '';
+            document.getElementById('q-steps').style.display = 'none';
+            document.getElementById('q-answer').focus();
+        }
+        document.querySelectorAll('.mode-btn').forEach(function (b) {
+            b.addEventListener('click', function () {
+                document.querySelectorAll('.mode-btn').forEach(function (x) { x.classList.remove('active'); });
+                b.classList.add('active'); mode = b.dataset.mode; newQ();
+            });
+        });
+        document.getElementById('check-btn').addEventListener('click', function () {
+            if (!cur) return;
+            var v = parseFloat(document.getElementById('q-answer').value);
+            var fb = document.getElementById('q-feedback');
+            if (isNaN(v)) { fb.textContent = 'Type a number first.'; fb.className = 'quiz-feedback incorrect'; return; }
+            total++;
+            if (Math.abs(v - cur.ans) < 0.02) { score++; fb.textContent = '🎉 Correct!'; fb.className = 'quiz-feedback correct'; }
+            else { fb.textContent = 'Not quite — the answer is ' + r2(cur.ans) + ' ' + cur.unit + '.'; fb.className = 'quiz-feedback incorrect'; }
+            document.getElementById('q-score').textContent = score;
+            document.getElementById('q-total').textContent = total;
+        });
+        document.getElementById('q-answer').addEventListener('keydown', function (e) { if (e.key === 'Enter') document.getElementById('check-btn').click(); });
+        document.getElementById('new-btn').addEventListener('click', newQ);
+        document.getElementById('steps-btn').addEventListener('click', function () {
+            if (!cur) return;
+            var s = document.getElementById('q-steps'); s.innerHTML = cur.steps; s.style.display = 'block';
+        });
+        newQ();
+    })();
+    </script>
 </body>
 </html>

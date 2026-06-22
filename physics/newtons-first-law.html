@@ -6,6 +6,30 @@
     <title>Newton's First Law - Motion & Forces - KidsLearn</title>
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/physics.css">
+    <style>
+        .topic-tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+        .topic-tab { padding: 10px 24px; border: 2px solid rgba(255,255,255,0.6); border-radius: 25px;
+            background: rgba(255,255,255,0.15); color: #fff; cursor: pointer; transition: all 0.25s; font-size: 1em; }
+        .topic-tab:hover { background: rgba(255,255,255,0.3); }
+        .topic-tab.active { background: #fff; color: #1565c0; border-color: #fff; font-weight: bold; }
+        .quiz-card { background: #fff; border-radius: 14px; padding: 24px 26px; margin: 20px 0; box-shadow: 0 3px 14px rgba(0,0,0,0.12); }
+        .quiz-intro { text-align: center; color: #555; margin-bottom: 18px; }
+        .quiz-score { text-align: center; font-weight: bold; color: #1565c0; margin: 10px 0; }
+        .quiz-question { text-align: center; font-size: 1.2em; font-weight: bold; margin: 16px 0; color: #333; line-height: 1.6; }
+        .quiz-choices { display: grid; gap: 10px; max-width: 480px; margin: 0 auto; }
+        .choice-btn { padding: 12px 18px; border: 2px solid #cdd6ec; border-radius: 10px; background: #fff; cursor: pointer; font-size: 1em; text-align: left; transition: all 0.2s; }
+        .choice-btn:hover { border-color: #1565c0; background: #f1f6ff; }
+        .choice-btn.correct { border-color: #2e7d32; background: #e8f5e9; }
+        .choice-btn.incorrect { border-color: #c62828; background: #fdecea; }
+        .choice-btn:disabled { cursor: default; }
+        .quiz-buttons { text-align: center; margin: 12px 0; }
+        .btn-primary { background: #1565c0; color: #fff; border: none; padding: 11px 24px; border-radius: 24px; font-size: 1em; font-weight: bold; cursor: pointer; margin: 4px; transition: background 0.2s; }
+        .btn-primary:hover { background: #0d47a1; }
+        .quiz-feedback { text-align: center; font-size: 1.1em; font-weight: bold; min-height: 1.4em; margin: 14px 0; }
+        .quiz-feedback.correct { color: #2e7d32; }
+        .quiz-feedback.incorrect { color: #c62828; }
+        .quiz-steps { background: #f1f6ff; border-left: 5px solid #1565c0; border-radius: 8px; padding: 14px 20px; margin: 14px auto; max-width: 560px; line-height: 1.9; display: none; }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -15,7 +39,13 @@
             <a href="motion.html" class="back-link">← Back to Motion &amp; Forces</a>
         </header>
 
+        <div class="topic-tabs">
+            <button class="topic-tab active" data-tab="lesson">📚 Learn</button>
+            <button class="topic-tab" data-tab="practice">1️⃣ Practice</button>
+        </div>
+
         <main class="lesson-content">
+            <div id="lesson-view">
             <section class="lesson-section intro-box">
                 <h2>🍎 Who Was Isaac Newton?</h2>
                 <p><strong>Sir Isaac Newton</strong> was a famous scientist who lived over 300 years ago. He discovered three rules — called the <strong>Laws of Motion</strong> — that explain how everything moves. This is the <strong>first</strong> of those three important laws!</p>
@@ -119,11 +149,123 @@
                     </div>
                 </div>
             </section>
+            </div><!-- /lesson-view -->
+
+            <div id="practice-view" style="display:none;">
+                <div class="quiz-card">
+                    <p class="quiz-intro">Test what you know about inertia and Newton's First Law. Pick the best answer!</p>
+                    <div class="quiz-score">Score: <span id="mc-score">0</span>/<span id="mc-total">0</span></div>
+                    <div class="quiz-question" id="mc-q"></div>
+                    <div class="quiz-choices" id="mc-choices"></div>
+                    <div class="quiz-feedback" id="mc-feedback"></div>
+                    <div class="quiz-steps" id="mc-steps"></div>
+                    <div class="quiz-buttons"><button class="btn-primary" id="mc-next">Next Question →</button></div>
+                </div>
+            </div><!-- /practice-view -->
         </main>
 
         <footer>
             <p>One law down, two to go! 🍎🌟</p>
         </footer>
     </div>
+
+    <script>
+    (function () {
+        var views = { lesson: 'lesson-view', practice: 'practice-view' };
+        document.querySelectorAll('.topic-tab').forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                document.querySelectorAll('.topic-tab').forEach(function (t) { t.classList.remove('active'); });
+                tab.classList.add('active');
+                var pick = tab.dataset.tab;
+                Object.keys(views).forEach(function (k) {
+                    document.getElementById(views[k]).style.display = (k === pick) ? '' : 'none';
+                });
+            });
+        });
+
+        var POOL = [
+            {
+                q: 'What does Newton\u2019s First Law say about an object that is sitting still?',
+                choices: ['It will stay still unless a force acts on it', 'It will slowly start moving on its own', 'It will get heavier over time', 'It will float upward'],
+                correct: 0,
+                explain: 'An object at rest stays at rest until a force (a push or pull) makes it move.'
+            },
+            {
+                q: 'What is the name for an object\u2019s tendency to resist changes in its motion?',
+                choices: ['Gravity', 'Inertia', 'Friction', 'Velocity'],
+                correct: 1,
+                explain: 'Inertia is the resistance of any object to a change in its state of motion.'
+            },
+            {
+                q: 'Which object has the most inertia?',
+                choices: ['A tennis ball', 'A bowling ball', 'A feather', 'A paperclip'],
+                correct: 1,
+                explain: 'More mass means more inertia. The heavy bowling ball is hardest to start or stop.'
+            },
+            {
+                q: 'Why do we wear seatbelts in a car?',
+                choices: ['To make the car go faster', 'Because your body keeps moving forward when the car suddenly stops', 'To reduce friction', 'To add mass to the car'],
+                correct: 1,
+                explain: 'When the car stops, inertia keeps your body moving forward \u2014 the seatbelt provides the force to stop you safely.'
+            },
+            {
+                q: 'A hockey puck slides across smooth ice and slowly stops. What force slows it down?',
+                choices: ['Inertia', 'Gravity', 'Friction', 'Magnetism'],
+                correct: 2,
+                explain: 'Friction between the puck and the ice is the force that gradually slows it to a stop.'
+            },
+            {
+                q: 'In outer space, far from any force, a moving spacecraft will...',
+                choices: ['Slow down and stop', 'Keep moving at the same speed forever', 'Speed up by itself', 'Fall straight down'],
+                correct: 1,
+                explain: 'With almost no friction or air, nothing slows the spacecraft \u2014 it keeps moving, just as the First Law predicts.'
+            },
+            {
+                q: 'A magician pulls a tablecloth quickly and the dishes stay put. This works because of...',
+                choices: ['Gravity pulling the dishes down', 'The dishes\u2019 inertia keeping them at rest', 'Air resistance', 'The dishes being very light'],
+                correct: 1,
+                explain: 'The dishes\u2019 inertia keeps them at rest because the quick pull doesn\u2019t apply enough force to move them.'
+            },
+            {
+                q: 'What is needed to change an object\u2019s motion?',
+                choices: ['Time', 'A force (a push or a pull)', 'More inertia', 'Sunlight'],
+                correct: 1,
+                explain: 'Only a force \u2014 a push or a pull \u2014 can change how an object is moving.'
+            }
+        ];
+
+        var score = 0, total = 0, order = [], idx = 0, answered = false;
+        function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+        function indices() { return shuffle(POOL.map(function (_, i) { return i; })); }
+        function load() {
+            if (idx >= order.length) { order = indices(); idx = 0; }
+            var item = POOL[order[idx]];
+            answered = false;
+            document.getElementById('mc-q').textContent = item.q;
+            var box = document.getElementById('mc-choices'); box.innerHTML = '';
+            item.choices.forEach(function (c, i) {
+                var b = document.createElement('button'); b.className = 'choice-btn'; b.textContent = c;
+                b.addEventListener('click', function () { choose(i, b); });
+                box.appendChild(b);
+            });
+            document.getElementById('mc-feedback').textContent = '';
+            document.getElementById('mc-steps').style.display = 'none';
+        }
+        function choose(i, btn) {
+            if (answered) return; answered = true;
+            var item = POOL[order[idx]]; total++;
+            var btns = document.querySelectorAll('#mc-choices .choice-btn');
+            btns.forEach(function (b) { b.disabled = true; });
+            var fb = document.getElementById('mc-feedback');
+            if (i === item.correct) { score++; btn.classList.add('correct'); fb.textContent = '🎉 Correct!'; fb.className = 'quiz-feedback correct'; }
+            else { btn.classList.add('incorrect'); btns[item.correct].classList.add('correct'); fb.textContent = 'Not quite.'; fb.className = 'quiz-feedback incorrect'; }
+            var s = document.getElementById('mc-steps'); s.innerHTML = item.explain; s.style.display = 'block';
+            document.getElementById('mc-score').textContent = score;
+            document.getElementById('mc-total').textContent = total;
+        }
+        document.getElementById('mc-next').addEventListener('click', function () { idx++; load(); });
+        order = indices(); load();
+    })();
+    </script>
 </body>
 </html>
