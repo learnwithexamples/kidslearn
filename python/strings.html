@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 3: Working with Text - Python - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐍 Lesson 3: Working with Text</h1>
+            <p class="subtitle">Strings — joining, slicing, and transforming words</p>
+            <a href="python.html" class="back-link">← Back to Python Lessons</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>🔗 Joining strings together</h2>
+                <p>You can glue strings together with the <code>+</code> sign. This is called <strong>concatenation</strong>.</p>
+                <div class="code-block">first = "Sky"
+last = "Walker"
+full = first + last
+print(full)        # SkyWalker</div>
+                <p>Need a space? Add one inside quotes:</p>
+                <div class="code-block">full = first + " " + last
+print(full)        # Sky Walker</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✨ f-strings — the easy way to build messages</h2>
+                <div class="info-box">
+                    <p>An <strong>f-string</strong> lets you drop variables right inside text. Put an <code>f</code> before the quotes, and wrap variable names in <code>{ }</code>.</p>
+                </div>
+                <div class="code-block">name = "Maya"
+age = 11
+print(f"Hi {name}, you are {age} years old!")
+# Hi Maya, you are 11 years old!</div>
+                <div class="tip-box">
+                    <h4>📌 Why f-strings rule</h4>
+                    <p>No more juggling <code>+</code> signs and quotes. f-strings are the modern, clean way to combine text and variables. You'll use them constantly!</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔢 Strings have a length</h2>
+                <p>Count the characters (including spaces) with <code>len()</code>:</p>
+                <div class="code-block">word = "python"
+print(len(word))   # 6</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>📍 Picking characters (indexing)</h2>
+                <p>Each character has a position number called an <strong>index</strong>. Python starts counting at <strong>0</strong>!</p>
+                <div class="code-block">word = "PYTHON"
+#        012345
+print(word[0])   # P
+print(word[1])   # Y
+print(word[-1])  # N  (negative counts from the end)</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✂️ Slicing — grabbing a piece</h2>
+                <p>Take a chunk with <code>[start:end]</code>. The <code>start</code> is included, the <code>end</code> is not.</p>
+                <div class="code-block">word = "PYTHON"
+print(word[0:3])   # PYT
+print(word[2:])    # THON  (to the end)
+print(word[:4])    # PYTH  (from the start)</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🛠️ Handy string methods</h2>
+                <p>Strings come with built-in superpowers you call with a dot:</p>
+                <div class="code-block">shout = "hello"
+print(shout.upper())       # HELLO
+print("LOUD".lower())      # loud
+print("  hi  ".strip())    # hi   (removes outside spaces)
+print("cat".replace("c", "b"))  # bat
+print("a,b,c".split(","))  # ['a', 'b', 'c']</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="info-box">
+                    <ul>
+                        <li>Join strings with <code>+</code>, or better — use <strong>f-strings</strong>.</li>
+                        <li><code>len()</code> counts characters.</li>
+                        <li>Indexing starts at <strong>0</strong>; <code>[-1]</code> is the last character.</li>
+                        <li>Slice with <code>[start:end]</code>.</li>
+                        <li>Methods like <code>.upper()</code>, <code>.lower()</code>, <code>.replace()</code> transform text.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Bend words to your will. Try the examples, then make them your own.</p>
+            </div>
+
+            <div class="task" data-expected="Hi Sam, welcome to Python!">
+                <div class="task-head">
+                    <span class="task-badge">👋</span>
+                    <h3>Task 1: Personal Greeting</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">A variable <code>name</code> holds <code>"Sam"</code>. Use an <strong>f-string</strong> to print: <code>Hi Sam, welcome to Python!</code></p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">name = "Sam"
+# print the greeting with an f-string
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>name = "Sam"
+print(f"Hi {name}, welcome to Python!")</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="SHOUT
+whisper
+11">
+                <div class="task-head">
+                    <span class="task-badge">🔊</span>
+                    <h3>Task 2: Volume Control</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Print the word <code>"shout"</code> in UPPERCASE, the word <code>"WHISPER"</code> in lowercase, and the length of <code>"programming"</code>. Output:</p>
+                <div class="code-block out">SHOUT
+whisper
+11</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">print("shout".upper())
+# now lowercase WHISPER and the length of programming
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>print("shout".upper())
+print("WHISPER".lower())
+print(len("programming"))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="PIZZA party">
+                <div class="task-head">
+                    <span class="task-badge">🍕</span>
+                    <h3>Task 3: Mix &amp; Match</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Given <code>word = "pizza"</code> and <code>event = "PARTY"</code>, print <code>PIZZA party</code> — the first word uppercased, a space, then the second word lowercased. Use an f-string and methods together!</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">word = "pizza"
+event = "PARTY"
+# print: PIZZA party
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>word = "pizza"
+event = "PARTY"
+print(f"{word.upper()} {event.lower()}")</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🕵️</span>
+                    <h3>Task 4: Free Play — Secret Initials</h3>
+                    <span class="task-difficulty diff-easy">Creative</span>
+                </div>
+                <p class="task-goal">Store your full name in a variable. Use indexing (<code>[0]</code>) and slicing to print your first initial, your last character, and the first 3 letters. Experiment!</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">full_name = "Ada Lovelace"
+print(full_name[0])
+# try full_name[-1] and full_name[0:3]
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="variables.html">← Previous: Variables</a>
+            <a class="nav-next" href="numbers.html">Next: Numbers &amp; Math →</a>
+        </nav>
+
+        <footer>
+            <p>Words are your clay — now you can shape them. 🎭</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

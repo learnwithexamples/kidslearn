@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 10: Functions - Python - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐍 Lesson 10: Functions</h1>
+            <p class="subtitle">Teach Python your own commands</p>
+            <a href="python.html" class="back-link">← Back to Python Lessons</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>🧰 What is a function?</h2>
+                <div class="info-box">
+                    <p>A <strong>function</strong> is a reusable block of code with a name. You write it once, then <strong>call</strong> it whenever you need it — no copy-pasting. You've already used functions: <code>print()</code> and <code>len()</code> are built-in ones!</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✍️ Defining your own</h2>
+                <p>Use the <code>def</code> keyword. Don't forget the colon and indentation:</p>
+                <div class="code-block">def greet():
+    print("Hello there!")
+    print("Welcome to Python!")
+
+greet()    # call it — runs the two prints
+greet()    # call it again!</div>
+                <div class="tip-box">
+                    <h4>📌 Define, then call</h4>
+                    <p>Writing <code>def greet():</code> only <em>creates</em> the function. Nothing happens until you <strong>call</strong> it with <code>greet()</code>.</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🎁 Parameters — giving input</h2>
+                <p>A <strong>parameter</strong> lets you pass information into a function so it can behave differently each time:</p>
+                <div class="code-block">def greet(name):
+    print(f"Hello, {name}!")
+
+greet("Maya")    # Hello, Maya!
+greet("Leo")     # Hello, Leo!</div>
+                <p>You can have several parameters:</p>
+                <div class="code-block">def add(a, b):
+    print(a + b)
+
+add(3, 4)    # 7</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>📤 <code>return</code> — sending a value back</h2>
+                <p>Often you want a function to <strong>compute and hand back</strong> a result, instead of just printing. That's what <code>return</code> does:</p>
+                <div class="code-block">def add(a, b):
+    return a + b
+
+total = add(3, 4)    # total is now 7
+print(total)         # 7
+print(add(10, 5))    # 15</div>
+                <div class="warn-box">
+                    <h4>print vs return</h4>
+                    <p><code>print</code> just <em>shows</em> a value on screen. <code>return</code> <em>gives it back</em> so you can store it in a variable and use it later. They're different!</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🌟 Why functions are awesome</h2>
+                <ul style="line-height:1.9;">
+                    <li><strong>Reuse</strong> — write once, use everywhere.</li>
+                    <li><strong>Organized</strong> — break a big problem into small named pieces.</li>
+                    <li><strong>Easy to fix</strong> — change it in one place, fixed everywhere.</li>
+                </ul>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="info-box">
+                    <ul>
+                        <li>Define a function with <code>def name():</code> and a colon + indentation.</li>
+                        <li><strong>Call</strong> it with <code>name()</code> to run it.</li>
+                        <li><strong>Parameters</strong> pass information in.</li>
+                        <li><code>return</code> sends a result back to be used.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Build your own toolbox of reusable commands. 🛠️</p>
+            </div>
+
+            <div class="task" data-expected="Have a great day!">
+                <div class="task-head">
+                    <span class="task-badge">😀</span>
+                    <h3>Task 1: Make a Function</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Define a function called <code>cheer</code> that prints <code>Have a great day!</code>, then call it once.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"># define cheer(), then call it
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def cheer():
+    print("Have a great day!")
+
+cheer()</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Hi, Sam!
+Hi, Mia!">
+                <div class="task-head">
+                    <span class="task-badge">👋</span>
+                    <h3>Task 2: Greeter with a Parameter</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write a function <code>greet(name)</code> that prints <code>Hi, NAME!</code>. Call it with <code>"Sam"</code> and then <code>"Mia"</code>. Output:</p>
+                <div class="code-block out">Hi, Sam!
+Hi, Mia!</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def greet(name):
+    # print the greeting
+    pass
+
+# call greet twice
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def greet(name):
+    print(f"Hi, {name}!")
+
+greet("Sam")
+greet("Mia")</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="20">
+                <div class="task-head">
+                    <span class="task-badge">⬜</span>
+                    <h3>Task 3: Area Calculator</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write a function <code>area(width, height)</code> that <strong>returns</strong> width × height. Call it with <code>4</code> and <code>5</code> and print the result (it's <code>20</code>).</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def area(width, height):
+    # return the area
+    pass
+
+print(area(4, 5))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def area(width, height):
+    return width * height
+
+print(area(4, 5))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="True
+False">
+                <div class="task-head">
+                    <span class="task-badge">🔢</span>
+                    <h3>Task 4: Is It Even?</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Write a function <code>is_even(n)</code> that <strong>returns</strong> <code>True</code> if <code>n</code> is even, <code>False</code> if odd. Print <code>is_even(8)</code> then <code>is_even(3)</code>. Output:</p>
+                <div class="code-block out">True
+False</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def is_even(n):
+    # return True or False
+    pass
+
+print(is_even(8))
+print(is_even(3))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def is_even(n):
+    return n % 2 == 0
+
+print(is_even(8))
+print(is_even(3))</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🎲</span>
+                    <h3>Task 5: Free Play — Your Own Function</h3>
+                    <span class="task-difficulty diff-medium">Creative</span>
+                </div>
+                <p class="task-goal">Invent a useful function! Ideas: <code>double(n)</code> that returns n×2, <code>shout(word)</code> that returns it in CAPS, or a function that builds a fun greeting. Call it a few times.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def double(n):
+    return n * 2
+
+print(double(7))
+print(double(double(5)))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="dictionaries.html">← Previous: Dictionaries</a>
+            <a class="nav-next" href="projects.html">Next: Capstone Projects →</a>
+        </nav>
+
+        <footer>
+            <p>Functions are the building blocks of every big program. 🏗️</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

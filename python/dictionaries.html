@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 9: Dictionaries - Python - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐍 Lesson 9: Dictionaries</h1>
+            <p class="subtitle">Match keys to values, like words to meanings</p>
+            <a href="python.html" class="back-link">← Back to Python Lessons</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>📒 What is a dictionary?</h2>
+                <div class="info-box">
+                    <p>A <strong>dictionary</strong> stores pairs of <strong>keys</strong> and <strong>values</strong>. Instead of looking things up by position (like a list), you look them up by a <em>name</em> (the key). Just like a real dictionary: you look up a word (key) to find its meaning (value).</p>
+                </div>
+                <div class="code-block">player = {
+    "name": "Maya",
+    "level": 7,
+    "health": 100
+}</div>
+                <p>Curly braces <code>{ }</code>, and each pair is written as <code>key: value</code>.</p>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔑 Looking up a value</h2>
+                <p>Use the key in square brackets:</p>
+                <div class="code-block">print(player["name"])    # Maya
+print(player["level"])   # 7</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✏️ Adding and changing</h2>
+                <div class="code-block">player["level"] = 8         # change a value
+player["score"] = 250       # add a brand-new pair
+print(player)</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔍 Safe lookups with <code>.get()</code></h2>
+                <div class="warn-box">
+                    <h4>Missing keys cause errors</h4>
+                    <p>Asking for a key that doesn't exist (<code>player["age"]</code>) crashes the program. Use <code>.get()</code> to avoid that — it returns <code>None</code> (or a default) instead.</p>
+                </div>
+                <div class="code-block">print(player.get("age"))          # None (no crash)
+print(player.get("age", "unknown"))  # unknown</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔁 Looping through a dictionary</h2>
+                <div class="code-block">prices = {"apple": 2, "banana": 1, "cherry": 5}
+for fruit in prices:
+    print(f"{fruit} costs ${prices[fruit]}")
+
+# Or get both at once with .items()
+for fruit, price in prices.items():
+    print(f"{fruit}: {price}")</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🛠️ Useful tools</h2>
+                <div class="code-block">prices = {"apple": 2, "banana": 1}
+print(prices.keys())     # the keys
+print(prices.values())   # the values
+print("apple" in prices) # True — is this key there?
+print(len(prices))       # 2 — how many pairs</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="info-box">
+                    <ul>
+                        <li>Dictionaries store <strong>key → value</strong> pairs in <code>{ }</code>.</li>
+                        <li>Look up with <code>dict["key"]</code> or safely with <code>.get()</code>.</li>
+                        <li>Add or change with <code>dict["key"] = value</code>.</li>
+                        <li>Loop with <code>for k in dict</code> or <code>.items()</code>.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Build little databases of your own. 🗂️</p>
+            </div>
+
+            <div class="task" data-expected="Rex">
+                <div class="task-head">
+                    <span class="task-badge">🐕</span>
+                    <h3>Task 1: Look It Up</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">A dictionary <code>dog = {"name": "Rex", "age": 4}</code>. Print just the dog's name. Expected: <code>Rex</code></p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">dog = {"name": "Rex", "age": 4}
+# print the dog's name
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>dog = {"name": "Rex", "age": 4}
+print(dog["name"])</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="apple: 3
+banana: 5">
+                <div class="task-head">
+                    <span class="task-badge">🍎</span>
+                    <h3>Task 2: Fruit Inventory</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">A dictionary <code>stock = {"apple": 3, "banana": 5}</code>. Loop with <code>.items()</code> and print each line as <code>fruit: count</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">stock = {"apple": 3, "banana": 5}
+# loop and print "fruit: count"
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>stock = {"apple": 3, "banana": 5}
+for fruit, count in stock.items():
+    print(f"{fruit}: {count}")</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="{'name': 'Zoe', 'level': 1, 'xp': 0}">
+                <div class="task-head">
+                    <span class="task-badge">🎮</span>
+                    <h3>Task 3: New Player</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Start with <code>player = {"name": "Zoe", "level": 1}</code>. Add a new key <code>"xp"</code> with value <code>0</code>, then print the whole dictionary. Expected: <code>{'name': 'Zoe', 'level': 1, 'xp': 0}</code></p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">player = {"name": "Zoe", "level": 1}
+# add xp = 0, then print player
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>player = {"name": "Zoe", "level": 1}
+player["xp"] = 0
+print(player)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Total: 8">
+                <div class="task-head">
+                    <span class="task-badge">🧮</span>
+                    <h3>Task 4: Add Up the Values</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">A dictionary <code>basket = {"apple": 3, "pear": 5}</code>. Print the total number of fruits: <code>Total: 8</code>. Hint: <code>sum(basket.values())</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">basket = {"apple": 3, "pear": 5}
+# print "Total: 8"
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>basket = {"apple": 3, "pear": 5}
+print(f"Total: {sum(basket.values())}")</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🦸</span>
+                    <h3>Task 5: Free Play — Character Sheet</h3>
+                    <span class="task-difficulty diff-easy">Creative</span>
+                </div>
+                <p class="task-goal">Build a dictionary describing a hero or pet: name, age, power, and anything else. Look up values, change them, and print the result. Make it yours!</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">hero = {"name": "Nova", "power": "flight", "level": 5}
+print(hero["power"])
+# add or change keys, then print(hero)
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="lists.html">← Previous: Lists</a>
+            <a class="nav-next" href="functions.html">Next: Functions →</a>
+        </nav>
+
+        <footer>
+            <p>Keys and values — a place for everything! 🗝️</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

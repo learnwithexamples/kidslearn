@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capstone Projects - Python - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏆 Capstone Projects</h1>
+            <p class="subtitle">Put everything together and build real programs!</p>
+            <a href="python.html" class="back-link">← Back to Python Lessons</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>🎓 You made it!</h2>
+                <div class="info-box">
+                    <p>You've learned printing, variables, strings, math, input, decisions, loops, lists, dictionaries, and functions. That's <strong>everything you need</strong> to build real programs!</p>
+                    <p>These capstone projects mix all those skills together. Each one starts with helpful code already written — your job is to finish it. Read the brief, switch to the <strong>Practice</strong> tab, and bring each program to life. 🚀</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🗺️ Your project briefs</h2>
+
+                <div class="example-box">
+                    <h3>🎯 Project 1: Number Guessing Game</h3>
+                    <p>The computer picks a secret number. The player keeps guessing, and the program says "too high" or "too low" until they get it. Uses: <code>random</code>, <code>while</code>, <code>if</code>, <code>input</code>.</p>
+                </div>
+
+                <div class="example-box">
+                    <h3>🧠 Project 2: Quiz Game</h3>
+                    <p>Ask a few questions, keep score, and show the final result. Uses: <code>input</code>, <code>if</code>, variables, f-strings.</p>
+                </div>
+
+                <div class="example-box">
+                    <h3>🔢 Project 3: FizzBuzz</h3>
+                    <p>The famous coding challenge! Print 1–20, but say "Fizz" for multiples of 3, "Buzz" for multiples of 5, and "FizzBuzz" for both. Uses: <code>for</code>, <code>%</code>, <code>if</code>/<code>elif</code>.</p>
+                </div>
+
+                <div class="example-box">
+                    <h3>✊ Project 4: Rock, Paper, Scissors</h3>
+                    <p>Play against the computer's random choice and find out who wins. Uses: <code>random</code>, <code>input</code>, <code>if</code>.</p>
+                </div>
+
+                <div class="example-box">
+                    <h3>🔐 Project 5: Password Strength Checker</h3>
+                    <p>Check whether a password is long enough and strong. Uses: <code>input</code>, <code>len</code>, <code>if</code>, functions.</p>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💪 Challenge yourself</h4>
+                    <p>Once a project works, make it better! Add more questions, more rounds, nicer messages, or new rules. That's exactly how real programmers learn.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Build Time!</h2>
+                <p>These projects are interactive — press <strong>▶ Run</strong> and play. Finish the TODOs to make each one work, then peek at the solution if you get stuck.</p>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🎯</span>
+                    <h3>Project 1: Number Guessing Game</h3>
+                    <span class="task-difficulty diff-medium">Project</span>
+                </div>
+                <p class="task-goal">The secret number is ready. Finish the <code>if</code>/<code>elif</code>/<code>else</code> so the game tells the player "too high", "too low", or "correct". Press ▶ Run and play!</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">import random
+
+secret = random.randint(1, 20)
+print("I'm thinking of a number from 1 to 20!")
+
+while True:
+    guess = int(input("Your guess: "))
+    # TODO: compare guess to secret
+    if guess == secret:
+        print("🎉 Correct! You got it!")
+        break
+    elif guess &lt; secret:
+        print("Too low! Try higher. ⬆️")
+    else:
+        print("Too high! Try lower. ⬇️")
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>import random
+
+secret = random.randint(1, 20)
+print("I'm thinking of a number from 1 to 20!")
+
+while True:
+    guess = int(input("Your guess: "))
+    if guess == secret:
+        print("🎉 Correct! You got it!")
+        break
+    elif guess &lt; secret:
+        print("Too low! Try higher. ⬆️")
+    else:
+        print("Too high! Try lower. ⬇️")</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🧠</span>
+                    <h3>Project 2: Quiz Game</h3>
+                    <span class="task-difficulty diff-medium">Project</span>
+                </div>
+                <p class="task-goal">Add one more question to the quiz, and make sure <code>score</code> goes up for each correct answer. Run it and test your knowledge!</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">score = 0
+
+a1 = input("What color is the sky on a clear day? ")
+if a1.lower() == "blue":
+    score += 1
+    print("Correct! ✅")
+else:
+    print("The answer was blue.")
+
+a2 = input("How many legs does a spider have? ")
+if a2 == "8":
+    score += 1
+    print("Correct! ✅")
+else:
+    print("The answer was 8.")
+
+# TODO: add a third question here!
+
+print(f"Your final score: {score}")
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>score = 0
+
+a1 = input("What color is the sky on a clear day? ")
+if a1.lower() == "blue":
+    score += 1
+    print("Correct! ✅")
+else:
+    print("The answer was blue.")
+
+a2 = input("How many legs does a spider have? ")
+if a2 == "8":
+    score += 1
+    print("Correct! ✅")
+else:
+    print("The answer was 8.")
+
+a3 = input("What is 6 times 7? ")
+if a3 == "42":
+    score += 1
+    print("Correct! ✅")
+else:
+    print("The answer was 42.")
+
+print(f"Your final score: {score}")</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+16
+17
+Fizz
+19
+Buzz">
+                <div class="task-head">
+                    <span class="task-badge">🔢</span>
+                    <h3>Project 3: FizzBuzz</h3>
+                    <span class="task-difficulty diff-hard">Classic Challenge</span>
+                </div>
+                <p class="task-goal">Print 1 to 20. For multiples of 3 print <code>Fizz</code>, for multiples of 5 print <code>Buzz</code>, for multiples of both print <code>FizzBuzz</code>, otherwise print the number. Tip: check <strong>both</strong> (15, 30...) first! Press ✓ Check to verify.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">for n in range(1, 21):
+    # TODO: print Fizz / Buzz / FizzBuzz / or the number
+    pass
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>for n in range(1, 21):
+    if n % 3 == 0 and n % 5 == 0:
+        print("FizzBuzz")
+    elif n % 3 == 0:
+        print("Fizz")
+    elif n % 5 == 0:
+        print("Buzz")
+    else:
+        print(n)</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">✊</span>
+                    <h3>Project 4: Rock, Paper, Scissors</h3>
+                    <span class="task-difficulty diff-hard">Project</span>
+                </div>
+                <p class="task-goal">The computer's random move is ready. Finish the logic that decides the winner. Type <code>rock</code>, <code>paper</code>, or <code>scissors</code> when it asks!</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">import random
+
+moves = ["rock", "paper", "scissors"]
+computer = random.choice(moves)
+you = input("rock, paper, or scissors? ").lower()
+
+print(f"Computer chose: {computer}")
+
+if you == computer:
+    print("It's a tie! 🤝")
+elif (you == "rock" and computer == "scissors") or \
+     (you == "paper" and computer == "rock") or \
+     (you == "scissors" and computer == "paper"):
+    print("You win! 🎉")
+else:
+    print("Computer wins! 🤖")
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>import random
+
+moves = ["rock", "paper", "scissors"]
+computer = random.choice(moves)
+you = input("rock, paper, or scissors? ").lower()
+
+print(f"Computer chose: {computer}")
+
+if you == computer:
+    print("It's a tie! 🤝")
+elif (you == "rock" and computer == "scissors") or \
+     (you == "paper" and computer == "rock") or \
+     (you == "scissors" and computer == "paper"):
+    print("You win! 🎉")
+else:
+    print("Computer wins! 🤖")</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🔐</span>
+                    <h3>Project 5: Password Strength Checker</h3>
+                    <span class="task-difficulty diff-hard">Project</span>
+                </div>
+                <p class="task-goal">Finish the <code>check</code> function so it returns "Strong" when a password is at least 8 characters long, otherwise "Too short". Then test it with your own ideas.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def check(password):
+    if len(password) &gt;= 8:
+        return "Strong 💪"
+    else:
+        return "Too short 😬"
+
+pw = input("Choose a password: ")
+print(check(pw))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def check(password):
+    if len(password) &gt;= 8:
+        return "Strong 💪"
+    else:
+        return "Too short 😬"
+
+pw = input("Choose a password: ")
+print(check(pw))</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🌟</span>
+                    <h3>Project 6: Free Build — Your Idea!</h3>
+                    <span class="task-difficulty diff-medium">Open-Ended</span>
+                </div>
+                <p class="task-goal">You're a programmer now — build whatever you want! A story generator, a dice roller, a tip calculator, a times-table printer... The blank canvas is yours. 🎨</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">import random
+
+# Example: a dice roller. Change it into your own idea!
+roll = random.randint(1, 6)
+print(f"🎲 You rolled a {roll}!")
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="functions.html">← Previous: Functions</a>
+            <a class="nav-next disabled" href="#">You finished the course! 🎉</a>
+        </nav>
+
+        <footer>
+            <p>Congratulations — you're a Python programmer! Keep building. 🐍💛</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

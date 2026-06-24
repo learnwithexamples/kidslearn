@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 2: Variables &amp; Data Types - Python - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐍 Lesson 2: Variables &amp; Data Types</h1>
+            <p class="subtitle">Labeled boxes that remember things for you</p>
+            <a href="python.html" class="back-link">← Back to Python Lessons</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>📦 What is a variable?</h2>
+                <div class="info-box">
+                    <p>A <strong>variable</strong> is a labeled box where you can store a piece of information and use it later. You create one with an <code>=</code> sign:</p>
+                </div>
+                <div class="code-block">score = 100
+name = "Maya"</div>
+                <p>Read this as: "Put <code>100</code> into a box labeled <code>score</code>." Now whenever you write <code>score</code>, Python remembers it means <code>100</code>.</p>
+                <div class="code-block">score = 100
+print(score)      # shows 100
+print(name)       # shows Maya</div>
+                <div class="tip-box">
+                    <h4>📌 Notice the difference</h4>
+                    <p><code>print("score")</code> prints the word <em>score</em>. <code>print(score)</code> (no quotes) prints what's <em>inside</em> the box — <code>100</code>.</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔁 Variables can change</h2>
+                <p>The value in a box can be replaced any time. Python always remembers the <strong>most recent</strong> value.</p>
+                <div class="code-block">lives = 3
+print(lives)   # 3
+lives = lives - 1
+print(lives)   # 2</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🧩 The main data types</h2>
+                <p>Every value in Python has a <strong>type</strong>. The three you'll use most are:</p>
+                <div class="example-box">
+                    <h3>1. String (text) — <code>str</code></h3>
+                    <p>Words and letters, always inside quotes.</p>
+                    <div class="code-block">pet = "dog"
+greeting = "Good morning!"</div>
+                </div>
+                <div class="example-box">
+                    <h3>2. Integer (whole number) — <code>int</code></h3>
+                    <p>Counting numbers, no quotes, no decimal point.</p>
+                    <div class="code-block">age = 11
+coins = -5</div>
+                </div>
+                <div class="example-box">
+                    <h3>3. Float (decimal number) — <code>float</code></h3>
+                    <p>Numbers with a decimal point.</p>
+                    <div class="code-block">price = 2.50
+temperature = 98.6</div>
+                </div>
+                <div class="example-box">
+                    <h3>Bonus: Boolean (true/false) — <code>bool</code></h3>
+                    <p>Only two values: <code>True</code> or <code>False</code> (capital first letter!).</p>
+                    <div class="code-block">game_over = False
+is_winner = True</div>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔍 Checking a type</h2>
+                <p>Ask Python what type something is with <code>type()</code>:</p>
+                <div class="code-block">print(type("hello"))   # &lt;class 'str'&gt;
+print(type(42))        # &lt;class 'int'&gt;
+print(type(3.14))      # &lt;class 'float'&gt;
+print(type(True))      # &lt;class 'bool'&gt;</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🏷️ Naming rules</h2>
+                <div class="warn-box">
+                    <h4>Good variable names</h4>
+                    <ul>
+                        <li>Use letters, numbers, and underscores: <code>high_score</code>, <code>player2</code></li>
+                        <li>Must start with a letter or underscore, <strong>not a number</strong>: <code>2cool</code> ❌</li>
+                        <li>No spaces — use underscores instead: <code>my name</code> ❌ → <code>my_name</code> ✅</li>
+                        <li>Choose names that describe the value: <code>x</code> 😐 vs <code>player_health</code> 😍</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="info-box">
+                    <ul>
+                        <li>A <strong>variable</strong> stores a value with <code>name = value</code>.</li>
+                        <li>The big data types: <code>str</code>, <code>int</code>, <code>float</code>, <code>bool</code>.</li>
+                        <li>Use <code>type()</code> to check a value's type.</li>
+                        <li>Variables can be changed at any time.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Build, change, and inspect your own variables. Run early, run often!</p>
+            </div>
+
+            <div class="task" data-expected="Buddy
+7">
+                <div class="task-head">
+                    <span class="task-badge">🐶</span>
+                    <h3>Task 1: Create a Pet</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Make a variable <code>pet_name</code> set to <code>"Buddy"</code> and a variable <code>pet_age</code> set to <code>7</code>. Then print each one (the values, not the words). Output should be:</p>
+                <div class="code-block out">Buddy
+7</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">pet_name = "Buddy"
+# add pet_age, then print both
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>pet_name = "Buddy"
+pet_age = 7
+print(pet_name)
+print(pet_age)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="3
+2
+1">
+                <div class="task-head">
+                    <span class="task-badge">🍪</span>
+                    <h3>Task 2: Cookie Countdown</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Start with <code>cookies = 3</code> and print it. Then eat one cookie at a time (<code>cookies = cookies - 1</code>), printing after each bite, until you reach <code>1</code>. Output:</p>
+                <div class="code-block out">3
+2
+1</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">cookies = 3
+print(cookies)
+# eat a cookie and print, twice more
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>cookies = 3
+print(cookies)
+cookies = cookies - 1
+print(cookies)
+cookies = cookies - 1
+print(cookies)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="&lt;class 'str'&gt;
+&lt;class 'int'&gt;
+&lt;class 'float'&gt;
+&lt;class 'bool'&gt;">
+                <div class="task-head">
+                    <span class="task-badge">🔬</span>
+                    <h3>Task 3: Type Detective</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Use <code>type()</code> to print the type of: the text <code>"cat"</code>, the number <code>10</code>, the decimal <code>3.5</code>, and the value <code>True</code> — in that order.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">print(type("cat"))
+# now print the type of 10, 3.5, and True
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>print(type("cat"))
+print(type(10))
+print(type(3.5))
+print(type(True))</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🦸</span>
+                    <h3>Task 4: Free Play — Build a Character</h3>
+                    <span class="task-difficulty diff-easy">Creative</span>
+                </div>
+                <p class="task-goal">Invent a game character! Make variables for <code>hero_name</code> (string), <code>level</code> (int), <code>health</code> (float), and <code>has_sword</code> (bool). Print them all. Then make your hero level up by changing <code>level</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">hero_name = "Zara"
+level = 1
+# add health and has_sword, then print everything
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="getting-started.html">← Previous: Your First Program</a>
+            <a class="nav-next" href="strings.html">Next: Working with Text →</a>
+        </nav>
+
+        <footer>
+            <p>Variables are the memory of your programs. 🧠</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

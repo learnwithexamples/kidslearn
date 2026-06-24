@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1: Your First Program - Python - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐍 Lesson 1: Your First Program</h1>
+            <p class="subtitle">Say hello to Python with <code>print()</code></p>
+            <a href="python.html" class="back-link">← Back to Python Lessons</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>💡 What is code?</h2>
+                <div class="info-box">
+                    <p><strong>Code</strong> is a set of instructions you give to a computer, written in a language the computer understands. Python is one of those languages — and it's famous for being easy to read.</p>
+                    <p>A computer does <em>exactly</em> what you tell it, in order, one line at a time. Your job as a programmer is to give it clear, correct instructions.</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🗣️ The <code>print()</code> command</h2>
+                <p>The most important first command is <code>print()</code>. It tells Python to <strong>show something on the screen</strong>. You put the message inside the parentheses, wrapped in quotation marks.</p>
+
+                <div class="code-block">print("Hello, World!")</div>
+
+                <p>When you run that line, Python shows:</p>
+                <div class="code-block">Hello, World!</div>
+
+                <div class="tip-box">
+                    <h4>📌 Why quotes?</h4>
+                    <p>The quotation marks <code>" "</code> tell Python "this is plain text — print it exactly." Text inside quotes is called a <strong>string</strong>. You can use double quotes <code>"like this"</code> or single quotes <code>'like this'</code> — just match them!</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>📚 Printing more than once</h2>
+                <p>Each <code>print()</code> shows its message on its own line. Run several in a row to make a list or a poem:</p>
+                <div class="code-block">print("Roses are red")
+print("Violets are blue")
+print("Python is fun")
+print("And so are you!")</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>💬 Comments — notes for humans</h2>
+                <p>A line that starts with <code>#</code> is a <strong>comment</strong>. Python ignores it completely. Comments are notes you leave for yourself or other people to explain what the code does.</p>
+                <div class="code-block"># This is a comment — Python skips it
+print("But this line runs!")  # you can comment at the end too</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>⚠️ Watch out for tiny mistakes</h2>
+                <div class="warn-box">
+                    <h4>Common beginner bugs</h4>
+                    <ul>
+                        <li>Forgetting a quotation mark: <code>print("Hi)</code> ❌</li>
+                        <li>Forgetting the parentheses: <code>print "Hi"</code> ❌</li>
+                        <li>Spelling it wrong: <code>Print(...)</code> — Python is case-sensitive, use lowercase <code>print</code> ❌</li>
+                    </ul>
+                    <p>Don't worry — every programmer makes these. The Practice tab lets you experiment safely!</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="info-box">
+                    <ul>
+                        <li><code>print()</code> shows text on the screen.</li>
+                        <li>Text inside quotes is called a <strong>string</strong>.</li>
+                        <li><code>#</code> starts a <strong>comment</strong> that Python ignores.</li>
+                        <li>Python runs your lines <strong>top to bottom, one at a time</strong>.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Write your code in the dark box, press <strong>▶ Run</strong> to see the result, and press <strong>✓ Check</strong> when you think you've nailed it. Stuck? Peek at the <strong>💡 Solution</strong>.</p>
+            </div>
+
+            <div class="task" data-expected="Hello, World!">
+                <div class="task-head">
+                    <span class="task-badge">⭐</span>
+                    <h3>Task 1: Hello, World!</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Every programmer's first program! Make Python print exactly: <code>Hello, World!</code></p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"># Type your code below this line
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>print("Hello, World!")</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="My name is Alex
+I am 10 years old
+I love coding!">
+                <div class="task-head">
+                    <span class="task-badge">🪪</span>
+                    <h3>Task 2: All About Me</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Print these <strong>three lines</strong>, each with its own <code>print()</code>:</p>
+                <div class="code-block out">My name is Alex
+I am 10 years old
+I love coding!</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">print("My name is Alex")
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>print("My name is Alex")
+print("I am 10 years old")
+print("I love coding!")</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="  *
+ ***
+*****">
+                <div class="task-head">
+                    <span class="task-badge">🎄</span>
+                    <h3>Task 3: ASCII Art Tree</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Use spaces and the <code>*</code> symbol to print a little tree. The output must be exactly:</p>
+                <div class="code-block out">  *
+ ***
+*****</div>
+                <p class="task-goal">💡 Hint: the first line has <strong>two spaces</strong> then a star. The second has one space then three stars.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"># Print the tree, one print() per row
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>print("  *")
+print(" ***")
+print("*****")</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🎨</span>
+                    <h3>Task 4: Free Play — Your Signature</h3>
+                    <span class="task-difficulty diff-easy">Creative</span>
+                </div>
+                <p class="task-goal">There's no wrong answer here! Print your own name, your favorite animal, and a joke. Add a comment with <code>#</code> explaining one line. Press <strong>▶ Run</strong> to see it.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"># Make this program your own!
+print("Hi, I'm ...")
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev disabled" href="#">← Previous</a>
+            <a class="nav-next" href="variables.html">Next: Variables &amp; Data Types →</a>
+        </nav>
+
+        <footer>
+            <p>You just wrote real code. Welcome to programming! 🎉</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

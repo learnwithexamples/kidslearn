@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 8: Lists - Python - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐍 Lesson 8: Lists</h1>
+            <p class="subtitle">Keep many things together, in order</p>
+            <a href="python.html" class="back-link">← Back to Python Lessons</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>📋 What is a list?</h2>
+                <div class="info-box">
+                    <p>A <strong>list</strong> holds many values in a single variable, kept in order. You write it with square brackets <code>[ ]</code>, separating items with commas.</p>
+                </div>
+                <div class="code-block">fruits = ["apple", "banana", "cherry"]
+numbers = [10, 20, 30, 40]
+mixed = ["Maya", 11, True]</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>📍 Reading items by index</h2>
+                <p>Just like strings, lists are numbered from <strong>0</strong>:</p>
+                <div class="code-block">fruits = ["apple", "banana", "cherry"]
+print(fruits[0])    # apple
+print(fruits[2])    # cherry
+print(fruits[-1])   # cherry (last item)
+print(len(fruits))  # 3</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✏️ Changing and adding items</h2>
+                <div class="code-block">fruits = ["apple", "banana"]
+fruits[0] = "mango"        # change an item
+fruits.append("cherry")    # add to the end
+fruits.insert(1, "kiwi")   # insert at position 1
+print(fruits)
+# ['mango', 'kiwi', 'banana', 'cherry']</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🗑️ Removing items</h2>
+                <div class="code-block">fruits = ["apple", "banana", "cherry"]
+fruits.remove("banana")   # remove by value
+last = fruits.pop()       # remove &amp; return the last item
+print(fruits)             # ['apple']
+print(last)               # cherry</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔁 Looping through a list</h2>
+                <p>This is where lists shine — a <code>for</code> loop visits every item:</p>
+                <div class="code-block">scores = [90, 85, 100]
+for s in scores:
+    print(f"Score: {s}")</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🛠️ Handy list tools</h2>
+                <div class="code-block">nums = [3, 1, 4, 1, 5]
+print(len(nums))     # 5   how many items
+print(sum(nums))     # 14  add them all
+print(max(nums))     # 5   biggest
+print(min(nums))     # 1   smallest
+nums.sort()          # put in order
+print(nums)          # [1, 1, 3, 4, 5]
+print("apple" in fruits)  # True/False — is it there?</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="info-box">
+                    <ul>
+                        <li>Lists hold ordered collections in <code>[ ]</code>.</li>
+                        <li>Read items by index (starting at 0); <code>[-1]</code> is the last.</li>
+                        <li>Add with <code>.append()</code> / <code>.insert()</code>, remove with <code>.remove()</code> / <code>.pop()</code>.</li>
+                        <li>Loop with <code>for</code>; use <code>len</code>, <code>sum</code>, <code>max</code>, <code>min</code>, <code>sort</code>, and <code>in</code>.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Collect, change, and explore lists of stuff. 📦</p>
+            </div>
+
+            <div class="task" data-expected="red
+green
+blue">
+                <div class="task-head">
+                    <span class="task-badge">🌈</span>
+                    <h3>Task 1: Print Each Color</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">A list <code>colors</code> holds <code>"red"</code>, <code>"green"</code>, <code>"blue"</code>. Use a <code>for</code> loop to print each color on its own line.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">colors = ["red", "green", "blue"]
+# loop and print each color
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>colors = ["red", "green", "blue"]
+for c in colors:
+    print(c)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="['milk', 'eggs', 'bread']">
+                <div class="task-head">
+                    <span class="task-badge">🛒</span>
+                    <h3>Task 2: Shopping List</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Start with <code>cart = ["milk", "eggs"]</code>. Add <code>"bread"</code> to the end, then print the whole list. Expected: <code>['milk', 'eggs', 'bread']</code></p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">cart = ["milk", "eggs"]
+# append bread, then print cart
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>cart = ["milk", "eggs"]
+cart.append("bread")
+print(cart)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Highest score: 100">
+                <div class="task-head">
+                    <span class="task-badge">🏆</span>
+                    <h3>Task 3: Top Score</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">A list <code>scores = [78, 100, 92, 45]</code>. Print the highest score in the form: <code>Highest score: 100</code>. Use <code>max()</code> and an f-string.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">scores = [78, 100, 92, 45]
+# print the highest score
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>scores = [78, 100, 92, 45]
+print(f"Highest score: {max(scores)}")</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Average: 20.0">
+                <div class="task-head">
+                    <span class="task-badge">📊</span>
+                    <h3>Task 4: Find the Average</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Given <code>nums = [10, 20, 30]</code>, print the average like <code>Average: 20.0</code>. Hint: average = <code>sum(nums) / len(nums)</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">nums = [10, 20, 30]
+# print the average
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>nums = [10, 20, 30]
+average = sum(nums) / len(nums)
+print(f"Average: {average}")</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🎵</span>
+                    <h3>Task 5: Free Play — Your Playlist</h3>
+                    <span class="task-difficulty diff-easy">Creative</span>
+                </div>
+                <p class="task-goal">Make a list of your 3 favorite songs. Add one more, remove one, sort it, and print it after each change to watch it transform.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">playlist = ["Song A", "Song B", "Song C"]
+playlist.append("Song D")
+print(playlist)
+# try .remove(), .sort(), and print again
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="loops.html">← Previous: Loops</a>
+            <a class="nav-next" href="dictionaries.html">Next: Dictionaries →</a>
+        </nav>
+
+        <footer>
+            <p>Lists keep your data organized and ready. 📚</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

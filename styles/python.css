@@ -1,0 +1,433 @@
+/* ====================================================
+   Python Course Styles — KidsLearn
+   Accent palette: Python blue (#306998) + yellow (#FFD43B)
+   ==================================================== */
+
+:root {
+    --py-blue: #306998;
+    --py-blue-dark: #1f4d73;
+    --py-yellow: #ffd43b;
+    --py-yellow-dark: #f2b705;
+}
+
+/* ---- Landing: progress / course path ---- */
+.course-intro {
+    background: linear-gradient(135deg, rgba(48, 105, 152, 0.12) 0%, rgba(255, 212, 59, 0.18) 100%);
+    border-left: 6px solid var(--py-blue);
+    padding: 24px 28px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+.course-intro h2 {
+    color: var(--py-blue);
+    margin-bottom: 10px;
+}
+
+.course-intro p {
+    color: #374151;
+    line-height: 1.7;
+    margin-bottom: 8px;
+}
+
+/* Numbered lesson cards on the landing page */
+.lesson-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 22px;
+    margin-bottom: 30px;
+}
+
+.lesson-card {
+    position: relative;
+    background: linear-gradient(135deg, #ffffff 0%, #f5f9ff 100%);
+    border: 3px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px 24px 24px 70px;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    display: block;
+    color: inherit;
+}
+
+.lesson-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 26px rgba(48, 105, 152, 0.25);
+    border-color: var(--py-blue);
+}
+
+.lesson-number {
+    position: absolute;
+    left: 18px;
+    top: 22px;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--py-blue) 0%, var(--py-blue-dark) 100%);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.15em;
+    box-shadow: 0 3px 8px rgba(48, 105, 152, 0.4);
+}
+
+.lesson-card h3 {
+    color: #1f2937;
+    font-size: 1.25em;
+    margin-bottom: 6px;
+}
+
+.lesson-card p {
+    color: #6b7280;
+    font-size: 0.98em;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.lesson-card .lesson-tag {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 0.8em;
+    font-weight: 700;
+    color: var(--py-blue-dark);
+    background: var(--py-yellow);
+    padding: 3px 12px;
+    border-radius: 20px;
+}
+
+/* ---- Lesson page: tabs ---- */
+.lesson-tabs {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px 0 30px;
+}
+
+.lesson-tab {
+    padding: 12px 30px;
+    border: 2px solid #d7def0;
+    border-radius: 30px;
+    background: white;
+    cursor: pointer;
+    font-size: 1.05em;
+    font-weight: 700;
+    color: var(--py-blue);
+    transition: all 0.25s;
+    font-family: inherit;
+}
+
+.lesson-tab:hover {
+    background: #f0f5ff;
+    border-color: var(--py-blue);
+}
+
+.lesson-tab.active {
+    background: linear-gradient(135deg, var(--py-blue) 0%, var(--py-blue-dark) 100%);
+    color: white;
+    border-color: var(--py-blue);
+}
+
+.tab-panel {
+    max-width: 920px;
+    margin: 0 auto;
+}
+
+/* ---- Description content ---- */
+.lesson-section h2 {
+    border-bottom-color: var(--py-blue);
+}
+
+.info-box {
+    background: linear-gradient(135deg, rgba(48, 105, 152, 0.1) 0%, rgba(255, 212, 59, 0.12) 100%);
+    border-left-color: var(--py-blue);
+}
+
+.example-box h3 {
+    color: var(--py-blue);
+}
+
+.tip-box {
+    background: linear-gradient(135deg, rgba(255, 212, 59, 0.18) 0%, rgba(242, 183, 5, 0.12) 100%);
+    border-left-color: var(--py-yellow-dark);
+}
+
+.tip-box h4 {
+    color: #b45309;
+}
+
+.warn-box {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(248, 113, 113, 0.08) 100%);
+    border-left: 5px solid #ef4444;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.warn-box h4 {
+    color: #dc2626;
+    margin-bottom: 10px;
+}
+
+.warn-box p, .warn-box li {
+    color: #374151;
+}
+
+/* Code block shown inside descriptions */
+.code-block {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 18px 20px;
+    border-radius: 10px;
+    font-family: 'Menlo', 'Consolas', 'Courier New', monospace;
+    font-size: 0.98em;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 16px 0;
+    white-space: pre;
+    tab-size: 4;
+}
+
+.code-block .cmt { color: #94a3b8; font-style: italic; }
+.code-block .kw  { color: #f472b6; font-weight: bold; }
+.code-block .str { color: #fcd34d; }
+.code-block .num { color: #7dd3fc; }
+.code-block .fn  { color: #86efac; }
+.code-block .out { color: #94a3b8; }
+
+/* Inline code */
+.lesson-section code, .task-goal code, p code, li code {
+    background: #eef2ff;
+    color: #4338ca;
+    padding: 2px 7px;
+    border-radius: 5px;
+    font-family: 'Menlo', 'Consolas', monospace;
+    font-size: 0.92em;
+}
+
+/* ---- Practice tasks ---- */
+.practice-intro {
+    text-align: center;
+    background: linear-gradient(135deg, rgba(48, 105, 152, 0.1) 0%, rgba(255, 212, 59, 0.15) 100%);
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 26px;
+}
+
+.practice-intro h2 {
+    color: var(--py-blue);
+    margin-bottom: 8px;
+}
+
+.practice-intro p {
+    color: #4b5563;
+    margin: 0;
+}
+
+.task {
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 28px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    transition: border-color 0.3s;
+}
+
+.task.task-done {
+    border-color: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.18);
+}
+
+.task-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.task-badge {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, var(--py-yellow) 0%, var(--py-yellow-dark) 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3em;
+}
+
+.task-head h3 {
+    color: #1f2937;
+    font-size: 1.25em;
+    margin: 0;
+}
+
+.task-difficulty {
+    margin-left: auto;
+    font-size: 0.8em;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.diff-easy   { background: #dcfce7; color: #166534; }
+.diff-medium { background: #fef9c3; color: #854d0e; }
+.diff-hard   { background: #fee2e2; color: #991b1b; }
+
+.task-goal {
+    color: #4b5563;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    font-size: 1.05em;
+}
+
+.task-goal ul {
+    margin: 8px 0 0 22px;
+}
+
+.task-goal li {
+    margin: 4px 0;
+}
+
+/* ---- Playground / editor ---- */
+.playground {
+    border: 2px solid #d7def0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #1e293b;
+}
+
+.code-input {
+    width: 100%;
+    min-height: 150px;
+    border: none;
+    outline: none;
+    resize: vertical;
+    background: #1e293b;
+    color: #f1f5f9;
+    font-family: 'Menlo', 'Consolas', 'Courier New', monospace;
+    font-size: 0.98em;
+    line-height: 1.6;
+    padding: 16px 18px;
+    tab-size: 4;
+    display: block;
+}
+
+.pg-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 10px 12px;
+    background: #0f172a;
+    border-top: 1px solid #334155;
+}
+
+.pg-buttons button {
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 0.92em;
+    padding: 9px 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.run-btn {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+}
+
+.run-btn:hover:not(:disabled) { filter: brightness(1.08); transform: translateY(-1px); }
+.run-btn:disabled { opacity: 0.7; cursor: progress; }
+
+.check-btn {
+    background: linear-gradient(135deg, var(--py-yellow) 0%, var(--py-yellow-dark) 100%);
+    color: #1f2937;
+}
+
+.check-btn:hover { filter: brightness(1.05); transform: translateY(-1px); }
+
+.reset-btn, .solution-btn {
+    background: #334155;
+    color: #e2e8f0;
+}
+
+.reset-btn:hover, .solution-btn:hover { background: #475569; }
+
+.pg-output {
+    margin: 0;
+    padding: 16px 18px;
+    background: #111827;
+    color: #d1fae5;
+    font-family: 'Menlo', 'Consolas', 'Courier New', monospace;
+    font-size: 0.95em;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    word-break: break-word;
+    min-height: 30px;
+    max-height: 320px;
+    overflow-y: auto;
+    border-top: 1px solid #334155;
+}
+
+.pg-output.error { color: #fca5a5; }
+.pg-output.success { color: #86efac; }
+.pg-output:empty::before {
+    content: 'Output will appear here when you press ▶ Run';
+    color: #64748b;
+    font-style: italic;
+}
+
+.solution {
+    margin-top: 14px;
+    border: 2px dashed #cbd5e1;
+    border-radius: 10px;
+    padding: 6px 16px;
+    background: #f8fafc;
+}
+
+.solution pre {
+    font-family: 'Menlo', 'Consolas', monospace;
+    font-size: 0.95em;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    color: #1e293b;
+}
+
+/* Lesson navigation (prev / next) */
+.lesson-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    max-width: 920px;
+    margin: 36px auto 0;
+    flex-wrap: wrap;
+}
+
+.lesson-nav a {
+    flex: 1;
+    min-width: 160px;
+    text-decoration: none;
+    background: linear-gradient(135deg, var(--py-blue) 0%, var(--py-blue-dark) 100%);
+    color: white;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-weight: 700;
+    transition: all 0.25s;
+    text-align: center;
+}
+
+.lesson-nav a:hover { filter: brightness(1.1); transform: translateY(-2px); }
+.lesson-nav a.nav-prev { background: linear-gradient(135deg, #64748b 0%, #475569 100%); }
+.lesson-nav a.disabled { opacity: 0.4; pointer-events: none; }
+
+@media (max-width: 600px) {
+    .lesson-tab { padding: 10px 20px; font-size: 0.95em; }
+    .lesson-card { padding-left: 64px; }
+}

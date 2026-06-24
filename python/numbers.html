@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 4: Numbers &amp; Math - Python - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐍 Lesson 4: Numbers &amp; Math</h1>
+            <p class="subtitle">Turn Python into a super-calculator</p>
+            <a href="python.html" class="back-link">← Back to Python Lessons</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>➕ The math operators</h2>
+                <p>Python knows all the basic math symbols:</p>
+                <div class="code-block">print(5 + 3)    # 8   addition
+print(5 - 3)    # 2   subtraction
+print(5 * 3)    # 15  multiplication (use * not ×)
+print(6 / 3)    # 2.0 division (always gives a float)</div>
+                <div class="tip-box">
+                    <h4>📌 Division always makes a float</h4>
+                    <p><code>6 / 3</code> gives <code>2.0</code>, not <code>2</code>. The decimal point tells you it's a float.</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✨ Three special operators</h2>
+                <div class="example-box">
+                    <h3>Power <code>**</code></h3>
+                    <div class="code-block">print(2 ** 3)   # 8   (2 to the power of 3)
+print(5 ** 2)   # 25  (5 squared)</div>
+                </div>
+                <div class="example-box">
+                    <h3>Floor division <code>//</code> — divide and drop the decimal</h3>
+                    <div class="code-block">print(7 // 2)   # 3   (not 3.5)</div>
+                </div>
+                <div class="example-box">
+                    <h3>Modulo <code>%</code> — the remainder</h3>
+                    <div class="code-block">print(7 % 2)    # 1   (7 ÷ 2 = 3 remainder 1)
+print(10 % 5)   # 0   (divides evenly)</div>
+                    <p>The <code>%</code> operator is super useful for checking if a number is even (<code>n % 2 == 0</code>) or odd.</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔢 Order of operations</h2>
+                <p>Python follows the same rules as math class (PEMDAS). Use parentheses to control the order:</p>
+                <div class="code-block">print(2 + 3 * 4)     # 14  (multiply first)
+print((2 + 3) * 4)   # 20  (parentheses first)</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔄 Converting between text and numbers</h2>
+                <div class="warn-box">
+                    <h4>You can't add text and numbers directly</h4>
+                    <p><code>"5" + 3</code> causes an error! <code>"5"</code> is a string, <code>3</code> is a number.</p>
+                </div>
+                <p>Convert with <code>int()</code>, <code>float()</code>, and <code>str()</code>:</p>
+                <div class="code-block">print(int("5") + 3)      # 8    text → number
+print(str(5) + " cats")  # 5 cats   number → text
+print(float("2.5"))      # 2.5</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🧮 Math shortcuts</h2>
+                <p>Update a variable quickly with <code>+=</code>, <code>-=</code>, <code>*=</code>:</p>
+                <div class="code-block">score = 10
+score += 5     # same as score = score + 5
+print(score)   # 15
+score *= 2
+print(score)   # 30</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="info-box">
+                    <ul>
+                        <li>Operators: <code>+ - * /</code>, plus <code>**</code> (power), <code>//</code> (floor), <code>%</code> (remainder).</li>
+                        <li>Parentheses control the order of operations.</li>
+                        <li>Convert with <code>int()</code>, <code>float()</code>, <code>str()</code>.</li>
+                        <li>Shortcuts: <code>+=</code>, <code>-=</code>, <code>*=</code>.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Crunch some numbers. Predict the answer first, then run to check!</p>
+            </div>
+
+            <div class="task" data-expected="49
+2">
+                <div class="task-head">
+                    <span class="task-badge">⚡</span>
+                    <h3>Task 1: Power &amp; Remainder</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Print <code>7</code> to the power of <code>2</code>, then print the remainder of <code>17 ÷ 5</code>. Output:</p>
+                <div class="code-block out">49
+2</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"># use ** and %
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>print(7 ** 2)
+print(17 % 5)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="100">
+                <div class="task-head">
+                    <span class="task-badge">🍬</span>
+                    <h3>Task 2: Candy Calculator</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">You have <code>4</code> bags with <code>25</code> candies each. Use variables <code>bags</code> and <code>per_bag</code>, multiply them, and print the total. It should be <code>100</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">bags = 4
+per_bag = 25
+# multiply and print the total
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>bags = 4
+per_bag = 25
+print(bags * per_bag)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="8 cats">
+                <div class="task-head">
+                    <span class="task-badge">🐱</span>
+                    <h3>Task 3: Text Meets Numbers</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">A variable <code>count = "5"</code> is text! Convert it to a number, add <code>3</code>, then print the result followed by the word cats, like: <code>8 cats</code>. (Hint: you'll need <code>int()</code> and <code>str()</code>, or an f-string.)</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">count = "5"
+# turn count into a number, add 3, print "8 cats"
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>count = "5"
+total = int(count) + 3
+print(f"{total} cats")</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🌡️</span>
+                    <h3>Task 4: Free Play — Temperature Converter</h3>
+                    <span class="task-difficulty diff-medium">Creative</span>
+                </div>
+                <p class="task-goal">Convert a Celsius temperature to Fahrenheit with the formula <code>F = C * 9/5 + 32</code>. Change the <code>celsius</code> value and watch the result. Try 0, 100, and your room temperature!</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">celsius = 25
+fahrenheit = celsius * 9/5 + 32
+print(f"{celsius}°C = {fahrenheit}°F")
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="strings.html">← Previous: Working with Text</a>
+            <a class="nav-next" href="input.html">Next: Getting Input →</a>
+        </nav>
+
+        <footer>
+            <p>Python never makes an arithmetic mistake. 🧮</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 7: Loops - Python - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐍 Lesson 7: Loops</h1>
+            <p class="subtitle">Repeat actions without copy-pasting</p>
+            <a href="python.html" class="back-link">← Back to Python Lessons</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>🔁 Why loops?</h2>
+                <div class="info-box">
+                    <p>Imagine printing "Hello" 100 times. You wouldn't write 100 <code>print()</code> lines — you'd use a <strong>loop</strong>. A loop repeats a block of code so you don't have to.</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔂 The <code>for</code> loop with <code>range()</code></h2>
+                <p><code>range(n)</code> gives the numbers <code>0</code> up to (but not including) <code>n</code>. A <code>for</code> loop walks through them one at a time:</p>
+                <div class="code-block">for i in range(5):
+    print(i)
+# prints 0 1 2 3 4 (each on its own line)</div>
+                <p>You can choose a start and stop:</p>
+                <div class="code-block">for i in range(1, 6):
+    print(i)
+# prints 1 2 3 4 5</div>
+                <div class="tip-box">
+                    <h4>📌 The loop variable</h4>
+                    <p><code>i</code> is just a variable name that holds the current number each time around. You can call it anything — <code>count</code>, <code>n</code>, <code>step</code>.</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>📜 Looping over text and lists</h2>
+                <p><code>for</code> can step through each character in a string, or each item in a list:</p>
+                <div class="code-block">for letter in "cat":
+    print(letter)
+# c  a  t
+
+for fruit in ["apple", "banana", "cherry"]:
+    print(f"I like {fruit}")</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>♾️ The <code>while</code> loop</h2>
+                <p>A <code>while</code> loop keeps repeating <strong>as long as a condition stays true</strong>:</p>
+                <div class="code-block">count = 3
+while count &gt; 0:
+    print(count)
+    count = count - 1
+print("Blast off! 🚀")</div>
+                <div class="warn-box">
+                    <h4>Avoid infinite loops!</h4>
+                    <p>If the condition never becomes false, the loop runs forever and your program freezes. Always make sure something <em>changes</em> inside the loop (like <code>count = count - 1</code>) so it can eventually stop.</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🛑 <code>break</code> and <code>continue</code></h2>
+                <ul style="line-height:1.9;">
+                    <li><code>break</code> — jump out of the loop immediately.</li>
+                    <li><code>continue</code> — skip to the next time around.</li>
+                </ul>
+                <div class="code-block">for i in range(1, 10):
+    if i == 5:
+        break          # stop the loop at 5
+    print(i)
+# prints 1 2 3 4</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="info-box">
+                    <ul>
+                        <li><code>for</code> loops repeat a set number of times, often with <code>range()</code>.</li>
+                        <li><code>for</code> can step through strings and lists.</li>
+                        <li><code>while</code> loops repeat as long as a condition is true.</li>
+                        <li><code>break</code> stops a loop; <code>continue</code> skips to the next round.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Let the computer do the boring repetition for you. 🔁</p>
+            </div>
+
+            <div class="task" data-expected="1
+2
+3
+4
+5">
+                <div class="task-head">
+                    <span class="task-badge">🔢</span>
+                    <h3>Task 1: Count to Five</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Use a <code>for</code> loop with <code>range()</code> to print the numbers <code>1</code> through <code>5</code>, each on its own line.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"># loop and print 1 to 5
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>for i in range(1, 6):
+    print(i)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Go Team! Go Team! Go Team! ">
+                <div class="task-head">
+                    <span class="task-badge">📣</span>
+                    <h3>Task 2: Cheer Squad</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Print <code>Go Team! </code> (with a trailing space) <strong>3 times on one line</strong>. Hint: <code>print("Go Team! ", end="")</code> keeps printing on the same line.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">for i in range(3):
+    print("Go Team! ", end="")
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>for i in range(3):
+    print("Go Team! ", end="")</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="2
+4
+6
+8
+10">
+                <div class="task-head">
+                    <span class="task-badge">⚡</span>
+                    <h3>Task 3: Even Numbers</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Print the even numbers from <code>2</code> to <code>10</code>. Two ways to try: use <code>range(2, 11, 2)</code>, or loop 1–10 and check <code>% 2 == 0</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"># print 2, 4, 6, 8, 10
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>for n in range(2, 11, 2):
+    print(n)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="55">
+                <div class="task-head">
+                    <span class="task-badge">➕</span>
+                    <h3>Task 4: Add Them All Up</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Use a loop to add up all the numbers from <code>1</code> to <code>10</code> and print the total (it's <code>55</code>). Hint: start with <code>total = 0</code> and add each number inside the loop.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">total = 0
+# loop from 1 to 10, adding to total
+# then print total
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>total = 0
+for n in range(1, 11):
+    total += n
+print(total)</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🚀</span>
+                    <h3>Task 5: Free Play — Rocket Launch</h3>
+                    <span class="task-difficulty diff-medium">Creative</span>
+                </div>
+                <p class="task-goal">Make a countdown using a <code>while</code> loop! Start at 10, count down to 1, then blast off. Add your own emojis and messages.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">count = 10
+while count &gt; 0:
+    print(count)
+    count -= 1
+print("🚀 Blast off!")
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="conditions.html">← Previous: Making Decisions</a>
+            <a class="nav-next" href="lists.html">Next: Lists →</a>
+        </nav>
+
+        <footer>
+            <p>Loops turn 1000 lines of code into 3. ♻️</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

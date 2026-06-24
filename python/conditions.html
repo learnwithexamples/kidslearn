@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 6: Making Decisions - Python - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐍 Lesson 6: Making Decisions</h1>
+            <p class="subtitle">Teach your code to choose with <code>if</code> / <code>elif</code> / <code>else</code></p>
+            <a href="python.html" class="back-link">← Back to Python Lessons</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>🤔 The <code>if</code> statement</h2>
+                <div class="info-box">
+                    <p>An <code>if</code> statement runs some code <strong>only when a condition is true</strong>. If the condition is false, that code is skipped.</p>
+                </div>
+                <div class="code-block">age = 10
+if age &gt;= 8:
+    print("You can ride the roller coaster! 🎢")</div>
+                <div class="tip-box">
+                    <h4>📌 Two things to remember</h4>
+                    <p>1. End the <code>if</code> line with a <strong>colon</strong> <code>:</code><br>
+                    2. <strong>Indent</strong> the code inside with 4 spaces. Indentation is how Python knows what belongs to the <code>if</code>!</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>⚖️ Comparison operators</h2>
+                <p>Conditions usually compare two values. They give back <code>True</code> or <code>False</code>:</p>
+                <div class="code-block">a == b   # equal to        (two equals signs!)
+a != b   # not equal to
+a &gt;  b   # greater than
+a &lt;  b   # less than
+a &gt;= b   # greater than or equal
+a &lt;= b   # less than or equal</div>
+                <div class="warn-box">
+                    <h4>One = vs two ==</h4>
+                    <p><code>=</code> <strong>stores</strong> a value (<code>x = 5</code>). <code>==</code> <strong>compares</strong> two values (<code>x == 5</code>). Mixing them up is the #1 beginner bug!</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔀 <code>else</code> — the backup plan</h2>
+                <p>Add <code>else</code> to run different code when the condition is false:</p>
+                <div class="code-block">temperature = 15
+if temperature &gt; 20:
+    print("Wear a t-shirt 👕")
+else:
+    print("Bring a jacket 🧥")</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🪜 <code>elif</code> — checking many cases</h2>
+                <p>Use <code>elif</code> (short for "else if") to check several conditions in order. Python runs the <strong>first one that's true</strong> and skips the rest.</p>
+                <div class="code-block">score = 85
+if score &gt;= 90:
+    print("Grade: A 🌟")
+elif score &gt;= 80:
+    print("Grade: B 😊")
+elif score &gt;= 70:
+    print("Grade: C 🙂")
+else:
+    print("Keep practicing! 💪")</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔗 Combining conditions: <code>and</code>, <code>or</code>, <code>not</code></h2>
+                <div class="code-block">age = 12
+has_ticket = True
+
+if age &gt;= 10 and has_ticket:
+    print("Enjoy the movie! 🍿")
+
+if age &lt; 5 or age &gt; 65:
+    print("You get a discount!")</div>
+                <ul style="line-height:1.9;">
+                    <li><code>and</code> — both must be true</li>
+                    <li><code>or</code> — at least one must be true</li>
+                    <li><code>not</code> — flips true to false</li>
+                </ul>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="info-box">
+                    <ul>
+                        <li><code>if</code> runs code when a condition is true.</li>
+                        <li><code>else</code> handles the false case; <code>elif</code> checks more cases.</li>
+                        <li>Use a <strong>colon</strong> and <strong>indentation</strong>.</li>
+                        <li>Compare with <code>== != &gt; &lt; &gt;= &lt;=</code>; combine with <code>and</code>, <code>or</code>, <code>not</code>.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Give your programs a brain. Mind your colons and indentation!</p>
+            </div>
+
+            <div class="task" data-expected="Big number!">
+                <div class="task-head">
+                    <span class="task-badge">🔢</span>
+                    <h3>Task 1: Big or Small?</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">The variable <code>num</code> is <code>50</code>. Write an <code>if</code> that prints <code>Big number!</code> when <code>num</code> is greater than <code>10</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">num = 50
+# if num is greater than 10, print "Big number!"
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>num = 50
+if num &gt; 10:
+    print("Big number!")</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Even">
+                <div class="task-head">
+                    <span class="task-badge">⚖️</span>
+                    <h3>Task 2: Even or Odd?</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">The variable <code>n</code> is <code>8</code>. Print <code>Even</code> if it divides evenly by 2, otherwise print <code>Odd</code>. (Hint: use <code>n % 2 == 0</code>.)</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">n = 8
+# print "Even" or "Odd"
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>n = 8
+if n % 2 == 0:
+    print("Even")
+else:
+    print("Odd")</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="B">
+                <div class="task-head">
+                    <span class="task-badge">🎓</span>
+                    <h3>Task 3: Grade Machine</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">A test <code>score</code> is <code>85</code>. Print the letter grade using <code>if</code>/<code>elif</code>/<code>else</code>: 90+ → <code>A</code>, 80–89 → <code>B</code>, 70–79 → <code>C</code>, otherwise → <code>F</code>. For 85 it should print <code>B</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">score = 85
+# print the letter grade
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>score = 85
+if score &gt;= 90:
+    print("A")
+elif score &gt;= 80:
+    print("B")
+elif score &gt;= 70:
+    print("C")
+else:
+    print("F")</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🎢</span>
+                    <h3>Task 4: Free Play — Ride Checker</h3>
+                    <span class="task-difficulty diff-medium">Creative</span>
+                </div>
+                <p class="task-goal">Ask the user their height in cm. If it's <code>120</code> or more, let them on the ride; otherwise, tell them to grow a bit more. Try different heights!</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">height = int(input("Your height in cm? "))
+if height &gt;= 120:
+    print("Enjoy the ride! 🎢")
+else:
+    print("Sorry, you need to be a bit taller. 🌱")
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="input.html">← Previous: Getting Input</a>
+            <a class="nav-next" href="loops.html">Next: Loops →</a>
+        </nav>
+
+        <footer>
+            <p>Your code can think for itself now! 🧠</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

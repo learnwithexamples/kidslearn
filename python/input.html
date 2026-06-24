@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 5: Getting Input - Python - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐍 Lesson 5: Getting Input</h1>
+            <p class="subtitle">Make your programs talk back with <code>input()</code></p>
+            <a href="python.html" class="back-link">← Back to Python Lessons</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>🎤 The <code>input()</code> command</h2>
+                <div class="info-box">
+                    <p><code>input()</code> pauses your program and waits for the user to <strong>type something</strong> and press Enter. Whatever they type is handed back as a string, which you usually save in a variable.</p>
+                </div>
+                <div class="code-block">name = input("What is your name? ")
+print(f"Nice to meet you, {name}!")</div>
+                <p>The text inside <code>input("...")</code> is the <strong>prompt</strong> — the question shown to the user.</p>
+                <div class="tip-box">
+                    <h4>🖥️ In this playground</h4>
+                    <p>When your code reaches <code>input()</code>, a small pop-up box appears. Type your answer there and press OK. Try it in the Practice tab!</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>⚠️ input() always gives you text</h2>
+                <div class="warn-box">
+                    <h4>Numbers from input are strings!</h4>
+                    <p>Even if the user types <code>7</code>, <code>input()</code> returns the <strong>string</strong> <code>"7"</code>. To do math, you must convert it with <code>int()</code> or <code>float()</code>.</p>
+                </div>
+                <div class="code-block">age = input("How old are you? ")
+age = int(age)              # convert text to a number
+print(f"Next year you'll be {age + 1}")</div>
+                <p>You can even do it in one line:</p>
+                <div class="code-block">age = int(input("How old are you? "))</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🧪 A complete mini-program</h2>
+                <div class="code-block">name = input("Your name? ")
+fav = input("Favorite food? ")
+print(f"{name} loves {fav}! Yum 😋")</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="info-box">
+                    <ul>
+                        <li><code>input("prompt")</code> waits for the user to type something.</li>
+                        <li>It always returns a <strong>string</strong>.</li>
+                        <li>Wrap it in <code>int()</code> or <code>float()</code> to get a number.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>When you press ▶ Run, a pop-up will ask you to type. These tasks are interactive — just press <strong>▶ Run</strong> and play!</p>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">👋</span>
+                    <h3>Task 1: Friendly Greeter</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Ask the user their name, then greet them by name. Press ▶ Run and type your name in the pop-up.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">name = input("What is your name? ")
+print(f"Hello, {name}! Welcome! 🎉")
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🎂</span>
+                    <h3>Task 2: Age Next Year</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Ask the user their age, convert it to a number, and tell them how old they'll be next year. Remember: convert with <code>int()</code> before adding 1!</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">age = int(input("How old are you? "))
+# print their age next year
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>age = int(input("How old are you? "))
+print(f"Next year you will be {age + 1}!")</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">➕</span>
+                    <h3>Task 3: Two-Number Adder</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Ask for two numbers and print their sum. Be careful — convert <strong>both</strong> inputs to numbers, or Python will glue the text together instead of adding!</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">a = input("First number: ")
+b = input("Second number: ")
+# convert and add them, then print the result
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>a = int(input("First number: "))
+b = int(input("Second number: "))
+print(f"The sum is {a + b}")</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">📖</span>
+                    <h3>Task 4: Free Play — Mad Libs!</h3>
+                    <span class="task-difficulty diff-medium">Creative</span>
+                </div>
+                <p class="task-goal">Build a silly story! Ask for an animal, a color, and an action, then drop them into a funny sentence. Run it and laugh. 😄</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">animal = input("An animal: ")
+color = input("A color: ")
+action = input("An action verb: ")
+print(f"The {color} {animal} loves to {action} all day!")
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="numbers.html">← Previous: Numbers &amp; Math</a>
+            <a class="nav-next" href="conditions.html">Next: Making Decisions →</a>
+        </nav>
+
+        <footer>
+            <p>Now your programs can have a conversation! 💬</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>
