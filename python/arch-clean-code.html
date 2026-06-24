@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Code - Architecture - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body class="theme-arch">
+    <div class="container">
+        <header>
+            <h1>🧼 Clean Code</h1>
+            <p class="subtitle">Code that reads like a story</p>
+            <a href="architecture.html" class="back-link">← Back to Architecture</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>📖 Why clean code?</h2>
+                <div class="info-box">
+                    <p>Code is read <strong>far more often</strong> than it's written. You — or a teammate — will come back in 6 months and need to understand it. <strong>Clean code</strong> means writing for humans, not just computers.</p>
+                </div>
+                <p>Two programs can do the exact same thing, but one is a joy to read and the other is a headache. Let's learn the difference.</p>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🏷️ Rule 1: Good names</h2>
+                <p>Names should tell you <em>what</em> something is or does. Avoid <code>x</code>, <code>data2</code>, and <code>tmp</code>.</p>
+                <div class="code-block"># 😵 Mystery code
+d = 86400
+t = s / d
+
+# 😀 Clear code
+SECONDS_PER_DAY = 86400
+days = total_seconds / SECONDS_PER_DAY</div>
+                <div class="tip-box">
+                    <h4>💡 Naming guide</h4>
+                    <ul>
+                        <li>Variables &amp; functions: <code>snake_case</code></li>
+                        <li>Constants: <code>UPPER_CASE</code></li>
+                        <li>Functions are <strong>verbs</strong> (<code>calculate_total</code>), variables are <strong>nouns</strong> (<code>total_price</code>).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔧 Rule 2: Small functions that do one thing</h2>
+                <p>A function should do <strong>one</strong> job. If you need "and" to describe it, split it up.</p>
+                <div class="code-block">def calculate_area(width, height):
+    return width * height
+
+def calculate_perimeter(width, height):
+    return 2 * (width + height)</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🚫 Rule 3: Don't Repeat Yourself (DRY)</h2>
+                <p>If you copy-paste code, turn it into a function instead. One place to fix bugs, one place to improve.</p>
+                <div class="code-block"># Instead of repeating the greeting three times...
+def greet(name):
+    return "Hello, " + name + "!"
+
+print(greet("Mia"))
+print(greet("Leo"))</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>💬 Rule 4: Comments explain WHY, not WHAT</h2>
+                <div class="warn-box">
+                    <p>A comment like <code># add 1 to x</code> is useless — the code already says that. Good comments explain <em>why</em> something is done, or warn about a tricky case.</p>
+                </div>
+                <div class="code-block"># Good: explains the reasoning
+# Tax is applied only after the discount, per store policy
+final = (price - discount) * 1.08</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="info-box">
+                    <ul>
+                        <li>Write code for <strong>humans</strong> to read.</li>
+                        <li>Use <strong>descriptive names</strong>; functions are verbs, variables are nouns.</li>
+                        <li>Keep functions <strong>small</strong> — one job each.</li>
+                        <li><strong>DRY</strong>: don't repeat yourself.</li>
+                        <li>Comments explain <strong>why</strong>, not what.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Refactor messy code into clean code. 🧼</p>
+            </div>
+
+            <div class="task" data-expected="2.5">
+                <div class="task-head">
+                    <span class="task-badge">🏷️</span>
+                    <h3>Task 1: Rename for Clarity</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">This works but is unreadable. Rewrite it with clear names so it computes hours from minutes. <code>150</code> minutes → <code>2.5</code> hours.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"># messy version: a = 150, b = 60, c = a / b
+# rewrite with clear names below
+minutes = 150
+MINUTES_PER_HOUR = 60
+hours = minutes / MINUTES_PER_HOUR
+print(hours)
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Hello, Mia!
+Hello, Leo!
+Hello, Zoe!">
+                <div class="task-head">
+                    <span class="task-badge">🚫</span>
+                    <h3>Task 2: Apply DRY</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write one <code>greet(name)</code> function and call it for Mia, Leo, and Zoe instead of repeating the print statement. Expected three greeting lines.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def greet(name):
+    # return a greeting like "Hello, Mia!"
+    pass
+
+for person in ["Mia", "Leo", "Zoe"]:
+    print(greet(person))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def greet(name):
+    return "Hello, " + name + "!"
+
+for person in ["Mia", "Leo", "Zoe"]:
+    print(greet(person))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="20
+18">
+                <div class="task-head">
+                    <span class="task-badge">🔧</span>
+                    <h3>Task 3: One Function, One Job</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Split the work into two clear functions: <code>area(w, h)</code> and <code>perimeter(w, h)</code>. For a 5×4 rectangle: area <code>20</code>, perimeter <code>18</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def area(w, h):
+    pass
+
+def perimeter(w, h):
+    pass
+
+print(area(5, 4))
+print(perimeter(5, 4))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def area(w, h):
+    return w * h
+
+def perimeter(w, h):
+    return 2 * (w + h)
+
+print(area(5, 4))
+print(perimeter(5, 4))</pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev disabled" aria-disabled="true">Start of track</a>
+            <a class="nav-next" href="arch-oop.html">Next: Objects &amp; Classes →</a>
+        </nav>
+
+        <footer>
+            <p>Clean code is a gift to your future self. 🧼</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

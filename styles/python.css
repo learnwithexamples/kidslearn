@@ -431,3 +431,201 @@
     .lesson-tab { padding: 10px 20px; font-size: 0.95em; }
     .lesson-card { padding-left: 64px; }
 }
+
+/* ====================================================
+   Hub: course track cards
+   ==================================================== */
+.track-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.track-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: #ffffff;
+    border: 3px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 26px;
+    transition: all 0.25s ease;
+    border-top-width: 7px;
+}
+
+.track-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+}
+
+.track-basics { border-top-color: var(--py-yellow-dark); }
+.track-basics:hover { border-color: var(--py-yellow-dark); }
+.track-algo   { border-top-color: #7c3aed; }
+.track-algo:hover { border-color: #7c3aed; }
+.track-arch   { border-top-color: #0d9488; }
+.track-arch:hover { border-color: #0d9488; }
+
+.track-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.track-icon { font-size: 2.6em; }
+
+.track-level {
+    font-size: 0.75em;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.track-basics .track-level { background: #fef3c7; color: #92400e; }
+.track-algo .track-level   { background: #ede9fe; color: #5b21b6; }
+.track-arch .track-level   { background: #ccfbf1; color: #115e59; }
+
+.track-card h2 {
+    color: #1f2937;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+.track-card > p {
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: 14px;
+}
+
+.track-topics {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 18px;
+}
+
+.track-topics li {
+    color: #475569;
+    font-size: 0.92em;
+    padding: 5px 0 5px 24px;
+    position: relative;
+}
+
+.track-topics li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #22c55e;
+    font-weight: 800;
+}
+
+.track-cta {
+    display: inline-block;
+    font-weight: 800;
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, var(--py-blue) 0%, var(--py-blue-dark) 100%);
+}
+
+.track-algo .track-cta { background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); }
+.track-arch .track-cta { background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%); }
+
+.path-note {
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 16px 22px;
+    margin-bottom: 24px;
+}
+
+.path-note p { margin: 0; color: #475569; }
+.path-note a { color: var(--py-blue); font-weight: 700; }
+
+/* ====================================================
+   Advanced course accent themes
+   Apply .theme-algo or .theme-arch on <body>
+   ==================================================== */
+.theme-algo .lesson-tab { color: #7c3aed; border-color: #ddd6fe; }
+.theme-algo .lesson-tab:hover { background: #f5f3ff; border-color: #7c3aed; }
+.theme-algo .lesson-tab.active {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+    border-color: #7c3aed;
+}
+.theme-algo .lesson-section h2 { border-bottom-color: #7c3aed; }
+.theme-algo h1 { color: #6d28d9; }
+.theme-algo .info-box { background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(167,139,250,0.12) 100%); border-left-color: #7c3aed; }
+.theme-algo .example-box h3 { color: #6d28d9; }
+.theme-algo .lesson-number { background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); box-shadow: 0 3px 8px rgba(124,58,237,0.4); }
+.theme-algo .lesson-card:hover { border-color: #7c3aed; box-shadow: 0 12px 26px rgba(124,58,237,0.25); }
+.theme-algo .lesson-card .lesson-tag { background: #ddd6fe; color: #5b21b6; }
+.theme-algo .lesson-nav a { background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); }
+.theme-algo .lesson-nav a.nav-prev { background: linear-gradient(135deg, #64748b 0%, #475569 100%); }
+.theme-algo .check-btn { background: linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%); color: #fff; }
+.theme-algo .task-badge { background: linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%); }
+.theme-algo .practice-intro, .theme-algo .course-intro { background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(167,139,250,0.14) 100%); }
+.theme-algo .practice-intro h2, .theme-algo .course-intro h2 { color: #6d28d9; }
+
+.theme-arch .lesson-tab { color: #0d9488; border-color: #99f6e4; }
+.theme-arch .lesson-tab:hover { background: #f0fdfa; border-color: #0d9488; }
+.theme-arch .lesson-tab.active {
+    background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+    border-color: #0d9488;
+}
+.theme-arch .lesson-section h2 { border-bottom-color: #0d9488; }
+.theme-arch h1 { color: #0f766e; }
+.theme-arch .info-box { background: linear-gradient(135deg, rgba(13,148,136,0.1) 0%, rgba(45,212,191,0.12) 100%); border-left-color: #0d9488; }
+.theme-arch .example-box h3 { color: #0f766e; }
+.theme-arch .lesson-number { background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%); box-shadow: 0 3px 8px rgba(13,148,136,0.4); }
+.theme-arch .lesson-card:hover { border-color: #0d9488; box-shadow: 0 12px 26px rgba(13,148,136,0.25); }
+.theme-arch .lesson-card .lesson-tag { background: #ccfbf1; color: #115e59; }
+.theme-arch .lesson-nav a { background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%); }
+.theme-arch .lesson-nav a.nav-prev { background: linear-gradient(135deg, #64748b 0%, #475569 100%); }
+.theme-arch .check-btn { background: linear-gradient(135deg, #2dd4bf 0%, #0d9488 100%); color: #fff; }
+.theme-arch .task-badge { background: linear-gradient(135deg, #2dd4bf 0%, #0d9488 100%); }
+.theme-arch .practice-intro, .theme-arch .course-intro { background: linear-gradient(135deg, rgba(13,148,136,0.1) 0%, rgba(45,212,191,0.14) 100%); }
+.theme-arch .practice-intro h2, .theme-arch .course-intro h2 { color: #0f766e; }
+
+/* ---- Complexity / comparison tables for algorithm lessons ---- */
+.algo-table-wrap { overflow-x: auto; margin: 18px 0; }
+table.algo-table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 360px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    font-size: 0.96em;
+}
+table.algo-table th {
+    background: #7c3aed;
+    color: #fff;
+    padding: 10px 14px;
+    text-align: left;
+}
+.theme-arch table.algo-table th { background: #0d9488; }
+table.algo-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #374151;
+}
+table.algo-table tr:nth-child(even) td { background: #faf9ff; }
+.theme-arch table.algo-table tr:nth-child(even) td { background: #f0fdfa; }
+table.algo-table tr:last-child td { border-bottom: none; }
+
+.big-o {
+    display: inline-block;
+    font-family: 'Menlo', 'Consolas', monospace;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 5px;
+    background: #f1f5f9;
+}
+.o-good { background: #dcfce7; color: #166534; }
+.o-ok   { background: #fef9c3; color: #854d0e; }
+.o-bad  { background: #fee2e2; color: #991b1b; }

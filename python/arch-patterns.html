@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Patterns - Architecture - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body class="theme-arch">
+    <div class="container">
+        <header>
+            <h1>🎨 Design Patterns</h1>
+            <p class="subtitle">Reusable solutions to common problems</p>
+            <a href="architecture.html" class="back-link">← Back to Architecture</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>🧩 What is a design pattern?</h2>
+                <div class="info-box">
+                    <p>A <strong>design pattern</strong> is a tested, reusable solution to a problem programmers face again and again. Instead of reinventing the wheel, you reach for a known recipe — and other developers instantly recognize it.</p>
+                </div>
+                <p>Patterns aren't code you copy-paste; they're <em>ideas</em> for how to structure your classes. Let's meet three friendly ones.</p>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🏭 Pattern 1: Factory</h2>
+                <p>A <strong>factory</strong> is a function (or method) whose job is to <strong>create objects</strong> for you, so the rest of your code doesn't worry about the details.</p>
+                <div class="code-block">def make_animal(kind):
+    if kind == "dog":
+        return Dog()
+    if kind == "cat":
+        return Cat()
+
+pet = make_animal("dog")   # factory decides which class</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🎯 Pattern 2: Strategy</h2>
+                <p>The <strong>strategy</strong> pattern lets you <strong>swap behavior</strong> by passing in different functions or objects. Same code, different "strategy."</p>
+                <div class="code-block">def add(a, b): return a + b
+def multiply(a, b): return a * b
+
+def calculate(a, b, strategy):
+    return strategy(a, b)
+
+print(calculate(3, 4, add))        # 7
+print(calculate(3, 4, multiply))   # 12</div>
+                <div class="tip-box">
+                    <h4>💡 You've used this!</h4>
+                    <p>Passing <code>key=</code> to Python's <code>sorted()</code> is the strategy pattern — you give it a strategy for how to compare items.</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>📣 Pattern 3: Observer</h2>
+                <p>The <strong>observer</strong> pattern lets many objects "subscribe" to an event. When something happens, everyone gets notified — like followers getting a post update.</p>
+                <div class="code-block">class Channel:
+    def __init__(self):
+        self.subscribers = []
+    def subscribe(self, name):
+        self.subscribers.append(name)
+    def upload(self):
+        return [name + " notified" for name in self.subscribers]</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="info-box">
+                    <ul>
+                        <li>A <strong>pattern</strong> is a reusable design idea, not copy-paste code.</li>
+                        <li><strong>Factory</strong> — a helper that creates objects for you.</li>
+                        <li><strong>Strategy</strong> — swap behavior by passing in functions/objects.</li>
+                        <li><strong>Observer</strong> — notify many subscribers when an event happens.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Wire up some classic patterns. 🎨</p>
+            </div>
+
+            <div class="task" data-expected="Woof
+Meow">
+                <div class="task-head">
+                    <span class="task-badge">🏭</span>
+                    <h3>Task 1: Animal Factory</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Finish <code>make_animal</code> so it returns a <code>Dog</code> for <code>"dog"</code> and a <code>Cat</code> for <code>"cat"</code>. The factory creates the right object → <code>Woof</code> then <code>Meow</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">class Dog:
+    def speak(self): return "Woof"
+class Cat:
+    def speak(self): return "Meow"
+
+def make_animal(kind):
+    # return the right object based on kind
+    pass
+
+print(make_animal("dog").speak())
+print(make_animal("cat").speak())
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def make_animal(kind):
+    if kind == "dog":
+        return Dog()
+    if kind == "cat":
+        return Cat()
+
+print(make_animal("dog").speak())
+print(make_animal("cat").speak())</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="7
+12">
+                <div class="task-head">
+                    <span class="task-badge">🎯</span>
+                    <h3>Task 2: Pick a Strategy</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Complete <code>calculate</code> so it applies whichever <code>strategy</code> function it's given. <code>add</code> → <code>7</code>, <code>multiply</code> → <code>12</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def add(a, b): return a + b
+def multiply(a, b): return a * b
+
+def calculate(a, b, strategy):
+    # apply the strategy to a and b
+    pass
+
+print(calculate(3, 4, add))
+print(calculate(3, 4, multiply))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def calculate(a, b, strategy):
+    return strategy(a, b)
+
+print(calculate(3, 4, add))
+print(calculate(3, 4, multiply))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="['Mia notified', 'Leo notified']">
+                <div class="task-head">
+                    <span class="task-badge">📣</span>
+                    <h3>Task 3: Observer Notifications</h3>
+                    <span class="task-difficulty diff-hard">Challenge</span>
+                </div>
+                <p class="task-goal">Finish <code>upload</code> so it returns a list like <code>['Mia notified', 'Leo notified']</code> for every subscriber.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">class Channel:
+    def __init__(self):
+        self.subscribers = []
+    def subscribe(self, name):
+        self.subscribers.append(name)
+    def upload(self):
+        # return a list of "<name> notified" strings
+        pass
+
+c = Channel()
+c.subscribe("Mia")
+c.subscribe("Leo")
+print(c.upload())
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>    def upload(self):
+        return [name + " notified" for name in self.subscribers]</pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="arch-solid.html">← Previous: SOLID Principles</a>
+            <a class="nav-next" href="arch-modularity.html">Next: Modules &amp; Structure →</a>
+        </nav>
+
+        <footer>
+            <p>Patterns are a shared language for designers. 🎨</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

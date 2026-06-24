@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOLID Principles - Architecture - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body class="theme-arch">
+    <div class="container">
+        <header>
+            <h1>🧱 SOLID Principles</h1>
+            <p class="subtitle">Five rules for flexible code</p>
+            <a href="architecture.html" class="back-link">← Back to Architecture</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>🧭 What is SOLID?</h2>
+                <div class="info-box">
+                    <p><strong>SOLID</strong> is five famous principles that keep object-oriented code easy to read and change. Each letter is one rule. You don't need them on day one — but knowing them makes you a stronger designer.</p>
+                </div>
+                <div class="algo-table-wrap">
+                    <table class="algo-table">
+                        <thead><tr><th>Letter</th><th>Principle</th><th>Plain English</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>S</strong></td><td>Single Responsibility</td><td>One class, one job.</td></tr>
+                            <tr><td><strong>O</strong></td><td>Open/Closed</td><td>Add features without editing old code.</td></tr>
+                            <tr><td><strong>L</strong></td><td>Liskov Substitution</td><td>A subclass should work anywhere its parent does.</td></tr>
+                            <tr><td><strong>I</strong></td><td>Interface Segregation</td><td>Many small interfaces beat one giant one.</td></tr>
+                            <tr><td><strong>D</strong></td><td>Dependency Inversion</td><td>Depend on ideas, not exact details.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>1️⃣ S — Single Responsibility</h2>
+                <p>A class should have <strong>one reason to change</strong>. Don't mix saving files with calculating math.</p>
+                <div class="code-block"># 😵 Does too much
+class Report:
+    def calculate(self): ...
+    def save_to_file(self): ...   # different job!
+
+# 😀 Split responsibilities
+class Report:
+    def calculate(self): ...
+
+class ReportSaver:
+    def save(self, report): ...</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>2️⃣ O — Open/Closed</h2>
+                <p>Code should be <strong>open to extension, closed to modification</strong>. Add new shapes without rewriting the old ones.</p>
+                <div class="code-block">class Shape:
+    def area(self):
+        raise NotImplementedError
+
+class Circle(Shape):
+    def __init__(self, r): self.r = r
+    def area(self): return 3.14 * self.r * self.r
+
+class Square(Shape):
+    def __init__(self, s): self.s = s
+    def area(self): return self.s * self.s</div>
+                <div class="tip-box">
+                    <h4>💡 The win</h4>
+                    <p>To add a <code>Triangle</code>, you write a <em>new</em> class — you never touch <code>Circle</code> or <code>Square</code>. Less risk of breaking working code!</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>3️⃣ L, I, D in one breath</h2>
+                <ul>
+                    <li><strong>Liskov:</strong> if <code>Penguin</code> is a <code>Bird</code>, it shouldn't break code that calls <code>bird.fly()</code> — so maybe not every bird should have <code>fly()</code>.</li>
+                    <li><strong>Interface Segregation:</strong> don't force a class to implement methods it doesn't use.</li>
+                    <li><strong>Dependency Inversion:</strong> a <code>NotificationService</code> should depend on a general "sender," not specifically on "EmailSender" — so you can swap in SMS later.</li>
+                </ul>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="info-box">
+                    <ul>
+                        <li><strong>S</strong>ingle Responsibility — one class, one job.</li>
+                        <li><strong>O</strong>pen/Closed — extend without editing.</li>
+                        <li><strong>L</strong>iskov — subclasses must behave like their parent.</li>
+                        <li><strong>I</strong>nterface Segregation — keep interfaces small.</li>
+                        <li><strong>D</strong>ependency Inversion — depend on abstractions.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Refactor toward SOLID design. 🧱</p>
+            </div>
+
+            <div class="task" data-expected="42
+Saved: 42">
+                <div class="task-head">
+                    <span class="task-badge">1️⃣</span>
+                    <h3>Task 1: Split Responsibilities</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Keep <code>Report</code> only for calculating, and put saving in a separate <code>ReportSaver</code>. Finish both methods so the output is <code>42</code> then <code>Saved: 42</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">class Report:
+    def calculate(self):
+        return 42
+
+class ReportSaver:
+    def save(self, value):
+        # return "Saved: " + str(value)
+        pass
+
+report = Report()
+result = report.calculate()
+print(result)
+saver = ReportSaver()
+print(saver.save(result))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class ReportSaver:
+    def save(self, value):
+        return "Saved: " + str(value)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="78.5
+16">
+                <div class="task-head">
+                    <span class="task-badge">2️⃣</span>
+                    <h3>Task 2: Open/Closed Shapes</h3>
+                    <span class="task-difficulty diff-hard">Challenge</span>
+                </div>
+                <p class="task-goal">Add a <code>Square</code> class that extends <code>Shape</code> without changing <code>Circle</code>. <code>Circle(5).area()</code> → <code>78.5</code>, <code>Square(4).area()</code> → <code>16</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">class Shape:
+    def area(self):
+        raise NotImplementedError
+
+class Circle(Shape):
+    def __init__(self, r):
+        self.r = r
+    def area(self):
+        return 3.14 * self.r * self.r
+
+# add Square below without touching Circle
+class Square(Shape):
+    pass
+
+print(Circle(5).area())
+print(Square(4).area())
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Square(Shape):
+    def __init__(self, s):
+        self.s = s
+    def area(self):
+        return self.s * self.s
+
+print(Circle(5).area())
+print(Square(4).area())</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Sending via Email: Hi!
+Sending via SMS: Hi!">
+                <div class="task-head">
+                    <span class="task-badge">🔌</span>
+                    <h3>Task 3: Dependency Inversion</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">The <code>Notifier</code> takes any <em>sender</em> object with a <code>send</code> method — so we can swap Email for SMS without changing <code>Notifier</code>. Finish both senders' <code>send</code> methods.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">class EmailSender:
+    def send(self, msg):
+        return "Sending via Email: " + msg
+
+class SmsSender:
+    def send(self, msg):
+        # return "Sending via SMS: " + msg
+        pass
+
+class Notifier:
+    def __init__(self, sender):
+        self.sender = sender
+    def notify(self, msg):
+        return self.sender.send(msg)
+
+print(Notifier(EmailSender()).notify("Hi!"))
+print(Notifier(SmsSender()).notify("Hi!"))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class SmsSender:
+    def send(self, msg):
+        return "Sending via SMS: " + msg</pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="arch-oop.html">← Previous: Objects &amp; Classes</a>
+            <a class="nav-next" href="arch-patterns.html">Next: Design Patterns →</a>
+        </nav>
+
+        <footer>
+            <p>SOLID code bends instead of breaking. 🧱</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

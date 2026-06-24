@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modules &amp; Structure - Architecture - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body class="theme-arch">
+    <div class="container">
+        <header>
+            <h1>🗃️ Modules &amp; Structure</h1>
+            <p class="subtitle">Split a program into tidy pieces</p>
+            <a href="architecture.html" class="back-link">← Back to Architecture</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>📁 One giant file vs. many small ones</h2>
+                <div class="info-box">
+                    <p>As programs grow, one huge file becomes impossible to manage. <strong>Modules</strong> let you split code into separate files, each focused on one topic — like chapters in a book.</p>
+                </div>
+                <p>In Python, every <code>.py</code> file is a <strong>module</strong>. A folder of modules is a <strong>package</strong>.</p>
+            </section>
+
+            <section class="lesson-section">
+                <h2>📦 Importing modules</h2>
+                <p>You already use modules! Python's standard library is full of them.</p>
+                <div class="code-block">import math
+print(math.sqrt(16))      # 4.0
+
+from random import choice
+print(choice(["a", "b"])) # picks one</div>
+                <div class="tip-box">
+                    <h4>💡 Two import styles</h4>
+                    <ul>
+                        <li><code>import math</code> → use as <code>math.sqrt()</code>.</li>
+                        <li><code>from math import sqrt</code> → use as <code>sqrt()</code> directly.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🧩 Separation of concerns</h2>
+                <p>Each module should handle <strong>one concern</strong>. A typical small app might split like this:</p>
+                <div class="code-block">myapp/
+├── data.py        # loading &amp; saving
+├── logic.py       # the rules &amp; calculations
+├── display.py     # printing to the screen
+└── main.py        # ties it all together</div>
+                <p>When the display needs to change, you only touch <code>display.py</code> — the logic stays untouched. This is the heart of good architecture.</p>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔗 Low coupling, high cohesion</h2>
+                <div class="info-box">
+                    <ul>
+                        <li><strong>High cohesion:</strong> things in one module belong together.</li>
+                        <li><strong>Low coupling:</strong> modules don't depend too heavily on each other's inner details — they talk through clean functions.</li>
+                    </ul>
+                </div>
+                <div class="warn-box">
+                    <p>If changing one file forces you to edit five others, your modules are too tightly <strong>coupled</strong>. Aim for pieces you can change independently.</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="info-box">
+                    <ul>
+                        <li>Split big programs into <strong>modules</strong> (files) and <strong>packages</strong> (folders).</li>
+                        <li>Use <code>import</code> to reuse code.</li>
+                        <li><strong>Separation of concerns</strong> — one module, one job.</li>
+                        <li>Aim for <strong>high cohesion</strong> and <strong>low coupling</strong>.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Organize code and reuse built-in modules. 🗃️</p>
+            </div>
+
+            <div class="task" data-expected="4.0
+5.0">
+                <div class="task-head">
+                    <span class="task-badge">📦</span>
+                    <h3>Task 1: Use the math Module</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Import <code>math</code> and print the square root of 16 and 25 → <code>4.0</code> then <code>5.0</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"># import the math module and use math.sqrt
+print(16)
+print(25)
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>import math
+print(math.sqrt(16))
+print(math.sqrt(25))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="15
+Total is: 15">
+                <div class="task-head">
+                    <span class="task-badge">🧩</span>
+                    <h3>Task 2: Separate Logic from Display</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Keep calculation in <code>add_all</code> and formatting in <code>show</code> — two separate concerns. Output: <code>15</code> then <code>Total is: 15</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"># logic concern
+def add_all(numbers):
+    return sum(numbers)
+
+# display concern
+def show(value):
+    # return "Total is: " + str(value)
+    pass
+
+total = add_all([1, 2, 3, 4, 5])
+print(total)
+print(show(total))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def show(value):
+    return "Total is: " + str(value)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="HELLO
+hello">
+                <div class="task-head">
+                    <span class="task-badge">🔧</span>
+                    <h3>Task 3: A Tiny Toolbox Module</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Group two related helpers into a class acting like a "text tools" module. Finish <code>quiet</code> to lowercase the text. <code>"hello"</code> → <code>HELLO</code> then <code>hello</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">class TextTools:
+    def loud(self, text):
+        return text.upper()
+    def quiet(self, text):
+        # return the lowercase version
+        pass
+
+tools = TextTools()
+print(tools.loud("hello"))
+print(tools.quiet("HELLO"))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>    def quiet(self, text):
+        return text.lower()</pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="arch-patterns.html">← Previous: Design Patterns</a>
+            <a class="nav-next" href="arch-testing.html">Next: Testing &amp; TDD →</a>
+        </nav>
+
+        <footer>
+            <p>Tidy modules make big programs feel small. 🗃️</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

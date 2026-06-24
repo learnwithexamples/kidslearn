@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linked Lists - Algorithms - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body class="theme-algo">
+    <div class="container">
+        <header>
+            <h1>🔗 Linked Lists</h1>
+            <p class="subtitle">A chain of nodes connected by pointers</p>
+            <a href="algorithms.html" class="back-link">← Back to Algorithms</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>🚂 What is a linked list?</h2>
+                <div class="info-box">
+                    <p>A <strong>linked list</strong> is a chain of <strong>nodes</strong>. Each node holds a piece of <strong>data</strong> and a <strong>pointer</strong> to the next node — like train cars coupled together. The last node points to <code>None</code>.</p>
+                </div>
+                <div class="code-block">[ 3 | •]──&gt;[ 7 | •]──&gt;[ 9 | None ]
+  head</div>
+                <p>Unlike a Python list (stored in one solid block of memory), a linked list's nodes can live anywhere — they're connected only by their pointers.</p>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🧱 Building a Node</h2>
+                <p>We use a class with two attributes: <code>data</code> and <code>next</code>.</p>
+                <div class="code-block">class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None    # points to nothing yet
+
+# Link them by hand
+a = Node(3)
+b = Node(7)
+a.next = b              # 3 now points to 7
+print(a.data)          # 3
+print(a.next.data)     # 7</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🚶 Walking the list (traversal)</h2>
+                <p>To visit every node, start at the head and follow <code>.next</code> until you hit <code>None</code>:</p>
+                <div class="code-block">current = head
+while current is not None:
+    print(current.data)
+    current = current.next   # hop to the next node</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>⚖️ Linked list vs. array</h2>
+                <div class="algo-table-wrap">
+                    <table class="algo-table">
+                        <thead><tr><th>Operation</th><th>Array / list</th><th>Linked list</th></tr></thead>
+                        <tbody>
+                            <tr><td>Get by index</td><td><span class="big-o o-good">O(1)</span></td><td><span class="big-o o-ok">O(n)</span></td></tr>
+                            <tr><td>Insert at front</td><td><span class="big-o o-ok">O(n)</span></td><td><span class="big-o o-good">O(1)</span></td></tr>
+                            <tr><td>Memory</td><td>One solid block</td><td>Scattered nodes</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tip-box">
+                    <h4>💡 When to use which</h4>
+                    <p>Linked lists shine when you add/remove at the front a lot. Arrays win when you need fast index access. Python's built-in <code>list</code> is an array — but knowing linked lists helps you understand stacks, queues, and trees.</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="info-box">
+                    <ul>
+                        <li>A linked list is <strong>nodes</strong> connected by <code>.next</code> pointers.</li>
+                        <li>Each node has <code>data</code> and a pointer; the last points to <code>None</code>.</li>
+                        <li><strong>Traverse</strong> by following <code>.next</code> from the head.</li>
+                        <li>Fast inserts at the front, but slow index access.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Build a chain of nodes from scratch. 🔗</p>
+            </div>
+
+            <div class="task" data-expected="1
+2
+3">
+                <div class="task-head">
+                    <span class="task-badge">🚂</span>
+                    <h3>Task 1: Link &amp; Traverse</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Three nodes are created. Link them <code>1 → 2 → 3</code>, then traverse from <code>head</code> printing each value. Output: <code>1</code>, <code>2</code>, <code>3</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+a = Node(1)
+b = Node(2)
+c = Node(3)
+# link a -> b -> c
+a.next = b
+# (add the next link)
+
+head = a
+current = head
+while current is not None:
+    print(current.data)
+    current = current.next
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+a = Node(1)
+b = Node(2)
+c = Node(3)
+a.next = b
+b.next = c
+
+head = a
+current = head
+while current is not None:
+    print(current.data)
+    current = current.next</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="3">
+                <div class="task-head">
+                    <span class="task-badge">📏</span>
+                    <h3>Task 2: Count the Nodes</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write <code>length(head)</code> that counts nodes by walking the chain. The list <code>10 → 20 → 30</code> has length <code>3</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+head = Node(10)
+head.next = Node(20)
+head.next.next = Node(30)
+
+def length(head):
+    count = 0
+    current = head
+    # walk the list, counting nodes
+    return count
+
+print(length(head))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def length(head):
+    count = 0
+    current = head
+    while current is not None:
+        count += 1
+        current = current.next
+    return count</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="99
+10
+20">
+                <div class="task-head">
+                    <span class="task-badge">⏩</span>
+                    <h3>Task 3: Insert at the Front</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Adding to the front of a linked list is <span class="big-o o-good">O(1)</span>! Make the new node point to the old head, then return the new node as the new head. Insert <code>99</code> before <code>10 → 20</code> → prints <code>99</code>, <code>10</code>, <code>20</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+def push_front(head, value):
+    new_node = Node(value)
+    # point new_node to the current head, then return new_node
+    pass
+
+head = Node(10)
+head.next = Node(20)
+head = push_front(head, 99)
+
+current = head
+while current is not None:
+    print(current.data)
+    current = current.next
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def push_front(head, value):
+    new_node = Node(value)
+    new_node.next = head
+    return new_node</pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="algo-stacks-queues.html">← Previous: Stacks &amp; Queues</a>
+            <a class="nav-next" href="algo-hashing.html">Next: Hash Tables →</a>
+        </nav>
+
+        <footer>
+            <p>Follow the pointers and you'll never get lost. 🔗</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

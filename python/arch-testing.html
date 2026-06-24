@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing &amp; TDD - Architecture - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body class="theme-arch">
+    <div class="container">
+        <header>
+            <h1>🏆 Testing &amp; TDD</h1>
+            <p class="subtitle">The capstone: prove your code works</p>
+            <a href="architecture.html" class="back-link">← Back to Architecture</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>🛡️ Why test?</h2>
+                <div class="info-box">
+                    <p>A <strong>test</strong> is code that checks your other code. Instead of running your program and eyeballing the output, you write tests that <strong>automatically</strong> prove it works — and keep proving it as you make changes.</p>
+                </div>
+                <p>Tests are a safety net. When you add a feature and a test suddenly fails, you've caught a bug <em>before</em> your users do.</p>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ The <code>assert</code> statement</h2>
+                <p>The simplest test tool: <code>assert</code> checks that something is true. If it isn't, your program stops and tells you.</p>
+                <div class="code-block">def add(a, b):
+    return a + b
+
+assert add(2, 3) == 5      # passes silently
+assert add(0, 0) == 0      # passes
+print("All tests passed!")</div>
+                <div class="tip-box">
+                    <h4>💡 Read it as a promise</h4>
+                    <p><code>assert add(2, 3) == 5</code> means "I promise <code>add(2, 3)</code> equals 5." If the promise breaks, Python raises an error.</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔴🟢 Test-Driven Development (TDD)</h2>
+                <p><strong>TDD</strong> flips the usual order: you write the <em>test first</em>, watch it fail, then write just enough code to pass.</p>
+                <div class="algo-table-wrap">
+                    <table class="algo-table">
+                        <thead><tr><th>Step</th><th>Color</th><th>What you do</th></tr></thead>
+                        <tbody>
+                            <tr><td>1. Red</td><td>🔴</td><td>Write a failing test for a feature you want.</td></tr>
+                            <tr><td>2. Green</td><td>🟢</td><td>Write the simplest code to make it pass.</td></tr>
+                            <tr><td>3. Refactor</td><td>🔵</td><td>Clean up the code — tests keep you safe.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🧪 Test the edges</h2>
+                <p>Good tests check <strong>normal cases</strong> AND tricky <strong>edge cases</strong>: empty lists, zero, negatives, and the very first/last item.</p>
+                <div class="code-block">def biggest(nums):
+    return max(nums)
+
+assert biggest([3, 7, 2]) == 7    # normal
+assert biggest([5]) == 5          # edge: one item
+assert biggest([-1, -9]) == -1    # edge: negatives</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🎓 You finished the track!</h2>
+                <div class="info-box">
+                    <ul>
+                        <li><strong>Clean Code</strong> — readable names and small functions.</li>
+                        <li><strong>OOP</strong> — classes, objects, inheritance.</li>
+                        <li><strong>SOLID</strong> — five principles for flexible design.</li>
+                        <li><strong>Patterns</strong> — factory, strategy, observer.</li>
+                        <li><strong>Modules</strong> — separation of concerns.</li>
+                        <li><strong>Testing &amp; TDD</strong> — prove it works, automatically.</li>
+                    </ul>
+                    <p>🎉 You now design software like a professional engineer. Incredible work!</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Final Boss Challenges!</h2>
+                <p>Write code that passes the tests. 🏆</p>
+            </div>
+
+            <div class="task" data-expected="All tests passed!">
+                <div class="task-head">
+                    <span class="task-badge">✅</span>
+                    <h3>Task 1: Make the Tests Pass</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write a <code>double</code> function so all three asserts pass. If they do, you'll see <code>All tests passed!</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def double(n):
+    # return n times 2
+    pass
+
+assert double(2) == 4
+assert double(0) == 0
+assert double(-3) == -6
+print("All tests passed!")
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def double(n):
+    return n * 2
+
+assert double(2) == 4
+assert double(0) == 0
+assert double(-3) == -6
+print("All tests passed!")</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Tests passed!">
+                <div class="task-head">
+                    <span class="task-badge">🔴🟢</span>
+                    <h3>Task 2: TDD a is_even Function</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">The tests are already written (Red). Now write <code>is_even</code> to make them pass (Green). Use the modulo <code>%</code> operator.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def is_even(n):
+    # return True if n is even
+    pass
+
+assert is_even(4) == True
+assert is_even(7) == False
+assert is_even(0) == True
+print("Tests passed!")
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def is_even(n):
+    return n % 2 == 0</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="All edge cases passed!">
+                <div class="task-head">
+                    <span class="task-badge">🧪</span>
+                    <h3>Task 3: Handle the Edge Cases</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Write <code>safe_average</code> that returns the average of a list — but returns <code>0</code> for an empty list (the tricky edge case!). Make all asserts pass.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def safe_average(nums):
+    # return 0 if the list is empty, else the average
+    pass
+
+assert safe_average([2, 4, 6]) == 4.0
+assert safe_average([10]) == 10.0
+assert safe_average([]) == 0
+print("All edge cases passed!")
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def safe_average(nums):
+    if len(nums) == 0:
+        return 0
+    return sum(nums) / len(nums)</pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="arch-modularity.html">← Previous: Modules &amp; Structure</a>
+            <a class="nav-next disabled" aria-disabled="true">🎉 Track Complete!</a>
+        </nav>
+
+        <footer>
+            <p>🏆 You finished Software Architecture &amp; Design. Bravo!</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

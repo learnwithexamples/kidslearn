@@ -3,108 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python - KidsLearn</title>
+    <title>Python &amp; Computer Science - KidsLearn</title>
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/python.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🐍 Learn Python</h1>
-            <p class="subtitle">Write real code, run it instantly, and build cool stuff!</p>
+            <h1>🐍 Python &amp; Computer Science</h1>
+            <p class="subtitle">From your first line of code to thinking like a software engineer</p>
             <a href="../index.html" class="back-link">← Back to Home</a>
         </header>
 
         <main>
             <div class="course-intro">
-                <h2>👋 Welcome, future programmer!</h2>
-                <p><strong>Python</strong> is one of the most popular programming languages in the world. It powers games, websites, robots, space missions, and even the special effects in movies! Best of all, Python reads almost like plain English — so it's the perfect first language.</p>
-                <p>This course is built <strong>lesson by lesson</strong>. Each lesson has a <strong>📖 Description</strong> tab that teaches you an idea, and a <strong>🎮 Practice</strong> tab full of fun mini-projects. You'll write code right in your browser, press <strong>▶ Run</strong>, and see your program come to life. No installing anything!</p>
-                <p>👉 Start at Lesson 1 and work your way down. Ready? Let's code! 🚀</p>
+                <h2>🎒 Pick your track</h2>
+                <p>Learning to code is a journey. Start with the <strong>fundamentals</strong>, then level up to the skills that real software engineers use every day: designing fast <strong>algorithms</strong> and building well-organized, professional <strong>software</strong>.</p>
+                <p>Every track keeps the same hands-on style — read a short lesson, then write and run real Python right in your browser. 🚀</p>
             </div>
 
-            <div class="lesson-grid">
-                <a href="getting-started.html" class="lesson-card">
-                    <span class="lesson-number">1</span>
-                    <h3>Your First Program</h3>
-                    <p>Meet <code>print()</code>, write your very first line of Python, and learn what code even is.</p>
-                    <span class="lesson-tag">Start here ✨</span>
+            <div class="track-grid">
+                <a href="basics.html" class="track-card track-basics">
+                    <div class="track-top">
+                        <span class="track-icon">🐍</span>
+                        <span class="track-level">Beginner</span>
+                    </div>
+                    <h2>Python Basics</h2>
+                    <p>Your first steps in programming. Variables, loops, functions, and fun mini-projects. Perfect if you've never written code before.</p>
+                    <ul class="track-topics">
+                        <li>print, variables &amp; data types</li>
+                        <li>if / else, loops, lists &amp; dicts</li>
+                        <li>functions + capstone games</li>
+                    </ul>
+                    <span class="track-cta">Start Coding →</span>
                 </a>
 
-                <a href="variables.html" class="lesson-card">
-                    <span class="lesson-number">2</span>
-                    <h3>Variables &amp; Data Types</h3>
-                    <p>Store words, numbers, and true/false values in labeled boxes called variables.</p>
-                    <span class="lesson-tag">Foundations</span>
+                <a href="algorithms.html" class="track-card track-algo">
+                    <div class="track-top">
+                        <span class="track-icon">⚡</span>
+                        <span class="track-level">Intermediate</span>
+                    </div>
+                    <h2>Algorithms &amp; Data Structures</h2>
+                    <p>The heart of computer science. Learn how to solve problems <em>efficiently</em> and organize data the way pros do — the skills behind every coding interview.</p>
+                    <ul class="track-topics">
+                        <li>Big-O, recursion, searching &amp; sorting</li>
+                        <li>stacks, queues, linked lists, hashing</li>
+                        <li>trees &amp; problem-solving patterns</li>
+                    </ul>
+                    <span class="track-cta">Level Up →</span>
                 </a>
 
-                <a href="strings.html" class="lesson-card">
-                    <span class="lesson-number">3</span>
-                    <h3>Working with Text</h3>
-                    <p>Join, slice, and transform words. Build messages with f-strings like a pro.</p>
-                    <span class="lesson-tag">Strings</span>
+                <a href="architecture.html" class="track-card track-arch">
+                    <div class="track-top">
+                        <span class="track-icon">🏛️</span>
+                        <span class="track-level">Advanced</span>
+                    </div>
+                    <h2>Software Architecture &amp; Design</h2>
+                    <p>Anyone can make code that works — engineers make code that <em>lasts</em>. Learn to write clean, reusable, well-structured software that teams can build on.</p>
+                    <ul class="track-topics">
+                        <li>clean code &amp; object-oriented design</li>
+                        <li>SOLID principles &amp; design patterns</li>
+                        <li>modularity, layering &amp; testing</li>
+                    </ul>
+                    <span class="track-cta">Build Like a Pro →</span>
                 </a>
+            </div>
 
-                <a href="numbers.html" class="lesson-card">
-                    <span class="lesson-number">4</span>
-                    <h3>Numbers &amp; Math</h3>
-                    <p>Turn Python into a super-calculator with +, −, ×, ÷, remainders, and powers.</p>
-                    <span class="lesson-tag">Math</span>
-                </a>
-
-                <a href="input.html" class="lesson-card">
-                    <span class="lesson-number">5</span>
-                    <h3>Getting Input</h3>
-                    <p>Ask the user questions with <code>input()</code> and make your programs interactive.</p>
-                    <span class="lesson-tag">Interaction</span>
-                </a>
-
-                <a href="conditions.html" class="lesson-card">
-                    <span class="lesson-number">6</span>
-                    <h3>Making Decisions</h3>
-                    <p>Use <code>if</code>, <code>elif</code>, and <code>else</code> so your code can choose what to do.</p>
-                    <span class="lesson-tag">Logic</span>
-                </a>
-
-                <a href="loops.html" class="lesson-card">
-                    <span class="lesson-number">7</span>
-                    <h3>Loops</h3>
-                    <p>Repeat actions without copy-pasting using <code>for</code> and <code>while</code> loops.</p>
-                    <span class="lesson-tag">Repetition</span>
-                </a>
-
-                <a href="lists.html" class="lesson-card">
-                    <span class="lesson-number">8</span>
-                    <h3>Lists</h3>
-                    <p>Keep collections of things in order — add, remove, sort, and loop over them.</p>
-                    <span class="lesson-tag">Collections</span>
-                </a>
-
-                <a href="dictionaries.html" class="lesson-card">
-                    <span class="lesson-number">9</span>
-                    <h3>Dictionaries</h3>
-                    <p>Match keys to values, like a real dictionary matches words to meanings.</p>
-                    <span class="lesson-tag">Collections</span>
-                </a>
-
-                <a href="functions.html" class="lesson-card">
-                    <span class="lesson-number">10</span>
-                    <h3>Functions</h3>
-                    <p>Teach Python your own commands and reuse them as many times as you like.</p>
-                    <span class="lesson-tag">Reusable code</span>
-                </a>
-
-                <a href="projects.html" class="lesson-card">
-                    <span class="lesson-number">🏆</span>
-                    <h3>Capstone Projects</h3>
-                    <p>Put it all together! Build a quiz game, a password maker, and more.</p>
-                    <span class="lesson-tag">Challenge</span>
-                </a>
+            <div class="path-note">
+                <p>💡 <strong>New here?</strong> Begin with <a href="basics.html">Python Basics</a>. Already comfortable writing functions and loops? Jump straight into <a href="algorithms.html">Algorithms</a>.</p>
             </div>
         </main>
 
         <footer>
-            <p>Every expert was once a beginner. Keep coding! 🐍💛</p>
+            <p>Great software starts with great thinking. 🧠💛</p>
         </footer>
     </div>
 </body>

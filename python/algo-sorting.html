@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting - Algorithms - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body class="theme-algo">
+    <div class="container">
+        <header>
+            <h1>📊 Sorting</h1>
+            <p class="subtitle">Putting things in order — slow ways and clever ways</p>
+            <a href="algorithms.html" class="back-link">← Back to Algorithms</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>🫧 Bubble sort — simple but slow</h2>
+                <div class="info-box">
+                    <p><strong>Bubble sort</strong> repeatedly walks the list, swapping neighbors that are out of order. Big values "bubble up" to the end. Easy to understand, but <span class="big-o o-bad">O(n²)</span> — slow for big lists.</p>
+                </div>
+                <div class="code-block">def bubble_sort(items):
+    n = len(items)
+    for i in range(n):
+        for j in range(n - 1 - i):
+            if items[j] &gt; items[j + 1]:
+                items[j], items[j + 1] = items[j + 1], items[j]  # swap
+    return items</div>
+                <div class="tip-box">
+                    <h4>🔁 The Python swap trick</h4>
+                    <p><code>a, b = b, a</code> swaps two values in one clean line — no temporary variable needed!</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🎯 Selection sort — find the smallest</h2>
+                <p><strong>Selection sort</strong> finds the smallest item and puts it first, then the next smallest, and so on. Also <span class="big-o o-bad">O(n²)</span>, but it makes fewer swaps.</p>
+                <div class="code-block">def selection_sort(items):
+    n = len(items)
+    for i in range(n):
+        smallest = i
+        for j in range(i + 1, n):
+            if items[j] &lt; items[smallest]:
+                smallest = j
+        items[i], items[smallest] = items[smallest], items[i]
+    return items</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>⚡ Merge sort — divide and conquer</h2>
+                <div class="info-box">
+                    <p><strong>Merge sort</strong> splits the list in half, sorts each half (recursively!), then <strong>merges</strong> the two sorted halves together. Much faster: <span class="big-o o-ok">O(n log n)</span>.</p>
+                </div>
+                <div class="code-block">def merge_sort(items):
+    if len(items) &lt;= 1:        # base case
+        return items
+    mid = len(items) // 2
+    left = merge_sort(items[:mid])
+    right = merge_sort(items[mid:])
+    return merge(left, right)
+
+def merge(left, right):
+    result = []
+    i = j = 0
+    while i &lt; len(left) and j &lt; len(right):
+        if left[i] &lt;= right[j]:
+            result.append(left[i]); i += 1
+        else:
+            result.append(right[j]); j += 1
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>📏 Comparing the sorts</h2>
+                <div class="algo-table-wrap">
+                    <table class="algo-table">
+                        <thead><tr><th>Algorithm</th><th>Big-O</th><th>Idea</th></tr></thead>
+                        <tbody>
+                            <tr><td>Bubble sort</td><td><span class="big-o o-bad">O(n²)</span></td><td>Swap neighbors</td></tr>
+                            <tr><td>Selection sort</td><td><span class="big-o o-bad">O(n²)</span></td><td>Pick the smallest</td></tr>
+                            <tr><td>Merge sort</td><td><span class="big-o o-ok">O(n log n)</span></td><td>Split &amp; merge</td></tr>
+                            <tr><td>Python's <code>.sort()</code></td><td><span class="big-o o-ok">O(n log n)</span></td><td>Timsort (built-in)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tip-box">
+                    <h4>💡 In real life</h4>
+                    <p>You rarely write your own sort — Python's <code>sorted()</code> and <code>.sort()</code> are highly optimized. But understanding <em>how</em> sorting works makes you a better problem-solver.</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="info-box">
+                    <ul>
+                        <li>Bubble &amp; selection sort are simple but <span class="big-o o-bad">O(n²)</span>.</li>
+                        <li>Merge sort uses <strong>divide and conquer</strong> for <span class="big-o o-ok">O(n log n)</span>.</li>
+                        <li>Swap values with <code>a, b = b, a</code>.</li>
+                        <li>Real code uses Python's built-in <code>sorted()</code>.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Sort it out — from scratch! 📊</p>
+            </div>
+
+            <div class="task" data-expected="[1, 2, 5, 8, 9]">
+                <div class="task-head">
+                    <span class="task-badge">🫧</span>
+                    <h3>Task 1: Bubble Sort</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Complete the swap inside bubble sort: if <code>items[j]</code> is bigger than <code>items[j+1]</code>, swap them. Sorting <code>[5, 2, 9, 1, 8]</code> should print <code>[1, 2, 5, 8, 9]</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def bubble_sort(items):
+    n = len(items)
+    for i in range(n):
+        for j in range(n - 1 - i):
+            if items[j] &gt; items[j + 1]:
+                # swap items[j] and items[j + 1]
+                pass
+    return items
+
+print(bubble_sort([5, 2, 9, 1, 8]))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def bubble_sort(items):
+    n = len(items)
+    for i in range(n):
+        for j in range(n - 1 - i):
+            if items[j] &gt; items[j + 1]:
+                items[j], items[j + 1] = items[j + 1], items[j]
+    return items
+
+print(bubble_sort([5, 2, 9, 1, 8]))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="[3, 7, 10, 15]">
+                <div class="task-head">
+                    <span class="task-badge">🎯</span>
+                    <h3>Task 2: Selection Sort</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Finish the inner loop that finds the index of the <strong>smallest</strong> remaining item. Sorting <code>[15, 3, 10, 7]</code> should print <code>[3, 7, 10, 15]</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def selection_sort(items):
+    n = len(items)
+    for i in range(n):
+        smallest = i
+        for j in range(i + 1, n):
+            # if items[j] is smaller than items[smallest], update smallest
+            pass
+        items[i], items[smallest] = items[smallest], items[i]
+    return items
+
+print(selection_sort([15, 3, 10, 7]))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def selection_sort(items):
+    n = len(items)
+    for i in range(n):
+        smallest = i
+        for j in range(i + 1, n):
+            if items[j] &lt; items[smallest]:
+                smallest = j
+        items[i], items[smallest] = items[smallest], items[i]
+    return items
+
+print(selection_sort([15, 3, 10, 7]))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="[1, 2, 3, 4, 6, 8]">
+                <div class="task-head">
+                    <span class="task-badge">🔀</span>
+                    <h3>Task 3: The Merge Step</h3>
+                    <span class="task-difficulty diff-hard">Challenge</span>
+                </div>
+                <p class="task-goal">The heart of merge sort is merging two <strong>already sorted</strong> lists. Pick the smaller front item each time. Merge <code>[1, 4, 8]</code> and <code>[2, 3, 6]</code> → <code>[1, 2, 3, 4, 6, 8]</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def merge(left, right):
+    result = []
+    i = j = 0
+    while i &lt; len(left) and j &lt; len(right):
+        if left[i] &lt;= right[j]:
+            result.append(left[i]); i += 1
+        else:
+            result.append(right[j]); j += 1
+    # add the leftovers from whichever list isn't empty
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+
+print(merge([1, 4, 8], [2, 3, 6]))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🏎️</span>
+                    <h3>Task 4: Free Play — Race the Built-in</h3>
+                    <span class="task-difficulty diff-easy">Explore</span>
+                </div>
+                <p class="task-goal">Python's <code>sorted()</code> is the easy way. Try sorting numbers, words, and sorting in reverse. Experiment with <code>reverse=True</code> and sorting by length!</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">print(sorted([5, 2, 9, 1]))
+print(sorted(["banana", "apple", "cherry"]))
+print(sorted([5, 2, 9, 1], reverse=True))
+print(sorted(["hi", "hello", "hey"], key=len))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="algo-searching.html">← Previous: Searching</a>
+            <a class="nav-next" href="algo-stacks-queues.html">Next: Stacks &amp; Queues →</a>
+        </nav>
+
+        <footer>
+            <p>A clever idea beats raw effort every time. 📊</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

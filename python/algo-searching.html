@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Searching - Algorithms - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body class="theme-algo">
+    <div class="container">
+        <header>
+            <h1>🔍 Searching</h1>
+            <p class="subtitle">Linear search vs. the mighty binary search</p>
+            <a href="algorithms.html" class="back-link">← Back to Algorithms</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>🚶 Linear search — check every item</h2>
+                <div class="info-box">
+                    <p><strong>Linear search</strong> walks through a list one item at a time until it finds the target (or runs out). Simple and works on <em>any</em> list, sorted or not. Its speed is <span class="big-o o-ok">O(n)</span>.</p>
+                </div>
+                <div class="code-block">def linear_search(items, target):
+    for i in range(len(items)):
+        if items[i] == target:
+            return i        # found! return the index
+    return -1               # not found
+
+print(linear_search([5, 3, 9, 1], 9))   # 2</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>⚡ Binary search — halve it every time</h2>
+                <div class="info-box">
+                    <p><strong>Binary search</strong> only works on a <strong>sorted</strong> list, but it's lightning fast — <span class="big-o o-good">O(log n)</span>. It checks the middle, then throws away half the list every step.</p>
+                </div>
+                <p>It's exactly how you find a word in a dictionary: open the middle, decide "earlier" or "later", and repeat on the half that remains.</p>
+                <div class="code-block">def binary_search(items, target):
+    low = 0
+    high = len(items) - 1
+    while low &lt;= high:
+        mid = (low + high) // 2
+        if items[mid] == target:
+            return mid
+        elif items[mid] &lt; target:
+            low = mid + 1       # target is in the right half
+        else:
+            high = mid - 1      # target is in the left half
+    return -1</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🤯 Why halving is a superpower</h2>
+                <p>Searching a sorted list of <strong>1,000,000</strong> items:</p>
+                <div class="algo-table-wrap">
+                    <table class="algo-table">
+                        <thead><tr><th>Method</th><th>Worst-case steps</th><th>Big-O</th></tr></thead>
+                        <tbody>
+                            <tr><td>Linear search</td><td>1,000,000</td><td><span class="big-o o-ok">O(n)</span></td></tr>
+                            <tr><td>Binary search</td><td>about 20</td><td><span class="big-o o-good">O(log n)</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tip-box">
+                    <h4>💡 The catch</h4>
+                    <p>Binary search needs the list to be <strong>sorted first</strong>. If you only search once, sorting may not be worth it. If you search many times, sort once and enjoy fast lookups forever.</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="info-box">
+                    <ul>
+                        <li><strong>Linear search</strong>: check every item, O(n), works on any list.</li>
+                        <li><strong>Binary search</strong>: halve the range each step, O(log n), needs a sorted list.</li>
+                        <li>Return the <strong>index</strong> when found, or <code>-1</code> when not.</li>
+                        <li>The midpoint is <code>(low + high) // 2</code>.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Build both searches and feel the speed difference. 🔍</p>
+            </div>
+
+            <div class="task" data-expected="2">
+                <div class="task-head">
+                    <span class="task-badge">🚶</span>
+                    <h3>Task 1: Linear Search</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Finish <code>linear_search</code> to return the index of <code>target</code>, or <code>-1</code> if missing. Searching for <code>9</code> in <code>[5, 3, 9, 1]</code> should print <code>2</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def linear_search(items, target):
+    for i in range(len(items)):
+        # if items[i] equals target, return i
+        pass
+    return -1
+
+print(linear_search([5, 3, 9, 1], 9))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def linear_search(items, target):
+    for i in range(len(items)):
+        if items[i] == target:
+            return i
+    return -1
+
+print(linear_search([5, 3, 9, 1], 9))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="4">
+                <div class="task-head">
+                    <span class="task-badge">⚡</span>
+                    <h3>Task 2: Binary Search</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Complete the binary search loop. The list is sorted. Update <code>low</code> or <code>high</code> based on the middle value. Searching for <code>11</code> in <code>[1, 3, 5, 7, 11, 13]</code> should print <code>4</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def binary_search(items, target):
+    low, high = 0, len(items) - 1
+    while low &lt;= high:
+        mid = (low + high) // 2
+        if items[mid] == target:
+            return mid
+        elif items[mid] &lt; target:
+            # target is to the right
+            pass
+        else:
+            # target is to the left
+            pass
+    return -1
+
+print(binary_search([1, 3, 5, 7, 11, 13], 11))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def binary_search(items, target):
+    low, high = 0, len(items) - 1
+    while low &lt;= high:
+        mid = (low + high) // 2
+        if items[mid] == target:
+            return mid
+        elif items[mid] &lt; target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
+
+print(binary_search([1, 3, 5, 7, 11, 13], 11))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Found at index 3
+Steps: 1">
+                <div class="task-head">
+                    <span class="task-badge">🏁</span>
+                    <h3>Task 3: Count the Steps</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Binary search on <code>[2, 4, 6, 8, 10, 12, 14]</code> for <code>8</code>. The middle is index 3 — so it's found in just <strong>1 step</strong>! Run the code to confirm it prints <code>Found at index 3</code> then <code>Steps: 1</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">data = [2, 4, 6, 8, 10, 12, 14]
+target = 8
+low, high, steps = 0, len(data) - 1, 0
+found = -1
+while low &lt;= high:
+    steps += 1
+    mid = (low + high) // 2
+    if data[mid] == target:
+        found = mid
+        break
+    elif data[mid] &lt; target:
+        low = mid + 1
+    else:
+        high = mid - 1
+print(f"Found at index {found}")
+print(f"Steps: {steps}")
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="algo-recursion.html">← Previous: Recursion</a>
+            <a class="nav-next" href="algo-sorting.html">Next: Sorting →</a>
+        </nav>
+
+        <footer>
+            <p>Why look at a million items when 20 will do? ⚡</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

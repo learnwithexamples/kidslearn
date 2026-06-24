@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hash Tables &amp; Sets - Algorithms - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body class="theme-algo">
+    <div class="container">
+        <header>
+            <h1>🗂️ Hash Tables &amp; Sets</h1>
+            <p class="subtitle">The magic behind instant lookups</p>
+            <a href="algorithms.html" class="back-link">← Back to Algorithms</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>🪄 The big idea</h2>
+                <div class="info-box">
+                    <p>A <strong>hash table</strong> stores key→value pairs so you can look up any value <strong>instantly</strong> — <span class="big-o o-good">O(1)</span> on average. In Python, the <code>dict</code> you already know <em>is</em> a hash table!</p>
+                </div>
+                <p>How? A <strong>hash function</strong> turns a key into a number that points straight to a slot in memory. No searching through items one by one — it jumps right to the answer.</p>
+                <div class="code-block">scores = {"Alice": 90, "Bob": 85}
+print(scores["Alice"])    # O(1) — instant, no scanning!</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>⚡ Why it beats a list</h2>
+                <p>To find a name in a list, you might check every element — <span class="big-o o-ok">O(n)</span>. A dict jumps directly to it — <span class="big-o o-good">O(1)</span>.</p>
+                <div class="algo-table-wrap">
+                    <table class="algo-table">
+                        <thead><tr><th>Task</th><th>List</th><th>Dict / Set</th></tr></thead>
+                        <tbody>
+                            <tr><td>Look up a value</td><td><span class="big-o o-ok">O(n)</span></td><td><span class="big-o o-good">O(1)</span></td></tr>
+                            <tr><td>Check membership (<code>in</code>)</td><td><span class="big-o o-ok">O(n)</span></td><td><span class="big-o o-good">O(1)</span></td></tr>
+                            <tr><td>Add an item</td><td><span class="big-o o-good">O(1)</span>*</td><td><span class="big-o o-good">O(1)</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🎒 Sets — a hash table of just keys</h2>
+                <p>A <strong>set</strong> is like a dict with keys but no values. It stores <strong>unique</strong> items and checks membership in <span class="big-o o-good">O(1)</span>.</p>
+                <div class="code-block">seen = set()
+seen.add("apple")
+seen.add("apple")    # duplicate ignored
+print("apple" in seen)   # True — instant
+print(len(seen))         # 1</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🧰 The hash table superpower: counting</h2>
+                <p>Hash tables make counting things effortless. This pattern appears in <em>tons</em> of problems:</p>
+                <div class="code-block">counts = {}
+for letter in "banana":
+    counts[letter] = counts.get(letter, 0) + 1
+print(counts)   # {'b': 1, 'a': 3, 'n': 2}</div>
+                <div class="tip-box">
+                    <h4>💡 Remember <code>.get(key, 0)</code></h4>
+                    <p>It returns the current count, or <code>0</code> if the key isn't there yet — perfect for "add one to the tally."</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="info-box">
+                    <ul>
+                        <li>Hash tables (Python <code>dict</code>) give <span class="big-o o-good">O(1)</span> lookups via a hash function.</li>
+                        <li><strong>Sets</strong> store unique items with instant membership checks.</li>
+                        <li>Use a dict to <strong>count</strong> things with <code>.get(key, 0) + 1</code>.</li>
+                        <li>Trade a little memory for huge speed gains.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Hash your way to instant answers. 🗂️</p>
+            </div>
+
+            <div class="task" data-expected="{'b': 1, 'a': 3, 'n': 2}">
+                <div class="task-head">
+                    <span class="task-badge">🔤</span>
+                    <h3>Task 1: Count the Letters</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Count how many times each letter appears in <code>"banana"</code> using a dict and <code>.get()</code>. Expected: <code>{'b': 1, 'a': 3, 'n': 2}</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">counts = {}
+for letter in "banana":
+    # add one to counts[letter]
+    pass
+print(counts)
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>counts = {}
+for letter in "banana":
+    counts[letter] = counts.get(letter, 0) + 1
+print(counts)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="True
+False">
+                <div class="task-head">
+                    <span class="task-badge">🎯</span>
+                    <h3>Task 2: Two-Sum (the famous one!)</h3>
+                    <span class="task-difficulty diff-hard">Challenge</span>
+                </div>
+                <p class="task-goal">Does any pair add up to <code>target</code>? The slow way is O(n²). The fast way: for each number, check if <code>target - number</code> is already in a set — O(n)! Test <code>[2, 7, 11]</code> target <code>9</code> → <code>True</code>, then target <code>20</code> → <code>False</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def two_sum(nums, target):
+    seen = set()
+    for n in nums:
+        if (target - n) in seen:
+            return True
+        seen.add(n)
+    return False
+
+print(two_sum([2, 7, 11], 9))
+print(two_sum([2, 7, 11], 20))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="[1, 2, 3, 4]">
+                <div class="task-head">
+                    <span class="task-badge">🧹</span>
+                    <h3>Task 3: Remove Duplicates</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Turn <code>[1, 2, 2, 3, 4, 4]</code> into a sorted list of unique values using a <code>set</code>. Expected: <code>[1, 2, 3, 4]</code>. (Hint: <code>sorted(set(...))</code>.)</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">nums = [1, 2, 2, 3, 4, 4]
+# make a sorted list of unique values
+result = []
+print(result)
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>nums = [1, 2, 2, 3, 4, 4]
+result = sorted(set(nums))
+print(result)</pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="algo-linked-lists.html">← Previous: Linked Lists</a>
+            <a class="nav-next" href="algo-trees.html">Next: Trees &amp; BSTs →</a>
+        </nav>
+
+        <footer>
+            <p>When in doubt, reach for a hash table. 🗂️</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

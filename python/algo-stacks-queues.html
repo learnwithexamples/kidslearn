@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stacks &amp; Queues - Algorithms - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body class="theme-algo">
+    <div class="container">
+        <header>
+            <h1>📚 Stacks &amp; Queues</h1>
+            <p class="subtitle">Two ways to organize what comes next</p>
+            <a href="algorithms.html" class="back-link">← Back to Algorithms</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>🥞 A Stack — Last In, First Out (LIFO)</h2>
+                <div class="info-box">
+                    <p>A <strong>stack</strong> is like a pile of pancakes 🥞 or plates: you add to the top and remove from the top. The <strong>last</strong> item you put in is the <strong>first</strong> one to come out — LIFO.</p>
+                </div>
+                <p>You use stacks every day:</p>
+                <ul style="line-height:1.9;">
+                    <li><strong>Undo</strong> (Ctrl+Z) — the most recent action is undone first.</li>
+                    <li>The browser <strong>Back</strong> button.</li>
+                    <li>The function <strong>call stack</strong> in recursion!</li>
+                </ul>
+                <div class="code-block">stack = []
+stack.append("a")   # push
+stack.append("b")
+stack.append("c")
+print(stack.pop())  # c  (last in, first out)
+print(stack.pop())  # b</div>
+                <div class="tip-box">
+                    <h4>📌 In Python</h4>
+                    <p>A plain list <em>is</em> a stack: <code>.append()</code> to push, <code>.pop()</code> to remove the top.</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🚶‍♂️🚶‍♀️ A Queue — First In, First Out (FIFO)</h2>
+                <div class="info-box">
+                    <p>A <strong>queue</strong> is like a line at a store: the <strong>first</strong> person to arrive is the <strong>first</strong> served — FIFO. You add at the back and remove from the front.</p>
+                </div>
+                <p>Queues power printers (first document prints first), task schedulers, and breadth-first search (next lesson territory!).</p>
+                <div class="code-block">from collections import deque
+
+queue = deque()
+queue.append("a")    # enqueue (add at back)
+queue.append("b")
+queue.append("c")
+print(queue.popleft())  # a  (first in, first out)
+print(queue.popleft())  # b</div>
+                <div class="warn-box">
+                    <h4>Why not just use list.pop(0)?</h4>
+                    <p>Removing from the front of a list is <span class="big-o o-ok">O(n)</span> — Python has to shift every item. A <code>deque</code> (double-ended queue) does it in <span class="big-o o-good">O(1)</span>. Use <code>deque</code> for queues!</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>📏 Quick comparison</h2>
+                <div class="algo-table-wrap">
+                    <table class="algo-table">
+                        <thead><tr><th></th><th>Stack (LIFO)</th><th>Queue (FIFO)</th></tr></thead>
+                        <tbody>
+                            <tr><td>Add</td><td><code>append()</code></td><td><code>append()</code></td></tr>
+                            <tr><td>Remove</td><td><code>pop()</code> (end)</td><td><code>popleft()</code> (front)</td></tr>
+                            <tr><td>Real-world</td><td>Undo, Back button</td><td>Print line, ticket queue</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="info-box">
+                    <ul>
+                        <li><strong>Stack</strong> = LIFO. Push/pop from the same end. Use a list.</li>
+                        <li><strong>Queue</strong> = FIFO. Add at back, remove from front. Use <code>deque</code>.</li>
+                        <li>Both add and remove in <span class="big-o o-good">O(1)</span> when used correctly.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Push, pop, enqueue, dequeue! 📚</p>
+            </div>
+
+            <div class="task" data-expected="c
+b
+a">
+                <div class="task-head">
+                    <span class="task-badge">🥞</span>
+                    <h3>Task 1: Use a Stack</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Push <code>"a"</code>, <code>"b"</code>, <code>"c"</code> onto the stack, then pop and print all three. Because it's LIFO, the output is <code>c</code>, <code>b</code>, <code>a</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">stack = []
+stack.append("a")
+stack.append("b")
+stack.append("c")
+# pop and print three times
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>stack = []
+stack.append("a")
+stack.append("b")
+stack.append("c")
+print(stack.pop())
+print(stack.pop())
+print(stack.pop())</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="True">
+                <div class="task-head">
+                    <span class="task-badge">🧮</span>
+                    <h3>Task 2: Balanced Brackets</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">A classic stack problem! Check if brackets are balanced. Push every <code>(</code>; when you see a <code>)</code>, pop one. It's balanced if you never pop an empty stack and it ends empty. Test <code>"(())"</code> → <code>True</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def is_balanced(text):
+    stack = []
+    for ch in text:
+        if ch == "(":
+            stack.append(ch)
+        elif ch == ")":
+            if not stack:
+                return False
+            stack.pop()
+    return len(stack) == 0
+
+print(is_balanced("(())"))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Alice
+Bob
+Carol">
+                <div class="task-head">
+                    <span class="task-badge">🎟️</span>
+                    <h3>Task 3: Serve the Queue</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Three people join a line. Serve them in FIFO order using <code>popleft()</code>. Output should be <code>Alice</code>, <code>Bob</code>, <code>Carol</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">from collections import deque
+
+line = deque()
+line.append("Alice")
+line.append("Bob")
+line.append("Carol")
+# serve all three from the front
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>from collections import deque
+
+line = deque()
+line.append("Alice")
+line.append("Bob")
+line.append("Carol")
+print(line.popleft())
+print(line.popleft())
+print(line.popleft())</pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="algo-sorting.html">← Previous: Sorting</a>
+            <a class="nav-next" href="algo-linked-lists.html">Next: Linked Lists →</a>
+        </nav>
+
+        <footer>
+            <p>Undo, redo, wait in line — it's all stacks and queues. 📚</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

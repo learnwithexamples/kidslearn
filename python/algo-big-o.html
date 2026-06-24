@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big-O &amp; Complexity - Algorithms - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body class="theme-algo">
+    <div class="container">
+        <header>
+            <h1>⚡ Big-O &amp; Complexity</h1>
+            <p class="subtitle">How we measure the speed of an algorithm</p>
+            <a href="algorithms.html" class="back-link">← Back to Algorithms</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>⏱️ Why measure speed?</h2>
+                <div class="info-box">
+                    <p>Two programs can solve the same problem, but one might take a <strong>millisecond</strong> and the other a <strong>full minute</strong>. As the amount of data grows, that gap explodes. <strong>Big-O notation</strong> is the language we use to describe how an algorithm's work grows as the input gets bigger.</p>
+                </div>
+                <p>We don't measure in seconds (computers differ!). Instead we count <strong>how many steps</strong> the algorithm takes relative to the input size, which we call <code>n</code>.</p>
+            </section>
+
+            <section class="lesson-section">
+                <h2>📈 The common complexities</h2>
+                <div class="algo-table-wrap">
+                    <table class="algo-table">
+                        <thead><tr><th>Big-O</th><th>Name</th><th>Example</th><th>Speed</th></tr></thead>
+                        <tbody>
+                            <tr><td><span class="big-o o-good">O(1)</span></td><td>Constant</td><td>Get <code>list[0]</code></td><td>🚀 Fastest</td></tr>
+                            <tr><td><span class="big-o o-good">O(log n)</span></td><td>Logarithmic</td><td>Binary search</td><td>⚡ Excellent</td></tr>
+                            <tr><td><span class="big-o o-ok">O(n)</span></td><td>Linear</td><td>One loop over a list</td><td>👍 Good</td></tr>
+                            <tr><td><span class="big-o o-ok">O(n log n)</span></td><td>Linearithmic</td><td>Merge sort</td><td>🙂 Decent</td></tr>
+                            <tr><td><span class="big-o o-bad">O(n²)</span></td><td>Quadratic</td><td>Nested loops</td><td>🐢 Slow</td></tr>
+                            <tr><td><span class="big-o o-bad">O(2ⁿ)</span></td><td>Exponential</td><td>Naive recursion</td><td>💀 Avoid!</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🎯 O(1) — Constant time</h2>
+                <p>The work is the <strong>same</strong> no matter how big the data is. Grabbing one item by its index is instant:</p>
+                <div class="code-block">def first(items):
+    return items[0]    # one step, always</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>➡️ O(n) — Linear time</h2>
+                <p>The work grows in <strong>direct proportion</strong> to the input. One loop = O(n):</p>
+                <div class="code-block">def total(items):
+    s = 0
+    for x in items:    # runs n times
+        s += x
+    return s</div>
+                <p>Double the list, and it takes about double the steps.</p>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🐢 O(n²) — Quadratic time</h2>
+                <p>A <strong>loop inside a loop</strong> means n × n steps. This gets slow fast — 100 items = 10,000 steps!</p>
+                <div class="code-block">def has_duplicate(items):
+    for i in items:          # n times
+        for j in items:      # n times each
+            ...              # n × n = n² steps</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>📏 The rules of Big-O</h2>
+                <div class="tip-box">
+                    <h4>Simplify, simplify</h4>
+                    <ul>
+                        <li><strong>Drop constants:</strong> O(2n) becomes O(n). We care about <em>growth</em>, not exact counts.</li>
+                        <li><strong>Drop smaller terms:</strong> O(n² + n) becomes O(n²). The biggest term dominates.</li>
+                        <li><strong>Worst case:</strong> Big-O usually describes the slowest possible run.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="info-box">
+                    <ul>
+                        <li>Big-O describes how work grows with input size <code>n</code>.</li>
+                        <li><strong>One loop</strong> → O(n). <strong>Nested loops</strong> → O(n²). <strong>No loop</strong> → O(1).</li>
+                        <li>Halving the problem each step → O(log n).</li>
+                        <li>Drop constants and smaller terms when simplifying.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Reason about speed, then prove it with code. Press ▶ Run and ✓ Check.</p>
+            </div>
+
+            <div class="task" data-expected="15">
+                <div class="task-head">
+                    <span class="task-badge">➡️</span>
+                    <h3>Task 1: Write an O(n) Function</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Finish <code>total(items)</code> so it loops once through the list and returns the sum. Calling it on <code>[1,2,3,4,5]</code> should print <code>15</code>. (This is O(n) — a single loop.)</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def total(items):
+    s = 0
+    # loop through items and add each to s
+    return s
+
+print(total([1, 2, 3, 4, 5]))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def total(items):
+    s = 0
+    for x in items:
+        s += x
+    return s
+
+print(total([1, 2, 3, 4, 5]))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="True">
+                <div class="task-head">
+                    <span class="task-badge">🐢</span>
+                    <h3>Task 2: The O(n²) Duplicate Finder</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write <code>has_duplicate(items)</code> using <strong>nested loops</strong> that returns <code>True</code> if any value appears twice. Test on <code>[3, 1, 4, 1]</code> → should print <code>True</code>. (Compare each pair of <em>different</em> positions.)</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def has_duplicate(items):
+    for i in range(len(items)):
+        for j in range(i + 1, len(items)):
+            # if two items are equal, return True
+            pass
+    return False
+
+print(has_duplicate([3, 1, 4, 1]))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def has_duplicate(items):
+    for i in range(len(items)):
+        for j in range(i + 1, len(items)):
+            if items[i] == items[j]:
+                return True
+    return False
+
+print(has_duplicate([3, 1, 4, 1]))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="False
+O(n) is faster">
+                <div class="task-head">
+                    <span class="task-badge">⚡</span>
+                    <h3>Task 3: Make It Fast — O(n)</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">The same duplicate check can be done in <strong>O(n)</strong> using a <code>set</code>! Finish <code>has_dup_fast</code>: loop once, remember seen values in a set, return <code>True</code> the moment you see a repeat. Test on <code>[1, 2, 3]</code> (no dupes → <code>False</code>), then print <code>O(n) is faster</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def has_dup_fast(items):
+    seen = set()
+    for x in items:
+        # if x already seen, return True; else add it
+        pass
+    return False
+
+print(has_dup_fast([1, 2, 3]))
+print("O(n) is faster")
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def has_dup_fast(items):
+    seen = set()
+    for x in items:
+        if x in seen:
+            return True
+        seen.add(x)
+    return False
+
+print(has_dup_fast([1, 2, 3]))
+print("O(n) is faster")</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🔬</span>
+                    <h3>Task 4: Free Play — Count the Steps</h3>
+                    <span class="task-difficulty diff-medium">Explore</span>
+                </div>
+                <p class="task-goal">Add a <code>steps</code> counter inside a loop to <em>see</em> Big-O in action. Try changing <code>n</code> from 5 to 50 — one loop grows linearly, nested loops grow as n². Watch the numbers!</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">n = 5
+
+steps = 0
+for i in range(n):
+    steps += 1
+print(f"One loop (O(n)): {steps} steps")
+
+steps = 0
+for i in range(n):
+    for j in range(n):
+        steps += 1
+print(f"Nested loop (O(n^2)): {steps} steps")
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev disabled" href="#">← Previous</a>
+            <a class="nav-next" href="algo-recursion.html">Next: Recursion →</a>
+        </nav>
+
+        <footer>
+            <p>Now you can spot a slow algorithm before you even run it. ⚡</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

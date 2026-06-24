@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem-Solving Patterns - Algorithms - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body class="theme-algo">
+    <div class="container">
+        <header>
+            <h1>🏆 Problem-Solving Patterns</h1>
+            <p class="subtitle">The capstone: think like an algorithm pro</p>
+            <a href="algorithms.html" class="back-link">← Back to Algorithms</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>🧠 Patterns beat memorizing</h2>
+                <div class="info-box">
+                    <p>You don't need to memorize a thousand puzzles. Most coding problems are solved by a handful of <strong>patterns</strong>. Learn the pattern, and you can crack a whole family of problems!</p>
+                </div>
+                <p>This capstone brings together everything: loops, hash tables, two-finger tricks, and smart thinking to turn slow <span class="big-o o-bad">O(n²)</span> solutions into fast <span class="big-o o-good">O(n)</span> ones.</p>
+            </section>
+
+            <section class="lesson-section">
+                <h2>👉👉 Pattern 1: Two Pointers</h2>
+                <p>Use <strong>two indexes</strong> that move toward each other (or in the same direction). Great for sorted lists and reversing.</p>
+                <div class="code-block">def is_palindrome(s):
+    left, right = 0, len(s) - 1
+    while left &lt; right:
+        if s[left] != s[right]:
+            return False
+        left += 1
+        right -= 1
+    return True
+
+print(is_palindrome("racecar"))   # True</div>
+                <div class="tip-box">
+                    <h4>💡 When to reach for it</h4>
+                    <p>Two pointers turn many <span class="big-o o-bad">O(n²)</span> "check every pair" problems into <span class="big-o o-good">O(n)</span>.</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🪟 Pattern 2: Sliding Window</h2>
+                <p>Keep a "window" over part of a list and slide it along, updating a running total instead of recomputing from scratch.</p>
+                <div class="code-block">def max_sum(nums, k):
+    window = sum(nums[:k])
+    best = window
+    for i in range(k, len(nums)):
+        window += nums[i] - nums[i - k]   # slide!
+        best = max(best, window)
+    return best
+
+print(max_sum([1, 4, 2, 10, 2], 2))   # 12</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🗂️ Pattern 3: Hash for Speed</h2>
+                <p>When you find yourself searching "have I seen this before?", a <strong>set or dict</strong> turns that lookup into <span class="big-o o-good">O(1)</span>.</p>
+                <div class="code-block">def first_repeat(nums):
+    seen = set()
+    for n in nums:
+        if n in seen:
+            return n
+        seen.add(n)
+    return None</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🎓 Your algorithm toolkit</h2>
+                <div class="info-box">
+                    <ul>
+                        <li><strong>Big-O</strong> — measure how an algorithm scales.</li>
+                        <li><strong>Recursion</strong> — solve a problem with smaller copies of itself.</li>
+                        <li><strong>Search &amp; Sort</strong> — binary search, bubble/merge sort.</li>
+                        <li><strong>Stacks, Queues, Linked Lists</strong> — organize data your way.</li>
+                        <li><strong>Hash tables &amp; Trees</strong> — instant lookups and branching data.</li>
+                        <li><strong>Patterns</strong> — two pointers, sliding window, hashing for speed.</li>
+                    </ul>
+                    <p>🎉 You've finished the Algorithms track. You now think like a real computer scientist!</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Final Boss Challenges!</h2>
+                <p>Use the patterns to slay these. 🏆</p>
+            </div>
+
+            <div class="task" data-expected="True
+False">
+                <div class="task-head">
+                    <span class="task-badge">🔁</span>
+                    <h3>Task 1: Palindrome with Two Pointers</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Finish <code>is_palindrome</code> using two pointers moving inward. <code>"racecar"</code> → <code>True</code>, <code>"hello"</code> → <code>False</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def is_palindrome(s):
+    left, right = 0, len(s) - 1
+    while left &lt; right:
+        if s[left] != s[right]:
+            return False
+        # move both pointers inward
+        pass
+    return True
+
+print(is_palindrome("racecar"))
+print(is_palindrome("hello"))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def is_palindrome(s):
+    left, right = 0, len(s) - 1
+    while left &lt; right:
+        if s[left] != s[right]:
+            return False
+        left += 1
+        right -= 1
+    return True
+
+print(is_palindrome("racecar"))
+print(is_palindrome("hello"))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="12">
+                <div class="task-head">
+                    <span class="task-badge">🪟</span>
+                    <h3>Task 2: Best Window Sum</h3>
+                    <span class="task-difficulty diff-hard">Challenge</span>
+                </div>
+                <p class="task-goal">Find the biggest sum of any <code>k=2</code> neighbours in <code>[1, 4, 2, 10, 2]</code> using a sliding window. Answer: <code>12</code> (10 + 2).</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def max_sum(nums, k):
+    window = sum(nums[:k])
+    best = window
+    for i in range(k, len(nums)):
+        # slide: add nums[i], remove nums[i-k], then update best
+        pass
+    return best
+
+print(max_sum([1, 4, 2, 10, 2], 2))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def max_sum(nums, k):
+    window = sum(nums[:k])
+    best = window
+    for i in range(k, len(nums)):
+        window += nums[i] - nums[i - k]
+        best = max(best, window)
+    return best
+
+print(max_sum([1, 4, 2, 10, 2], 2))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="4">
+                <div class="task-head">
+                    <span class="task-badge">🎯</span>
+                    <h3>Task 3: First Repeated Number</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Return the first number that appears twice in <code>[5, 1, 4, 4, 2, 1]</code> using a set for O(1) lookups. Answer: <code>4</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">def first_repeat(nums):
+    seen = set()
+    for n in nums:
+        # if n already seen, return it; else remember it
+        pass
+    return None
+
+print(first_repeat([5, 1, 4, 4, 2, 1]))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def first_repeat(nums):
+    seen = set()
+    for n in nums:
+        if n in seen:
+            return n
+        seen.add(n)
+    return None
+
+print(first_repeat([5, 1, 4, 4, 2, 1]))</pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="algo-trees.html">← Previous: Trees &amp; BSTs</a>
+            <a class="nav-next disabled" aria-disabled="true">🎉 Track Complete!</a>
+        </nav>
+
+        <footer>
+            <p>🏆 You finished Algorithms &amp; Data Structures. Amazing work!</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

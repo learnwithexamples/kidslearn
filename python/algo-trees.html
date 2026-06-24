@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trees &amp; BSTs - Algorithms - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body class="theme-algo">
+    <div class="container">
+        <header>
+            <h1>🌳 Trees &amp; BSTs</h1>
+            <p class="subtitle">Branching data structures</p>
+            <a href="algorithms.html" class="back-link">← Back to Algorithms</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>🌲 What is a tree?</h2>
+                <div class="info-box">
+                    <p>A <strong>tree</strong> is a structure that branches out, like a family tree or a folder structure. It starts at the <strong>root</strong> and each node can have <strong>children</strong>. Nodes with no children are <strong>leaves</strong>.</p>
+                </div>
+                <div class="code-block">        (8)         &lt;- root
+       /   \
+     (3)   (10)
+    /  \      \
+  (1)  (6)   (14)   &lt;- leaves</div>
+                <p>Trees are everywhere: file systems, the HTML on this page (the DOM!), decision trees in AI, and database indexes.</p>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🌴 Binary trees</h2>
+                <p>A <strong>binary tree</strong> is a tree where each node has at most <strong>two</strong> children: a <code>left</code> and a <code>right</code>. We build it with a node class:</p>
+                <div class="code-block">class Node:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+root = Node(8)
+root.left = Node(3)
+root.right = Node(10)</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔎 Binary Search Tree (BST)</h2>
+                <div class="info-box">
+                    <p>A <strong>BST</strong> follows one golden rule at every node: <strong>smaller values go left, larger values go right</strong>. This keeps the data organized so you can search it in <span class="big-o o-good">O(log n)</span> — just like binary search!</p>
+                </div>
+                <div class="code-block">def insert(root, value):
+    if root is None:
+        return Node(value)
+    if value &lt; root.value:
+        root.left = insert(root.left, value)
+    else:
+        root.right = insert(root.right, value)
+    return root</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🚶 Traversals — visiting every node</h2>
+                <p>Because trees branch, we use <strong>recursion</strong> to visit nodes. <strong>In-order</strong> traversal of a BST magically returns the values <em>in sorted order</em>!</p>
+                <div class="code-block">def in_order(root):
+    if root is None:
+        return
+    in_order(root.left)     # 1. left subtree
+    print(root.value)       # 2. this node
+    in_order(root.right)    # 3. right subtree</div>
+                <div class="tip-box">
+                    <h4>💡 Three traversal orders</h4>
+                    <ul>
+                        <li><strong>In-order</strong> (left, node, right) → sorted output for a BST.</li>
+                        <li><strong>Pre-order</strong> (node, left, right) → copy/serialize a tree.</li>
+                        <li><strong>Post-order</strong> (left, right, node) → delete a tree safely.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="info-box">
+                    <ul>
+                        <li>A <strong>tree</strong> branches from a root; nodes have children, leaves have none.</li>
+                        <li>A <strong>binary tree</strong> node has <code>left</code> and <code>right</code> children.</li>
+                        <li>A <strong>BST</strong> keeps smaller left, larger right → fast O(log n) search.</li>
+                        <li><strong>In-order</strong> traversal of a BST prints values in sorted order.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Grow a tree, then climb it with recursion. 🌳</p>
+            </div>
+
+            <div class="task" data-expected="8
+3
+10">
+                <div class="task-head">
+                    <span class="task-badge">🌱</span>
+                    <h3>Task 1: Build a Tiny Tree</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Give the root (8) a left child of <code>3</code> and a right child of <code>10</code>. Then print the root, left, and right values → <code>8</code>, <code>3</code>, <code>10</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">class Node:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+root = Node(8)
+# add left child 3 and right child 10
+print(root.value)
+print(root.left.value)
+print(root.right.value)
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>root = Node(8)
+root.left = Node(3)
+root.right = Node(10)
+print(root.value)
+print(root.left.value)
+print(root.right.value)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="1
+3
+6
+8
+10
+14">
+                <div class="task-head">
+                    <span class="task-badge">🔤</span>
+                    <h3>Task 2: In-Order = Sorted!</h3>
+                    <span class="task-difficulty diff-hard">Challenge</span>
+                </div>
+                <p class="task-goal">Complete the in-order traversal (left, then node, then right). The BST is built for you. Running it should print the values <strong>in sorted order</strong>: 1, 3, 6, 8, 10, 14.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">class Node:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+def insert(root, value):
+    if root is None:
+        return Node(value)
+    if value &lt; root.value:
+        root.left = insert(root.left, value)
+    else:
+        root.right = insert(root.right, value)
+    return root
+
+root = None
+for v in [8, 3, 10, 1, 6, 14]:
+    root = insert(root, v)
+
+def in_order(root):
+    if root is None:
+        return
+    # 1. recurse left, 2. print value, 3. recurse right
+    pass
+
+in_order(root)
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def in_order(root):
+    if root is None:
+        return
+    in_order(root.left)
+    print(root.value)
+    in_order(root.right)
+
+in_order(root)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="3">
+                <div class="task-head">
+                    <span class="task-badge">📐</span>
+                    <h3>Task 3: Tree Height</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">The <strong>height</strong> of a tree is the longest path from root to a leaf. Recursively: height = 1 + the taller of the two children. An empty tree has height 0. This tree's height is <code>3</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false">class Node:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+def insert(root, value):
+    if root is None:
+        return Node(value)
+    if value &lt; root.value:
+        root.left = insert(root.left, value)
+    else:
+        root.right = insert(root.right, value)
+    return root
+
+root = None
+for v in [8, 3, 10, 1]:
+    root = insert(root, v)
+
+def height(root):
+    if root is None:
+        return 0
+    # 1 + max(height(left), height(right))
+    pass
+
+print(height(root))
+</textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def height(root):
+    if root is None:
+        return 0
+    return 1 + max(height(root.left), height(root.right))
+
+print(height(root))</pre>
+                </div>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="algo-hashing.html">← Previous: Hash Tables</a>
+            <a class="nav-next" href="algo-patterns.html">Next: Problem-Solving Patterns →</a>
+        </nav>
+
+        <footer>
+            <p>Recursion + trees = a perfect match. 🌳</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>
