@@ -79,8 +79,18 @@
 
         let captured = '';
         outputEl.textContent = '';
-        py.setStdout({ batched: (s) => { captured += s + '\n'; outputEl.textContent += s + '\n'; } });
-        py.setStderr({ batched: (s) => { captured += s + '\n'; outputEl.textContent += s + '\n'; } });
+        // Use the raw byte `write` handler instead of `batched`: batched only
+        // delivers complete lines, so output ending without a newline (e.g.
+        // print(..., end="")) would be buffered and lost.
+        const decoder = new TextDecoder('utf-8');
+        const write = (buf) => {
+            const text = decoder.decode(buf, { stream: true });
+            captured += text;
+            outputEl.textContent += text;
+            return buf.length;
+        };
+        py.setStdout({ write });
+        py.setStderr({ write });
         py.setStdin({
             stdin: () => {
                 const v = window.prompt('Your program is asking for input:');
