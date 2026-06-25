@@ -127,7 +127,10 @@
         const solution = task.querySelector('.solution');
         if (!textarea || !output) return;
 
-        const starter = textarea.value;
+        // Every playground starts blank — students write all the code
+        // themselves. (Any text in the HTML textarea is ignored.)
+        textarea.value = '';
+        const starter = '';
 
         // Tab key inserts 4 spaces instead of leaving the editor.
         textarea.addEventListener('keydown', (e) => {
