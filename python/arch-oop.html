@@ -12,7 +12,7 @@
     <div class="container">
         <header>
             <h1>📦 Objects &amp; Classes</h1>
-            <p class="subtitle">Bundle data and behavior together</p>
+            <p class="subtitle">Bundle data and behavior together — from blueprints to superpowers</p>
             <a href="architecture.html" class="back-link">← Back to Architecture</a>
         </header>
 
@@ -24,67 +24,169 @@
         <!-- ============ DESCRIPTION ============ -->
         <div id="description" class="tab-panel">
             <section class="lesson-section">
-                <h2>🧸 Think of a blueprint</h2>
+                <h2>🧸 The big idea</h2>
                 <div class="info-box">
-                    <p>A <strong>class</strong> is a blueprint. An <strong>object</strong> is a thing built from that blueprint. One "Dog" blueprint can make many dogs — each with its own name, but all able to bark.</p>
+                    <p>A <strong>class</strong> is a blueprint. An <strong>object</strong> is a real thing built from that blueprint. One "Dog" blueprint can make many dogs — each with its own name, but all able to bark.</p>
                 </div>
-                <p>This idea is called <strong>Object-Oriented Programming (OOP)</strong>. It lets you bundle <strong>data</strong> (a dog's name) and <strong>behavior</strong> (barking) into one neat package.</p>
+                <p>This is <strong>Object-Oriented Programming (OOP)</strong>. It lets you bundle <strong>data</strong> (a dog's name) and <strong>behavior</strong> (barking) into one neat package. We'll go in two stages: <strong>Part A — Basics</strong>, then <strong>Part B — Advanced</strong>.</p>
+            </section>
+
+            <!-- ========================================================= -->
+            <h2 style="text-align:center; margin-top:10px;">🟢 Part A — The Basics</h2>
+            <!-- ========================================================= -->
+
+            <section class="lesson-section">
+                <h2>1️⃣ Class vs. Object</h2>
+                <p>A <strong>class</strong> is like a house <em>plan</em>. An <strong>object</strong> (also called an <em>instance</em>) is an actual house built from it. From one plan you can build a whole street of houses.</p>
+                <div class="code-block">class Dog:        # the blueprint
+    pass
+
+rex = Dog()       # an object built from the blueprint
+fido = Dog()      # another, separate object
+print(rex)        # &lt;__main__.Dog object ...&gt;</div>
             </section>
 
             <section class="lesson-section">
-                <h2>🏗️ Defining a class</h2>
+                <h2>2️⃣ The <code>__init__</code> constructor</h2>
+                <p><code>__init__</code> runs <strong>automatically</strong> the moment you create an object. Use it to set up the starting data each object needs.</p>
+                <div class="code-block">class Dog:
+    def __init__(self, name, age):
+        self.name = name        # store the data
+        self.age = age
+
+rex = Dog("Rex", 3)
+print(rex.name)   # Rex
+print(rex.age)    # 3</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>3️⃣ The <code>self</code> parameter</h2>
+                <p><code>self</code> means "this particular object." It keeps each object's data tied to <em>itself</em>, so Rex's name never gets mixed up with Fido's.</p>
+                <div class="tip-box">
+                    <h4>💡 Two dogs, two names</h4>
+                    <p><code>rex.name</code> is Rex's, <code>fido.name</code> is Fido's. <code>self</code> is how Python knows which dog you mean.</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>4️⃣ Attributes vs. Methods</h2>
+                <ul>
+                    <li><strong>Attributes</strong> = the object's data (variables), like <code>self.name</code>.</li>
+                    <li><strong>Methods</strong> = the object's actions (functions), like <code>bark()</code>.</li>
+                </ul>
                 <div class="code-block">class Dog:
     def __init__(self, name):
-        self.name = name        # data (attribute)
-
-    def bark(self):             # behavior (method)
+        self.name = name          # attribute (data)
+    def bark(self):               # method (action)
         return self.name + " says Woof!"
 
-rex = Dog("Rex")               # make an object
-print(rex.bark())              # Rex says Woof!</div>
-                <div class="tip-box">
-                    <h4>💡 Decoding the pieces</h4>
-                    <ul>
-                        <li><code>__init__</code> is the <strong>constructor</strong> — it runs when you create an object.</li>
-                        <li><code>self</code> means "this particular object."</li>
-                        <li><strong>Attributes</strong> are variables on the object; <strong>methods</strong> are its functions.</li>
-                    </ul>
-                </div>
+rex = Dog("Rex")
+print(rex.bark())                 # Rex says Woof!</div>
+            </section>
+
+            <!-- ========================================================= -->
+            <h2 style="text-align:center; margin-top:10px;">🔴 Part B — Advanced</h2>
+            <!-- ========================================================= -->
+
+            <section class="lesson-section">
+                <h2>5️⃣ Instance vs. Class variables</h2>
+                <p>An <strong>instance variable</strong> belongs to one object. A <strong>class variable</strong> is shared by <em>all</em> objects of that class.</p>
+                <div class="code-block">class Dog:
+    species = "Canis familiaris"   # class variable (shared)
+    def __init__(self, name):
+        self.name = name           # instance variable (unique)
+
+print(Dog("Rex").species)          # Canis familiaris
+print(Dog("Fido").species)         # same for everyone</div>
             </section>
 
             <section class="lesson-section">
-                <h2>🔐 Encapsulation</h2>
-                <p>An object keeps its data <strong>inside</strong> and lets you change it through methods. This protects the data from invalid changes.</p>
-                <div class="code-block">class BankAccount:
-    def __init__(self):
-        self.balance = 0
+                <h2>6️⃣ <code>@classmethod</code> vs. <code>@staticmethod</code></h2>
+                <ul>
+                    <li><code>@classmethod</code> gets the class as <code>cls</code> — great for building objects in a special way.</li>
+                    <li><code>@staticmethod</code> is just a helper that lives in the class but needs no object.</li>
+                </ul>
+                <div class="code-block">class Dog:
+    def __init__(self, name): self.name = name
+    @classmethod
+    def puppy(cls): return cls("Baby")     # makes a Dog
+    @staticmethod
+    def is_dog(sound): return sound == "Woof"
 
-    def deposit(self, amount):
-        if amount &gt; 0:
-            self.balance += amount</div>
+print(Dog.puppy().name)   # Baby
+print(Dog.is_dog("Woof")) # True</div>
             </section>
 
             <section class="lesson-section">
-                <h2>🧬 Inheritance</h2>
-                <p>A class can <strong>inherit</strong> from another, reusing its code and adding more. A <code>Puppy</code> is a <code>Dog</code> that can also play.</p>
-                <div class="code-block">class Puppy(Dog):
-    def play(self):
-        return self.name + " wags its tail!"
+                <h2>7️⃣ Getters &amp; setters with <code>@property</code></h2>
+                <p>A <strong>property</strong> lets you guard an attribute — validate or compute it — while still using simple <code>dog.age</code> syntax.</p>
+                <div class="code-block">class Dog:
+    def __init__(self, age): self._age = age
+    @property
+    def age(self): return self._age
+    @age.setter
+    def age(self, value):
+        if value &lt; 0: raise ValueError("Age can't be negative")
+        self._age = value
 
-buddy = Puppy("Buddy")
-print(buddy.bark())   # inherited from Dog
-print(buddy.play())   # new ability</div>
+d = Dog(3)
+d.age = 5          # uses the setter (validates!)
+print(d.age)       # 5</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>8️⃣ Inheritance, overriding &amp; <code>super()</code></h2>
+                <p>A child class <strong>inherits</strong> a parent's powers, can <strong>override</strong> a method to change it, and can call the parent with <code>super()</code>.</p>
+                <div class="code-block">class Animal:
+    def speak(self): return "..."
+class Cat(Animal):
+    def speak(self): return "Meow"          # override
+class Puppy(Animal):
+    def speak(self): return super().speak() + " Woof"
+
+print(Cat().speak())     # Meow
+print(Puppy().speak())   # ... Woof</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>9️⃣ Polymorphism</h2>
+                <p>Different classes can answer the <strong>same method call</strong> their own way. One loop, many behaviors.</p>
+                <div class="code-block">animals = [Cat(), Puppy()]
+for a in animals:
+    print(a.speak())   # each class responds its own way</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔟 Dunder methods &amp; operator overloading</h2>
+                <p>"Dunder" = double underscore. They make your objects behave like built-in types. <code>__str__</code> controls printing; <code>__add__</code> makes <code>+</code> work.</p>
+                <div class="code-block">class Money:
+    def __init__(self, amt): self.amt = amt
+    def __str__(self): return f"${self.amt}"
+    def __add__(self, other): return Money(self.amt + other.amt)
+
+print(Money(5) + Money(3))   # $8</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>1️⃣1️⃣ Python extras: dataclasses &amp; ABCs</h2>
+                <ul>
+                    <li><code>@dataclass</code> auto-writes <code>__init__</code> and <code>__repr__</code> for data-heavy classes.</li>
+                    <li><strong>Abstract Base Classes</strong> force children to implement certain methods.</li>
+                </ul>
+                <div class="code-block">from dataclasses import dataclass
+@dataclass
+class Point:
+    x: int
+    y: int
+
+print(Point(1, 2))   # Point(x=1, y=2)</div>
             </section>
 
             <section class="lesson-section">
                 <h2>✅ What you learned</h2>
                 <div class="info-box">
-                    <ul>
-                        <li>A <strong>class</strong> is a blueprint; an <strong>object</strong> is built from it.</li>
-                        <li><code>__init__</code> sets up attributes; <code>self</code> is "this object."</li>
-                        <li><strong>Methods</strong> are behaviors; <strong>attributes</strong> are data.</li>
-                        <li><strong>Inheritance</strong> lets one class reuse and extend another.</li>
-                    </ul>
+                    <p><strong>Basics:</strong> class vs. object, <code>__init__</code>, <code>self</code>, attributes &amp; methods.</p>
+                    <p><strong>Advanced:</strong> class vs. instance variables, <code>@classmethod</code>/<code>@staticmethod</code>, <code>@property</code>, inheritance, <code>super()</code>, polymorphism, dunder methods, dataclasses &amp; ABCs.</p>
                 </div>
             </section>
         </div>
@@ -93,7 +195,7 @@ print(buddy.play())   # new ability</div>
         <div id="practice" class="tab-panel" style="display:none;">
             <div class="practice-intro">
                 <h2>🎮 Time to Practice!</h2>
-                <p>Build blueprints and bring objects to life. 📦</p>
+                <p>Build blueprints, then unlock the advanced powers. 📦</p>
             </div>
 
             <div class="task" data-expected="Rex says Woof!">
@@ -102,19 +204,9 @@ print(buddy.play())   # new ability</div>
                     <h3>Task 1: Make a Dog Bark</h3>
                     <span class="task-difficulty diff-easy">Easy</span>
                 </div>
-                <p class="task-goal">Finish the <code>bark</code> method so it returns the dog's name plus <code>" says Woof!"</code>. Create <code>Dog("Rex")</code> → <code>Rex says Woof!</code>.</p>
+                <p class="task-goal">Write a <code>Dog</code> class with <code>__init__(self, name)</code> and a <code>bark()</code> method returning name + <code>" says Woof!"</code>. Create <code>Dog("Rex")</code> and print its bark → <code>Rex says Woof!</code>.</p>
                 <div class="playground">
-                    <textarea class="code-input" spellcheck="false">class Dog:
-    def __init__(self, name):
-        self.name = name
-
-    def bark(self):
-        # return name + " says Woof!"
-        pass
-
-rex = Dog("Rex")
-print(rex.bark())
-</textarea>
+                    <textarea class="code-input" spellcheck="false"></textarea>
                     <div class="pg-buttons">
                         <button class="run-btn">▶ Run</button>
                         <button class="check-btn">✓ Check</button>
@@ -127,12 +219,10 @@ print(rex.bark())
                     <pre>class Dog:
     def __init__(self, name):
         self.name = name
-
     def bark(self):
         return self.name + " says Woof!"
 
-rex = Dog("Rex")
-print(rex.bark())</pre>
+print(Dog("Rex").bark())</pre>
                 </div>
             </div>
 
@@ -142,22 +232,9 @@ print(rex.bark())</pre>
                     <h3>Task 2: A Safe Bank Account</h3>
                     <span class="task-difficulty diff-medium">Medium</span>
                 </div>
-                <p class="task-goal">Finish <code>deposit</code> so it adds to the balance only when the amount is positive. After depositing 50, then -10 (ignored), then 30... wait — deposit 50 then withdraw nothing: deposit 10, then 20 → balance <code>30</code>.</p>
+                <p class="task-goal">Write a <code>BankAccount</code> starting at balance 0 with a <code>deposit</code> method that only adds when the amount is positive. Deposit 10, then -99 (ignored), then 20, and print the balance → <code>30</code>.</p>
                 <div class="playground">
-                    <textarea class="code-input" spellcheck="false">class BankAccount:
-    def __init__(self):
-        self.balance = 0
-
-    def deposit(self, amount):
-        # only add when amount > 0
-        pass
-
-acc = BankAccount()
-acc.deposit(10)
-acc.deposit(-99)   # ignored
-acc.deposit(20)
-print(acc.balance)
-</textarea>
+                    <textarea class="code-input" spellcheck="false"></textarea>
                     <div class="pg-buttons">
                         <button class="run-btn">▶ Run</button>
                         <button class="check-btn">✓ Check</button>
@@ -170,7 +247,6 @@ print(acc.balance)
                     <pre>class BankAccount:
     def __init__(self):
         self.balance = 0
-
     def deposit(self, amount):
         if amount &gt; 0:
             self.balance += amount
@@ -183,29 +259,16 @@ print(acc.balance)</pre>
                 </div>
             </div>
 
-            <div class="task" data-expected="Buddy says Woof!
-Buddy wags its tail!">
+            <div class="task" data-expected="Canis familiaris
+Canis familiaris">
                 <div class="task-head">
-                    <span class="task-badge">🧬</span>
-                    <h3>Task 3: A Puppy Inherits</h3>
-                    <span class="task-difficulty diff-hard">Challenge</span>
+                    <span class="task-badge">🌍</span>
+                    <h3>Task 3: Shared Class Variable</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
                 </div>
-                <p class="task-goal">Make <code>Puppy</code> inherit from <code>Dog</code> and add a <code>play</code> method returning name + <code>" wags its tail!"</code>. <code>Puppy("Buddy")</code> should bark <em>and</em> play.</p>
+                <p class="task-goal">Give <code>Dog</code> a <strong>class variable</strong> <code>species = "Canis familiaris"</code>. Print the species of two different dogs — both share it. Expected: the line twice.</p>
                 <div class="playground">
-                    <textarea class="code-input" spellcheck="false">class Dog:
-    def __init__(self, name):
-        self.name = name
-    def bark(self):
-        return self.name + " says Woof!"
-
-class Puppy(Dog):
-    # add a play() method
-    pass
-
-buddy = Puppy("Buddy")
-print(buddy.bark())
-print(buddy.play())
-</textarea>
+                    <textarea class="code-input" spellcheck="false"></textarea>
                     <div class="pg-buttons">
                         <button class="run-btn">▶ Run</button>
                         <button class="check-btn">✓ Check</button>
@@ -215,13 +278,137 @@ print(buddy.play())
                     <pre class="pg-output"></pre>
                 </div>
                 <div class="solution" hidden>
-                    <pre>class Puppy(Dog):
+                    <pre>class Dog:
+    species = "Canis familiaris"
+    def __init__(self, name):
+        self.name = name
+
+print(Dog("Rex").species)
+print(Dog("Fido").species)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Buddy says Woof!
+Buddy wags its tail!">
+                <div class="task-head">
+                    <span class="task-badge">🧬</span>
+                    <h3>Task 4: A Puppy Inherits</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Make a <code>Dog</code> with a <code>bark()</code>, then a <code>Puppy(Dog)</code> that adds <code>play()</code> returning name + <code>" wags its tail!"</code>. <code>Puppy("Buddy")</code> should bark <em>and</em> play.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Dog:
+    def __init__(self, name):
+        self.name = name
+    def bark(self):
+        return self.name + " says Woof!"
+
+class Puppy(Dog):
     def play(self):
         return self.name + " wags its tail!"
 
 buddy = Puppy("Buddy")
 print(buddy.bark())
 print(buddy.play())</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="... Woof">
+                <div class="task-head">
+                    <span class="task-badge">⬆️</span>
+                    <h3>Task 5: Override with super()</h3>
+                    <span class="task-difficulty diff-hard">Challenge</span>
+                </div>
+                <p class="task-goal"><code>Animal.speak()</code> returns <code>"..."</code>. Make <code>Puppy</code> override <code>speak()</code> to return the parent's result plus <code>" Woof"</code> using <code>super()</code>. Print <code>Puppy().speak()</code> → <code>... Woof</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Animal:
+    def speak(self):
+        return "..."
+
+class Puppy(Animal):
+    def speak(self):
+        return super().speak() + " Woof"
+
+print(Puppy().speak())</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="$8">
+                <div class="task-head">
+                    <span class="task-badge">➕</span>
+                    <h3>Task 6: Operator Overloading</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Build a <code>Money</code> class with <code>__str__</code> printing <code>$amount</code> and <code>__add__</code> so two Moneys add up. Print <code>Money(5) + Money(3)</code> → <code>$8</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Money:
+    def __init__(self, amt):
+        self.amt = amt
+    def __str__(self):
+        return f"${self.amt}"
+    def __add__(self, other):
+        return Money(self.amt + other.amt)
+
+print(Money(5) + Money(3))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Point(x=1, y=2)">
+                <div class="task-head">
+                    <span class="task-badge">⚡</span>
+                    <h3>Task 7: A dataclass</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Use <code>@dataclass</code> to make a <code>Point</code> with <code>x</code> and <code>y</code> — no <code>__init__</code> needed! Print <code>Point(1, 2)</code> → <code>Point(x=1, y=2)</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>from dataclasses import dataclass
+
+@dataclass
+class Point:
+    x: int
+    y: int
+
+print(Point(1, 2))</pre>
                 </div>
             </div>
         </div>
