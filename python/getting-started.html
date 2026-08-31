@@ -197,6 +197,245 @@ print("Hi, I'm ...")
                     <pre class="pg-output"></pre>
                 </div>
             </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Drill Time!</h2>
+                <p>One or two tasks is never enough to make a skill stick. Work down this list — each one is a little harder than the last. Type every line yourself (no copy-paste!), press <strong>▶ Run</strong>, then press <strong>✓ Check</strong>.</p>
+            </div>
+
+            <div class="task" data-expected="My name is Ana
+I am 10 years old
+I love pizza">
+                <div class="task-head">
+                    <span class="task-badge">📇</span>
+                    <h3>Task 5: Three Facts</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Print exactly three lines about a made-up kid: their name, their age, and their favorite food. Match this output <em>exactly</em> — spelling and capital letters matter to Python!</p>
+                <div class="code-block out">My name is Ana
+I am 10 years old
+I love pizza</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>print(&quot;My name is Ana&quot;)
+print(&quot;I am 10 years old&quot;)
+print(&quot;I love pizza&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="42
+55
+20">
+                <div class="task-head">
+                    <span class="task-badge">🧮</span>
+                    <h3>Task 6: Python the Calculator</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal"><code>print()</code> can do math too — anything without quotes gets worked out first. Print the answers to <code>7 * 6</code>, <code>100 - 45</code> and <code>12 + 8</code>, one per line. (No quotes anywhere!)</p>
+                <div class="code-block out">42
+55
+20</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>print(7 * 6)
+print(100 - 45)
+print(12 + 8)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="I have 3 cats and 2 dogs">
+                <div class="task-head">
+                    <span class="task-badge">🔗</span>
+                    <h3>Task 7: Commas Glue Things Together</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Inside <code>print()</code> you can list several things separated by commas, and Python puts a space between them. Print <code>I have 3 cats and 2 dogs</code> using commas, with the numbers written <strong>without</strong> quotes.</p>
+                <div class="code-block out">I have 3 cats and 2 dogs</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>print(&quot;I have&quot;, 3, &quot;cats and&quot;, 2, &quot;dogs&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="2026-01-15">
+                <div class="task-head">
+                    <span class="task-badge">🗓️</span>
+                    <h3>Task 8: The sep Trick</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal"><code>print(a, b, sep="-")</code> glues the pieces with a dash instead of a space. Print the date <code>2026-01-15</code> from the three separate numbers <code>2026</code>, <code>1</code>, <code>15</code>… careful, you need <code>"01"</code> as text to keep the zero!</p>
+                <div class="code-block out">2026-01-15</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>print(&quot;2026&quot;, &quot;01&quot;, &quot;15&quot;, sep=&quot;-&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Ready Set Go!">
+                <div class="task-head">
+                    <span class="task-badge">➡️</span>
+                    <h3>Task 9: The end Trick</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Normally <code>print()</code> jumps to a new line. Add <code>end=" "</code> to stay on the same line. Print <code>Ready Set Go!</code> using <strong>three separate</strong> <code>print()</code> calls.</p>
+                <div class="code-block out">Ready Set Go!</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>print(&quot;Ready&quot;, end=&quot; &quot;)
+print(&quot;Set&quot;, end=&quot; &quot;)
+print(&quot;Go!&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="She said &quot;Python is fun!&quot; and smiled">
+                <div class="task-head">
+                    <span class="task-badge">❝</span>
+                    <h3>Task 10: Quotes Inside Quotes</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">To put double quotes <em>inside</em> your text, wrap the whole thing in single quotes. Print this line exactly:</p>
+                <div class="code-block out">She said &quot;Python is fun!&quot; and smiled</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>print(&#x27;She said &quot;Python is fun!&quot; and smiled&#x27;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Line one
+Line two">
+                <div class="task-head">
+                    <span class="task-badge">🗒️</span>
+                    <h3>Task 11: Comment It Out</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">A line that starts with <code>#</code> is a <strong>comment</strong> — Python skips it completely. Write three lines: a comment saying <code>this is my homework</code>, a print of <code>Line one</code>, and a print of <code>Line two</code>. Only two lines should appear.</p>
+                <div class="code-block out">Line one
+Line two</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre># this is my homework
+print(&quot;Line one&quot;)
+print(&quot;Line two&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="5
+4
+3
+2
+1
+LIFT OFF! 🚀">
+                <div class="task-head">
+                    <span class="task-badge">🚀</span>
+                    <h3>Task 12: Boss Level: Rocket Countdown</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Print a countdown from 5 down to 1, each on its own line, then <code>LIFT OFF! 🚀</code>. You only know <code>print()</code> so far — that means six <code>print()</code> lines. (Later you'll do this with a loop in one line!)</p>
+                <div class="code-block out">5
+4
+3
+2
+1
+LIFT OFF! 🚀</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>print(5)
+print(4)
+print(3)
+print(2)
+print(1)
+print(&quot;LIFT OFF! 🚀&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🖼️</span>
+                    <h3>Task 13: Free Play — Draw Something</h3>
+                    <span class="task-difficulty diff-easy">Creative</span>
+                </div>
+                <p class="task-goal">Use <code>print()</code> lines to draw ASCII art: a house, a rocket, your initials, anything. Try to make it at least 5 lines tall. There is no wrong answer — just make it awesome. 🎨</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
         </div>
 
         <nav class="lesson-nav">

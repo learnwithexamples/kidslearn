@@ -115,7 +115,7 @@ Saved: 42">
                     <h3>Task 1: Split Responsibilities</h3>
                     <span class="task-difficulty diff-medium">Medium</span>
                 </div>
-                <p class="task-goal">Keep <code>Report</code> only for calculating, and put saving in a separate <code>ReportSaver</code>. Finish both methods so the output is <code>42</code> then <code>Saved: 42</code>.</p>
+                <p class="task-goal">Keep <code>Report</code> only for calculating (a <code>total()</code> method) and put saving in a separate <code>ReportSaver</code> with a <code>save(value)</code> method. Use the numbers <code>[20, 22]</code> and print the total, then the saved message.</p>
                 <div class="playground">
                     <textarea class="code-input" spellcheck="false">class Report:
     def calculate(self):
@@ -141,9 +141,20 @@ print(saver.save(result))
                     <pre class="pg-output"></pre>
                 </div>
                 <div class="solution" hidden>
-                    <pre>class ReportSaver:
+                    <pre>class Report:
+    def __init__(self, numbers):
+        self.numbers = numbers
+
+    def total(self):
+        return sum(self.numbers)
+
+class ReportSaver:
     def save(self, value):
-        return "Saved: " + str(value)</pre>
+        return &quot;Saved: &quot; + str(value)
+
+report = Report([20, 22])
+print(report.total())
+print(ReportSaver().save(report.total()))</pre>
                 </div>
             </div>
 
@@ -154,7 +165,7 @@ print(saver.save(result))
                     <h3>Task 2: Open/Closed Shapes</h3>
                     <span class="task-difficulty diff-hard">Challenge</span>
                 </div>
-                <p class="task-goal">Add a <code>Square</code> class that extends <code>Shape</code> without changing <code>Circle</code>. <code>Circle(5).area()</code> → <code>78.5</code>, <code>Square(4).area()</code> → <code>16</code>.</p>
+                <p class="task-goal">Write a <code>Shape</code> base class and a <code>Circle</code> (use 3.14 for π), then add a <code>Square</code> that extends <code>Shape</code> <strong>without editing Circle at all</strong>. Print the area of <code>Circle(5)</code> and <code>Square(4)</code>.</p>
                 <div class="playground">
                     <textarea class="code-input" spellcheck="false">class Shape:
     def area(self):
@@ -182,7 +193,17 @@ print(Square(4).area())
                     <pre class="pg-output"></pre>
                 </div>
                 <div class="solution" hidden>
-                    <pre>class Square(Shape):
+                    <pre>class Shape:
+    def area(self):
+        raise NotImplementedError
+
+class Circle(Shape):
+    def __init__(self, r):
+        self.r = r
+    def area(self):
+        return 3.14 * self.r * self.r
+
+class Square(Shape):
     def __init__(self, s):
         self.s = s
     def area(self):
@@ -200,7 +221,7 @@ Sending via SMS: Hi!">
                     <h3>Task 3: Dependency Inversion</h3>
                     <span class="task-difficulty diff-hard">Boss</span>
                 </div>
-                <p class="task-goal">The <code>Notifier</code> takes any <em>sender</em> object with a <code>send</code> method — so we can swap Email for SMS without changing <code>Notifier</code>. Finish both senders' <code>send</code> methods.</p>
+                <p class="task-goal">Write <code>EmailSender</code> and <code>SmsSender</code>, both with a <code>send(msg)</code> method, and a <code>Notifier</code> that accepts <em>any</em> sender in <code>__init__</code>. Swapping email for SMS must need no change inside <code>Notifier</code>. Send <code>"Hi!"</code> both ways.</p>
                 <div class="playground">
                     <textarea class="code-input" spellcheck="false">class EmailSender:
     def send(self, msg):
@@ -229,9 +250,267 @@ print(Notifier(SmsSender()).notify("Hi!"))
                     <pre class="pg-output"></pre>
                 </div>
                 <div class="solution" hidden>
-                    <pre>class SmsSender:
+                    <pre>class EmailSender:
     def send(self, msg):
-        return "Sending via SMS: " + msg</pre>
+        return &quot;Sending via Email: &quot; + msg
+
+class SmsSender:
+    def send(self, msg):
+        return &quot;Sending via SMS: &quot; + msg
+
+class Notifier:
+    def __init__(self, sender):
+        self.sender = sender
+
+    def notify(self, msg):
+        return self.sender.send(msg)
+
+print(Notifier(EmailSender()).notify(&quot;Hi!&quot;))
+print(Notifier(SmsSender()).notify(&quot;Hi!&quot;))</pre>
+                </div>
+            </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Engineering Reps</h2>
+                <p>Five letters, five habits that keep big code from rotting. Practice each one on a small example so you recognize it in a big one.</p>
+            </div>
+
+            <div class="task" data-expected="Sparrow is flying
+Penguin is swimming">
+                <div class="task-head">
+                    <span class="task-badge">🦆</span>
+                    <h3>Task 4: L — Liskov: Subclasses Must Behave</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">A <code>Bird</code> has <code>move()</code>. If <code>Penguin</code> inherits <code>fly()</code> and then crashes, the substitution rule is broken. Fix it: give <code>Bird</code> a <code>move()</code>, let <code>Sparrow</code> return <code>"flying"</code> and <code>Penguin</code> return <code>"swimming"</code>, then loop over both calling <code>move()</code> — no crashes, no special cases.</p>
+                <div class="code-block out">Sparrow is flying
+Penguin is swimming</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Bird:
+    def move(self):
+        return &quot;moving&quot;
+
+class Sparrow(Bird):
+    def move(self):
+        return &quot;flying&quot;
+
+class Penguin(Bird):
+    def move(self):
+        return &quot;swimming&quot;
+
+for bird in [Sparrow(), Penguin()]:
+    print(f&quot;{type(bird).__name__} is {bird.move()}&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="printing
+printing
+scanning">
+                <div class="task-head">
+                    <span class="task-badge">🔌</span>
+                    <h3>Task 5: I — Interface Segregation</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Do not force a class to have methods it cannot use. Instead of one fat <code>Machine</code> with print, scan and fax, write small classes: <code>Printer</code> with <code>print_page()</code>, <code>Scanner</code> with <code>scan()</code>, and <code>AllInOne(Printer, Scanner)</code> that gets both. Print the result of all three actions.</p>
+                <div class="code-block out">printing
+printing
+scanning</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Printer:
+    def print_page(self):
+        return &quot;printing&quot;
+
+class Scanner:
+    def scan(self):
+        return &quot;scanning&quot;
+
+class AllInOne(Printer, Scanner):
+    pass
+
+simple = Printer()
+machine = AllInOne()
+print(simple.print_page())
+print(machine.print_page())
+print(machine.scan())</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Ana: 90.0">
+                <div class="task-head">
+                    <span class="task-badge">✂️</span>
+                    <h3>Task 6: S — One Class, One Reason to Change</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">A <code>Student</code> class should not also know how to save files and format reports. Split it: <code>Student</code> holds the data and <code>average()</code>; <code>StudentReport</code> takes a student and returns a printable line. Print the report for a student with grades 80, 90, 100.</p>
+                <div class="code-block out">Ana: 90.0</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Student:
+    def __init__(self, name, grades):
+        self.name = name
+        self.grades = grades
+
+    def average(self):
+        return sum(self.grades) / len(self.grades)
+
+class StudentReport:
+    def __init__(self, student):
+        self.student = student
+
+    def line(self):
+        return f&quot;{self.student.name}: {self.student.average():.1f}&quot;
+
+print(StudentReport(Student(&quot;Ana&quot;, [80, 90, 100])).line())</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="15
+10">
+                <div class="task-head">
+                    <span class="task-badge">➕</span>
+                    <h3>Task 7: O — Add Without Editing</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">A <code>price_for(kind)</code> function full of <code>elif</code>s must be edited for every new ticket type. Replace it with a dictionary of prices plus a <code>register(kind, price)</code> function, so adding a <code>"student"</code> ticket needs no change to the lookup code. Print the adult price, register the student price, then print it too.</p>
+                <div class="code-block out">15
+10</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>PRICES = {&quot;adult&quot;: 15, &quot;child&quot;: 8}
+
+def register(kind, price):
+    PRICES[kind] = price
+
+def price_for(kind):
+    return PRICES.get(kind, 0)
+
+print(price_for(&quot;adult&quot;))
+register(&quot;student&quot;, 10)
+print(price_for(&quot;student&quot;))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Email: Dinner is ready
+SMS: Dinner is ready">
+                <div class="task-head">
+                    <span class="task-badge">🔄</span>
+                    <h3>Task 8: D — Depend on the Idea, Not the Thing</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">A <code>Notifier</code> should not hard-code email. Write <code>EmailSender</code> and <code>SmsSender</code> that both have <code>send(message)</code>, and a <code>Notifier</code> that receives <em>any</em> sender in its <code>__init__</code>. Send the same message both ways and print each result.</p>
+                <div class="code-block out">Email: Dinner is ready
+SMS: Dinner is ready</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class EmailSender:
+    def send(self, message):
+        return f&quot;Email: {message}&quot;
+
+class SmsSender:
+    def send(self, message):
+        return f&quot;SMS: {message}&quot;
+
+class Notifier:
+    def __init__(self, sender):
+        self.sender = sender
+
+    def alert(self, message):
+        return self.sender.send(message)
+
+print(Notifier(EmailSender()).alert(&quot;Dinner is ready&quot;))
+print(Notifier(SmsSender()).alert(&quot;Dinner is ready&quot;))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Charged $25.50 to card
+Took $25.50 in cash">
+                <div class="task-head">
+                    <span class="task-badge">🏗️</span>
+                    <h3>Task 9: Boss Level: All Five at Once</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Build a mini payment system: an abstract idea of a <code>PaymentMethod</code> with <code>pay(amount)</code>, two implementations (<code>Card</code>, <code>Cash</code>), and a <code>Checkout</code> class that takes any payment method and only handles totals. Pay $25.50 both ways and print each confirmation. Then say to yourself which letter each part of your design satisfies.</p>
+                <div class="code-block out">Charged $25.50 to card
+Took $25.50 in cash</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class PaymentMethod:
+    def pay(self, amount):
+        raise NotImplementedError
+
+class Card(PaymentMethod):
+    def pay(self, amount):
+        return f&quot;Charged ${amount:.2f} to card&quot;
+
+class Cash(PaymentMethod):
+    def pay(self, amount):
+        return f&quot;Took ${amount:.2f} in cash&quot;
+
+class Checkout:
+    def __init__(self, method):
+        self.method = method
+
+    def buy(self, prices):
+        return self.method.pay(sum(prices))
+
+print(Checkout(Card()).buy([10.00, 15.50]))
+print(Checkout(Cash()).buy([10.00, 15.50]))</pre>
                 </div>
             </div>
         </div>

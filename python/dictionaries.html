@@ -222,6 +222,315 @@ print(hero["power"])
                     <pre class="pg-output"></pre>
                 </div>
             </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Drill Time!</h2>
+                <p>Dictionaries are how real apps remember things — players, settings, scores, inventories. Time to build a lot of them.</p>
+            </div>
+
+            <div class="task" data-expected="Zara
+None
+none yet">
+                <div class="task-head">
+                    <span class="task-badge">🛟</span>
+                    <h3>Task 6: Safe Look-Up with get</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">With <code>hero = {"name": "Zara", "level": 7}</code>: print the name, then try <code>hero.get("pet")</code> for a key that does not exist, then <code>hero.get("pet", "none yet")</code> which gives a backup answer instead of crashing.</p>
+                <div class="code-block out">Zara
+None
+none yet</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>hero = {&quot;name&quot;: &quot;Zara&quot;, &quot;level&quot;: 7}
+print(hero[&quot;name&quot;])
+print(hero.get(&quot;pet&quot;))
+print(hero.get(&quot;pet&quot;, &quot;none yet&quot;))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="apple
+pear
+plum
+2
+3
+1
+apple costs 2
+pear costs 3
+plum costs 1">
+                <div class="task-head">
+                    <span class="task-badge">🔑</span>
+                    <h3>Task 7: Keys, Values, Items</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">With <code>prices = {"apple": 2, "pear": 3, "plum": 1}</code>, loop three times: first print every key, then every value, then print each pair as <code>apple costs 2</code> using <code>.items()</code>.</p>
+                <div class="code-block out">apple
+pear
+plum
+2
+3
+1
+apple costs 2
+pear costs 3
+plum costs 1</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>prices = {&quot;apple&quot;: 2, &quot;pear&quot;: 3, &quot;plum&quot;: 1}
+for key in prices:
+    print(key)
+for value in prices.values():
+    print(value)
+for fruit, price in prices.items():
+    print(f&quot;{fruit} costs {price}&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="{&#x27;sound&#x27;: False, &#x27;level&#x27;: 2, &#x27;nickname&#x27;: &#x27;Ace&#x27;}">
+                <div class="task-head">
+                    <span class="task-badge">✏️</span>
+                    <h3>Task 8: Change and Delete</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Start with <code>settings = {"sound": True, "level": 1, "cheats": True}</code>. Turn the sound off, raise the level to 2, add <code>"nickname": "Ace"</code>, delete the <code>cheats</code> key with <code>del</code>, then print the dictionary.</p>
+                <div class="code-block out">{&#x27;sound&#x27;: False, &#x27;level&#x27;: 2, &#x27;nickname&#x27;: &#x27;Ace&#x27;}</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>settings = {&quot;sound&quot;: True, &quot;level&quot;: 1, &quot;cheats&quot;: True}
+settings[&quot;sound&quot;] = False
+settings[&quot;level&quot;] = 2
+settings[&quot;nickname&quot;] = &quot;Ace&quot;
+del settings[&quot;cheats&quot;]
+print(settings)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Yes
+Not sold here">
+                <div class="task-head">
+                    <span class="task-badge">🚪</span>
+                    <h3>Task 9: Is That Key There?</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">With <code>stock = {"pens": 4, "books": 0}</code>: print <code>Yes</code> if <code>"pens"</code> is a key (use <code>in</code>), and print <code>Not sold here</code> if <code>"rulers"</code> is not a key.</p>
+                <div class="code-block out">Yes
+Not sold here</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>stock = {&quot;pens&quot;: 4, &quot;books&quot;: 0}
+if &quot;pens&quot; in stock:
+    print(&quot;Yes&quot;)
+if &quot;rulers&quot; not in stock:
+    print(&quot;Not sold here&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="{&#x27;b&#x27;: 1, &#x27;a&#x27;: 3, &#x27;n&#x27;: 2}">
+                <div class="task-head">
+                    <span class="task-badge">🔤</span>
+                    <h3>Task 10: Letter Counter</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Count how many times each letter appears in <code>word = "banana"</code> using a dictionary, then print the dictionary. Hint: for each letter, <code>counts[letter] = counts.get(letter, 0) + 1</code>.</p>
+                <div class="code-block out">{&#x27;b&#x27;: 1, &#x27;a&#x27;: 3, &#x27;n&#x27;: 2}</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>word = &quot;banana&quot;
+counts = {}
+for letter in word:
+    counts[letter] = counts.get(letter, 0) + 1
+print(counts)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="200
+91
+Ben">
+                <div class="task-head">
+                    <span class="task-badge">🧮</span>
+                    <h3>Task 11: Totals and Winners</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">With <code>scores = {"Ana": 42, "Ben": 91, "Cy": 67}</code>, print the total of all scores, the highest score, and the name of the winner. Hint for the winner: <code>max(scores, key=scores.get)</code>.</p>
+                <div class="code-block out">200
+91
+Ben</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>scores = {&quot;Ana&quot;: 42, &quot;Ben&quot;: 91, &quot;Cy&quot;: 67}
+print(sum(scores.values()))
+print(max(scores.values()))
+print(max(scores, key=scores.get))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="3
+Ana is level 3 with 50 hp
+Ben is level 5 with 80 hp">
+                <div class="task-head">
+                    <span class="task-badge">🪆</span>
+                    <h3>Task 12: A Dictionary Inside a Dictionary</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Build <code>team</code> holding two players, each with their own dictionary of <code>level</code> and <code>hp</code>. Print the level of the first player, then loop through and print <code>Ana is level 3 with 50 hp</code> style lines for everyone.</p>
+                <div class="code-block out">3
+Ana is level 3 with 50 hp
+Ben is level 5 with 80 hp</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>team = {
+    &quot;Ana&quot;: {&quot;level&quot;: 3, &quot;hp&quot;: 50},
+    &quot;Ben&quot;: {&quot;level&quot;: 5, &quot;hp&quot;: 80},
+}
+print(team[&quot;Ana&quot;][&quot;level&quot;])
+for name, info in team.items():
+    print(f&quot;{name} is level {info[&#x27;level&#x27;]} with {info[&#x27;hp&#x27;]} hp&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="{&#x27;France&#x27;: &#x27;Paris&#x27;, &#x27;Japan&#x27;: &#x27;Tokyo&#x27;, &#x27;Peru&#x27;: &#x27;Lima&#x27;}">
+                <div class="task-head">
+                    <span class="task-badge">🔗</span>
+                    <h3>Task 13: Two Lists Into One Dictionary</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">You have <code>countries = ["France", "Japan", "Peru"]</code> and <code>capitals = ["Paris", "Tokyo", "Lima"]</code>. Build a dictionary that maps each country to its capital and print it. Hint: <code>dict(zip(a, b))</code>.</p>
+                <div class="code-block out">{&#x27;France&#x27;: &#x27;Paris&#x27;, &#x27;Japan&#x27;: &#x27;Tokyo&#x27;, &#x27;Peru&#x27;: &#x27;Lima&#x27;}</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>countries = [&quot;France&quot;, &quot;Japan&quot;, &quot;Peru&quot;]
+capitals = [&quot;Paris&quot;, &quot;Tokyo&quot;, &quot;Lima&quot;]
+atlas = dict(zip(countries, capitals))
+print(atlas)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="apple x2 = 4
+bread x1 = 3
+milk x1 = 4
+TOTAL = 11">
+                <div class="task-head">
+                    <span class="task-badge">🏪</span>
+                    <h3>Task 14: Boss Level: Shop Till</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">A shop has <code>prices = {"apple": 2, "bread": 3, "milk": 4}</code> and a customer's <code>cart = ["apple", "milk", "apple", "bread"]</code>. Print one line per <em>different</em> item like <code>apple x2 = 4</code> (in the order apple, bread, milk), then a final <code>TOTAL = 11</code>.</p>
+                <div class="code-block out">apple x2 = 4
+bread x1 = 3
+milk x1 = 4
+TOTAL = 11</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>prices = {&quot;apple&quot;: 2, &quot;bread&quot;: 3, &quot;milk&quot;: 4}
+cart = [&quot;apple&quot;, &quot;milk&quot;, &quot;apple&quot;, &quot;bread&quot;]
+counts = {}
+for item in cart:
+    counts[item] = counts.get(item, 0) + 1
+total = 0
+for item in sorted(counts):
+    cost = counts[item] * prices[item]
+    total += cost
+    print(f&quot;{item} x{counts[item]} = {cost}&quot;)
+print(f&quot;TOTAL = {total}&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🐾</span>
+                    <h3>Task 15: Free Play — Your Own Database</h3>
+                    <span class="task-difficulty diff-easy">Creative</span>
+                </div>
+                <p class="task-goal">Build a dictionary about something you love: pokémon stats, planet facts, your class timetable. Add at least five entries, print them nicely with a loop, then look one up and change one. 🌍</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
         </div>
 
         <nav class="lesson-nav">

@@ -234,6 +234,270 @@ level = 1
                     <pre class="pg-output"></pre>
                 </div>
             </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Drill Time!</h2>
+                <p>Variables click only after you have made dozens of them. Do every task below — write the code yourself, run it, then check it.</p>
+            </div>
+
+            <div class="task" data-expected="banana
+apple">
+                <div class="task-head">
+                    <span class="task-badge">🔁</span>
+                    <h3>Task 5: The Great Swap</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Make <code>left = "apple"</code> and <code>right = "banana"</code>, then swap what is inside the two boxes so that printing <code>left</code> then <code>right</code> shows banana then apple. Hint: a third helper box, or Python's magic <code>a, b = b, a</code>.</p>
+                <div class="code-block out">banana
+apple</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>left = &quot;apple&quot;
+right = &quot;banana&quot;
+left, right = right, left
+print(left)
+print(right)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="30">
+                <div class="task-head">
+                    <span class="task-badge">⚡</span>
+                    <h3>Task 6: Shortcut Math</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal"><code>score += 10</code> is a shortcut for <code>score = score + 10</code>. Start with <code>score = 0</code>, add 10, add 25, then take away 5 — using the shortcuts <code>+=</code> and <code>-=</code> — and print the final score.</p>
+                <div class="code-block out">30</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>score = 0
+score += 10
+score += 25
+score -= 5
+print(score)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="11
+24">
+                <div class="task-head">
+                    <span class="task-badge">🎁</span>
+                    <h3>Task 7: Two Boxes at Once</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Python can fill two boxes in one line: <code>x, y = 3, 8</code>. Do that, then print their sum, then print their product.</p>
+                <div class="code-block out">11
+24</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>x, y = 3, 8
+print(x + y)
+print(x * y)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="I am 11 years old">
+                <div class="task-head">
+                    <span class="task-badge">🔤</span>
+                    <h3>Task 8: Numbers Into Words</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">You cannot add text to a number directly. Make <code>age = 11</code>, then print <code>I am 11 years old</code> by turning the number into text with <code>str(age)</code> and joining with <code>+</code>.</p>
+                <div class="code-block out">I am 11 years old</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>age = 11
+print(&quot;I am &quot; + str(age) + &quot; years old&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="50
+&lt;class &#x27;int&#x27;&gt;">
+                <div class="task-head">
+                    <span class="task-badge">🔢</span>
+                    <h3>Task 9: Words Into Numbers</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Sometimes a number arrives as text. Make <code>text_number = "42"</code>, turn it into a real number with <code>int()</code>, store it in <code>real_number</code>, then print <code>real_number + 8</code> and <code>type(real_number)</code>.</p>
+                <div class="code-block out">50
+&lt;class &#x27;int&#x27;&gt;</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>text_number = &quot;42&quot;
+real_number = int(text_number)
+print(real_number + 8)
+print(type(real_number))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="2.0
+2.5
+4.5">
+                <div class="task-head">
+                    <span class="task-badge">🛒</span>
+                    <h3>Task 10: Shopping Total</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Make variables <code>apples = 4</code>, <code>apple_price = 0.5</code>, <code>breads = 2</code>, <code>bread_price = 1.25</code>. Print the apple total, the bread total, then the grand total — three lines.</p>
+                <div class="code-block out">2.0
+2.5
+4.5</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>apples = 4
+apple_price = 0.5
+breads = 2
+bread_price = 1.25
+apple_total = apples * apple_price
+bread_total = breads * bread_price
+print(apple_total)
+print(bread_total)
+print(apple_total + bread_total)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="&lt;class &#x27;str&#x27;&gt;
+&lt;class &#x27;int&#x27;&gt;
+&lt;class &#x27;float&#x27;&gt;
+&lt;class &#x27;bool&#x27;&gt;">
+                <div class="task-head">
+                    <span class="task-badge">🕵️</span>
+                    <h3>Task 11: Type Detective II</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Predict before you run! Print the type of each of these, in order: <code>"7"</code>, <code>7</code>, <code>7.0</code>, <code>7 &gt; 3</code>. Were you right?</p>
+                <div class="code-block out">&lt;class &#x27;str&#x27;&gt;
+&lt;class &#x27;int&#x27;&gt;
+&lt;class &#x27;float&#x27;&gt;
+&lt;class &#x27;bool&#x27;&gt;</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>print(type(&quot;7&quot;))
+print(type(7))
+print(type(7.0))
+print(type(7 &gt; 3))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Zara
+3
+74.5
+50">
+                <div class="task-head">
+                    <span class="task-badge">🎮</span>
+                    <h3>Task 12: Boss Level: Game Save File</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">A hero starts with <code>level = 1</code>, <code>health = 100.0</code>, <code>coins = 0</code>, <code>name = "Zara"</code>. Then: the hero finds 50 coins, loses 25.5 health, and levels up twice. Print the four values afterwards, each on its own line, in the order name, level, health, coins.</p>
+                <div class="code-block out">Zara
+3
+74.5
+50</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>name = &quot;Zara&quot;
+level = 1
+health = 100.0
+coins = 0
+coins += 50
+health -= 25.5
+level += 1
+level += 1
+print(name)
+print(level)
+print(health)
+print(coins)</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🏷️</span>
+                    <h3>Task 13: Free Play — Name Things Well</h3>
+                    <span class="task-difficulty diff-easy">Creative</span>
+                </div>
+                <p class="task-goal">Invent five variables about yourself with really clear names (like <code>favorite_sport</code>, not <code>x</code>). Give them different types — text, whole number, decimal and True/False — then print them all with labels.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
         </div>
 
         <nav class="lesson-nav">

@@ -233,6 +233,351 @@ print("🚀 Blast off!")
                     <pre class="pg-output"></pre>
                 </div>
             </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Drill Time!</h2>
+                <p>Loops save you from writing the same line a hundred times. Grind through these and you will start seeing loops everywhere.</p>
+            </div>
+
+            <div class="task" data-expected="7 x 1 = 7
+7 x 2 = 14
+7 x 3 = 21
+7 x 4 = 28
+7 x 5 = 35
+7 x 6 = 42
+7 x 7 = 49
+7 x 8 = 56
+7 x 9 = 63
+7 x 10 = 70">
+                <div class="task-head">
+                    <span class="task-badge">✖️</span>
+                    <h3>Task 6: Times Table</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Print the 7 times table from 7 × 1 to 7 × 10, one line each, in the form <code>7 x 1 = 7</code>. Use a <code>for</code> loop with <code>range(1, 11)</code>.</p>
+                <div class="code-block out">7 x 1 = 7
+7 x 2 = 14
+7 x 3 = 21
+7 x 4 = 28
+7 x 5 = 35
+7 x 6 = 42
+7 x 7 = 49
+7 x 8 = 56
+7 x 9 = 63
+7 x 10 = 70</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>for i in range(1, 11):
+    print(f&quot;7 x {i} = {7 * i}&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="5050">
+                <div class="task-head">
+                    <span class="task-badge">🧮</span>
+                    <h3>Task 7: Sum to 100</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Add up every whole number from 1 to 100 with a loop and a <code>total</code> variable, then print the answer. (Legend says a schoolboy named Gauss did this in his head in seconds!)</p>
+                <div class="code-block out">5050</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>total = 0
+for n in range(1, 101):
+    total += n
+print(total)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="5
+4
+3
+2
+1
+Blast off!">
+                <div class="task-head">
+                    <span class="task-badge">⏳</span>
+                    <h3>Task 8: While Countdown</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Use a <code>while</code> loop to count down from 5 to 1, one number per line, then print <code>Blast off!</code>. Do not forget to make the number smaller each time, or the loop will never stop!</p>
+                <div class="code-block out">5
+4
+3
+2
+1
+Blast off!</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>n = 5
+while n &gt; 0:
+    print(n)
+    n -= 1
+print(&quot;Blast off!&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="P
+Y
+T
+H
+O
+N">
+                <div class="task-head">
+                    <span class="task-badge">🔤</span>
+                    <h3>Task 9: Loop Over Letters</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">A <code>for</code> loop can walk through text one character at a time. Loop over <code>"PYTHON"</code> and print each letter on its own line.</p>
+                <div class="code-block out">P
+Y
+T
+H
+O
+N</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>for letter in &quot;PYTHON&quot;:
+    print(letter)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="1
+2
+3
+4
+6
+7">
+                <div class="task-head">
+                    <span class="task-badge">⏭️</span>
+                    <h3>Task 10: Skip and Stop</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Loop over <code>range(1, 11)</code>. Use <code>continue</code> to skip the number 5 entirely, and <code>break</code> to stop completely once you reach 8. Print the numbers that survive.</p>
+                <div class="code-block out">1
+2
+3
+4
+6
+7</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>for n in range(1, 11):
+    if n == 5:
+        continue
+    if n == 8:
+        break
+    print(n)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="98">
+                <div class="task-head">
+                    <span class="task-badge">🏆</span>
+                    <h3>Task 11: Find the Biggest</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Without using <code>max()</code>, find the largest number in <code>scores = [12, 45, 7, 98, 33]</code> with a loop and print it. Start with <code>biggest = scores[0]</code> and replace it whenever you meet something larger.</p>
+                <div class="code-block out">98</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>scores = [12, 45, 7, 98, 33]
+biggest = scores[0]
+for s in scores:
+    if s &gt; biggest:
+        biggest = s
+print(biggest)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="*
+**
+***
+****
+*****">
+                <div class="task-head">
+                    <span class="task-badge">⭐</span>
+                    <h3>Task 12: Growing Star Triangle</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Print a triangle of stars 5 rows tall: one star on row 1, two on row 2, and so on. Hint: <code>"*" * n</code> repeats the star.</p>
+                <div class="code-block out">*
+**
+***
+****
+*****</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>for n in range(1, 6):
+    print(&quot;*&quot; * n)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="(1,1) (1,2) (1,3) 
+(2,1) (2,2) (2,3) 
+(3,1) (3,2) (3,3) ">
+                <div class="task-head">
+                    <span class="task-badge">🔲</span>
+                    <h3>Task 13: A Loop Inside a Loop</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Nested loops build grids. Print a 3 × 3 grid of coordinate pairs like <code>(1,1)</code> — three per line, separated by spaces. Hint: an inner loop with <code>end=" "</code>, then an empty <code>print()</code> to end the row.</p>
+                <div class="code-block out">(1,1) (1,2) (1,3) 
+(2,1) (2,2) (2,3) 
+(3,1) (3,2) (3,3) </div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>for row in range(1, 4):
+    for col in range(1, 4):
+        print(f&quot;({row},{col})&quot;, end=&quot; &quot;)
+    print()</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+16
+17
+Fizz
+19
+Buzz">
+                <div class="task-head">
+                    <span class="task-badge">🎳</span>
+                    <h3>Task 14: Boss Level: FizzBuzz</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">The most famous interview question ever! For numbers 1 to 20: print <code>Fizz</code> if the number divides by 3, <code>Buzz</code> if it divides by 5, <code>FizzBuzz</code> if it divides by both, otherwise the number itself. Check the both-case <strong>first</strong>!</p>
+                <div class="code-block out">1
+2
+Fizz
+4
+Buzz
+…
+Buzz</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>for n in range(1, 21):
+    if n % 3 == 0 and n % 5 == 0:
+        print(&quot;FizzBuzz&quot;)
+    elif n % 3 == 0:
+        print(&quot;Fizz&quot;)
+    elif n % 5 == 0:
+        print(&quot;Buzz&quot;)
+    else:
+        print(n)</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🧵</span>
+                    <h3>Task 15: Free Play — Pattern Maker</h3>
+                    <span class="task-difficulty diff-easy">Creative</span>
+                </div>
+                <p class="task-goal">Invent your own loop art: a diamond, a chessboard, a staircase, a spiral of emojis. Mix <code>*</code> repetition, nested loops and <code>end=""</code> until it looks great. 🎨</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
         </div>
 
         <nav class="lesson-nav">

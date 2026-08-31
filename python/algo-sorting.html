@@ -255,6 +255,211 @@ print(sorted(["hi", "hello", "hey"], key=len))
                     <pre class="pg-output"></pre>
                 </div>
             </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Algorithm Reps</h2>
+                <p>Sorting algorithms are the classic training ground. Write each one by hand — that is how you learn to think in loops and swaps.</p>
+            </div>
+
+            <div class="task" data-expected="[1, 2, 5, 7, 9]">
+                <div class="task-head">
+                    <span class="task-badge">🃏</span>
+                    <h3>Task 5: Insertion Sort</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Sort like you sort playing cards in your hand: take each card and slide it back until it sits in the right place. Write <code>insertion_sort(items)</code> and print the sorted version of <code>[5, 2, 9, 1, 7]</code>.</p>
+                <div class="code-block out">[1, 2, 5, 7, 9]</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def insertion_sort(items):
+    items = items[:]
+    for i in range(1, len(items)):
+        card = items[i]
+        j = i - 1
+        while j &gt;= 0 and items[j] &gt; card:
+            items[j + 1] = items[j]
+            j -= 1
+        items[j + 1] = card
+    return items
+
+print(insertion_sort([5, 2, 9, 1, 7]))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="True
+False
+True">
+                <div class="task-head">
+                    <span class="task-badge">✅</span>
+                    <h3>Task 6: Is It Sorted?</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Write <code>is_sorted(items)</code> that returns True only when every item is less than or equal to the next one — one pass, O(n). Print it for <code>[1, 2, 3]</code>, <code>[1, 3, 2]</code> and <code>[]</code>.</p>
+                <div class="code-block out">True
+False
+True</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def is_sorted(items):
+    for i in range(len(items) - 1):
+        if items[i] &gt; items[i + 1]:
+            return False
+    return True
+
+print(is_sorted([1, 2, 3]))
+print(is_sorted([1, 3, 2]))
+print(is_sorted([]))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="[&#x27;fig&#x27;, &#x27;kiwi&#x27;, &#x27;apple&#x27;, &#x27;banana&#x27;]
+[&#x27;apple&#x27;, &#x27;banana&#x27;, &#x27;fig&#x27;, &#x27;kiwi&#x27;]
+[&#x27;banana&#x27;, &#x27;apple&#x27;, &#x27;fig&#x27;, &#x27;kiwi&#x27;]">
+                <div class="task-head">
+                    <span class="task-badge">🔑</span>
+                    <h3>Task 7: Sort by a Rule</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Python's <code>sorted()</code> takes a <code>key</code> telling it what to compare. Sort <code>["banana", "fig", "apple", "kiwi"]</code> by length, then alphabetically, then by <em>last</em> letter (<code>key=lambda w: w[-1]</code>). Print all three lists.</p>
+                <div class="code-block out">[&#x27;fig&#x27;, &#x27;kiwi&#x27;, &#x27;apple&#x27;, &#x27;banana&#x27;]
+[&#x27;apple&#x27;, &#x27;banana&#x27;, &#x27;fig&#x27;, &#x27;kiwi&#x27;]
+[&#x27;banana&#x27;, &#x27;apple&#x27;, &#x27;fig&#x27;, &#x27;kiwi&#x27;]</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>fruits = [&quot;banana&quot;, &quot;fig&quot;, &quot;apple&quot;, &quot;kiwi&quot;]
+print(sorted(fruits, key=len))
+print(sorted(fruits))
+print(sorted(fruits, key=lambda w: w[-1]))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Ben: 91
+Cy: 67
+Ana: 42">
+                <div class="task-head">
+                    <span class="task-badge">🏅</span>
+                    <h3>Task 8: Sort Records by Score</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">You have <code>players = [("Ana", 42), ("Ben", 91), ("Cy", 67)]</code>. Print them sorted by score, highest first, one line each like <code>Ben: 91</code>. Hint: <code>key=lambda p: p[1]</code> with <code>reverse=True</code>.</p>
+                <div class="code-block out">Ben: 91
+Cy: 67
+Ana: 42</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>players = [(&quot;Ana&quot;, 42), (&quot;Ben&quot;, 91), (&quot;Cy&quot;, 67)]
+for name, score in sorted(players, key=lambda p: p[1], reverse=True):
+    print(f&quot;{name}: {score}&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="[3, 9, 10, 27, 38, 43, 82]">
+                <div class="task-head">
+                    <span class="task-badge">🔗</span>
+                    <h3>Task 9: Full Merge Sort</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">You already built the merge step — now build the whole thing. <code>merge_sort(items)</code> splits the list in half, sorts each half by calling itself, then merges. Print the sorted version of <code>[38, 27, 43, 3, 9, 82, 10]</code>.</p>
+                <div class="code-block out">[3, 9, 10, 27, 38, 43, 82]</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def merge(left, right):
+    result = []
+    i = j = 0
+    while i &lt; len(left) and j &lt; len(right):
+        if left[i] &lt;= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    return result + left[i:] + right[j:]
+
+def merge_sort(items):
+    if len(items) &lt;= 1:
+        return items
+    mid = len(items) // 2
+    return merge(merge_sort(items[:mid]), merge_sort(items[mid:]))
+
+print(merge_sort([38, 27, 43, 3, 9, 82, 10]))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="[1, 2, 3, 4, 7, 8, 9]">
+                <div class="task-head">
+                    <span class="task-badge">⚡</span>
+                    <h3>Task 10: Boss Level: Quicksort</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">The fastest of the classics. Pick the first item as the <strong>pivot</strong>, build a list of everything smaller and everything bigger, then quicksort those and join them: <code>smaller + [pivot] + bigger</code>. Print the sorted version of <code>[7, 2, 9, 4, 1, 8, 3]</code>.</p>
+                <div class="code-block out">[1, 2, 3, 4, 7, 8, 9]</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def quicksort(items):
+    if len(items) &lt;= 1:
+        return items
+    pivot = items[0]
+    smaller = [x for x in items[1:] if x &lt;= pivot]
+    bigger = [x for x in items[1:] if x &gt; pivot]
+    return quicksort(smaller) + [pivot] + quicksort(bigger)
+
+print(quicksort([7, 2, 9, 4, 1, 8, 3]))</pre>
+                </div>
+            </div>
         </div>
 
         <nav class="lesson-nav">

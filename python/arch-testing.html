@@ -137,7 +137,7 @@ print("All tests passed!")</pre>
                     <h3>Task 2: TDD a is_even Function</h3>
                     <span class="task-difficulty diff-medium">Medium</span>
                 </div>
-                <p class="task-goal">The tests are already written (Red). Now write <code>is_even</code> to make them pass (Green). Use the modulo <code>%</code> operator.</p>
+                <p class="task-goal">Test-first! Write three asserts for a function you have not written yet — <code>is_even(4)</code> is True, <code>is_even(7)</code> is False, <code>is_even(0)</code> is True (Red). Then write <code>is_even</code> with the <code>%</code> operator until they all pass (Green) and print <code>Tests passed!</code>.</p>
                 <div class="playground">
                     <textarea class="code-input" spellcheck="false">def is_even(n):
     # return True if n is even
@@ -158,7 +158,12 @@ print("Tests passed!")
                 </div>
                 <div class="solution" hidden>
                     <pre>def is_even(n):
-    return n % 2 == 0</pre>
+    return n % 2 == 0
+
+assert is_even(4) == True
+assert is_even(7) == False
+assert is_even(0) == True
+print(&quot;Tests passed!&quot;)</pre>
                 </div>
             </div>
 
@@ -168,7 +173,7 @@ print("Tests passed!")
                     <h3>Task 3: Handle the Edge Cases</h3>
                     <span class="task-difficulty diff-hard">Boss</span>
                 </div>
-                <p class="task-goal">Write <code>safe_average</code> that returns the average of a list — but returns <code>0</code> for an empty list (the tricky edge case!). Make all asserts pass.</p>
+                <p class="task-goal">Write <code>safe_average(nums)</code> that returns the average of a list — but returns 0 for an empty list (the tricky edge case that crashes careless code). Assert it for <code>[2, 4]</code>, <code>[5]</code> and <code>[]</code>, then print <code>All edge cases passed!</code>.</p>
                 <div class="playground">
                     <textarea class="code-input" spellcheck="false">def safe_average(nums):
     # return 0 if the list is empty, else the average
@@ -191,7 +196,227 @@ print("All edge cases passed!")
                     <pre>def safe_average(nums):
     if len(nums) == 0:
         return 0
-    return sum(nums) / len(nums)</pre>
+    return sum(nums) / len(nums)
+
+assert safe_average([2, 4]) == 3
+assert safe_average([5]) == 5
+assert safe_average([]) == 0
+print(&quot;All edge cases passed!&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Engineering Reps</h2>
+                <p>Professional code is code you can change without fear — and that fear disappears only when tests have your back. Write lots of them.</p>
+            </div>
+
+            <div class="task" data-expected="All tests passed ✅">
+                <div class="task-head">
+                    <span class="task-badge">✅</span>
+                    <h3>Task 4: Your First Assertions</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal"><code>assert</code> says "this must be true, or stop everything". Write <code>double(n)</code>, then assert it works for 2, 0 and −3, and print <code>All tests passed ✅</code> at the end. If an assert fails you will see the error instead.</p>
+                <div class="code-block out">All tests passed ✅</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def double(n):
+    return n * 2
+
+assert double(2) == 4
+assert double(0) == 0
+assert double(-3) == -6
+print(&quot;All tests passed ✅&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Edges are safe 🛡️">
+                <div class="task-head">
+                    <span class="task-badge">🧪</span>
+                    <h3>Task 5: Test the Edges</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Bugs hide at the edges. Write <code>grade(score)</code> returning <code>"A"</code> for 90+, <code>"B"</code> for 80+, otherwise <code>"F"</code>, then assert the exact boundaries: 90, 89, 80, 79 and 100. Print <code>Edges are safe 🛡️</code>.</p>
+                <div class="code-block out">Edges are safe 🛡️</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def grade(score):
+    if score &gt;= 90:
+        return &quot;A&quot;
+    if score &gt;= 80:
+        return &quot;B&quot;
+    return &quot;F&quot;
+
+assert grade(100) == &quot;A&quot;
+assert grade(90) == &quot;A&quot;
+assert grade(89) == &quot;B&quot;
+assert grade(80) == &quot;B&quot;
+assert grade(79) == &quot;F&quot;
+print(&quot;Edges are safe 🛡️&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Bug squashed 🐞">
+                <div class="task-head">
+                    <span class="task-badge">🐞</span>
+                    <h3>Task 6: Find the Bug With a Test</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">This function is wrong: <code>def biggest(items): return items[0]</code>. First write a test that proves it (<code>assert biggest([3, 9, 2]) == 9</code> will fail), then fix the function so the test passes. Print <code>Bug squashed 🐞</code>.</p>
+                <div class="code-block out">Bug squashed 🐞</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def biggest(items):
+    best = items[0]
+    for item in items:
+        if item &gt; best:
+            best = item
+    return best
+
+assert biggest([3, 9, 2]) == 9
+assert biggest([5]) == 5
+assert biggest([-4, -1]) == -1
+print(&quot;Bug squashed 🐞&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Green! 🟢">
+                <div class="task-head">
+                    <span class="task-badge">🔴</span>
+                    <h3>Task 7: TDD: Red, Green, Refactor</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Write the tests <em>first</em> for a function <code>initials(full_name)</code> that turns <code>"ada lovelace"</code> into <code>"A.L."</code>. Write three asserts, watch them fail, then write the function until they pass. Print <code>Green! 🟢</code>.</p>
+                <div class="code-block out">Green! 🟢</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def initials(full_name):
+    return &quot;&quot;.join(part[0].upper() + &quot;.&quot; for part in full_name.split())
+
+assert initials(&quot;ada lovelace&quot;) == &quot;A.L.&quot;
+assert initials(&quot;grace brewster hopper&quot;) == &quot;G.B.H.&quot;
+assert initials(&quot;plato&quot;) == &quot;P.&quot;
+print(&quot;Green! 🟢&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Errors handled 💥">
+                <div class="task-head">
+                    <span class="task-badge">💥</span>
+                    <h3>Task 8: Test That It Fails Properly</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Good code refuses bad input. Write <code>square_root(n)</code> that raises <code>ValueError</code> for negatives, then test it with <code>try/except</code>: assert the normal case, and confirm the error is raised for −9. Print <code>Errors handled 💥</code>.</p>
+                <div class="code-block out">Errors handled 💥</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def square_root(n):
+    if n &lt; 0:
+        raise ValueError(&quot;no square root of a negative number&quot;)
+    return n ** 0.5
+
+assert square_root(9) == 3.0
+
+try:
+    square_root(-9)
+    raised = False
+except ValueError:
+    raised = True
+
+assert raised
+print(&quot;Errors handled 💥&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Cart is solid 🛒">
+                <div class="task-head">
+                    <span class="task-badge">🧫</span>
+                    <h3>Task 9: Boss Level: Test a Whole Class</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Write a <code>ShoppingCart</code> class with <code>add(item, price)</code>, <code>total()</code> and <code>remove(item)</code>, then write at least six assertions covering an empty cart, one item, several items, removing an item, and removing something that is not there (it should not crash). Print <code>Cart is solid 🛒</code>.</p>
+                <div class="code-block out">Cart is solid 🛒</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class ShoppingCart:
+    def __init__(self):
+        self.items = {}
+
+    def add(self, item, price):
+        self.items[item] = price
+
+    def remove(self, item):
+        self.items.pop(item, None)
+
+    def total(self):
+        return sum(self.items.values())
+
+cart = ShoppingCart()
+assert cart.total() == 0
+cart.add(&quot;apple&quot;, 2)
+assert cart.total() == 2
+cart.add(&quot;bread&quot;, 3)
+assert cart.total() == 5
+cart.remove(&quot;apple&quot;)
+assert cart.total() == 3
+cart.remove(&quot;ghost&quot;)
+assert cart.total() == 3
+assert len(cart.items) == 1
+print(&quot;Cart is solid 🛒&quot;)</pre>
                 </div>
             </div>
         </div>

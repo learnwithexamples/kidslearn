@@ -219,6 +219,202 @@ print(first_repeat([5, 1, 4, 4, 2, 1]))
 print(first_repeat([5, 1, 4, 4, 2, 1]))</pre>
                 </div>
             </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Algorithm Reps</h2>
+                <p>Interview problems reuse the same handful of tricks. Practice each pattern until you recognize it in one glance.</p>
+            </div>
+
+            <div class="task" data-expected="3 11">
+                <div class="task-head">
+                    <span class="task-badge">👉</span>
+                    <h3>Task 4: Two Pointers: Pair Sum</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">In the <em>sorted</em> list <code>[1, 3, 5, 8, 11]</code>, find two numbers that add up to 14 using one pointer at each end: move the left one right when the sum is too small, the right one left when it is too big. Print the pair like <code>3 11</code>.</p>
+                <div class="code-block out">3 11</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>numbers = [1, 3, 5, 8, 11]
+target = 14
+left, right = 0, len(numbers) - 1
+while left &lt; right:
+    total = numbers[left] + numbers[right]
+    if total == target:
+        print(numbers[left], numbers[right])
+        break
+    elif total &lt; target:
+        left += 1
+    else:
+        right -= 1</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="6.33">
+                <div class="task-head">
+                    <span class="task-badge">🪟</span>
+                    <h3>Task 5: Sliding Window Average</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Find the highest average of any 3 neighboring numbers in <code>[1, 9, 2, 8, 3, 7]</code>. Slide a window of 3: add the new number, subtract the one that left. Print the best average rounded to 2 decimals.</p>
+                <div class="code-block out">6.33</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>numbers = [1, 9, 2, 8, 3, 7]
+k = 3
+window = sum(numbers[:k])
+best = window
+for i in range(k, len(numbers)):
+    window += numbers[i] - numbers[i - k]
+    if window &gt; best:
+        best = window
+print(round(best / k, 2))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="[0, 2, 6, 12, 20]
+18">
+                <div class="task-head">
+                    <span class="task-badge">🧾</span>
+                    <h3>Task 6: Prefix Sums</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Build a running-total list from <code>[2, 4, 6, 8]</code> so that <code>prefix[i]</code> is the sum of everything up to <code>i</code>. Print the prefix list, then use it to answer "what is the sum from index 1 to 3?" instantly.</p>
+                <div class="code-block out">[0, 2, 6, 12, 20]
+18</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>numbers = [2, 4, 6, 8]
+prefix = [0]
+for n in numbers:
+    prefix.append(prefix[-1] + n)
+print(prefix)
+print(prefix[4] - prefix[1])</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="True
+False">
+                <div class="task-head">
+                    <span class="task-badge">🔁</span>
+                    <h3>Task 7: Frequency Counter Face-Off</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Check whether <code>[1, 2, 3, 2]</code> and <code>[2, 1, 2, 3]</code> contain exactly the same numbers the same number of times — using two count dictionaries instead of nested loops. Print True, then compare against <code>[1, 2, 3, 3]</code> and print False.</p>
+                <div class="code-block out">True
+False</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def counts(items):
+    result = {}
+    for item in items:
+        result[item] = result.get(item, 0) + 1
+    return result
+
+def same_contents(a, b):
+    return counts(a) == counts(b)
+
+print(same_contents([1, 2, 3, 2], [2, 1, 2, 3]))
+print(same_contents([1, 2, 3, 2], [1, 2, 3, 3]))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="30">
+                <div class="task-head">
+                    <span class="task-badge">🐇</span>
+                    <h3>Task 8: Fast and Slow Pointers</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Without using <code>len()</code> twice, find the middle item of <code>[10, 20, 30, 40, 50]</code>: move a slow index by 1 and a fast index by 2 until the fast one runs off the end. Print the middle value.</p>
+                <div class="code-block out">30</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>items = [10, 20, 30, 40, 50]
+slow = 0
+fast = 0
+while fast &lt; len(items) and fast + 1 &lt; len(items):
+    slow += 1
+    fast += 2
+print(items[slow])</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="3">
+                <div class="task-head">
+                    <span class="task-badge">🏁</span>
+                    <h3>Task 9: Boss Level: Longest Run of Different Letters</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Find the length of the longest stretch of <code>"abcabcbb"</code> with no repeated letter — the classic sliding-window question. Keep a <code>start</code> index and a dictionary of where each letter was last seen. Print the answer (it is 3).</p>
+                <div class="code-block out">3</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>text = &quot;abcabcbb&quot;
+last_seen = {}
+start = 0
+best = 0
+for i, ch in enumerate(text):
+    if ch in last_seen and last_seen[ch] &gt;= start:
+        start = last_seen[ch] + 1
+    last_seen[ch] = i
+    best = max(best, i - start + 1)
+print(best)</pre>
+                </div>
+            </div>
         </div>
 
         <nav class="lesson-nav">

@@ -346,6 +346,234 @@ print(f"🎲 You rolled a {roll}!")
                     <pre class="pg-output"></pre>
                 </div>
             </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ More Projects — Keep Building!</h2>
+                <p>The best way to learn is to build something you actually want to play with. Each project below uses everything from the whole course. Press <strong>▶ Run</strong>, answer the pop-ups, and when it works, change the rules and make it yours.</p>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🔤</span>
+                    <h3>Project 7: Word Scramble</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">The computer scrambles a secret word and the player guesses it. Write it yourself: pick a random word from a list, shuffle its letters with <code>random.sample</code>, then loop until the player guesses right (give up after 3 tries).</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>import random
+
+words = [&quot;python&quot;, &quot;banana&quot;, &quot;rocket&quot;, &quot;puzzle&quot;]
+secret = random.choice(words)
+scrambled = &quot;&quot;.join(random.sample(secret, len(secret)))
+
+print(&quot;Unscramble this word:&quot;, scrambled)
+tries = 3
+while tries &gt; 0:
+    guess = input(&quot;Your guess: &quot;).lower()
+    if guess == secret:
+        print(&quot;🎉 Correct!&quot;)
+        break
+    tries -= 1
+    print(f&quot;Nope! {tries} tries left.&quot;)
+else:
+    print(&quot;The word was&quot;, secret)</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🎲</span>
+                    <h3>Project 8: Dice Duel</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">You and the computer each roll two dice for 3 rounds. Print each round's rolls, keep both totals, and announce the overall winner at the end.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>import random
+
+you = 0
+computer = 0
+for game_round in range(1, 4):
+    my_roll = random.randint(1, 6) + random.randint(1, 6)
+    pc_roll = random.randint(1, 6) + random.randint(1, 6)
+    you += my_roll
+    computer += pc_roll
+    print(f&quot;Round {game_round}: you {my_roll} - computer {pc_roll}&quot;)
+
+print(f&quot;Final: you {you} - computer {computer}&quot;)
+if you &gt; computer:
+    print(&quot;🏆 You win!&quot;)
+elif computer &gt; you:
+    print(&quot;🤖 Computer wins!&quot;)
+else:
+    print(&quot;🤝 A tie!&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">✅</span>
+                    <h3>Project 9: To-Do List Manager</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Build a mini app with a menu that loops: <code>1</code> add a task, <code>2</code> show all tasks numbered, <code>3</code> remove a task by its number, <code>4</code> quit. Store everything in a list.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>todo = []
+while True:
+    print(&quot;\n1) add  2) show  3) remove  4) quit&quot;)
+    choice = input(&quot;Choose: &quot;)
+    if choice == &quot;1&quot;:
+        todo.append(input(&quot;New task: &quot;))
+        print(&quot;Added!&quot;)
+    elif choice == &quot;2&quot;:
+        if not todo:
+            print(&quot;Nothing to do. 🎉&quot;)
+        for i, task in enumerate(todo, start=1):
+            print(f&quot;{i}. {task}&quot;)
+    elif choice == &quot;3&quot;:
+        number = int(input(&quot;Remove which number? &quot;))
+        if 1 &lt;= number &lt;= len(todo):
+            print(&quot;Removed&quot;, todo.pop(number - 1))
+        else:
+            print(&quot;No such task.&quot;)
+    elif choice == &quot;4&quot;:
+        print(&quot;Bye! 👋&quot;)
+        break
+    else:
+        print(&quot;Pick 1, 2, 3 or 4.&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">✖️</span>
+                    <h3>Project 10: Times Table Trainer</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Ask 5 random multiplication questions (numbers 2–12). Count the correct answers, and at the end print the score plus a message: 5/5 is 🌟 perfect, 3–4 is good, less is keep practicing.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>import random
+
+score = 0
+for q in range(5):
+    a = random.randint(2, 12)
+    b = random.randint(2, 12)
+    answer = int(input(f&quot;What is {a} x {b}? &quot;))
+    if answer == a * b:
+        print(&quot;Correct! ✅&quot;)
+        score += 1
+    else:
+        print(f&quot;Nope, it was {a * b}&quot;)
+
+print(f&quot;Score: {score}/5&quot;)
+if score == 5:
+    print(&quot;🌟 Perfect!&quot;)
+elif score &gt;= 3:
+    print(&quot;Good job! 👍&quot;)
+else:
+    print(&quot;Keep practicing! 💪&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🏦</span>
+                    <h3>Project 11: Cash Machine</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Store a balance and a 4-digit PIN. Ask for the PIN (3 attempts), then loop a menu: check balance, deposit, withdraw (refuse if there is not enough money), quit. Show every amount with 2 decimals.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>PIN = &quot;1234&quot;
+balance = 100.0
+
+for attempt in range(3):
+    if input(&quot;Enter PIN: &quot;) == PIN:
+        break
+    print(&quot;Wrong PIN.&quot;)
+else:
+    print(&quot;Card blocked. 🚫&quot;)
+    raise SystemExit
+
+while True:
+    choice = input(&quot;\n1) balance 2) deposit 3) withdraw 4) quit: &quot;)
+    if choice == &quot;1&quot;:
+        print(f&quot;Balance: ${balance:.2f}&quot;)
+    elif choice == &quot;2&quot;:
+        balance += float(input(&quot;Deposit how much? &quot;))
+        print(f&quot;New balance: ${balance:.2f}&quot;)
+    elif choice == &quot;3&quot;:
+        amount = float(input(&quot;Withdraw how much? &quot;))
+        if amount &gt; balance:
+            print(&quot;Not enough money! 😬&quot;)
+        else:
+            balance -= amount
+            print(f&quot;Take your cash. Balance: ${balance:.2f}&quot;)
+    elif choice == &quot;4&quot;:
+        print(&quot;Goodbye! 👋&quot;)
+        break</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🕹️</span>
+                    <h3>Project 12: Free Build — Boss Project</h3>
+                    <span class="task-difficulty diff-easy">Creative</span>
+                </div>
+                <p class="task-goal">Build the biggest thing you have made so far: a text adventure with rooms, a quiz with categories, a pet simulator, a shop. Rules: use at least one list, one dictionary, one loop and two functions. Take your time — real projects take more than one sitting. 🚀</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
         </div>
 
         <nav class="lesson-nav">

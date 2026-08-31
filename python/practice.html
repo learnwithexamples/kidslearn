@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Arena - Python - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏟️ Python Practice Arena</h1>
+            <p class="subtitle">25 mixed challenges — because reading code is not learning code</p>
+            <a href="python.html" class="back-link">← Back to Python Hub</a>
+        </header>
+
+        <main>
+            <div class="course-intro">
+                <h2>💪 How to practice properly</h2>
+                <p>Nobody learned to ride a bike by watching videos about bikes. Programming is exactly the same: you only really learn it by <strong>typing code, breaking it, and fixing it</strong>. This page is your gym.</p>
+                <ul>
+                    <li><strong>Type every line yourself</strong> — no copy-paste. Your fingers learn too.</li>
+                    <li><strong>Guess the answer first</strong>, then press ▶ Run and see if you were right.</li>
+                    <li><strong>Get stuck for a while.</strong> Ten minutes of being stuck teaches more than the solution does.</li>
+                    <li><strong>Only then</strong> press 💡 Solution — and afterwards, close it and write the whole thing again from memory.</li>
+                    <li><strong>Three challenges a day</strong> beats twenty challenges once a month. 📅</li>
+                </ul>
+                <p>The challenges mix everything from the whole course: variables, loops, lists, dictionaries, functions, classes and algorithms. If one uses something you have not met yet, go and read that lesson — then come back and beat it. 🥊</p>
+            </div>
+
+            <div class="practice-intro">
+                <h2>🔥 Warm-Up Round</h2>
+                <p>Five to ten minutes each. Perfect for a daily practice session — do three every day and you will be amazed in a month.</p>
+            </div>
+
+            <div class="task" data-expected="1. milk
+2. eggs
+3. bread">
+                <div class="task-head">
+                    <span class="task-badge">🛒</span>
+                    <h3>Challenge 1: Numbered Shopping List</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Print the list <code>["milk", "eggs", "bread"]</code> as a numbered list: <code>1. milk</code> and so on.</p>
+                <div class="code-block out">1. milk
+2. eggs
+3. bread</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>items = [&quot;milk&quot;, &quot;eggs&quot;, &quot;bread&quot;]
+for i, item in enumerate(items, start=1):
+    print(f&quot;{i}. {item}&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="110">
+                <div class="task-head">
+                    <span class="task-badge">➕</span>
+                    <h3>Challenge 2: Even Numbers Total</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Add up every even number from 1 to 20 and print the total.</p>
+                <div class="code-block out">110</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>total = 0
+for n in range(1, 21):
+    if n % 2 == 0:
+        total += n
+print(total)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="7">
+                <div class="task-head">
+                    <span class="task-badge">🅰️</span>
+                    <h3>Challenge 3: Count the Vowels</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Count how many vowels (a, e, i, o, u) are in <code>"programming is powerful"</code> and print the number.</p>
+                <div class="code-block out">7</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>text = &quot;programming is powerful&quot;
+count = 0
+for letter in text:
+    if letter in &quot;aeiou&quot;:
+        count += 1
+print(count)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="42">
+                <div class="task-head">
+                    <span class="task-badge">🥇</span>
+                    <h3>Challenge 4: Biggest of Three</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Without using <code>max()</code>, print the biggest of <code>a = 17</code>, <code>b = 42</code> and <code>c = 23</code>.</p>
+                <div class="code-block out">42</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>a, b, c = 17, 42, 23
+biggest = a
+if b &gt; biggest:
+    biggest = b
+if c &gt; biggest:
+    biggest = c
+print(biggest)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="[5, 4, 3, 2, 1]
+5
+4
+3
+2
+1">
+                <div class="task-head">
+                    <span class="task-badge">🔄</span>
+                    <h3>Challenge 5: Backwards List</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Print <code>[1, 2, 3, 4, 5]</code> reversed — first with slicing <code>[::-1]</code>, then by looping backwards with <code>range(len(items) - 1, -1, -1)</code> printing one per line.</p>
+                <div class="code-block out">[5, 4, 3, 2, 1]
+5
+4
+3
+2
+1</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>items = [1, 2, 3, 4, 5]
+print(items[::-1])
+for i in range(len(items) - 1, -1, -1):
+    print(items[i])</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="0C = 32.0F
+10C = 50.0F
+20C = 68.0F
+30C = 86.0F">
+                <div class="task-head">
+                    <span class="task-badge">🌡️</span>
+                    <h3>Challenge 6: Temperature Table</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Print a small conversion table for 0, 10, 20 and 30 °C in the form <code>0C = 32.0F</code>. Formula: <code>c * 9 / 5 + 32</code>.</p>
+                <div class="code-block out">0C = 32.0F
+10C = 50.0F
+20C = 68.0F
+30C = 86.0F</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>for c in [0, 10, 20, 30]:
+    print(f&quot;{c}C = {c * 9 / 5 + 32}F&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="G.B.H.">
+                <div class="task-head">
+                    <span class="task-badge">✍️</span>
+                    <h3>Challenge 7: Initials Maker</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Turn <code>"grace brewster hopper"</code> into <code>G.B.H.</code> — split the name, take each first letter, uppercase it and add a dot.</p>
+                <div class="code-block out">G.B.H.</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>name = &quot;grace brewster hopper&quot;
+initials = &quot;&quot;
+for part in name.split():
+    initials += part[0].upper() + &quot;.&quot;
+print(initials)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="21">
+                <div class="task-head">
+                    <span class="task-badge">🔢</span>
+                    <h3>Challenge 8: Digit Sum</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Add up the digits of <code>9174</code> (9 + 1 + 7 + 4) and print the answer. Use <code>%</code> and <code>//</code>, or turn it into text — your choice.</p>
+                <div class="code-block out">21</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>n = 9174
+total = 0
+while n &gt; 0:
+    total += n % 10
+    n = n // 10
+print(total)</pre>
+                </div>
+            </div>
+
+            <div class="practice-intro">
+                <h2>🧠 Brain Builders</h2>
+                <p>These take real thinking. Read the goal twice, plan on paper, then code. Getting stuck is <em>part of the exercise</em> — stay with it before peeking at the solution.</p>
+            </div>
+
+            <div class="task" data-expected="wj3degzd">
+                <div class="task-head">
+                    <span class="task-badge">🔐</span>
+                    <h3>Challenge 9: Password Generator</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Using <code>random.seed(7)</code> so the answer is the same every run, build an 8-character password by picking random letters from <code>"abcdefghijkmnpqrstuvwxyz23456789"</code>. Print it.</p>
+                <div class="code-block out">wj3degzd</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>import random
+
+random.seed(7)
+alphabet = &quot;abcdefghijkmnpqrstuvwxyz23456789&quot;
+password = &quot;&quot;
+for i in range(8):
+    password += random.choice(alphabet)
+print(password)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="9
+quick
+3.89">
+                <div class="task-head">
+                    <span class="task-badge">📝</span>
+                    <h3>Challenge 10: Sentence Statistics</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">For <code>"the quick brown fox jumps over the lazy dog"</code>, print the number of words, the longest word, and the average word length rounded to 2 decimals.</p>
+                <div class="code-block out">9
+quick
+3.89</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>sentence = &quot;the quick brown fox jumps over the lazy dog&quot;
+words = sentence.split()
+longest = words[0]
+total_letters = 0
+for word in words:
+    total_letters += len(word)
+    if len(word) &gt; len(longest):
+        longest = word
+print(len(words))
+print(longest)
+print(round(total_letters / len(words), 2))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="45">
+                <div class="task-head">
+                    <span class="task-badge">🔎</span>
+                    <h3>Challenge 11: Second Largest</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Find the second largest number in <code>[12, 45, 7, 98, 33, 98]</code> — careful, the biggest number appears twice, and the answer is 45, not 98!</p>
+                <div class="code-block out">45</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>numbers = [12, 45, 7, 98, 33, 98]
+unique = sorted(set(numbers))
+print(unique[-2])</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="2 3 5 7 11 13 17 19 23 29 ">
+                <div class="task-head">
+                    <span class="task-badge">🧮</span>
+                    <h3>Challenge 12: Prime Checker</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write <code>is_prime(n)</code> (a number bigger than 1 with no divisors except 1 and itself), then print every prime from 1 to 30 on one line.</p>
+                <div class="code-block out">2 3 5 7 11 13 17 19 23 29 </div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def is_prime(n):
+    if n &lt; 2:
+        return False
+    for d in range(2, int(n ** 0.5) + 1):
+        if n % d == 0:
+            return False
+    return True
+
+for n in range(1, 31):
+    if is_prime(n):
+        print(n, end=&quot; &quot;)
+print()</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="dwwdfn dw gdzq">
+                <div class="task-head">
+                    <span class="task-badge">🕵️</span>
+                    <h3>Challenge 13: Caesar Cipher</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Shift every letter of <code>"attack at dawn"</code> three places along the alphabet (a→d, z→c), leaving spaces alone. Print the secret message.</p>
+                <div class="code-block out">dwwdfn dw gdzq</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>message = &quot;attack at dawn&quot;
+alphabet = &quot;abcdefghijklmnopqrstuvwxyz&quot;
+secret = &quot;&quot;
+for ch in message:
+    if ch == &quot; &quot;:
+        secret += &quot; &quot;
+    else:
+        secret += alphabet[(alphabet.index(ch) + 3) % 26]
+print(secret)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="78.75
+Cy
+3">
+                <div class="task-head">
+                    <span class="task-badge">📊</span>
+                    <h3>Challenge 14: Class Report</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">From <code>grades = {"Ana": 88, "Ben": 61, "Cy": 94, "Di": 72}</code>, print the average (2 decimals), the top student's name, and how many scored 70 or more.</p>
+                <div class="code-block out">78.75
+Cy
+3</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>grades = {&quot;Ana&quot;: 88, &quot;Ben&quot;: 61, &quot;Cy&quot;: 94, &quot;Di&quot;: 72}
+print(round(sum(grades.values()) / len(grades), 2))
+print(max(grades, key=grades.get))
+passed = 0
+for score in grades.values():
+    if score &gt;= 70:
+        passed += 1
+print(passed)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]">
+                <div class="task-head">
+                    <span class="task-badge">🐚</span>
+                    <h3>Challenge 15: Fibonacci List</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Build a list of the first 12 Fibonacci numbers (each one is the sum of the two before, starting 0, 1) and print the list.</p>
+                <div class="code-block out">[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>fib = [0, 1]
+while len(fib) &lt; 12:
+    fib.append(fib[-1] + fib[-2])
+print(fib)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="too low
+too high
+too low
+correct!">
+                <div class="task-head">
+                    <span class="task-badge">🎯</span>
+                    <h3>Challenge 16: Guess Checker</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Without any <code>input()</code>, simulate a guessing game: <code>secret = 42</code> and <code>guesses = [10, 60, 40, 42, 7]</code>. Print <code>too low</code>, <code>too high</code> or <code>correct!</code> for each guess, and stop as soon as it is correct.</p>
+                <div class="code-block out">too low
+too high
+too low
+correct!</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>secret = 42
+guesses = [10, 60, 40, 42, 7]
+for guess in guesses:
+    if guess &lt; secret:
+        print(&quot;too low&quot;)
+    elif guess &gt; secret:
+        print(&quot;too high&quot;)
+    else:
+        print(&quot;correct!&quot;)
+        break</pre>
+                </div>
+            </div>
+
+            <div class="practice-intro">
+                <h2>👑 Boss Battles</h2>
+                <p>The big ones. Each of these is a real classic that programmers meet in interviews and competitions. Take your time — half an hour on one of these teaches more than an hour of easy tasks.</p>
+            </div>
+
+            <div class="task" data-expected="111">
+                <div class="task-head">
+                    <span class="task-badge">🌀</span>
+                    <h3>Challenge 17: Collatz Sequence</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Start at 27. If the number is even, halve it; if it is odd, triple it and add one. Repeat until you reach 1, counting the steps. Print how many steps it took (it is famously more than you expect!).</p>
+                <div class="code-block out">111</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>n = 27
+steps = 0
+while n != 1:
+    if n % 2 == 0:
+        n = n // 2
+    else:
+        n = 3 * n + 1
+    steps += 1
+print(steps)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="X">
+                <div class="task-head">
+                    <span class="task-badge">⭕</span>
+                    <h3>Challenge 18: Tic-Tac-Toe Judge</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">The board is <code>[["X", "O", "O"], ["O", "X", "O"], ["O", "O", "X"]]</code>. Check all three rows, all three columns and both diagonals, then print the winner (<code>X</code>) or <code>nobody</code>.</p>
+                <div class="code-block out">X</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>board = [[&quot;X&quot;, &quot;O&quot;, &quot;O&quot;], [&quot;O&quot;, &quot;X&quot;, &quot;O&quot;], [&quot;O&quot;, &quot;O&quot;, &quot;X&quot;]]
+
+lines = []
+for row in board:
+    lines.append(row)
+for c in range(3):
+    lines.append([board[r][c] for r in range(3)])
+lines.append([board[i][i] for i in range(3)])
+lines.append([board[i][2 - i] for i in range(3)])
+
+winner = &quot;nobody&quot;
+for line in lines:
+    if line[0] == line[1] == line[2] != &quot; &quot;:
+        winner = line[0]
+print(winner)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="MCMXCIV">
+                <div class="task-head">
+                    <span class="task-badge">🏛️</span>
+                    <h3>Challenge 19: Roman Numerals</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Turn 1994 into <code>MCMXCIV</code>. Work through the values from biggest to smallest (1000=M, 900=CM, 500=D, 400=CD, 100=C, 90=XC, 50=L, 40=XL, 10=X, 9=IX, 5=V, 4=IV, 1=I), subtracting as you go.</p>
+                <div class="code-block out">MCMXCIV</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>number = 1994
+values = [(1000, &quot;M&quot;), (900, &quot;CM&quot;), (500, &quot;D&quot;), (400, &quot;CD&quot;),
+          (100, &quot;C&quot;), (90, &quot;XC&quot;), (50, &quot;L&quot;), (40, &quot;XL&quot;),
+          (10, &quot;X&quot;), (9, &quot;IX&quot;), (5, &quot;V&quot;), (4, &quot;IV&quot;), (1, &quot;I&quot;)]
+roman = &quot;&quot;
+for value, letters in values:
+    while number &gt;= value:
+        roman += letters
+        number -= value
+print(roman)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="10011100
+10011100">
+                <div class="task-head">
+                    <span class="task-badge">0️⃣</span>
+                    <h3>Challenge 20: Decimal to Binary</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Convert 156 into binary <strong>without</strong> using <code>bin()</code>: keep dividing by 2 and collecting the remainders backwards. Print your answer, then print <code>bin(156)[2:]</code> to prove it matches.</p>
+                <div class="code-block out">10011100
+10011100</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>n = 156
+binary = &quot;&quot;
+while n &gt; 0:
+    binary = str(n % 2) + binary
+    n = n // 2
+print(binary)
+print(bin(156)[2:])</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="70
+[&#x27;+100&#x27;, &#x27;-30&#x27;, &#x27;refused 500&#x27;]">
+                <div class="task-head">
+                    <span class="task-badge">🏦</span>
+                    <h3>Challenge 21: Bank Account Class</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Write an <code>Account</code> class with <code>deposit</code>, <code>withdraw</code> (refusing overdrafts) and <code>history()</code> returning the list of every transaction. Deposit 100, withdraw 30, try to withdraw 500, then print the balance and the history.</p>
+                <div class="code-block out">70
+[&#x27;+100&#x27;, &#x27;-30&#x27;, &#x27;refused 500&#x27;]</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Account:
+    def __init__(self):
+        self.balance = 0
+        self.log = []
+
+    def deposit(self, amount):
+        self.balance += amount
+        self.log.append(f&quot;+{amount}&quot;)
+
+    def withdraw(self, amount):
+        if amount &gt; self.balance:
+            self.log.append(f&quot;refused {amount}&quot;)
+            return False
+        self.balance -= amount
+        self.log.append(f&quot;-{amount}&quot;)
+        return True
+
+    def history(self):
+        return self.log
+
+account = Account()
+account.deposit(100)
+account.withdraw(30)
+account.withdraw(500)
+print(account.balance)
+print(account.history())</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="cold-cord
+cord-card
+card-ward
+ward-warm">
+                <div class="task-head">
+                    <span class="task-badge">🗺️</span>
+                    <h3>Challenge 22: Word Ladder Counter</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Two words are "neighbors" if they differ in exactly one letter. From <code>["cold", "cord", "card", "ward", "warm"]</code>, print each neighboring pair like <code>cold-cord</code>, one per line.</p>
+                <div class="code-block out">cold-cord
+cord-card
+card-ward
+ward-warm</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>words = [&quot;cold&quot;, &quot;cord&quot;, &quot;card&quot;, &quot;ward&quot;, &quot;warm&quot;]
+
+def differ_by_one(a, b):
+    if len(a) != len(b):
+        return False
+    differences = 0
+    for i in range(len(a)):
+        if a[i] != b[i]:
+            differences += 1
+    return differences == 1
+
+for i in range(len(words)):
+    for j in range(i + 1, len(words)):
+        if differ_by_one(words[i], words[j]):
+            print(f&quot;{words[i]}-{words[j]}&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="practice-intro">
+                <h2>🎨 Creative Lab</h2>
+                <p>No right answers here — just build something you think is cool and show someone. This is where practice turns into real programming.</p>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🎪</span>
+                    <h3>Challenge 23: Free Play — Your Own Quiz</h3>
+                    <span class="task-difficulty diff-easy">Creative</span>
+                </div>
+                <p class="task-goal">Build a 5-question quiz about anything you love. Keep the questions and answers in a list or dictionary, ask them with <code>input()</code>, count the score, and print a fun ending message. 🏆</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🖌️</span>
+                    <h3>Challenge 24: Free Play — ASCII Animation</h3>
+                    <span class="task-difficulty diff-easy">Creative</span>
+                </div>
+                <p class="task-goal">Use loops and <code>print()</code> to make something move down the screen: a falling star, a growing tree, a rocket climbing. Print many frames one after another. 🚀</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🧩</span>
+                    <h3>Challenge 25: Free Play — Invent a Challenge</h3>
+                    <span class="task-difficulty diff-easy">Creative</span>
+                </div>
+                <p class="task-goal">Invent a practice task you think would be hard for a friend, then solve it yourself. Write the goal as a comment at the top, then the code below. Making good problems is how teachers learn too! 💡</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
+
+        </main>
+
+        <nav class="lesson-nav">
+            <a class="nav-prev" href="basics.html">← Python Basics</a>
+            <a class="nav-next" href="algorithms.html">Algorithms →</a>
+        </nav>
+
+        <footer>
+            <p>Practice does not make perfect. Practice makes <em>permanent</em>. 🧠💛</p>
+        </footer>
+    </div>
+
+    <script src="../scripts/python-playground.js"></script>
+</body>
+</html>

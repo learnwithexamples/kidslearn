@@ -213,6 +213,251 @@ print(f"Steps: {steps}")
                     <pre class="pg-output"></pre>
                 </div>
             </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Algorithm Reps</h2>
+                <p>Searching is the algorithm you will use most in your life. Drill both kinds until binary search feels automatic.</p>
+            </div>
+
+            <div class="task" data-expected="3
+0">
+                <div class="task-head">
+                    <span class="task-badge">🥇</span>
+                    <h3>Task 4: Find the Smallest</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Write <code>index_of_min(items)</code> that returns the <em>position</em> of the smallest value — scanning once, O(n). Print it for <code>[7, 2, 9, 1, 5]</code> (answer: 3) and for <code>[4]</code>.</p>
+                <div class="code-block out">3
+0</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def index_of_min(items):
+    best = 0
+    for i in range(1, len(items)):
+        if items[i] &lt; items[best]:
+            best = i
+    return best
+
+print(index_of_min([7, 2, 9, 1, 5]))
+print(index_of_min([4]))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="10
+9">
+                <div class="task-head">
+                    <span class="task-badge">📊</span>
+                    <h3>Task 5: Count the Comparisons</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write <code>binary_steps(items, target)</code>: a binary search that counts how many times it looks at a middle value. Print the count for finding 999 in <code>list(range(1000))</code>, then for finding 0. Both should be small — that is the power of halving.</p>
+                <div class="code-block out">10
+9</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def binary_steps(items, target):
+    low, high, steps = 0, len(items) - 1, 0
+    while low &lt;= high:
+        mid = (low + high) // 2
+        steps += 1
+        if items[mid] == target:
+            return steps
+        elif items[mid] &lt; target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return steps
+
+print(binary_steps(list(range(1000)), 999))
+print(binary_steps(list(range(1000)), 0))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="3
+-1">
+                <div class="task-head">
+                    <span class="task-badge">🔤</span>
+                    <h3>Task 6: Search a Word List</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Binary search works on anything that can be ordered — including words. Write <code>find_word(words, target)</code> using binary search on the sorted list <code>["ant", "bee", "cat", "dog", "eel"]</code> and print the index of <code>"dog"</code> and of <code>"fox"</code> (missing → -1).</p>
+                <div class="code-block out">3
+-1</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def find_word(words, target):
+    low, high = 0, len(words) - 1
+    while low &lt;= high:
+        mid = (low + high) // 2
+        if words[mid] == target:
+            return mid
+        elif words[mid] &lt; target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
+
+words = [&quot;ant&quot;, &quot;bee&quot;, &quot;cat&quot;, &quot;dog&quot;, &quot;eel&quot;]
+print(find_word(words, &quot;dog&quot;))
+print(find_word(words, &quot;fox&quot;))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="2
+0
+4">
+                <div class="task-head">
+                    <span class="task-badge">📍</span>
+                    <h3>Task 7: Where Should It Go?</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Write <code>insert_position(items, value)</code> that returns the index where <code>value</code> should be inserted to keep the list sorted — using binary search. For <code>[1, 3, 5, 7]</code> print the position for 4 (answer 2), for 0 and for 9.</p>
+                <div class="code-block out">2
+0
+4</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def insert_position(items, value):
+    low, high = 0, len(items)
+    while low &lt; high:
+        mid = (low + high) // 2
+        if items[mid] &lt; value:
+            low = mid + 1
+        else:
+            high = mid
+    return low
+
+items = [1, 3, 5, 7]
+print(insert_position(items, 4))
+print(insert_position(items, 0))
+print(insert_position(items, 9))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="[0, 2, 4]
+[]">
+                <div class="task-head">
+                    <span class="task-badge">👯</span>
+                    <h3>Task 8: Find All Matches</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write <code>find_all(items, target)</code> that returns a list of <em>every</em> index where the target appears. Print it for <code>[3, 1, 3, 7, 3]</code> looking for 3, and for a value that is missing.</p>
+                <div class="code-block out">[0, 2, 4]
+[]</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def find_all(items, target):
+    found = []
+    for i, item in enumerate(items):
+        if item == target:
+            found.append(i)
+    return found
+
+print(find_all([3, 1, 3, 7, 3], 3))
+print(find_all([3, 1, 3, 7, 3], 8))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Guess: 500
+Guess: 750
+Guess: 625
+Guess: 687
+Guess: 718
+Guess: 734
+Guess: 726
+Guess: 730
+Guess: 732
+Guess: 731
+Found in 10 guesses">
+                <div class="task-head">
+                    <span class="task-badge">🎯</span>
+                    <h3>Task 9: Boss Level: The Guessing Robot</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">A robot must guess a secret number from 1 to 1000 using binary search. Write a loop that always guesses the middle of the range, prints each guess, and narrows the range until it finds <code>secret = 731</code>. Print how many guesses it needed at the end — it should be about 10, not 731!</p>
+                <div class="code-block out">Guess: 500
+Guess: 750
+Guess: 625
+Guess: 687
+Guess: 718
+Guess: 734
+Guess: 726
+Guess: 730
+Guess: 732
+Guess: 731
+Found in 10 guesses</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>secret = 731
+low, high = 1, 1000
+guesses = 0
+while True:
+    guess = (low + high) // 2
+    guesses += 1
+    print(&quot;Guess:&quot;, guess)
+    if guess == secret:
+        break
+    elif guess &lt; secret:
+        low = guess + 1
+    else:
+        high = guess - 1
+print(&quot;Found in&quot;, guesses, &quot;guesses&quot;)</pre>
+                </div>
+            </div>
         </div>
 
         <nav class="lesson-nav">

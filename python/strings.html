@@ -210,6 +210,256 @@ print(full_name[0])
                     <pre class="pg-output"></pre>
                 </div>
             </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Drill Time!</h2>
+                <p>Text is everywhere in programming — names, messages, passwords, chat. The only way to get fast at it is repetition, so here are plenty of reps.</p>
+            </div>
+
+            <div class="task" data-expected="8
+ELEPHANT
+elephant">
+                <div class="task-head">
+                    <span class="task-badge">📏</span>
+                    <h3>Task 5: How Long Is It?</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal"><code>len(text)</code> counts the characters. Make <code>word = "elephant"</code> and print its length, then print it in ALL CAPS with <code>.upper()</code>, then in lowercase with <code>.lower()</code>.</p>
+                <div class="code-block out">8
+ELEPHANT
+elephant</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>word = &quot;elephant&quot;
+print(len(word))
+print(word.upper())
+print(word.lower())</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="pro
+ming
+gram">
+                <div class="task-head">
+                    <span class="task-badge">✂️</span>
+                    <h3>Task 6: Slice It Up</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Slicing takes a piece of text: <code>text[0:3]</code> means characters 0, 1 and 2. With <code>word = "programming"</code>, print the first three letters, then the last four letters (<code>word[-4:]</code>), then every letter from position 3 to 7.</p>
+                <div class="code-block out">pro
+ming
+gram</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>word = &quot;programming&quot;
+print(word[0:3])
+print(word[-4:])
+print(word[3:7])</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="True
+10
+2">
+                <div class="task-head">
+                    <span class="task-badge">🔍</span>
+                    <h3>Task 7: Search Inside Text</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">With <code>sentence = "the quick brown fox"</code>, print: whether it contains <code>"quick"</code> (use <code>in</code>), the position of <code>"brown"</code> (use <code>.find()</code>), and how many times the letter <code>"o"</code> appears (use <code>.count()</code>).</p>
+                <div class="code-block out">True
+10
+2</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>sentence = &quot;the quick brown fox&quot;
+print(&quot;quick&quot; in sentence)
+print(sentence.find(&quot;brown&quot;))
+print(sentence.count(&quot;o&quot;))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="hahaha
+I like dogs">
+                <div class="task-head">
+                    <span class="task-badge">🔁</span>
+                    <h3>Task 8: Replace and Repeat</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Text has superpowers: <code>*</code> repeats it and <code>.replace()</code> swaps parts. Print <code>"ha" * 3</code>, then take <code>"I like cats"</code> and print it with <code>cats</code> replaced by <code>dogs</code>.</p>
+                <div class="code-block out">hahaha
+I like dogs</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>print(&quot;ha&quot; * 3)
+print(&quot;I like cats&quot;.replace(&quot;cats&quot;, &quot;dogs&quot;))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="|   Hello World   |
+|Hello World|">
+                <div class="task-head">
+                    <span class="task-badge">🧹</span>
+                    <h3>Task 9: Clean Up Messy Input</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Users type messy text. Take <code>messy = "   Hello World   "</code> and print: the messy value inside two pipes <code>|</code> so you can see the spaces, then the cleaned version with <code>.strip()</code> inside pipes too.</p>
+                <div class="code-block out">|   Hello World   |
+|Hello World|</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>messy = &quot;   Hello World   &quot;
+print(&quot;|&quot; + messy + &quot;|&quot;)
+print(&quot;|&quot; + messy.strip() + &quot;|&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Sam scored 92% in math!">
+                <div class="task-head">
+                    <span class="task-badge">🏷️</span>
+                    <h3>Task 10: f-string Report Card</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Using an f-string, build one sentence from <code>name = "Sam"</code>, <code>subject = "math"</code> and <code>score = 92</code>:</p>
+                <div class="code-block out">Sam scored 92% in math!</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>name = &quot;Sam&quot;
+subject = &quot;math&quot;
+score = 92
+print(f&quot;{name} scored {score}% in {subject}!&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Alice Wonderland
+AW">
+                <div class="task-head">
+                    <span class="task-badge">🔠</span>
+                    <h3>Task 11: Title Case Machine</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Take <code>messy_name = "aLiCe wOnDeRlAnD"</code> and print it properly capitalized using <code>.title()</code>. Then print just the first letter of each word joined together (<code>AW</code>) using slicing and <code>.split()</code> — or by hand, your choice.</p>
+                <div class="code-block out">Alice Wonderland
+AW</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>messy_name = &quot;aLiCe wOnDeRlAnD&quot;
+nice = messy_name.title()
+print(nice)
+parts = nice.split()
+print(parts[0][0] + parts[1][0])</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="selur nohtyp
+python_rules
+P-Y-T-H-O-N- -R-U-L-E-S">
+                <div class="task-head">
+                    <span class="task-badge">🔒</span>
+                    <h3>Task 12: Boss Level: Secret Code</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Write a mini cipher. Take <code>secret = "python rules"</code> and print, in order: the message reversed (<code>secret[::-1]</code>), the message with every space replaced by <code>_</code>, and the message in caps with each letter separated by a dash (hint: <code>"-".join(...)</code>).</p>
+                <div class="code-block out">selur nohtyp
+python_rules
+P-Y-T-H-O-N- -R-U-L-E-S</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>secret = &quot;python rules&quot;
+print(secret[::-1])
+print(secret.replace(&quot; &quot;, &quot;_&quot;))
+print(&quot;-&quot;.join(secret.upper()))</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🎤</span>
+                    <h3>Task 13: Free Play — Song Lyric Machine</h3>
+                    <span class="task-difficulty diff-easy">Creative</span>
+                </div>
+                <p class="task-goal">Store a chorus line in a variable and print it three times using <code>*</code> or three prints, then print a version SHOUTED in caps, a whispered lowercase version, and a version with one word swapped out. Have fun with it! 🎶</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
         </div>
 
         <nav class="lesson-nav">

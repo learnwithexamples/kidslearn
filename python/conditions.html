@@ -221,6 +221,295 @@ else:
                     <pre class="pg-output"></pre>
                 </div>
             </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Drill Time!</h2>
+                <p>Decisions are the brain of a program. The more <code>if</code> statements you write, the more natural they feel — so here is a whole workout.</p>
+            </div>
+
+            <div class="task" data-expected="a is bigger">
+                <div class="task-head">
+                    <span class="task-badge">⚖️</span>
+                    <h3>Task 5: Which Is Bigger?</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">With <code>a = 14</code> and <code>b = 9</code>, print <code>a is bigger</code>, <code>b is bigger</code> or <code>They are equal</code> — whichever is true. Then change the numbers and run again to test the other branches!</p>
+                <div class="code-block out">a is bigger</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>a = 14
+b = 9
+if a &gt; b:
+    print(&quot;a is bigger&quot;)
+elif b &gt; a:
+    print(&quot;b is bigger&quot;)
+else:
+    print(&quot;They are equal&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="negative">
+                <div class="task-head">
+                    <span class="task-badge">➕</span>
+                    <h3>Task 6: Positive, Negative or Zero</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">With <code>n = -7</code>, print <code>positive</code>, <code>negative</code> or <code>zero</code>. Use one <code>if</code>, one <code>elif</code> and one <code>else</code>.</p>
+                <div class="code-block out">negative</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>n = -7
+if n &gt; 0:
+    print(&quot;positive&quot;)
+elif n &lt; 0:
+    print(&quot;negative&quot;)
+else:
+    print(&quot;zero&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Sorry, not yet.">
+                <div class="task-head">
+                    <span class="task-badge">🎢</span>
+                    <h3>Task 7: Two Rules at Once (and)</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">A ride needs riders to be at least 8 years old <strong>and</strong> at least 120 cm tall. With <code>age = 10</code> and <code>height = 115</code>, print <code>You may ride!</code> or <code>Sorry, not yet.</code> using <code>and</code>.</p>
+                <div class="code-block out">Sorry, not yet.</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>age = 10
+height = 115
+if age &gt;= 8 and height &gt;= 120:
+    print(&quot;You may ride!&quot;)
+else:
+    print(&quot;Sorry, not yet.&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Free entry!">
+                <div class="task-head">
+                    <span class="task-badge">🎟️</span>
+                    <h3>Task 8: Either Rule Works (or)</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Entry is free if you are under 5 <strong>or</strong> over 65. With <code>age = 70</code>, print <code>Free entry!</code> or <code>Please pay $10</code> using <code>or</code>.</p>
+                <div class="code-block out">Free entry!</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>age = 70
+if age &lt; 5 or age &gt; 65:
+    print(&quot;Free entry!&quot;)
+else:
+    print(&quot;Please pay $10&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Go outside! ☀️">
+                <div class="task-head">
+                    <span class="task-badge">🚫</span>
+                    <h3>Task 9: Flip It With not</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">With <code>is_raining = False</code>, use <code>if not is_raining:</code> to print <code>Go outside! ☀️</code>, otherwise print <code>Stay in and code. 🌧️</code>.</p>
+                <div class="code-block out">Go outside! ☀️</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>is_raining = False
+if not is_raining:
+    print(&quot;Go outside! ☀️&quot;)
+else:
+    print(&quot;Stay in and code. 🌧️&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Has a number
+Long enough">
+                <div class="task-head">
+                    <span class="task-badge">🔍</span>
+                    <h3>Task 10: Is It In There?</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">The word <code>in</code> also asks questions. With <code>password = "dragon123"</code>, print <code>Has a number</code> if <code>"1"</code> is in it, and print <code>Long enough</code> if it has 8 or more characters. Two separate <code>if</code> statements — both should print here.</p>
+                <div class="code-block out">Has a number
+Long enough</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>password = &quot;dragon123&quot;
+if &quot;1&quot; in password:
+    print(&quot;Has a number&quot;)
+if len(password) &gt;= 8:
+    print(&quot;Long enough&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Price: $15">
+                <div class="task-head">
+                    <span class="task-badge">🎫</span>
+                    <h3>Task 11: Ticket Price Machine</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Ticket prices: under 5 is free, 5–12 costs $8, 13–64 costs $15, 65 and over costs $10. With <code>age = 13</code>, print just the price line, like <code>Price: $15</code>. Test it by changing <code>age</code> to 3, 9 and 70 too!</p>
+                <div class="code-block out">Price: $15</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>age = 13
+if age &lt; 5:
+    price = 0
+elif age &lt;= 12:
+    price = 8
+elif age &lt;= 64:
+    price = 15
+else:
+    price = 10
+print(f&quot;Price: ${price}&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Welcome, user!">
+                <div class="task-head">
+                    <span class="task-badge">🪆</span>
+                    <h3>Task 12: An if Inside an if</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">With <code>logged_in = True</code> and <code>is_admin = False</code>: if the user is logged in, then check whether they are an admin — print <code>Welcome, boss!</code> for an admin, <code>Welcome, user!</code> for a normal one. If they are not logged in at all, print <code>Please log in.</code></p>
+                <div class="code-block out">Welcome, user!</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>logged_in = True
+is_admin = False
+if logged_in:
+    if is_admin:
+        print(&quot;Welcome, boss!&quot;)
+    else:
+        print(&quot;Welcome, user!&quot;)
+else:
+    print(&quot;Please log in.&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Player wins!">
+                <div class="task-head">
+                    <span class="task-badge">👑</span>
+                    <h3>Task 13: Boss Level: Rock Paper Scissors Judge</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">With <code>player = "rock"</code> and <code>computer = "scissors"</code>, decide the winner and print exactly one of <code>Player wins!</code>, <code>Computer wins!</code> or <code>It's a tie!</code>. Remember: rock beats scissors, scissors beats paper, paper beats rock. Try all the combinations!</p>
+                <div class="code-block out">Player wins!</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>player = &quot;rock&quot;
+computer = &quot;scissors&quot;
+if player == computer:
+    print(&quot;It&#x27;s a tie!&quot;)
+elif player == &quot;rock&quot; and computer == &quot;scissors&quot;:
+    print(&quot;Player wins!&quot;)
+elif player == &quot;scissors&quot; and computer == &quot;paper&quot;:
+    print(&quot;Player wins!&quot;)
+elif player == &quot;paper&quot; and computer == &quot;rock&quot;:
+    print(&quot;Player wins!&quot;)
+else:
+    print(&quot;Computer wins!&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🧙</span>
+                    <h3>Task 14: Free Play — Choose Your Adventure</h3>
+                    <span class="task-difficulty diff-easy">Creative</span>
+                </div>
+                <p class="task-goal">Write a short story where variables decide what happens: <code>has_key</code>, <code>coins</code>, <code>brave</code>… Use at least three <code>if</code> statements so the ending changes when you change the variables. Then change them and run it again! 🗝️</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
         </div>
 
         <nav class="lesson-nav">

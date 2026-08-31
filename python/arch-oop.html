@@ -411,6 +411,255 @@ class Point:
 print(Point(1, 2))</pre>
                 </div>
             </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Engineering Reps</h2>
+                <p>Objects are how big programs stay organized. Model a few little worlds of your own below.</p>
+            </div>
+
+            <div class="task" data-expected="&#x27;Hobbit&#x27; by Tolkien (1937)">
+                <div class="task-head">
+                    <span class="task-badge">🖨️</span>
+                    <h3>Task 8: Print an Object Nicely</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Add a <code>__str__</code> method to a <code>Book</code> class so <code>print(book)</code> shows <code>'Hobbit' by Tolkien (1937)</code> instead of a memory address. Create one book and print it.</p>
+                <div class="code-block out">&#x27;Hobbit&#x27; by Tolkien (1937)</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Book:
+    def __init__(self, title, author, year):
+        self.title = title
+        self.author = author
+        self.year = year
+
+    def __str__(self):
+        return f&quot;&#x27;{self.title}&#x27; by {self.author} ({self.year})&quot;
+
+print(Book(&quot;Hobbit&quot;, &quot;Tolkien&quot;, 1937))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="20">
+                <div class="task-head">
+                    <span class="task-badge">🔒</span>
+                    <h3>Task 9: Protect the Data</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write a <code>Thermostat</code> whose temperature can only be set between 5 and 30. Keep the value in <code>self._temperature</code> and provide <code>set_temperature(value)</code> that ignores silly values, plus <code>get_temperature()</code>. Try 20, then 99, then print the temperature — it should still be 20.</p>
+                <div class="code-block out">20</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Thermostat:
+    def __init__(self):
+        self._temperature = 18
+
+    def set_temperature(self, value):
+        if 5 &lt;= value &lt;= 30:
+            self._temperature = value
+
+    def get_temperature(self):
+        return self._temperature
+
+t = Thermostat()
+t.set_temperature(20)
+t.set_temperature(99)
+print(t.get_temperature())</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="3">
+                <div class="task-head">
+                    <span class="task-badge">🏭</span>
+                    <h3>Task 10: Class Methods and Counters</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Give <code>Robot</code> a class variable <code>count</code> that goes up every time a robot is built, and a <code>@classmethod how_many(cls)</code> that returns it. Build three robots and print how many exist.</p>
+                <div class="code-block out">3</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Robot:
+    count = 0
+
+    def __init__(self, name):
+        self.name = name
+        Robot.count += 1
+
+    @classmethod
+    def how_many(cls):
+        return cls.count
+
+Robot(&quot;R1&quot;)
+Robot(&quot;R2&quot;)
+Robot(&quot;R3&quot;)
+print(Robot.how_many())</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Tesla: Vroom">
+                <div class="task-head">
+                    <span class="task-badge">🧩</span>
+                    <h3>Task 11: Has-A Instead of Is-A</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">A car is not a kind of engine — it <em>has</em> one. Write an <code>Engine</code> class with <code>start()</code> returning <code>"Vroom"</code>, and a <code>Car</code> that creates an Engine inside <code>__init__</code> and has <code>drive()</code> returning <code>"Tesla: Vroom"</code>. Print <code>Car("Tesla").drive()</code>.</p>
+                <div class="code-block out">Tesla: Vroom</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Engine:
+    def start(self):
+        return &quot;Vroom&quot;
+
+class Car:
+    def __init__(self, brand):
+        self.brand = brand
+        self.engine = Engine()
+
+    def drive(self):
+        return f&quot;{self.brand}: {self.engine.start()}&quot;
+
+print(Car(&quot;Tesla&quot;).drive())</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Circle: 12.57
+Square: 9.00
+Triangle: 10.00">
+                <div class="task-head">
+                    <span class="task-badge">🎭</span>
+                    <h3>Task 12: Polymorphism in a Loop</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Write <code>Circle</code>, <code>Square</code> and <code>Triangle</code> classes that each have an <code>area()</code> method. Put one of each in a list (radius 2, side 3, base 4 height 5) and loop through printing <code>ClassName: area</code> rounded to 2 decimals. The loop should not care which shape it holds — that is polymorphism.</p>
+                <div class="code-block out">Circle: 12.57
+Square: 9.00
+Triangle: 10.00</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Circle:
+    def __init__(self, radius):
+        self.radius = radius
+    def area(self):
+        return 3.14159 * self.radius ** 2
+
+class Square:
+    def __init__(self, side):
+        self.side = side
+    def area(self):
+        return self.side ** 2
+
+class Triangle:
+    def __init__(self, base, height):
+        self.base = base
+        self.height = height
+    def area(self):
+        return self.base * self.height / 2
+
+for shape in [Circle(2), Square(3), Triangle(4, 5)]:
+    print(f&quot;{type(shape).__name__}: {shape.area():.2f}&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="You borrowed Hobbit
+Sorry, Hobbit is already out
+[&#x27;Matilda&#x27;]">
+                <div class="task-head">
+                    <span class="task-badge">📚</span>
+                    <h3>Task 13: Boss Level: Library System</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Build a tiny library. <code>Book</code> holds a title and an <code>is_borrowed</code> flag. <code>Library</code> holds a list of books with <code>add(book)</code>, <code>borrow(title)</code> (returns a message and marks it borrowed, refusing if it is already out) and <code>available()</code> returning the list of free titles. Add two books, borrow one twice, then print the available titles.</p>
+                <div class="code-block out">You borrowed Hobbit
+Sorry, Hobbit is already out
+[&#x27;Matilda&#x27;]</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Book:
+    def __init__(self, title):
+        self.title = title
+        self.is_borrowed = False
+
+class Library:
+    def __init__(self):
+        self.books = []
+
+    def add(self, book):
+        self.books.append(book)
+
+    def borrow(self, title):
+        for book in self.books:
+            if book.title == title:
+                if book.is_borrowed:
+                    return f&quot;Sorry, {title} is already out&quot;
+                book.is_borrowed = True
+                return f&quot;You borrowed {title}&quot;
+        return f&quot;We do not have {title}&quot;
+
+    def available(self):
+        return [b.title for b in self.books if not b.is_borrowed]
+
+library = Library()
+library.add(Book(&quot;Hobbit&quot;))
+library.add(Book(&quot;Matilda&quot;))
+print(library.borrow(&quot;Hobbit&quot;))
+print(library.borrow(&quot;Hobbit&quot;))
+print(library.available())</pre>
+                </div>
+            </div>
         </div>
 
         <nav class="lesson-nav">

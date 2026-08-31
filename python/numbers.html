@@ -203,6 +203,298 @@ print(f"{celsius}°C = {fahrenheit}°F")
                     <pre class="pg-output"></pre>
                 </div>
             </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Drill Time!</h2>
+                <p>Mathematics in code only becomes easy through repetition. Work through every drill below, from warm-up to boss level.</p>
+            </div>
+
+            <div class="task" data-expected="3.4
+3
+2">
+                <div class="task-head">
+                    <span class="task-badge">➗</span>
+                    <h3>Task 5: Divide Three Ways</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Python has three kinds of division. Print <code>17 / 5</code> (normal), <code>17 // 5</code> (whole answer only) and <code>17 % 5</code> (the remainder), one per line. Notice how the first one has a decimal point and the others do not!</p>
+                <div class="code-block out">3.4
+3
+2</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>print(17 / 5)
+print(17 // 5)
+print(17 % 5)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="14
+20
+17.0
+7.0">
+                <div class="task-head">
+                    <span class="task-badge">🥇</span>
+                    <h3>Task 6: Order of Operations</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Python follows the same rules you use in math class: brackets first, then × and ÷, then + and −. Predict each answer <em>before</em> running, then print <code>2 + 3 * 4</code>, <code>(2 + 3) * 4</code>, <code>20 - 6 / 2</code> and <code>(20 - 6) / 2</code>.</p>
+                <div class="code-block out">14
+20
+17.0
+7.0</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>print(2 + 3 * 4)
+print((2 + 3) * 4)
+print(20 - 6 / 2)
+print((20 - 6) / 2)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="3
+3.14
+9
+9">
+                <div class="task-head">
+                    <span class="task-badge">🎯</span>
+                    <h3>Task 7: Round and Absolute</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal"><code>round(x)</code> rounds a number and <code>round(x, 2)</code> keeps 2 decimal places. <code>abs(x)</code> throws away the minus sign. Print <code>round(2.7)</code>, <code>round(3.14159, 2)</code>, <code>abs(-9)</code> and <code>abs(9)</code>.</p>
+                <div class="code-block out">3
+3.14
+9
+9</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>print(round(2.7))
+print(round(3.14159, 2))
+print(abs(-9))
+print(abs(9))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="15
+3
+32">
+                <div class="task-head">
+                    <span class="task-badge">📊</span>
+                    <h3>Task 8: Biggest, Smallest, Total</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Python has built-in helpers. For the numbers 8, 3, 15 and 6, print the largest with <code>max()</code>, the smallest with <code>min()</code>, and their total with <code>sum([...])</code> (a list goes inside <code>sum</code>).</p>
+                <div class="code-block out">15
+3
+32</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>print(max(8, 3, 15, 6))
+print(min(8, 3, 15, 6))
+print(sum([8, 3, 15, 6]))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="3 items cost $13.50">
+                <div class="task-head">
+                    <span class="task-badge">💰</span>
+                    <h3>Task 9: Money Formatting</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Prices should always show 2 decimals. Inside an f-string, <code>{value:.2f}</code> does exactly that. With <code>price = 4.5</code> and <code>quantity = 3</code>, print <code>3 items cost $13.50</code>.</p>
+                <div class="code-block out">3 items cost $13.50</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>price = 4.5
+quantity = 3
+print(f&quot;{quantity} items cost ${price * quantity:.2f}&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="500 seconds = 8 minutes and 20 seconds">
+                <div class="task-head">
+                    <span class="task-badge">⏱️</span>
+                    <h3>Task 10: Seconds Into Minutes</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">You have <code>total_seconds = 500</code>. Using <code>//</code> and <code>%</code>, work out the minutes and the leftover seconds, then print <code>500 seconds = 8 minutes and 20 seconds</code>.</p>
+                <div class="code-block out">500 seconds = 8 minutes and 20 seconds</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>total_seconds = 500
+minutes = total_seconds // 60
+seconds = total_seconds % 60
+print(f&quot;{total_seconds} seconds = {minutes} minutes and {seconds} seconds&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Each friend gets 3
+Leftover slices: 2">
+                <div class="task-head">
+                    <span class="task-badge">🍕</span>
+                    <h3>Task 11: Fair Pizza Sharing</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">There are <code>slices = 17</code> pizza slices and <code>friends = 5</code> hungry friends. Print how many whole slices each friend gets, and how many are left over for the dog — two lines, like <code>Each friend gets 3</code> and <code>Leftover slices: 2</code>.</p>
+                <div class="code-block out">Each friend gets 3
+Leftover slices: 2</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>slices = 17
+friends = 5
+print(f&quot;Each friend gets {slices // friends}&quot;)
+print(f&quot;Leftover slices: {slices % friends}&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="4
+7
+2">
+                <div class="task-head">
+                    <span class="task-badge">🔢</span>
+                    <h3>Task 12: Digit Splitter</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Take the three-digit number <code>n = 472</code> and print its hundreds digit, tens digit and ones digit on separate lines — using only <code>//</code> and <code>%</code>, no text tricks!</p>
+                <div class="code-block out">4
+7
+2</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>n = 472
+print(n // 100)
+print((n // 10) % 10)
+print(n % 10)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Quarters: 3
+Dimes: 1
+Nickels: 0
+Pennies: 2">
+                <div class="task-head">
+                    <span class="task-badge">🪙</span>
+                    <h3>Task 13: Boss Level: Coin Machine</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">A shop must give <code>change = 87</code> cents using the fewest coins: quarters (25), dimes (10), nickels (5) and pennies (1). Print how many of each, in that order, as four lines like <code>Quarters: 3</code>. Hint: take the biggest coin first with <code>//</code>, then keep the remainder with <code>%</code>.</p>
+                <div class="code-block out">Quarters: 3
+Dimes: 1
+Nickels: 0
+Pennies: 2</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>change = 87
+quarters = change // 25
+change = change % 25
+dimes = change // 10
+change = change % 10
+nickels = change // 5
+pennies = change % 5
+print(f&quot;Quarters: {quarters}&quot;)
+print(f&quot;Dimes: {dimes}&quot;)
+print(f&quot;Nickels: {nickels}&quot;)
+print(f&quot;Pennies: {pennies}&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🧪</span>
+                    <h3>Task 14: Free Play — Your Own Calculator</h3>
+                    <span class="task-difficulty diff-easy">Creative</span>
+                </div>
+                <p class="task-goal">Invent a real-life calculation and code it: pocket money saved per week over a year, how many seconds you have been alive, the cost of a party for 12 friends… print the numbers with nice labeled sentences. 🎉</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
         </div>
 
         <nav class="lesson-nav">

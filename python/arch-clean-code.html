@@ -198,6 +198,200 @@ print(area(5, 4))
 print(perimeter(5, 4))</pre>
                 </div>
             </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Engineering Reps</h2>
+                <p>Clean code is a habit, not a talent. Each drill below hands you messy code — your job is to make it obvious at a glance. The output must stay exactly the same!</p>
+            </div>
+
+            <div class="task" data-expected="31.4159">
+                <div class="task-head">
+                    <span class="task-badge">🔢</span>
+                    <h3>Task 4: Kill the Magic Numbers</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">This line is a mystery: <code>print(2 * 3.14159 * 5)</code>. Rewrite it with named constants <code>PI</code> and <code>radius</code>, plus a <code>circumference</code> variable, so a stranger understands it instantly. Print the value.</p>
+                <div class="code-block out">31.4159</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>PI = 3.14159
+radius = 5
+circumference = 2 * PI * radius
+print(circumference)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="May vote
+Too young">
+                <div class="task-head">
+                    <span class="task-badge">🛡️</span>
+                    <h3>Task 5: Guard Clauses Beat Deep Nesting</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Deeply nested <code>if</code>s are hard to read. Write <code>can_vote(person)</code> that returns early with a clear message: no name → <code>"No name given"</code>, under 18 → <code>"Too young"</code>, not registered → <code>"Not registered"</code>, otherwise <code>"May vote"</code>. Test it with a valid voter and an under-18.</p>
+                <div class="code-block out">May vote
+Too young</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def can_vote(person):
+    if not person.get(&quot;name&quot;):
+        return &quot;No name given&quot;
+    if person[&quot;age&quot;] &lt; 18:
+        return &quot;Too young&quot;
+    if not person.get(&quot;registered&quot;):
+        return &quot;Not registered&quot;
+    return &quot;May vote&quot;
+
+print(can_vote({&quot;name&quot;: &quot;Ana&quot;, &quot;age&quot;: 20, &quot;registered&quot;: True}))
+print(can_vote({&quot;name&quot;: &quot;Ben&quot;, &quot;age&quot;: 12, &quot;registered&quot;: True}))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="False">
+                <div class="task-head">
+                    <span class="task-badge">🏷️</span>
+                    <h3>Task 6: Name Booleans Like Questions</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Bad: <code>flag = True</code>. Good: <code>is_logged_in = True</code>, <code>has_premium = False</code>, <code>can_download = is_logged_in and has_premium</code>. Write those three lines and print <code>can_download</code>. Notice how the last line reads like English.</p>
+                <div class="code-block out">False</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>is_logged_in = True
+has_premium = False
+can_download = is_logged_in and has_premium
+print(can_download)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Alice scores 50">
+                <div class="task-head">
+                    <span class="task-badge">✂️</span>
+                    <h3>Task 7: Break Up a Long Function</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">One function is doing three jobs: cleaning a name, scoring it, and printing a report. Split it into <code>clean(name)</code>, <code>score(name)</code> (length × 10) and <code>report(name)</code> that uses the other two. Call <code>report("  aLiCe ")</code> to print <code>Alice scores 50</code>.</p>
+                <div class="code-block out">Alice scores 50</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def clean(name):
+    return name.strip().title()
+
+def score(name):
+    return len(name) * 10
+
+def report(name):
+    tidy = clean(name)
+    print(f&quot;{tidy} scores {score(tidy)}&quot;)
+
+report(&quot;  aLiCe &quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="8.00
+20.00
+32.00">
+                <div class="task-head">
+                    <span class="task-badge">🔁</span>
+                    <h3>Task 8: DRY: One Source of Truth</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Three lines repeat the same 20% discount: <code>10 * 0.8</code>, <code>25 * 0.8</code>, <code>40 * 0.8</code>. Replace them with a <code>DISCOUNT</code> constant and an <code>apply_discount(price)</code> function, then print the three results with 2 decimals. Changing the sale later should mean changing <em>one</em> line.</p>
+                <div class="code-block out">8.00
+20.00
+32.00</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>DISCOUNT = 0.8
+
+def apply_discount(price):
+    return price * DISCOUNT
+
+for price in [10, 25, 40]:
+    print(f&quot;{apply_discount(price):.2f}&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="4.666666666666667
+0">
+                <div class="task-head">
+                    <span class="task-badge">🧽</span>
+                    <h3>Task 9: Boss Level: The Big Clean-Up</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Here is truly awful code: <code>def f(l):\n  t=0\n  for i in l:\n    if i>0: t=t+i\n  return t/len(l)</code>. Rewrite it properly: a descriptive name, a docstring, clear variable names, and a guard for an empty list (return 0). Print the result for <code>[4, -2, 10]</code> and for <code>[]</code>.</p>
+                <div class="code-block out">4.666666666666667
+0</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def average_of_positive_values(numbers):
+    &quot;&quot;&quot;Return the average of the positive numbers, or 0 for an empty list.&quot;&quot;&quot;
+    if not numbers:
+        return 0
+    total = 0
+    for number in numbers:
+        if number &gt; 0:
+            total += number
+    return total / len(numbers)
+
+print(average_of_positive_values([4, -2, 10]))
+print(average_of_positive_values([]))</pre>
+                </div>
+            </div>
         </div>
 
         <nav class="lesson-nav">

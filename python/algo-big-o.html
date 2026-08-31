@@ -247,6 +247,216 @@ print(f"Nested loop (O(n^2)): {steps} steps")
                     <pre class="pg-output"></pre>
                 </div>
             </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Algorithm Reps</h2>
+                <p>Big-O only clicks when you count the steps yourself, again and again. Every task below makes you measure real work instead of guessing.</p>
+            </div>
+
+            <div class="task" data-expected="9
+0">
+                <div class="task-head">
+                    <span class="task-badge">⚡</span>
+                    <h3>Task 5: Constant Time O(1)</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Write <code>first_item(items)</code> that returns <code>items[0]</code>. It does the <em>same</em> amount of work whether the list has 5 or 5 million things — that is O(1). Print it for <code>[9, 8, 7]</code> and for <code>list(range(1000000))</code>.</p>
+                <div class="code-block out">9
+0</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def first_item(items):
+    return items[0]
+
+print(first_item([9, 8, 7]))
+print(first_item(list(range(1000000))))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="10
+100
+1000">
+                <div class="task-head">
+                    <span class="task-badge">🔢</span>
+                    <h3>Task 6: Count the Steps of O(n)</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write <code>count_steps(n)</code> that loops <code>n</code> times, counting each loop in a <code>steps</code> variable, and returns the count. Print the steps for n = 10, 100 and 1000. Notice the steps grow exactly like n.</p>
+                <div class="code-block out">10
+100
+1000</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def count_steps(n):
+    steps = 0
+    for i in range(n):
+        steps += 1
+    return steps
+
+print(count_steps(10))
+print(count_steps(100))
+print(count_steps(1000))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="25
+100
+10000">
+                <div class="task-head">
+                    <span class="task-badge">🔲</span>
+                    <h3>Task 7: Count the Steps of O(n²)</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Now write <code>count_pairs(n)</code> with a loop inside a loop, counting every inner step. Print it for n = 5, 10 and 100. Ten times bigger input, but a <em>hundred</em> times more work — that is why O(n²) hurts.</p>
+                <div class="code-block out">25
+100
+10000</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def count_pairs(n):
+    steps = 0
+    for i in range(n):
+        for j in range(n):
+            steps += 1
+    return steps
+
+print(count_pairs(5))
+print(count_pairs(10))
+print(count_pairs(100))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="4
+11
+20">
+                <div class="task-head">
+                    <span class="task-badge">✂️</span>
+                    <h3>Task 8: Count the Steps of O(log n)</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Write <code>halvings(n)</code> that keeps halving <code>n</code> (using <code>n = n // 2</code>) until it reaches 0, counting each halving. Print it for 8, 1024 and 1000000. A million items in only about twenty steps! 🤯</p>
+                <div class="code-block out">4
+11
+20</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def halvings(n):
+    steps = 0
+    while n &gt; 0:
+        n = n // 2
+        steps += 1
+    return steps
+
+print(halvings(8))
+print(halvings(1024))
+print(halvings(1000000))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="500500
+500500">
+                <div class="task-head">
+                    <span class="task-badge">🧮</span>
+                    <h3>Task 9: O(n) Loop vs O(1) Formula</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Add up 1…n two ways: <code>sum_loop(n)</code> with a loop, and <code>sum_formula(n)</code> using <code>n * (n + 1) // 2</code>. Print both for n = 1000 — same answer, wildly different work.</p>
+                <div class="code-block out">500500
+500500</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def sum_loop(n):
+    total = 0
+    for i in range(1, n + 1):
+        total += i
+    return total
+
+def sum_formula(n):
+    return n * (n + 1) // 2
+
+print(sum_loop(1000))
+print(sum_formula(1000))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="10000
+True">
+                <div class="task-head">
+                    <span class="task-badge">🐢</span>
+                    <h3>Task 10: Boss Level: Slow List vs Fast Set</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Searching a list is O(n); searching a <code>set</code> is about O(1). Write <code>steps_in_list(items, target)</code> that counts how many items it checks before finding the target. Print the steps for finding 9999 in <code>list(range(10000))</code>, then print <code>9999 in set(range(10000))</code> — which needs no scan at all.</p>
+                <div class="code-block out">10000
+True</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def steps_in_list(items, target):
+    steps = 0
+    for item in items:
+        steps += 1
+        if item == target:
+            return steps
+    return steps
+
+print(steps_in_list(list(range(10000)), 9999))
+print(9999 in set(range(10000)))</pre>
+                </div>
+            </div>
         </div>
 
         <nav class="lesson-nav">

@@ -99,7 +99,7 @@ Meow">
                     <h3>Task 1: Animal Factory</h3>
                     <span class="task-difficulty diff-medium">Medium</span>
                 </div>
-                <p class="task-goal">Finish <code>make_animal</code> so it returns a <code>Dog</code> for <code>"dog"</code> and a <code>Cat</code> for <code>"cat"</code>. The factory creates the right object → <code>Woof</code> then <code>Meow</code>.</p>
+                <p class="task-goal">Write <code>Dog</code> and <code>Cat</code> classes with a <code>speak()</code> method, then a <code>make_animal(kind)</code> factory that returns the right object for <code>"dog"</code> or <code>"cat"</code>. The caller never needs to know which class it got.</p>
                 <div class="playground">
                     <textarea class="code-input" spellcheck="false">class Dog:
     def speak(self): return "Woof"
@@ -122,14 +122,22 @@ print(make_animal("cat").speak())
                     <pre class="pg-output"></pre>
                 </div>
                 <div class="solution" hidden>
-                    <pre>def make_animal(kind):
-    if kind == "dog":
+                    <pre>class Dog:
+    def speak(self):
+        return &quot;Woof&quot;
+
+class Cat:
+    def speak(self):
+        return &quot;Meow&quot;
+
+def make_animal(kind):
+    if kind == &quot;dog&quot;:
         return Dog()
-    if kind == "cat":
+    if kind == &quot;cat&quot;:
         return Cat()
 
-print(make_animal("dog").speak())
-print(make_animal("cat").speak())</pre>
+print(make_animal(&quot;dog&quot;).speak())
+print(make_animal(&quot;cat&quot;).speak())</pre>
                 </div>
             </div>
 
@@ -140,7 +148,7 @@ print(make_animal("cat").speak())</pre>
                     <h3>Task 2: Pick a Strategy</h3>
                     <span class="task-difficulty diff-medium">Medium</span>
                 </div>
-                <p class="task-goal">Complete <code>calculate</code> so it applies whichever <code>strategy</code> function it's given. <code>add</code> → <code>7</code>, <code>multiply</code> → <code>12</code>.</p>
+                <p class="task-goal">Write two tiny functions, <code>add(a, b)</code> and <code>multiply(a, b)</code>, then <code>calculate(a, b, strategy)</code> which runs whichever one it is handed. Call it with 3 and 4 both ways → 7 then 12.</p>
                 <div class="playground">
                     <textarea class="code-input" spellcheck="false">def add(a, b): return a + b
 def multiply(a, b): return a * b
@@ -161,7 +169,13 @@ print(calculate(3, 4, multiply))
                     <pre class="pg-output"></pre>
                 </div>
                 <div class="solution" hidden>
-                    <pre>def calculate(a, b, strategy):
+                    <pre>def add(a, b):
+    return a + b
+
+def multiply(a, b):
+    return a * b
+
+def calculate(a, b, strategy):
     return strategy(a, b)
 
 print(calculate(3, 4, add))
@@ -175,7 +189,7 @@ print(calculate(3, 4, multiply))</pre>
                     <h3>Task 3: Observer Notifications</h3>
                     <span class="task-difficulty diff-hard">Challenge</span>
                 </div>
-                <p class="task-goal">Finish <code>upload</code> so it returns a list like <code>['Mia notified', 'Leo notified']</code> for every subscriber.</p>
+                <p class="task-goal">Write a <code>VideoChannel</code> that keeps a list of subscribers, with <code>subscribe(name)</code> and <code>upload()</code> which returns a list like <code>['Mia notified', 'Leo notified']</code>. Subscribe Mia and Leo, then upload.</p>
                 <div class="playground">
                     <textarea class="code-input" spellcheck="false">class Channel:
     def __init__(self):
@@ -200,8 +214,282 @@ print(c.upload())
                     <pre class="pg-output"></pre>
                 </div>
                 <div class="solution" hidden>
-                    <pre>    def upload(self):
-        return [name + " notified" for name in self.subscribers]</pre>
+                    <pre>class VideoChannel:
+    def __init__(self):
+        self.subscribers = []
+
+    def subscribe(self, name):
+        self.subscribers.append(name)
+
+    def upload(self):
+        return [name + &quot; notified&quot; for name in self.subscribers]
+
+channel = VideoChannel()
+channel.subscribe(&quot;Mia&quot;)
+channel.subscribe(&quot;Leo&quot;)
+print(channel.upload())</pre>
+                </div>
+            </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Engineering Reps</h2>
+                <p>Design patterns are recipes other engineers already tested. Cook each one at least once and you will recognize it forever.</p>
+            </div>
+
+            <div class="task" data-expected="9
+True">
+                <div class="task-head">
+                    <span class="task-badge">1️⃣</span>
+                    <h3>Task 4: Singleton: Only One Allowed</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Some things should exist exactly once — a game's settings, for example. Write <code>Settings</code> whose <code>__new__</code> always returns the same instance. Create it twice, change a value through the first, and print the value through the second plus <code>a is b</code>.</p>
+                <div class="code-block out">9
+True</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Settings:
+    _instance = None
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+            cls._instance.volume = 5
+        return cls._instance
+
+a = Settings()
+b = Settings()
+a.volume = 9
+print(b.volume)
+print(a is b)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="HELLO ANA!">
+                <div class="task-head">
+                    <span class="task-badge">🎁</span>
+                    <h3>Task 5: Decorator: Wrap a Function</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">A decorator adds behavior around a function without touching its code. Write <code>@shout</code> that takes any function returning text and makes the result UPPERCASE with an exclamation mark. Decorate <code>greet(name)</code> and print <code>greet("ana")</code>.</p>
+                <div class="code-block out">HELLO ANA!</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def shout(func):
+    def wrapper(*args, **kwargs):
+        return func(*args, **kwargs).upper() + &quot;!&quot;
+    return wrapper
+
+@shout
+def greet(name):
+    return f&quot;hello {name}&quot;
+
+print(greet(&quot;ana&quot;))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="42">
+                <div class="task-head">
+                    <span class="task-badge">🔌</span>
+                    <h3>Task 6: Adapter: Make Two Things Fit</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Your app expects <code>.area()</code> but an old library only offers <code>compute_surface()</code>. Write the old class, then an <code>Adapter</code> that wraps it and provides <code>area()</code>. Print the area through the adapter.</p>
+                <div class="code-block out">42</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class OldShape:
+    def compute_surface(self):
+        return 42
+
+class ShapeAdapter:
+    def __init__(self, old_shape):
+        self.old_shape = old_shape
+
+    def area(self):
+        return self.old_shape.compute_surface()
+
+print(ShapeAdapter(OldShape()).area())</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Hello 
+Hello World
+Hello ">
+                <div class="task-head">
+                    <span class="task-badge">↩️</span>
+                    <h3>Task 7: Command: Actions You Can Undo</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Store actions as objects so you can undo them. Write <code>AddText</code> with <code>run(doc)</code> and <code>undo(doc)</code> (both returning the new text), keep a history list, run two commands, then undo one. Print the document after every step.</p>
+                <div class="code-block out">Hello 
+Hello World
+Hello </div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class AddText:
+    def __init__(self, text):
+        self.text = text
+
+    def run(self, doc):
+        return doc + self.text
+
+    def undo(self, doc):
+        return doc[:-len(self.text)]
+
+doc = &quot;&quot;
+history = []
+for command in [AddText(&quot;Hello &quot;), AddText(&quot;World&quot;)]:
+    doc = command.run(doc)
+    history.append(command)
+    print(doc)
+
+doc = history.pop().undo(doc)
+print(doc)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Chess starting
+Move a knight
+Chess over
+
+Tag starting
+Run away!
+Tag over">
+                <div class="task-head">
+                    <span class="task-badge">🧱</span>
+                    <h3>Task 8: Template Method: Same Steps, Different Details</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Every game has the same skeleton: start, play, finish. Write a <code>Game</code> base class with a <code>play_game()</code> method that calls <code>start()</code>, <code>turn()</code> and <code>end()</code>, then two subclasses (<code>Chess</code>, <code>Tag</code>) that fill in their own <code>turn()</code>. Play both.</p>
+                <div class="code-block out">Chess starting
+Move a knight
+Chess over
+
+Tag starting
+Run away!
+Tag over</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Game:
+    def start(self):
+        print(f&quot;{type(self).__name__} starting&quot;)
+
+    def turn(self):
+        raise NotImplementedError
+
+    def end(self):
+        print(f&quot;{type(self).__name__} over\n&quot;)
+
+    def play_game(self):
+        self.start()
+        self.turn()
+        self.end()
+
+class Chess(Game):
+    def turn(self):
+        print(&quot;Move a knight&quot;)
+
+class Tag(Game):
+    def turn(self):
+        print(&quot;Run away!&quot;)
+
+Chess().play_game()
+Tag().play_game()</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Goblin swings a club
+Dragon breathes fire">
+                <div class="task-head">
+                    <span class="task-badge">🏰</span>
+                    <h3>Task 9: Boss Level: Factory + Strategy Together</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Build a monster spawner: a <code>make_monster(kind)</code> factory returning <code>Goblin</code> or <code>Dragon</code> objects, where each has an <code>attack_style</code> strategy object with <code>attack()</code>. Spawn one of each and print their attacks. Two patterns, one small program.</p>
+                <div class="code-block out">Goblin swings a club
+Dragon breathes fire</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Melee:
+    def attack(self):
+        return &quot;swings a club&quot;
+
+class FireBreath:
+    def attack(self):
+        return &quot;breathes fire&quot;
+
+class Monster:
+    def __init__(self, name, style):
+        self.name = name
+        self.style = style
+
+    def act(self):
+        return f&quot;{self.name} {self.style.attack()}&quot;
+
+def make_monster(kind):
+    if kind == &quot;goblin&quot;:
+        return Monster(&quot;Goblin&quot;, Melee())
+    if kind == &quot;dragon&quot;:
+        return Monster(&quot;Dragon&quot;, FireBreath())
+    raise ValueError(&quot;unknown monster&quot;)
+
+for kind in [&quot;goblin&quot;, &quot;dragon&quot;]:
+    print(make_monster(kind).act())</pre>
                 </div>
             </div>
         </div>

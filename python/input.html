@@ -165,6 +165,201 @@ print(f"The {color} {animal} loves to {action} all day!")
                     <pre class="pg-output"></pre>
                 </div>
             </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Interactive Drills</h2>
+                <p>These programs talk to you. Press <strong>▶ Run</strong>, answer the pop-ups, and watch what your code does with your answers. Try running each one twice with different answers!</p>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🍰</span>
+                    <h3>Task 5: Birthday Countdown</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Ask for the user's name and their age, then print a sentence saying how many years until they turn 100. Remember to wrap the age in <code>int()</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>name = input(&quot;Your name: &quot;)
+age = int(input(&quot;Your age: &quot;))
+print(f&quot;Hi {name}! You will turn 100 in {100 - age} years.&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">📏</span>
+                    <h3>Task 6: Rectangle Room</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Ask for the width and length of a room in meters (they may be decimals — use <code>float()</code>), then print the area and the perimeter.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>width = float(input(&quot;Width in meters: &quot;))
+length = float(input(&quot;Length in meters: &quot;))
+print(f&quot;Area: {width * length} square meters&quot;)
+print(f&quot;Perimeter: {2 * (width + length)} meters&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🔤</span>
+                    <h3>Task 7: Name Analyzer</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Ask for a word, then print: how many letters it has, the word in CAPITALS, the word reversed, and its first letter.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>word = input(&quot;Type a word: &quot;)
+print(f&quot;Letters: {len(word)}&quot;)
+print(word.upper())
+print(word[::-1])
+print(f&quot;First letter: {word[0]}&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🎂</span>
+                    <h3>Task 8: Party Planner</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Ask how many guests are coming and how many slices of cake each guest eats. Print the total slices needed, and how many whole cakes to buy if one cake has 8 slices (round up by adding 7 before dividing — a classic trick!).</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>guests = int(input(&quot;How many guests? &quot;))
+slices = int(input(&quot;Slices per guest? &quot;))
+total = guests * slices
+print(f&quot;You need {total} slices&quot;)
+print(f&quot;Buy {(total + 7) // 8} cakes&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🌡️</span>
+                    <h3>Task 9: Temperature Translator</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Ask for a temperature in Celsius and print it in Fahrenheit. The formula is <code>F = C * 9 / 5 + 32</code>. Show the answer with one decimal place using <code>{value:.1f}</code>.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>celsius = float(input(&quot;Temperature in Celsius: &quot;))
+print(f&quot;{celsius}°C is {celsius * 9 / 5 + 32:.1f}°F&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🔐</span>
+                    <h3>Task 10: Password Checker</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Ask the user to invent a password. Print how long it is, and print <code>Strong 💪</code> if it is 8 characters or more, otherwise <code>Too short 😬</code>. (You'll meet <code>if</code> properly in the next lesson — try it here anyway!)</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>password = input(&quot;Invent a password: &quot;)
+print(f&quot;Length: {len(password)}&quot;)
+if len(password) &gt;= 8:
+    print(&quot;Strong 💪&quot;)
+else:
+    print(&quot;Too short 😬&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🧮</span>
+                    <h3>Task 11: Boss Level: Shopping Till</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Ask for an item name, its price, and how many the customer wants. Then print a tidy receipt: the item line with the total, a 10% tax line, and the final amount — all with 2 decimal places.</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>item = input(&quot;Item name: &quot;)
+price = float(input(&quot;Price each: &quot;))
+count = int(input(&quot;How many? &quot;))
+subtotal = price * count
+tax = subtotal * 0.10
+print(f&quot;{count} x {item} = ${subtotal:.2f}&quot;)
+print(f&quot;Tax: ${tax:.2f}&quot;)
+print(f&quot;TOTAL: ${subtotal + tax:.2f}&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🎲</span>
+                    <h3>Task 12: Free Play — Interview Bot</h3>
+                    <span class="task-difficulty diff-easy">Creative</span>
+                </div>
+                <p class="task-goal">Write a bot that asks the user at least four questions (favorite animal, dream job, lucky number, best food…) and then prints a funny paragraph about them using every answer. 🤖</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
         </div>
 
         <nav class="lesson-nav">

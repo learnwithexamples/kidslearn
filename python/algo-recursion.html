@@ -248,6 +248,226 @@ for i in range(7):
     print(fib(i))</pre>
                 </div>
             </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Algorithm Reps</h2>
+                <p>Recursion feels like magic until you have written ten of them — then it feels obvious. Here are your ten.</p>
+            </div>
+
+            <div class="task" data-expected="5
+4
+3
+2
+1
+Go!">
+                <div class="task-head">
+                    <span class="task-badge">🚀</span>
+                    <h3>Task 5: Recursive Countdown</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Write <code>countdown(n)</code> that prints n, then calls itself with n − 1, and prints <code>Go!</code> when n reaches 0. Call <code>countdown(5)</code>. Every recursion needs that stopping point — the <strong>base case</strong>.</p>
+                <div class="code-block out">5
+4
+3
+2
+1
+Go!</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def countdown(n):
+    if n == 0:
+        print(&quot;Go!&quot;)
+        return
+    print(n)
+    countdown(n - 1)
+
+countdown(5)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="1024
+125">
+                <div class="task-head">
+                    <span class="task-badge">🔋</span>
+                    <h3>Task 6: Power Without **</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write <code>power(base, exp)</code> recursively: anything to the power 0 is 1, otherwise it is <code>base * power(base, exp - 1)</code>. Print <code>power(2, 10)</code> and <code>power(5, 3)</code>.</p>
+                <div class="code-block out">1024
+125</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def power(base, exp):
+    if exp == 0:
+        return 1
+    return base * power(base, exp - 1)
+
+print(power(2, 10))
+print(power(5, 3))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="1
+4
+7">
+                <div class="task-head">
+                    <span class="task-badge">🔢</span>
+                    <h3>Task 7: Count the Digits</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write <code>count_digits(n)</code> that returns how many digits a whole number has — without turning it into text. Base case: a number below 10 has 1 digit. Otherwise it is <code>1 + count_digits(n // 10)</code>. Print it for 7, 4720 and 1000000.</p>
+                <div class="code-block out">1
+4
+7</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def count_digits(n):
+    if n &lt; 10:
+        return 1
+    return 1 + count_digits(n // 10)
+
+print(count_digits(7))
+print(count_digits(4720))
+print(count_digits(1000000))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="True
+True
+False">
+                <div class="task-head">
+                    <span class="task-badge">🪞</span>
+                    <h3>Task 8: Recursive Palindrome</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Write <code>is_palindrome(word)</code> recursively: a word of 0 or 1 letters is a palindrome; otherwise the first and last letters must match <em>and</em> the middle must be a palindrome too. Print it for <code>"racecar"</code>, <code>"level"</code> and <code>"python"</code>.</p>
+                <div class="code-block out">True
+True
+False</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def is_palindrome(word):
+    if len(word) &lt;= 1:
+        return True
+    if word[0] != word[-1]:
+        return False
+    return is_palindrome(word[1:-1])
+
+print(is_palindrome(&quot;racecar&quot;))
+print(is_palindrome(&quot;level&quot;))
+print(is_palindrome(&quot;python&quot;))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="[1, 2, 3, 4, 5]">
+                <div class="task-head">
+                    <span class="task-badge">📦</span>
+                    <h3>Task 9: Flatten a Nested List</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Lists can hide inside lists. Write <code>flatten(items)</code> that returns one flat list from <code>[1, [2, [3, 4]], 5]</code>. Hint: check each item with <code>isinstance(item, list)</code> and recurse when it is one.</p>
+                <div class="code-block out">[1, 2, 3, 4, 5]</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def flatten(items):
+    result = []
+    for item in items:
+        if isinstance(item, list):
+            result += flatten(item)
+        else:
+            result.append(item)
+    return result
+
+print(flatten([1, [2, [3, 4]], 5]))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Move disc 1 from A to C
+Move disc 2 from A to B
+Move disc 1 from C to B
+Move disc 3 from A to C
+Move disc 1 from B to A
+Move disc 2 from B to C
+Move disc 1 from A to C">
+                <div class="task-head">
+                    <span class="task-badge">🗼</span>
+                    <h3>Task 10: Boss Level: Tower of Hanoi</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">The classic puzzle: move a stack of discs from peg A to peg C using peg B, never putting a bigger disc on a smaller one. Write <code>hanoi(n, source, helper, target)</code> that prints each move like <code>Move disc 1 from A to C</code>. Run it for 3 discs — exactly 7 moves.</p>
+                <div class="code-block out">Move disc 1 from A to C
+Move disc 2 from A to B
+Move disc 1 from C to B
+Move disc 3 from A to C
+Move disc 1 from B to A
+Move disc 2 from B to C
+Move disc 1 from A to C</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def hanoi(n, source, helper, target):
+    if n == 0:
+        return
+    hanoi(n - 1, source, target, helper)
+    print(f&quot;Move disc {n} from {source} to {target}&quot;)
+    hanoi(n - 1, helper, source, target)
+
+hanoi(3, &quot;A&quot;, &quot;B&quot;, &quot;C&quot;)</pre>
+                </div>
+            </div>
         </div>
 
         <nav class="lesson-nav">

@@ -177,6 +177,196 @@ result = sorted(set(nums))
 print(result)</pre>
                 </div>
             </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Algorithm Reps</h2>
+                <p>Hash maps and sets turn slow problems into instant ones. These reps teach you to spot the moment a dictionary saves the day.</p>
+            </div>
+
+            <div class="task" data-expected="[1, 3, 7]
+3
+True">
+                <div class="task-head">
+                    <span class="task-badge">🎒</span>
+                    <h3>Task 4: Meet the Set</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">A <code>set</code> keeps only unique items and checks membership instantly. From <code>[3, 1, 3, 7, 1]</code> print the set, its size, and whether 7 is in it.</p>
+                <div class="code-block out">[1, 3, 7]
+3
+True</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>numbers = [3, 1, 3, 7, 1]
+unique = set(numbers)
+print(sorted(unique))
+print(len(unique))
+print(7 in unique)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="True
+False">
+                <div class="task-head">
+                    <span class="task-badge">🔤</span>
+                    <h3>Task 5: Anagram Detector</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Two words are anagrams if they use exactly the same letters. Write <code>is_anagram(a, b)</code> using letter-count dictionaries (or sorted letters). Print it for <code>"listen"/"silent"</code> and <code>"hello"/"world"</code>.</p>
+                <div class="code-block out">True
+False</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def is_anagram(a, b):
+    return sorted(a) == sorted(b)
+
+print(is_anagram(&quot;listen&quot;, &quot;silent&quot;))
+print(is_anagram(&quot;hello&quot;, &quot;world&quot;))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="w">
+                <div class="task-head">
+                    <span class="task-badge">1️⃣</span>
+                    <h3>Task 6: First Letter That Appears Once</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">In <code>"swiss cheese"</code>, find the first character that appears exactly once (ignore spaces). Count everything in a dictionary first, then walk the text again and return the first count of 1.</p>
+                <div class="code-block out">w</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>text = &quot;swiss cheese&quot;
+counts = {}
+for ch in text:
+    if ch != &quot; &quot;:
+        counts[ch] = counts.get(ch, 0) + 1
+for ch in text:
+    if ch != &quot; &quot; and counts[ch] == 1:
+        print(ch)
+        break</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="{&#x27;a&#x27;: [&#x27;ant&#x27;, &#x27;alpaca&#x27;], &#x27;b&#x27;: [&#x27;bee&#x27;, &#x27;bear&#x27;], &#x27;c&#x27;: [&#x27;cat&#x27;]}">
+                <div class="task-head">
+                    <span class="task-badge">🗂️</span>
+                    <h3>Task 7: Group by First Letter</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Sort <code>["ant", "bee", "alpaca", "bear", "cat"]</code> into a dictionary where each first letter maps to a list of words. Print the dictionary.</p>
+                <div class="code-block out">{&#x27;a&#x27;: [&#x27;ant&#x27;, &#x27;alpaca&#x27;], &#x27;b&#x27;: [&#x27;bee&#x27;, &#x27;bear&#x27;], &#x27;c&#x27;: [&#x27;cat&#x27;]}</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>words = [&quot;ant&quot;, &quot;bee&quot;, &quot;alpaca&quot;, &quot;bear&quot;, &quot;cat&quot;]
+groups = {}
+for word in words:
+    letter = word[0]
+    if letter not in groups:
+        groups[letter] = []
+    groups[letter].append(word)
+print(groups)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="[3, 4]
+[1, 2, 3, 4, 5]
+[1, 2]">
+                <div class="task-head">
+                    <span class="task-badge">🤝</span>
+                    <h3>Task 8: What Do They Share?</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">With <code>a = [1, 2, 3, 4]</code> and <code>b = [3, 4, 5]</code>, use sets to print: the values in both (<code>&amp;</code>), all values with no repeats (<code>|</code>), and the values only in <code>a</code> (<code>-</code>). Print each as a sorted list.</p>
+                <div class="code-block out">[3, 4]
+[1, 2, 3, 4, 5]
+[1, 2]</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>a = [1, 2, 3, 4]
+b = [3, 4, 5]
+print(sorted(set(a) &amp; set(b)))
+print(sorted(set(a) | set(b)))
+print(sorted(set(a) - set(b)))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="the: 3
+and: 2
+bat: 1">
+                <div class="task-head">
+                    <span class="task-badge">📊</span>
+                    <h3>Task 9: Boss Level: Top Three Words</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Count the words in <code>"the cat and the hat and the bat"</code> with a dictionary, then print the three most common as <code>the: 3</code> lines, most common first. Hint: <code>sorted(counts.items(), key=lambda pair: pair[1], reverse=True)</code>.</p>
+                <div class="code-block out">the: 3
+and: 2
+bat: 1</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>text = &quot;the cat and the hat and the bat&quot;
+counts = {}
+for word in text.split():
+    counts[word] = counts.get(word, 0) + 1
+ranked = sorted(counts.items(), key=lambda pair: (-pair[1], pair[0]))
+for word, count in ranked[:3]:
+    print(f&quot;{word}: {count}&quot;)</pre>
+                </div>
+            </div>
         </div>
 
         <nav class="lesson-nav">

@@ -202,6 +202,228 @@ print(line.popleft())
 print(line.popleft())</pre>
                 </div>
             </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Algorithm Reps</h2>
+                <p>Stacks and queues show up in browsers, printers, undo buttons and text editors. Build them over and over until the push/pop rhythm is second nature.</p>
+            </div>
+
+            <div class="task" data-expected="kcats">
+                <div class="task-head">
+                    <span class="task-badge">🔄</span>
+                    <h3>Task 4: Reverse With a Stack</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Push every letter of <code>"stack"</code> onto a list, then pop them off one by one into a new string. Last in, first out — so the word comes out backwards. Print the result.</p>
+                <div class="code-block out">kcats</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>stack = []
+for letter in &quot;stack&quot;:
+    stack.append(letter)
+
+reversed_word = &quot;&quot;
+while stack:
+    reversed_word += stack.pop()
+print(reversed_word)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Undo: line
+Undo: square
+Left: [&#x27;circle&#x27;]">
+                <div class="task-head">
+                    <span class="task-badge">↩️</span>
+                    <h3>Task 5: Undo History</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">A drawing app remembers actions in a stack. Push <code>"circle"</code>, <code>"square"</code> and <code>"line"</code>, then undo twice — printing what each undo removes — and finally print what is left.</p>
+                <div class="code-block out">Undo: line
+Undo: square
+Left: [&#x27;circle&#x27;]</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>history = []
+history.append(&quot;circle&quot;)
+history.append(&quot;square&quot;)
+history.append(&quot;line&quot;)
+print(&quot;Undo:&quot;, history.pop())
+print(&quot;Undo:&quot;, history.pop())
+print(&quot;Left:&quot;, history)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Serving Ana
+Serving Ben
+Serving Cy">
+                <div class="task-head">
+                    <span class="task-badge">🎟️</span>
+                    <h3>Task 6: A Real Queue</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">A queue is first in, first out. Using <code>from collections import deque</code>, add <code>"Ana"</code>, <code>"Ben"</code> and <code>"Cy"</code>, then serve them in order with <code>.popleft()</code>, printing <code>Serving Ana</code> each time.</p>
+                <div class="code-block out">Serving Ana
+Serving Ben
+Serving Cy</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>from collections import deque
+
+line = deque()
+line.append(&quot;Ana&quot;)
+line.append(&quot;Ben&quot;)
+line.append(&quot;Cy&quot;)
+while line:
+    print(&quot;Serving&quot;, line.popleft())</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Out: D
+Out: C
+Out: E
+Out: B
+Winner: A">
+                <div class="task-head">
+                    <span class="task-badge">🥔</span>
+                    <h3>Task 7: Hot Potato</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Five kids stand in a circle: <code>["A", "B", "C", "D", "E"]</code>. Pass the potato 3 times (move the front kid to the back), then the kid holding it is out — print who leaves. Repeat until one winner remains, then print <code>Winner: X</code>.</p>
+                <div class="code-block out">Out: D
+Out: C
+Out: E
+Out: B
+Winner: A</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>from collections import deque
+
+kids = deque([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;])
+while len(kids) &gt; 1:
+    for pass_number in range(3):
+        kids.append(kids.popleft())
+    print(&quot;Out:&quot;, kids.popleft())
+print(&quot;Winner:&quot;, kids[0])</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="min is 5
+min is 3
+min is 3
+min is 2">
+                <div class="task-head">
+                    <span class="task-badge">📉</span>
+                    <h3>Task 8: A Stack That Knows Its Minimum</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Keep a second stack of running minimums so you can ask for the smallest value instantly. Push 5, 3, 7 and 2, printing the current minimum after each push.</p>
+                <div class="code-block out">min is 5
+min is 3
+min is 3
+min is 2</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>stack = []
+mins = []
+
+def push(value):
+    stack.append(value)
+    if not mins or value &lt;= mins[-1]:
+        mins.append(value)
+    else:
+        mins.append(mins[-1])
+    print(&quot;min is&quot;, mins[-1])
+
+push(5)
+push(3)
+push(7)
+push(2)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="14">
+                <div class="task-head">
+                    <span class="task-badge">🧮</span>
+                    <h3>Task 9: Boss Level: Calculator in Reverse</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Computers love <strong>postfix</strong> maths: <code>"3 4 + 2 *"</code> means (3 + 4) × 2. Read the tokens one by one — push numbers onto a stack, and when you meet an operator pop two numbers, apply it, and push the answer back. Print the final value.</p>
+                <div class="code-block out">14</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>expression = &quot;3 4 + 2 *&quot;
+stack = []
+for token in expression.split():
+    if token in &quot;+-*/&quot;:
+        b = stack.pop()
+        a = stack.pop()
+        if token == &quot;+&quot;:
+            stack.append(a + b)
+        elif token == &quot;-&quot;:
+            stack.append(a - b)
+        elif token == &quot;*&quot;:
+            stack.append(a * b)
+        else:
+            stack.append(a // b)
+    else:
+        stack.append(int(token))
+print(stack.pop())</pre>
+                </div>
+            </div>
         </div>
 
         <nav class="lesson-nav">

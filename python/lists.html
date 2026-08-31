@@ -227,6 +227,303 @@ print(playlist)
                     <pre class="pg-output"></pre>
                 </div>
             </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Drill Time!</h2>
+                <p>Real programs are full of lists — scores, names, messages, pixels. Do all of these and lists will stop feeling scary.</p>
+            </div>
+
+            <div class="task" data-expected="cat
+bee
+[&#x27;cat&#x27;, &#x27;dog&#x27;, &#x27;fox&#x27;]
+5">
+                <div class="task-head">
+                    <span class="task-badge">📍</span>
+                    <h3>Task 6: Pick and Slice</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">With <code>animals = ["cat", "dog", "fox", "owl", "bee"]</code>, print: the first animal, the last animal (use <code>[-1]</code>), the first three as a list (<code>[0:3]</code>) and how many animals there are.</p>
+                <div class="code-block out">cat
+bee
+[&#x27;cat&#x27;, &#x27;dog&#x27;, &#x27;fox&#x27;]
+5</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>animals = [&quot;cat&quot;, &quot;dog&quot;, &quot;fox&quot;, &quot;owl&quot;, &quot;bee&quot;]
+print(animals[0])
+print(animals[-1])
+print(animals[0:3])
+print(len(animals))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="[&#x27;key&#x27;, &#x27;apple&#x27;, &#x27;book&#x27;]
+book
+[&#x27;key&#x27;, &#x27;apple&#x27;]">
+                <div class="task-head">
+                    <span class="task-badge">➕</span>
+                    <h3>Task 7: Grow and Shrink</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Start with <code>bag = ["apple", "pen"]</code>. Append <code>"book"</code>, insert <code>"key"</code> at position 0, remove <code>"pen"</code>, then print the bag. Finally use <code>.pop()</code> to take out the last item, print the popped item, and print the bag again.</p>
+                <div class="code-block out">[&#x27;key&#x27;, &#x27;apple&#x27;, &#x27;book&#x27;]
+book
+[&#x27;key&#x27;, &#x27;apple&#x27;]</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>bag = [&quot;apple&quot;, &quot;pen&quot;]
+bag.append(&quot;book&quot;)
+bag.insert(0, &quot;key&quot;)
+bag.remove(&quot;pen&quot;)
+print(bag)
+last = bag.pop()
+print(last)
+print(bag)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="[1, 2, 5, 9]
+[5, 2, 9, 1]
+[9, 5, 2, 1]">
+                <div class="task-head">
+                    <span class="task-badge">🔀</span>
+                    <h3>Task 8: Sort It Out</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">With <code>nums = [5, 2, 9, 1]</code>: print <code>sorted(nums)</code> (a sorted copy), then print <code>nums</code> to show the original is untouched. Then call <code>nums.sort(reverse=True)</code> and print <code>nums</code> — now it really changed.</p>
+                <div class="code-block out">[1, 2, 5, 9]
+[5, 2, 9, 1]
+[9, 5, 2, 1]</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>nums = [5, 2, 9, 1]
+print(sorted(nums))
+print(nums)
+nums.sort(reverse=True)
+print(nums)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="True
+3
+3">
+                <div class="task-head">
+                    <span class="task-badge">🔎</span>
+                    <h3>Task 9: Search the List</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">With <code>votes = ["red", "blue", "red", "green", "red"]</code>, print: whether <code>"blue"</code> is in the list, how many votes <code>"red"</code> got (<code>.count()</code>), and the position of the first <code>"green"</code> (<code>.index()</code>).</p>
+                <div class="code-block out">True
+3
+3</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>votes = [&quot;red&quot;, &quot;blue&quot;, &quot;red&quot;, &quot;green&quot;, &quot;red&quot;]
+print(&quot;blue&quot; in votes)
+print(votes.count(&quot;red&quot;))
+print(votes.index(&quot;green&quot;))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="1. pizza
+2. salad
+3. soup">
+                <div class="task-head">
+                    <span class="task-badge">🔢</span>
+                    <h3>Task 10: Numbered List with enumerate</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Print a numbered menu from <code>menu = ["pizza", "salad", "soup"]</code> so it reads <code>1. pizza</code>, <code>2. salad</code>, <code>3. soup</code>. Use <code>for i, item in enumerate(menu, start=1):</code>.</p>
+                <div class="code-block out">1. pizza
+2. salad
+3. soup</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>menu = [&quot;pizza&quot;, &quot;salad&quot;, &quot;soup&quot;]
+for i, item in enumerate(menu, start=1):
+    print(f&quot;{i}. {item}&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="[4, 10, 8]">
+                <div class="task-head">
+                    <span class="task-badge">🧹</span>
+                    <h3>Task 11: Build a New List</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">From <code>numbers = [4, 7, 10, 3, 8, 15]</code>, build a brand-new list called <code>evens</code> containing only the even numbers, then print it. Start with <code>evens = []</code> and <code>append</code> inside a loop.</p>
+                <div class="code-block out">[4, 10, 8]</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>numbers = [4, 7, 10, 3, 8, 15]
+evens = []
+for n in numbers:
+    if n % 2 == 0:
+        evens.append(n)
+print(evens)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="[1, 4, 9, 16, 25]
+[1, 3, 5]">
+                <div class="task-head">
+                    <span class="task-badge">🎛️</span>
+                    <h3>Task 12: One-Line Magic</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">A <strong>list comprehension</strong> does the last task in one line: <code>[n * n for n in numbers]</code>. From <code>numbers = [1, 2, 3, 4, 5]</code>, print the squares in one line, then print only the odd numbers using <code>[n for n in numbers if n % 2 == 1]</code>.</p>
+                <div class="code-block out">[1, 4, 9, 16, 25]
+[1, 3, 5]</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>numbers = [1, 2, 3, 4, 5]
+print([n * n for n in numbers])
+print([n for n in numbers if n % 2 == 1])</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="5
+1 2 3
+4 5 6
+7 8 9">
+                <div class="task-head">
+                    <span class="task-badge">🗺️</span>
+                    <h3>Task 13: A List of Lists</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">A grid is a list of rows: <code>grid = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]</code>. Print the middle number (<code>grid[1][1]</code>), then print each row on its own line with the numbers separated by spaces.</p>
+                <div class="code-block out">5
+1 2 3
+4 5 6
+7 8 9</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>grid = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+print(grid[1][1])
+for row in grid:
+    print(row[0], row[1], row[2])</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="1. Ben - 91
+2. Dee - 88
+3. Cy - 67">
+                <div class="task-head">
+                    <span class="task-badge">🏅</span>
+                    <h3>Task 14: Boss Level: Leaderboard</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">You have <code>players = ["Ana", "Ben", "Cy", "Dee"]</code> and <code>scores = [42, 91, 67, 88]</code>. Print the top three, highest first, as <code>1. Ben - 91</code> and so on. Hint: <code>list(zip(scores, players))</code> then <code>sorted(..., reverse=True)</code>.</p>
+                <div class="code-block out">1. Ben - 91
+2. Dee - 88
+3. Cy - 67</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>players = [&quot;Ana&quot;, &quot;Ben&quot;, &quot;Cy&quot;, &quot;Dee&quot;]
+scores = [42, 91, 67, 88]
+board = sorted(zip(scores, players), reverse=True)
+for i, pair in enumerate(board[:3], start=1):
+    print(f&quot;{i}. {pair[1]} - {pair[0]}&quot;)</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🎧</span>
+                    <h3>Task 15: Free Play — Your Top 10</h3>
+                    <span class="task-difficulty diff-easy">Creative</span>
+                </div>
+                <p class="task-goal">Make a list of your ten favorite songs, games or foods. Print it numbered, print it sorted alphabetically, print how many items it has, then add one and remove one. 🎶</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
         </div>
 
         <nav class="lesson-nav">

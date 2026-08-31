@@ -127,7 +127,7 @@ Total is: 15">
                     <h3>Task 2: Separate Logic from Display</h3>
                     <span class="task-difficulty diff-medium">Medium</span>
                 </div>
-                <p class="task-goal">Keep calculation in <code>add_all</code> and formatting in <code>show</code> — two separate concerns. Output: <code>15</code> then <code>Total is: 15</code>.</p>
+                <p class="task-goal">Keep the calculation in <code>add_all(numbers)</code> and the wording in <code>show(value)</code> — two separate concerns, two separate functions. Use <code>[4, 5, 6]</code> and print the raw total, then the pretty line.</p>
                 <div class="playground">
                     <textarea class="code-input" spellcheck="false"># logic concern
 def add_all(numbers):
@@ -151,8 +151,15 @@ print(show(total))
                     <pre class="pg-output"></pre>
                 </div>
                 <div class="solution" hidden>
-                    <pre>def show(value):
-    return "Total is: " + str(value)</pre>
+                    <pre>def add_all(numbers):
+    return sum(numbers)
+
+def show(value):
+    return &quot;Total is: &quot; + str(value)
+
+total = add_all([4, 5, 6])
+print(total)
+print(show(total))</pre>
                 </div>
             </div>
 
@@ -163,7 +170,7 @@ hello">
                     <h3>Task 3: A Tiny Toolbox Module</h3>
                     <span class="task-difficulty diff-medium">Medium</span>
                 </div>
-                <p class="task-goal">Group two related helpers into a class acting like a "text tools" module. Finish <code>quiet</code> to lowercase the text. <code>"hello"</code> → <code>HELLO</code> then <code>hello</code>.</p>
+                <p class="task-goal">Group two related helpers into one class that acts like a "text tools" module: <code>loud(text)</code> returns it in capitals and <code>quiet(text)</code> returns it in lowercase. Print <code>loud("hello")</code> then <code>quiet("HELLO")</code>.</p>
                 <div class="playground">
                     <textarea class="code-input" spellcheck="false">class TextTools:
     def loud(self, text):
@@ -185,8 +192,230 @@ print(tools.quiet("HELLO"))
                     <pre class="pg-output"></pre>
                 </div>
                 <div class="solution" hidden>
-                    <pre>    def quiet(self, text):
-        return text.lower()</pre>
+                    <pre>class TextTools:
+    def loud(self, text):
+        return text.upper()
+
+    def quiet(self, text):
+        return text.lower()
+
+tools = TextTools()
+print(tools.loud(&quot;hello&quot;))
+print(tools.quiet(&quot;HELLO&quot;))</pre>
+                </div>
+            </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Engineering Reps</h2>
+                <p>Big programs survive because they are built from small, swappable pieces. Practice cutting programs into layers.</p>
+            </div>
+
+            <div class="task" data-expected="4
+4
+4">
+                <div class="task-head">
+                    <span class="task-badge">📦</span>
+                    <h3>Task 4: Borrow From the Standard Library</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Python ships with hundreds of ready-made modules. Import <code>statistics</code> and print the mean, median and mode of <code>[4, 1, 4, 9, 2]</code>. Never write code that already exists!</p>
+                <div class="code-block out">4
+4
+4</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>import statistics
+
+data = [4, 1, 4, 9, 2]
+print(statistics.mean(data))
+print(statistics.median(data))
+print(statistics.mode(data))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="6
+1
+1">
+                <div class="task-head">
+                    <span class="task-badge">🎲</span>
+                    <h3>Task 5: Repeatable Randomness</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Random results make testing impossible — unless you seed them. Import <code>random</code>, call <code>random.seed(42)</code>, then print three dice rolls. Run it twice: identical every time, which is exactly what tests need.</p>
+                <div class="code-block out">6
+1
+1</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>import random
+
+random.seed(42)
+for roll in range(3):
+    print(random.randint(1, 6))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Total: $33.00">
+                <div class="task-head">
+                    <span class="task-badge">🧠</span>
+                    <h3>Task 6: Logic Layer vs Display Layer</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Split a program in two: <code>calculate_total(prices, tax)</code> that only does math and returns a number, and <code>show_total(total)</code> that only prints. Call them together for <code>[10, 20]</code> with 10% tax. The logic function must contain no <code>print</code> at all — that is what makes it testable.</p>
+                <div class="code-block out">Total: $33.00</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def calculate_total(prices, tax_rate):
+    subtotal = sum(prices)
+    return subtotal + subtotal * tax_rate
+
+def show_total(total):
+    print(f&quot;Total: ${total:.2f}&quot;)
+
+show_total(calculate_total([10, 20], 0.10))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Top: Ben with 94">
+                <div class="task-head">
+                    <span class="task-badge">🗄️</span>
+                    <h3>Task 7: Three Layers in One File</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Write a mini app with clearly separated sections: <strong>data</strong> (<code>get_students()</code> returning a list of dicts), <strong>logic</strong> (<code>top_student(students)</code>), and <strong>display</strong> (<code>show(student)</code>). Wire them together in one line at the bottom. Each function should do exactly one job.</p>
+                <div class="code-block out">Top: Ben with 94</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre># --- data layer ---
+def get_students():
+    return [
+        {&quot;name&quot;: &quot;Ana&quot;, &quot;score&quot;: 88},
+        {&quot;name&quot;: &quot;Ben&quot;, &quot;score&quot;: 94},
+        {&quot;name&quot;: &quot;Cy&quot;, &quot;score&quot;: 71},
+    ]
+
+# --- logic layer ---
+def top_student(students):
+    return max(students, key=lambda s: s[&quot;score&quot;])
+
+# --- display layer ---
+def show(student):
+    print(f&quot;Top: {student[&#x27;name&#x27;]} with {student[&#x27;score&#x27;]}&quot;)
+
+show(top_student(get_students()))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="__main__
+5">
+                <div class="task-head">
+                    <span class="task-badge">🚪</span>
+                    <h3>Task 8: The __main__ Guard</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Code inside <code>if __name__ == "__main__":</code> runs only when the file is run directly, not when another file imports it — so your module can be a tool <em>and</em> a library. Write <code>add(a, b)</code>, print <code>__name__</code>, and put a demo call inside the guard.</p>
+                <div class="code-block out">__main__
+5</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def add(a, b):
+    return a + b
+
+print(__name__)
+
+if __name__ == &quot;__main__&quot;:
+    print(add(2, 3))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="-5C = 23.0F (freezing)
+10C = 50.0F (cold)
+20C = 68.0F (mild)
+30C = 86.0F (hot)">
+                <div class="task-head">
+                    <span class="task-badge">🧰</span>
+                    <h3>Task 9: Boss Level: A Reusable Toolbox</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Design a <code>temperature</code> mini-module: <code>c_to_f</code>, <code>f_to_c</code>, and <code>describe(celsius)</code> returning <code>"freezing"</code> (≤0), <code>"cold"</code> (&lt;15), <code>"mild"</code> (&lt;25) or <code>"hot"</code>. Every function must be pure — no printing. Then, under a <code>__main__</code> guard, print a small demo table for −5, 10, 20 and 30 °C.</p>
+                <div class="code-block out">-5C = 23.0F (freezing)
+10C = 50.0F (cold)
+20C = 68.0F (mild)
+30C = 86.0F (hot)</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def c_to_f(celsius):
+    return celsius * 9 / 5 + 32
+
+def f_to_c(fahrenheit):
+    return (fahrenheit - 32) * 5 / 9
+
+def describe(celsius):
+    if celsius &lt;= 0:
+        return &quot;freezing&quot;
+    if celsius &lt; 15:
+        return &quot;cold&quot;
+    if celsius &lt; 25:
+        return &quot;mild&quot;
+    return &quot;hot&quot;
+
+if __name__ == &quot;__main__&quot;:
+    for c in [-5, 10, 20, 30]:
+        print(f&quot;{c}C = {c_to_f(c):.1f}F ({describe(c)})&quot;)</pre>
                 </div>
             </div>
         </div>

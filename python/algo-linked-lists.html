@@ -158,7 +158,7 @@ while current is not None:
                     <h3>Task 2: Count the Nodes</h3>
                     <span class="task-difficulty diff-medium">Medium</span>
                 </div>
-                <p class="task-goal">Write <code>length(head)</code> that counts nodes by walking the chain. The list <code>10 → 20 → 30</code> has length <code>3</code>.</p>
+                <p class="task-goal">Build the chain 10 → 20 → 30 with a <code>Node</code> class, then write <code>length(head)</code> that counts the nodes by walking the chain until it falls off the end. Print the length → <code>3</code>.</p>
                 <div class="playground">
                     <textarea class="code-input" spellcheck="false">class Node:
     def __init__(self, data):
@@ -186,13 +186,22 @@ print(length(head))
                     <pre class="pg-output"></pre>
                 </div>
                 <div class="solution" hidden>
-                    <pre>def length(head):
+                    <pre>class Node:
+    def __init__(self, value, next_node=None):
+        self.value = value
+        self.next = next_node
+
+head = Node(10, Node(20, Node(30)))
+
+def length(head):
     count = 0
     current = head
     while current is not None:
         count += 1
         current = current.next
-    return count</pre>
+    return count
+
+print(length(head))</pre>
                 </div>
             </div>
 
@@ -204,7 +213,7 @@ print(length(head))
                     <h3>Task 3: Insert at the Front</h3>
                     <span class="task-difficulty diff-hard">Tricky</span>
                 </div>
-                <p class="task-goal">Adding to the front of a linked list is <span class="big-o o-good">O(1)</span>! Make the new node point to the old head, then return the new node as the new head. Insert <code>99</code> before <code>10 → 20</code> → prints <code>99</code>, <code>10</code>, <code>20</code>.</p>
+                <p class="task-goal">Adding to the front of a linked list is O(1)! Build 10 → 20, then write <code>push_front(head, value)</code> that points the new node at the old head and returns it as the new head. Insert 99 and print every value.</p>
                 <div class="playground">
                     <textarea class="code-input" spellcheck="false">class Node:
     def __init__(self, data):
@@ -234,10 +243,295 @@ while current is not None:
                     <pre class="pg-output"></pre>
                 </div>
                 <div class="solution" hidden>
-                    <pre>def push_front(head, value):
+                    <pre>class Node:
+    def __init__(self, value, next_node=None):
+        self.value = value
+        self.next = next_node
+
+head = Node(10, Node(20))
+
+def push_front(head, value):
     new_node = Node(value)
     new_node.next = head
-    return new_node</pre>
+    return new_node
+
+head = push_front(head, 99)
+
+current = head
+while current is not None:
+    print(current.value)
+    current = current.next</pre>
+                </div>
+            </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Algorithm Reps</h2>
+                <p>Linked lists are where pointers finally make sense. Draw the boxes and arrows on paper as you do each task — then code it.</p>
+            </div>
+
+            <div class="task" data-expected="1
+2
+3">
+                <div class="task-head">
+                    <span class="task-badge">➕</span>
+                    <h3>Task 4: Append to the End</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Using the <code>Node</code> class, write <code>append(head, value)</code> that walks to the last node and hooks a new one on. Build a list 1 → 2 → 3 and print the values one per line.</p>
+                <div class="code-block out">1
+2
+3</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+def append(head, value):
+    new_node = Node(value)
+    if head is None:
+        return new_node
+    current = head
+    while current.next is not None:
+        current = current.next
+    current.next = new_node
+    return head
+
+head = None
+for n in [1, 2, 3]:
+    head = append(head, n)
+
+current = head
+while current is not None:
+    print(current.value)
+    current = current.next</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="True
+False">
+                <div class="task-head">
+                    <span class="task-badge">🔍</span>
+                    <h3>Task 5: Search the Chain</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write <code>contains(head, target)</code> that walks the chain and returns True if it finds the value. Build 4 → 8 → 15 and print the search for 8 and for 9.</p>
+                <div class="code-block out">True
+False</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Node:
+    def __init__(self, value, next_node=None):
+        self.value = value
+        self.next = next_node
+
+head = Node(4, Node(8, Node(15)))
+
+def contains(head, target):
+    current = head
+    while current is not None:
+        if current.value == target:
+            return True
+        current = current.next
+    return False
+
+print(contains(head, 8))
+print(contains(head, 9))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="1
+3">
+                <div class="task-head">
+                    <span class="task-badge">🗑️</span>
+                    <h3>Task 6: Delete a Node</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Write <code>delete(head, value)</code> that removes the first node holding that value by making the previous node point <em>past</em> it. Build 1 → 2 → 3, delete 2, and print what is left.</p>
+                <div class="code-block out">1
+3</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Node:
+    def __init__(self, value, next_node=None):
+        self.value = value
+        self.next = next_node
+
+head = Node(1, Node(2, Node(3)))
+
+def delete(head, value):
+    if head is not None and head.value == value:
+        return head.next
+    current = head
+    while current is not None and current.next is not None:
+        if current.next.value == value:
+            current.next = current.next.next
+            return head
+        current = current.next
+    return head
+
+head = delete(head, 2)
+current = head
+while current is not None:
+    print(current.value)
+    current = current.next</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="4
+3
+2
+1">
+                <div class="task-head">
+                    <span class="task-badge">🔃</span>
+                    <h3>Task 7: Reverse the List</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">The famous interview question! Walk the chain flipping every arrow backwards, keeping track of <code>previous</code>, <code>current</code> and <code>next</code>. Reverse 1 → 2 → 3 → 4 and print the values.</p>
+                <div class="code-block out">4
+3
+2
+1</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Node:
+    def __init__(self, value, next_node=None):
+        self.value = value
+        self.next = next_node
+
+head = Node(1, Node(2, Node(3, Node(4))))
+
+previous = None
+current = head
+while current is not None:
+    upcoming = current.next
+    current.next = previous
+    previous = current
+    current = upcoming
+head = previous
+
+current = head
+while current is not None:
+    print(current.value)
+    current = current.next</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="3">
+                <div class="task-head">
+                    <span class="task-badge">🐢</span>
+                    <h3>Task 8: Find the Middle</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Use two pointers: a slow one moving one node at a time and a fast one moving two. When the fast one reaches the end, the slow one is in the middle. Print the middle value of 1 → 2 → 3 → 4 → 5.</p>
+                <div class="code-block out">3</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Node:
+    def __init__(self, value, next_node=None):
+        self.value = value
+        self.next = next_node
+
+head = Node(1, Node(2, Node(3, Node(4, Node(5)))))
+
+slow = head
+fast = head
+while fast is not None and fast.next is not None:
+    slow = slow.next
+    fast = fast.next.next
+print(slow.value)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="True
+False">
+                <div class="task-head">
+                    <span class="task-badge">🔁</span>
+                    <h3>Task 9: Boss Level: Detect a Loop</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">A broken linked list can point back on itself and loop forever. Use the slow/fast trick again: if the fast pointer ever catches the slow one, there is a cycle. Build 1 → 2 → 3 → back to 2, and print <code>True</code>, then a normal list printing <code>False</code>.</p>
+                <div class="code-block out">True
+False</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>class Node:
+    def __init__(self, value, next_node=None):
+        self.value = value
+        self.next = next_node
+
+def has_cycle(head):
+    slow = fast = head
+    while fast is not None and fast.next is not None:
+        slow = slow.next
+        fast = fast.next.next
+        if slow is fast:
+            return True
+    return False
+
+third = Node(3)
+second = Node(2, third)
+first = Node(1, second)
+third.next = second          # oops, a loop!
+print(has_cycle(first))
+
+clean = Node(1, Node(2, Node(3)))
+print(has_cycle(clean))</pre>
                 </div>
             </div>
         </div>

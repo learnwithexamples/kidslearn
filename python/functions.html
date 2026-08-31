@@ -250,6 +250,317 @@ print(double(double(5)))
                     <pre class="pg-output"></pre>
                 </div>
             </div>
+
+            <div class="practice-intro extra-practice">
+                <h2>🏋️ Extra Practice — Drill Time!</h2>
+                <p>Functions are how programmers stop repeating themselves. Write lots of small ones — that is the whole trick.</p>
+            </div>
+
+            <div class="task" data-expected="24
+18">
+                <div class="task-head">
+                    <span class="task-badge">📐</span>
+                    <h3>Task 6: Two Parameters</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Write <code>rectangle_area(width, height)</code> that <strong>returns</strong> width × height. Print the area of a 4 × 6 rectangle and a 2 × 9 rectangle.</p>
+                <div class="code-block out">24
+18</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def rectangle_area(width, height):
+    return width * height
+
+print(rectangle_area(4, 6))
+print(rectangle_area(2, 9))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="Hello, Ana!
+Yo, Ben!">
+                <div class="task-head">
+                    <span class="task-badge">🎁</span>
+                    <h3>Task 7: A Default Value</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write <code>greet(name, greeting="Hello")</code> that returns <code>"Hello, Ana!"</code>. Call it once with just a name, and once with <code>greeting="Yo"</code>.</p>
+                <div class="code-block out">Hello, Ana!
+Yo, Ben!</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def greet(name, greeting=&quot;Hello&quot;):
+    return f&quot;{greeting}, {name}!&quot;
+
+print(greet(&quot;Ana&quot;))
+print(greet(&quot;Ben&quot;, greeting=&quot;Yo&quot;))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="low 1 high 9">
+                <div class="task-head">
+                    <span class="task-badge">↩️</span>
+                    <h3>Task 8: Return Two Things</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write <code>min_and_max(numbers)</code> that returns both the smallest and the largest value. Call it with <code>[4, 9, 1, 7]</code>, unpack the answer into <code>low, high</code>, and print <code>low 1 high 9</code>.</p>
+                <div class="code-block out">low 1 high 9</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def min_and_max(numbers):
+    return min(numbers), max(numbers)
+
+low, high = min_and_max([4, 9, 1, 7])
+print(&quot;low&quot;, low, &quot;high&quot;, high)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="False
+True
+False">
+                <div class="task-head">
+                    <span class="task-badge">✅</span>
+                    <h3>Task 9: A True/False Helper</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write <code>is_teenager(age)</code> that returns <code>True</code> when the age is between 13 and 19 (inclusive). Print the answer for 12, 13 and 20.</p>
+                <div class="code-block out">False
+True
+False</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def is_teenager(age):
+    return 13 &lt;= age &lt;= 19
+
+print(is_teenager(12))
+print(is_teenager(13))
+print(is_teenager(20))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="20">
+                <div class="task-head">
+                    <span class="task-badge">🧱</span>
+                    <h3>Task 10: Functions Using Functions</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write <code>double(n)</code> that returns n × 2, and <code>quadruple(n)</code> that returns <code>double(double(n))</code>. Print <code>quadruple(5)</code>.</p>
+                <div class="code-block out">20</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def double(n):
+    return n * 2
+
+def quadruple(n):
+    return double(double(n))
+
+print(quadruple(5))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="5.0
+Cannot divide by zero">
+                <div class="task-head">
+                    <span class="task-badge">🚪</span>
+                    <h3>Task 11: Return Early</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Write <code>safe_divide(a, b)</code> that returns the text <code>"Cannot divide by zero"</code> straight away if <code>b</code> is 0, otherwise returns <code>a / b</code>. Print <code>safe_divide(10, 2)</code> and <code>safe_divide(7, 0)</code>.</p>
+                <div class="code-block out">5.0
+Cannot divide by zero</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def safe_divide(a, b):
+    if b == 0:
+        return &quot;Cannot divide by zero&quot;
+    return a / b
+
+print(safe_divide(10, 2))
+print(safe_divide(7, 0))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="9.0
+3.5">
+                <div class="task-head">
+                    <span class="task-badge">📋</span>
+                    <h3>Task 12: A List Goes In</h3>
+                    <span class="task-difficulty diff-hard">Tricky</span>
+                </div>
+                <p class="task-goal">Write <code>average(numbers)</code> that returns the mean of a list, rounded to 1 decimal place. Print the average of <code>[8, 9, 10]</code> and of <code>[3, 4]</code>.</p>
+                <div class="code-block out">9.0
+3.5</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def average(numbers):
+    return round(sum(numbers) / len(numbers), 1)
+
+print(average([8, 9, 10]))
+print(average([3, 4]))</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="32.0
+212.0
+Convert Celsius to Fahrenheit.">
+                <div class="task-head">
+                    <span class="task-badge">📖</span>
+                    <h3>Task 13: Document Your Function</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write <code>celsius_to_fahrenheit(c)</code> with a docstring (a <code>"""triple-quoted"""</code> sentence on the first line inside the function) explaining what it does. Print the result for 0 and 100, then print <code>celsius_to_fahrenheit.__doc__</code> — exactly the sentence <code>Convert Celsius to Fahrenheit.</code></p>
+                <div class="code-block out">32.0
+212.0
+Convert Celsius to Fahrenheit.</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def celsius_to_fahrenheit(c):
+    &quot;&quot;&quot;Convert Celsius to Fahrenheit.&quot;&quot;&quot;
+    return c * 9 / 5 + 32
+
+print(celsius_to_fahrenheit(0))
+print(celsius_to_fahrenheit(100))
+print(celsius_to_fahrenheit.__doc__)</pre>
+                </div>
+            </div>
+
+            <div class="task" data-expected="strong
+weak
+medium">
+                <div class="task-head">
+                    <span class="task-badge">🧰</span>
+                    <h3>Task 14: Boss Level: Password Toolbox</h3>
+                    <span class="task-difficulty diff-hard">Boss</span>
+                </div>
+                <p class="task-goal">Write three small functions: <code>is_long_enough(p)</code> (8+ characters), <code>has_digit(p)</code> (contains any of 0-9) and <code>strength(p)</code> which returns <code>"strong"</code> when both are true, <code>"medium"</code> when only one is, and <code>"weak"</code> when neither. Print the strength of <code>"dragon123"</code>, <code>"dragon"</code> and <code>"a1"</code>.</p>
+                <div class="code-block out">strong
+weak
+medium</div>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>def is_long_enough(p):
+    return len(p) &gt;= 8
+
+def has_digit(p):
+    for ch in p:
+        if ch.isdigit():
+            return True
+    return False
+
+def strength(p):
+    score = 0
+    if is_long_enough(p):
+        score += 1
+    if has_digit(p):
+        score += 1
+    if score == 2:
+        return &quot;strong&quot;
+    if score == 1:
+        return &quot;medium&quot;
+    return &quot;weak&quot;
+
+print(strength(&quot;dragon123&quot;))
+print(strength(&quot;dragon&quot;))
+print(strength(&quot;a1&quot;))</pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-head">
+                    <span class="task-badge">🛠️</span>
+                    <h3>Task 15: Free Play — Build Your Toolbox</h3>
+                    <span class="task-difficulty diff-easy">Creative</span>
+                </div>
+                <p class="task-goal">Write four functions you would actually use: convert money, work out a tip, turn a name into initials, pick a random compliment… then call them all and print the results. Give every one a clear name and a docstring. 🧰</p>
+                <div class="playground">
+                    <textarea class="code-input" spellcheck="false"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="reset-btn">↺ Reset</button>
+                    </div>
+                    <pre class="pg-output"></pre>
+                </div>
+            </div>
         </div>
 
         <nav class="lesson-nav">
