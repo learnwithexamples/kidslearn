@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Tetris Yourself - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        body { background: #2b2b2b; }
+        .container { background: #fafafa; max-width: 1250px; }
+        h1, .subtitle { color: #111; text-shadow: none; }
+        .subtitle { color: #555; }
+
+        /* ---- progress strip ---- */
+        .progress-wrap { text-align: center; margin-bottom: 22px; }
+        #progress { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 8px; }
+
+        .step-dot {
+            width: 38px; height: 38px;
+            font-family: monospace; font-size: 1em; font-weight: bold;
+            background: #fff; color: #111; border: 3px solid #111; cursor: pointer;
+        }
+        .step-dot.current { background: #111; color: #fff; }
+        .step-dot.done { background: #fff; color: #111; border-color: #111; }
+        .step-dot.done::after { content: '✓'; font-size: 0.7em; position: relative; top: -6px; left: 1px; }
+        .step-dot.locked { border-color: #bbb; color: #bbb; cursor: not-allowed; }
+        #progress-text { font-family: monospace; color: #555; font-size: 0.95em; }
+
+        /* ---- two columns ---- */
+        .workshop { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+        .lesson-col { flex: 1 1 520px; min-width: 320px; }
+        .demo-col { flex: 0 0 300px; }
+
+        .panel { background: #fff; border: 3px solid #111; padding: 18px 22px; margin-bottom: 18px; }
+        .panel h2 { color: #111; margin: 0 0 4px; font-size: 1.5em; }
+        .panel h3 { color: #111; margin: 0 0 10px; }
+        .panel p { color: #333; margin-bottom: 10px; }
+        .panel ol, .panel ul { color: #333; margin: 0 0 10px 20px; }
+        .panel li { margin-bottom: 5px; }
+
+        .step-label { font-family: monospace; color: #666; letter-spacing: 2px; font-size: 0.85em; text-transform: uppercase; }
+        .step-adds { font-family: monospace; background: #111; color: #fff; display: inline-block; padding: 4px 10px; margin-bottom: 12px; }
+
+        code, .mini-code { font-family: 'Menlo', 'Consolas', monospace; }
+        code { background: #eee; color: #111; padding: 2px 6px; border-radius: 3px; font-size: 0.92em; }
+        .mini-code { display: block; background: #111; color: #fff; padding: 12px 16px; white-space: pre; overflow-x: auto; font-size: 0.9em; margin: 10px 0; }
+
+        .spec { background: #f4f4f4; border-left: 6px solid #111; padding: 14px 18px; }
+        .spec h4 { font-family: monospace; margin: 10px 0 4px; color: #111; font-size: 0.9em; letter-spacing: 1px; }
+        .spec h4:first-child { margin-top: 0; }
+        .spec p, .spec ol { margin: 0 0 6px; color: #333; }
+        .spec ol { margin-left: 20px; }
+        .spec li { font-family: monospace; font-size: 0.9em; white-space: pre-wrap; }
+
+        .warn { background: #111; color: #fff; padding: 12px 16px; margin: 12px 0; }
+        .warn code { background: #fff; color: #111; }
+
+        .score-table { border-collapse: collapse; margin: 10px 0; }
+        .score-table th, .score-table td { border: 1px solid #111; padding: 5px 12px; font-family: monospace; }
+        .score-table th { background: #111; color: #fff; }
+
+        /* ---- editor ---- */
+        #code-editor {
+            width: 100%; min-height: 260px; font-family: 'Menlo', 'Consolas', monospace;
+            font-size: 0.95em; line-height: 1.5; padding: 14px; border: 3px solid #111;
+            background: #fff; color: #111; resize: vertical; tab-size: 4;
+        }
+
+        .mono-btn {
+            font-family: monospace; font-weight: bold; font-size: 1em;
+            background: #fff; color: #111; border: 3px solid #111; padding: 10px 18px; cursor: pointer;
+        }
+        .mono-btn:hover:not(:disabled) { background: #111; color: #fff; }
+        .mono-btn:disabled { border-color: #bbb; color: #bbb; cursor: not-allowed; }
+        .mono-btn.small { padding: 7px 12px; font-size: 0.9em; border-width: 2px; }
+        .mono-btn.small.active { background: #111; color: #fff; }
+        .mono-btn.primary { background: #111; color: #fff; }
+        .mono-btn.primary:hover:not(:disabled) { background: #fff; color: #111; }
+        .mono-btn.primary:disabled { background: #fff; color: #bbb; border-color: #bbb; }
+
+        .btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+
+        .hint-box { background: #fffbe6; border: 2px dashed #111; padding: 12px 16px; margin-top: 12px; }
+        .hint-box p { margin: 0 0 6px; }
+
+        /* ---- tests ---- */
+        .test-summary { font-family: monospace; padding: 12px 16px; border: 3px solid #111; background: #fff; margin-top: 14px; }
+        .test-summary.pass { background: #111; color: #fff; }
+        .test-summary.fail { background: #fff; color: #111; border-style: dashed; }
+
+        #test-results { list-style: none; margin: 12px 0 0; padding: 0; }
+        #test-results li { padding: 8px 12px; border-left: 5px solid #111; background: #f4f4f4; margin-bottom: 6px; font-size: 0.94em; }
+        #test-results li.test-fail { border-left-style: dashed; background: #fff; border: 2px dashed #111; }
+        #test-results .detail { display: block; font-family: monospace; font-size: 0.86em; color: #444; margin-top: 4px; white-space: pre-wrap; word-break: break-word; }
+
+        /* ---- demo ---- */
+        .demo-col .panel { position: sticky; top: 14px; }
+        #demo-canvas { display: block; margin: 0 auto; background: #fff; }
+        .demo-status { font-family: monospace; font-size: 0.85em; text-align: center; padding: 6px; margin-bottom: 10px; border: 2px solid #111; }
+        .demo-status.yours { background: #111; color: #fff; }
+        .demo-status.goal { background: #fff; color: #111; }
+        .demo-status.broken { background: #fff; color: #111; border-style: dashed; }
+        #demo-controls { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 10px; }
+        #demo-note { font-family: monospace; font-size: 0.85em; color: #333; text-align: center; margin-top: 10px; min-height: 2.4em; }
+        #demo-caption { font-size: 0.9em; color: #555; text-align: center; margin-top: 8px; }
+        .demo-switch { display: flex; gap: 6px; justify-content: center; margin-bottom: 10px; }
+
+        .nav-row { display: flex; justify-content: space-between; gap: 10px; margin-top: 6px; }
+
+        .finish-panel { background: #111; color: #fff; padding: 24px; text-align: center; }
+        .finish-panel h2, .finish-panel p { color: #fff; }
+        .finish-panel a { color: #fff; font-weight: bold; }
+
+        footer p { color: #444; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛠️ Build Tetris Yourself</h1>
+            <p class="subtitle">Twelve functions. Write them one at a time, test each one, and watch the game come alive.</p>
+            <a href="funtime.html" class="back-link">← Back to Fun Time</a>
+        </header>
+
+        <div class="progress-wrap">
+            <div id="progress"></div>
+            <div id="progress-text"></div>
+        </div>
+
+        <div class="workshop">
+            <!-- ============ LEFT: the lesson and the editor ============ -->
+            <div class="lesson-col">
+                <div class="panel">
+                    <div class="step-label" id="step-number">Step 1</div>
+                    <h2 id="step-title">…</h2>
+                    <div class="step-adds" id="step-adds"></div>
+                    <div id="step-intro"></div>
+                    <div class="spec" id="step-spec"></div>
+                    <div class="warn" id="step-warning" style="display:none;"></div>
+                </div>
+
+                <div class="panel">
+                    <h3>✏️ Write your function</h3>
+                    <textarea id="code-editor" spellcheck="false"></textarea>
+                    <div class="btn-row">
+                        <button class="mono-btn primary" id="btn-test">▶ Test it</button>
+                        <button class="mono-btn" id="btn-hint">💡 Hint</button>
+                        <button class="mono-btn" id="btn-answer">🔑 Answer</button>
+                        <button class="mono-btn" id="btn-reset">↺ Start over</button>
+                    </div>
+                    <div class="hint-box" id="hint-box" style="display:none;"></div>
+
+                    <div class="test-summary" id="test-summary">Write your function, then press ▶ Test it.</div>
+                    <ul id="test-results"></ul>
+
+                    <div class="nav-row">
+                        <button class="mono-btn" id="btn-prev">← Previous step</button>
+                        <button class="mono-btn primary" id="btn-next" disabled>Next step →</button>
+                    </div>
+                </div>
+
+                <div class="panel finish-panel" id="finish-panel" style="display:none;">
+                    <h2>🏆 You built Tetris!</h2>
+                    <p>Every function running in that game is one you wrote yourself: the board, the rotation maths, the referee, the line clearing, the scoring, the speed curve and the keyboard.</p>
+                    <p>Now go and play the finished game — <a href="tetris.html">▩ Tetris</a> — or open <code>funtime/lib/</code> and read the 40 other functions that turn your twelve into a whole game.</p>
+                    <p><strong>Next challenge:</strong> add a "hold piece" box, a high-score list, or make the board 15 columns wide.</p>
+                </div>
+            </div>
+
+            <!-- ============ RIGHT: the live demo ============ -->
+            <div class="demo-col">
+                <div class="panel">
+                    <h3>🎮 The game so far</h3>
+                    <div class="demo-switch">
+                        <button class="mono-btn small" id="btn-demo-yours">🧑‍💻 My code</button>
+                        <button class="mono-btn small" id="btn-demo-goal">🎬 The goal</button>
+                    </div>
+                    <div class="demo-status goal" id="demo-status">…</div>
+                    <canvas id="demo-canvas" width="200" height="400"></canvas>
+                    <div id="demo-controls"></div>
+                    <div id="demo-note"></div>
+                    <div id="demo-caption"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h3>📋 How this works</h3>
+            <ul>
+                <li>Each step asks for <strong>one function</strong> from the real game. Read the <strong>INPUT / OUTPUT / ALGORITHM</strong> box — it tells you everything you need.</li>
+                <li>Press <strong>▶ Test it</strong> to run real checks on your function. Every ❌ tells you what it expected and what it got.</li>
+                <li>When all the tests pass, the next step unlocks and the demo switches to <strong>your</strong> code.</li>
+                <li>Use <strong>🎬 The goal</strong> any time to see what the demo should look like when it works.</li>
+                <li>Your code is saved in this browser, so you can close the page and come back later.</li>
+                <li>⚠️ A <code>while</code> loop that never stops is caught after 2 seconds and reported as a mistake — so you can fix it instead of reloading.</li>
+            </ul>
+            <button class="mono-btn small" id="btn-restart-course">🗑️ Erase my work and start again</button>
+        </div>
+
+        <footer>
+            <p>Reading code teaches you a little. Writing it teaches you everything. 🛠️</p>
+        </footer>
+    </div>
+
+    <!-- The finished game's libraries: they are the "reference answers", and the
+         demos run on them until you replace a function with your own. -->
+    <script src="lib/tetris-shapes.js"></script>
+    <script src="lib/tetris-board.js"></script>
+    <script src="lib/tetris-game.js"></script>
+    <script src="lib/tetris-draw.js"></script>
+    <script src="lib/tetris-input.js"></script>
+    <!-- The workshop itself -->
+    <script src="lib/tetris-steps.js"></script>
+    <script src="lib/tetris-build.js"></script>
+</body>
+</html>

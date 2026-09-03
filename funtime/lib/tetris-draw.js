@@ -181,7 +181,9 @@ function drawFrame(ctx, width, height) {
  *
  * ALGORITHM:
  *   1. Cover the board with a see-through white sheet so the text stands out.
- *   2. Draw the title in the middle, then the subtitle just below it.
+ *   2. Scale the letters to the width of the board, so the words still fit on
+ *      a small canvas (the workshop's demo board is smaller than the game's).
+ *   3. Draw the title in the middle, then the subtitle just below it.
  */
 function drawMessage(ctx, width, height, title, subtitle) {
     ctx.fillStyle = 'rgba(255, 255, 255, 0.88)';
@@ -190,11 +192,15 @@ function drawMessage(ctx, width, height, title, subtitle) {
     ctx.fillStyle = COLOR_BLOCK;
     ctx.textAlign = 'center';
 
-    ctx.font = 'bold 30px monospace';
+    const scale = width / 300;
+    const titleSize = Math.max(14, Math.round(30 * scale));
+    const subtitleSize = Math.max(9, Math.round(15 * scale));
+
+    ctx.font = 'bold ' + titleSize + 'px monospace';
     ctx.fillText(title, width / 2, height / 2 - 8);
 
-    ctx.font = '15px monospace';
-    ctx.fillText(subtitle, width / 2, height / 2 + 22);
+    ctx.font = subtitleSize + 'px monospace';
+    ctx.fillText(subtitle, width / 2, height / 2 + titleSize * 0.8);
 }
 
 /**

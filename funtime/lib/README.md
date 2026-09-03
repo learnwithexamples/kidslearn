@@ -48,6 +48,15 @@ corner sits on the board.
 | `tetris-input.js` | keyboard and touch buttons | `actionForKey`, `isHoldableAction`, `createInputState`, `pressKey`, `releaseKey`, `updateHeldKey`, `shouldBlockBrowserKey`, `connectButton` |
 | `tetris-main.js` | the glue between the page and the rules | `getElement`, `updateScoreboard`, `updatePauseButton`, `drawEverything`, `buildActions`, `startNewGame`, `gameLoop`, `connectKeyboard`, `connectTouchButtons`, `setUpGame` |
 
+## The guided version
+
+`../tetris-build.html` ("Build Tetris Yourself") walks through twelve of these
+functions one at a time: it explains each one, lets you write it, runs real
+tests on your version, and shows the game growing beside the editor. The steps
+live in `tetris-steps.js` and the workshop engine in `tetris-build.js`.
+
+Prefer to work straight in the files? Use the ladder below.
+
 ## A practice ladder
 
 Re-write these in order. Empty the function body, keep the comment, and reload
