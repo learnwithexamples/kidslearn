@@ -41,7 +41,7 @@ corner sits on the board.
 
 | File | Job | Functions |
 |---|---|---|
-| `tetris-shapes.js` | the seven tetrominoes and turning them | `copyMatrix`, `rotateMatrixClockwise`, `rotateMatrixCounterClockwise`, `createPiece`, `copyPiece`, `movePiece`, `rotatePiece`, `forEachBlock`, `randomShapeType`, `createShuffledBag` |
+| `tetris-shapes.js` | the seven tetrominoes and turning them | `copyMatrix`, `rotateMatrixClockwise`, `rotateMatrixCounterClockwise`, `createPiece`, `copyPiece`, `movePiece`, `rotatePiece`, `centerLongBar`, `forEachBlock`, `randomShapeType`, `createShuffledBag` |
 | `tetris-board.js` | the grid, collisions and line clearing | `createEmptyBoard`, `copyBoard`, `boardWidth`, `boardHeight`, `isInsideBoard`, `isCellFilled`, `canPlacePiece`, `mergePieceIntoBoard`, `isRowFull`, `findFullRows`, `removeRows`, `dropDistance`, `highestFilledRow` |
 | `tetris-game.js` | the rules: falling, scoring, levels | `createGame`, `takeFromBag`, `startingColumn`, `spawnPiece`, `tryMove`, `tryRotate`, `softDrop`, `hardDrop`, `scoreForLines`, `levelForLines`, `dropIntervalForLevel`, `lockPiece`, `updateGame`, `getGhostPiece`, `togglePause` |
 | `tetris-draw.js` | painting the black-and-white picture | `clearCanvas`, `drawGrid`, `drawBlock`, `drawGhostBlock`, `drawBoardBlocks`, `drawPiece`, `drawGhost`, `drawFrame`, `drawMessage`, `renderGame`, `renderNextPiece` |

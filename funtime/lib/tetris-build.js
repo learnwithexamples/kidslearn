@@ -282,7 +282,7 @@
     let demoTimer = 0;
     let demoMessage = '';
     let spinType = 'T';
-    let spinMatrix = null;
+    let spinPiece = null;
 
     /**
      * makeSampleBoard — a 10 x 20 field with a realistic pile at the bottom,
@@ -325,7 +325,7 @@
 
         if (demoKind === 'spin') {
             spinType = 'T';
-            spinMatrix = createPiece(spinType).cells;
+            spinPiece = createPiece(spinType);
         } else if (demoKind === 'rows') {
             demo = { board: makeSampleBoard() };
         } else if (demoKind === 'final') {
@@ -501,7 +501,7 @@
 
             if (demoKind === 'spin') {
                 clearCanvas(ctx, width, height, '#ffffff');
-                drawMatrix(ctx, spinMatrix, 34, width, height);
+                drawMatrix(ctx, spinPiece.cells, 34, width, height);
                 drawFrame(ctx, width, height);
                 setDemoNote('Piece ' + spinType + ' — press ↻ to turn it.');
                 return;
@@ -686,11 +686,11 @@
 
         if (kind === 'spin') {
             bar.appendChild(button('↻ Turn', 'Rotate clockwise', function () {
-                spinMatrix = rotateMatrixClockwise(spinMatrix);
+                spinPiece = rotatePiece(spinPiece, true);
             }));
             bar.appendChild(button('🎲 Next piece', 'Try another shape', function () {
                 spinType = randomShapeType();
-                spinMatrix = createPiece(spinType).cells;
+                spinPiece = createPiece(spinType);
             }));
             return;
         }

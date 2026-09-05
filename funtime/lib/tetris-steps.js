@@ -282,7 +282,8 @@ const TETRIS_STEPS = [
     adds: 'Pieces can spin!',
     intro: '<p>A piece is a little square grid. Turning it is pure maths: every square moves to a new place, and one line of code describes all of it.</p>' +
            '<pre class="mini-code">[0,1,0]        [0,1,0]\n[1,1,1]  -->   [0,1,1]\n[0,0,0]        [0,1,0]</pre>' +
-           '<p>The T piece pointing up becomes a T piece pointing right.</p>',
+           '<p>The T piece pointing up becomes a T piece pointing right.</p>' +
+           '<p>🤔 <strong>A puzzle for later:</strong> a 3 x 3 piece spins neatly around its middle square — but the long I piece lives in a 4 x 4 box, which has no middle square, so its bar lands one row lower every quarter turn. Your formula here is still exactly right; the game fixes the wobble afterwards, in <code>centerLongBar</code> in <code>tetris-shapes.js</code>. Go and read it once you have finished this step!</p>',
     spec: {
         input: 'matrix — a square grid of 0s and 1s, size N x N',
         output: 'A NEW N x N grid, turned a quarter turn to the right. The original must not change.',

@@ -195,6 +195,79 @@ function movePiece(piece, dx, dy) {
 }
 
 /**
+ * centerLongBar — put the I piece's bar back in the middle of its box.
+ *
+ * INPUT:  cells — a piece matrix that has just been rotated
+ * OUTPUT: the same matrix, or a NEW one with the bar slid back to the middle
+ *
+ * ALGORITHM:
+ *   1. If the matrix is not 4 x 4, there is nothing to do — hand it back.
+ *   2. Find which rows and which columns hold blocks.
+ *   3. If every block is in ONE row, slide that row to row 1.
+ *      If every block is in ONE column, slide that column to column 1.
+ *   4. Build the shifted matrix and return it.
+ *
+ * WHY THIS EXISTS:
+ *   A 3 x 3 piece has a middle square, at (1, 1), and turning it spins the
+ *   piece neatly around that square. A 4 x 4 box has NO middle square — its
+ *   centre is the corner point where the four inner squares meet. So the bar
+ *   lands on the far side of that centre every quarter turn:
+ *
+ *       ....        ..#.        ....        .#..
+ *       ####   ->   ..#.   ->   ....   ->   .#..
+ *       ....        ..#.        ####        .#..
+ *       ....        ..#.        ....        .#..
+ *        row 1      column 2     row 2      column 1
+ *
+ *   Turning it twice would leave the bar one row LOWER than it started, so a
+ *   player who spins it twice sees the piece move. Sliding a lone bar back to
+ *   row 1 (or column 1) gives the I piece exactly two positions, flat and
+ *   upright, which is how the classic game behaves.
+ */
+function centerLongBar(cells) {
+    const size = cells.length;
+    if (size !== 4) {
+        return cells;
+    }
+
+    const filledRows = [];
+    const filledColumns = [];
+    for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size; c++) {
+            if (cells[r][c] === 1) {
+                if (filledRows.indexOf(r) === -1) { filledRows.push(r); }
+                if (filledColumns.indexOf(c) === -1) { filledColumns.push(c); }
+            }
+        }
+    }
+
+    let shiftRows = 0;
+    let shiftColumns = 0;
+    if (filledRows.length === 1) { shiftRows = 1 - filledRows[0]; }
+    if (filledColumns.length === 1) { shiftColumns = 1 - filledColumns[0]; }
+    if (shiftRows === 0 && shiftColumns === 0) {
+        return cells;
+    }
+
+    const result = [];
+    for (let r = 0; r < size; r++) {
+        result.push([0, 0, 0, 0]);
+    }
+    for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size; c++) {
+            if (cells[r][c] === 1) {
+                const newRow = r + shiftRows;
+                const newColumn = c + shiftColumns;
+                if (newRow >= 0 && newRow < size && newColumn >= 0 && newColumn < size) {
+                    result[newRow][newColumn] = 1;
+                }
+            }
+        }
+    }
+    return result;
+}
+
+/**
  * rotatePiece — make a copy of a piece turned a quarter turn.
  *
  * INPUT:  piece     — a piece object
@@ -204,7 +277,9 @@ function movePiece(piece, dx, dy) {
  * ALGORITHM:
  *   1. Copy the piece.
  *   2. Replace its cells with the rotated matrix.
- *   3. Return the copy.
+ *   3. Slide a lone bar back to the middle (see centerLongBar) so the I piece
+ *      does not creep across the board every time it is turned.
+ *   4. Return the copy.
  *
  * NOTE: the O piece looks identical after rotating, which is fine — the
  *       maths still works, it just looks like nothing happened.
@@ -216,6 +291,7 @@ function rotatePiece(piece, clockwise) {
     } else {
         turned.cells = rotateMatrixCounterClockwise(piece.cells);
     }
+    turned.cells = centerLongBar(turned.cells);
     return turned;
 }
 
