@@ -1,7 +1,8 @@
 # Game libraries
 
-All the JavaScript for both games lives in this folder — Tetris first, then
-Snake, then the shared workshop engine.
+All the JavaScript for the three games lives in this folder — Tetris, then
+Snake, then Car Racing, then the shared workshop engine. (The Python versions
+of the same games live in `../pylib/`.)
 
 # Tetris
 
@@ -174,3 +175,72 @@ editor, the tests, the progress dots, the saved work and the demo panel, and it
 knows nothing about either game. Each game supplies its own steps
 (`*-steps.js`) and its own demos (`*-build.js`), and calls `startWorkshop(...)`.
 `../../styles/workshop.css` gives both pages their look.
+
+
+# Car Racing
+
+`../race.html` loads five files in order:
+
+```
+race-road.js  →  race-game.js  →  race-draw.js  →  race-input.js  →  race-main.js
+```
+
+## How the data is shaped
+
+There is no grid here: cars sit at real **pixel** positions, and every car —
+yours and the traffic — is the same thing, a rectangle:
+
+```js
+{ x: 38, y: 120, width: 44, height: 74, lane: 0 }   // x, y = TOP-LEFT corner
+```
+
+Your car never moves forward. The traffic slides *down* and the road markings
+scroll — that is the whole illusion of speed, and it lives in `moveCars`.
+
+## The files
+
+| File | Job | Functions |
+|---|---|---|
+| `race-road.js` | the road, the lanes and the shape of a car | `laneCenterX`, `clamp`, `createCar`, `overlaps`, `isOnScreen`, `randomLane` |
+| `race-game.js` | the rules: steering, traffic, crashing, scoring | `createGame`, `steerPlayer`, `moveCars`, `keepCarsOnScreen`, `spawnCar`, `hasCrashed`, `scoreForPass`, `levelForPassed`, `speedForLevel`, `secondsBetweenCars`, `spawnGapForLevel`, `updateRace`, `togglePause`, `metresDriven` |
+| `race-draw.js` | painting the black-and-white picture | `clearCanvas`, `drawDashedLine`, `drawRoad`, `drawCar`, `drawFrame`, `drawMessage`, `renderGame` |
+| `race-input.js` | keys you HOLD, and touch buttons | `actionForKey`, `isHeldAction`, `createInputState`, `setHeld`, `releaseAll`, `steeringFromInput`, `boostFromInput`, `connectButton`, `connectHoldButton` |
+| `race-main.js` | the glue between the page and the rules | `loadBestScore`, `updateScoreboard`, `startNewGame`, `gameLoop`, `connectKeyboard`, `connectTouchButtons`, `setUpGame` |
+
+## The guided version
+
+`../race-build.html` ("Build Car Racing Yourself") walks through twelve of
+these functions one step at a time, in this order:
+
+1. `laneCenterX` — the road gets lanes
+2. `clamp` — the car stops at the verge
+3. `createCar` — cars can be built
+4. `overlaps` — the rectangle crash test every game needs
+5. `steerPlayer` — you can drive
+6. `moveCars` — the traffic flows
+7. `keepCarsOnScreen` — cars you have passed are forgotten
+8. `spawnCar` — the traffic never stops
+9. `hasCrashed` — crashing ends the race
+10. `updateRace` — one whole frame (the boss step)
+11. `speedForLevel` — every level is faster
+12. `actionForKey` — the keyboard, and the game is finished
+
+## One design rule worth knowing
+
+`spawnGapForLevel` works in **time**, not pixels: however fast the road gets,
+there is always at least 0.8 seconds between cars, and a lane change takes
+about 0.3. A game you cannot possibly survive is not a game — the gap is what
+keeps every level hard but fair.
+
+# Tests
+
+Every game and every workshop is covered by a test suite that loads the real
+library files. Nothing needs installing:
+
+```bash
+node funtime/tests/run-all.js
+```
+
+It runs twelve JavaScript suites (game rules, page wiring, workshop steps and
+a full workshop walkthrough for each game, all driven against a pretend
+browser) and the two Python suites in `../tests/`.

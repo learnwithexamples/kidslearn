@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Car Racing Yourself - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/workshop.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛠️ Build Car Racing Yourself</h1>
+            <p class="subtitle">Twelve functions. Write them one at a time, test each one, and watch the race come to life.</p>
+            <a href="funtime.html" class="back-link">← Back to Fun Time</a>
+        </header>
+
+        <div class="progress-wrap">
+            <div id="progress"></div>
+            <div id="progress-text"></div>
+        </div>
+
+        <div class="workshop">
+            <!-- ============ LEFT: the lesson and the editor ============ -->
+            <div class="lesson-col">
+                <div class="panel">
+                    <div class="step-label" id="step-number">Step 1</div>
+                    <h2 id="step-title">…</h2>
+                    <div class="step-adds" id="step-adds"></div>
+                    <div id="step-intro"></div>
+                    <div class="spec" id="step-spec"></div>
+                    <div class="warn" id="step-warning" style="display:none;"></div>
+                </div>
+
+                <div class="panel">
+                    <h3>✏️ Write your function</h3>
+                    <textarea id="code-editor" spellcheck="false"></textarea>
+                    <div class="btn-row">
+                        <button class="mono-btn primary" id="btn-test">▶ Test it</button>
+                        <button class="mono-btn" id="btn-hint">💡 Hint</button>
+                        <button class="mono-btn" id="btn-answer">🔑 Answer</button>
+                        <button class="mono-btn" id="btn-reset">↺ Start over</button>
+                    </div>
+                    <div class="hint-box" id="hint-box" style="display:none;"></div>
+
+                    <div class="test-summary" id="test-summary">Write your function, then press ▶ Test it.</div>
+                    <ul id="test-results"></ul>
+
+                    <div class="nav-row">
+                        <button class="mono-btn" id="btn-prev">← Previous step</button>
+                        <button class="mono-btn primary" id="btn-next" disabled>Next step →</button>
+                    </div>
+                </div>
+
+                <div class="panel finish-panel" id="finish-panel" style="display:none;">
+                    <h2>🏆 You built a racing game!</h2>
+                    <p>Every function running in that race is one you wrote yourself: the lanes, the clamping, the cars, the crash test, the steering, the traffic, the scoring and the keyboard.</p>
+                    <p>Now go and play the finished game — <a href="race.html">🏎️ Car Racing</a> — or open <code>funtime/lib/</code> and read the other functions that turn your twelve into a whole game.</p>
+                    <p><strong>Next challenge:</strong> add a second row of traffic, a puddle that makes you skid, or fuel that runs out. Or try <a href="snake-build.html">Build Snake Yourself</a> and <a href="tetris-build.html">Build Tetris Yourself</a>.</p>
+                </div>
+            </div>
+
+            <!-- ============ RIGHT: the live demo ============ -->
+            <div class="demo-col">
+                <div class="panel">
+                    <h3>🎮 The game so far</h3>
+                    <div class="demo-switch">
+                        <button class="mono-btn small" id="btn-demo-yours">🧑‍💻 My code</button>
+                        <button class="mono-btn small" id="btn-demo-goal">🎬 The goal</button>
+                    </div>
+                    <div class="demo-status goal" id="demo-status">…</div>
+                    <canvas id="demo-canvas" width="200" height="400"></canvas>
+                    <div id="demo-controls"></div>
+                    <div id="demo-note"></div>
+                    <div id="demo-caption"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h3>📋 How this works</h3>
+            <ul>
+                <li>Each step asks for <strong>one function</strong> from the real game. Read the <strong>INPUT / OUTPUT / ALGORITHM</strong> box — it tells you everything you need.</li>
+                <li>Press <strong>▶ Test it</strong> to run real checks on your function. Every ❌ tells you what it expected and what it got.</li>
+                <li>When all the tests pass, the next step unlocks and the demo switches to <strong>your</strong> code.</li>
+                <li>Use <strong>🎬 The goal</strong> any time to see what the demo should look like when it works.</li>
+                <li>Your code is saved in this browser, so you can close the page and come back later.</li>
+                <li>⚠️ A <code>while</code> loop that never stops is caught after 2 seconds and reported as a mistake — so you can fix it instead of reloading.</li>
+            </ul>
+            <button class="mono-btn small" id="btn-restart-course">🗑️ Erase my work and start again</button>
+        </div>
+
+        <footer>
+            <p>Reading code teaches you a little. Writing it teaches you everything. 🛠️</p>
+        </footer>
+    </div>
+
+    <!-- The finished game's libraries: they are the "reference answers", and the
+         demos run on them until you replace a function with your own. -->
+    <script src="lib/race-road.js"></script>
+    <script src="lib/race-game.js"></script>
+    <script src="lib/race-draw.js"></script>
+    <script src="lib/race-input.js"></script>
+    <!-- The workshop itself -->
+    <script src="lib/workshop.js"></script>
+    <script src="lib/race-steps.js"></script>
+    <script src="lib/race-build.js"></script>
+</body>
+</html>

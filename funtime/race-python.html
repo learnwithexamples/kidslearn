@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Racing in Python - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        /* ---- This game is deliberately black and white ---- */
+        body { background: #2b2b2b; }
+        .container { background: #fafafa; }
+        h1, .subtitle { color: #111; text-shadow: none; }
+        .subtitle { color: #555; }
+
+        .game-wrap { max-width: 860px; margin: 0 auto; }
+
+        .game-layout {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 26px;
+        }
+
+        #race-road {
+            display: block;
+            background: #ffffff;
+            border: 3px solid #111;
+            image-rendering: pixelated;
+            touch-action: none;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .side-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            min-width: 170px;
+        }
+
+        .panel-box {
+            background: #ffffff;
+            border: 3px solid #111;
+            padding: 12px 16px;
+            text-align: center;
+        }
+
+        .panel-box .label {
+            font-family: monospace;
+            font-size: 0.85em;
+            letter-spacing: 2px;
+            color: #555;
+            text-transform: uppercase;
+        }
+
+        .panel-box .value {
+            font-family: monospace;
+            font-size: 2em;
+            font-weight: bold;
+            color: #111;
+            line-height: 1.1;
+        }
+
+        .btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+        .mono-btn {
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 1em;
+            background: #ffffff;
+            color: #111;
+            border: 3px solid #111;
+            padding: 10px 18px;
+            cursor: pointer;
+        }
+
+        .mono-btn:hover { background: #111; color: #fff; }
+        .mono-btn:active { transform: translateY(1px); }
+
+        .touch-pad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 300px;
+            margin: 20px auto 0;
+        }
+
+        .touch-pad .mono-btn { padding: 16px 0; font-size: 1.2em; }
+        .touch-pad .spacer { visibility: hidden; }
+
+        .help-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin: 26px 0 0;
+        }
+
+        .help-card {
+            background: #ffffff;
+            border: 2px solid #111;
+            padding: 16px 20px;
+        }
+
+        .help-card h3 { margin: 0 0 10px; color: #111; }
+        .help-card ul { margin: 0; padding-left: 20px; }
+        .help-card li { margin-bottom: 6px; color: #333; }
+
+        .key {
+            display: inline-block;
+            min-width: 26px;
+            padding: 2px 8px;
+            text-align: center;
+            background: #111;
+            color: #fff;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .coder-box {
+            background: #ffffff;
+            border: 2px dashed #111;
+            padding: 18px 22px;
+            margin-top: 26px;
+        }
+
+        .coder-box h3 { margin: 0 0 10px; color: #111; }
+        .coder-box p { color: #333; margin-bottom: 10px; }
+        .coder-box code {
+            background: #111;
+            color: #fff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        .file-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .file-table th, .file-table td {
+            border: 1px solid #999;
+            padding: 7px 10px;
+            text-align: left;
+            font-size: 0.94em;
+        }
+        .file-table th { background: #111; color: #fff; font-family: monospace; }
+        .file-table td:first-child { font-family: monospace; white-space: nowrap; }
+
+        .py-badge {
+            font-family: monospace;
+            font-size: 0.42em;
+            vertical-align: middle;
+            background: #111;
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 6px;
+        }
+
+        .py-status {
+            font-family: monospace;
+            font-size: 0.9em;
+            text-align: center;
+            border: 2px dashed #111;
+            padding: 10px;
+            margin: 0 auto 18px;
+            max-width: 620px;
+            color: #333;
+        }
+
+        .py-status.ready { border-style: solid; background: #111; color: #fff; }
+        .py-status.error { border-style: solid; background: #fff; color: #111; font-weight: bold; }
+
+        footer p { color: #444; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏎️ CAR RACING <span class="py-badge">in Python</span></h1>
+            <p class="subtitle">The same race — but every line of it is Python, running in your browser</p>
+            <a href="funtime.html" class="back-link">← Back to Fun Time</a>
+        </header>
+
+        <div class="py-status" id="py-status">🐍 Starting Python…</div>
+
+        <div class="game-wrap">
+            <div class="game-layout">
+                <canvas id="race-road" width="300" height="500"></canvas>
+
+                <div class="side-panel">
+                    <div class="panel-box">
+                        <div class="label">Score</div>
+                        <div class="value" id="score">0</div>
+                    </div>
+
+                    <div class="panel-box">
+                        <div class="label">Metres</div>
+                        <div class="value" id="metres">0</div>
+                    </div>
+
+                    <div class="panel-box">
+                        <div class="label">Level</div>
+                        <div class="value" id="level">1</div>
+                    </div>
+
+                    <div class="panel-box">
+                        <div class="label">Best</div>
+                        <div class="value" id="best">0</div>
+                    </div>
+
+                    <div class="btn-row">
+                        <button class="mono-btn" id="pause-btn">▶ Go</button>
+                        <button class="mono-btn" id="restart-btn">↺ New</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="touch-pad">
+                <div class="spacer"></div>
+                <button class="mono-btn" id="btn-faster">↑</button>
+                <div class="spacer"></div>
+                <button class="mono-btn" id="btn-left">←</button>
+                <button class="mono-btn" id="btn-slower">↓</button>
+                <button class="mono-btn" id="btn-right">→</button>
+            </div>
+
+            <div class="help-grid">
+                <div class="help-card">
+                    <h3>⌨️ Controls</h3>
+                    <ul>
+                        <li><span class="key">←</span> <span class="key">→</span> steer between the lanes</li>
+                        <li><span class="key">↑</span> accelerate &nbsp; <span class="key">↓</span> brake</li>
+                        <li><span class="key">W</span> <span class="key">A</span> <span class="key">S</span> <span class="key">D</span> work too</li>
+                        <li><span class="key">P</span> or <span class="key">Space</span> pause</li>
+                        <li><span class="key">R</span> new race</li>
+                        <li>Hold the keys — steering is not a tap!</li>
+                    </ul>
+                </div>
+
+                <div class="help-card">
+                    <h3>🎯 How to play</h3>
+                    <ul>
+                        <li>Your car is the one with the racing stripe, at the bottom.</li>
+                        <li>The road never stops. Steer between the three lanes to miss the traffic.</li>
+                        <li>Every car you overtake scores points — and touching one ends the race.</li>
+                        <li>Accelerating covers more road (and scores faster), but leaves you less time to react.</li>
+                        <li>Every 5 cars passed is a new level, and every level is quicker.</li>
+                    </ul>
+                </div>
+
+                <div class="help-card">
+                    <h3>🏆 Scoring</h3>
+                    <ul>
+                        <li>Each car overtaken is worth <strong>10 × your level</strong>.</li>
+                        <li><strong>Metres</strong> counts how far you have driven — 10 pixels of road is 1 metre.</li>
+                        <li>Level 1 rolls along at 180 pixels a second; level 11 screams past at 520.</li>
+                        <li>However fast it gets, there is always <strong>0.8 seconds</strong> between cars — just enough to swerve. 😅</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="coder-box">
+                <h3>🧑‍💻 This whole game is Python</h3>
+                <p>There is almost no JavaScript on this page. When you opened it, the browser downloaded <strong>Pyodide</strong> — a complete Python interpreter compiled to WebAssembly — and then ran three ordinary <code>.py</code> files from the <code>funtime/pylib/</code> folder. Python is doing everything: the rules, the maths, <em>and</em> the drawing.</p>
+
+                <table class="file-table">
+                    <tr>
+                        <th>File</th>
+                        <th>What it does</th>
+                        <th>Functions to try re-writing</th>
+                    </tr>
+                    <tr>
+                        <td>pylib/race_rules.py</td>
+                        <td>The rules: steering, traffic, crashing, scoring</td>
+                        <td><code>clamp</code>, <code>overlaps</code>, <code>move_cars</code>, <code>update_race</code></td>
+                    </tr>
+                    <tr>
+                        <td>pylib/race_draw.py</td>
+                        <td>Painting the picture — Python calling the canvas</td>
+                        <td><code>draw_dashed_line</code>, <code>draw_road</code>, <code>draw_car</code></td>
+                    </tr>
+                    <tr>
+                        <td>pylib/race_web.py</td>
+                        <td>The glue: held keys, buttons, the 60-times-a-second loop</td>
+                        <td><code>set_held</code>, <code>frame</code>, <code>connect_hold_button</code></td>
+                    </tr>
+                </table>
+
+                <p style="margin-top:12px;">🔍 <strong>Compare the two versions.</strong> Open <code>lib/race-game.js</code> and <code>pylib/race_rules.py</code> side by side. The ideas are identical, but Python is shorter in places: <code>clamp</code> becomes one line with <code>min</code> and <code>max</code>, and <code>any(...)</code> finds a crash without writing a loop.</p>
+                <p style="margin-top:12px;">🛠️ <strong>Want to build it yourself in Python?</strong> <a href="race-python-build.html"><strong>Build Car Racing in Python</strong></a> walks you through the twelve functions, tests each one with real Python, and shows the race growing as you go.</p>
+                <p style="margin-top:12px;">⚠️ <strong>If the game never starts:</strong> this page has to read its <code>.py</code> files, and a browser will not do that for a page opened straight off your disk. Open it from the live site, or run <code>python3 -m http.server</code> in the project folder and visit the address it prints.</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Python, running in a browser, driving a car. What a time to be alive. 🏎️</p>
+        </footer>
+    </div>
+
+    <!-- One small piece of JavaScript, whose only job is to start Python. -->
+    <script src="lib/python-runner.js"></script>
+    <script>
+        startPythonGame({
+            files: ['race_rules.py', 'race_draw.py', 'race_web.py'],
+            setup: 'import race_web\nrace_web.start_game()',
+            status: 'py-status'
+        });
+    </script>
+</body>
+</html>

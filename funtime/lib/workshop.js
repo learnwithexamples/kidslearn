@@ -27,8 +27,14 @@
        startWorkshop({
            storagePrefix: 'snake-build',   // where work is saved in the browser
            steps: SNAKE_STEPS,             // the step definitions
-           demo: { sizeCanvas, start, update, draw, controls, onKey }
+           demo: { sizeCanvas, start, update, draw, controls, onKey },
+           engine: { compile, install, runTests }   // optional
        });
+
+   The `engine` is how the same page can teach a different language. Leave it
+   out and the workshop checks JavaScript, exactly as written below. The Python
+   workshops pass in an engine that runs the student's code inside Pyodide
+   instead — everything else on the page works the same way.
 
    The demo module gets called like this:
 
@@ -47,6 +53,7 @@ function startWorkshop(config) {
 
     const STEPS = config.steps;
     const DEMO = config.demo;
+    const ENGINE = config.engine || {};
     const STORAGE_CODE = config.storagePrefix + '-code-';
     const STORAGE_DONE = config.storagePrefix + '-done';
 
@@ -171,7 +178,10 @@ function startWorkshop(config) {
      *            followed by "return theFunctionName;". If that throws, the
      *            code has a syntax error and we hand the message back.
      */
-    function compileFunction(code, fnName) {
+    function compileFunction(code, fnName, step) {
+        if (ENGINE.compile) {
+            return ENGINE.compile(code, step);
+        }
         let factory;
         try {
             factory = new Function('__tick', addLoopGuards(code) + '\n;return typeof ' + fnName +
@@ -205,6 +215,9 @@ function startWorkshop(config) {
      *   3. Also try the code sitting in the editor right now for this step.
      */
     function installFunctions(useStudent, step, code) {
+        if (ENGINE.install) {
+            return ENGINE.install(useStudent, step, code, STEPS, isDone, loadCode);
+        }
         STEPS.forEach(function (other) {
             window[other.fnName] = REFERENCE[other.fnName];
         });
@@ -217,7 +230,7 @@ function startWorkshop(config) {
             if (isDone(other.id)) {
                 const saved = loadCode(other.id);
                 if (saved) {
-                    const built = compileFunction(saved, other.fnName);
+                    const built = compileFunction(saved, other.fnName, other);
                     if (built.ok) {
                         window[other.fnName] = built.fn;
                     }
@@ -226,7 +239,7 @@ function startWorkshop(config) {
         });
 
         if (step && code) {
-            const built = compileFunction(code, step.fnName);
+            const built = compileFunction(code, step.fnName, step);
             if (built.ok) {
                 window[step.fnName] = built.fn;
                 return true;
@@ -271,6 +284,9 @@ function startWorkshop(config) {
      *            `check` function. Any crash counts as a failure.
      */
     function runTests(step, fn) {
+        if (ENGINE.runTests) {
+            return ENGINE.runTests(step, fn);
+        }
         const results = [];
 
         step.tests.forEach(function (test) {
@@ -490,7 +506,7 @@ function startWorkshop(config) {
         const code = el('code-editor').value;
         saveCode(step.id, code);
 
-        const built = compileFunction(code, step.fnName);
+        const built = compileFunction(code, step.fnName, step);
         if (!built.ok) {
             el('test-results').innerHTML = '';
             const summary = el('test-summary');
@@ -647,5 +663,12 @@ function startWorkshop(config) {
         window.requestAnimationFrame(loop);
     }
 
-    document.addEventListener('DOMContentLoaded', setUpWorkshop);
+    /* The JavaScript workshops start as soon as the page is ready. A Python
+       workshop calls startWorkshop later, once Pyodide has finished loading —
+       by which time DOMContentLoaded has already been and gone, so check. */
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setUpWorkshop);
+    } else {
+        setUpWorkshop();
+    }
 }
