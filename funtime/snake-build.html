@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Build Tetris Yourself - KidsLearn</title>
+    <title>Build Snake Yourself - KidsLearn</title>
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/workshop.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🛠️ Build Tetris Yourself</h1>
-            <p class="subtitle">Twelve functions. Write them one at a time, test each one, and watch the game come alive.</p>
+            <h1>🛠️ Build Snake Yourself</h1>
+            <p class="subtitle">Twelve functions. Write them one at a time, test each one, and watch the snake come to life.</p>
             <a href="funtime.html" class="back-link">← Back to Fun Time</a>
         </header>
 
@@ -53,10 +53,10 @@
                 </div>
 
                 <div class="panel finish-panel" id="finish-panel" style="display:none;">
-                    <h2>🏆 You built Tetris!</h2>
-                    <p>Every function running in that game is one you wrote yourself: the board, the rotation maths, the referee, the line clearing, the scoring, the speed curve and the keyboard.</p>
-                    <p>Now go and play the finished game — <a href="tetris.html">▩ Tetris</a> — or open <code>funtime/lib/</code> and read the 40 other functions that turn your twelve into a whole game.</p>
-                    <p><strong>Next challenge:</strong> add a "hold piece" box, a high-score list, or make the board 15 columns wide.</p>
+                    <h2>🏆 You built Snake!</h2>
+                    <p>Every function running in that game is one you wrote yourself: the snake itself, the stepping, the walls, the biting, the apples, the scoring, the speed curve and the keyboard.</p>
+                    <p>Now go and play the finished game — <a href="snake.html">🐍 Snake</a> — or open <code>funtime/lib/</code> and read the other functions that turn your twelve into a whole game.</p>
+                    <p><strong>Next challenge:</strong> make the walls wrap around instead of killing you, add a second apple, or try <a href="tetris-build.html">Build Tetris Yourself</a>.</p>
                 </div>
             </div>
 
@@ -97,14 +97,13 @@
 
     <!-- The finished game's libraries: they are the "reference answers", and the
          demos run on them until you replace a function with your own. -->
-    <script src="lib/tetris-shapes.js"></script>
-    <script src="lib/tetris-board.js"></script>
-    <script src="lib/tetris-game.js"></script>
-    <script src="lib/tetris-draw.js"></script>
-    <script src="lib/tetris-input.js"></script>
+    <script src="lib/snake-grid.js"></script>
+    <script src="lib/snake-game.js"></script>
+    <script src="lib/snake-draw.js"></script>
+    <script src="lib/snake-input.js"></script>
     <!-- The workshop itself -->
     <script src="lib/workshop.js"></script>
-    <script src="lib/tetris-steps.js"></script>
-    <script src="lib/tetris-build.js"></script>
+    <script src="lib/snake-steps.js"></script>
+    <script src="lib/snake-build.js"></script>
 </body>
 </html>

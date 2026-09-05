@@ -1,7 +1,12 @@
-# Tetris libraries
+# Game libraries
 
-All the JavaScript for the Tetris game lives in this folder. `../tetris.html` is
-only a page with a canvas and some buttons — it loads these six files in order:
+All the JavaScript for both games lives in this folder — Tetris first, then
+Snake, then the shared workshop engine.
+
+# Tetris
+
+`../tetris.html` is only a page with a canvas and some buttons — it loads these
+six files in order:
 
 ```
 tetris-shapes.js  →  tetris-board.js  →  tetris-game.js
@@ -52,8 +57,8 @@ corner sits on the board.
 
 `../tetris-build.html` ("Build Tetris Yourself") walks through twelve of these
 functions one at a time: it explains each one, lets you write it, runs real
-tests on your version, and shows the game growing beside the editor. The steps
-live in `tetris-steps.js` and the workshop engine in `tetris-build.js`.
+tests on your version, and shows the game growing beside the editor. Its steps
+live in `tetris-steps.js` and its demos in `tetris-build.js`.
 
 Prefer to work straight in the files? Use the ladder below.
 
@@ -97,3 +102,75 @@ Re-write these in order. Empty the function body, keep the comment, and reload
   prefers `createShuffledBag`, which is fairer. Try both and feel the difference.
 * Make a wider or taller board: `BOARD_WIDTH` and `BOARD_HEIGHT` in
   `tetris-board.js` are the only two numbers you need to change.
+
+
+# Snake
+
+`../snake.html` loads five files in order:
+
+```
+snake-grid.js  →  snake-game.js  →  snake-draw.js  →  snake-input.js  →  snake-main.js
+```
+
+## How the data is shaped
+
+**A position** is one square of the field. **A direction** is a step to take.
+
+```js
+{ x: 3, y: 7 }             // x = column (0 = left wall), y = row (0 = TOP)
+DIRECTIONS.up              // { x: 0, y: -1 } — up is MINUS, row 0 is the top
+```
+
+**A snake** is simply a list of positions, head first:
+
+```js
+[ {x:10,y:10}, {x:9,y:10}, {x:8,y:10} ]      // head, body, tail
+```
+
+Moving is "add a head, drop a tail". Eating is "add a head, keep the tail".
+That one sentence is the whole game.
+
+## The files
+
+| File | Job | Functions |
+|---|---|---|
+| `snake-grid.js` | squares, directions, and what is where | `createPosition`, `samePosition`, `addDirection`, `isInsideGrid`, `containsPosition`, `isOppositeDirection`, `emptyCells`, `randomEmptyCell` |
+| `snake-game.js` | the rules: crawling, eating, growing, dying | `createStartingSnake`, `createGame`, `moveSnake`, `turnSnake`, `scoreForFood`, `levelForFood`, `stepIntervalForLevel`, `stepGame`, `updateGame`, `togglePause`, `snakeLength` |
+| `snake-draw.js` | painting the black-and-white picture | `clearCanvas`, `drawGrid`, `drawSegment`, `drawHead`, `drawFood`, `drawFrame`, `drawMessage`, `renderGame` |
+| `snake-input.js` | keyboard and touch buttons | `actionForKey`, `directionForAction`, `shouldBlockBrowserKey`, `connectButton` |
+| `snake-main.js` | the glue between the page and the rules | `getElement`, `loadBestScore`, `saveBestScore`, `updateScoreboard`, `updatePauseButton`, `drawEverything`, `buildActions`, `startNewGame`, `gameLoop`, `connectKeyboard`, `connectTouchButtons`, `setUpGame` |
+
+## The guided version
+
+`../snake-build.html` ("Build Snake Yourself") walks through twelve of these
+functions one step at a time, in this order:
+
+1. `createStartingSnake` — a snake appears
+2. `samePosition` — the game can compare two squares
+3. `addDirection` — the head takes a step
+4. `moveSnake` — it crawls
+5. `isInsideGrid` — walls kill
+6. `containsPosition` — biting yourself kills
+7. `randomEmptyCell` — apples appear and the snake grows
+8. `isOppositeDirection` — no U-turns
+9. `stepGame` — one whole turn of the game (the boss step)
+10. `scoreForFood` — points
+11. `stepIntervalForLevel` — speed by level
+12. `actionForKey` — the keyboard, and the game is finished
+
+## Ideas to build on top
+
+* Make the walls wrap around instead of killing you.
+* Put two apples on the board at once, or a rotten one to avoid.
+* Add a wall of blocks in the middle for a harder field.
+* Slow the snake down for one second after it eats, as a reward.
+* Change `GRID_WIDTH` and `GRID_HEIGHT` in `snake-grid.js` — everything else
+  works those out for itself.
+
+# The workshop engine
+
+`workshop.js` runs BOTH "Build it yourself" pages: it handles the steps, the
+editor, the tests, the progress dots, the saved work and the demo panel, and it
+knows nothing about either game. Each game supplies its own steps
+(`*-steps.js`) and its own demos (`*-build.js`), and calls `startWorkshop(...)`.
+`../../styles/workshop.css` gives both pages their look.
