@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Four - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        body { background: #2b2b2b; }
+        .container { background: #fafafa; }
+        h1, .subtitle { color: #111; text-shadow: none; }
+        .subtitle { color: #555; }
+
+        .game-wrap { max-width: 880px; margin: 0 auto; }
+
+        .game-layout {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 26px;
+        }
+
+        canvas.board {
+            display: block;
+            background: #ffffff;
+            border: 3px solid #111;
+            image-rendering: pixelated;
+            touch-action: none;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .side-panel { display: flex; flex-direction: column; gap: 14px; min-width: 160px; }
+
+        .panel-box { background: #fff; border: 3px solid #111; padding: 10px 16px; text-align: center; }
+        .panel-box .label { font-family: monospace; font-size: 0.8em; letter-spacing: 2px; color: #555; text-transform: uppercase; }
+        .panel-box .value { font-family: monospace; font-size: 1.9em; font-weight: bold; color: #111; line-height: 1.1; }
+
+        .btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+        .mono-btn {
+            font-family: monospace; font-weight: bold; font-size: 1em;
+            background: #fff; color: #111; border: 3px solid #111; padding: 10px 18px; cursor: pointer;
+        }
+        .mono-btn:hover { background: #111; color: #fff; }
+        .mono-btn:active { transform: translateY(1px); }
+
+        .touch-pad { display: grid; gap: 10px; max-width: 340px; margin: 20px auto 0; }
+        .touch-pad .mono-btn { padding: 14px 0; font-size: 1.15em; }
+        .touch-pad .spacer { visibility: hidden; }
+
+        .help-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 26px 0 0; }
+        .help-card { background: #fff; border: 2px solid #111; padding: 16px 20px; }
+        .help-card h3 { margin: 0 0 10px; color: #111; }
+        .help-card ul { margin: 0; padding-left: 20px; }
+        .help-card li { margin-bottom: 6px; color: #333; }
+
+        .key {
+            display: inline-block; min-width: 26px; padding: 2px 8px; text-align: center;
+            background: #111; color: #fff; border-radius: 4px;
+            font-family: monospace; font-weight: bold; font-size: 0.9em;
+        }
+
+        .coder-box { background: #fff; border: 2px dashed #111; padding: 18px 22px; margin-top: 26px; }
+        .coder-box h3 { margin: 0 0 10px; color: #111; }
+        .coder-box p { color: #333; margin-bottom: 10px; }
+        .coder-box code { background: #111; color: #fff; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+
+        .file-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .file-table th, .file-table td { border: 1px solid #999; padding: 7px 10px; text-align: left; font-size: 0.94em; }
+        .file-table th { background: #111; color: #fff; font-family: monospace; }
+        .file-table td:first-child { font-family: monospace; white-space: nowrap; }
+
+        .py-badge {
+            font-family: monospace; font-size: 0.42em; vertical-align: middle;
+            background: #111; color: #fff; padding: 6px 10px; border-radius: 6px;
+        }
+
+        .py-status {
+            font-family: monospace; font-size: 0.9em; text-align: center;
+            border: 2px dashed #111; padding: 10px; margin: 0 auto 18px; max-width: 640px; color: #333;
+        }
+        .py-status.ready { border-style: solid; background: #111; color: #fff; }
+        .py-status.error { border-style: solid; background: #fff; color: #111; font-weight: bold; }
+
+        footer p { color: #444; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔴 CONNECT FOUR</h1>
+            <p class="subtitle">Drop your counters and get four in a row — the computer is trying to stop you</p>
+            <a href="funtime.html" class="back-link">← Back to Fun Time</a>
+        </header>
+
+        <div class="game-wrap">
+            <div class="game-layout">
+                <canvas class="board" id="connect4-board" width="384" height="366"></canvas>
+
+                <div class="side-panel">
+                    <div class="panel-box">
+                        <div class="label">You</div>
+                        <div class="value" id="wins">0</div>
+                    </div>
+
+                    <div class="panel-box">
+                        <div class="label">Computer</div>
+                        <div class="value" id="losses">0</div>
+                    </div>
+
+                    <div class="panel-box">
+                        <div class="label">Draws</div>
+                        <div class="value" id="draws">0</div>
+                    </div>
+
+                    <div class="btn-row">
+                        <button class="mono-btn" id="pause-btn">⏸ Pause</button>
+                        <button class="mono-btn" id="restart-btn">↺ New</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="touch-pad" style="grid-template-columns: repeat(3, 1fr);">
+                <button class="mono-btn" id="btn-left">←</button>
+                <button class="mono-btn" id="btn-drop">Drop</button>
+                <button class="mono-btn" id="btn-right">→</button>
+            </div>
+
+            <div class="help-grid">
+                <div class="help-card">
+                    <h3>⌨️ Controls</h3>
+                    <ul>
+                        <li><span class="key">←</span> <span class="key">→</span> aim above a column</li>
+                        <li><span class="key">Space</span>, <span class="key">Enter</span> or <span class="key">↓</span> drop a counter</li>
+                        <li>Clicking or tapping a column works too</li>
+                        <li><span class="key">R</span> next round &nbsp;•&nbsp; <span class="key">P</span> pause</li>
+                    </ul>
+                </div>
+
+                <div class="help-card">
+                    <h3>🎯 How to play</h3>
+                    <ul>
+                        <li>You are the <strong>solid</strong> counters; the computer is the <strong>rings</strong>.</li>
+                        <li>Counters fall to the lowest free hole in the column you pick.</li>
+                        <li>Get four in a row — across, down or diagonally.</li>
+                        <li>The computer replies straight away, so every drop is a whole turn.</li>
+                    </ul>
+                </div>
+
+                <div class="help-card">
+                    <h3>🤖 How the computer thinks</h3>
+                    <ul>
+                        <li>1. If it can make four, it does.</li>
+                        <li>2. If you are about to make four, it blocks you.</li>
+                        <li>3. Otherwise it plays as near the middle as it can — the middle column is part of more possible lines than any other.</li>
+                        <li>4. And it never drops a counter that lets you win by landing on top of it.</li>
+                        <li>To beat it, build <strong>two</strong> threats at once. It can only block one!</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="coder-box">
+                <h3>🧑‍💻 For young coders: build this game yourself</h3>
+                <p>This game is split into small library files inside <code>funtime/lib/</code>, and every function has a comment saying exactly what goes <strong>in</strong>, what comes <strong>out</strong>, and the <strong>algorithm</strong> in plain English. Empty any function out, read its comment, and write it yourself.</p>
+                <table class="file-table">
+                    <tr>
+                        <th>File</th>
+                        <th>What it does</th>
+                        <th>Good functions to try re-writing</th>
+                    </tr>
+                    <tr>
+                        <td>lib/connect4-rules.js</td>
+                        <td>The rules, the win check and the computer</td>
+                        <td><code>dropRow</code>, <code>countInDirection</code>, <code>isWinAt</code>, <code>computerColumn</code></td>
+                    </tr>
+                    <tr>
+                        <td>lib/connect4-draw.js</td>
+                        <td>Painting the holes and counters</td>
+                        <td><code>drawCounter</code>, <code>drawDropMarker</code>, <code>columnAtPixel</code></td>
+                    </tr>
+                    <tr>
+                        <td>lib/connect4-main.js</td>
+                        <td>The glue: clicks, keyboard, the scoreboard</td>
+                        <td><code>doAction</code>, <code>connectBoard</code>, <code>updateScoreboard</code></td>
+                    </tr>
+                </table>
+                <p style="margin-top:12px;">💡 <strong>The big idea:</strong> you never have to search the whole board for four in a row. Only the counter that was <em>just dropped</em> can have made a new line, so you look outwards from that one square — in four directions, both ways. That trick keeps the check fast no matter how big the board gets.</p>
+                <p style="margin-top:12px;">🛠️ <strong>Want to be walked through it?</strong> <a href="connect4-build.html"><strong>Build Connect Four Yourself</strong></a> takes you through the key functions one step at a time and tests each one you write. There is a <a href="connect4-python.html">Python version</a> too.</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Build two threats at once and even a computer cannot stop you. 🔴</p>
+        </footer>
+    </div>
+
+    <!-- The libraries, in the order they need each other -->
+    <script src="lib/connect4-rules.js"></script>
+    <script src="lib/connect4-draw.js"></script>
+    <script src="lib/connect4-main.js"></script>
+</body>
+</html>

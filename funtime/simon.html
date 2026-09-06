@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon Says - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        body { background: #2b2b2b; }
+        .container { background: #fafafa; }
+        h1, .subtitle { color: #111; text-shadow: none; }
+        .subtitle { color: #555; }
+
+        .game-wrap { max-width: 880px; margin: 0 auto; }
+
+        .game-layout {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 26px;
+        }
+
+        canvas.board {
+            display: block;
+            background: #ffffff;
+            border: 3px solid #111;
+            image-rendering: pixelated;
+            touch-action: none;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .side-panel { display: flex; flex-direction: column; gap: 14px; min-width: 160px; }
+
+        .panel-box { background: #fff; border: 3px solid #111; padding: 10px 16px; text-align: center; }
+        .panel-box .label { font-family: monospace; font-size: 0.8em; letter-spacing: 2px; color: #555; text-transform: uppercase; }
+        .panel-box .value { font-family: monospace; font-size: 1.9em; font-weight: bold; color: #111; line-height: 1.1; }
+
+        .btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+        .mono-btn {
+            font-family: monospace; font-weight: bold; font-size: 1em;
+            background: #fff; color: #111; border: 3px solid #111; padding: 10px 18px; cursor: pointer;
+        }
+        .mono-btn:hover { background: #111; color: #fff; }
+        .mono-btn:active { transform: translateY(1px); }
+
+        .touch-pad { display: grid; gap: 10px; max-width: 340px; margin: 20px auto 0; }
+        .touch-pad .mono-btn { padding: 14px 0; font-size: 1.15em; }
+        .touch-pad .spacer { visibility: hidden; }
+
+        .help-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 26px 0 0; }
+        .help-card { background: #fff; border: 2px solid #111; padding: 16px 20px; }
+        .help-card h3 { margin: 0 0 10px; color: #111; }
+        .help-card ul { margin: 0; padding-left: 20px; }
+        .help-card li { margin-bottom: 6px; color: #333; }
+
+        .key {
+            display: inline-block; min-width: 26px; padding: 2px 8px; text-align: center;
+            background: #111; color: #fff; border-radius: 4px;
+            font-family: monospace; font-weight: bold; font-size: 0.9em;
+        }
+
+        .coder-box { background: #fff; border: 2px dashed #111; padding: 18px 22px; margin-top: 26px; }
+        .coder-box h3 { margin: 0 0 10px; color: #111; }
+        .coder-box p { color: #333; margin-bottom: 10px; }
+        .coder-box code { background: #111; color: #fff; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+
+        .file-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .file-table th, .file-table td { border: 1px solid #999; padding: 7px 10px; text-align: left; font-size: 0.94em; }
+        .file-table th { background: #111; color: #fff; font-family: monospace; }
+        .file-table td:first-child { font-family: monospace; white-space: nowrap; }
+
+        .py-badge {
+            font-family: monospace; font-size: 0.42em; vertical-align: middle;
+            background: #111; color: #fff; padding: 6px 10px; border-radius: 6px;
+        }
+
+        .py-status {
+            font-family: monospace; font-size: 0.9em; text-align: center;
+            border: 2px dashed #111; padding: 10px; margin: 0 auto 18px; max-width: 640px; color: #333;
+        }
+        .py-status.ready { border-style: solid; background: #111; color: #fff; }
+        .py-status.error { border-style: solid; background: #fff; color: #111; font-weight: bold; }
+
+        footer p { color: #444; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎵 SIMON SAYS</h1>
+            <p class="subtitle">Watch the pattern, then play it back — one pad longer every round</p>
+            <a href="funtime.html" class="back-link">← Back to Fun Time</a>
+        </header>
+
+        <div class="game-wrap">
+            <div class="game-layout">
+                <canvas class="board" id="simon-board" width="294" height="294"></canvas>
+
+                <div class="side-panel">
+                    <div class="panel-box">
+                        <div class="label">Round</div>
+                        <div class="value" id="round">1</div>
+                    </div>
+
+                    <div class="panel-box">
+                        <div class="label">Score</div>
+                        <div class="value" id="score">0</div>
+                    </div>
+
+                    <div class="panel-box">
+                        <div class="label">Length</div>
+                        <div class="value" id="length">1</div>
+                    </div>
+
+                    <div class="panel-box">
+                        <div class="label">Best round</div>
+                        <div class="value" id="best">0</div>
+                    </div>
+
+                    <div class="btn-row">
+                        <button class="mono-btn" id="pause-btn">⏸ Pause</button>
+                        <button class="mono-btn" id="restart-btn">↺ New</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="touch-pad" style="grid-template-columns: repeat(2, 1fr);">
+                <button class="mono-btn" id="btn-pad0">1</button>
+                <button class="mono-btn" id="btn-pad1">2</button>
+                <button class="mono-btn" id="btn-pad2">3</button>
+                <button class="mono-btn" id="btn-pad3">4</button>
+            </div>
+
+            <div class="help-grid">
+                <div class="help-card">
+                    <h3>⌨️ Controls</h3>
+                    <ul>
+                        <li>Click or tap a pad — or use <span class="key">1</span> <span class="key">2</span> <span class="key">3</span> <span class="key">4</span></li>
+                        <li><span class="key">Q</span> <span class="key">W</span> <span class="key">A</span> <span class="key">S</span> work too, as do the arrow keys</li>
+                        <li><span class="key">P</span> pause &nbsp;•&nbsp; <span class="key">R</span> new game</li>
+                        <li>Presses during the flashing are ignored — wait for YOUR TURN.</li>
+                    </ul>
+                </div>
+
+                <div class="help-card">
+                    <h3>🎯 How to play</h3>
+                    <ul>
+                        <li>The game flashes a pattern of pads. Watch carefully.</li>
+                        <li>When it says <strong>YOUR TURN</strong>, press the same pads in the same order.</li>
+                        <li>Get it right and the pattern grows by one and flashes again.</li>
+                        <li>One wrong pad ends the game — so take your time on the early rounds.</li>
+                    </ul>
+                </div>
+
+                <div class="help-card">
+                    <h3>🏆 Scoring</h3>
+                    <ul>
+                        <li>Finishing a round is worth <strong>10 × the round number</strong>.</li>
+                        <li>Round 1 flashes each pad for 620 ms; by round 15 it is down to 260.</li>
+                        <li>Most people manage 5 or 6. Ten is genuinely impressive.</li>
+                        <li>Tip: say the numbers out loud as they flash. It really works.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="coder-box">
+                <h3>🧑‍💻 For young coders: build this game yourself</h3>
+                <p>This game is split into small library files inside <code>funtime/lib/</code>, and every function has a comment saying exactly what goes <strong>in</strong>, what comes <strong>out</strong>, and the <strong>algorithm</strong> in plain English. Empty any function out, read its comment, and write it yourself.</p>
+                <table class="file-table">
+                    <tr>
+                        <th>File</th>
+                        <th>What it does</th>
+                        <th>Good functions to try re-writing</th>
+                    </tr>
+                    <tr>
+                        <td>lib/simon-rules.js</td>
+                        <td>The rules: the sequence, the checking, the phases</td>
+                        <td><code>addStep</code>, <code>isCorrectSoFar</code>, <code>pressPad</code>, <code>updateGame</code></td>
+                    </tr>
+                    <tr>
+                        <td>lib/simon-draw.js</td>
+                        <td>Painting the four pads</td>
+                        <td><code>drawPad</code>, <code>padAtPixel</code>, <code>renderGame</code></td>
+                    </tr>
+                    <tr>
+                        <td>lib/simon-main.js</td>
+                        <td>The glue: clicks, keyboard, the loop</td>
+                        <td><code>doAction</code>, <code>connectBoard</code>, <code>gameLoop</code></td>
+                    </tr>
+                </table>
+                <p style="margin-top:12px;">💡 <strong>The big idea:</strong> the game is always in one of three <strong>phases</strong> — watching, playing, or over — and almost every rule starts by asking which one it is in. A little word like <code>phase</code> can organise a whole program.</p>
+                <p style="margin-top:12px;">🛠️ <strong>Want to be walked through it?</strong> <a href="simon-build.html"><strong>Build Simon Says Yourself</strong></a> takes you through the key functions one step at a time and tests each one you write. There is a <a href="simon-python.html">Python version</a> too.</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Say the numbers out loud. It really helps. 🎵</p>
+        </footer>
+    </div>
+
+    <!-- The libraries, in the order they need each other -->
+    <script src="lib/simon-rules.js"></script>
+    <script src="lib/simon-draw.js"></script>
+    <script src="lib/simon-main.js"></script>
+</body>
+</html>

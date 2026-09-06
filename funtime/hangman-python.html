@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman in Python - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        body { background: #2b2b2b; }
+        .container { background: #fafafa; }
+        h1, .subtitle { color: #111; text-shadow: none; }
+        .subtitle { color: #555; }
+
+        .game-wrap { max-width: 880px; margin: 0 auto; }
+
+        .game-layout {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 26px;
+        }
+
+        canvas.board {
+            display: block;
+            background: #ffffff;
+            border: 3px solid #111;
+            image-rendering: pixelated;
+            touch-action: none;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .side-panel { display: flex; flex-direction: column; gap: 14px; min-width: 160px; }
+
+        .panel-box { background: #fff; border: 3px solid #111; padding: 10px 16px; text-align: center; }
+        .panel-box .label { font-family: monospace; font-size: 0.8em; letter-spacing: 2px; color: #555; text-transform: uppercase; }
+        .panel-box .value { font-family: monospace; font-size: 1.9em; font-weight: bold; color: #111; line-height: 1.1; }
+
+        .btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+        .mono-btn {
+            font-family: monospace; font-weight: bold; font-size: 1em;
+            background: #fff; color: #111; border: 3px solid #111; padding: 10px 18px; cursor: pointer;
+        }
+        .mono-btn:hover { background: #111; color: #fff; }
+        .mono-btn:active { transform: translateY(1px); }
+
+        .touch-pad { display: grid; gap: 10px; max-width: 340px; margin: 20px auto 0; }
+        .touch-pad .mono-btn { padding: 14px 0; font-size: 1.15em; }
+        .touch-pad .spacer { visibility: hidden; }
+
+        .help-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 26px 0 0; }
+        .help-card { background: #fff; border: 2px solid #111; padding: 16px 20px; }
+        .help-card h3 { margin: 0 0 10px; color: #111; }
+        .help-card ul { margin: 0; padding-left: 20px; }
+        .help-card li { margin-bottom: 6px; color: #333; }
+
+        .key {
+            display: inline-block; min-width: 26px; padding: 2px 8px; text-align: center;
+            background: #111; color: #fff; border-radius: 4px;
+            font-family: monospace; font-weight: bold; font-size: 0.9em;
+        }
+
+        .coder-box { background: #fff; border: 2px dashed #111; padding: 18px 22px; margin-top: 26px; }
+        .coder-box h3 { margin: 0 0 10px; color: #111; }
+        .coder-box p { color: #333; margin-bottom: 10px; }
+        .coder-box code { background: #111; color: #fff; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+
+        .file-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .file-table th, .file-table td { border: 1px solid #999; padding: 7px 10px; text-align: left; font-size: 0.94em; }
+        .file-table th { background: #111; color: #fff; font-family: monospace; }
+        .file-table td:first-child { font-family: monospace; white-space: nowrap; }
+
+        .py-badge {
+            font-family: monospace; font-size: 0.42em; vertical-align: middle;
+            background: #111; color: #fff; padding: 6px 10px; border-radius: 6px;
+        }
+
+        .py-status {
+            font-family: monospace; font-size: 0.9em; text-align: center;
+            border: 2px dashed #111; padding: 10px; margin: 0 auto 18px; max-width: 640px; color: #333;
+        }
+        .py-status.ready { border-style: solid; background: #111; color: #fff; }
+        .py-status.error { border-style: solid; background: #fff; color: #111; font-weight: bold; }
+
+        footer p { color: #444; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔤 HANGMAN <span class="py-badge">in Python</span></h1>
+            <p class="subtitle">The same word game — but every string is handled by Python</p>
+            <a href="funtime.html" class="back-link">← Back to Fun Time</a>
+        </header>
+
+        <div class="py-status" id="py-status">🐍 Starting Python…</div>
+
+        <div class="game-wrap">
+            <div class="game-layout">
+                <canvas class="board" id="hangman-board" width="320" height="330"></canvas>
+
+                <div class="side-panel">
+                    <div class="panel-box">
+                        <div class="label">Lives</div>
+                        <div class="value" id="lives">6</div>
+                    </div>
+
+                    <div class="panel-box">
+                        <div class="label">Letters tried</div>
+                        <div class="value" id="letters">0</div>
+                    </div>
+
+                    <div class="panel-box">
+                        <div class="label">Wins</div>
+                        <div class="value" id="wins">0</div>
+                    </div>
+
+                    <div class="panel-box">
+                        <div class="label">Losses</div>
+                        <div class="value" id="losses">0</div>
+                    </div>
+
+                    <div class="btn-row">
+                        <button class="mono-btn" id="pause-btn">⏸ Pause</button>
+                        <button class="mono-btn" id="restart-btn">↺ New</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="touch-pad" style="grid-template-columns: repeat(1, 1fr);">
+                <button class="mono-btn" id="btn-vowels">A E I O U</button>
+            </div>
+
+            <div class="help-grid">
+                <div class="help-card">
+                    <h3>⌨️ Controls</h3>
+                    <ul>
+                        <li>Just <strong>type a letter</strong> — any letter is a guess</li>
+                        <li>Or click the alphabet along the bottom of the picture</li>
+                        <li><span class="key">ENTER</span> a new word &nbsp;•&nbsp; <span class="key">ESC</span> pause</li>
+                        <li>The A E I O U button tries all five vowels at once.</li>
+                    </ul>
+                </div>
+
+                <div class="help-card">
+                    <h3>🎯 How to play</h3>
+                    <ul>
+                        <li>A word is hidden. Every letter you find is filled in.</li>
+                        <li>A letter that is not in the word costs a life and draws another line.</li>
+                        <li>Six wrong guesses and the picture is finished.</li>
+                        <li>Guessing the same letter twice is free — it costs nothing.</li>
+                    </ul>
+                </div>
+
+                <div class="help-card">
+                    <h3>🧠 Getting good</h3>
+                    <ul>
+                        <li>Start with the vowels: <strong>E, A, I, O, U</strong>. Almost every word has one.</li>
+                        <li>Then the common consonants: <strong>R, S, T, N, L</strong>.</li>
+                        <li>Count the blanks. Short words are much harder than long ones.</li>
+                        <li>Look at what you have: <code>_ I O N</code> is not many words.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="coder-box">
+                <h3>🧑‍💻 This whole game is Python</h3>
+                <p>There is almost no JavaScript on this page. The browser downloaded <strong>Pyodide</strong> — a complete Python interpreter compiled to WebAssembly — and then ran the <code>.py</code> files in <code>funtime/pylib/</code>. Python does the rules, the maths <em>and</em> the drawing.</p>
+                <table class="file-table">
+                    <tr>
+                        <th>File</th>
+                        <th>What it does</th>
+                        <th>Good functions to try re-writing</th>
+                    </tr>
+                    <tr>
+                        <td>pylib/hangman_rules.py</td>
+                        <td>The rules: hiding the word, counting mistakes</td>
+                        <td><code>masked_word</code>, <code>is_word_complete</code>, <code>wrong_letters</code>, <code>guess_letter</code></td>
+                    </tr>
+                    <tr>
+                        <td>pylib/hangman_draw.py</td>
+                        <td>The drawing — Python calling the canvas</td>
+                        <td><code>draw_gallows</code>, <code>draw_parts</code>, <code>render_game</code></td>
+                    </tr>
+                    <tr>
+                        <td>pylib/hangman_web.py</td>
+                        <td>The glue: the keyboard and the alphabet row</td>
+                        <td><code>do_action</code>, <code>on_board_click</code>, <code>start_game</code></td>
+                    </tr>
+                </table>
+                <p style="margin-top:12px;">🔍 <strong>Compare the two versions.</strong> Open <code>lib/hangman-rules.js</code> and <code>pylib/hangman_rules.py</code> side by side — same ideas, two languages.</p>
+                <p style="margin-top:12px;">🛠️ <strong>Build it yourself:</strong> <a href="hangman-python-build.html"><strong>Build Hangman in Python</strong></a> walks you through the functions one at a time.</p>
+                <p style="margin-top:12px;">⚠️ <strong>If the game never starts:</strong> the page has to read its <code>.py</code> files, which a browser will not do for a page opened straight off your disk. Use the live site, or run <code>python3 -m http.server</code> in the project folder.</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Try the vowels first. 🔤</p>
+        </footer>
+    </div>
+
+    <!-- One small piece of JavaScript, whose only job is to start Python. -->
+    <script src="lib/python-runner.js"></script>
+    <script>
+        startPythonGame({
+            files: ['hangman_rules.py', 'hangman_draw.py', 'hangman_web.py'],
+            setup: 'import hangman_web\nhangman_web.start_game()',
+            status: 'py-status'
+        });
+    </script>
+</body>
+</html>

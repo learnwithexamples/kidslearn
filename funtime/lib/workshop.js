@@ -119,6 +119,11 @@ function startWorkshop(config) {
         REFERENCE[step.fnName] = window[step.fnName];
     });
 
+    /* How many turns one loop may take before we call it runaway. Four
+       million is far more than any real answer here needs, and takes well
+       under a second even on a slow machine. */
+    const TURN_LIMIT = 4000000;
+
     /**
      * makeTicker — a safety net for loops that never stop.
      *
@@ -136,16 +141,26 @@ function startWorkshop(config) {
      */
     function makeTicker() {
         let count = 0;
+        let burstCount = 0;
         let lastCheck = 0;
         let burstStart = 0;
         return function () {
             count++;
+            burstCount++;
             if ((count & 1023) !== 0) {
                 return true;
+            }
+            /* Two safety nets, because one is not enough. The clock is the
+               friendly one — two seconds is what a person notices. But a busy
+               computer can make the clock unreliable, so the turn counter
+               stops the loop even if the clock lets us down. */
+            if (burstCount > TURN_LIMIT) {
+                throw new Error('your loop has taken millions of turns without stopping — it probably never ends. Check the condition!');
             }
             const now = Date.now();
             if (now - lastCheck > 100) {
                 burstStart = now;
+                burstCount = 0;
             }
             lastCheck = now;
             if (now - burstStart > 2000) {
@@ -279,9 +294,13 @@ function startWorkshop(config) {
      * INPUT:  step — a step object. fn — the student's function.
      * OUTPUT: an array of { name, ok, detail } results
      *
-     * ALGORITHM: for each test, either call the function with the given
-     *            arguments and compare with `expect`, or run the test's own
-     *            `check` function. Any crash counts as a failure.
+     * ALGORITHM: a test can be written three ways —
+     *              { name, code }            a few lines of JavaScript ending
+     *                                        in assert(...)
+     *              { name, args, expect }    call it and compare the answer
+     *              { name, check }           a function that returns
+     *                                        { ok, detail }
+     *            Any crash counts as a failure.
      */
     function runTests(step, fn) {
         if (ENGINE.runTests) {
@@ -292,7 +311,19 @@ function startWorkshop(config) {
         step.tests.forEach(function (test) {
             let result;
             try {
-                if (test.check) {
+                if (test.code) {
+                    /* A test written as a few lines of JavaScript ending in
+                       assert(...). The student's function arrives as a
+                       parameter named after itself, so the test can simply
+                       call it by name. */
+                    const assert = function (condition, message) {
+                        if (!condition) {
+                            throw new Error(message || 'the check failed');
+                        }
+                    };
+                    new Function(step.fnName, 'assert', test.code)(fn, assert);
+                    result = { name: test.name, ok: true, detail: '' };
+                } else if (test.check) {
                     const custom = test.check(fn);
                     result = { name: test.name, ok: custom.ok === true, detail: custom.detail || '' };
                 } else {

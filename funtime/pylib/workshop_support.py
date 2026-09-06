@@ -181,11 +181,17 @@ def run_test(module_name, test_code):
     ALGORITHM: exec the test inside the module, so it can call the functions by
     name. An AssertionError means the check failed and its message explains
     why; any other error means the code crashed.
+
+    The test gets the same loop guards as the student's own code. A test that
+    loops until a function finishes something would never end while that
+    function is still half-written, and a workshop that hangs is far worse
+    than one that says "this test ran away".
     """
     module = sys.modules[module_name]
     setattr(module, GUARD_NAME, _guard_tick)
     try:
-        _run_guarded(lambda: exec(test_code, vars(module)))
+        guarded = _compile_guarded(test_code)
+        _run_guarded(lambda: exec(guarded, vars(module)))
         return json.dumps({"ok": True, "detail": ""})
     except AssertionError as error:
         return json.dumps({"ok": False, "detail": str(error) or "the check failed"})

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Race - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        body { background: #2b2b2b; }
+        .container { background: #fafafa; }
+        h1, .subtitle { color: #111; text-shadow: none; }
+        .subtitle { color: #555; }
+
+        .game-wrap { max-width: 880px; margin: 0 auto; }
+
+        .game-layout {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 26px;
+        }
+
+        canvas.board {
+            display: block;
+            background: #ffffff;
+            border: 3px solid #111;
+            image-rendering: pixelated;
+            touch-action: none;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .side-panel { display: flex; flex-direction: column; gap: 14px; min-width: 160px; }
+
+        .panel-box { background: #fff; border: 3px solid #111; padding: 10px 16px; text-align: center; }
+        .panel-box .label { font-family: monospace; font-size: 0.8em; letter-spacing: 2px; color: #555; text-transform: uppercase; }
+        .panel-box .value { font-family: monospace; font-size: 1.9em; font-weight: bold; color: #111; line-height: 1.1; }
+
+        .btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+        .mono-btn {
+            font-family: monospace; font-weight: bold; font-size: 1em;
+            background: #fff; color: #111; border: 3px solid #111; padding: 10px 18px; cursor: pointer;
+        }
+        .mono-btn:hover { background: #111; color: #fff; }
+        .mono-btn:active { transform: translateY(1px); }
+
+        .touch-pad { display: grid; gap: 10px; max-width: 340px; margin: 20px auto 0; }
+        .touch-pad .mono-btn { padding: 14px 0; font-size: 1.15em; }
+        .touch-pad .spacer { visibility: hidden; }
+
+        .help-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 26px 0 0; }
+        .help-card { background: #fff; border: 2px solid #111; padding: 16px 20px; }
+        .help-card h3 { margin: 0 0 10px; color: #111; }
+        .help-card ul { margin: 0; padding-left: 20px; }
+        .help-card li { margin-bottom: 6px; color: #333; }
+
+        .key {
+            display: inline-block; min-width: 26px; padding: 2px 8px; text-align: center;
+            background: #111; color: #fff; border-radius: 4px;
+            font-family: monospace; font-weight: bold; font-size: 0.9em;
+        }
+
+        .coder-box { background: #fff; border: 2px dashed #111; padding: 18px 22px; margin-top: 26px; }
+        .coder-box h3 { margin: 0 0 10px; color: #111; }
+        .coder-box p { color: #333; margin-bottom: 10px; }
+        .coder-box code { background: #111; color: #fff; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+
+        .file-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .file-table th, .file-table td { border: 1px solid #999; padding: 7px 10px; text-align: left; font-size: 0.94em; }
+        .file-table th { background: #111; color: #fff; font-family: monospace; }
+        .file-table td:first-child { font-family: monospace; white-space: nowrap; }
+
+        .py-badge {
+            font-family: monospace; font-size: 0.42em; vertical-align: middle;
+            background: #111; color: #fff; padding: 6px 10px; border-radius: 6px;
+        }
+
+        .py-status {
+            font-family: monospace; font-size: 0.9em; text-align: center;
+            border: 2px dashed #111; padding: 10px; margin: 0 auto 18px; max-width: 640px; color: #333;
+        }
+        .py-status.ready { border-style: solid; background: #111; color: #fff; }
+        .py-status.error { border-style: solid; background: #fff; color: #111; font-weight: bold; }
+
+        footer p { color: #444; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⌨️ TYPING RACE</h1>
+            <p class="subtitle">Twenty-four words, sixty seconds — how fast can you go?</p>
+            <a href="funtime.html" class="back-link">← Back to Fun Time</a>
+        </header>
+
+        <div class="game-wrap">
+            <div class="game-layout">
+                <canvas class="board" id="typing-board" width="340" height="250"></canvas>
+
+                <div class="side-panel">
+                    <div class="panel-box">
+                        <div class="label">Speed</div>
+                        <div class="value" id="wpm">0</div>
+                    </div>
+
+                    <div class="panel-box">
+                        <div class="label">Accuracy</div>
+                        <div class="value" id="accuracy">100%</div>
+                    </div>
+
+                    <div class="panel-box">
+                        <div class="label">Words done</div>
+                        <div class="value" id="words">0</div>
+                    </div>
+
+                    <div class="panel-box">
+                        <div class="label">Best WPM</div>
+                        <div class="value" id="best">0</div>
+                    </div>
+
+                    <div class="btn-row">
+                        <button class="mono-btn" id="pause-btn">⏸ Pause</button>
+                        <button class="mono-btn" id="restart-btn">↺ New</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="touch-pad" style="grid-template-columns: repeat(1, 1fr);">
+                <button class="mono-btn" id="btn-keyboard">⌨ TAP TO TYPE</button>
+            </div>
+
+            <div class="help-grid">
+                <div class="help-card">
+                    <h3>⌨️ Controls</h3>
+                    <ul>
+                        <li>Just start typing — the clock starts with your first letter</li>
+                        <li><span class="key">SPACE</span> after each word</li>
+                        <li><span class="key">BACKSPACE</span> to fix a letter</li>
+                        <li><span class="key">ENTER</span> a new race &nbsp;•&nbsp; <span class="key">ESC</span> pause</li>
+                    </ul>
+                </div>
+
+                <div class="help-card">
+                    <h3>🎯 How to play</h3>
+                    <ul>
+                        <li>Type the boxed word, then press space. Right or wrong, the race moves on.</li>
+                        <li>Your typing turns black as it matches — and gets struck through when it does not.</li>
+                        <li>The bar shows the minute running out.</li>
+                        <li>The race ends after 24 words or 60 seconds, whichever comes first.</li>
+                    </ul>
+                </div>
+
+                <div class="help-card">
+                    <h3>🏆 What is a good speed?</h3>
+                    <ul>
+                        <li>A "word" means <strong>five characters</strong> — that is how typists have always counted.</li>
+                        <li><strong>20 WPM</strong> is a good start. <strong>40</strong> is proper touch typing.</li>
+                        <li>Accuracy beats speed: a wrong word is worth nothing at all.</li>
+                        <li>Do not look at your hands. It feels slower and it is much faster.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="coder-box">
+                <h3>🧑‍💻 For young coders: build this game yourself</h3>
+                <p>This game is split into small library files inside <code>funtime/lib/</code>, and every function has a comment saying exactly what goes <strong>in</strong>, what comes <strong>out</strong>, and the <strong>algorithm</strong> in plain English. Empty any function out, read its comment, and write it yourself.</p>
+                <table class="file-table">
+                    <tr>
+                        <th>File</th>
+                        <th>What it does</th>
+                        <th>Good functions to try re-writing</th>
+                    </tr>
+                    <tr>
+                        <td>lib/typing-rules.js</td>
+                        <td>The rules: matching letters and working out the speed</td>
+                        <td><code>matchingLetters</code>, <code>submitWord</code>, <code>accuracy</code>, <code>wordsPerMinute</code></td>
+                    </tr>
+                    <tr>
+                        <td>lib/typing-draw.js</td>
+                        <td>Painting the words, the typing and the clock</td>
+                        <td><code>layoutWords</code>, <code>drawTyped</code>, <code>renderGame</code></td>
+                    </tr>
+                    <tr>
+                        <td>lib/typing-main.js</td>
+                        <td>The glue: the keyboard and the on-screen one</td>
+                        <td><code>doAction</code>, <code>connectKeyboard</code>, <code>gameLoop</code></td>
+                    </tr>
+                </table>
+                <p style="margin-top:12px;">💡 <strong>The big idea:</strong> <strong>check before you divide</strong>. Accuracy divides by the words attempted, and speed divides by the seconds gone by — and at the very start of a race both of those are zero. Two lines of guard turn a crash into a sensible answer.</p>
+                <p style="margin-top:12px;">🛠️ <strong>Want to be walked through it?</strong> <a href="typing-build.html"><strong>Build Typing Race Yourself</strong></a> takes you through the key functions one step at a time and tests each one you write. There is a <a href="typing-python.html">Python version</a> too.</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Accuracy first. Speed follows. ⌨️</p>
+        </footer>
+    </div>
+
+    <!-- The libraries, in the order they need each other -->
+    <script src="lib/typing-rules.js"></script>
+    <script src="lib/typing-draw.js"></script>
+    <script src="lib/typing-main.js"></script>
+</body>
+</html>

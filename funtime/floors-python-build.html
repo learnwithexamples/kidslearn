@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Hundred Floors in Python - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        body { background: #2b2b2b; }
+        .container { background: #fafafa; }
+        h1, .subtitle { color: #111; text-shadow: none; }
+        .subtitle { color: #555; }
+
+        .game-wrap { max-width: 880px; margin: 0 auto; }
+
+        .game-layout {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 26px;
+        }
+
+        canvas.board {
+            display: block;
+            background: #ffffff;
+            border: 3px solid #111;
+            image-rendering: pixelated;
+            touch-action: none;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .side-panel { display: flex; flex-direction: column; gap: 14px; min-width: 160px; }
+
+        .panel-box { background: #fff; border: 3px solid #111; padding: 10px 16px; text-align: center; }
+        .panel-box .label { font-family: monospace; font-size: 0.8em; letter-spacing: 2px; color: #555; text-transform: uppercase; }
+        .panel-box .value { font-family: monospace; font-size: 1.9em; font-weight: bold; color: #111; line-height: 1.1; }
+
+        .btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+        .mono-btn {
+            font-family: monospace; font-weight: bold; font-size: 1em;
+            background: #fff; color: #111; border: 3px solid #111; padding: 10px 18px; cursor: pointer;
+        }
+        .mono-btn:hover { background: #111; color: #fff; }
+        .mono-btn:active { transform: translateY(1px); }
+
+        .touch-pad { display: grid; gap: 10px; max-width: 340px; margin: 20px auto 0; }
+        .touch-pad .mono-btn { padding: 14px 0; font-size: 1.15em; }
+        .touch-pad .spacer { visibility: hidden; }
+
+        .help-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 26px 0 0; }
+        .help-card { background: #fff; border: 2px solid #111; padding: 16px 20px; }
+        .help-card h3 { margin: 0 0 10px; color: #111; }
+        .help-card ul { margin: 0; padding-left: 20px; }
+        .help-card li { margin-bottom: 6px; color: #333; }
+
+        .key {
+            display: inline-block; min-width: 26px; padding: 2px 8px; text-align: center;
+            background: #111; color: #fff; border-radius: 4px;
+            font-family: monospace; font-weight: bold; font-size: 0.9em;
+        }
+
+        .coder-box { background: #fff; border: 2px dashed #111; padding: 18px 22px; margin-top: 26px; }
+        .coder-box h3 { margin: 0 0 10px; color: #111; }
+        .coder-box p { color: #333; margin-bottom: 10px; }
+        .coder-box code { background: #111; color: #fff; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+
+        .file-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .file-table th, .file-table td { border: 1px solid #999; padding: 7px 10px; text-align: left; font-size: 0.94em; }
+        .file-table th { background: #111; color: #fff; font-family: monospace; }
+        .file-table td:first-child { font-family: monospace; white-space: nowrap; }
+
+        .py-badge {
+            font-family: monospace; font-size: 0.42em; vertical-align: middle;
+            background: #111; color: #fff; padding: 6px 10px; border-radius: 6px;
+        }
+
+        .py-status {
+            font-family: monospace; font-size: 0.9em; text-align: center;
+            border: 2px dashed #111; padding: 10px; margin: 0 auto 18px; max-width: 640px; color: #333;
+        }
+        .py-status.ready { border-style: solid; background: #111; color: #fff; }
+        .py-status.error { border-style: solid; background: #fff; color: #111; font-weight: bold; }
+
+        footer p { color: #444; }
+    </style>
+    <link rel="stylesheet" href="../styles/workshop.css">
+    <style>
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛠️ Build Hundred Floors <span class="py-badge">in Python</span></h1>
+            <p class="subtitle">6 Python functions. Write them one at a time, test each one, and watch the game come alive.</p>
+            <a href="funtime.html" class="back-link">← Back to Fun Time</a>
+        </header>
+
+        <div class="py-status" id="py-status">🐍 Starting Python…</div>
+
+        <div class="progress-wrap">
+            <div id="progress"></div>
+            <div id="progress-text"></div>
+        </div>
+
+        <div class="workshop">
+            <div class="lesson-col">
+                <div class="panel">
+                    <div class="step-label" id="step-number">Step 1</div>
+                    <h2 id="step-title">…</h2>
+                    <div class="step-adds" id="step-adds"></div>
+                    <div id="step-intro"></div>
+                    <div class="spec" id="step-spec"></div>
+                    <div class="warn" id="step-warning" style="display:none;"></div>
+                </div>
+
+                <div class="panel">
+                    <h3>✏️ Write your function</h3>
+                    <textarea id="code-editor" spellcheck="false"></textarea>
+                    <div class="btn-row">
+                        <button class="mono-btn primary" id="btn-test">▶ Test it</button>
+                        <button class="mono-btn" id="btn-hint">💡 Hint</button>
+                        <button class="mono-btn" id="btn-answer">🔑 Answer</button>
+                        <button class="mono-btn" id="btn-reset">↺ Start over</button>
+                    </div>
+                    <div class="hint-box" id="hint-box" style="display:none;"></div>
+
+                    <div class="test-summary" id="test-summary">Write your function, then press ▶ Test it.</div>
+                    <ul id="test-results"></ul>
+
+                    <div class="nav-row">
+                        <button class="mono-btn" id="btn-prev">← Previous step</button>
+                        <button class="mono-btn primary" id="btn-next" disabled>Next step →</button>
+                    </div>
+                </div>
+
+                <div class="panel finish-panel" id="finish-panel" style="display:none;">
+                    <h2>🏆 You built Hundred Floors!</h2>
+                    <p>Every function running in that game is one you wrote yourself.</p>
+                    <p>Play the finished version at <a href="floors-python.html">🪜 Hundred Floors in Python</a>, or try <a href="floors-build.html">the JavaScript version</a> of this same workshop.</p>
+                    <p><strong>Next challenge:</strong> add a platform that heals you, make the shaft narrower as you go deeper, or show how far you fell and give a bonus for a really long drop.</p>
+                </div>
+            </div>
+
+            <div class="demo-col">
+                <div class="panel">
+                    <h3>🎮 The game so far</h3>
+                    <div class="demo-switch">
+                        <button class="mono-btn small" id="btn-demo-yours">🧑‍💻 My code</button>
+                        <button class="mono-btn small" id="btn-demo-goal">🎬 The goal</button>
+                    </div>
+                    <div class="demo-status goal" id="demo-status">…</div>
+                    <canvas id="demo-canvas" width="240" height="400"></canvas>
+                    <div id="demo-controls"></div>
+                    <div id="demo-note"></div>
+                    <div id="demo-caption"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h3>📋 How this works</h3>
+            <ul>
+                <li>Each step asks for <strong>one function</strong>. Read the <strong>INPUT / OUTPUT / ALGORITHM</strong> box — it tells you everything you need.</li>
+                <li>Press <strong>▶ Test it</strong> to run real checks. Every ❌ says what it expected and what it got.</li>
+                <li>When all the tests pass, the next step unlocks and the demo switches to <strong>your</strong> code.</li>
+                <li>Your work is saved in this browser, so you can come back later.</li>
+                <li>⚠️ A loop that never stops is caught after 2 seconds and reported as a mistake.</li>
+            </ul>
+            <button class="mono-btn small" id="btn-restart-course">🗑️ Erase my work and start again</button>
+        </div>
+
+        <footer>
+            <p>Reading code teaches you a little. Writing it teaches you everything. 🛠️</p>
+        </footer>
+    </div>
+
+    <script src="lib/python-runner.js"></script>
+    <script src="lib/workshop.js"></script>
+    <script src="lib/workshop-python.js"></script>
+    <script src="lib/floors-python-steps.js"></script>
+    <script>
+        startPythonWorkshop({
+            storagePrefix: 'floors-python-build',
+            steps: FLOORS_PYTHON_STEPS,
+            module: 'floors_rules',
+            demoModule: 'floors_demo',
+            files: ['floors_rules.py', 'floors_draw.py', 'floors_demo.py', 'workshop_support.py'],
+            status: 'py-status'
+        });
+    </script>
+</body>
+</html>

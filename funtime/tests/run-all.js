@@ -24,7 +24,9 @@ const SUITES = [
     ['Racing — game rules', 'test-race.js'],
     ['Racing — page wiring', 'test-race-dom.js'],
     ['Racing — workshop steps', 'test-race-steps.js'],
-    ['Racing — workshop page', 'test-race-build.js']
+    ['Racing — workshop page', 'test-race-build.js'],
+    ['Every JS workshop — steps', 'test-js-steps.js'],
+    ['Every JS workshop — played through', 'test-js-workshops.js']
 ];
 
 let failed = 0;
@@ -45,8 +47,12 @@ SUITES.forEach(function (suite) {
     }
     try {
         const out = execFileSync(process.execPath, [file], { encoding: 'utf8' });
-        const checks = (out.match(/ ok   /g) || []).length;
-        console.log('  PASS  ' + label.padEnd(32) + checks + ' checks');
+        /* Some suites tick off each check with " ok   "; the auto-discovering
+           ones just print a total at the end. Take whichever we can find. */
+        const counted = (out.match(/ ok   /g) || []).length;
+        const reported = out.match(/(\d+) checks run/);
+        const checks = reported ? Number(reported[1]) : counted;
+        console.log('  PASS  ' + label.padEnd(32) + ' ' + checks + ' checks');
     } catch (e) {
         failed++;
         console.log('  FAIL  ' + label);
@@ -64,8 +70,10 @@ PYTHON_SUITES.forEach(function (suite) {
     }
     try {
         const out = execFileSync('python3', [file], { encoding: 'utf8' });
-        const checks = (out.match(/ ok   /g) || []).length || (out.match(/checks run/) ? out : '').length;
-        console.log('  PASS  ' + label.padEnd(32) + (out.match(/(\d+) checks run/) || [0, '?'])[1] + ' checks');
+        const counted = (out.match(/ ok   /g) || []).length;
+        const reported = out.match(/(\d+) checks run/);
+        const checks = reported ? Number(reported[1]) : counted;
+        console.log('  PASS  ' + label.padEnd(32) + ' ' + checks + ' checks');
     } catch (e) {
         failed++;
         console.log('  FAIL  ' + label);

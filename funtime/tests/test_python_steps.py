@@ -31,11 +31,27 @@ def load_steps(js_file, const_name):
     return json.loads(text[start:end])
 
 
-WORKSHOPS = [
-    ("Snake", "snake-python-steps.js", "SNAKE_PYTHON_STEPS", "snake_rules"),
-    ("Tetris", "tetris-python-steps.js", "TETRIS_PYTHON_STEPS", "tetris_rules"),
-    ("Racing", "race-python-steps.js", "RACE_PYTHON_STEPS", "race_rules"),
-]
+def discover_workshops():
+    """Find every Python workshop by looking for its steps file.
+
+    INPUT:  nothing
+    OUTPUT: a list of (label, js file, constant name, module name)
+    ALGORITHM: every workshop ships a `<game>-python-steps.js` holding a
+    constant named `<GAME>_PYTHON_STEPS` and teaching `<game>_rules`, so the
+    names can be worked out from the file name. New games are picked up with
+    no changes here.
+    """
+    found = []
+    for path in sorted((ROOT / "lib").glob("*-python-steps.js")):
+        game = path.name.replace("-python-steps.js", "")
+        module = game.replace("-", "_") + "_rules"
+        constant = game.replace("-", "_").upper() + "_PYTHON_STEPS"
+        if (ROOT / "pylib" / (module + ".py")).exists():
+            found.append((game.replace("-", " ").title(), path.name, constant, module))
+    return found
+
+
+WORKSHOPS = discover_workshops()
 
 failures = 0
 checked = 0
