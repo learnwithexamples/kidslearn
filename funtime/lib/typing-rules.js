@@ -110,6 +110,9 @@ function backspace(state) {
  *            moves on to the next word — this is a race, not a spelling test,
  *            and stopping to correct things would ruin the rhythm. Finishing
  *            the last word ends the race.
+ *
+ *            The answer is remembered in state.results, one entry per word,
+ *            so the page can show at a glance which words went wrong.
  */
 function submitWord(state) {
     if (state.isOver || state.isPaused || state.typed.length === 0) {
@@ -123,6 +126,7 @@ function submitWord(state) {
     } else {
         state.wrong = state.wrong + 1;
     }
+    state.results.push(right);
 
     state.index = state.index + 1;
     state.typed = '';
@@ -184,6 +188,7 @@ function newRace(state) {
     state.typed = '';
     state.correct = 0;
     state.wrong = 0;
+    state.results = [];
     state.lettersTyped = 0;
     state.keystrokes = 0;
     state.seconds = 0;

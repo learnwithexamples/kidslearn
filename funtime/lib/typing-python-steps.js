@@ -73,7 +73,7 @@ const TYPING_PYTHON_STEPS = [
         "fnName": "submit_word",
         "title": "Press space",
         "adds": "The race moves along.",
-        "intro": "<p>Space means \"I have finished that word\". Right or wrong, the game moves on — this is a <em>race</em>, and stopping to fix things would ruin the rhythm.</p><p>Notice what gets counted when the word is right: the length of the word <strong>plus one</strong>. That extra one is the space you just pressed, and typists have always counted it. Leave it out and everyone's speed comes out about 15% too low.</p>",
+        "intro": "<p>Space means \"I have finished that word\". Right or wrong, the game moves on — this is a <em>race</em>, and stopping to fix things would ruin the rhythm.</p><p>Notice what gets counted when the word is right: the length of the word <strong>plus one</strong>. That extra one is the space you just pressed, and typists have always counted it. Leave it out and everyone's speed comes out about 15% too low.</p><p>One more job: push the answer onto <code>state.results</code>. The counters only say <em>how many</em> went wrong — this list says <em>which</em>, and that is what lets the page draw a line through the words you fluffed.</p>",
         "spec": {
             "input": "state",
             "output": "True if the word was right",
@@ -82,15 +82,17 @@ const TYPING_PYTHON_STEPS = [
                 "Compare what was typed with the current word.",
                 "If it matches: add one to `correct`, and add the word's length PLUS ONE to `lettersTyped`.",
                 "If not: add one to `wrong`.",
+                "Either way, remember the answer by pushing it onto `results`.",
                 "Move on to the next word and clear what was typed.",
                 "If there are no words left, the race is over."
             ]
         },
         "starter": "def submit_word(state):\n    # right or wrong, move on to the next word\n    pass\n",
-        "answer": "def submit_word(state):\n    if state[\"is_over\"] or state[\"is_paused\"] or not state[\"typed\"]:\n        return False\n    right = state[\"typed\"] == current_word(state)\n\n    if right:\n        state[\"correct\"] += 1\n        state[\"letters_typed\"] += len(current_word(state)) + 1\n    else:\n        state[\"wrong\"] += 1\n\n    state[\"index\"] += 1\n    state[\"typed\"] = \"\"\n\n    if state[\"index\"] >= len(state[\"words\"]):\n        state[\"is_over\"] = True\n    return right\n",
+        "answer": "def submit_word(state):\n    if state[\"is_over\"] or state[\"is_paused\"] or not state[\"typed\"]:\n        return False\n    right = state[\"typed\"] == current_word(state)\n\n    if right:\n        state[\"correct\"] += 1\n        state[\"letters_typed\"] += len(current_word(state)) + 1\n    else:\n        state[\"wrong\"] += 1\n    state[\"results\"].append(right)\n\n    state[\"index\"] += 1\n    state[\"typed\"] = \"\"\n\n    if state[\"index\"] >= len(state[\"words\"]):\n        state[\"is_over\"] = True\n    return right\n",
         "hints": [
             "current_word(state) is written for you.",
             "The + 1 on letters_typed is the space bar - it counts.",
+            "state['results'].append(right) records the answer for the page to draw.",
             "Move on and clear the typing whether the word was right or wrong."
         ],
         "tests": [
@@ -123,8 +125,12 @@ const TYPING_PYTHON_STEPS = [
                 "code": "state = create_game()\nstate.update({'words': ['water'], 'index': 0, 'typed': 'water'})\nsubmit_word(state)\nassert state['is_over'] is True"
             },
             {
+                "name": "Which words went wrong is remembered",
+                "code": "state = create_game()\nstate.update({'words': ['water', 'little', 'sound'], 'index': 0})\nfor typed in ('water', 'wrong', 'sound'):\n    state['typed'] = typed\n    submit_word(state)\nassert state['results'] == [True, False, True], f\"got {state['results']}\""
+            },
+            {
                 "name": "A whole race can be typed",
-                "code": "state = create_game()\nfor _ in range(len(state['words'])):\n    state['typed'] = current_word(state)\n    submit_word(state)\nassert state['correct'] == len(state['words'])\nassert state['is_over'] is True"
+                "code": "state = create_game()\nfor _ in range(len(state['words'])):\n    state['typed'] = current_word(state)\n    submit_word(state)\nassert state['correct'] == len(state['words'])\nassert state['is_over'] is True\nassert len(state['results']) == len(state['words'])"
             }
         ],
         "demo": {

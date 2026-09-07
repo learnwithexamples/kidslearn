@@ -104,6 +104,7 @@ def submit_word(state):
         state["letters_typed"] += len(current_word(state)) + 1
     else:
         state["wrong"] += 1
+    state["results"].append(right)
 
     state["index"] += 1
     state["typed"] = ""
@@ -152,6 +153,7 @@ def new_race(state):
     state["typed"] = ""
     state["correct"] = 0
     state["wrong"] = 0
+    state["results"] = []
     state["letters_typed"] = 0
     state["keystrokes"] = 0
     state["seconds"] = 0

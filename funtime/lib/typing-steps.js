@@ -73,7 +73,7 @@ const TYPING_STEPS = [
         "fnName": "submitWord",
         "title": "Press space",
         "adds": "The race moves along.",
-        "intro": "<p>Space means \"I have finished that word\". Right or wrong, the game moves on — this is a <em>race</em>, and stopping to fix things would ruin the rhythm.</p><p>Notice what gets counted when the word is right: the length of the word <strong>plus one</strong>. That extra one is the space you just pressed, and typists have always counted it. Leave it out and everyone's speed comes out about 15% too low.</p>",
+        "intro": "<p>Space means \"I have finished that word\". Right or wrong, the game moves on — this is a <em>race</em>, and stopping to fix things would ruin the rhythm.</p><p>Notice what gets counted when the word is right: the length of the word <strong>plus one</strong>. That extra one is the space you just pressed, and typists have always counted it. Leave it out and everyone's speed comes out about 15% too low.</p><p>One more job: push the answer onto <code>state.results</code>. The counters only say <em>how many</em> went wrong — this list says <em>which</em>, and that is what lets the page draw a line through the words you fluffed.</p>",
         "spec": {
             "input": "state",
             "output": "True if the word was right",
@@ -82,15 +82,17 @@ const TYPING_STEPS = [
                 "Compare what was typed with the current word.",
                 "If it matches: add one to `correct`, and add the word's length PLUS ONE to `lettersTyped`.",
                 "If not: add one to `wrong`.",
+                "Either way, remember the answer by pushing it onto `results`.",
                 "Move on to the next word and clear what was typed.",
                 "If there are no words left, the race is over."
             ]
         },
         "starter": "function submitWord(state) {\n    // right or wrong, move on to the next word\n}\n",
-        "answer": "function submitWord(state) {\n    if (state.isOver || state.isPaused || state.typed.length === 0) {\n        return false;\n    }\n    const right = state.typed === currentWord(state);\n\n    if (right) {\n        state.correct = state.correct + 1;\n        state.lettersTyped = state.lettersTyped + currentWord(state).length + 1;\n    } else {\n        state.wrong = state.wrong + 1;\n    }\n\n    state.index = state.index + 1;\n    state.typed = '';\n\n    if (state.index >= state.words.length) {\n        state.isOver = true;\n    }\n    return right;\n}\n",
+        "answer": "function submitWord(state) {\n    if (state.isOver || state.isPaused || state.typed.length === 0) {\n        return false;\n    }\n    const right = state.typed === currentWord(state);\n\n    if (right) {\n        state.correct = state.correct + 1;\n        state.lettersTyped = state.lettersTyped + currentWord(state).length + 1;\n    } else {\n        state.wrong = state.wrong + 1;\n    }\n    state.results.push(right);\n\n    state.index = state.index + 1;\n    state.typed = '';\n\n    if (state.index >= state.words.length) {\n        state.isOver = true;\n    }\n    return right;\n}\n",
         "hints": [
             "currentWord(state) is written for you.",
             "The + 1 on lettersTyped is the space bar — it counts.",
+            "state.results.push(right) records the answer for the page to draw.",
             "Move on and clear the typing whether the word was right or wrong."
         ],
         "tests": [
@@ -123,8 +125,12 @@ const TYPING_STEPS = [
                 "code": "const state = createGame();\nstate.words = ['water'];\nstate.index = 0;\nstate.typed = 'water';\nsubmitWord(state);\nassert(state.isOver === true);"
             },
             {
+                "name": "Which words went wrong is remembered",
+                "code": "const state = createGame();\nstate.words = ['water', 'little', 'sound'];\nstate.index = 0;\nstate.typed = 'water';\nsubmitWord(state);\nstate.typed = 'wrong';\nsubmitWord(state);\nstate.typed = 'sound';\nsubmitWord(state);\nassert(state.results.length === 3, 'one entry per word, got ' + state.results.length);\nassert(state.results[0] === true && state.results[1] === false && state.results[2] === true, 'got ' + JSON.stringify(state.results));"
+            },
+            {
                 "name": "A whole race can be typed",
-                "code": "const state = createGame();\nfor (let i = 0; i < state.words.length; i++) {\n    state.typed = currentWord(state);\n    submitWord(state);\n}\nassert(state.correct === state.words.length, 'every word should have been right');\nassert(state.isOver === true, 'the race should have finished');"
+                "code": "const state = createGame();\nfor (let i = 0; i < state.words.length; i++) {\n    state.typed = currentWord(state);\n    submitWord(state);\n}\nassert(state.correct === state.words.length, 'every word should have been right');\nassert(state.isOver === true, 'the race should have finished');\nassert(state.results.length === state.words.length, 'results should have one entry per word');"
             }
         ],
         "demo": {

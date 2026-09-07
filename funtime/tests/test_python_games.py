@@ -7,9 +7,9 @@ These are the same checks the JavaScript suites make, written against the
 Python modules in funtime/pylib. The drawing modules are tested too, with a
 pretend canvas that simply counts what it was asked to draw.
 
-Bubble Shooter is here as well, because its Python rules must agree with the
-JavaScript ones that test-bubbles.js watches — and the bug that file exists
-to catch was in both copies at once.
+Bubble Shooter and Typing Race are here as well, because their Python rules
+must agree with the JavaScript ones that test-bubbles.js and test-typing.js
+watch — and the bugs those files exist to catch were in both copies at once.
 """
 
 import math
@@ -27,6 +27,8 @@ import snake_rules as snake           # noqa: E402
 import tetris_draw                    # noqa: E402
 import tetris_rules as tetris         # noqa: E402
 import bubbles_rules as bubbles       # noqa: E402
+import typing_draw                    # noqa: E402
+import typing_rules as typing_race    # noqa: E402
 
 failures = 0
 checks = 0
@@ -386,6 +388,52 @@ check("no bubble is ever left hanging in mid-air", stranded == 0, stranded)
 check("every shot lands somewhere a bubble can hold on", landed_nowhere == 0, landed_nowhere)
 check("every shot lands within one cell of where it stopped", far_snaps == 0,
       "%d shots snapped further, worst %.0fpx" % (far_snaps, worst_snap))
+
+print("Typing Race (the board must hold still while you type):")
+
+
+class Ruler:
+    """A pretend canvas that can only measure - monospace, 9px a letter."""
+
+    font = ""
+    textAlign = ""
+    fillStyle = ""
+    strokeStyle = ""
+    lineWidth = 0
+
+    def measureText(self, text):          # noqa: N802 - the canvas spells it this way
+        return type("Size", (), {"width": len(text) * 9})()
+
+
+words = typing_race.pick_words(typing_race.WORDS_PER_RACE)
+first = typing_draw.layout_words(Ruler(), words)
+check("every word of the race is laid out", len(first) == len(words),
+      "%d of %d" % (len(first), len(words)))
+
+moved = 0
+for _ in range(len(words)):
+    again = typing_draw.layout_words(Ruler(), words)
+    moved += sum(1 for a, b in zip(first, again)
+                 if a["x"] != b["x"] or a["y"] != b["y"])
+check("no word moves as the race goes on", moved == 0, moved)
+
+typed_top = 190 - 26
+check("the words never reach the typing line",
+      all(item["y"] + 6 <= typed_top for item in first),
+      max(item["y"] for item in first))
+check("and never spill past the margins",
+      all(typing_draw.WORD_LEFT <= item["x"]
+          and item["x"] + item["width"] <= typing_draw.FIELD_WIDTH - typing_draw.WORD_LEFT + 0.01
+          for item in first))
+
+state = typing_race.create_game()
+check("a fresh race has no results yet", state["results"] == [], state["results"])
+state.update({"words": ["alpha", "bravo", "charlie"], "index": 0})
+for word in ("alpha", "XXXXX", "charlie"):
+    state["typed"] = word
+    typing_race.submit_word(state)
+check("the results say which words went wrong",
+      state["results"] == [True, False, True], state["results"])
 
 print("\n%d checks run" % checks)
 print("ALL PYTHON GAME TESTS PASSED" if failures == 0 else "%d TEST(S) FAILED" % failures)
