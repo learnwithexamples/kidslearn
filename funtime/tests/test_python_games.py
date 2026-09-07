@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
-"""Check the Python versions of the three games.
+"""Check the Python versions of the games, rules and drawing.
 
     python3 funtime/tests/test_python_games.py
 
 These are the same checks the JavaScript suites make, written against the
 Python modules in funtime/pylib. The drawing modules are tested too, with a
 pretend canvas that simply counts what it was asked to draw.
+
+Bubble Shooter is here as well, because its Python rules must agree with the
+JavaScript ones that test-bubbles.js watches — and the bug that file exists
+to catch was in both copies at once.
 """
 
+import math
 import pathlib
 import random
 import sys
@@ -21,6 +26,7 @@ import snake_draw                     # noqa: E402
 import snake_rules as snake           # noqa: E402
 import tetris_draw                    # noqa: E402
 import tetris_rules as tetris         # noqa: E402
+import bubbles_rules as bubbles       # noqa: E402
 
 failures = 0
 checks = 0
@@ -300,6 +306,86 @@ race_state = race.create_game()
 race.spawn_car(race_state)
 race_draw.render_game(canvas, race_state)
 check("the racing game draws the road and cars", canvas.calls.get("fillRect", 0) > 20)
+
+print("Bubble Shooter (the rules the workshop never touches):")
+
+
+def held_by_ceiling(grid):
+    """Every bubble that can be reached from the top row."""
+    held, todo = set(), []
+    for column in range(bubbles.COLUMNS):
+        if grid[bubbles.bubble_index(column, 0)] != bubbles.EMPTY:
+            todo.append((column, 0))
+    while todo:
+        column, row = todo.pop()
+        index = bubbles.bubble_index(column, row)
+        if index in held or grid[index] == bubbles.EMPTY:
+            continue
+        held.add(index)
+        todo.extend(bubbles.neighbours(column, row))
+    return held
+
+
+state = bubbles.create_game()
+check("an occupied cell is not free", bubbles.can_stick_here(state, 0, 0) is False)
+check("the cell under a bubble will do", bubbles.can_stick_here(state, 3, 4) is True)
+check("a cell touching nothing will not do", bubbles.can_stick_here(state, 3, 8) is False)
+
+lonely = {"grid": [bubbles.EMPTY] * (bubbles.COLUMNS * bubbles.ROWS)}
+lonely["grid"][bubbles.bubble_index(4, 5)] = 0
+check("nor will a cell that is only diagonal to a bubble",
+      bubbles.can_stick_here(lonely, 5, 6) is False)
+check("the ceiling row is always allowed", bubbles.can_stick_here(lonely, 3, 0) is True)
+
+shots = stranded = landed_nowhere = far_snaps = 0
+worst_snap = 0.0
+real_nearest = bubbles.nearest_free_cell
+
+
+def watched_nearest(state, x, y):
+    """The real thing, with the answer checked on the way past."""
+    global landed_nowhere, far_snaps, worst_snap
+    cell = real_nearest(state, x, y)
+    if cell is not None:
+        if not bubbles.can_stick_here(state, cell[0], cell[1]):
+            landed_nowhere += 1
+        centre = bubbles.bubble_centre(cell[0], cell[1])
+        snap = math.hypot(centre["x"] - x, centre["y"] - y)
+        worst_snap = max(worst_snap, snap)
+        if snap > bubbles.CELL:
+            far_snaps += 1
+    return cell
+
+
+bubbles.nearest_free_cell = watched_nearest
+try:
+    for game_number in range(40):
+        state = bubbles.create_game()
+        for _ in range(60):
+            if state["is_over"]:
+                break
+            state["angle"] = (bubbles.MIN_ANGLE
+                              + random.random() * (bubbles.MAX_ANGLE - bubbles.MIN_ANGLE))
+            if not bubbles.shoot_bubble(state):
+                break
+            shots += 1
+            frames = 0
+            while state["flying"] is not None and frames < 900:
+                bubbles.update_game(state, 16 + random.random() * 24)
+                frames += 1
+            held = held_by_ceiling(state["grid"])
+            for i, kind in enumerate(state["grid"]):
+                if kind != bubbles.EMPTY and i not in held:
+                    stranded += 1
+                    state["grid"][i] = bubbles.EMPTY
+finally:
+    bubbles.nearest_free_cell = real_nearest
+
+check("%d shots fired" % shots, shots > 1000, shots)
+check("no bubble is ever left hanging in mid-air", stranded == 0, stranded)
+check("every shot lands somewhere a bubble can hold on", landed_nowhere == 0, landed_nowhere)
+check("every shot lands within one cell of where it stopped", far_snaps == 0,
+      "%d shots snapped further, worst %.0fpx" % (far_snaps, worst_snap))
 
 print("\n%d checks run" % checks)
 print("ALL PYTHON GAME TESTS PASSED" if failures == 0 else "%d TEST(S) FAILED" % failures)

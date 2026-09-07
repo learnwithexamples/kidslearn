@@ -31,6 +31,12 @@ KIND_COUNT = 5
 EMPTY = -1
 
 SHOT_SPEED = 420
+
+# How far a shot may travel between two collision checks. A whole frame's
+# worth at once is over half a cell, which is enough to carry a fast bubble
+# through a gap, or bury it deep inside the cluster before anything notices -
+# and a bubble that stops deep inside lands nowhere near where it hit.
+MAX_STEP = 4
 MIN_POP = 3
 POINTS_PER_BUBBLE = 10
 POINTS_PER_DROP = 25
@@ -216,17 +222,37 @@ def shoot_bubble(state):
     return True
 
 
-def nearest_free_cell(state, x, y):
-    """Where should a flying bubble stick? A free cell, or None."""
-    over = cell_at_pixel(x, y)
-    if over is not None and state["grid"][bubble_index(over[0], over[1])] == EMPTY:
-        return over
+def can_stick_here(state, column, row):
+    """May a flying bubble stop in this cell?
 
+    ALGORITHM: the cell has to be empty, and it has to have something to hold
+    on to - either it is up on the ceiling row, or one of its four neighbours
+    already holds a bubble.
+
+    WHY the second half matters: without it a shot can stop in a cell that
+    touches nothing at all and hang there in mid-air. Worse, it then belongs
+    to no group, so it can never be popped - it just sits there until
+    something else pops and the falling rule sweeps it away.
+    """
+    if state["grid"][bubble_index(column, row)] != EMPTY:
+        return False
+    if row == 0:
+        return True
+    return any(state["grid"][bubble_index(c, r)] != EMPTY
+               for c, r in neighbours(column, row))
+
+
+def nearest_free_cell(state, x, y):
+    """Where should a flying bubble stick? A cell, or None.
+
+    ALGORITHM: of every cell it COULD stick to, take the one whose middle is
+    closest to where the bubble actually stopped.
+    """
     best = None
     best_distance = 0
     for row in range(ROWS):
         for column in range(COLUMNS):
-            if state["grid"][bubble_index(column, row)] != EMPTY:
+            if not can_stick_here(state, column, row):
                 continue
             centre = bubble_centre(column, row)
             away = math.sqrt((centre["x"] - x) ** 2 + (centre["y"] - y) ** 2)
@@ -299,6 +325,36 @@ def create_game():
     return state
 
 
+def move_shot(state, distance):
+    """Carry the flying bubble along by one small step.
+
+    ALGORITHM: move along the direction it is travelling, bounce off the side
+    walls, then look for a landing. Called over and over with a small
+    distance, so a shot is never checked only after a big jump.
+    """
+    flying = state["flying"]
+    speed = math.sqrt(flying["dx"] ** 2 + flying["dy"] ** 2)
+    if speed == 0:
+        state["flying"] = None
+        return
+
+    flying["x"] += flying["dx"] / speed * distance
+    flying["y"] += flying["dy"] / speed * distance
+
+    # the side walls bounce a shot back - that is how you reach the corners
+    if flying["x"] < BUBBLE_RADIUS:
+        flying["x"] = BUBBLE_RADIUS
+        flying["dx"] = -flying["dx"]
+    if flying["x"] > FIELD_WIDTH - BUBBLE_RADIUS:
+        flying["x"] = FIELD_WIDTH - BUBBLE_RADIUS
+        flying["dx"] = -flying["dx"]
+
+    if flying["y"] < BUBBLE_RADIUS or hits_a_bubble(state, flying["x"], flying["y"]):
+        land_bubble(state)
+    elif flying["y"] > FIELD_HEIGHT:
+        state["flying"] = None
+
+
 def update_game(state, elapsed_ms):
     """One frame of the game."""
     if state["is_over"] or state["is_paused"]:
@@ -311,22 +367,14 @@ def update_game(state, elapsed_ms):
     if state["flying"] is None:
         return
 
-    state["flying"]["x"] += state["flying"]["dx"] * seconds
-    state["flying"]["y"] += state["flying"]["dy"] * seconds
+    # Walk the shot along in small steps, checking as it goes.
+    speed = math.sqrt(state["flying"]["dx"] ** 2 + state["flying"]["dy"] ** 2)
+    togo = speed * seconds
 
-    # the side walls bounce a shot back - that is how you reach the corners
-    if state["flying"]["x"] < BUBBLE_RADIUS:
-        state["flying"]["x"] = BUBBLE_RADIUS
-        state["flying"]["dx"] = -state["flying"]["dx"]
-    if state["flying"]["x"] > FIELD_WIDTH - BUBBLE_RADIUS:
-        state["flying"]["x"] = FIELD_WIDTH - BUBBLE_RADIUS
-        state["flying"]["dx"] = -state["flying"]["dx"]
-
-    if (state["flying"]["y"] < BUBBLE_RADIUS
-            or hits_a_bubble(state, state["flying"]["x"], state["flying"]["y"])):
-        land_bubble(state)
-    elif state["flying"]["y"] > FIELD_HEIGHT:
-        state["flying"] = None
+    while state["flying"] is not None and togo > 0:
+        step = min(MAX_STEP, togo)
+        togo -= step
+        move_shot(state, step)
 
 
 def toggle_pause(state):

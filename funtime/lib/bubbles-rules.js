@@ -29,6 +29,12 @@ const KIND_COUNT = 5;
 const EMPTY = -1;
 
 const SHOT_SPEED = 420;
+
+/* How far a shot may travel between two collision checks. A whole frame's
+   worth at once is over half a cell, which is enough to carry a fast bubble
+   through a gap, or bury it deep inside the cluster before anything notices —
+   and a bubble that stops deep inside lands nowhere near where it hit. */
+const MAX_STEP = 4;
 const MIN_POP = 3;
 const POINTS_PER_BUBBLE = 10;
 const POINTS_PER_DROP = 25;
@@ -275,25 +281,52 @@ function shootBubble(state) {
 }
 
 /**
+ * canStickHere — may a flying bubble stop in this cell?
+ *
+ * INPUT:  state, column, row
+ * OUTPUT: true if a bubble could sit there
+ *
+ * ALGORITHM: the cell has to be empty, and it has to have something to hold
+ *            on to — either it is up on the ceiling row, or one of its four
+ *            neighbours already holds a bubble.
+ *
+ * WHY the second half matters: without it a shot can stop in a cell that
+ *      touches nothing at all and hang there in mid-air. Worse, it then
+ *      belongs to no group, so it can never be popped — it just sits there
+ *      until something else pops and the falling rule sweeps it away.
+ */
+function canStickHere(state, column, row) {
+    if (state.grid[bubbleIndex(column, row)] !== EMPTY) {
+        return false;
+    }
+    if (row === 0) {
+        return true;
+    }
+    const around = neighbours(column, row);
+    for (let i = 0; i < around.length; i++) {
+        if (state.grid[bubbleIndex(around[i].column, around[i].row)] !== EMPTY) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
  * nearestFreeCell — where should a flying bubble stick?
  *
  * INPUT:  state, x, y — where the bubble ended up
- * OUTPUT: a free cell { column, row }, or null if there is nowhere
+ * OUTPUT: a cell { column, row }, or null if there is nowhere at all
  *
- * ALGORITHM: look at the cell it is over. If that is free, use it. If not,
- *            look at the free cell nearest to the bubble's real position.
+ * ALGORITHM: of every cell it COULD stick to, take the one whose middle is
+ *            closest to where the bubble actually stopped.
  */
 function nearestFreeCell(state, x, y) {
-    const over = cellAtPixel(x, y);
-    if (over && state.grid[bubbleIndex(over.column, over.row)] === EMPTY) {
-        return over;
-    }
-
     let best = null;
     let bestDistance = 0;
+
     for (let row = 0; row < ROWS; row++) {
         for (let column = 0; column < COLUMNS; column++) {
-            if (state.grid[bubbleIndex(column, row)] !== EMPTY) { continue; }
+            if (!canStickHere(state, column, row)) { continue; }
             const centre = bubbleCentre(column, row);
             const away = Math.sqrt((centre.x - x) * (centre.x - x) +
                                    (centre.y - y) * (centre.y - y));
@@ -385,6 +418,44 @@ function createGame() {
 }
 
 /**
+ * moveShot — carry the flying bubble along by one small step.
+ *
+ * INPUT:  state, distance — how far to move it, in pixels
+ * OUTPUT: nothing; the shot may land or fall off the bottom
+ *
+ * ALGORITHM: move along the direction it is travelling, bounce off the side
+ *            walls, then look for a landing. Called over and over with a
+ *            small distance, so a shot is never checked only after a big jump.
+ */
+function moveShot(state, distance) {
+    const flying = state.flying;
+    const speed = Math.sqrt(flying.dx * flying.dx + flying.dy * flying.dy);
+    if (speed === 0) {
+        state.flying = null;
+        return;
+    }
+
+    flying.x = flying.x + flying.dx / speed * distance;
+    flying.y = flying.y + flying.dy / speed * distance;
+
+    /* the side walls bounce a shot back — that is how you reach the corners */
+    if (flying.x < BUBBLE_RADIUS) {
+        flying.x = BUBBLE_RADIUS;
+        flying.dx = -flying.dx;
+    }
+    if (flying.x > FIELD_WIDTH - BUBBLE_RADIUS) {
+        flying.x = FIELD_WIDTH - BUBBLE_RADIUS;
+        flying.dx = -flying.dx;
+    }
+
+    if (flying.y < BUBBLE_RADIUS || hitsABubble(state, flying.x, flying.y)) {
+        landBubble(state);
+    } else if (flying.y > FIELD_HEIGHT) {
+        state.flying = null;
+    }
+}
+
+/**
  * updateGame — one frame of the game.
  * INPUT: state, elapsedMs. OUTPUT: nothing.
  */
@@ -402,23 +473,15 @@ function updateGame(state, elapsedMs) {
         return;
     }
 
-    state.flying.x = state.flying.x + state.flying.dx * seconds;
-    state.flying.y = state.flying.y + state.flying.dy * seconds;
+    /* Walk the shot along in small steps, checking as it goes. */
+    const speed = Math.sqrt(state.flying.dx * state.flying.dx +
+                            state.flying.dy * state.flying.dy);
+    let togo = speed * seconds;
 
-    /* the side walls bounce a shot back — that is how you reach the corners */
-    if (state.flying.x < BUBBLE_RADIUS) {
-        state.flying.x = BUBBLE_RADIUS;
-        state.flying.dx = -state.flying.dx;
-    }
-    if (state.flying.x > FIELD_WIDTH - BUBBLE_RADIUS) {
-        state.flying.x = FIELD_WIDTH - BUBBLE_RADIUS;
-        state.flying.dx = -state.flying.dx;
-    }
-
-    if (state.flying.y < BUBBLE_RADIUS || hitsABubble(state, state.flying.x, state.flying.y)) {
-        landBubble(state);
-    } else if (state.flying.y > FIELD_HEIGHT) {
-        state.flying = null;
+    while (state.flying !== null && togo > 0) {
+        const step = togo > MAX_STEP ? MAX_STEP : togo;
+        togo = togo - step;
+        moveShot(state, step);
     }
 }
 
