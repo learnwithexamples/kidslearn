@@ -25,6 +25,7 @@ const SUITES = [
     ['Racing — page wiring', 'test-race-dom.js'],
     ['Racing — workshop steps', 'test-race-steps.js'],
     ['Racing — workshop page', 'test-race-build.js'],
+    ['Xbox controller support', 'test-gamepad.js'],
     ['Every JS workshop — steps', 'test-js-steps.js'],
     ['Every JS workshop — played through', 'test-js-workshops.js']
 ];

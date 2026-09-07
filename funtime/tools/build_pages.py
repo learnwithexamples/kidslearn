@@ -136,6 +136,14 @@ def padded_row(row, columns):
     return [None] * left + list(row) + [None] * (missing - left)
 
 
+# Every page loads this. It is the whole of the Xbox-controller support: it
+# turns the pad into key presses, so no game has to know it exists.
+GAMEPAD_SCRIPT = (
+    "    <!-- An Xbox controller, for anyone who has one. No driver needed. -->\n"
+    '    <script src="lib/gamepad.js"></script>\n'
+)
+
+
 def touchpad_html(spec):
     """The on-screen buttons under the board."""
     rows = spec.get("touchpad", [])
@@ -154,10 +162,31 @@ def touchpad_html(spec):
             % columns) + "\n".join(cells) + "\n            </div>\n"
 
 
+# The two typing games cannot be played on a controller: you cannot type
+# twenty-six letters with eight buttons. Every other game can.
+KEYBOARD_ONLY = ("hangman", "typing")
+
+GAMEPAD_HELP = ('🎮 <strong>Xbox controller?</strong> Just plug it in or pair it — '
+                'the stick and D-pad are the arrow keys, <strong>A</strong> is '
+                '<span class="key">SPACE</span>, <strong>Menu</strong> pauses and '
+                '<strong>View</strong> starts again')
+
+GAMEPAD_HELP_TYPING = ('🎮 <strong>Xbox controller?</strong> Not this one, sorry — '
+                       'this game is about typing letters, and a controller has no '
+                       'letters on it. Every other game takes a pad.')
+
+
 def help_html(spec):
-    """The three cards explaining the game."""
+    """The three cards explaining the game.
+
+    The first card is always the controls, so the line about the controller is
+    added there — one place, rather than in all twenty-four descriptions.
+    """
     cards = []
-    for title, items in spec["help"]:
+    for index, (title, items) in enumerate(spec["help"]):
+        if index == 0:
+            note = GAMEPAD_HELP_TYPING if spec["slug"] in KEYBOARD_ONLY else GAMEPAD_HELP
+            items = list(items) + [note]
         lines = "\n".join("                        <li>%s</li>" % item for item in items)
         cards.append('''                <div class="help-card">
                     <h3>%s</h3>
@@ -225,7 +254,7 @@ def build_game_page(spec, python=False):
         });
     </script>
 ''' % (", ".join("'" + name + "'" for name in spec["py_files"]),
-       slug.replace("-", "_"), slug.replace("-", "_"))
+       slug.replace("-", "_"), slug.replace("-", "_")) + GAMEPAD_SCRIPT
         coder = '''            <div class="coder-box">
                 <h3>🧑‍💻 This whole game is Python</h3>
                 <p>There is almost no JavaScript on this page. The browser downloaded <strong>Pyodide</strong> — a complete Python interpreter compiled to WebAssembly — and then ran the <code>.py</code> files in <code>funtime/pylib/</code>. Python does the rules, the maths <em>and</em> the drawing.</p>
@@ -237,7 +266,8 @@ def build_game_page(spec, python=False):
 ''' % (file_table(spec["py_coder_rows"]), slug, slug.replace("-", "_"), slug, spec["name"])
     else:
         scripts = "    <!-- The libraries, in the order they need each other -->\n" + \
-                  "\n".join('    <script src="lib/%s"></script>' % name for name in spec["js_files"]) + "\n"
+                  "\n".join('    <script src="lib/%s"></script>' % name for name in spec["js_files"]) + \
+                  "\n" + GAMEPAD_SCRIPT
         coder = '''            <div class="coder-box">
                 <h3>🧑‍💻 For young coders: build this game yourself</h3>
                 <p>This game is split into small library files inside <code>funtime/lib/</code>, and every function has a comment saying exactly what goes <strong>in</strong>, what comes <strong>out</strong>, and the <strong>algorithm</strong> in plain English. Empty any function out, read its comment, and write it yourself.</p>
@@ -315,7 +345,7 @@ def build_workshop_page(spec, python=False):
         });
     </script>
 ''' % (slug, slug, spec["py_steps_const"], slug.replace("-", "_"), slug.replace("-", "_"),
-       ", ".join("'" + name + "'" for name in spec["py_workshop_files"]))
+       ", ".join("'" + name + "'" for name in spec["py_workshop_files"])) + GAMEPAD_SCRIPT
         other = '<a href="%s-build.html">the JavaScript version</a>' % slug
         play = '<a href="%s-python.html">%s %s in Python</a>' % (slug, spec["icon"], spec["name"])
     else:
@@ -324,6 +354,8 @@ def build_workshop_page(spec, python=False):
     <script src="lib/workshop.js"></script>
     <script src="lib/%s-steps.js"></script>
     <script src="lib/%s-build.js"></script>
+    <!-- An Xbox controller, for anyone who has one. No driver needed. -->
+    <script src="lib/gamepad.js"></script>
 ''' % (slug, slug)
         other = '<a href="%s-python-build.html">the Python version</a>' % slug
         play = '<a href="%s.html">%s %s</a>' % (slug, spec["icon"], spec["name"])
@@ -488,6 +520,24 @@ def build_hub():
 <body>
     <div class="container">
 %s
+
+        <div class="help-card" style="margin-top: 40px;">
+            <h3>🎮 Playing with an Xbox controller</h3>
+            <ul>
+                <li>Nothing to install. Plug the controller in with a USB cable, or hold
+                    its pairing button and add it under <strong>System Settings →
+                    Bluetooth</strong>.</li>
+                <li>Open any game and <strong>press a button on the pad</strong> — a
+                    little <em>🎮 Controller ready</em> badge appears in the corner.</li>
+                <li>The stick and the D-pad are the arrow keys, <strong>A</strong> is
+                    <span class="key">SPACE</span>, <strong>Menu</strong> pauses and
+                    <strong>View</strong> starts again.</li>
+                <li>The keyboard keeps working at the same time, so two people can share
+                    a game — one on the pad, one on the keys.</li>
+                <li>The two typing games — Hangman and Typing Race — need a keyboard, for
+                    the obvious reason.</li>
+            </ul>
+        </div>
 
         <footer>
             <p>Play hard, learn hard — then build the games yourself. 🌟</p>
