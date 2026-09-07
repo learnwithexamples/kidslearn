@@ -24,6 +24,7 @@ const BULLET_SPEED = 320;
 const BULLET_LIFE = 1.1;        /* seconds before a shot fizzles out */
 const MAX_BULLETS = 4;
 
+const ROCK_CORNERS = 9;         /* how many corners a rock's outline has */
 const BIG_ROCK = 3;
 const ROCK_RADIUS = { 3: 26, 2: 16, 1: 9 };
 const ROCK_SCORE = { 3: 20, 2: 50, 1: 100 };
@@ -94,6 +95,63 @@ function touches(a, b, radiusA, radiusB) {
 }
 
 /**
+ * speedOf — how fast is this thing going, in total?
+ *
+ * INPUT:  thing — anything with a dx and a dy
+ * OUTPUT: its speed in pixels per second
+ *
+ * ALGORITHM: Pythagoras again. dx and dy are the two short sides of a right
+ *            triangle and the speed is the long one — exactly the same sum as
+ *            distanceBetween, asked about a SPEED rather than a place.
+ */
+function speedOf(thing) {
+    return Math.sqrt(thing.dx * thing.dx + thing.dy * thing.dy);
+}
+
+/**
+ * clampSpeed — put a ceiling on how fast something may travel.
+ *
+ * INPUT:  thing — with dx and dy. limit — the fastest it may go.
+ * OUTPUT: true if it had to be slowed down
+ *
+ * ALGORITHM: work out the speed. If it is over the limit, scale BOTH dx and
+ *            dy by the same fraction — limit ÷ speed. Scaling both by the
+ *            same amount is what keeps the direction unchanged; the ship
+ *            slows down without being nudged off course.
+ */
+function clampSpeed(thing, limit) {
+    const speed = speedOf(thing);
+    if (speed <= limit) {
+        return false;
+    }
+    thing.dx = thing.dx / speed * limit;
+    thing.dy = thing.dy / speed * limit;
+    return true;
+}
+
+/**
+ * turnShip — swing the nose round.
+ *
+ * INPUT:  ship. turning — -1, 0 or 1. seconds.
+ * OUTPUT: nothing; it changes ship.angle
+ *
+ * ALGORITHM: add turning × TURN_SPEED × seconds, then fold the answer back
+ *            into the range -π to π.
+ *
+ * WHY fold it: spin one way for five minutes and the angle would climb into
+ *      the thousands. cos and sin would still work, but every number you
+ *      printed would be nonsense and comparing two angles would get hard. The
+ *      double % is the usual trick — the first can give a negative answer, so
+ *      the second one straightens it out.
+ */
+function turnShip(ship, turning, seconds) {
+    const whole = Math.PI * 2;
+    let angle = ship.angle + turning * TURN_SPEED * seconds;
+    angle = ((angle + Math.PI) % whole + whole) % whole - Math.PI;
+    ship.angle = angle;
+}
+
+/**
  * thrustShip — push the ship along the way it is pointing.
  *
  * INPUT:  ship. seconds — how long this frame took.
@@ -111,12 +169,26 @@ function touches(a, b, radiusA, radiusB) {
 function thrustShip(ship, seconds) {
     ship.dx = ship.dx + Math.cos(ship.angle) * THRUST * seconds;
     ship.dy = ship.dy + Math.sin(ship.angle) * THRUST * seconds;
+    clampSpeed(ship, MAX_SPEED);
+}
 
-    const speed = Math.sqrt(ship.dx * ship.dx + ship.dy * ship.dy);
-    if (speed > MAX_SPEED) {
-        ship.dx = ship.dx / speed * MAX_SPEED;
-        ship.dy = ship.dy / speed * MAX_SPEED;
-    }
+/**
+ * driftShip — space is not quite empty.
+ *
+ * INPUT:  ship, seconds
+ * OUTPUT: nothing; it slows the ship a little
+ *
+ * ALGORITHM: multiply the speed by a shade less than 1. Note it is
+ *            (1 - rate × seconds) rather than a flat 0.99: tie it to the time
+ *            and the ship drifts the same on a fast computer and a slow one.
+ *
+ * Real space would not do this. The game does, because a ship that never
+ *            slows down is exhausting to fly.
+ */
+function driftShip(ship, seconds) {
+    const slow = 1 - DRIFT_SLOWDOWN * seconds;
+    ship.dx = ship.dx * slow;
+    ship.dy = ship.dy * slow;
 }
 
 /**
@@ -130,22 +202,57 @@ function thrustShip(ship, seconds) {
  *            is pointing — PLUS the ship's own speed, so a shot fired while
  *            flying forwards really does go faster.
  */
+function makeBullet(ship) {
+    const nose = pointFrom(ship.x, ship.y, ship.angle, SHIP_RADIUS + 3);
+    const flight = pointFrom(0, 0, ship.angle, BULLET_SPEED);
+
+    return {
+        x: nose.x,
+        y: nose.y,
+        dx: flight.x + ship.dx,
+        dy: flight.y + ship.dy,
+        life: BULLET_LIFE
+    };
+}
+
+/**
+ * fireBullet — shoot, if the rules allow it.
+ *
+ * INPUT:  state
+ * OUTPUT: true if a shot was fired
+ *
+ * ALGORITHM: three reasons to refuse — the game is over, it is paused, or
+ *            there are already MAX_BULLETS in the air. Otherwise make one and
+ *            add it to the list.
+ */
 function fireBullet(state) {
     if (state.isOver || state.isPaused || state.bullets.length >= MAX_BULLETS) {
         return false;
     }
-    const nose = pointFrom(state.ship.x, state.ship.y, state.ship.angle, SHIP_RADIUS + 3);
-    const flight = pointFrom(0, 0, state.ship.angle, BULLET_SPEED);
-
-    state.bullets.push({
-        x: nose.x,
-        y: nose.y,
-        dx: flight.x + state.ship.dx,
-        dy: flight.y + state.ship.dy,
-        life: BULLET_LIFE
-    });
+    state.bullets.push(makeBullet(state.ship));
     state.shots = state.shots + 1;
     return true;
+}
+
+/**
+ * ageBullets — a shot does not fly for ever.
+ *
+ * INPUT:  bullets — the list. seconds.
+ * OUTPUT: a NEW list, holding only the ones still alive
+ *
+ * ALGORITHM: take the time off every bullet's life, and keep the ones with
+ *            anything left. Without this the screen slowly fills with old
+ *            shots and you could clear a wave without aiming.
+ */
+function ageBullets(bullets, seconds) {
+    const flying = [];
+    for (let i = 0; i < bullets.length; i++) {
+        bullets[i].life = bullets[i].life - seconds;
+        if (bullets[i].life > 0) {
+            flying.push(bullets[i]);
+        }
+    }
+    return flying;
 }
 
 /**
@@ -161,6 +268,32 @@ function makeRock(x, y, size) {
         spin: (Math.random() - 0.5) * 2,
         wobble: Math.floor(Math.random() * 1000)
     };
+}
+
+/**
+ * rockPoints — the corners of one rock's outline.
+ *
+ * INPUT:  rock
+ * OUTPUT: a list of ROCK_CORNERS points, all the way round
+ *
+ * ALGORITHM: walk right round the circle in equal steps. At each step push
+ *            the corner in or out a little, so the rock is lumpy rather than
+ *            a perfect circle. The wobble number decides how — so every rock
+ *            has its own shape, and always the same one.
+ *
+ * This is the drawing turned into DATA. The picture is then just "join these
+ * points up", which is a great deal easier to test than a drawing.
+ */
+function rockPoints(rock) {
+    const radius = ROCK_RADIUS[rock.size];
+    const points = [];
+
+    for (let i = 0; i < ROCK_CORNERS; i++) {
+        const angle = i / ROCK_CORNERS * Math.PI * 2 + rock.wobble;
+        const lumpy = radius * (0.78 + 0.22 * Math.abs(Math.sin(i * 2.3 + rock.wobble)));
+        points.push(pointFrom(rock.x, rock.y, angle, lumpy));
+    }
+    return points;
 }
 
 /**
@@ -292,13 +425,11 @@ function updateGame(state, elapsedMs) {
     }
     const seconds = elapsedMs / 1000;
 
-    state.ship.angle = state.ship.angle + state.turning * TURN_SPEED * seconds;
+    turnShip(state.ship, state.turning, seconds);
     if (state.thrusting) {
         thrustShip(state.ship, seconds);
     } else {
-        const slow = 1 - DRIFT_SLOWDOWN * seconds;
-        state.ship.dx = state.ship.dx * slow;
-        state.ship.dy = state.ship.dy * slow;
+        driftShip(state.ship, seconds);
     }
     moveThing(state.ship, seconds);
 
@@ -307,14 +438,10 @@ function updateGame(state, elapsedMs) {
         state.rocks[i].wobble = state.rocks[i].wobble + state.rocks[i].spin * seconds;
     }
 
-    const flying = [];
     for (let i = 0; i < state.bullets.length; i++) {
-        const bullet = state.bullets[i];
-        moveThing(bullet, seconds);
-        bullet.life = bullet.life - seconds;
-        if (bullet.life > 0) { flying.push(bullet); }
+        moveThing(state.bullets[i], seconds);
     }
-    state.bullets = flying;
+    state.bullets = ageBullets(state.bullets, seconds);
 
     hitRocks(state);
 

@@ -7,7 +7,7 @@ filling in pixels, which is why everything in this game is an outline.
 import math
 
 from asteroids_rules import (FIELD_WIDTH, FIELD_HEIGHT, SHIP_RADIUS,
-                            ROCK_RADIUS, point_from)
+                            ROCK_RADIUS, point_from, rock_points)
 
 COLOR_INK = "#111111"
 COLOR_PAPER = "#ffffff"
@@ -81,21 +81,17 @@ def draw_shield(ctx, ship):
 def draw_rock(ctx, rock):
     """A lumpy outlined circle.
 
-    ALGORITHM: walk right round the circle in nine steps, pushing each point
-    in or out a little. The wobble number decides how, so every rock is a
-    different shape but always the same shape.
+    ALGORITHM: ask rock_points for the corners, then join them up. The shape
+    is worked out in the rules, so the drawing has no maths in it at all - and
+    the shape can be tested without drawing anything.
     """
-    radius = ROCK_RADIUS[rock["size"]]
-    points = 9
+    corners = rock_points(rock)
 
     ctx.strokeStyle = COLOR_INK
     ctx.fillStyle = COLOR_PAPER
     ctx.lineWidth = 2
     ctx.beginPath()
-    for i in range(points):
-        angle = i / points * math.pi * 2 + rock["wobble"]
-        lumpy = radius * (0.78 + 0.22 * abs(math.sin(i * 2.3 + rock["wobble"])))
-        spot = point_from(rock["x"], rock["y"], angle, lumpy)
+    for i, spot in enumerate(corners):
         if i == 0:
             ctx.moveTo(spot["x"], spot["y"])
         else:

@@ -56,6 +56,13 @@ code { background: #eee; color: #111; padding: 2px 6px; border-radius: 3px; font
 .score-table th, .score-table td { border: 1px solid #111; padding: 5px 12px; font-family: monospace; }
 .score-table th { background: #111; color: #fff; }
 
+/* ---- drawings inside a step ---- */
+.step-figure { margin: 18px 0; text-align: center; }
+.step-figure svg { max-width: 100%; height: auto; background: #fff;
+                   border: 2px solid #111; }
+.step-figure figcaption { font-family: monospace; font-size: 0.84em; color: #555;
+                          margin-top: 7px; line-height: 1.5; }
+
 /* ---- editor ---- */
 #code-editor {
     width: 100%; min-height: 260px; font-family: 'Menlo', 'Consolas', monospace;

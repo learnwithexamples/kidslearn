@@ -53,7 +53,7 @@ SPEC = dict(
          "<code>do_action</code>, <code>on_key_down</code>, <code>frame</code>"),
     ],
     big_idea="<code>cos</code> and <code>sin</code> turn <strong>a direction into a place</strong>. Give them an angle and a distance and they tell you exactly where you end up. Learn that one function and you can point, aim, orbit and steer in any game you ever write.",
-    step_count=5,
+    step_count=20,
     py_steps_const="ASTEROIDS_PYTHON_STEPS",
     next_challenge="add a flying saucer that shoots back, give the ship a hyperspace jump to somewhere random, or make the rocks bounce off each other.",
     footer="Space has no brakes. 🚀",

@@ -26,6 +26,7 @@ BULLET_SPEED = 320
 BULLET_LIFE = 1.1
 MAX_BULLETS = 4
 
+ROCK_CORNERS = 9            # how many corners a rock's outline has
 BIG_ROCK = 3
 ROCK_RADIUS = {3: 26, 2: 16, 1: 9}
 ROCK_SCORE = {3: 20, 2: 50, 1: 100}
@@ -84,6 +85,64 @@ def touches(a, b, radius_a, radius_b):
     return distance_between(a, b) < radius_a + radius_b
 
 
+def speed_of(thing):
+    """How fast is this thing going, in total?
+
+    ALGORITHM: Pythagoras again. dx and dy are the two short sides of a right
+    triangle and the speed is the long one - exactly the same sum as
+    distance_between, asked about a SPEED rather than a place.
+    """
+    return math.sqrt(thing["dx"] ** 2 + thing["dy"] ** 2)
+
+
+def clamp_speed(thing, limit):
+    """Put a ceiling on how fast something may travel.
+
+    OUTPUT: True if it had to be slowed down.
+    ALGORITHM: work out the speed. If it is over the limit, scale BOTH dx and
+    dy by the same fraction - limit / speed. Scaling both by the same amount
+    is what keeps the direction unchanged; the ship slows down without being
+    nudged off course.
+    """
+    speed = speed_of(thing)
+    if speed <= limit:
+        return False
+    thing["dx"] = thing["dx"] / speed * limit
+    thing["dy"] = thing["dy"] / speed * limit
+    return True
+
+
+def turn_ship(ship, turning, seconds):
+    """Swing the nose round.
+
+    ALGORITHM: add turning x TURN_SPEED x seconds, then fold the answer back
+    into the range -pi to pi.
+
+    WHY fold it: spin one way for five minutes and the angle would climb into
+    the thousands. cos and sin would still work, but every number you printed
+    would be nonsense. Python's % always returns a positive answer, which
+    makes this tidier here than it is in JavaScript.
+    """
+    whole = math.pi * 2
+    angle = ship["angle"] + turning * TURN_SPEED * seconds
+    ship["angle"] = (angle + math.pi) % whole - math.pi
+
+
+def drift_ship(ship, seconds):
+    """Space is not quite empty.
+
+    ALGORITHM: multiply the speed by a shade less than 1. Note it is
+    (1 - rate x seconds) rather than a flat 0.99: tie it to the time and the
+    ship drifts the same on a fast computer and a slow one.
+
+    Real space would not do this. The game does, because a ship that never
+    slows down is exhausting to fly.
+    """
+    slow = 1 - DRIFT_SLOWDOWN * seconds
+    ship["dx"] *= slow
+    ship["dy"] *= slow
+
+
 def thrust_ship(ship, seconds):
     """Push the ship along the way it is pointing.
 
@@ -97,34 +156,56 @@ def thrust_ship(ship, seconds):
     ship["dx"] += math.cos(ship["angle"]) * THRUST * seconds
     ship["dy"] += math.sin(ship["angle"]) * THRUST * seconds
 
-    speed = math.sqrt(ship["dx"] ** 2 + ship["dy"] ** 2)
-    if speed > MAX_SPEED:
-        ship["dx"] = ship["dx"] / speed * MAX_SPEED
-        ship["dy"] = ship["dy"] / speed * MAX_SPEED
+    clamp_speed(ship, MAX_SPEED)
+
+
+def make_bullet(ship):
+    """One shot, leaving the nose of the ship.
+
+    ALGORITHM: the shot starts at the NOSE, not the middle, or you would shoot
+    yourself. It flies at BULLET_SPEED in the direction the ship is pointing -
+    PLUS the ship's own speed, so a shot fired while racing forwards really
+    does travel faster.
+    """
+    nose = point_from(ship["x"], ship["y"], ship["angle"], SHIP_RADIUS + 3)
+    flight = point_from(0, 0, ship["angle"], BULLET_SPEED)
+
+    return {
+        "x": nose["x"],
+        "y": nose["y"],
+        "dx": flight["x"] + ship["dx"],
+        "dy": flight["y"] + ship["dy"],
+        "life": BULLET_LIFE,
+    }
 
 
 def fire_bullet(state):
-    """Shoot from the nose of the ship.
+    """Shoot, if the rules allow it.
 
-    ALGORITHM: the shot starts at the nose, not the middle, or you would shoot
-    yourself. It travels at BULLET_SPEED in the direction the ship is pointing
-    - PLUS the ship's own speed.
+    ALGORITHM: three reasons to refuse - the game is over, it is paused, or
+    there are already MAX_BULLETS in the air.
     """
     if state["is_over"] or state["is_paused"] or len(state["bullets"]) >= MAX_BULLETS:
         return False
-    nose = point_from(state["ship"]["x"], state["ship"]["y"],
-                      state["ship"]["angle"], SHIP_RADIUS + 3)
-    flight = point_from(0, 0, state["ship"]["angle"], BULLET_SPEED)
-
-    state["bullets"].append({
-        "x": nose["x"],
-        "y": nose["y"],
-        "dx": flight["x"] + state["ship"]["dx"],
-        "dy": flight["y"] + state["ship"]["dy"],
-        "life": BULLET_LIFE,
-    })
+    state["bullets"].append(make_bullet(state["ship"]))
     state["shots"] += 1
     return True
+
+
+def age_bullets(bullets, seconds):
+    """A shot does not fly for ever.
+
+    OUTPUT: a NEW list, holding only the ones still alive.
+    ALGORITHM: take the time off every bullet's life, and keep the ones with
+    anything left. Without this the screen slowly fills with old shots and you
+    could clear a wave without aiming.
+    """
+    flying = []
+    for bullet in bullets:
+        bullet["life"] -= seconds
+        if bullet["life"] > 0:
+            flying.append(bullet)
+    return flying
 
 
 def make_rock(x, y, size):
@@ -137,6 +218,28 @@ def make_rock(x, y, size):
         "spin": random.uniform(-1, 1),
         "wobble": random.randrange(1000),
     }
+
+
+def rock_points(rock):
+    """The corners of one rock's outline.
+
+    OUTPUT: a list of ROCK_CORNERS points, all the way round.
+    ALGORITHM: walk right round the circle in equal steps. At each step push
+    the corner in or out a little, so the rock is lumpy rather than a perfect
+    circle. The wobble number decides how - so every rock has its own shape,
+    and always the same one.
+
+    This is the drawing turned into DATA. The picture is then just "join these
+    points up", which is a great deal easier to test than a drawing.
+    """
+    radius = ROCK_RADIUS[rock["size"]]
+    points = []
+
+    for i in range(ROCK_CORNERS):
+        angle = i / ROCK_CORNERS * math.pi * 2 + rock["wobble"]
+        lumpy = radius * (0.78 + 0.22 * abs(math.sin(i * 2.3 + rock["wobble"])))
+        points.append(point_from(rock["x"], rock["y"], angle, lumpy))
+    return points
 
 
 def split_rock(rock):
@@ -241,26 +344,20 @@ def update_game(state, elapsed_ms):
         return
     seconds = elapsed_ms / 1000
 
-    state["ship"]["angle"] += state["turning"] * TURN_SPEED * seconds
+    turn_ship(state["ship"], state["turning"], seconds)
     if state["thrusting"]:
         thrust_ship(state["ship"], seconds)
     else:
-        slow = 1 - DRIFT_SLOWDOWN * seconds
-        state["ship"]["dx"] *= slow
-        state["ship"]["dy"] *= slow
+        drift_ship(state["ship"], seconds)
     move_thing(state["ship"], seconds)
 
     for rock in state["rocks"]:
         move_thing(rock, seconds)
         rock["wobble"] += rock["spin"] * seconds
 
-    flying = []
     for bullet in state["bullets"]:
         move_thing(bullet, seconds)
-        bullet["life"] -= seconds
-        if bullet["life"] > 0:
-            flying.append(bullet)
-    state["bullets"] = flying
+    state["bullets"] = age_bullets(state["bullets"], seconds)
 
     hit_rocks(state)
 

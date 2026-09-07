@@ -38,7 +38,8 @@ let failed = 0;
 /* The Python versions of the games are checked by Python itself. */
 const PYTHON_SUITES = [
     ['Python games — rules & drawing', 'test_python_games.py'],
-    ['Python workshops — every step', 'test_python_steps.py']
+    ['Python workshops — every step', 'test_python_steps.py'],
+    ['Python workshops — every demo', 'test_python_demos.py']
 ];
 
 SUITES.forEach(function (suite) {

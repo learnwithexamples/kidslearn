@@ -79,23 +79,23 @@ function drawShield(ctx, ship) {
 
 /**
  * drawRock — a lumpy outlined circle.
- * ALGORITHM: walk right round the circle in nine steps, pushing each point in
- *            or out a little. The wobble number decides how, so every rock is
- *            a different shape but always the same shape.
+ * ALGORITHM: ask rockPoints for the corners, then join them up. The shape is
+ *            worked out in the rules, so the drawing has no maths in it at
+ *            all — and the shape can be tested without drawing anything.
  */
 function drawRock(ctx, rock) {
-    const radius = ROCK_RADIUS[rock.size];
-    const points = 9;
+    const corners = rockPoints(rock);
 
     ctx.strokeStyle = COLOR_INK;
     ctx.fillStyle = COLOR_PAPER;
     ctx.lineWidth = 2;
     ctx.beginPath();
-    for (let i = 0; i < points; i++) {
-        const angle = i / points * Math.PI * 2 + rock.wobble;
-        const lumpy = radius * (0.78 + 0.22 * Math.abs(Math.sin(i * 2.3 + rock.wobble)));
-        const spot = pointFrom(rock.x, rock.y, angle, lumpy);
-        if (i === 0) { ctx.moveTo(spot.x, spot.y); } else { ctx.lineTo(spot.x, spot.y); }
+    for (let i = 0; i < corners.length; i++) {
+        if (i === 0) {
+            ctx.moveTo(corners[i].x, corners[i].y);
+        } else {
+            ctx.lineTo(corners[i].x, corners[i].y);
+        }
     }
     ctx.closePath();
     ctx.fill();

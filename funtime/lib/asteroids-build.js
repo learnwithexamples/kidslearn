@@ -1,5 +1,10 @@
 /* ============================================================
    asteroids-build.js — the Asteroids workshop's demos
+
+   Twenty steps need more than one practice field, so there are nine. Each one
+   shows the least it can get away with: the step about angles has no rocks in
+   it at all, the step about bullets has nothing to shoot. Fewer moving parts
+   means a student can actually see what their function just did.
    ============================================================ */
 
 (function () {
@@ -7,9 +12,22 @@
 
     const SCALE = 0.66;
 
+    /* Kinds that are just the ship flying about, with nothing to hit. */
+    const OPEN_SKY = ['angles', 'measure', 'drift', 'shoot'];
+
     let demo = null;
     let demoKind = 'angles';
     let demoFlags = {};
+
+    function isOpenSky() { return OPEN_SKY.indexOf(demoKind) !== -1; }
+
+    /** stillRock — a rock that stays put, so a demo can be read slowly. */
+    function stillRock(x, y, size) {
+        const rock = makeRock(x, y, size);
+        rock.dx = 0;
+        rock.dy = 0;
+        return rock;
+    }
 
     /** startDemo — build whatever the current step wants to show. */
     function startDemo(step) {
@@ -17,14 +35,21 @@
         demoFlags = (step.demo && step.demo.flags) || {};
 
         demo = createGame();
-        if (demoKind === 'angles' || demoKind === 'drift') {
+
+        if (isOpenSky()) {
             demo.rocks = [];
             demo.shield = 0;
+            if (demoKind === 'measure') {
+                demo.rocks = [stillRock(250, 110, 3)];
+            }
+        } else if (demoKind === 'rock') {
+            demo.shield = 0;
+            demo.rocks = [stillRock(FIELD_WIDTH / 2, FIELD_HEIGHT / 2, 3)];
         } else if (demoKind === 'split') {
-            const rock = makeRock(FIELD_WIDTH / 2, 110, 3);
-            rock.dx = 0;
-            rock.dy = 0;
-            demo.rocks = [rock];
+            demo.rocks = [stillRock(FIELD_WIDTH / 2, 110, 3)];
+        } else if (demoKind === 'wave') {
+            demo.wave = 1;
+            startWave(demo);
         }
     }
 
@@ -45,32 +70,108 @@
         if (Math.abs(turn) < 0.12) { fireBullet(state); }
     }
 
+    /** flyShip — the ship's own frame: turn, thrust or drift, move. */
+    function flyShip(seconds) {
+        turnShip(demo.ship, demo.turning, seconds);
+        if (demo.thrusting) { thrustShip(demo.ship, seconds); } else { driftShip(demo.ship, seconds); }
+        moveThing(demo.ship, seconds);
+    }
+
+    /** flyBullets — carry the shots along and let the spent ones fade. */
+    function flyBullets(seconds) {
+        demo.bullets.forEach(function (bullet) { moveThing(bullet, seconds); });
+        demo.bullets = ageBullets(demo.bullets, seconds);
+    }
+
     /** updateDemo — one frame of whichever practice field is showing. */
     function updateDemo(elapsed) {
         const seconds = elapsed / 1000;
 
-        if (demoKind === 'angles' || demoKind === 'drift') {
-            demo.ship.angle = demo.ship.angle + demo.turning * TURN_SPEED * seconds;
-            if (demo.thrusting) { thrustShip(demo.ship, seconds); }
-            moveThing(demo.ship, seconds);
-            demo.bullets.forEach(function (bullet) {
-                moveThing(bullet, seconds);
-                bullet.life = bullet.life - seconds;
+        if (isOpenSky()) {
+            flyShip(seconds);
+            flyBullets(seconds);
+
+        } else if (demoKind === 'rock') {
+            demo.rocks.forEach(function (rock) { rock.wobble = rock.wobble + rock.spin * seconds; });
+
+        } else if (demoKind === 'wave') {
+            demo.rocks.forEach(function (rock) {
+                moveThing(rock, seconds);
+                rock.wobble = rock.wobble + rock.spin * seconds;
             });
-            demo.bullets = demo.bullets.filter(function (b) { return b.life > 0; });
 
         } else if (demoKind === 'split') {
-            demo.bullets.forEach(function (bullet) {
-                moveThing(bullet, seconds);
-                bullet.life = bullet.life - seconds;
-            });
-            demo.bullets = demo.bullets.filter(function (b) { return b.life > 0; });
+            flyBullets(seconds);
             hitRocks(demo);
 
         } else if (demoKind === 'game' || demoKind === 'final') {
             if (demoFlags.robot) { robotPilot(demo); }
             updateGame(demo, elapsed);
             if (demo.isOver) { startDemo({ demo: { kind: demoKind, flags: demoFlags } }); }
+        }
+    }
+
+    /** dashedLine — the measuring line the geometry demos draw. */
+    function dashedLine(ctx, from, to) {
+        ctx.strokeStyle = '#111111';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.moveTo(from.x, from.y);
+        ctx.lineTo(to.x, to.y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+    }
+
+    /** markCorners — a dot on every point rockPoints handed back. */
+    function markCorners(ctx, rock) {
+        ctx.fillStyle = '#111111';
+        rockPoints(rock).forEach(function (point) {
+            ctx.beginPath();
+            ctx.arc(point.x, point.y, 2.5, 0, Math.PI * 2);
+            ctx.fill();
+        });
+    }
+
+    /** describe — the line of words under the canvas, per demo kind. */
+    function describe(setNote) {
+        const ship = demo.ship;
+
+        if (demoKind === 'angles') {
+            const nose = pointFrom(ship.x, ship.y, ship.angle, 60);
+            setNote('angle ' + ship.angle.toFixed(2) + '  →  60 pixels ahead is x ' +
+                    Math.round(nose.x) + ', y ' + Math.round(nose.y));
+
+        } else if (demoKind === 'measure') {
+            const rock = demo.rocks[0];
+            const gap = distanceBetween(ship, rock);
+            const hit = touches(ship, rock, SHIP_RADIUS, ROCK_RADIUS[rock.size]);
+            setNote('distanceBetween → ' + gap.toFixed(1) + '   •   touches → ' +
+                    (hit ? 'TRUE, they overlap' : 'false, still clear'));
+
+        } else if (demoKind === 'drift') {
+            setNote('x ' + Math.round(ship.x) + '  y ' + Math.round(ship.y) +
+                    '   speedOf → ' + Math.round(speedOf(ship)) + ' px/s  (limit ' + MAX_SPEED + ')');
+
+        } else if (demoKind === 'shoot') {
+            setNote(demo.bullets.length + ' of ' + MAX_BULLETS + ' shots in the air   •   ' +
+                    demo.shots + ' fired so far');
+
+        } else if (demoKind === 'rock') {
+            const rock = demo.rocks[0];
+            setNote(rock ? ('size ' + rock.size + '   •   rockPoints → ' + rockPoints(rock).length +
+                            ' corners   •   wobble ' + rock.wobble.toFixed(1)) : 'no rock');
+
+        } else if (demoKind === 'wave') {
+            setNote('wave ' + demo.wave + '   •   ' + demo.rocks.length + ' rocks in the ring');
+
+        } else if (demoKind === 'split') {
+            const sizes = demo.rocks.map(function (rock) { return rock.size; });
+            setNote(demo.rocks.length + ' rock(s), sizes [' + sizes + ']  •  score ' + demo.score);
+
+        } else {
+            setNote('score ' + demo.score + '  •  ' + demo.lives + ' lives  •  wave ' +
+                    demo.wave + '  •  ' + demo.rocks.length + ' rocks');
         }
     }
 
@@ -81,33 +182,15 @@
             ctx.scale(SCALE, SCALE);
             renderGame(ctx, demo);
 
-            const ship = demo.ship;
             if (demoKind === 'angles') {
-                const nose = pointFrom(ship.x, ship.y, ship.angle, 60);
-                ctx.strokeStyle = '#111111';
-                ctx.lineWidth = 1.5;
-                ctx.setLineDash([4, 4]);
-                ctx.beginPath();
-                ctx.moveTo(ship.x, ship.y);
-                ctx.lineTo(nose.x, nose.y);
-                ctx.stroke();
-                ctx.setLineDash([]);
-                setNote('angle ' + ship.angle.toFixed(2) + '  →  60 pixels ahead is x ' +
-                        Math.round(nose.x) + ', y ' + Math.round(nose.y));
-
-            } else if (demoKind === 'drift') {
-                const speed = Math.sqrt(ship.dx * ship.dx + ship.dy * ship.dy);
-                setNote('x ' + Math.round(ship.x) + '  y ' + Math.round(ship.y) +
-                        '   drifting at ' + Math.round(speed) + ' px/s');
-
-            } else if (demoKind === 'split') {
-                const sizes = demo.rocks.map(function (rock) { return rock.size; });
-                setNote(demo.rocks.length + ' rock(s), sizes [' + sizes + ']  •  score ' + demo.score);
-
-            } else {
-                setNote('score ' + demo.score + '  •  ' + demo.lives + ' lives  •  wave ' +
-                        demo.wave + '  •  ' + demo.rocks.length + ' rocks');
+                dashedLine(ctx, demo.ship, pointFrom(demo.ship.x, demo.ship.y, demo.ship.angle, 60));
+            } else if (demoKind === 'measure' && demo.rocks[0]) {
+                dashedLine(ctx, demo.ship, demo.rocks[0]);
+            } else if (demoKind === 'rock' && demo.rocks[0]) {
+                markCorners(ctx, demo.rocks[0]);
             }
+
+            describe(setNote);
         } catch (error) {
             ctx.restore();
             ctx.save();
@@ -127,9 +210,40 @@
         canvas.height = Math.round(FIELD_HEIGHT * SCALE);
     }
 
+    /** steering — the three buttons every flying demo needs. */
+    function steering(addButton) {
+        addButton('◀ TURN', 'Point further left', function () { demo.turning = -1; });
+        addButton('TURN ▶', 'Point further right', function () { demo.turning = 1; });
+        addButton('Stop', 'Stop turning', function () { demo.turning = 0; });
+    }
+
     /** controls — the buttons under the demo, chosen by the step. */
     function controls(step, addButton) {
         const kind = step.demo.kind;
+
+        if (kind === 'rock') {
+            addButton('New rock', 'Another rock, drifting its own way', function () {
+                demo.rocks = [stillRock(FIELD_WIDTH / 2, FIELD_HEIGHT / 2, 3)];
+            });
+            addButton('Smaller', 'Try the next size down', function () {
+                const rock = demo.rocks[0];
+                const size = rock && rock.size > 1 ? rock.size - 1 : 3;
+                demo.rocks = [stillRock(FIELD_WIDTH / 2, FIELD_HEIGHT / 2, size)];
+            });
+            addButton('Spin', 'Give it a shove', function () {
+                if (demo.rocks[0]) { demo.rocks[0].spin = Math.random() * 2 - 1; }
+            });
+            return;
+        }
+
+        if (kind === 'wave') {
+            addButton('Next wave', 'A bigger ring', function () {
+                demo.wave = demo.wave + 1;
+                startWave(demo);
+            });
+            addButton('↺ Wave 1', 'Back to the start', function () { startDemo(step); });
+            return;
+        }
 
         if (kind === 'split') {
             addButton('Shoot it', 'Fire at the rock', function () {
@@ -142,14 +256,12 @@
             return;
         }
 
-        addButton('↺ Left', 'Point further left', function () { demo.turning = -1; });
-        addButton('Right ↻', 'Point further right', function () { demo.turning = 1; });
-        addButton('Stop', 'Stop turning', function () { demo.turning = 0; });
+        steering(addButton);
 
         if (kind !== 'angles') {
             addButton('Thrust', 'Fire the engine', function () { thrustShip(demo.ship, 0.25); });
         }
-        if (kind === 'game' || kind === 'final') {
+        if (kind === 'shoot' || kind === 'game' || kind === 'final') {
             addButton('FIRE', 'Shoot', function () { fireBullet(demo); });
         }
         addButton('↺ New', 'Start again', function () { startDemo(step); });
