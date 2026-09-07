@@ -5,16 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fun Time - KidsLearn</title>
     <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        .tab-bar { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+                   margin: 0 0 8px; }
+        .tab { flex: 1 1 190px; max-width: 260px; background: #fff; color: #111;
+               border: 3px solid #111; padding: 12px 10px; cursor: pointer;
+               font-family: inherit; text-align: center; line-height: 1.35; }
+        .tab:hover { background: #f0f0f0; }
+        .tab[aria-selected="true"] { background: #111; color: #fff; }
+        .tab-what { display: block; font-size: 1.15em; font-weight: 700; }
+        .tab-lang { display: block; font-family: monospace; font-size: 0.9em; }
+        .tab[aria-selected="false"] .tab-lang { color: #555; }
+        .tab-count { display: block; font-family: monospace; font-size: 0.75em;
+                     letter-spacing: 1px; margin-top: 3px; opacity: 0.7; }
+        .panel-note { text-align: center; color: #555; margin: 18px 0 22px; }
+        .tab-panel[hidden] { display: none; }
+    </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🎮 Play a game</h1>
-            <p class="subtitle">Every one is black and white, and every one is yours to take apart</p>
+            <h1>🎮 Fun Time</h1>
+            <p class="subtitle">Twenty-four games. Play them, then build them — in JavaScript or in Python.</p>
             <a href="../index.html" class="back-link">← Back to Home</a>
         </header>
 
-        <main class="topics-grid">
+        <div class="tab-bar" role="tablist" aria-label="Which games to show">
+                <button class="tab" role="tab" id="tab-play" aria-controls="panel-play" aria-selected="true" data-tab="play">
+                    <span class="tab-what">🎮 Play</span>
+                    <span class="tab-lang">JavaScript</span>
+                    <span class="tab-count">25 games</span>
+                </button>
+                <button class="tab" role="tab" id="tab-build" aria-controls="panel-build" aria-selected="false" data-tab="build">
+                    <span class="tab-what">🛠️ Build</span>
+                    <span class="tab-lang">JavaScript</span>
+                    <span class="tab-count">24 games</span>
+                </button>
+                <button class="tab" role="tab" id="tab-play-python" aria-controls="panel-play-python" aria-selected="false" data-tab="play-python">
+                    <span class="tab-what">🎮 Play</span>
+                    <span class="tab-lang">🐍 Python</span>
+                    <span class="tab-count">24 games</span>
+                </button>
+                <button class="tab" role="tab" id="tab-build-python" aria-controls="panel-build-python" aria-selected="false" data-tab="build-python">
+                    <span class="tab-what">🛠️ Build</span>
+                    <span class="tab-lang">🐍 Python</span>
+                    <span class="tab-count">24 games</span>
+                </button>
+        </div>
+
+        <section class="tab-panel" id="panel-play" role="tabpanel" aria-labelledby="tab-play">
+            <p class="panel-note">Every one is black and white, and every one is yours to take apart.</p>
+
+            <main class="topics-grid">
             <div class="topic-card">
                 <div class="topic-icon">⚽</div>
                 <h2>Home Pong</h2>
@@ -189,14 +231,13 @@
                 <p>Drop from floor to floor — miss and you fall, land on the 锯齿 and you bleed</p>
                 <a href="floors.html" class="topic-link">Play Now!</a>
             </div>
-        </main>
+            </main>
+        </section>
 
-        <header style="margin-top: 40px;">
-            <h1>🛠️ Build a game yourself</h1>
-            <p class="subtitle">Not games — workshops. Write the real functions, one at a time, and watch each game come alive</p>
-        </header>
+        <section class="tab-panel" id="panel-build" role="tabpanel" aria-labelledby="tab-build" hidden>
+            <p class="panel-note">Not games — workshops. Write the real functions one at a time, and watch each game come alive.</p>
 
-        <main class="topics-grid">
+            <main class="topics-grid">
             <div class="topic-card">
                 <div class="topic-icon">🛠️</div>
                 <h2>Build Tetris Yourself</h2>
@@ -364,14 +405,13 @@
                 <p>Write the 6 functions behind Hundred Floors, one at a time.</p>
                 <a href="floors-build.html" class="topic-link">Start Building!</a>
             </div>
-        </main>
+            </main>
+        </section>
 
-        <header style="margin-top: 40px;">
-            <h1>🐍 The same games, in Python</h1>
-            <p class="subtitle">Real Python, running in your browser — no installing anything</p>
-        </header>
+        <section class="tab-panel" id="panel-play-python" role="tabpanel" aria-labelledby="tab-play-python" hidden>
+            <p class="panel-note">The very same games, running on real Python in your browser. Nothing to install.</p>
 
-        <main class="topics-grid">
+            <main class="topics-grid">
             <div class="topic-card">
                 <div class="topic-icon">▩</div>
                 <h2>Tetris in Python</h2>
@@ -391,27 +431,6 @@
                 <h2>Car Racing in Python</h2>
                 <p>Dodge the traffic on a road drawn entirely by Python.</p>
                 <a href="race-python.html" class="topic-link">Play in Python!</a>
-            </div>
-
-            <div class="topic-card">
-                <div class="topic-icon">🛠️</div>
-                <h2>Build Tetris in Python</h2>
-                <p>Twelve Python functions, each tested by real Python as you write it.</p>
-                <a href="tetris-python-build.html" class="topic-link">Start Building!</a>
-            </div>
-
-            <div class="topic-card">
-                <div class="topic-icon">🛠️</div>
-                <h2>Build Snake in Python</h2>
-                <p>Write the snake in Python, one tested function at a time.</p>
-                <a href="snake-python-build.html" class="topic-link">Start Building!</a>
-            </div>
-
-            <div class="topic-card">
-                <div class="topic-icon">🛠️</div>
-                <h2>Build Car Racing in Python</h2>
-                <p>Lanes, clamping and the crash test — in Python this time.</p>
-                <a href="race-python-build.html" class="topic-link">Start Building!</a>
             </div>
 
             <div class="topic-card">
@@ -560,6 +579,33 @@
                 <p>The same shaft — but the camera and the landings are all Python</p>
                 <a href="floors-python.html" class="topic-link">Play in Python!</a>
             </div>
+            </main>
+        </section>
+
+        <section class="tab-panel" id="panel-build-python" role="tabpanel" aria-labelledby="tab-build-python" hidden>
+            <p class="panel-note">The same functions again, written in Python and tested by Python as you go.</p>
+
+            <main class="topics-grid">
+            <div class="topic-card">
+                <div class="topic-icon">🛠️</div>
+                <h2>Build Tetris in Python</h2>
+                <p>Twelve Python functions, each tested by real Python as you write it.</p>
+                <a href="tetris-python-build.html" class="topic-link">Start Building!</a>
+            </div>
+
+            <div class="topic-card">
+                <div class="topic-icon">🛠️</div>
+                <h2>Build Snake in Python</h2>
+                <p>Write the snake in Python, one tested function at a time.</p>
+                <a href="snake-python-build.html" class="topic-link">Start Building!</a>
+            </div>
+
+            <div class="topic-card">
+                <div class="topic-icon">🛠️</div>
+                <h2>Build Car Racing in Python</h2>
+                <p>Lanes, clamping and the crash test — in Python this time.</p>
+                <a href="race-python-build.html" class="topic-link">Start Building!</a>
+            </div>
 
             <div class="topic-card">
                 <div class="topic-icon">🛠️</div>
@@ -707,7 +753,8 @@
                 <p>The same 6 functions, written and tested in Python.</p>
                 <a href="floors-python-build.html" class="topic-link">Start Building!</a>
             </div>
-        </main>
+            </main>
+        </section>
 
         <div class="help-card" style="margin-top: 40px;">
             <h3>🎮 Playing with an Xbox controller</h3>
@@ -728,10 +775,59 @@
                     the obvious reason.</li>
             </ul>
         </div>
-
         <footer>
             <p>Play hard, learn hard — then build the games yourself. 🌟</p>
         </footer>
     </div>
+
+    <script>
+        /* Four tabs, one per corner of play/build x JavaScript/Python.
+           The chosen tab is remembered, and can also be linked to directly
+           with an address ending in #build-python. */
+        (function () {
+            'use strict';
+            var STORE = 'funtime-tab';
+            var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+
+            function show(name) {
+                var found = false;
+                tabs.forEach(function (tab) {
+                    var mine = tab.dataset.tab === name;
+                    if (mine) { found = true; }
+                    tab.setAttribute('aria-selected', mine ? 'true' : 'false');
+                    document.getElementById('panel-' + tab.dataset.tab).hidden = !mine;
+                });
+                if (!found) { return false; }
+                try { window.localStorage.setItem(STORE, name); } catch (e) { /* fine */ }
+                return true;
+            }
+
+            tabs.forEach(function (tab) {
+                tab.addEventListener('click', function () {
+                    show(tab.dataset.tab);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            /* the left and right arrows walk along the tabs */
+            document.querySelector('.tab-bar').addEventListener('keydown', function (event) {
+                var step = event.key === 'ArrowRight' ? 1 : (event.key === 'ArrowLeft' ? -1 : 0);
+                if (!step) { return; }
+                event.preventDefault();
+                var at = tabs.findIndex(function (t) {
+                    return t.getAttribute('aria-selected') === 'true';
+                });
+                var next = tabs[(at + step + tabs.length) % tabs.length];
+                show(next.dataset.tab);
+                next.focus();
+            });
+
+            /* an address like funtime.html#build-python opens that tab */
+            var asked = window.location.hash.replace('#', '');
+            var saved = null;
+            try { saved = window.localStorage.getItem(STORE); } catch (e) { /* fine */ }
+            if (!show(asked)) { show(saved || 'play'); }
+        })();
+    </script>
 </body>
 </html>

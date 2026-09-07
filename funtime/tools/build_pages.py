@@ -464,64 +464,7 @@ def card(icon, name, blurb, page, link):
             </div>''' % (icon, name, blurb, page, link)
 
 
-def build_hub():
-    """Write funtime.html, listing every game in one place.
-
-    INPUT:  nothing (it reads games.py)
-    OUTPUT: the file name it wrote
-    ALGORITHM: three sections - the games, the workshops, and the Python
-    versions - each a grid of cards built from the game descriptions.
-    """
-    play = [card(g["icon"], g["name"], g["subtitle"], g["slug"] + ".html", "Play Now!") for g in GAMES]
-    build = [card("🛠️", "Build " + g["name"] + " Yourself",
-                  "Write the %d functions behind %s, one at a time." % (g["step_count"], g["name"]),
-                  g["slug"] + "-build.html", "Start Building!") for g in GAMES]
-    python_play = [card(g["icon"], g["name"] + " in Python", g["python_subtitle"],
-                        g["slug"] + "-python.html", "Play in Python!") for g in GAMES]
-    python_build = [card("🛠️", "Build " + g["name"] + " in Python",
-                         "The same %d functions, written and tested in Python." % g["step_count"],
-                         g["slug"] + "-python-build.html", "Start Building!") for g in GAMES]
-
-    classics = [card(c["icon"], c["name"], c["blurb"], c["page"], c["link"]) for c in CLASSICS]
-    workshops = [card(c["icon"], c["name"], c["blurb"], c["page"], c["link"]) for c in WORKSHOP_CLASSICS]
-    python_classics = [card(c["icon"], c["name"], c["blurb"], c["page"], c["link"]) for c in PYTHON_CLASSICS]
-
-    sections = [
-        ("🎮 Play a game", "Every one is black and white, and every one is yours to take apart",
-         classics + play),
-        ("🛠️ Build a game yourself", "Not games — workshops. Write the real functions, one at a time, and watch each game come alive",
-         workshops + build),
-        ("🐍 The same games, in Python", "Real Python, running in your browser — no installing anything",
-         python_classics + python_play + python_build),
-    ]
-
-    body = []
-    for index, (title, subtitle, cards) in enumerate(sections):
-        top = "" if index == 0 else ' style="margin-top: 40px;"'
-        body.append('''        <header%s>
-            <h1>%s</h1>
-            <p class="subtitle">%s</p>%s
-        </header>
-
-        <main class="topics-grid">
-%s
-        </main>''' % (top, title, subtitle,
-                      '\n            <a href="../index.html" class="back-link">← Back to Home</a>' if index == 0 else "",
-                      "\n\n".join(cards)))
-
-    page = '''<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fun Time - KidsLearn</title>
-    <link rel="stylesheet" href="../styles/main.css">
-</head>
-<body>
-    <div class="container">
-%s
-
-        <div class="help-card" style="margin-top: 40px;">
+HUB_GAMEPAD_CARD = '''        <div class="help-card" style="margin-top: 40px;">
             <h3>🎮 Playing with an Xbox controller</h3>
             <ul>
                 <li>Nothing to install. Plug the controller in with a USB cable, or hold
@@ -539,15 +482,177 @@ def build_hub():
                 <li>The two typing games — Hangman and Typing Race — need a keyboard, for
                     the obvious reason.</li>
             </ul>
-        </div>
+        </div>'''
 
-        <footer>
-            <p>Play hard, learn hard — then build the games yourself. 🌟</p>
-        </footer>
-    </div>
-</body>
-</html>
-''' % ("\n\n".join(body))
+
+# ---- the Fun Time hub, as four tabs -----------------------------------------
+
+HUB_STYLE = """
+        .tab-bar { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+                   margin: 0 0 8px; }
+        .tab { flex: 1 1 190px; max-width: 260px; background: #fff; color: #111;
+               border: 3px solid #111; padding: 12px 10px; cursor: pointer;
+               font-family: inherit; text-align: center; line-height: 1.35; }
+        .tab:hover { background: #f0f0f0; }
+        .tab[aria-selected="true"] { background: #111; color: #fff; }
+        .tab-what { display: block; font-size: 1.15em; font-weight: 700; }
+        .tab-lang { display: block; font-family: monospace; font-size: 0.9em; }
+        .tab[aria-selected="false"] .tab-lang { color: #555; }
+        .tab-count { display: block; font-family: monospace; font-size: 0.75em;
+                     letter-spacing: 1px; margin-top: 3px; opacity: 0.7; }
+        .panel-note { text-align: center; color: #555; margin: 18px 0 22px; }
+        .tab-panel[hidden] { display: none; }
+"""
+
+HUB_SCRIPT = """
+    <script>
+        /* Four tabs, one per corner of play/build x JavaScript/Python.
+           The chosen tab is remembered, and can also be linked to directly
+           with an address ending in #build-python. */
+        (function () {
+            'use strict';
+            var STORE = 'funtime-tab';
+            var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+
+            function show(name) {
+                var found = false;
+                tabs.forEach(function (tab) {
+                    var mine = tab.dataset.tab === name;
+                    if (mine) { found = true; }
+                    tab.setAttribute('aria-selected', mine ? 'true' : 'false');
+                    document.getElementById('panel-' + tab.dataset.tab).hidden = !mine;
+                });
+                if (!found) { return false; }
+                try { window.localStorage.setItem(STORE, name); } catch (e) { /* fine */ }
+                return true;
+            }
+
+            tabs.forEach(function (tab) {
+                tab.addEventListener('click', function () {
+                    show(tab.dataset.tab);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            /* the left and right arrows walk along the tabs */
+            document.querySelector('.tab-bar').addEventListener('keydown', function (event) {
+                var step = event.key === 'ArrowRight' ? 1 : (event.key === 'ArrowLeft' ? -1 : 0);
+                if (!step) { return; }
+                event.preventDefault();
+                var at = tabs.findIndex(function (t) {
+                    return t.getAttribute('aria-selected') === 'true';
+                });
+                var next = tabs[(at + step + tabs.length) % tabs.length];
+                show(next.dataset.tab);
+                next.focus();
+            });
+
+            /* an address like funtime.html#build-python opens that tab */
+            var asked = window.location.hash.replace('#', '');
+            var saved = null;
+            try { saved = window.localStorage.getItem(STORE); } catch (e) { /* fine */ }
+            if (!show(asked)) { show(saved || 'play'); }
+        })();
+    </script>
+"""
+
+
+def build_hub():
+    """Write funtime.html, listing every game in one place.
+
+    INPUT:  nothing (it reads games.py)
+    OUTPUT: the file name it wrote
+
+    ALGORITHM: the games come in a 2x2 - you can PLAY one or BUILD one, in
+    JAVASCRIPT or in PYTHON. So the page is four tabs, one per corner of that
+    square, rather than one very long scroll with everything on it.
+    """
+    play = [card(g["icon"], g["name"], g["subtitle"], g["slug"] + ".html", "Play Now!")
+            for g in GAMES]
+    build = [card("🛠️", "Build " + g["name"] + " Yourself",
+                  "Write the %d functions behind %s, one at a time." % (g["step_count"], g["name"]),
+                  g["slug"] + "-build.html", "Start Building!") for g in GAMES]
+    python_play = [card(g["icon"], g["name"] + " in Python", g["python_subtitle"],
+                        g["slug"] + "-python.html", "Play in Python!") for g in GAMES]
+    python_build = [card("🛠️", "Build " + g["name"] + " in Python",
+                         "The same %d functions, written and tested in Python." % g["step_count"],
+                         g["slug"] + "-python-build.html", "Start Building!") for g in GAMES]
+
+    classics = [card(c["icon"], c["name"], c["blurb"], c["page"], c["link"]) for c in CLASSICS]
+    workshops = [card(c["icon"], c["name"], c["blurb"], c["page"], c["link"])
+                 for c in WORKSHOP_CLASSICS]
+
+    # The older Python pages are listed all together, playing and building
+    # mixed up. The tabs need them apart, and the page name says which is which.
+    python_classic_play = [card(c["icon"], c["name"], c["blurb"], c["page"], c["link"])
+                           for c in PYTHON_CLASSICS if not c["page"].endswith("-build.html")]
+    python_classic_build = [card(c["icon"], c["name"], c["blurb"], c["page"], c["link"])
+                            for c in PYTHON_CLASSICS if c["page"].endswith("-build.html")]
+
+    tabs = [
+        ("play", "🎮", "Play", "JavaScript",
+         "Every one is black and white, and every one is yours to take apart.",
+         classics + play),
+        ("build", "🛠️", "Build", "JavaScript",
+         "Not games — workshops. Write the real functions one at a time, and watch each game come alive.",
+         workshops + build),
+        ("play-python", "🎮", "Play", "🐍 Python",
+         "The very same games, running on real Python in your browser. Nothing to install.",
+         python_classic_play + python_play),
+        ("build-python", "🛠️", "Build", "🐍 Python",
+         "The same functions again, written in Python and tested by Python as you go.",
+         python_classic_build + python_build),
+    ]
+
+    buttons, panels = [], []
+    for index, (key, icon, what, language, note, cards) in enumerate(tabs):
+        chosen = "true" if index == 0 else "false"
+        buttons.append(
+            '                <button class="tab" role="tab" id="tab-%s" aria-controls="panel-%s"'
+            ' aria-selected="%s" data-tab="%s">\n'
+            '                    <span class="tab-what">%s %s</span>\n'
+            '                    <span class="tab-lang">%s</span>\n'
+            '                    <span class="tab-count">%d games</span>\n'
+            '                </button>' % (key, key, chosen, key, icon, what, language, len(cards)))
+        panels.append(
+            '        <section class="tab-panel" id="panel-%s" role="tabpanel"'
+            ' aria-labelledby="tab-%s"%s>\n'
+            '            <p class="panel-note">%s</p>\n\n'
+            '            <main class="topics-grid">\n%s\n            </main>\n'
+            '        </section>' % (key, key, "" if index == 0 else " hidden", note,
+                                    "\n\n".join(cards)))
+
+    body = ('        <header>\n'
+            '            <h1>🎮 Fun Time</h1>\n'
+            '            <p class="subtitle">Twenty-four games. Play them, then build them —'
+            ' in JavaScript or in Python.</p>\n'
+            '            <a href="../index.html" class="back-link">← Back to Home</a>\n'
+            '        </header>\n\n'
+            '        <div class="tab-bar" role="tablist" aria-label="Which games to show">\n'
+            + "\n".join(buttons) + '\n        </div>\n\n'
+            + "\n\n".join(panels))
+
+    page = ('<!DOCTYPE html>\n'
+            '<html lang="en">\n'
+            '<head>\n'
+            '    <meta charset="UTF-8">\n'
+            '    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
+            '    <title>Fun Time - KidsLearn</title>\n'
+            '    <link rel="stylesheet" href="../styles/main.css">\n'
+            '    <style>' + HUB_STYLE + '    </style>\n'
+            '</head>\n'
+            '<body>\n'
+            '    <div class="container">\n'
+            + body + '\n\n'
+            + HUB_GAMEPAD_CARD + '\n'
+            '        <footer>\n'
+            '            <p>Play hard, learn hard — then build the games yourself. 🌟</p>\n'
+            '        </footer>\n'
+            '    </div>\n'
+            + HUB_SCRIPT +
+            '</body>\n'
+            '</html>\n')
+
     (FUNTIME / "funtime.html").write_text(page)
     return "funtime.html"
 
