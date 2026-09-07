@@ -29,6 +29,7 @@ import tetris_rules as tetris         # noqa: E402
 import bubbles_rules as bubbles       # noqa: E402
 import typing_draw                    # noqa: E402
 import typing_rules as typing_race    # noqa: E402
+import wordfall_rules as wordfall     # noqa: E402
 
 failures = 0
 checks = 0
@@ -434,6 +435,60 @@ for word in ("alpha", "XXXXX", "charlie"):
     typing_race.submit_word(state)
 check("the results say which words went wrong",
       state["results"] == [True, False, True], state["results"])
+
+print("Word Rain (the Python rules must match the JavaScript ones):")
+
+check("the speed has a ceiling", wordfall.speed_for_level(9999) == wordfall.MAX_SPEED)
+check("the gap has a floor", wordfall.gap_for_level(9999) == wordfall.MIN_GAP)
+check("a higher level is harder",
+      wordfall.speed_for_level(10) > wordfall.speed_for_level(1)
+      and wordfall.gap_for_level(10) < wordfall.gap_for_level(1))
+
+state = wordfall.create_game()
+state["level"] = 40
+off_screen = 0
+for _ in range(400):
+    state["words"] = []
+    word = wordfall.spawn_word(state)
+    if word["x"] < 0 or word["x"] + wordfall.word_width(word["text"]) > wordfall.FIELD_WIDTH:
+        off_screen += 1
+check("no word is ever dropped off the edge", off_screen == 0, off_screen)
+
+# A robot typing at 36 WPM: the game must give it a real run, and then win.
+state = wordfall.create_game()
+owed = 0.0
+frames = 0
+while not state["is_over"] and frames < 20000:
+    wordfall.update_game(state, 25)
+    frames += 1
+    owed += 3 * 25 / 1000
+    while owed >= 1 and not state["is_over"]:
+        owed -= 1
+        target = None
+        for word in state["words"]:
+            if state["typed"] and not word["text"].startswith(state["typed"]):
+                continue
+            if target is None or word["y"] > target["y"]:
+                target = word
+        if target is None:
+            state["typed"] = ""
+            break
+        wordfall.type_letter(state, target["text"][len(state["typed"])])
+        wordfall.zap_word(state)
+
+check("a 36 WPM robot gets a real game", state["level"] > 5, state["level"])
+check("and the rain wins in the end", state["is_over"] is True, frames)
+check("lives end at zero, never below", state["lives"] == 0, state["lives"])
+
+# Doing nothing must lose, and only cost the lives it should.
+state = wordfall.create_game()
+frames = 0
+while not state["is_over"] and frames < 20000:
+    wordfall.update_game(state, 25)
+    frames += 1
+check("doing nothing loses the game", state["is_over"] is True)
+check("after exactly %d misses" % wordfall.START_LIVES,
+      state["missed"] >= wordfall.START_LIVES, state["missed"])
 
 print("\n%d checks run" % checks)
 print("ALL PYTHON GAME TESTS PASSED" if failures == 0 else "%d TEST(S) FAILED" % failures)

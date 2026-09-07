@@ -49,6 +49,10 @@
         .touch-pad { display: grid; gap: 10px; max-width: 340px; margin: 20px auto 0; }
         .touch-pad .mono-btn { padding: 14px 0; font-size: 1.15em; }
         .touch-pad .spacer { visibility: hidden; }
+        /* Parked off the page: a phone needs a real input to focus before it
+           will raise its keyboard, but nobody should ever see this one. */
+        .hidden-input { position: absolute; left: -9999px; width: 1px; height: 1px;
+                        opacity: 0; border: 0; padding: 0; }
 
         .help-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 26px 0 0; }
         .help-card { background: #fff; border: 2px solid #111; padding: 16px 20px; }
@@ -97,7 +101,7 @@
 
         <div class="game-wrap">
             <div class="game-layout">
-                <canvas class="board" id="typing-board" width="340" height="250"></canvas>
+                <canvas class="board" id="typing-board" width="340" height="278"></canvas>
 
                 <div class="side-panel">
                     <div class="panel-box">
@@ -127,6 +131,9 @@
                 </div>
             </div>
 
+            <input id="hidden-input" class="hidden-input" type="text"
+                   autocomplete="off" autocorrect="off" autocapitalize="off"
+                   spellcheck="false" aria-label="Type here">
             <div class="touch-pad" style="grid-template-columns: repeat(1, 1fr);">
                 <button class="mono-btn" id="btn-keyboard">⌨ TAP TO TYPE</button>
             </div>

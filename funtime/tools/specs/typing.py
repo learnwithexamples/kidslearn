@@ -7,11 +7,12 @@ SPEC = dict(
     title="TYPING RACE",
     subtitle="Twenty-four words, sixty seconds — how fast can you go?",
     python_subtitle="The same race — but the speed and accuracy are worked out in Python",
-    canvas_id="typing-board", canvas_width=340, canvas_height=250,
+    canvas_id="typing-board", canvas_width=340, canvas_height=278,
     hud=[("Speed", "wpm", "0"), ("Accuracy", "accuracy", "100%"),
          ("Words done", "words", "0"), ("Best WPM", "best", "0")],
     play_label="⏸ Pause",
     touchpad=[[("btn-keyboard", "⌨ TAP TO TYPE")]],
+    hidden_input=True,
     help=[
         ("⌨️ Controls", [
             'Just start typing — the clock starts with your first letter',

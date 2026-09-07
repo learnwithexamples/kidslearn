@@ -68,6 +68,10 @@ GAME_STYLE = """        body { background: #2b2b2b; }
         .touch-pad { display: grid; gap: 10px; max-width: 340px; margin: 20px auto 0; }
         .touch-pad .mono-btn { padding: 14px 0; font-size: 1.15em; }
         .touch-pad .spacer { visibility: hidden; }
+        /* Parked off the page: a phone needs a real input to focus before it
+           will raise its keyboard, but nobody should ever see this one. */
+        .hidden-input { position: absolute; left: -9999px; width: 1px; height: 1px;
+                        opacity: 0; border: 0; padding: 0; }
 
         .help-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 26px 0 0; }
         .help-card { background: #fff; border: 2px solid #111; padding: 16px 20px; }
@@ -165,13 +169,29 @@ def touchpad_html(spec):
             else:
                 element_id, label = cell
                 cells.append('                <button class="mono-btn" id="%s">%s</button>' % (element_id, label))
-    return ('            <div class="touch-pad" style="grid-template-columns: repeat(%d, 1fr);">\n'
-            % columns) + "\n".join(cells) + "\n            </div>\n"
+    pad = ('            <div class="touch-pad" style="grid-template-columns: repeat(%d, 1fr);">\n'
+           % columns) + "\n".join(cells) + "\n            </div>\n"
+    return hidden_input_html(spec) + pad
 
 
-# The two typing games cannot be played on a controller: you cannot type
-# twenty-six letters with eight buttons. Every other game can.
-KEYBOARD_ONLY = ("hangman", "typing")
+def hidden_input_html(spec):
+    """An off-screen box for a phone's on-screen keyboard to type into.
+
+    A phone only raises its keyboard when something focusable has the cursor,
+    and a <canvas> is not that. So the games you play BY TYPING get a real
+    input, parked off the edge of the page: tapping "TAP TO TYPE" focuses it,
+    the keyboard comes up, and every letter is read out of it and thrown away.
+    """
+    if not spec.get("hidden_input"):
+        return ""
+    return ('            <input id="hidden-input" class="hidden-input" type="text"\n'
+            '                   autocomplete="off" autocorrect="off" autocapitalize="off"\n'
+            '                   spellcheck="false" aria-label="Type here">\n')
+
+
+# The games you play by typing cannot be played on a controller: you cannot
+# type twenty-six letters with eight buttons. Every other game can.
+KEYBOARD_ONLY = ("hangman", "typing", "wordfall")
 
 GAMEPAD_HELP = ('🎮 <strong>Xbox controller?</strong> Just plug it in or pair it — '
                 'the stick and D-pad are the arrow keys, <strong>A</strong> is '

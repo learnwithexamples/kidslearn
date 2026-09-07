@@ -31,6 +31,7 @@ const SUITES = [
     ['Xbox controller support', 'test-gamepad.js'],
     ['Bubble Shooter — game rules', 'test-bubbles.js'],
     ['Typing Race — the board', 'test-typing.js'],
+    ['Word Rain — played by robots', 'test-wordfall.js'],
     ['Every JS workshop — steps', 'test-js-steps.js'],
     ['Every JS workshop — played through', 'test-js-workshops.js'],
     ['The code editor — colours & spec', 'test-editor.js']

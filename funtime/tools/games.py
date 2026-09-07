@@ -30,6 +30,7 @@ ORDER = [
     "asteroids",
     "bubbles",
     "floors",
+    "wordfall",
 ]
 
 GAMES = [importlib.import_module("specs." + name).SPEC for name in ORDER]

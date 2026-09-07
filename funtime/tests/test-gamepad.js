@@ -358,7 +358,7 @@ const games = fs.readdirSync(LIB)
 /* Two of the games are about TYPING. You cannot type twenty-six letters on a
    controller, so those two need a keyboard and always will. Every other game
    has to be playable with the pad alone. */
-const KEYBOARD_ONLY = ['hangman', 'typing'];
+const KEYBOARD_ONLY = ['hangman', 'typing', 'wordfall'];
 
 games.forEach(function (game) {
     const sandbox = { Math, console, JSON, Date };
