@@ -79,7 +79,7 @@ function fakeContext() {
 }
 
 const ELEMENT_IDS = ['progress', 'progress-text', 'step-number', 'step-title', 'step-adds',
-    'step-intro', 'step-spec', 'step-warning', 'code-editor', 'btn-test', 'btn-hint',
+    'step-intro', 'step-spec', 'step-warning', 'code-editor', 'code-highlight', 'btn-test', 'btn-hint',
     'btn-answer', 'btn-reset', 'hint-box', 'test-summary', 'test-results', 'btn-prev',
     'btn-next', 'finish-panel', 'btn-demo-yours', 'btn-demo-goal', 'demo-status',
     'demo-canvas', 'demo-controls', 'demo-note', 'demo-caption', 'btn-restart-course'];
@@ -93,6 +93,48 @@ function check(name, ok, extra) {
         failures++;
         console.log('  FAIL ' + name + (extra !== undefined ? ' -> ' + JSON.stringify(extra) : ''));
     }
+}
+
+/** unhighlight — the plain text the colour layer is actually showing. */
+function unhighlight(html) {
+    return String(html).replace(/<[^>]*>/g, '')
+        .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+}
+
+/**
+ * checkStarter — what the student sees when a step first opens.
+ *
+ * The spec is written into the editor as a comment, so it has to be real
+ * code: it must still compile, it must not carry any leftover HTML, and the
+ * colour layer underneath must show exactly the same characters — a layer
+ * showing anything else would sit visibly out of line with the text.
+ */
+function checkStarter(game, step, seeded, highlightHtml) {
+    const label = game + ': ' + step.fnName;
+
+    check(label + ' opens with the spec as a comment',
+          seeded.indexOf('INPUT:') !== -1 && seeded.indexOf('OUTPUT:') !== -1 &&
+          seeded.indexOf('ALGORITHM:') !== -1, seeded.slice(0, 60));
+    check(label + ' spec comment carries no leftover HTML',
+          seeded.indexOf('<code>') === -1 && seeded.indexOf('&lt;') === -1,
+          seeded.slice(0, 200));
+    check(label + ' starter still compiles', (function () {
+        try { new Function(seeded); return true; } catch (e) { return e.message; } })() === true);
+
+    /* Only the comment is ours to wrap; a long line in the starter code
+       itself is the game's own business. 64 characters is what the editor
+       fits at its narrowest usable width. */
+    const commentLines = [];
+    for (const line of seeded.split('\n')) {
+        if (line.indexOf('/**') !== 0 && line.indexOf(' *') !== 0) { break; }
+        commentLines.push(line);
+    }
+    const tooLong = commentLines.filter(line => line.length > 64);
+    check(label + ' spec comment wraps', tooLong.length === 0, tooLong[0]);
+
+    check(label + ' colour layer matches the text',
+          unhighlight(highlightHtml) === seeded + '\n',
+          unhighlight(highlightHtml).slice(0, 80));
 }
 
 discover().forEach(function (game) {
@@ -123,7 +165,8 @@ discover().forEach(function (game) {
     sandbox.scrollTo = () => {};
 
     const ctx = vm.createContext(sandbox);
-    const files = libsFor(game).concat(['workshop.js', game + '-steps.js', game + '-build.js']);
+    const files = libsFor(game).concat(['code-highlight.js', 'workshop.js',
+                                        game + '-steps.js', game + '-build.js']);
     try {
         files.forEach(f => vm.runInContext(fs.readFileSync(path.join(LIB, f), 'utf8'), ctx, { filename: f }));
     } catch (e) {
@@ -154,6 +197,11 @@ discover().forEach(function (game) {
     check(game + ': the goal demo draws', (function () {
         try { frames(5); return true; } catch (e) { return e.message; } })() === true);
 
+    /* Step 1 as the student first sees it, before the probes below type over
+       the editor. Later steps are checked live, straight after renderStep. */
+    const firstSeeded = elements['code-editor'].value;
+    const firstHighlight = elements['code-highlight'].innerHTML;
+
     /* a wrong answer must be refused */
     elements['code-editor'].value = 'function ' + steps[0].fnName + '() { return "nope"; }';
     elements['btn-test'].click();
@@ -172,6 +220,10 @@ discover().forEach(function (game) {
         check(game + ': step ' + (index + 1) + ' is showing',
               elements['step-number'].textContent === 'Step ' + (index + 1) + ' of ' + steps.length,
               elements['step-number'].textContent);
+
+        checkStarter(game, step,
+                     index === 0 ? firstSeeded : elements['code-editor'].value,
+                     index === 0 ? firstHighlight : elements['code-highlight'].innerHTML);
 
         elements['code-editor'].value = step.answer;
         elements['btn-test'].click();

@@ -63,12 +63,41 @@ code { background: #eee; color: #111; padding: 2px 6px; border-radius: 3px; font
 .step-figure figcaption { font-family: monospace; font-size: 0.84em; color: #555;
                           margin-top: 7px; line-height: 1.5; }
 
-/* ---- editor ---- */
-#code-editor {
-    width: 100%; min-height: 260px; font-family: 'Menlo', 'Consolas', monospace;
-    font-size: 0.95em; line-height: 1.5; padding: 14px; border: 3px solid #111;
-    background: #fff; color: #111; resize: vertical; tab-size: 4;
+/* ---- editor ----
+   Two layers, one on top of the other: a <pre> holding a coloured copy of the
+   code, and the textarea above it with see-through text and a black cursor.
+   Every measurement below has to match in BOTH, or the letters drift apart. */
+.editor-wrap { position: relative; border: 3px solid #111; background: #fff; }
+
+#code-editor, #code-highlight {
+    margin: 0; padding: 14px; border: 0;
+    font-family: 'Menlo', 'Consolas', monospace; font-size: 0.95em;
+    line-height: 1.5; tab-size: 4;
+    white-space: pre-wrap; overflow-wrap: break-word;
+    box-sizing: border-box;
 }
+
+#code-highlight {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    overflow: hidden; pointer-events: none; color: #111;
+}
+
+#code-editor {
+    position: relative; display: block; width: 100%; min-height: 260px;
+    background: transparent; color: transparent; caret-color: #111;
+    resize: none; overflow: hidden;
+}
+#code-editor::selection { background: #b9d6ff; }
+
+/* The colours. Muted on purpose — the pages are black and white, and this is
+   the one place where a colour earns its keep by telling you what a word is. */
+.tok-comment  { color: #8a8a8a; font-style: italic; }
+.tok-string   { color: #0b6b47; }
+.tok-number   { color: #9a5b00; }
+.tok-keyword  { color: #111; font-weight: bold; }
+.tok-builtin  { color: #1a4f8f; }
+.tok-constant { color: #6b3fa0; }
+.tok-call     { color: #0f5c73; }
 
 .mono-btn {
     font-family: monospace; font-weight: bold; font-size: 1em;

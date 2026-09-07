@@ -54,6 +54,7 @@ function startWorkshop(config) {
     const STEPS = config.steps;
     const DEMO = config.demo;
     const ENGINE = config.engine || {};
+    const LANGUAGE = config.language || 'javascript';
     const STORAGE_CODE = config.storagePrefix + '-code-';
     const STORAGE_DONE = config.storagePrefix + '-done';
 
@@ -412,6 +413,139 @@ function startWorkshop(config) {
         }).join('');
     }
 
+    /* ------------------------------------------- the spec, as a comment */
+
+    /* How wide the words in the comment may run before they wrap.
+       Measured, not guessed: the editor is at its narrowest when the demo
+       column still sits beside it but the window is only about 1100px, and
+       that fits 64 characters. 48 plus the " * " and the label column comes
+       to 62, which leaves a little room to spare. */
+    const COMMENT_WIDTH = 48;
+
+    /* Every comment line starts "INPUT:     " — eleven characters — so the
+       three fields line up and the wrapped lines tuck in underneath. */
+    const LABEL_WIDTH = 11;
+
+    /**
+     * plainText — the spec as words, with any markup taken back out.
+     *
+     * ALGORITHM: drop the handful of tags the steps actually use, then put
+     *            the escaped characters back. Only those exact tags are
+     *            removed: one algorithm line genuinely contains a "<", and a
+     *            catch-all "anything in angle brackets" rule would eat it.
+     */
+    function plainText(text) {
+        return String(text)
+            .replace(/<\/?(?:code|strong|em|b|i)>/g, '')
+            .replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+            .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
+            /* An end-of-comment marker in the text would close the comment
+               early, taking the rest of the spec into the code with it. */
+            .replace(/\*\//g, '* /');
+    }
+
+    /**
+     * wrapWords — break a long line so it fits the editor.
+     *
+     * INPUT:  text, width — the words and how many characters fit.
+     * OUTPUT: an array of lines, none longer than width unless one single
+     *         word is longer than that all by itself.
+     */
+    function wrapWords(text, width) {
+        const lines = [];
+        let line = '';
+        plainText(text).split(/\s+/).forEach(function (word) {
+            if (word === '') { return; }
+            if (line === '') {
+                line = word;
+            } else if (line.length + 1 + word.length <= width) {
+                line = line + ' ' + word;
+            } else {
+                lines.push(line);
+                line = word;
+            }
+        });
+        if (line !== '') { lines.push(line); }
+        return lines.length > 0 ? lines : [''];
+    }
+
+    /** padRight — a label padded out to the width the columns line up on. */
+    function padRight(text, width) {
+        let out = text;
+        while (out.length < width) { out = out + ' '; }
+        return out;
+    }
+
+    /**
+     * specLines — the INPUT / OUTPUT / ALGORITHM box as plain aligned text.
+     *
+     * OUTPUT: an array of lines, already wrapped, ready for a comment.
+     */
+    function specLines(step) {
+        const out = [];
+
+        function field(label, text) {
+            wrapWords(text, COMMENT_WIDTH).forEach(function (line, i) {
+                out.push(padRight(i === 0 ? label + ':' : '', LABEL_WIDTH) + line);
+            });
+        }
+
+        field('INPUT', step.spec.input);
+        field('OUTPUT', step.spec.output);
+
+        step.spec.algorithm.forEach(function (item, index) {
+            const number = (index + 1) + '. ';
+            wrapWords(item, COMMENT_WIDTH - number.length).forEach(function (line, i) {
+                const label = index === 0 && i === 0 ? 'ALGORITHM:' : '';
+                out.push(padRight(label, LABEL_WIDTH) +
+                         (i === 0 ? number : padRight('', number.length)) + line);
+            });
+        });
+
+        return out;
+    }
+
+    /**
+     * specComment — the spec written the way this language writes comments.
+     *
+     * WHY: the spec box is up at the top of the page, and on a step with a
+     *      drawing in it that is a long way from the editor. Putting the same
+     *      words in the code means they are still in front of you while you
+     *      type, and they cost nothing — a comment is not code.
+     */
+    function specComment(step) {
+        const lines = specLines(step);
+        if (LANGUAGE === 'python') {
+            return lines.map(function (line) { return ('# ' + line).replace(/\s+$/, ''); })
+                        .join('\n') + '\n';
+        }
+        return '/**\n' +
+               lines.map(function (line) { return (' * ' + line).replace(/\s+$/, ''); }).join('\n') +
+               '\n */\n';
+    }
+
+    /* The colouring layer behind the editor. Set up once the page is ready;
+       until then, and on any page without one, this stays null and the editor
+       is a plain textarea that still works perfectly well. */
+    let highlighter = null;
+
+    /**
+     * setEditor — put text in the editor and re-colour it.
+     *
+     * Always change the editor through here. Typing is caught by the
+     * highlighter's own listener, but code that assigns .value is not, and a
+     * colour layer showing the previous step's code is worse than none.
+     */
+    function setEditor(text) {
+        el('code-editor').value = text;
+        if (highlighter) { highlighter.refresh(); }
+    }
+
+    /** starterFor — the empty function to begin from, with its spec on top. */
+    function starterFor(step) {
+        return specComment(step) + step.starter;
+    }
+
     /** renderStep — put the current step on the page. */
     function renderStep() {
         const step = currentStep();
@@ -435,7 +569,7 @@ function startWorkshop(config) {
         }
 
         const saved = loadCode(step.id);
-        el('code-editor').value = saved !== null ? saved : step.starter;
+        setEditor(saved !== null ? saved : starterFor(step));
 
         hintsShown = 0;
         el('hint-box').style.display = 'none';
@@ -596,8 +730,8 @@ function startWorkshop(config) {
         if (!window.confirm('Show one correct answer? Try your own version first — that is where the learning happens!')) {
             return;
         }
-        el('code-editor').value = step.answer;
-        saveCode(step.id, step.answer);
+        setEditor(specComment(step) + step.answer);
+        saveCode(step.id, el('code-editor').value);
         el('test-summary').className = 'test-summary';
         el('test-summary').textContent = 'Read the answer, then press ▶ Test it. Afterwards, delete it and write it again from memory!';
     }
@@ -605,8 +739,8 @@ function startWorkshop(config) {
     /** handleReset — go back to the empty starter code. */
     function handleReset() {
         const step = currentStep();
-        el('code-editor').value = step.starter;
-        saveCode(step.id, step.starter);
+        setEditor(starterFor(step));
+        saveCode(step.id, el('code-editor').value);
         el('test-results').innerHTML = '';
         el('test-summary').className = 'test-summary';
         el('test-summary').textContent = 'Back to the beginning. You can do this!';
@@ -646,6 +780,7 @@ function startWorkshop(config) {
                 const end = textarea.selectionEnd;
                 textarea.value = textarea.value.slice(0, start) + '    ' + textarea.value.slice(end);
                 textarea.selectionStart = textarea.selectionEnd = start + 4;
+                if (highlighter) { highlighter.refresh(); }
             }
         });
     }
@@ -680,6 +815,10 @@ function startWorkshop(config) {
             saveCode(currentStep().id, el('code-editor').value);
         });
         enableTabKey(el('code-editor'));
+
+        if (window.CodeHighlight) {
+            highlighter = window.CodeHighlight.attach(el('code-editor'), el('code-highlight'), LANGUAGE);
+        }
 
         document.addEventListener('keydown', handleKey);
 

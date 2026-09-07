@@ -34,7 +34,10 @@
 
                 <div class="panel">
                     <h3>✏️ Write your function</h3>
-                    <textarea id="code-editor" spellcheck="false"></textarea>
+                    <div class="editor-wrap">
+                        <pre id="code-highlight" aria-hidden="true"></pre>
+                        <textarea id="code-editor" spellcheck="false"></textarea>
+                    </div>
                     <div class="btn-row">
                         <button class="mono-btn primary" id="btn-test">▶ Test it</button>
                         <button class="mono-btn" id="btn-hint">💡 Hint</button>
@@ -102,6 +105,7 @@
     <script src="lib/snake-draw.js"></script>
     <script src="lib/snake-input.js"></script>
     <!-- The workshop itself -->
+    <script src="lib/code-highlight.js"></script>
     <script src="lib/workshop.js"></script>
     <script src="lib/snake-steps.js"></script>
     <script src="lib/snake-build.js"></script>

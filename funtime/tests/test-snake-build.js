@@ -73,6 +73,9 @@ const ctx = vm.createContext(sandbox);
     vm.runInContext(fs.readFileSync(LIB + f, 'utf8'), ctx, { filename: f });
 });
 
+/* These three workshop suites load workshop.js WITHOUT code-highlight.js on
+   purpose. The editor has to keep working when the colour layer is not there
+   — an old cached page, a blocked file — and this is where that is proved. */
 let failures = 0;
 const check = (name, ok, extra) => {
     if (ok) { console.log('  ok   ' + name); }
@@ -96,7 +99,11 @@ console.log('start state:');
 check('opens on step 1', elements['step-number'].textContent === 'Step 1 of 12', elements['step-number'].textContent);
 check('shows the step title', elements['step-title'].textContent === steps[0].title);
 check('Next is locked until the tests pass', elements['btn-next'].disabled === true);
-check('editor is filled with the starter code', elements['code-editor'].value === steps[0].starter);
+check('editor opens with the spec as a comment, then the starter code',
+      elements['code-editor'].value.indexOf('INPUT:') !== -1 &&
+      elements['code-editor'].value.indexOf('ALGORITHM:') !== -1 &&
+      elements['code-editor'].value.endsWith(steps[0].starter),
+      elements['code-editor'].value.slice(0, 60));
 check('12 progress dots, later ones locked', elements['progress'].children.length === 12 &&
       elements['progress'].children[11].className.indexOf('locked') !== -1);
 check('demo shows the goal first', elements['demo-status'].className.indexOf('goal') !== -1,

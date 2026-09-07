@@ -168,6 +168,7 @@ function startPythonWorkshop(options) {
             startWorkshop({
                 storagePrefix: options.storagePrefix,
                 steps: options.steps,
+                language: 'python',
                 engine: engine,
                 demo: demoAdapter
             });

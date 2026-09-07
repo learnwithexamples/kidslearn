@@ -338,6 +338,7 @@ def build_workshop_page(spec, python=False):
 
     if python:
         scripts = '''    <script src="lib/python-runner.js"></script>
+    <script src="lib/code-highlight.js"></script>
     <script src="lib/workshop.js"></script>
     <script src="lib/workshop-python.js"></script>
     <script src="lib/%s-python-steps.js"></script>
@@ -358,6 +359,7 @@ def build_workshop_page(spec, python=False):
     else:
         scripts = "\n".join('    <script src="lib/%s"></script>' % name
                             for name in spec["js_files"] if not name.endswith("-main.js")) + '''
+    <script src="lib/code-highlight.js"></script>
     <script src="lib/workshop.js"></script>
     <script src="lib/%s-steps.js"></script>
     <script src="lib/%s-build.js"></script>
@@ -392,7 +394,10 @@ def build_workshop_page(spec, python=False):
 
                 <div class="panel">
                     <h3>✏️ Write your function</h3>
-                    <textarea id="code-editor" spellcheck="false"></textarea>
+                    <div class="editor-wrap">
+                        <pre id="code-highlight" aria-hidden="true"></pre>
+                        <textarea id="code-editor" spellcheck="false"></textarea>
+                    </div>
                     <div class="btn-row">
                         <button class="mono-btn primary" id="btn-test">▶ Test it</button>
                         <button class="mono-btn" id="btn-hint">💡 Hint</button>
