@@ -138,6 +138,13 @@ def padded_row(row, columns):
 
 # Every page loads this. It is the whole of the Xbox-controller support: it
 # turns the pad into key presses, so no game has to know it exists.
+# Only the pages where a game is actually played. The arrow keys have to keep
+# scrolling on the workshop pages, which are long and meant to be read.
+NO_SCROLL_SCRIPT = (
+    "    <!-- Keep the arrow keys in the game instead of scrolling the page. -->\n"
+    '    <script src="lib/no-scroll.js"></script>\n'
+)
+
 GAMEPAD_SCRIPT = (
     "    <!-- An Xbox controller, for anyone who has one. No driver needed. -->\n"
     '    <script src="lib/gamepad.js"></script>\n'
@@ -254,7 +261,7 @@ def build_game_page(spec, python=False):
         });
     </script>
 ''' % (", ".join("'" + name + "'" for name in spec["py_files"]),
-       slug.replace("-", "_"), slug.replace("-", "_")) + GAMEPAD_SCRIPT
+       slug.replace("-", "_"), slug.replace("-", "_")) + GAMEPAD_SCRIPT + NO_SCROLL_SCRIPT
         coder = '''            <div class="coder-box">
                 <h3>🧑‍💻 This whole game is Python</h3>
                 <p>There is almost no JavaScript on this page. The browser downloaded <strong>Pyodide</strong> — a complete Python interpreter compiled to WebAssembly — and then ran the <code>.py</code> files in <code>funtime/pylib/</code>. Python does the rules, the maths <em>and</em> the drawing.</p>
@@ -267,7 +274,7 @@ def build_game_page(spec, python=False):
     else:
         scripts = "    <!-- The libraries, in the order they need each other -->\n" + \
                   "\n".join('    <script src="lib/%s"></script>' % name for name in spec["js_files"]) + \
-                  "\n" + GAMEPAD_SCRIPT
+                  "\n" + GAMEPAD_SCRIPT + NO_SCROLL_SCRIPT
         coder = '''            <div class="coder-box">
                 <h3>🧑‍💻 For young coders: build this game yourself</h3>
                 <p>This game is split into small library files inside <code>funtime/lib/</code>, and every function has a comment saying exactly what goes <strong>in</strong>, what comes <strong>out</strong>, and the <strong>algorithm</strong> in plain English. Empty any function out, read its comment, and write it yourself.</p>

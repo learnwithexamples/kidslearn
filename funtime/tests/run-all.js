@@ -25,6 +25,7 @@ const SUITES = [
     ['Racing — page wiring', 'test-race-dom.js'],
     ['Racing — workshop steps', 'test-race-steps.js'],
     ['Racing — workshop page', 'test-race-build.js'],
+    ['Arrow keys stay in the game', 'test-no-scroll.js'],
     ['The Fun Time hub', 'test-hub.js'],
     ['Files the pages need', 'test-assets.js'],
     ['Xbox controller support', 'test-gamepad.js'],
