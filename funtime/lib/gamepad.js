@@ -256,6 +256,11 @@
         if (document.hidden) { releaseEverything(); }
     });
 
+    /* The controller-tester page reads this so it can show the same mapping
+       this file actually uses, rather than a copy that could drift out of
+       step with it. */
+    window.GAMEPAD_BUTTON_KEYS = BUTTON_KEYS;
+
     if (navigator.getGamepads) {
         window.requestAnimationFrame(poll);
     }

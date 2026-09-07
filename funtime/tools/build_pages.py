@@ -529,6 +529,8 @@ def build_hub():
                     Bluetooth</strong>.</li>
                 <li>Open any game and <strong>press a button on the pad</strong> — a
                     little <em>🎮 Controller ready</em> badge appears in the corner.</li>
+                <li>Not sure it is working? <a href="gamepad-test.html"><strong>Test your
+                    controller here</strong></a> — every button lights up as you press it.</li>
                 <li>The stick and the D-pad are the arrow keys, <strong>A</strong> is
                     <span class="key">SPACE</span>, <strong>Menu</strong> pauses and
                     <strong>View</strong> starts again.</li>
