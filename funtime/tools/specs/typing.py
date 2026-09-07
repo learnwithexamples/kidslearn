@@ -13,6 +13,31 @@ SPEC = dict(
     play_label="⏸ Pause",
     touchpad=[[("btn-keyboard", "⌨ TAP TO TYPE")]],
     hidden_input=True,
+    extra_scripts=(
+        "    <!-- The Classical Roots words, shared with the vocabulary section. -->\n"
+        '    <script src="../data/vocabulary-data.js"></script>\n'
+        '    <script src="lib/wordlists.js"></script>\n'
+    ),
+    extra_panel="""            <div class="word-source" id="word-source">
+                <h3>\U0001F4DA Which words?</h3>
+                <p class="source-hint">Race on the everyday words, or practise a Classical Roots lesson. Pick one book, then tick as many lessons as you like.</p>
+
+                <div class="source-row">
+                    <label for="book-choice">Book</label>
+                    <select id="book-choice"></select>
+                </div>
+
+                <div class="lesson-list" id="lesson-list"></div>
+
+                <div class="btn-row">
+                    <button class="mono-btn small" id="lessons-all">All lessons</button>
+                    <button class="mono-btn small" id="lessons-none">None</button>
+                    <button class="mono-btn small primary" id="lessons-use">\u2713 Use these words</button>
+                </div>
+
+                <p class="source-note" id="source-note"></p>
+            </div>
+""",
     help=[
         ("⌨️ Controls", [
             'Just start typing — the clock starts with your first letter',
@@ -25,6 +50,12 @@ SPEC = dict(
             "Your typing turns black as it matches — and gets struck through when it does not.",
             "The bar shows the minute running out.",
             "The race ends after 24 words or 60 seconds, whichever comes first.",
+        ]),
+        ("📚 Your own word lists", [
+            "Under the board you can swap the everyday words for a <strong>Classical Roots</strong> lesson.",
+            "Pick <strong>one book</strong>, then tick <strong>as many lessons</strong> as you want — they all go in together.",
+            "The race deals from a shuffled bag, so every word in your choice gets a turn before any comes round again.",
+            "Your choice is remembered, so you can keep practising the same lesson.",
         ]),
         ("🏆 What is a good speed?", [
             "A \"word\" means <strong>five characters</strong> — that is how typists have always counted.",

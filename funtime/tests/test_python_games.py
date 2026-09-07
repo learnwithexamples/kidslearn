@@ -436,6 +436,46 @@ for word in ("alpha", "XXXXX", "charlie"):
 check("the results say which words went wrong",
       state["results"] == [True, False, True], state["results"])
 
+print("Typing Race word lists (the Python side of choosing a lesson):")
+
+lesson = ["conform", "deform", "formal", "gradually", "graduate", "graduation"]
+state = typing_race.create_game()
+state["pool"] = lesson
+typing_race.new_race(state)
+check("a race is a full %d words" % typing_race.WORDS_PER_RACE,
+      len(state["words"]) == typing_race.WORDS_PER_RACE, len(state["words"]))
+check("and every word came from the chosen lesson",
+      all(word in lesson for word in state["words"]),
+      [w for w in state["words"] if w not in lesson][:4])
+
+from collections import Counter                      # noqa: E402
+times = Counter(state["words"])
+check("a short list deals evenly", max(times.values()) - min(times.values()) <= 1, dict(times))
+check("and uses every word in it", len(times) == len(lesson), len(times))
+
+plain = typing_race.create_game()
+plain["pool"] = None
+typing_race.new_race(plain)
+check("no chosen list falls back to the everyday words",
+      all(word in typing_race.WORD_POOL for word in plain["words"]))
+
+typed_all = True
+state = typing_race.create_game()
+state["pool"] = lesson
+typing_race.new_race(state)
+for _ in range(typing_race.WORDS_PER_RACE):
+    if state["is_over"]:
+        break
+    word = typing_race.current_word(state)
+    for letter in word:
+        if not typing_race.type_letter(state, letter):
+            typed_all = False
+    if not typing_race.submit_word(state):
+        typed_all = False
+check("a whole lesson race can be typed", typed_all is True)
+check("with every word right", typing_race.accuracy(state) == 100,
+      typing_race.accuracy(state))
+
 print("Word Rain (the Python rules must match the JavaScript ones):")
 
 check("the speed has a ceiling", wordfall.speed_for_level(9999) == wordfall.MAX_SPEED)

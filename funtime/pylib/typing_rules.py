@@ -31,9 +31,27 @@ WORD_POOL = [
 ]
 
 
-def pick_words(count):
-    """A fresh line of words to type, chosen at random."""
-    return [random.choice(WORD_POOL) for _ in range(count)]
+def pick_words(count, pool=None):
+    """A fresh line of words to type.
+
+    ALGORITHM: shuffle the pool and deal from it, shuffling again whenever it
+    runs out.
+
+    WHY not just pick at random each time: a spelling lesson might hold only
+    eight words, and picking at random would show you one of them five times
+    and another one never. Dealing from a shuffled bag gives every word a turn
+    before any word gets a second one.
+    """
+    source = pool if pool else WORD_POOL
+    if not source:
+        return []
+
+    words = []
+    while len(words) < count:
+        bag = list(source)
+        random.shuffle(bag)
+        words.extend(bag[:count - len(words)])
+    return words
 
 
 def current_word(state):
@@ -147,8 +165,13 @@ def time_left(state):
 
 
 def new_race(state):
-    """A fresh line of words and a clean clock."""
-    state["words"] = pick_words(WORDS_PER_RACE)
+    """A fresh line of words and a clean clock.
+
+    ALGORITHM: state["pool"] holds whichever word list the player chose - a
+    Classical Roots lesson, say. Leave it alone here: choosing words once and
+    racing on them all afternoon is the whole point.
+    """
+    state["words"] = pick_words(WORDS_PER_RACE, state.get("pool"))
     state["index"] = 0
     state["typed"] = ""
     state["correct"] = 0

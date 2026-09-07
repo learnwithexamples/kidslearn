@@ -73,6 +73,30 @@ GAME_STYLE = """        body { background: #2b2b2b; }
         .hidden-input { position: absolute; left: -9999px; width: 1px; height: 1px;
                         opacity: 0; border: 0; padding: 0; }
 
+        /* ---- picking a word list (Typing Race) ---- */
+        .word-source { max-width: 520px; margin: 22px auto 0; padding: 16px 18px;
+                       border: 3px solid #111; background: #fff; }
+        .word-source h3 { margin: 0 0 6px; }
+        .source-hint { color: #555; font-size: 0.92em; margin: 0 0 12px; }
+        .source-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+        .source-row label { font-family: monospace; font-size: 0.9em; letter-spacing: 1px; }
+        .source-row select { flex: 1; font-family: monospace; font-size: 1em;
+                             padding: 8px 10px; border: 2px solid #111; background: #fff;
+                             color: #111; }
+        .lesson-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                       gap: 4px 12px; max-height: 210px; overflow-y: auto;
+                       border: 2px solid #eee; padding: 8px 10px; margin-bottom: 12px; }
+        .lesson-list:empty { display: none; }
+        .lesson-list label { display: flex; gap: 7px; align-items: baseline;
+                             font-size: 0.9em; cursor: pointer; padding: 2px 0; }
+        /* One line each, whatever the data says — some lessons name fifteen roots. */
+        .lesson-list .name { flex: 1; overflow: hidden; text-overflow: ellipsis;
+                             white-space: nowrap; }
+        .lesson-list input { margin: 0; flex: none; }
+        .lesson-list .count { color: #888; font-family: monospace; font-size: 0.85em; }
+        .source-note { font-family: monospace; font-size: 0.86em; color: #333;
+                       margin: 10px 0 0; min-height: 1.2em; }
+
         .help-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 26px 0 0; }
         .help-card { background: #fff; border: 2px solid #111; padding: 16px 20px; }
         .help-card h3 { margin: 0 0 10px; color: #111; }
@@ -271,7 +295,7 @@ def build_game_page(spec, python=False):
               if python else "")
 
     if python:
-        scripts = '''    <!-- One small piece of JavaScript, whose only job is to start Python. -->
+        scripts = spec.get("extra_scripts", "") + '''    <!-- One small piece of JavaScript, whose only job is to start Python. -->
     <script src="lib/python-runner.js"></script>
     <script>
         startPythonGame({
@@ -292,7 +316,8 @@ def build_game_page(spec, python=False):
             </div>
 ''' % (file_table(spec["py_coder_rows"]), slug, slug.replace("-", "_"), slug, spec["name"])
     else:
-        scripts = "    <!-- The libraries, in the order they need each other -->\n" + \
+        scripts = spec.get("extra_scripts", "") + \
+                  "    <!-- The libraries, in the order they need each other -->\n" + \
                   "\n".join('    <script src="lib/%s"></script>' % name for name in spec["js_files"]) + \
                   "\n" + GAMEPAD_SCRIPT + NO_SCROLL_SCRIPT
         coder = '''            <div class="coder-box">
@@ -326,6 +351,7 @@ def build_game_page(spec, python=False):
             </div>
 
 %s
+%s
             <div class="help-grid">
 %s
             </div>
@@ -340,7 +366,7 @@ def build_game_page(spec, python=False):
 %s''' % (spec["icon"], spec["title"], badge, subtitle, status,
          spec["canvas_id"], spec["canvas_width"], spec["canvas_height"],
          hud_html(spec), spec.get("play_label", "▶ Play"), touchpad_html(spec),
-         help_html(spec), coder, spec["footer"], scripts)
+         spec.get("extra_panel", ""), help_html(spec), coder, spec["footer"], scripts)
 
     name = "%s-python.html" % spec["slug"] if python else "%s.html" % spec["slug"]
     (FUNTIME / name).write_text(page_shell(

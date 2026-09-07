@@ -30,13 +30,48 @@ const WORD_POOL = [
 ];
 
 /**
- * pickWords — a fresh line of words to type.
- * INPUT: count. OUTPUT: a list of words, chosen at random.
+ * shuffled — a copy of a list, in a random order.
+ * ALGORITHM: walk backwards, swapping each item with a random one at or
+ *            before it. Every order is equally likely, and it takes one pass.
  */
-function pickWords(count) {
+function shuffled(list) {
+    const bag = list.slice();
+    for (let i = bag.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const held = bag[i];
+        bag[i] = bag[j];
+        bag[j] = held;
+    }
+    return bag;
+}
+
+/**
+ * pickWords — a fresh line of words to type.
+ *
+ * INPUT:  count. pool — the words to choose from, or nothing for the
+ *         built-in list.
+ * OUTPUT: a list of `count` words.
+ *
+ * ALGORITHM: shuffle the pool and deal from it, shuffling again whenever it
+ *            runs out.
+ *
+ * WHY not just pick at random each time: a spelling lesson might hold only
+ *      eight words, and picking at random would show you one of them five
+ *      times and another one never. Dealing from a shuffled bag gives every
+ *      word a turn before any word gets a second one.
+ */
+function pickWords(count, pool) {
+    const from = (pool && pool.length > 0) ? pool : WORD_POOL;
+    if (from.length === 0) {
+        return [];
+    }
+
     const words = [];
-    for (let i = 0; i < count; i++) {
-        words.push(WORD_POOL[Math.floor(Math.random() * WORD_POOL.length)]);
+    while (words.length < count) {
+        const bag = shuffled(from);
+        for (let i = 0; i < bag.length && words.length < count; i++) {
+            words.push(bag[i]);
+        }
     }
     return words;
 }
@@ -181,9 +216,14 @@ function timeLeft(state) {
     return left < 0 ? 0 : left;
 }
 
-/** newRace — a fresh line of words and a clean clock. */
+/**
+ * newRace — a fresh line of words and a clean clock.
+ * ALGORITHM: state.pool holds whichever word list the player chose — a
+ *            Classical Roots lesson, say. Leave it alone here: choosing words
+ *            once and racing on them all afternoon is the whole point.
+ */
 function newRace(state) {
-    state.words = pickWords(WORDS_PER_RACE);
+    state.words = pickWords(WORDS_PER_RACE, state.pool);
     state.index = 0;
     state.typed = '';
     state.correct = 0;

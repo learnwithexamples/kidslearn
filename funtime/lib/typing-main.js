@@ -77,6 +77,25 @@ function connectKeyboard() {
     });
 }
 
+/**
+ * connectWordSource — let the player race on a Classical Roots lesson.
+ *
+ * ALGORITHM: the panel itself is shared with the Python version, over in
+ *            wordlists.js. All this has to do is take the words it hands
+ *            back, hang them on the game, and start a fresh race.
+ */
+function connectWordSource() {
+    if (!window.WordLists) { return; }
+
+    window.WordLists.connectPicker(function (words, note) {
+        game.pool = (words && words.length > 0) ? words : null;
+        newRace(game);
+        drawEverything(game);
+        const line = getElement('source-note');
+        if (line) { line.textContent = note; }
+    });
+}
+
 /** connectButtons — the on-screen buttons. */
 function connectButtons() {
     [['pause-btn', 'pause'], ['restart-btn', 'new']].forEach(function (pair) {
@@ -127,6 +146,7 @@ function setUpGame() {
     startNewGame();
     connectKeyboard();
     connectButtons();
+    connectWordSource();
 
     window.requestAnimationFrame(gameLoop);
 }

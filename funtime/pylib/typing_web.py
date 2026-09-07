@@ -111,6 +111,36 @@ def on_open_keyboard(event):
         hidden.focus()
 
 
+def on_words_chosen(words, note):
+    """The player picked a word list, so start a race on it.
+
+    INPUT: words - a JavaScript array, empty for the game's own list.
+    """
+    chosen = [str(word) for word in words]
+    state["pool"] = chosen if chosen else None
+    rules.new_race(state)
+    draw_everything()
+
+    line = get_element("source-note")
+    if line is not None:
+        line.textContent = note
+
+
+def connect_word_source():
+    """Let the player race on a Classical Roots lesson.
+
+    ALGORITHM: the panel itself is shared with the JavaScript version, over in
+    lib/wordlists.js. All this has to do is take the words it hands back, hang
+    them on the game, and start a fresh race.
+    """
+    lists = getattr(window, "WordLists", None)
+    if lists is None:
+        return
+    proxy = create_proxy(on_words_chosen)
+    PROXIES.append(proxy)
+    lists.connectPicker(proxy)
+
+
 def frame(timestamp):
     """The heartbeat: only the clock ticks."""
     global last_time
@@ -170,4 +200,5 @@ def start_game():
     connect_button("restart-btn", "new")
 
     start_new_game()
+    connect_word_source()
     window.requestAnimationFrame(PROXIES[0])
