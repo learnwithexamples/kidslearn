@@ -42,7 +42,22 @@ code, .mini-code { font-family: 'Menlo', 'Consolas', monospace; }
 code { background: #eee; color: #111; padding: 2px 6px; border-radius: 3px; font-size: 0.92em; }
 .mini-code { display: block; background: #111; color: #fff; padding: 12px 16px; white-space: pre; overflow-x: auto; font-size: 0.9em; margin: 10px 0; }
 
-.spec { background: #f4f4f4; border-left: 6px solid #111; padding: 14px 18px; }
+/* ---- the spec, tucked away ----
+   The same words now sit at the top of the editor as a comment, so this stays
+   shut. It is still here because a student who edits that comment away needs
+   somewhere to find the spec again — and open or shut is remembered as you
+   move between steps, because <details> keeps its own state. */
+.spec-box { background: #f4f4f4; border-left: 6px solid #111; }
+.spec-box > summary {
+    font-family: monospace; font-size: 0.9em; letter-spacing: 1px; color: #111;
+    padding: 10px 18px; cursor: pointer; list-style: none;
+}
+.spec-box > summary::-webkit-details-marker { display: none; }
+.spec-box > summary::before { content: '📋 ▸ '; }
+.spec-box[open] > summary::before { content: '📋 ▾ '; }
+.spec-box > summary:hover { background: #111; color: #fff; }
+
+.spec { padding: 0 18px 14px; }
 .spec h4 { font-family: monospace; margin: 10px 0 4px; color: #111; font-size: 0.9em; letter-spacing: 1px; }
 .spec h4:first-child { margin-top: 0; }
 .spec p, .spec ol { margin: 0 0 6px; color: #333; }

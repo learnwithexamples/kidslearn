@@ -416,15 +416,77 @@ function startWorkshop(config) {
     /* ------------------------------------------- the spec, as a comment */
 
     /* How wide the words in the comment may run before they wrap.
-       Measured, not guessed: the editor is at its narrowest when the demo
-       column still sits beside it but the window is only about 1100px, and
-       that fits 64 characters. 48 plus the " * " and the label column comes
-       to 62, which leaves a little room to spare. */
-    const COMMENT_WIDTH = 48;
+       This cannot be a fixed number. The editor fits 85 characters on a wide
+       screen, but only 48 in the narrow band where the demo column squeezes
+       in beside the lesson column — so the width is MEASURED, and the
+       comment is wrapped to whatever really fits. Wrap too wide and the
+       browser soft-wraps it, which throws the aligned columns out. */
+    const NARROWEST_COMMENT = 32;
+    const WIDEST_COMMENT = 48;
+    const FALLBACK_COMMENT = 48;
 
     /* Every comment line starts "INPUT:     " — eleven characters — so the
        three fields line up and the wrapped lines tuck in underneath. */
     const LABEL_WIDTH = 11;
+
+    /* " * " or "# " in front of every line. Take the wider of the two, so a
+       comment is never too wide for the other language. */
+    const PREFIX_WIDTH = 3;
+
+    /* One character's width never changes, so it is worth measuring once. */
+    let measuredCharWidth = 0;
+
+    /**
+     * charWidth — how many pixels one character of the editor's font takes.
+     *
+     * ALGORITHM: put a known run of characters in a hidden span wearing the
+     *            editor's font, measure it, and divide. Returns 0 if there is
+     *            nothing real to measure — a test harness, say.
+     */
+    function charWidth(style) {
+        if (measuredCharWidth > 0) { return measuredCharWidth; }
+        if (!document.body || typeof document.body.appendChild !== 'function') { return 0; }
+
+        const ruler = document.createElement('span');
+        if (!ruler.style || typeof ruler.getBoundingClientRect !== 'function') { return 0; }
+        ruler.style.position = 'absolute';
+        ruler.style.visibility = 'hidden';
+        ruler.style.whiteSpace = 'pre';
+        ruler.style.fontFamily = style.fontFamily;
+        ruler.style.fontSize = style.fontSize;
+        ruler.style.letterSpacing = style.letterSpacing;
+        ruler.textContent = '0123456789012345678901234567890123456789';
+
+        document.body.appendChild(ruler);
+        const width = ruler.getBoundingClientRect().width / 40;
+        document.body.removeChild(ruler);
+
+        if (width > 0) { measuredCharWidth = width; }
+        return measuredCharWidth;
+    }
+
+    /**
+     * commentWidth — how many characters of words fit on one comment line.
+     *
+     * OUTPUT: a width between NARROWEST_COMMENT and WIDEST_COMMENT.
+     *
+     * ALGORITHM: measure the editor and one character, take off the room the
+     *            prefix and the label column need, and keep the answer
+     *            sensible. If anything cannot be measured, fall back.
+     */
+    function commentWidth() {
+        const editor = el('code-editor');
+        if (!editor || typeof window.getComputedStyle !== 'function') { return FALLBACK_COMMENT; }
+
+        const style = window.getComputedStyle(editor);
+        const one = charWidth(style);
+        const inner = editor.clientWidth - parseFloat(style.paddingLeft || 0) -
+                      parseFloat(style.paddingRight || 0);
+        if (!(one > 0) || !(inner > 0)) { return FALLBACK_COMMENT; }
+
+        const fits = Math.floor(inner / one) - LABEL_WIDTH - PREFIX_WIDTH;
+        return Math.max(NARROWEST_COMMENT, Math.min(WIDEST_COMMENT, fits));
+    }
 
     /**
      * plainText — the spec as words, with any markup taken back out.
@@ -482,10 +544,11 @@ function startWorkshop(config) {
      * OUTPUT: an array of lines, already wrapped, ready for a comment.
      */
     function specLines(step) {
+        const width = commentWidth();
         const out = [];
 
         function field(label, text) {
-            wrapWords(text, COMMENT_WIDTH).forEach(function (line, i) {
+            wrapWords(text, width).forEach(function (line, i) {
                 out.push(padRight(i === 0 ? label + ':' : '', LABEL_WIDTH) + line);
             });
         }
@@ -495,7 +558,7 @@ function startWorkshop(config) {
 
         step.spec.algorithm.forEach(function (item, index) {
             const number = (index + 1) + '. ';
-            wrapWords(item, COMMENT_WIDTH - number.length).forEach(function (line, i) {
+            wrapWords(item, width - number.length).forEach(function (line, i) {
                 const label = index === 0 && i === 0 ? 'ALGORITHM:' : '';
                 out.push(padRight(label, LABEL_WIDTH) +
                          (i === 0 ? number : padRight('', number.length)) + line);
