@@ -96,6 +96,10 @@ GAME_STYLE = """        body { background: #2b2b2b; }
         .lesson-list .count { color: #888; font-family: monospace; font-size: 0.85em; }
         .source-note { font-family: monospace; font-size: 0.86em; color: #333;
                        margin: 10px 0 0; min-height: 1.2em; }
+        .source-row input[type="number"] { font-family: monospace; font-size: 1em;
+                                           width: 76px; padding: 8px 10px;
+                                           border: 2px solid #111; background: #fff; color: #111; }
+        .source-aside { color: #666; font-size: 0.85em; }
 
         .help-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 26px 0 0; }
         .help-card { background: #fff; border: 2px solid #111; padding: 16px 20px; }

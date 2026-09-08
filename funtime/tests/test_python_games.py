@@ -530,6 +530,66 @@ check("doing nothing loses the game", state["is_over"] is True)
 check("after exactly %d misses" % wordfall.START_LIVES,
       state["missed"] >= wordfall.START_LIVES, state["missed"])
 
+# The player's own hand on the level.
+check("the up arrow means faster", wordfall.action_for_key("ArrowUp") == "faster")
+check("the down arrow means slower", wordfall.action_for_key("ArrowDown") == "slower")
+
+state = wordfall.create_game()
+state["level"] = 5
+check("up goes up one", wordfall.change_level(state, 1) == 6)
+check("down goes down one", wordfall.change_level(state, -1) == 5)
+for _ in range(50):
+    wordfall.change_level(state, -1)
+check("it never goes below level %d" % wordfall.MIN_LEVEL,
+      state["level"] == wordfall.MIN_LEVEL, state["level"])
+for _ in range(400):
+    wordfall.change_level(state, 1)
+check("and never above level %d" % wordfall.MAX_LEVEL,
+      state["level"] == wordfall.MAX_LEVEL, state["level"])
+
+state = wordfall.create_game()
+state["start_level"] = 9
+wordfall.new_game(state)
+check("a new game starts on the level you asked for", state["level"] == 9, state["level"])
+state["start_level"] = "nonsense"
+wordfall.new_game(state)
+check("and something that is not a number falls back to 1",
+      state["level"] == wordfall.MIN_LEVEL, state["level"])
+
+# A chosen word list, and the room it is given.
+everyday = wordfall.create_game()
+check("the everyday game is scaled by exactly one",
+      wordfall.drop_gap(everyday) == wordfall.gap_for_level(everyday["level"]))
+wordy = wordfall.create_game()
+wordy["pool"] = ["photosynthesis", "constellation", "metamorphosis"]
+check("a list of long words is given longer",
+      wordfall.drop_gap(wordy) > wordfall.drop_gap(everyday) * 2,
+      round(wordfall.drop_gap(wordy)))
+check("a list with no short words still works at level 1",
+      all(wordfall.word_for_level(1, wordy["pool"]) in wordy["pool"] for _ in range(40)))
+
+lesson = ["monologue", "monarch", "monogram", "unanimous", "duplex", "triple"]
+state = wordfall.create_game()
+state["pool"] = lesson
+wordfall.new_game(state)
+for _ in range(400):
+    wordfall.update_game(state, 25)
+check("every word in the sky came from the lesson",
+      all(word["text"] in lesson for word in state["words"]),
+      [w["text"] for w in state["words"] if w["text"] not in lesson])
+
+# Finishing a word must clear it, even with a longer one hanging lower.
+state = wordfall.create_game()
+whole = wordfall.make_word("graduate", 10)
+whole["y"] = 40
+longer = wordfall.make_word("graduation", 150)
+longer["y"] = 300
+state["words"] = [whole, longer]
+check("a word typed in full beats a longer one hanging lower",
+      wordfall.matching_word(state, "graduate")["text"] == "graduate")
+check("but half way through, the lower one is still the target",
+      wordfall.matching_word(state, "gradua")["text"] == "graduation")
+
 print("\n%d checks run" % checks)
 print("ALL PYTHON GAME TESTS PASSED" if failures == 0 else "%d TEST(S) FAILED" % failures)
 sys.exit(0 if failures == 0 else 1)

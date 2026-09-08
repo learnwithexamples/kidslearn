@@ -77,6 +77,10 @@
         .lesson-list .count { color: #888; font-family: monospace; font-size: 0.85em; }
         .source-note { font-family: monospace; font-size: 0.86em; color: #333;
                        margin: 10px 0 0; min-height: 1.2em; }
+        .source-row input[type="number"] { font-family: monospace; font-size: 1em;
+                                           width: 76px; padding: 8px 10px;
+                                           border: 2px solid #111; background: #fff; color: #111; }
+        .source-aside { color: #666; font-size: 0.85em; }
 
         .help-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 26px 0 0; }
         .help-card { background: #fff; border: 2px solid #111; padding: 16px 20px; }
@@ -164,12 +168,38 @@
                 <button class="mono-btn" id="btn-keyboard">⌨ TAP TO TYPE</button>
             </div>
 
+            <div class="word-source" id="word-source">
+                <h3>⚙️ Set it up</h3>
+                <p class="source-hint">Start wherever you like, and race on the everyday words or on a Classical Roots lesson. Pick one book, then tick as many lessons as you want.</p>
+
+                <div class="source-row">
+                    <label for="start-level">Start at level</label>
+                    <input id="start-level" type="number" min="1" max="99" step="1" value="1">
+                    <span class="source-aside">↑ and ↓ change it while you play</span>
+                </div>
+
+                <div class="source-row">
+                    <label for="book-choice">Book</label>
+                    <select id="book-choice"></select>
+                </div>
+
+                <div class="lesson-list" id="lesson-list"></div>
+
+                <div class="btn-row">
+                    <button class="mono-btn small" id="lessons-all">All lessons</button>
+                    <button class="mono-btn small" id="lessons-none">None</button>
+                    <button class="mono-btn small primary" id="lessons-use">✓ Use these words</button>
+                </div>
+
+                <p class="source-note" id="source-note"></p>
+            </div>
 
             <div class="help-grid">
                 <div class="help-card">
                     <h3>⌨️ Controls</h3>
                     <ul>
                         <li>Just start typing — no need to pick a word first</li>
+                        <li><span class="key">↑</span> faster &nbsp;•&nbsp; <span class="key">↓</span> slower — change the level whenever you like</li>
                         <li><span class="key">BACKSPACE</span> rub out a letter</li>
                         <li><span class="key">SPACE</span> give up on this word and start another</li>
                         <li><span class="key">ENTER</span> new game &nbsp;•&nbsp; <span class="key">ESC</span> pause</li>
@@ -192,8 +222,18 @@
                     <ul>
                         <li>Every <strong>six words</strong> you clear takes you up a level.</li>
                         <li>Each level the words fall <strong>faster</strong> and arrive <strong>closer together</strong>.</li>
-                        <li>The words get longer too — three letters at first, up to seven later on.</li>
+                        <li>Too slow or too easy? Press <span class='key'>↑</span> or <span class='key'>↓</span> and change it yourself, mid-game.</li>
                         <li>Nobody lasts for ever. The question is how far you get.</li>
+                    </ul>
+                </div>
+
+                <div class="help-card">
+                    <h3>📚 Your own word lists</h3>
+                    <ul>
+                        <li>Under the sky you can swap the everyday words for a <strong>Classical Roots</strong> lesson.</li>
+                        <li>Pick <strong>one book</strong>, then tick <strong>as many lessons</strong> as you want.</li>
+                        <li>Long words are given proportionally longer to fall, so a vocabulary lesson is a fair game and not an impossible one.</li>
+                        <li>Your book, your lessons and your starting level are all remembered.</li>
                     </ul>
                 </div>
             </div>
@@ -234,6 +274,9 @@
         </footer>
     </div>
 
+    <!-- The Classical Roots words, shared with the vocabulary section. -->
+    <script src="../data/vocabulary-data.js"></script>
+    <script src="lib/wordlists.js"></script>
     <!-- One small piece of JavaScript, whose only job is to start Python. -->
     <script src="lib/python-runner.js"></script>
     <script>

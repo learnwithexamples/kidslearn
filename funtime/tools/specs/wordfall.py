@@ -13,9 +13,41 @@ SPEC = dict(
     play_label="⏸ Pause",
     touchpad=[[("btn-keyboard", "⌨ TAP TO TYPE")]],
     hidden_input=True,
+    extra_scripts=(
+        "    <!-- The Classical Roots words, shared with the vocabulary section. -->\n"
+        '    <script src="../data/vocabulary-data.js"></script>\n'
+        '    <script src="lib/wordlists.js"></script>\n'
+    ),
+    extra_panel="""            <div class="word-source" id="word-source">
+                <h3>\u2699\ufe0f Set it up</h3>
+                <p class="source-hint">Start wherever you like, and race on the everyday words or on a Classical Roots lesson. Pick one book, then tick as many lessons as you want.</p>
+
+                <div class="source-row">
+                    <label for="start-level">Start at level</label>
+                    <input id="start-level" type="number" min="1" max="99" step="1" value="1">
+                    <span class="source-aside">\u2191 and \u2193 change it while you play</span>
+                </div>
+
+                <div class="source-row">
+                    <label for="book-choice">Book</label>
+                    <select id="book-choice"></select>
+                </div>
+
+                <div class="lesson-list" id="lesson-list"></div>
+
+                <div class="btn-row">
+                    <button class="mono-btn small" id="lessons-all">All lessons</button>
+                    <button class="mono-btn small" id="lessons-none">None</button>
+                    <button class="mono-btn small primary" id="lessons-use">\u2713 Use these words</button>
+                </div>
+
+                <p class="source-note" id="source-note"></p>
+            </div>
+""",
     help=[
         ("⌨️ Controls", [
             'Just start typing — no need to pick a word first',
+            '<span class="key">↑</span> faster &nbsp;•&nbsp; <span class="key">↓</span> slower — change the level whenever you like',
             '<span class="key">BACKSPACE</span> rub out a letter',
             '<span class="key">SPACE</span> give up on this word and start another',
             '<span class="key">ENTER</span> new game &nbsp;•&nbsp; <span class="key">ESC</span> pause',
@@ -29,8 +61,14 @@ SPEC = dict(
         ("📈 It gets faster", [
             "Every <strong>six words</strong> you clear takes you up a level.",
             "Each level the words fall <strong>faster</strong> and arrive <strong>closer together</strong>.",
-            "The words get longer too — three letters at first, up to seven later on.",
+            "Too slow or too easy? Press <span class=\'key\'>↑</span> or <span class=\'key\'>↓</span> and change it yourself, mid-game.",
             "Nobody lasts for ever. The question is how far you get.",
+        ]),
+        ("📚 Your own word lists", [
+            "Under the sky you can swap the everyday words for a <strong>Classical Roots</strong> lesson.",
+            "Pick <strong>one book</strong>, then tick <strong>as many lessons</strong> as you want.",
+            "Long words are given proportionally longer to fall, so a vocabulary lesson is a fair game and not an impossible one.",
+            "Your book, your lessons and your starting level are all remembered.",
         ]),
     ],
     js_files=["wordfall-rules.js", "wordfall-draw.js", "wordfall-main.js"],

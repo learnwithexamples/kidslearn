@@ -3,6 +3,7 @@
    ============================================================ */
 
 const BEST_KEY = 'wordfall-best-score';
+const LEVEL_KEY = 'wordfall-start-level';
 
 let game = null;
 let boardCanvas = null;
@@ -67,6 +68,8 @@ function doAction(action) {
     else if (action === 'pause') {
         if (game.isOver) { newGame(game); } else { togglePause(game); }
     }
+    else if (action === 'faster') { changeLevel(game, 1); }
+    else if (action === 'slower') { changeLevel(game, -1); }
     else if (action === 'back') { backspace(game); }
     else if (action === 'clear') { clearTyped(game); }
     else {
@@ -82,6 +85,52 @@ function connectKeyboard() {
         const action = actionForKey(event.key);
         if (action !== null) { event.preventDefault(); }
         doAction(action);
+    });
+}
+
+/**
+ * connectStartLevel — the box that says which level a new game begins on.
+ *
+ * ALGORITHM: read it whenever it changes, remember it, and hand it to the
+ *            game. It only takes effect on the NEXT game, which is why the
+ *            arrow keys exist as well.
+ */
+function connectStartLevel() {
+    const box = getElement('start-level');
+    if (!box) { return; }
+
+    let saved = 1;
+    try { saved = Number(window.localStorage.getItem(LEVEL_KEY)) || 1; } catch (e) { /* ignore */ }
+    box.value = String(saved);
+    game.startLevel = saved;
+
+    box.addEventListener('change', function () {
+        const wanted = Math.floor(Number(box.value));
+        const level = (wanted >= 1) ? Math.min(wanted, 99) : 1;
+        box.value = String(level);
+        game.startLevel = level;
+        try { window.localStorage.setItem(LEVEL_KEY, String(level)); } catch (e) { /* ignore */ }
+        newGame(game);
+        drawEverything(game);
+    });
+}
+
+/**
+ * connectWordSource — let the player race on a Classical Roots lesson.
+ *
+ * ALGORITHM: the panel itself is shared with the Python version and with
+ *            Typing Race, over in wordlists.js. All this has to do is take
+ *            the words it hands back and start a fresh game on them.
+ */
+function connectWordSource() {
+    if (!window.WordLists) { return; }
+
+    window.WordLists.connectPicker(function (words, note) {
+        game.pool = (words && words.length > 0) ? words : null;
+        newGame(game);
+        drawEverything(game);
+        const line = getElement('source-note');
+        if (line) { line.textContent = note; }
     });
 }
 
@@ -134,6 +183,8 @@ function setUpGame() {
     startNewGame();
     connectKeyboard();
     connectButtons();
+    connectStartLevel();
+    connectWordSource();
 
     window.requestAnimationFrame(gameLoop);
 }

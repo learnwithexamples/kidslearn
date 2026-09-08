@@ -182,22 +182,24 @@ const WORDFALL_STEPS = [
         "fnName": "wordForLevel",
         "title": "Pick a word",
         "adds": "Longer words start arriving.",
-        "intro": "<p>Level 1 should drop <em>cat</em> and <em>sun</em>. Level 20 should drop <em>thunder</em> and <em>lantern</em>. So the pool of words a level may use grows as you go.</p><p>Work out the longest word this level is allowed — three letters at level 1, one more every two levels, never past seven — then keep only the words that short and pick one at random.</p><p>This is <strong>filter then choose</strong>, and it turns up everywhere: narrow the list down to what is allowed, then pick from what is left. Doing it the other way round — picking first and checking afterwards — means sometimes picking again, and again, and you can never say how long that will take.</p>",
+        "intro": "<p>Level 1 should drop <em>cat</em> and <em>sun</em>. Level 20 should drop <em>thunder</em> and <em>lantern</em>. So the pool of words a level may use grows as you go.</p><p>Work out the longest word this level is allowed — three letters at level 1, one more every two levels, never past seven — then keep only the words that short and pick one at random.</p><p>This is <strong>filter then choose</strong>, and it turns up everywhere: narrow the list down to what is allowed, then pick from what is left. Doing it the other way round — picking first and checking afterwards — means sometimes picking again, and again, and you can never say how long that will take.</p><p>Two things guard it. The player can bring their own list of words — a spelling lesson — so take a <code>pool</code> and fall back to the game's own when there is not one. And if <em>nothing</em> in that list is short enough, use the whole list rather than filtering it down to nothing: picking at random from an empty list is a crash, and a vocabulary lesson may not hold a single three-letter word.</p>",
         "spec": {
-            "input": "level — 1, 2, 3 …",
+            "input": "level — 1, 2, 3 … pool — the words to choose from, or nothing for the game's own.",
             "output": "one word from WORD_POOL",
             "algorithm": [
+                "Choose from the pool if there is one, or WORD_POOL if not.",
                 "The longest allowed is 3 + (level − 1) ÷ 2, rounded down — but never more than 7.",
-                "Keep only the words in WORD_POOL that are that short.",
+                "Keep only the words that short.",
+                "If that left nothing at all, use the whole list instead.",
                 "Pick one of those at random."
             ]
         },
-        "starter": "function wordForLevel(level) {\n    return WORD_POOL[0];\n}\n",
-        "answer": "function wordForLevel(level) {\n    let longest = 3 + Math.floor((level - 1) / 2);\n    if (longest > 7) { longest = 7; }\n\n    const choices = WORD_POOL.filter(function (word) { return word.length <= longest; });\n    return choices[Math.floor(Math.random() * choices.length)];\n}\n",
+        "starter": "function wordForLevel(level, pool) {\n    return WORD_POOL[0];\n}\n",
+        "answer": "function wordForLevel(level, pool) {\n    const from = (pool && pool.length > 0) ? pool : WORD_POOL;\n\n    let longest = 3 + Math.floor((level - 1) / 2);\n    if (longest > 7) { longest = 7; }\n\n    let choices = from.filter(function (word) { return word.length <= longest; });\n    if (choices.length === 0) { choices = from; }\n\n    return choices[Math.floor(Math.random() * choices.length)];\n}\n",
         "hints": [
+            "Work out which list to use FIRST, then do everything else to that.",
             "Math.floor((level - 1) / 2) grows by one every two levels.",
-            "WORD_POOL.filter(...) gives you a new list of just the short enough words.",
-            "choices[Math.floor(Math.random() * choices.length)] picks one."
+            "After filtering, check for an empty list before you pick from it."
         ],
         "tests": [
             {
@@ -227,6 +229,14 @@ const WORDFALL_STEPS = [
             {
                 "name": "Every word it picks fits on the screen",
                 "code": "for (let i = 0; i < 100; i++) {\n    assert(wordWidth(wordForLevel(30)) < FIELD_WIDTH - SKY_MARGIN * 2);\n}"
+            },
+            {
+                "name": "A list of your own is used instead",
+                "code": "const mine = ['alpha', 'bravo', 'charlie'];\nfor (let i = 0; i < 60; i++) {\n    assert(mine.indexOf(wordForLevel(9, mine)) !== -1, 'it picked a word that was not on my list');\n}"
+            },
+            {
+                "name": "A list with nothing short enough still works",
+                "code": "const long = ['photosynthesis', 'constellation'];\nfor (let i = 0; i < 40; i++) {\n    const word = wordForLevel(1, long);\n    assert(long.indexOf(word) !== -1, 'level 1 allows three letters and my list has none — it must use the whole list rather than pick from nothing');\n}"
             }
         ],
         "demo": {
@@ -297,16 +307,17 @@ const WORDFALL_STEPS = [
             "input": "state — the whole game",
             "output": "the word that was dropped (and it is added to state.words)",
             "algorithm": [
-                "Ask wordForLevel for a word.",
+                "Ask wordForLevel for a word, handing it state.pool — the player's own list.",
                 "Room = FIELD_WIDTH − wordWidth(text) − SKY_MARGIN × 2. Never let it go below 0.",
                 "Pick x anywhere from SKY_MARGIN to SKY_MARGIN + room.",
                 "Make the word, add it to state.words, and give it back."
             ]
         },
         "starter": "function spawnWord(state) {\n    // pick a word, pick a place, drop it\n}\n",
-        "answer": "function spawnWord(state) {\n    const text = wordForLevel(state.level);\n    let room = FIELD_WIDTH - wordWidth(text) - SKY_MARGIN * 2;\n    if (room < 0) { room = 0; }\n\n    const word = makeWord(text, SKY_MARGIN + Math.random() * room);\n    state.words.push(word);\n    return word;\n}\n",
+        "answer": "function spawnWord(state) {\n    const text = wordForLevel(state.level, state.pool);\n    let room = FIELD_WIDTH - wordWidth(text) - SKY_MARGIN * 2;\n    if (room < 0) { room = 0; }\n\n    const word = makeWord(text, SKY_MARGIN + Math.random() * room);\n    state.words.push(word);\n    return word;\n}\n",
         "hints": [
             "Use the two functions you already wrote: wordForLevel and wordWidth.",
+            "Pass state.pool through, so a chosen word list is actually used.",
             "Math.random() * room gives you somewhere from 0 up to room.",
             "Do not forget state.words.push(word) — and to give the word back."
         ],
@@ -528,24 +539,24 @@ const WORDFALL_STEPS = [
         "fnName": "matchingWord",
         "title": "Which one do you mean?",
         "adds": "The game reads your mind.",
-        "intro": "<p>This is the clever bit, and the reason the game feels good to play.</p><p>Six words are falling. You never click one, never press Tab, never choose at all — you just start typing, and the game knows. Type <strong>c</strong> and only the words beginning with c are still in the running. Type <strong>ca</strong> and it is narrower still.</p><p>When several still match, take the one <strong>furthest down</strong> — the one in the most trouble. That is almost always the one the player meant, and it is the one they would lose a life over.</p><p>It is the same idea as a search box finishing your sentence: the letters themselves are the choice.</p>",
+        "intro": "<p>This is the clever bit, and the reason the game feels good to play.</p><p>Six words are falling. You never click one, never press Tab, never choose at all — you just start typing, and the game knows. Type <strong>c</strong> and only the words beginning with c are still in the running. Type <strong>ca</strong> and it is narrower still.</p><p>When several still match, take the one <strong>furthest down</strong> — the one in the most trouble. That is almost always the one the player meant, and it is the one they would lose a life over.</p><p>One rule beats even that: a word you have typed <strong>in full</strong> wins, wherever it is. Without it, finishing <em>graduate</em> while <em>graduation</em> hangs lower would clear nothing at all — and retyping would not help, because you would land on <em>graduation</em> again. Stuck.</p><p><code>lowestWhere</code> is written for you: give it a test, and it hands back the lowest word that passes. Ask it twice.</p><p>It is the same idea as a search box finishing your sentence: the letters themselves are the choice.</p>",
         "spec": {
             "input": "state — the whole game. typed — the letters so far.",
             "output": "the word being typed, or nothing at all",
             "algorithm": [
                 "If nothing has been typed, there is no match — give back nothing.",
-                "Look at every word in the sky.",
-                "Skip it unless its text STARTS WITH what has been typed.",
-                "Of the ones left, keep the one with the biggest y — the lowest in the sky.",
+                "First ask lowestWhere for a word whose text IS exactly what was typed.",
+                "If there is one, that is the answer.",
+                "Otherwise ask lowestWhere for the lowest word that STARTS WITH the typing.",
                 "Give that one back, or nothing if none matched."
             ]
         },
         "starter": "function matchingWord(state, typed) {\n    return null;\n}\n",
-        "answer": "function matchingWord(state, typed) {\n    if (typed.length === 0) {\n        return null;\n    }\n    let best = null;\n    for (let i = 0; i < state.words.length; i++) {\n        const word = state.words[i];\n        if (word.text.indexOf(typed) === 0) {\n            if (best === null || word.y > best.y) {\n                best = word;\n            }\n        }\n    }\n    return best;\n}\n",
+        "answer": "function matchingWord(state, typed) {\n    if (typed.length === 0) {\n        return null;\n    }\n\n    const finished = lowestWhere(state, function (word) { return word.text === typed; });\n    if (finished !== null) {\n        return finished;\n    }\n\n    return lowestWhere(state, function (word) { return word.text.indexOf(typed) === 0; });\n}\n",
         "hints": [
-            "word.text.indexOf(typed) === 0 means the word STARTS WITH what was typed.",
-            "Keep a `best` starting at null, and replace it whenever you find one further down.",
-            "Bigger y means lower down the screen, and lower down means more urgent."
+            "lowestWhere(state, test) does the searching — you only choose the test.",
+            "Ask it twice: first for word.text === typed, then for a word that starts with it.",
+            "word.text.indexOf(typed) === 0 means the word STARTS WITH what was typed."
         ],
         "tests": [
             {
@@ -587,6 +598,10 @@ const WORDFALL_STEPS = [
             {
                 "name": "It gives back the very word from the sky",
                 "code": "const state = createGame();\nconst word = makeWord('cat', 10);\nstate.words = [word];\nassert(matchingWord(state, 'ca') === word, 'give back the word itself, not a copy of it');"
+            },
+            {
+                "name": "A word typed IN FULL beats a longer one hanging lower",
+                "code": "const state = createGame();\nconst whole = makeWord('graduate', 10); whole.y = 40;\nconst longer = makeWord('graduation', 150); longer.y = 300;\nstate.words = [whole, longer];\nassert(matchingWord(state, 'graduate').text === 'graduate', 'finishing a word must clear it, even with a longer one closer to the ground — otherwise you are stuck for ever');\nassert(matchingWord(state, 'gradua').text === 'graduation', 'half way through, the lower one is still the one in trouble');"
             }
         ],
         "demo": {

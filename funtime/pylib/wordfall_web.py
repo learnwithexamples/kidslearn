@@ -7,6 +7,7 @@ import wordfall_rules as rules
 import wordfall_draw as draw
 
 BEST_KEY = "wordfall-python-best"
+LEVEL_KEY = "wordfall-python-start-level"
 
 state = None
 ctx = None
@@ -82,6 +83,10 @@ def do_action(action):
             rules.new_game(state)
         else:
             rules.toggle_pause(state)
+    elif action == "faster":
+        rules.change_level(state, 1)
+    elif action == "slower":
+        rules.change_level(state, -1)
     elif action == "back":
         rules.backspace(state)
     elif action == "clear":
@@ -115,6 +120,68 @@ def on_open_keyboard(event):
     hidden = get_element("hidden-input")
     if hidden is not None:
         hidden.focus()
+
+
+def on_start_level(event):
+    """The box that says which level a new game begins on."""
+    box = get_element("start-level")
+    try:
+        wanted = int(float(box.value))
+    except (TypeError, ValueError):
+        wanted = 1
+    level = max(rules.MIN_LEVEL, min(wanted, rules.MAX_LEVEL))
+
+    box.value = str(level)
+    state["start_level"] = level
+    window.localStorage.setItem(LEVEL_KEY, str(level))
+    rules.new_game(state)
+    draw_everything()
+
+
+def connect_start_level():
+    """Read the saved starting level, then watch the box for changes."""
+    box = get_element("start-level")
+    if box is None:
+        return
+
+    saved = window.localStorage.getItem(LEVEL_KEY)
+    level = int(saved) if saved else rules.MIN_LEVEL
+    box.value = str(level)
+    state["start_level"] = level
+
+    proxy = create_proxy(on_start_level)
+    PROXIES.append(proxy)
+    box.addEventListener("change", proxy)
+
+
+def on_words_chosen(words, note):
+    """The player picked a word list, so start a game on it.
+
+    INPUT: words - a JavaScript array, empty for the game's own list.
+    """
+    chosen = [str(word) for word in words]
+    state["pool"] = chosen if chosen else None
+    rules.new_game(state)
+    draw_everything()
+
+    line = get_element("source-note")
+    if line is not None:
+        line.textContent = note
+
+
+def connect_word_source():
+    """Let the player race on a Classical Roots lesson.
+
+    ALGORITHM: the panel itself is shared with the JavaScript version and with
+    Typing Race, over in lib/wordlists.js. All this has to do is take the words
+    it hands back and start a fresh game on them.
+    """
+    lists = getattr(window, "WordLists", None)
+    if lists is None:
+        return
+    proxy = create_proxy(on_words_chosen)
+    PROXIES.append(proxy)
+    lists.connectPicker(proxy)
 
 
 def frame(timestamp):
@@ -176,4 +243,6 @@ def start_game():
         connect_button(element_id, action)
 
     start_new_game()
+    connect_start_level()
+    connect_word_source()
     window.requestAnimationFrame(PROXIES[0])

@@ -23,6 +23,12 @@ LETTER_WIDTH = 11
 START_LIVES = 3
 WORDS_PER_LEVEL = 6
 
+# The player may drive the level up and down with the arrow keys, so it needs
+# ends. Level 1 is as gentle as it goes; past 30 nothing changes anyway,
+# because the speed and the gap have both hit their limits by then.
+MIN_LEVEL = 1
+MAX_LEVEL = 99
+
 # How fast words fall, in pixels per second, and how long between one word and
 # the next. These six numbers ARE the difficulty, and they were tuned by
 # letting a robot play at a fixed typing speed and seeing how far it got:
@@ -62,6 +68,17 @@ WORD_POOL = [
 ]
 
 
+def average_length(words):
+    """The mean length of the words in a list."""
+    return sum(len(word) for word in words) / len(words) if words else 1
+
+
+# How long the everyday words are, worked out from the list itself rather than
+# written down - so the everyday game is scaled by exactly 1, whatever anybody
+# later adds to the pool.
+TYPICAL_LENGTH = average_length(WORD_POOL)
+
+
 def speed_for_level(level):
     """How fast words fall on a given level, in pixels per second.
 
@@ -93,15 +110,24 @@ def word_width(text):
     return len(text) * LETTER_WIDTH
 
 
-def word_for_level(level):
+def word_for_level(level, pool=None):
     """Pick a word to drop.
 
     ALGORITHM: work out the longest word this level is allowed - three letters
     at level 1, one more every two levels, never past seven. Then keep only the
     words that short and pick one at random.
+
+    If NOTHING is short enough, use the whole pool instead. A spelling lesson
+    may not hold a single three-letter word, and picking at random from an
+    empty list is a crash.
     """
+    source = pool if pool else WORD_POOL
+
     longest = min(3 + (level - 1) // 2, 7)
-    choices = [word for word in WORD_POOL if len(word) <= longest]
+    choices = [word for word in source if len(word) <= longest]
+    if not choices:
+        choices = source
+
     return random.choice(choices)
 
 
@@ -118,7 +144,7 @@ def spawn_word(state):
     dropped at the right-hand edge would hang off the side of the screen where
     you could not read it.
     """
-    text = word_for_level(state["level"])
+    text = word_for_level(state["level"], state.get("pool"))
     room = max(0, FIELD_WIDTH - word_width(text) - SKY_MARGIN * 2)
 
     word = make_word(text, SKY_MARGIN + random.random() * room)
@@ -136,6 +162,31 @@ def move_words(state, seconds):
     speed = speed_for_level(state["level"])
     for word in state["words"]:
         word["y"] += speed * seconds
+
+
+def change_level(state, change):
+    """The player winds the difficulty up or down.
+
+    INPUT: change - +1 for harder, -1 for easier.
+    OUTPUT: the level it ended up on.
+    ALGORITHM: move the level, then keep it between the two ends.
+
+    WHY let them: a five-year-old and a touch typist want very different games,
+    and neither should have to survive to level 12 to get one. The clearing of
+    words still pushes the level up on its own - this just moves the whole
+    thing along with it.
+    """
+    state["level"] = max(MIN_LEVEL, min(state["level"] + change, MAX_LEVEL))
+    return state["level"]
+
+
+def start_level_of(state):
+    """The level a new game begins on, kept sensible."""
+    try:
+        wanted = int(state.get("start_level") or MIN_LEVEL)
+    except (TypeError, ValueError):
+        return MIN_LEVEL
+    return max(MIN_LEVEL, min(wanted, MAX_LEVEL))
 
 
 def has_landed(word):
@@ -171,11 +222,26 @@ def remove_landed_words(state):
     return landed
 
 
+def lowest_where(state, fits):
+    """The word furthest down the sky that passes a test, or None."""
+    best = None
+    for word in state["words"]:
+        if fits(word) and (best is None or word["y"] > best["y"]):
+            best = word
+    return best
+
+
 def matching_word(state, typed):
     """Which word are you typing? None if none of them match.
 
-    ALGORITHM: of every word that STARTS WITH what you have typed, take the one
-    furthest down the screen - the one in the most trouble.
+    ALGORITHM: a word you have typed IN FULL comes first. Otherwise, of every
+    word that STARTS WITH what you have typed, take the one furthest down the
+    screen - the one in the most trouble.
+
+    WHY the full word wins: "graduate" and "graduation" are both in one
+    vocabulary lesson. Without this rule, finishing "graduate" while
+    "graduation" hangs lower would clear nothing at all, and no amount of
+    retyping would help - you would be stuck.
 
     WHY the game never asks you to choose: you just start typing, and the
     letters themselves say which word you meant. Type "ca" and only the words
@@ -185,12 +251,12 @@ def matching_word(state, typed):
     if not typed:
         return None
 
-    best = None
-    for word in state["words"]:
-        if word["text"].startswith(typed):
-            if best is None or word["y"] > best["y"]:
-                best = word
-    return best
+    # a word you have FINISHED comes first, wherever it is in the sky
+    finished = lowest_where(state, lambda word: word["text"] == typed)
+    if finished is not None:
+        return finished
+
+    return lowest_where(state, lambda word: word["text"].startswith(typed))
 
 
 def type_letter(state, letter):
@@ -253,11 +319,17 @@ def clear_typed(state):
 
 
 def new_game(state):
-    """An empty sky and a fresh three lives."""
+    """An empty sky and a fresh three lives.
+
+    ALGORITHM: state["start_level"] is where the player asked to begin, and
+    state["pool"] is the word list they chose. Both survive a new game on
+    purpose - picking your settings once and then playing all afternoon is the
+    whole point of having them.
+    """
     state["words"] = []
     state["typed"] = ""
     state["score"] = 0
-    state["level"] = 1
+    state["level"] = start_level_of(state)
     state["cleared"] = 0
     state["missed"] = 0
     state["keystrokes"] = 0
@@ -266,6 +338,7 @@ def new_game(state):
     state["since_drop"] = 0
     state["is_over"] = False
     spawn_word(state)
+    state["next_drop"] = drop_gap(state)
 
 
 def create_game():
@@ -275,6 +348,26 @@ def create_game():
     return state
 
 
+def drop_gap(state):
+    """How long to wait before dropping the next word, in milliseconds.
+
+    ALGORITHM: gap_for_level says how long this level waits. Then stretch it by
+    how long THIS GAME'S words are, next to the everyday ones.
+
+    WHY: a Classical Roots lesson averages eight letters where the everyday
+    list averages under five. Dropping those at the same rate is not a harder
+    game, it is an impossible one - a robot typing at 24 words a minute cleared
+    48 everyday words and only 7 vocabulary ones. Given proportionally longer,
+    the two play much the same.
+
+    It scales by the whole LIST, not by each word. Scaling by the word would
+    quietly change the everyday game too, because level 1 only drops
+    three-letter words - and that game is already tuned.
+    """
+    source = state.get("pool") or WORD_POOL
+    return gap_for_level(state["level"]) * average_length(source) / TYPICAL_LENGTH
+
+
 def update_game(state, elapsed_ms):
     """One frame of the game."""
     if state["is_over"] or state["is_paused"]:
@@ -282,9 +375,10 @@ def update_game(state, elapsed_ms):
     seconds = elapsed_ms / 1000
 
     state["since_drop"] += elapsed_ms
-    if state["since_drop"] >= gap_for_level(state["level"]):
+    if state["since_drop"] >= state["next_drop"]:
         state["since_drop"] = 0
         spawn_word(state)
+        state["next_drop"] = drop_gap(state)
 
     move_words(state, seconds)
     remove_landed_words(state)
@@ -306,6 +400,11 @@ def toggle_pause(state):
 def action_for_key(key):
     """Turn a keyboard key into an action name, or None."""
     k = str(key)
+
+    if k.lower() == "arrowup":
+        return "faster"
+    if k.lower() == "arrowdown":
+        return "slower"
 
     if k == " " or k.lower() == "spacebar":
         return "clear"

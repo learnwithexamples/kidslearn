@@ -19,11 +19,16 @@ const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
 
-const sandbox = { Math, console, JSON };
+const ROOT = path.join(__dirname, '..', '..');
+const LIB = path.join(__dirname, '..', 'lib');
+
+const sandbox = { Math, console, JSON, RegExp };
 sandbox.window = sandbox;
+sandbox.document = { getElementById: () => null };
 vm.createContext(sandbox);
-vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'lib', 'wordfall-rules.js'), 'utf8'),
-                sandbox);
+vm.runInContext(fs.readFileSync(path.join(ROOT, 'data', 'vocabulary-data.js'), 'utf8'), sandbox);
+vm.runInContext(fs.readFileSync(path.join(LIB, 'wordlists.js'), 'utf8'), sandbox);
+vm.runInContext(fs.readFileSync(path.join(LIB, 'wordfall-rules.js'), 'utf8'), sandbox);
 const W = name => vm.runInContext(name, sandbox);
 
 const createGame = W('createGame'), updateGame = W('updateGame');
@@ -31,6 +36,10 @@ const typeLetter = W('typeLetter'), zapWord = W('zapWord'), spawnWord = W('spawn
 const wordWidth = W('wordWidth'), speedForLevel = W('speedForLevel'), gapForLevel = W('gapForLevel');
 const FIELD_WIDTH = W('FIELD_WIDTH'), GROUND_Y = W('GROUND_Y'), SKY_MARGIN = W('SKY_MARGIN');
 const START_LIVES = W('START_LIVES'), MAX_SPEED = W('MAX_SPEED'), MIN_GAP = W('MIN_GAP');
+const newGame = W('newGame'), changeLevel = W('changeLevel'), actionForKey = W('actionForKey');
+const dropGap = W('dropGap'), wordForLevel = W('wordForLevel'), WORD_POOL = W('WORD_POOL');
+const MIN_LEVEL = W('MIN_LEVEL'), MAX_LEVEL = W('MAX_LEVEL');
+const Lists = sandbox.window.WordLists;
 
 let failures = 0;
 let checks = 0;
@@ -49,8 +58,11 @@ function check(name, ok, extra) {
  * INPUT:  lettersPerSecond, frameLimit
  * OUTPUT: how the game went, and everything that looked wrong on the way
  */
-function play(lettersPerSecond, frameLimit) {
+function play(lettersPerSecond, frameLimit, pool, startLevel) {
     const state = createGame();
+    state.pool = pool || null;
+    state.startLevel = startLevel || 1;
+    newGame(state);
     const STEP = 25;
     let owed = 0;
     let peakWords = 0;
@@ -197,6 +209,122 @@ console.log('words stay where they can be read');
         }
     }
     check('no word is ever dropped off the edge, at any level', off === 0, off);
+})();
+
+/* ------------------------------------------ the player's hand on the level */
+
+console.log('driving the level by hand');
+
+check('the up arrow means faster', actionForKey('ArrowUp') === 'faster');
+check('the down arrow means slower', actionForKey('ArrowDown') === 'slower');
+check('and letters still mean themselves', actionForKey('k') === 'k');
+
+(function () {
+    const state = createGame();
+    state.level = 5;
+    check('up goes up one', changeLevel(state, 1) === 6);
+    check('down goes down one', changeLevel(state, -1) === 5);
+
+    for (let i = 0; i < 50; i++) { changeLevel(state, -1); }
+    check('it never goes below level ' + MIN_LEVEL, state.level === MIN_LEVEL, state.level);
+
+    for (let i = 0; i < 400; i++) { changeLevel(state, 1); }
+    check('and never above level ' + MAX_LEVEL, state.level === MAX_LEVEL, state.level);
+
+    /* winding it up must really make the game harder */
+    const easy = createGame(); easy.level = 1;
+    const hard = createGame(); hard.level = 1;
+    for (let i = 0; i < 9; i++) { changeLevel(hard, 1); }
+    check('a higher level really does fall faster',
+          speedForLevel(hard.level) > speedForLevel(easy.level));
+    check('and really does arrive quicker',
+          gapForLevel(hard.level) < gapForLevel(easy.level));
+})();
+
+console.log('starting where you asked');
+
+(function () {
+    const state = createGame();
+    state.startLevel = 9;
+    newGame(state);
+    check('a new game starts on the level you asked for', state.level === 9, state.level);
+
+    state.startLevel = 0;
+    newGame(state);
+    check('zero is pulled up to level 1', state.level === MIN_LEVEL, state.level);
+
+    state.startLevel = 5000;
+    newGame(state);
+    check('a silly number is pulled down', state.level === MAX_LEVEL, state.level);
+
+    state.startLevel = 'nonsense';
+    newGame(state);
+    check('so is something that is not a number at all', state.level === MIN_LEVEL, state.level);
+
+    /* it must survive a new game, or the setting would be useless */
+    state.startLevel = 6;
+    newGame(state);
+    newGame(state);
+    check('and it lasts from one game to the next', state.level === 6, state.level);
+
+    const high = play(3, 30000, null, 12);
+    const low = play(3, 30000, null, 1);
+    check('starting high makes for a shorter game', high.seconds < low.seconds,
+          high.seconds.toFixed(0) + 's vs ' + low.seconds.toFixed(0) + 's');
+})();
+
+/* ------------------------------------------------- racing on a word list */
+
+console.log('racing on a Classical Roots lesson');
+
+(function () {
+    const books = Lists.books();
+    check('the vocabulary is there to choose from', books.length > 0, books.length);
+
+    const book = books[0];
+    const pool = Lists.words(book.id, book.lessons.slice(0, 2).map(l => l.number));
+    check('a lesson gives some words', pool.length > 4, pool.length);
+
+    const state = createGame();
+    state.pool = pool;
+    newGame(state);
+    for (let frame = 0; frame < 600; frame++) { updateGame(state, 25); }
+    check('every word in the sky came from the lesson',
+          state.words.every(w => pool.indexOf(w.text) !== -1),
+          state.words.filter(w => pool.indexOf(w.text) === -1).map(w => w.text));
+
+    /* a lesson may hold no short words at all — level 1 must still work */
+    const longOnly = ['photosynthesis', 'constellation', 'metamorphosis'];
+    let picked = true;
+    for (let i = 0; i < 60; i++) {
+        if (longOnly.indexOf(wordForLevel(1, longOnly)) === -1) { picked = false; }
+    }
+    check('a list with no short words still works at level 1', picked === true);
+
+    /* the gap has to grow with the words, or a lesson is unplayable */
+    const everyday = createGame();
+    check('the everyday game is scaled by exactly one',
+          dropGap(everyday) === gapForLevel(everyday.level),
+          dropGap(everyday) + ' vs ' + gapForLevel(everyday.level));
+
+    const wordy = createGame();
+    wordy.pool = longOnly;
+    check('a list of long words is given longer', dropGap(wordy) > dropGap(everyday) * 2,
+          Math.round(dropGap(wordy)) + ' vs ' + Math.round(dropGap(everyday)));
+
+    /* and the whole thing must still be a game */
+    let level = 0, seconds = 0, unfinished = 0, faults = null;
+    for (let run = 0; run < 8; run++) {
+        const played = play(3, 30000, pool);
+        level += played.state.level;
+        seconds += played.seconds;
+        if (!played.finished) { unfinished++; }
+        if (faults === null && played.faults.length > 0) { faults = played.faults[0]; }
+    }
+    check('a lesson race breaks no rules', faults === null, faults);
+    check('a 36 WPM typist gets past level 3 on a lesson', level / 8 > 3, (level / 8).toFixed(1));
+    check('and lasts a good while', seconds / 8 > 45, (seconds / 8).toFixed(0) + 's');
+    check('and the rain still wins in the end', unfinished === 0, unfinished);
 })();
 
 console.log('\n' + checks + ' checks run');

@@ -182,22 +182,24 @@ const WORDFALL_PYTHON_STEPS = [
         "fnName": "word_for_level",
         "title": "Pick a word",
         "adds": "Longer words start arriving.",
-        "intro": "<p>Level 1 should drop <em>cat</em> and <em>sun</em>. Level 20 should drop <em>thunder</em> and <em>lantern</em>. So the pool of words a level may use grows as you go.</p><p>Work out the longest word this level is allowed — three letters at level 1, one more every two levels, never past seven — then keep only the words that short and pick one at random.</p><p>This is <strong>filter then choose</strong>, and it turns up everywhere: narrow the list down to what is allowed, then pick from what is left. Doing it the other way round — picking first and checking afterwards — means sometimes picking again, and again, and you can never say how long that will take.</p>",
+        "intro": "<p>Level 1 should drop <em>cat</em> and <em>sun</em>. Level 20 should drop <em>thunder</em> and <em>lantern</em>. So the pool of words a level may use grows as you go.</p><p>Work out the longest word this level is allowed — three letters at level 1, one more every two levels, never past seven — then keep only the words that short and pick one at random.</p><p>This is <strong>filter then choose</strong>, and it turns up everywhere: narrow the list down to what is allowed, then pick from what is left. Doing it the other way round — picking first and checking afterwards — means sometimes picking again, and again, and you can never say how long that will take.</p><p>Two things guard it. The player can bring their own list of words — a spelling lesson — so take a <code>pool</code> and fall back to the game's own when there is not one. And if <em>nothing</em> in that list is short enough, use the whole list rather than filtering it down to nothing: picking at random from an empty list is a crash, and a vocabulary lesson may not hold a single three-letter word.</p>",
         "spec": {
-            "input": "level — 1, 2, 3 …",
+            "input": "level — 1, 2, 3 … pool — the words to choose from, or nothing for the game's own.",
             "output": "one word from WORD_POOL",
             "algorithm": [
+                "Choose from the pool if there is one, or WORD_POOL if not.",
                 "The longest allowed is 3 + (level − 1) ÷ 2, rounded down — but never more than 7.",
-                "Keep only the words in WORD_POOL that are that short.",
+                "Keep only the words that short.",
+                "If that left nothing at all, use the whole list instead.",
                 "Pick one of those at random."
             ]
         },
-        "starter": "def word_for_level(level):\n    return WORD_POOL[0]\n",
-        "answer": "def word_for_level(level):\n    longest = min(3 + (level - 1) // 2, 7)\n    choices = [word for word in WORD_POOL if len(word) <= longest]\n    return random.choice(choices)\n",
+        "starter": "def word_for_level(level, pool=None):\n    return WORD_POOL[0]\n",
+        "answer": "def word_for_level(level, pool=None):\n    source = pool if pool else WORD_POOL\n\n    longest = min(3 + (level - 1) // 2, 7)\n    choices = [word for word in source if len(word) <= longest]\n    if not choices:\n        choices = source\n\n    return random.choice(choices)\n",
         "hints": [
+            "Work out which list to use FIRST, then do everything else to that.",
             "(level - 1) // 2 grows by one every two levels — // throws the remainder away.",
-            "A list comprehension gives you just the short enough words.",
-            "random.choice(choices) picks one."
+            "After the list comprehension, check for an empty list before picking."
         ],
         "tests": [
             {
@@ -227,6 +229,14 @@ const WORDFALL_PYTHON_STEPS = [
             {
                 "name": "Every word it picks fits on the screen",
                 "code": "for i in range(100):\n    assert word_width(word_for_level(30)) < FIELD_WIDTH - SKY_MARGIN * 2"
+            },
+            {
+                "name": "A list of your own is used instead",
+                "code": "mine = ['alpha', 'bravo', 'charlie']\nfor i in range(60):\n    assert word_for_level(9, mine) in mine, 'it picked a word that was not on my list'"
+            },
+            {
+                "name": "A list with nothing short enough still works",
+                "code": "long_words = ['photosynthesis', 'constellation']\nfor i in range(40):\n    assert word_for_level(1, long_words) in long_words, 'level 1 allows three letters and my list has none - it must use the whole list rather than pick from nothing'"
             }
         ],
         "demo": {
@@ -297,16 +307,17 @@ const WORDFALL_PYTHON_STEPS = [
             "input": "state — the whole game",
             "output": "the word that was dropped (and it is added to state.words)",
             "algorithm": [
-                "Ask wordForLevel for a word.",
+                "Ask wordForLevel for a word, handing it state.pool — the player's own list.",
                 "Room = FIELD_WIDTH − wordWidth(text) − SKY_MARGIN × 2. Never let it go below 0.",
                 "Pick x anywhere from SKY_MARGIN to SKY_MARGIN + room.",
                 "Make the word, add it to state.words, and give it back."
             ]
         },
         "starter": "def spawn_word(state):\n    # pick a word, pick a place, drop it\n    pass\n",
-        "answer": "def spawn_word(state):\n    text = word_for_level(state[\"level\"])\n    room = max(0, FIELD_WIDTH - word_width(text) - SKY_MARGIN * 2)\n\n    word = make_word(text, SKY_MARGIN + random.random() * room)\n    state[\"words\"].append(word)\n    return word\n",
+        "answer": "def spawn_word(state):\n    text = word_for_level(state[\"level\"], state.get(\"pool\"))\n    room = max(0, FIELD_WIDTH - word_width(text) - SKY_MARGIN * 2)\n\n    word = make_word(text, SKY_MARGIN + random.random() * room)\n    state[\"words\"].append(word)\n    return word\n",
         "hints": [
             "Use the two functions you already wrote: word_for_level and word_width.",
+            "Pass state.get('pool') through, so a chosen word list is actually used.",
             "random.random() * room gives you somewhere from 0 up to room.",
             "Do not forget state['words'].append(word) — and to give the word back."
         ],
@@ -528,24 +539,24 @@ const WORDFALL_PYTHON_STEPS = [
         "fnName": "matching_word",
         "title": "Which one do you mean?",
         "adds": "The game reads your mind.",
-        "intro": "<p>This is the clever bit, and the reason the game feels good to play.</p><p>Six words are falling. You never click one, never press Tab, never choose at all — you just start typing, and the game knows. Type <strong>c</strong> and only the words beginning with c are still in the running. Type <strong>ca</strong> and it is narrower still.</p><p>When several still match, take the one <strong>furthest down</strong> — the one in the most trouble. That is almost always the one the player meant, and it is the one they would lose a life over.</p><p>It is the same idea as a search box finishing your sentence: the letters themselves are the choice.</p>",
+        "intro": "<p>This is the clever bit, and the reason the game feels good to play.</p><p>Six words are falling. You never click one, never press Tab, never choose at all — you just start typing, and the game knows. Type <strong>c</strong> and only the words beginning with c are still in the running. Type <strong>ca</strong> and it is narrower still.</p><p>When several still match, take the one <strong>furthest down</strong> — the one in the most trouble. That is almost always the one the player meant, and it is the one they would lose a life over.</p><p>One rule beats even that: a word you have typed <strong>in full</strong> wins, wherever it is. Without it, finishing <em>graduate</em> while <em>graduation</em> hangs lower would clear nothing at all — and retyping would not help, because you would land on <em>graduation</em> again. Stuck.</p><p><code>lowestWhere</code> is written for you: give it a test, and it hands back the lowest word that passes. Ask it twice.</p><p>It is the same idea as a search box finishing your sentence: the letters themselves are the choice.</p>",
         "spec": {
             "input": "state — the whole game. typed — the letters so far.",
             "output": "the word being typed, or nothing at all",
             "algorithm": [
                 "If nothing has been typed, there is no match — give back nothing.",
-                "Look at every word in the sky.",
-                "Skip it unless its text STARTS WITH what has been typed.",
-                "Of the ones left, keep the one with the biggest y — the lowest in the sky.",
+                "First ask lowestWhere for a word whose text IS exactly what was typed.",
+                "If there is one, that is the answer.",
+                "Otherwise ask lowestWhere for the lowest word that STARTS WITH the typing.",
                 "Give that one back, or nothing if none matched."
             ]
         },
         "starter": "def matching_word(state, typed):\n    return None\n",
-        "answer": "def matching_word(state, typed):\n    if not typed:\n        return None\n\n    best = None\n    for word in state[\"words\"]:\n        if word[\"text\"].startswith(typed):\n            if best is None or word[\"y\"] > best[\"y\"]:\n                best = word\n    return best\n",
+        "answer": "def matching_word(state, typed):\n    if not typed:\n        return None\n\n    finished = lowest_where(state, lambda word: word[\"text\"] == typed)\n    if finished is not None:\n        return finished\n\n    return lowest_where(state, lambda word: word[\"text\"].startswith(typed))\n",
         "hints": [
-            "Python has a word for this: word['text'].startswith(typed).",
-            "Keep a `best` starting at None, and replace it whenever you find one further down.",
-            "Bigger y means lower down the screen, and lower down means more urgent."
+            "lowest_where(state, test) does the searching — you only choose the test.",
+            "Ask it twice: first for an exact match, then for one that starts with it.",
+            "A lambda is the tidiest test: lambda word: word['text'] == typed"
         ],
         "tests": [
             {
@@ -587,6 +598,10 @@ const WORDFALL_PYTHON_STEPS = [
             {
                 "name": "It gives back the very word from the sky",
                 "code": "state = create_game()\nword = make_word('cat', 10)\nstate['words'] = [word]\nassert matching_word(state, 'ca') is word, 'give back the word itself, not a copy'"
+            },
+            {
+                "name": "A word typed IN FULL beats a longer one hanging lower",
+                "code": "state = create_game()\nwhole = make_word('graduate', 10); whole['y'] = 40\nlonger = make_word('graduation', 150); longer['y'] = 300\nstate['words'] = [whole, longer]\nassert matching_word(state, 'graduate')['text'] == 'graduate', 'finishing a word must clear it, even with a longer one closer to the ground'\nassert matching_word(state, 'gradua')['text'] == 'graduation', 'half way through, the lower one is still in trouble'"
             }
         ],
         "demo": {

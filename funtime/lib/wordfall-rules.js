@@ -22,6 +22,12 @@ const LETTER_WIDTH = 11;
 const START_LIVES = 3;
 const WORDS_PER_LEVEL = 6;
 
+/* The player may drive the level up and down with the arrow keys, so it needs
+   ends. Level 1 is as gentle as it goes; past 30 nothing changes anyway,
+   because the speed and the gap have both hit their limits by then. */
+const MIN_LEVEL = 1;
+const MAX_LEVEL = 99;
+
 /* How fast words fall, in pixels per second, and how long between one word
    and the next. These six numbers ARE the difficulty, and they were tuned by
    letting a robot play at a fixed typing speed and seeing how far it got:
@@ -59,6 +65,21 @@ const WORD_POOL = [
     'harvest', 'journey', 'kitchen', 'machine', 'network', 'package',
     'rainbow', 'thunder', 'village', 'whisper', 'compass', 'lantern'
 ];
+
+/** averageLength — the mean length of the words in a list. */
+function averageLength(list) {
+    if (list.length === 0) { return 1; }
+    let total = 0;
+    for (let i = 0; i < list.length; i++) {
+        total = total + list[i].length;
+    }
+    return total / list.length;
+}
+
+/* How long the everyday words are, worked out from the list itself rather
+   than written down — so the everyday game is scaled by exactly 1, whatever
+   anybody later adds to the pool. */
+const TYPICAL_LENGTH = averageLength(WORD_POOL);
 
 /**
  * speedForLevel — how fast words fall on a given level.
@@ -112,12 +133,20 @@ function wordWidth(text) {
  * ALGORITHM: work out the longest word this level is allowed — three letters
  *            at level 1, one more every two levels, never past seven. Then
  *            keep only the words that short and pick one at random.
+ *
+ *            If NOTHING is short enough, use the whole pool instead. A
+ *            spelling lesson may not hold a single three-letter word, and
+ *            picking at random from an empty list is a crash.
  */
-function wordForLevel(level) {
+function wordForLevel(level, pool) {
+    const from = (pool && pool.length > 0) ? pool : WORD_POOL;
+
     let longest = 3 + Math.floor((level - 1) / 2);
     if (longest > 7) { longest = 7; }
 
-    const choices = WORD_POOL.filter(function (word) { return word.length <= longest; });
+    let choices = from.filter(function (word) { return word.length <= longest; });
+    if (choices.length === 0) { choices = from; }
+
     return choices[Math.floor(Math.random() * choices.length)];
 }
 
@@ -141,7 +170,7 @@ function makeWord(text, x) {
  *            of the screen where you could not read it.
  */
 function spawnWord(state) {
-    const text = wordForLevel(state.level);
+    const text = wordForLevel(state.level, state.pool);
     let room = FIELD_WIDTH - wordWidth(text) - SKY_MARGIN * 2;
     if (room < 0) { room = 0; }
 
@@ -162,6 +191,27 @@ function moveWords(state, seconds) {
     for (let i = 0; i < state.words.length; i++) {
         state.words[i].y = state.words[i].y + speed * seconds;
     }
+}
+
+/**
+ * changeLevel — the player winds the difficulty up or down.
+ *
+ * INPUT:  state. change — +1 for harder, −1 for easier.
+ * OUTPUT: the level it ended up on
+ *
+ * ALGORITHM: move the level, then keep it between the two ends.
+ *
+ * WHY let them: a five-year-old and a touch typist want very different games,
+ *      and neither should have to survive to level 12 to get one. The clearing
+ *      of words still pushes the level up on its own — this just moves the
+ *      whole thing along with it.
+ */
+function changeLevel(state, change) {
+    let level = state.level + change;
+    if (level < MIN_LEVEL) { level = MIN_LEVEL; }
+    if (level > MAX_LEVEL) { level = MAX_LEVEL; }
+    state.level = level;
+    return level;
 }
 
 /** hasLanded — has this word reached the ground? */
@@ -210,28 +260,43 @@ function removeLandedWords(state) {
  * INPUT:  state, typed — the letters typed so far
  * OUTPUT: the word being typed, or null if none of them match
  *
- * ALGORITHM: of every word that STARTS WITH what you have typed, take the one
- *            furthest down the screen — the one in the most trouble.
+ * ALGORITHM: a word you have typed IN FULL comes first. Otherwise, of every
+ *            word that STARTS WITH what you have typed, take the one furthest
+ *            down the screen — the one in the most trouble.
+ *
+ *            WHY the full word wins: "graduate" and "graduation" are both in
+ *            one vocabulary lesson. Without this rule, finishing "graduate"
+ *            while "graduation" hangs lower would clear nothing at all, and
+ *            no amount of retyping would help — you would be stuck.
  *
  * WHY the game never asks you to choose: you just start typing, and the
  *      letters themselves say which word you meant. Type "ca" and only the
  *      words beginning "ca" are still in the running. It is the same idea as
  *      a search box completing what you type.
  */
+function lowestWhere(state, fits) {
+    let best = null;
+    for (let i = 0; i < state.words.length; i++) {
+        const word = state.words[i];
+        if (fits(word) && (best === null || word.y > best.y)) {
+            best = word;
+        }
+    }
+    return best;
+}
+
 function matchingWord(state, typed) {
     if (typed.length === 0) {
         return null;
     }
-    let best = null;
-    for (let i = 0; i < state.words.length; i++) {
-        const word = state.words[i];
-        if (word.text.indexOf(typed) === 0) {
-            if (best === null || word.y > best.y) {
-                best = word;
-            }
-        }
+
+    /* a word you have FINISHED comes first, wherever it is in the sky */
+    const finished = lowestWhere(state, function (word) { return word.text === typed; });
+    if (finished !== null) {
+        return finished;
     }
-    return best;
+
+    return lowestWhere(state, function (word) { return word.text.indexOf(typed) === 0; });
 }
 
 /**
@@ -306,12 +371,18 @@ function clearTyped(state) {
     state.typed = '';
 }
 
-/** newGame — an empty sky and a fresh three lives. */
+/**
+ * newGame — an empty sky and a fresh three lives.
+ * ALGORITHM: state.startLevel is where the player asked to begin, and
+ *            state.pool is the word list they chose. Both survive a new game
+ *            on purpose — picking your settings once and then playing all
+ *            afternoon is the whole point of having them.
+ */
 function newGame(state) {
     state.words = [];
     state.typed = '';
     state.score = 0;
-    state.level = 1;
+    state.level = startLevelOf(state);
     state.cleared = 0;
     state.missed = 0;
     state.keystrokes = 0;
@@ -320,6 +391,14 @@ function newGame(state) {
     state.sinceDrop = 0;
     state.isOver = false;
     spawnWord(state);
+    state.nextDrop = dropGap(state);
+}
+
+/** startLevelOf — the level a new game begins on, kept sensible. */
+function startLevelOf(state) {
+    const wanted = Math.floor(state.startLevel || MIN_LEVEL);
+    if (!(wanted >= MIN_LEVEL)) { return MIN_LEVEL; }
+    return wanted > MAX_LEVEL ? MAX_LEVEL : wanted;
 }
 
 /** createGame — start a brand-new game. */
@@ -327,6 +406,30 @@ function createGame() {
     const state = { best: 0, isPaused: false };
     newGame(state);
     return state;
+}
+
+/**
+ * dropGap — how long to wait before dropping the next word.
+ *
+ * INPUT:  state
+ * OUTPUT: milliseconds
+ *
+ * ALGORITHM: gapForLevel says how long this level waits. Then stretch it by
+ *            how long THIS GAME'S words are, next to the everyday ones.
+ *
+ * WHY: a Classical Roots lesson averages eight letters where the everyday
+ *      list averages under five. Dropping those at the same rate is not a
+ *      harder game, it is an impossible one — a robot typing at 24 words a
+ *      minute cleared 48 everyday words and only 7 vocabulary ones. Given
+ *      proportionally longer, the two play much the same.
+ *
+ *      It scales by the whole LIST, not by each word. Scaling by the word
+ *      would quietly change the everyday game too, because level 1 only drops
+ *      three-letter words — and that game is already tuned.
+ */
+function dropGap(state) {
+    const from = (state.pool && state.pool.length > 0) ? state.pool : WORD_POOL;
+    return gapForLevel(state.level) * averageLength(from) / TYPICAL_LENGTH;
 }
 
 /**
@@ -340,9 +443,10 @@ function updateGame(state, elapsedMs) {
     const seconds = elapsedMs / 1000;
 
     state.sinceDrop = state.sinceDrop + elapsedMs;
-    if (state.sinceDrop >= gapForLevel(state.level)) {
+    if (state.sinceDrop >= state.nextDrop) {
         state.sinceDrop = 0;
         spawnWord(state);
+        state.nextDrop = dropGap(state);
     }
 
     moveWords(state, seconds);
@@ -365,10 +469,14 @@ function togglePause(state) {
 
 /**
  * actionForKey — turn a keyboard key into an action, or null.
- * INPUT: key. OUTPUT: 'back', 'clear', 'new', 'pause', a letter, or null.
+ * INPUT: key. OUTPUT: 'faster', 'slower', 'back', 'clear', 'new', 'pause',
+ *        a single letter, or null.
  */
 function actionForKey(key) {
     const k = String(key);
+
+    if (k.toLowerCase() === 'arrowup') { return 'faster'; }
+    if (k.toLowerCase() === 'arrowdown') { return 'slower'; }
 
     if (k === ' ' || k.toLowerCase() === 'spacebar') { return 'clear'; }
     if (k.toLowerCase() === 'backspace') { return 'back'; }
