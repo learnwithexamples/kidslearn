@@ -7,15 +7,14 @@ LESSON = dict(
     subtitle="A blank rectangle, and code that paints on it",
     tag="Draw with code",
     card="The canvas element, its upside-down coordinates, and the commands for rectangles, colours and lines.",
-    practice_intro="Every task from here draws something. Press Run and look at the picture — that is your program.",
+    practice_intro="Every task from here draws something. Press Run and compare your canvas with the goal beside it. The faint dashed line round each one marks the edge of the canvas — it is not part of the drawing.",
     footer="Every game in Fun Time is this, thirty times a second. 🖼️",
 
     sections=[
         section("🖼️ A rectangle you can paint on",
             info("<p>A <code>&lt;canvas&gt;</code> is a blank patch of page. HTML gives you the patch; it cannot draw a single thing on it. <strong>Everything</strong> you see on a canvas was put there by JavaScript — which means every picture is a program.</p>"),
             "<p>Two steps to get started, and they are the same two every time:</p>",
-            demo('''<canvas id="board" width="300" height="160"
-        style="border:2px solid #333"></canvas>
+            demo('''<canvas id="board" width="300" height="160"></canvas>
 
 <script>
     const canvas = document.getElementById("board");
@@ -28,6 +27,10 @@ LESSON = dict(
                     <li><code>getElementById</code> finds the canvas — same as Lesson 6.</li>
                     <li><code>getContext("2d")</code> hands you the <strong>brush</strong>. Everybody calls it <code>ctx</code>.</li>
                 </ul>''',
+            tip("┈ About that dashed line",
+                "<p>A canvas has no edge of its own — it is completely invisible until you draw. The faint <strong>dashed grey line</strong> round every canvas in these lessons is put there by the page, just so you can see where the edges are. It is <em>not</em> part of the picture and you never have to draw it.</p>"
+                "<p>On a page of your own you would add a real one yourself with CSS: <code>&lt;canvas style=\"border:2px solid #333\"&gt;</code>.</p>"),
+
             warn("📏 Set the size in the HTML, not the CSS",
                  "<p><code>width=\"300\" height=\"160\"</code> as attributes sets how many <em>pixels</em> the canvas has. Setting it in CSS instead stretches those pixels like a blown-up photo, and everything goes blurry.</p>")),
 

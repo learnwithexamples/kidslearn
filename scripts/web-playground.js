@@ -138,12 +138,25 @@
                'window.__report(null);\n<\/script>';
     }
 
+    /* The canvas edge is a GUIDE, not ink.
+       It used to be a solid black 2px border, which looks exactly like
+       something a student drew with strokeRect — so a child reading "draw an
+       X" reasonably wondered whether the box round it was theirs to draw too.
+       A pale dashed line cannot be mistaken for a drawing, and `outline`
+       rather than `border` means it takes no space and shifts nothing. */
     const STAGE_STYLE =
         'body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; ' +
         'margin: 0; padding: 14px; color: #222; background: #fff; } ' +
         '#__out { font-family: Menlo, Consolas, monospace; font-size: 13px; ' +
         'white-space: pre-wrap; margin: 0; color: #111; } ' +
-        'canvas { border: 2px solid #333; background: #fff; display: block; }';
+        'canvas { display: block; background: #fff; max-width: 100%; height: auto; ' +
+        'outline: 1px dashed #c9c9c9; }';
+
+    /* Drawing tasks get their canvas centred, so the space around it reads as
+       the frame's margin rather than as part of the picture. */
+    const CANVAS_STAGE_STYLE =
+        'body { display: flex; align-items: center; justify-content: center; ' +
+        'min-height: 100vh; box-sizing: border-box; }';
 
     /**
      * buildPage — the whole little document for one run.
@@ -169,7 +182,8 @@
             const prelude = 'var canvas = document.getElementById("board");\n' +
                             'var ctx = canvas.getContext("2d");\n' +
                             'window.__watchCanvas(ctx);\n';
-            return '<!DOCTYPE html><html><head>' + head + '</head><body>' +
+            return '<!DOCTYPE html><html><head>' + head +
+                   '<style data-stage>' + CANVAS_STAGE_STYLE + '</style></head><body>' +
                    '<canvas data-stage id="board" width="' + CANVAS_WIDTH + '" height="' + CANVAS_HEIGHT +
                    '"></canvas>' + runnerFor(prelude + code) + '</body></html>';
         }

@@ -7,7 +7,7 @@ LESSON = dict(
     subtitle="Where a loop and a canvas together make something you could not draw by hand",
     tag="Finale 🏆",
     card="Circles with arc(), then loops that draw a hundred shapes from four lines of code — and a final project.",
-    practice_intro="The last set. Every task here is a picture built by a loop, which is the whole trick of drawing with code.",
+    practice_intro="The last set. Every task here is a picture built by a loop, which is the whole trick of drawing with code. As before, the faint dashed line is just the edge of the canvas — nothing to draw.",
     footer="You wrote a program that made a picture. That is computer graphics. 🎨🏆",
 
     sections=[

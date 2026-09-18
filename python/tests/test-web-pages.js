@@ -207,6 +207,38 @@ console.log('every task is complete and checks something');
     console.log('       (' + total + ' tasks across ' + LESSONS.length + ' lessons)');
 })();
 
+/* --------------------------------------------- nothing that looks like ink */
+
+console.log('the canvas edge is a guide, not a drawing');
+
+(function () {
+    const playground = fs.readFileSync(
+        path.join(ROOT, 'scripts', 'web-playground.js'), 'utf8');
+
+    /* A solid dark border round the preview canvas is indistinguishable from
+       something drawn with strokeRect, and a child reading "draw an X" will
+       reasonably wonder whether the box round it is theirs to draw as well.
+       Whatever marks the edge has to be unmistakably NOT ink. */
+    /* The stylesheet is built by joining string literals, so glue the
+       adjacent ones back together before looking for the rule. */
+    const joined = playground.replace(/'\s*\+\s*'/g, '');
+    const rule = (joined.match(/canvas \{([^}]*)\}/) || [])[1] || '';
+    check('the preview canvas has no border of its own',
+          rule.indexOf('border:') === -1, rule.trim());
+    check('its edge is marked with a dashed line instead',
+          /outline:[^;]*dashed/.test(rule), rule.trim());
+
+    /* And the lessons say so in words, because a guide nobody explained is
+       still a guide somebody will try to draw. */
+    ['canvas', 'canvas-art'].forEach(function (slug) {
+        const html = read('web-' + slug + '.html');
+        const explained = /not part of the (picture|drawing)/.test(html) ||
+                          /nothing to draw/.test(html);
+        check('web-' + slug + '.html explains the dashed edge',
+              /dashed/.test(html) && explained);
+    });
+})();
+
 /* ------------------------------------------------- the live examples */
 
 console.log('the live examples');
