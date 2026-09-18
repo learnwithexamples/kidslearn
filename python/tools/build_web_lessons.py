@@ -93,8 +93,15 @@ def task(badge, title, difficulty, goal, kind, solution, **checks):
                         <button class="reset-btn">↺ Reset</button>
                         <button class="solution-btn">💡 Solution</button>
                     </div>
-                    <div class="web-stage">
-                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    <div class="web-results">
+                        <div class="web-goal">
+                            <iframe class="goal-preview" title="What you are aiming for"
+                                    sandbox="allow-scripts"></iframe>
+                            <pre class="goal-output"></pre>
+                        </div>
+                        <div class="web-stage">
+                            <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                        </div>
                     </div>
                     <pre class="pg-output" aria-live="polite"></pre>
                 </div>

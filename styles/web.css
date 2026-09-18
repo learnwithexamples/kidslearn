@@ -7,25 +7,34 @@
    borrowed from python.css so the two tracks feel like one course.
    ============================================================ */
 
-/* ---- the live preview ---- */
-.web-stage {
+/* ---- the two previews: what to aim for, and what you made ----
+   Side by side wherever there is room, so comparing them is a glance and
+   not a scroll. On a narrow screen auto-fit drops them into one column. */
+.web-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 12px;
     margin-top: 12px;
+}
+.web-goal, .web-stage {
     border: 3px solid #2c3e50;
     border-radius: 8px;
     background: #fff;
     overflow: hidden;
 }
-.web-stage::before {
-    content: '🖥️ Your page';
+.web-goal { border-color: #2e8b57; }
+.web-goal::before, .web-stage::before {
     display: block;
-    background: #2c3e50;
     color: #fff;
     font-family: Menlo, Consolas, monospace;
     font-size: 0.78em;
     letter-spacing: 1px;
     padding: 5px 10px;
 }
-.web-preview {
+.web-goal::before { content: '🎯 What you are aiming for'; background: #2e8b57; }
+.web-stage::before { content: '🖥️ Yours'; background: #2c3e50; }
+
+.web-preview, .goal-preview {
     display: block;
     width: 100%;
     height: 240px;
@@ -33,8 +42,23 @@
     background: #fff;
 }
 
-/* A JavaScript task has nothing to look at, so the frame stays small and
-   quiet and the output box below does the talking. */
+/* The goal for a JavaScript task is what it PRINTS, not the blank page it
+   draws — so that one shows an output box and hides the frame. */
+.goal-output {
+    margin: 0;
+    padding: 12px 14px;
+    font-family: Menlo, Consolas, monospace;
+    font-size: 0.88em;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    color: #111;
+    min-height: 3em;
+}
+.task[data-kind="js"] .goal-preview { display: none; }
+.task:not([data-kind="js"]) .goal-output { display: none; }
+
+/* A JavaScript task has nothing to look at, so its own frame stays quiet
+   and the output box under the buttons does the talking. */
 .web-stage.stage-quiet { display: none; }
 
 /* ---- worked examples inside the Description tab ---- */

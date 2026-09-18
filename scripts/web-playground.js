@@ -193,6 +193,8 @@
      * that never ends.
      */
     function freshFrame(task) {
+        /* .web-preview is the student's own frame. The goal beside it is a
+           .goal-preview and is deliberately left alone. */
         const old = task.querySelector('.web-preview');
         const frame = document.createElement('iframe');
         frame.className = old.className;
@@ -296,6 +298,52 @@
         return { ok: true };
     }
 
+    /**
+     * showGoal — run the task's own answer, so the student can see the aim.
+     *
+     * ALGORITHM: the reference answer is already on the page, behind the
+     *            Solution button. Run it in a second, read-only preview and
+     *            show whatever it produces:
+     *
+     *              a drawing or a page — show the preview itself
+     *              JavaScript          — show what it printed
+     *
+     * WHY: "draw a house" does not say what the house looks like, and even
+     *      "make a card" leaves a lot open. A picture of the finished thing
+     *      is part of the requirement, not a hint. And because it is made
+     *      FROM the answer, the picture and the answer can never disagree.
+     */
+    function showGoal(task) {
+        if (task.dataset.goalShown === 'yes') { return; }
+        const frame = task.querySelector('.goal-preview');
+        const answer = task.querySelector('.solution pre');
+        if (!frame || !answer) { return; }
+
+        task.dataset.goalShown = 'yes';
+        const kind = task.dataset.kind || 'js';
+        const token = 'goal-' + (nextToken++);
+        const box = task.querySelector('.goal-output');
+
+        /* A JavaScript answer has nothing to look at, so catch what it
+           printed and show that instead of the blank page it drew. */
+        if (kind === 'js' && box) {
+            box.textContent = 'running…';
+            waiting[token] = function (note) {
+                box.textContent = note.error
+                    ? '⚠️ ' + note.error
+                    : (note.output || '(it prints nothing)');
+            };
+        }
+
+        frame.srcdoc = buildPage(kind, answer.textContent, token, []);
+    }
+
+    /* The Practice panel starts hidden, and a hidden iframe does not load.
+       So the goals are drawn the moment the panel is first shown. */
+    function showGoals() {
+        document.querySelectorAll('.task').forEach(showGoal);
+    }
+
     function setupTask(task) {
         const textarea = task.querySelector('.code-input');
         const output = task.querySelector('.pg-output');
@@ -379,6 +427,7 @@
                 document.querySelectorAll('.tab-panel').forEach(function (panel) {
                     panel.style.display = panel.id === tab.dataset.panel ? 'block' : 'none';
                 });
+                if (tab.dataset.panel === 'practice') { showGoals(); }
             });
         });
     }
@@ -399,6 +448,10 @@
         setupTabs();
         setupDemos();
         document.querySelectorAll('.task').forEach(setupTask);
+
+        /* If the Practice panel is already showing, the goals are needed now. */
+        const practice = document.getElementById('practice');
+        if (practice && practice.style.display !== 'none') { showGoals(); }
     });
 
     /* Handy for tests. */

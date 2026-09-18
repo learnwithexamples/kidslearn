@@ -104,6 +104,38 @@ function talk(url) {
     });
 }
 
+/* Ask the page what each goal preview actually produced. A goal that draws
+   nothing is worse than no goal: it tells a child the answer is a blank
+   rectangle. */
+const GOALS = `
+(function () {
+    return new Promise(function (done) {
+        var practice = document.querySelector('.lesson-tab[data-panel="practice"]');
+        if (practice) { practice.click(); }
+        setTimeout(function () {
+            var empty = [];
+            document.querySelectorAll('.task').forEach(function (task, i) {
+                var kind = task.dataset.kind || 'js';
+                if (kind === 'js') {
+                    var box = task.querySelector('.goal-output');
+                    var text = box ? box.textContent.trim() : '';
+                    if (text === '' || text === 'running…' || text.indexOf('⚠️') === 0) {
+                        empty.push('task ' + (i + 1) + ' prints nothing: "' + text + '"');
+                    }
+                } else {
+                    var frame = task.querySelector('.goal-preview');
+                    var doc = null;
+                    try { doc = frame.contentDocument; } catch (e) { /* sandboxed */ }
+                    if (!frame || !frame.getAttribute('srcdoc')) {
+                        empty.push('task ' + (i + 1) + ' has no goal at all');
+                    }
+                }
+            });
+            done(empty);
+        }, 1400);
+    });
+})()`;
+
 /** evaluate — run an expression in the page and wait for its promise. */
 async function evaluate(tab, expression) {
     const reply = await tab.send('Runtime.evaluate', {
@@ -240,6 +272,10 @@ async function main() {
                 ' demos: document.querySelectorAll(".web-demo").length})');
             check(label + ': the page has tasks and live examples',
                   counts.tasks > 0 && counts.demos > 0, JSON.stringify(counts));
+
+            const emptyGoals = await evaluate(tab, GOALS);
+            check(label + ': every task shows what to aim for',
+                  emptyGoals.length === 0, emptyGoals[0]);
 
             for (const [index, right, wrong] of trials) {
                 const yes = await tryAnswer(tab, index, right);
