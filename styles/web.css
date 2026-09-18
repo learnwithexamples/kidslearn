@@ -1,0 +1,115 @@
+/* ============================================================
+   web.css — the Web Coding track (HTML, CSS, JavaScript, canvas)
+
+   Only the pieces the Python lessons do not already have: the live preview
+   frame, the worked examples in the Description tab, and the track card on
+   the hub. Everything else — tabs, tasks, code blocks, info boxes — is
+   borrowed from python.css so the two tracks feel like one course.
+   ============================================================ */
+
+/* ---- the live preview ---- */
+.web-stage {
+    margin-top: 12px;
+    border: 3px solid #2c3e50;
+    border-radius: 8px;
+    background: #fff;
+    overflow: hidden;
+}
+.web-stage::before {
+    content: '🖥️ Your page';
+    display: block;
+    background: #2c3e50;
+    color: #fff;
+    font-family: Menlo, Consolas, monospace;
+    font-size: 0.78em;
+    letter-spacing: 1px;
+    padding: 5px 10px;
+}
+.web-preview {
+    display: block;
+    width: 100%;
+    height: 240px;
+    border: 0;
+    background: #fff;
+}
+
+/* A JavaScript task has nothing to look at, so the frame stays small and
+   quiet and the output box below does the talking. */
+.web-stage.stage-quiet { display: none; }
+
+/* ---- worked examples inside the Description tab ---- */
+.web-demo {
+    margin: 16px 0;
+    border: 2px solid #d9e2ec;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #f8fafc;
+}
+.web-demo .demo-code {
+    display: block;
+    margin: 0;
+    padding: 12px 16px;
+    background: #1e2a36;
+    color: #e6f1ff;
+    font-family: Menlo, Consolas, monospace;
+    font-size: 0.88em;
+    line-height: 1.55;
+    white-space: pre;
+    overflow-x: auto;
+}
+.web-demo .demo-label {
+    display: block;
+    background: #d9e2ec;
+    color: #2c3e50;
+    font-family: Menlo, Consolas, monospace;
+    font-size: 0.76em;
+    letter-spacing: 1px;
+    padding: 5px 12px;
+}
+.web-demo .web-preview { height: 170px; border-top: 2px solid #d9e2ec; }
+.web-demo.demo-tall .web-preview { height: 280px; }
+
+/* ---- a tag broken into its parts ---- */
+.tag-anatomy {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 14px 0;
+}
+.tag-part {
+    flex: 1 1 150px;
+    border: 2px solid #4a90d9;
+    border-radius: 8px;
+    padding: 10px 12px;
+    background: #f2f8fd;
+}
+.tag-part code {
+    display: block;
+    font-size: 1.05em;
+    color: #1a5490;
+    margin-bottom: 4px;
+}
+.tag-part span { font-size: 0.88em; color: #45596b; }
+
+/* ---- the track card on the Python hub ---- */
+.track-card.track-web { border-color: #e67e22; }
+.track-card.track-web .track-level { background: #e67e22; }
+.track-card.track-web:hover { box-shadow: 0 10px 24px rgba(230, 126, 34, 0.25); }
+
+/* ---- a reference table of canvas commands ---- */
+.canvas-table-wrap { overflow-x: auto; margin: 14px 0; }
+.canvas-table { border-collapse: collapse; width: 100%; min-width: 480px; }
+.canvas-table th, .canvas-table td {
+    border: 1px solid #cfd8e3;
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 0.93em;
+}
+.canvas-table th { background: #2c3e50; color: #fff; }
+.canvas-table td code { font-size: 0.92em; }
+.canvas-table tr:nth-child(even) td { background: #f6f9fc; }
+
+@media (max-width: 600px) {
+    .web-preview { height: 200px; }
+    .web-demo .demo-code { font-size: 0.8em; }
+}

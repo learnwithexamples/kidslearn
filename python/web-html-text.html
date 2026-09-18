@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 2: Text, Lists & Links - Web Coding - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+    <link rel="stylesheet" href="../styles/web.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔗 Lesson 2: Text, Lists &amp; Links</h1>
+            <p class="subtitle">Bold, italics, bullet points, links and pictures</p>
+            <a href="web.html" class="back-link">← Back to Web Coding</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>✍️ Making words stand out</h2>
+                <p>Two tags, and the difference between them matters more than it looks:</p>
+                <div class="web-demo" data-kind="html">
+    <code class="demo-code">&lt;p&gt;This is &lt;strong&gt;important&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;This is &lt;em&gt;said with emphasis&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;This is &lt;mark&gt;highlighted&lt;/mark&gt;.&lt;/p&gt;</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <div class="tip-box"><h4>🔊 Why not just &lt;b&gt; and &lt;i&gt;?</h4><p>They exist, and they only change the <em>look</em>. <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> change the <em>meaning</em> — a screen reader actually reads them with more force, so a blind visitor hears what you meant. Same appearance, more care.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>📝 Lists</h2>
+                <p>A list is two tags: one for the list itself, one for each item.</p>
+                <p><strong>Bulleted</strong> — order does not matter (<code>ul</code>, for <em>unordered</em>):</p>
+                <div class="web-demo" data-kind="html">
+    <code class="demo-code">&lt;ul&gt;
+    &lt;li&gt;Milk&lt;/li&gt;
+    &lt;li&gt;Eggs&lt;/li&gt;
+    &lt;li&gt;Dragon food&lt;/li&gt;
+&lt;/ul&gt;</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <p><strong>Numbered</strong> — order does matter (<code>ol</code>, for <em>ordered</em>):</p>
+                <div class="web-demo" data-kind="html">
+    <code class="demo-code">&lt;ol&gt;
+    &lt;li&gt;Wake up&lt;/li&gt;
+    &lt;li&gt;Write some HTML&lt;/li&gt;
+    &lt;li&gt;Rule the world&lt;/li&gt;
+&lt;/ol&gt;</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <div class="info-box"><p>You never type the bullets or the numbers. You say <em>this is a list, these are its items</em>, and the browser counts for you. Add an item in the middle of an <code>ol</code> and everything below renumbers itself.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔗 Links</h2>
+                <p>The tag that built the internet. <code>&lt;a&gt;</code> stands for <em>anchor</em>, and it needs an <strong>attribute</strong> to say where it goes:</p>
+                <div class="code-block">&lt;a href=&quot;https://example.com&quot;&gt;Visit Example&lt;/a&gt;</div>
+                <div class="tag-anatomy">
+                    <div class="tag-part"><code>href</code><span>the <strong>attribute name</strong> — "hypertext reference"</span></div>
+                    <div class="tag-part"><code>"https://…"</code><span>its <strong>value</strong>, always in quotes</span></div>
+                    <div class="tag-part"><code>Visit Example</code><span>the words you actually click</span></div>
+                </div>
+                <div class="web-demo" data-kind="html">
+    <code class="demo-code">&lt;p&gt;Go and read about &lt;a href=&quot;https://en.wikipedia.org/wiki/Octopus&quot;&gt;octopuses&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Or visit &lt;a href=&quot;html.html&quot;&gt;another page in this folder&lt;/a&gt;.&lt;/p&gt;</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <div class="tip-box"><h4>📎 Two kinds of address</h4><p>A full address starting <code>https://</code> goes anywhere on the web. A bare name like <code>about.html</code> means <em>a file sitting next to this one</em> — that is how the pages of one site link to each other.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🖼️ Pictures</h2>
+                <p><code>&lt;img&gt;</code> is different in two ways. It has no closing tag — there is nothing to put inside it — and it needs <strong>two</strong> attributes:</p>
+                <div class="code-block">&lt;img src=&quot;cat.jpg&quot; alt=&quot;A ginger cat asleep on a keyboard&quot;&gt;</div>
+                <div class="web-demo" data-kind="html">
+    <code class="demo-code">&lt;img src=&quot;img/example-photo.svg&quot;
+     alt=&quot;A cartoon cat asleep on a keyboard&quot;
+     width=&quot;120&quot;&gt;</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <p>That picture lives in a file next to this page. Change the <code>src</code> to a name that does not exist and the browser shows the <code>alt</code> text instead — which is the first reason to write one.</p>
+                <div class="warn-box"><h4>⚠️ alt is not optional</h4><p><code>alt</code> describes the picture for anyone who cannot see it — a blind visitor, or anybody whose connection dropped. Writing it is a two-second kindness, and every professional does it.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>📏 A line and a break</h2>
+                <p>Two more tags with nothing inside them:</p>
+                <div class="web-demo" data-kind="html">
+    <code class="demo-code">&lt;p&gt;Roses are red&lt;br&gt;Violets are blue&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;A horizontal rule divides one part from the next.&lt;/p&gt;</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <div class="tip-box"><h4>↩️ Enter does nothing</h4><p>Press Enter twenty times in your HTML and the browser shows one space. It collapses <em>all</em> runs of whitespace. If you want a new line, you have to ask for one — <code>&lt;br&gt;</code> for a line break, or a new <code>&lt;p&gt;</code> for a new paragraph.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="takeaway-box">
+                    <ul>
+                        <li><code>strong</code> and <code>em</code> carry <strong>meaning</strong>, not just looks.</li>
+                        <li><code>ul</code> + <code>li</code> for bullets; <code>ol</code> + <code>li</code> when the order matters.</li>
+                        <li><code>&lt;a href="…"&gt;</code> makes a link. <strong>Attributes</strong> go in the opening tag, values in quotes.</li>
+                        <li><code>&lt;img src="…" alt="…"&gt;</code> has no closing tag and always needs <code>alt</code>.</li>
+                        <li>The browser ignores your line breaks. Use <code>&lt;br&gt;</code> or a new paragraph.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Six new tags in this lesson. Use every one of them at least once and they will stick.</p>
+            </div>
+
+            <div class="task" data-kind="html" data-expected="Cheese" data-expect-tags="h1, ul, ul li">
+                <div class="task-head">
+                    <span class="task-badge">🛒</span>
+                    <h3>Task 1: Shopping List</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Write an <code>h1</code> saying <code>Shopping</code> and a <strong>bulleted</strong> list with three items: <code>Bread</code>, <code>Cheese</code>, <code>Apples</code>.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>&lt;h1&gt;Shopping&lt;/h1&gt;
+&lt;ul&gt;
+    &lt;li&gt;Bread&lt;/li&gt;
+    &lt;li&gt;Cheese&lt;/li&gt;
+    &lt;li&gt;Apples&lt;/li&gt;
+&lt;/ul&gt;</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="html" data-expected="Wait" data-expect-tags="h2, ol, ol li">
+                <div class="task-head">
+                    <span class="task-badge">🍳</span>
+                    <h3>Task 2: A Recipe</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">An <code>h2</code> saying <code>How to make toast</code>, then a <strong>numbered</strong> list of three steps in the right order.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>&lt;h2&gt;How to make toast&lt;/h2&gt;
+&lt;ol&gt;
+    &lt;li&gt;Put bread in the toaster&lt;/li&gt;
+    &lt;li&gt;Wait&lt;/li&gt;
+    &lt;li&gt;Eat it&lt;/li&gt;
+&lt;/ol&gt;</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="html" data-expected="I am learning at KidsLearn." data-expect-tags="p a[href]">
+                <div class="task-head">
+                    <span class="task-badge">🔗</span>
+                    <h3>Task 3: Make a Link</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write a paragraph that says <code>I am learning at KidsLearn.</code> — with the words <code>KidsLearn</code> being a link to <code>../index.html</code>.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>&lt;p&gt;I am learning at &lt;a href=&quot;../index.html&quot;&gt;KidsLearn&lt;/a&gt;.&lt;/p&gt;</pre>
+                </div>
+            </div>
+
+            <div class="practice-intro">
+                <h2>🏋️ Extra Practice — Drill Time!</h2>
+                <p>This is where it sticks. Try every one — and if you get stuck, read your own earlier answers before you peek.</p>
+            </div>
+
+            <div class="task" data-kind="html" data-expected="Never feed a dragon after midnight." data-expect-tags="p strong, p em">
+                <div class="task-head">
+                    <span class="task-badge">💪</span>
+                    <h3>Task 4: Strong Feelings</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">One paragraph containing the sentence <code>Never feed a dragon after midnight.</code> with the word <code>Never</code> in <code>&lt;strong&gt;</code> and the word <code>midnight</code> in <code>&lt;em&gt;</code>.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>&lt;p&gt;&lt;strong&gt;Never&lt;/strong&gt; feed a dragon after &lt;em&gt;midnight&lt;/em&gt;.&lt;/p&gt;</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="html" data-expected="Pear" data-expect-tags="ul li ul li">
+                <div class="task-head">
+                    <span class="task-badge">🪺</span>
+                    <h3>Task 5: A List Inside a List</h3>
+                    <span class="task-difficulty diff-hard">Hard</span>
+                </div>
+                <p class="task-goal">Make a bulleted list with two items, <code>Fruit</code> and <code>Vegetables</code>. Inside the <code>Fruit</code> item, put <em>another</em> bulleted list with <code>Apple</code> and <code>Pear</code>. The inner <code>&lt;ul&gt;</code> goes inside the outer <code>&lt;li&gt;</code>, before its closing tag.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>&lt;ul&gt;
+    &lt;li&gt;Fruit
+        &lt;ul&gt;
+            &lt;li&gt;Apple&lt;/li&gt;
+            &lt;li&gt;Pear&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Vegetables&lt;/li&gt;
+&lt;/ul&gt;</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="html" data-expect-tags="h1, img[alt], p, hr, a[href]">
+                <div class="task-head">
+                    <span class="task-badge">📇</span>
+                    <h3>Task 6: A Tiny Profile</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Build a little profile card: an <code>h1</code> with a name, an <code>&lt;img&gt;</code> with any <code>src</code> and a proper <code>alt</code>, a paragraph, a horizontal rule, and a link to <code>https://example.com</code>.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>&lt;h1&gt;Ada&lt;/h1&gt;
+&lt;img src=&quot;ada.jpg&quot; alt=&quot;A portrait of Ada&quot; width=&quot;90&quot;&gt;
+&lt;p&gt;Writes programs for machines that do not exist yet.&lt;/p&gt;
+&lt;hr&gt;
+&lt;a href=&quot;https://example.com&quot;&gt;Her website&lt;/a&gt;</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="page" data-expect-tags="html, head, title, body, h1, ol li, p a[href]">
+                <div class="task-head">
+                    <span class="task-badge">📜</span>
+                    <h3>Task 7: Boss Level — The Whole Page</h3>
+                    <span class="task-difficulty diff-hard">Hard</span>
+                </div>
+                <p class="task-goal">A complete page (doctype and all) titled <code>My Top Three</code>. In the body: an <code>h1</code>, a numbered list of your three favourite things, and a final paragraph with a link in it. Every tag properly closed.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My Top Three&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;My Top Three&lt;/h1&gt;
+    &lt;ol&gt;
+        &lt;li&gt;Octopuses&lt;/li&gt;
+        &lt;li&gt;Thunderstorms&lt;/li&gt;
+        &lt;li&gt;Toast&lt;/li&gt;
+    &lt;/ol&gt;
+    &lt;p&gt;Read more at &lt;a href=&quot;https://example.com&quot;&gt;Example&lt;/a&gt;.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="lesson-nav">
+            <a href="web-html.html">← Lesson 1: Your First Web Page</a>
+            <a href="web-css.html">Lesson 3: Colour &amp; Style →</a>
+        </div>
+
+        <footer>
+            <p>A link is what makes it a <em>web</em>. 🕸️</p>
+        </footer>
+    </div>
+    <script src="../scripts/web-playground.js"></script>
+</body>
+</html>

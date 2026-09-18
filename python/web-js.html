@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 4: Your First JavaScript - Web Coding - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+    <link rel="stylesheet" href="../styles/web.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚡ Lesson 4: Your First JavaScript</h1>
+            <p class="subtitle">Where labelling stops and real programming begins</p>
+            <a href="web.html" class="back-link">← Back to Web Coding</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>⚡ HTML labels. JavaScript decides.</h2>
+                <div class="info-box"><p>HTML and CSS cannot count, cannot compare, cannot remember. <strong>JavaScript</strong> can. It is a real programming language, it is built into every browser, and it is what makes a page <em>do</em> something instead of just sitting there.</p></div>
+                <p>It goes inside a <code>&lt;script&gt;</code> tag:</p>
+                <div class="web-demo" data-kind="html">
+    <code class="demo-code">&lt;p&gt;Look in the box below.&lt;/p&gt;
+&lt;pre id=&quot;__out&quot;&gt;&lt;/pre&gt;
+&lt;script&gt;
+    console.log(&quot;Hello from JavaScript!&quot;);
+&lt;/script&gt;</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <p><code>console.log(...)</code> is JavaScript's <code>print()</code>. It writes a line out where a programmer can read it.</p>
+            </section>
+
+            <section class="lesson-section">
+                <h2>📦 Variables</h2>
+                <p>Same idea as Python, with one extra word at the front:</p>
+                <div class="code-block">let score = 100;
+const name = &quot;Maya&quot;;</div>
+                <ul>
+                    <li><code>let</code> — a box whose contents can change later.</li>
+                    <li><code>const</code> — a box that is set once and never changed.</li>
+                </ul>
+                <div class="web-demo" data-kind="js">
+    <code class="demo-code">let score = 10;
+console.log(score);
+
+score = score + 5;
+console.log(score);
+
+const name = &quot;Maya&quot;;
+console.log(name);</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <div class="tip-box"><h4>🔒 Reach for const first</h4><p>Use <code>const</code> unless you know the value has to change. A box that cannot change is one less thing that can go wrong — and when you read the code later, <code>const</code> promises you it is still what it was.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🐍 If you know Python…</h2>
+                <div class="algo-table-wrap">
+                <table class="canvas-table">
+                    <tr><th>Python</th><th>JavaScript</th><th></th></tr>
+                    <tr><td><code>score = 10</code></td><td><code>let score = 10;</code></td><td>say let or const</td></tr>
+                    <tr><td><code>print(x)</code></td><td><code>console.log(x);</code></td><td>same job</td></tr>
+                    <tr><td><code># a note</code></td><td><code>// a note</code></td><td>two slashes</td></tr>
+                    <tr><td><code>True</code> / <code>False</code></td><td><code>true</code> / <code>false</code></td><td>lower case</td></tr>
+                    <tr><td><code>None</code></td><td><code>null</code></td><td>nothing at all</td></tr>
+                    <tr><td>indentation</td><td><code>{ }</code></td><td>braces group things</td></tr>
+                </table>
+            </div>
+                <div class="info-box"><p>The ideas are identical. Variables, text, numbers, decisions, loops — you are not learning to program twice, you are learning one thing in a second accent.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔢 Numbers and text</h2>
+                <div class="web-demo" data-kind="js">
+    <code class="demo-code">let a = 7;
+let b = 2;
+
+console.log(a + b);
+console.log(a - b);
+console.log(a * b);
+console.log(a / b);
+console.log(a % b);</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <p>Note <code>7 / 2</code> gives <code>3.5</code> — JavaScript has only one kind of number, so no whole-number division surprise.</p>
+                <p>Joining text together is done with <code>+</code> as well, but there is a much nicer way — <strong>backticks</strong> with <code>${...}</code> holes in them:</p>
+                <div class="web-demo" data-kind="js">
+    <code class="demo-code">const name = &quot;Maya&quot;;
+const age = 11;
+
+console.log(&quot;Hi &quot; + name + &quot;, you are &quot; + age);
+console.log(`Hi ${name}, you are ${age}`);</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <div class="warn-box"><h4>⚠️ + means two different things</h4><p><code>2 + 3</code> is <code>5</code>. But <code>"2" + 3</code> is <code>"23"</code>, because a piece of text next to a <code>+</code> turns the whole thing into joining. This catches everybody once.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🧰 A few things you can ask of text</h2>
+                <div class="web-demo" data-kind="js">
+    <code class="demo-code">const word = &quot;dragon&quot;;
+
+console.log(word.length);
+console.log(word.toUpperCase());
+console.log(word[0]);
+console.log(word.includes(&quot;ago&quot;));</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <div class="tip-box"><h4>📏 length has no brackets</h4><p><code>word.length</code> is a <em>fact about</em> the text, so no brackets. <code>word.toUpperCase()</code> is something you ask it to <em>do</em>, so it gets brackets. That difference runs all the way through the language.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="takeaway-box">
+                    <ul>
+                        <li>JavaScript lives in <code>&lt;script&gt;</code> tags and runs in the browser.</li>
+                        <li><code>console.log()</code> prints. <code>//</code> starts a comment.</li>
+                        <li><code>let</code> for a box that changes, <code>const</code> for one that does not.</li>
+                        <li>Backticks and <code>${ }</code> beat gluing text with <code>+</code>.</li>
+                        <li>Lines usually end with a semicolon.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>These tasks have no page to look at — the output box below each one is where your <code>console.log</code> lines appear.</p>
+            </div>
+
+            <div class="task" data-kind="js" data-expected="Hello, JavaScript!">
+                <div class="task-head">
+                    <span class="task-badge">👋</span>
+                    <h3>Task 1: Hello, Console</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Print the exact words <code>Hello, JavaScript!</code></p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>console.log(&quot;Hello, JavaScript!&quot;);</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="js" data-expected="Buddy
+7">
+                <div class="task-head">
+                    <span class="task-badge">📦</span>
+                    <h3>Task 2: Two Boxes</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Make a <code>const</code> called <code>pet</code> holding <code>"Buddy"</code> and a <code>let</code> called <code>age</code> holding <code>7</code>. Print each one on its own line — the values, not the words.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>const pet = &quot;Buddy&quot;;
+let age = 7;
+console.log(pet);
+console.log(age);</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="js" data-expected="17
+7
+60">
+                <div class="task-head">
+                    <span class="task-badge">🧮</span>
+                    <h3>Task 3: A Little Maths</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Two variables, <code>a = 12</code> and <code>b = 5</code>. Print their sum, then their difference, then their product — three lines, in that order.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>const a = 12;
+const b = 5;
+console.log(a + b);
+console.log(a - b);
+console.log(a * b);</pre>
+                </div>
+            </div>
+
+            <div class="practice-intro">
+                <h2>🏋️ Extra Practice — Drill Time!</h2>
+                <p>This is where it sticks. Try every one — and if you get stuck, read your own earlier answers before you peek.</p>
+            </div>
+
+            <div class="task" data-kind="js" data-expected="Sam is 10 years old">
+                <div class="task-head">
+                    <span class="task-badge">💬</span>
+                    <h3>Task 4: Use a Template</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Make <code>const name = "Sam"</code> and <code>const age = 10</code>, then print exactly <code>Sam is 10 years old</code> using backticks and <code>${ }</code> — not <code>+</code>.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>const name = &quot;Sam&quot;;
+const age = 10;
+console.log(`${name} is ${age} years old`);</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="js" data-expected="10
+15
+30">
+                <div class="task-head">
+                    <span class="task-badge">🔁</span>
+                    <h3>Task 5: Change the Box</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Make <code>let score = 10</code>. Print it. Add 5 to it and print it again. Double it and print it a third time.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>let score = 10;
+console.log(score);
+score = score + 5;
+console.log(score);
+score = score * 2;
+console.log(score);</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="js" data-expected="8
+ELEPHANT
+e">
+                <div class="task-head">
+                    <span class="task-badge">🔤</span>
+                    <h3>Task 6: Ask a Word Some Questions</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Make <code>const word = "elephant"</code>. Print its length, then the whole word in capitals, then its first letter — three lines.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>const word = &quot;elephant&quot;;
+console.log(word.length);
+console.log(word.toUpperCase());
+console.log(word[0]);</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="js" data-expected="5
+23
+different">
+                <div class="task-head">
+                    <span class="task-badge">🪤</span>
+                    <h3>Task 7: The Plus Trap</h3>
+                    <span class="task-difficulty diff-hard">Hard</span>
+                </div>
+                <p class="task-goal">Print three lines that show the trap. Line 1: <code>2 + 3</code> as numbers. Line 2: <code>"2" + 3</code> with the 2 in quotes. Line 3: the word <code>different</code>. Your output should read <code>5</code>, then <code>23</code>, then <code>different</code>.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>console.log(2 + 3);
+console.log(&quot;2&quot; + 3);
+console.log(&quot;different&quot;);</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="js" data-expected="Cake x3
+Total: 12">
+                <div class="task-head">
+                    <span class="task-badge">🎁</span>
+                    <h3>Task 8: Boss Level — A Receipt</h3>
+                    <span class="task-difficulty diff-hard">Hard</span>
+                </div>
+                <p class="task-goal"><code>const item = "Cake"</code>, <code>const price = 4</code>, <code>const many = 3</code>. Print exactly two lines:<br><code>Cake x3</code><br><code>Total: 12</code><br>Work the total out with <code>*</code> — do not type <code>12</code> yourself.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>const item = &quot;Cake&quot;;
+const price = 4;
+const many = 3;
+console.log(`${item} x${many}`);
+console.log(`Total: ${price * many}`);</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="lesson-nav">
+            <a href="web-css.html">← Lesson 3: Colour &amp; Style</a>
+            <a href="web-js-logic.html">Lesson 5: Decisions, Loops &amp; Functions →</a>
+        </div>
+
+        <footer>
+            <p>Every browser in the world speaks JavaScript. Including yours. ⚡</p>
+        </footer>
+    </div>
+    <script src="../scripts/web-playground.js"></script>
+</body>
+</html>

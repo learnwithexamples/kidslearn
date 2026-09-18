@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1: Your First Web Page - Web Coding - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+    <link rel="stylesheet" href="../styles/web.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌐 Lesson 1: Your First Web Page</h1>
+            <p class="subtitle">Tags, elements, and the skeleton every web page shares</p>
+            <a href="web.html" class="back-link">← Back to Web Coding</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>🏷️ HTML is labelling, not programming</h2>
+                <div class="info-box"><p>Imagine writing out a story and then going back with a highlighter: <em>this bit is the title</em>, <em>this bit is a paragraph</em>, <em>this bit is a picture</em>. That is all HTML is. You write the words, then you label each piece so the browser knows what it is looking at.</p></div>
+                <p>The labels are called <strong>tags</strong>, and they come in pairs that wrap around the thing they describe:</p>
+                <div class="web-demo" data-kind="html">
+    <code class="demo-code">&lt;h1&gt;Dragons&lt;/h1&gt;
+&lt;p&gt;Dragons are large and usually on fire.&lt;/p&gt;</code>
+    <span class="demo-label">↓ and here is what the browser makes of it</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <p>You did not tell the browser to make the title big and bold. You told it <em>this is a heading</em>, and it already knew what headings look like.</p>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔎 The parts of a tag</h2>
+                <p>Every element has the same three parts:</p>
+                <div class="tag-anatomy">
+                    <div class="tag-part"><code>&lt;p&gt;</code><span>the <strong>opening tag</strong> — "a paragraph starts here"</span></div>
+                    <div class="tag-part"><code>Hello!</code><span>the <strong>content</strong> — whatever goes inside</span></div>
+                    <div class="tag-part"><code>&lt;/p&gt;</code><span>the <strong>closing tag</strong> — note the slash</span></div>
+                </div>
+                <p>Put together, one <strong>element</strong>:</p>
+                <div class="code-block">&lt;p&gt;Hello!&lt;/p&gt;</div>
+                <div class="tip-box"><h4>📌 The slash is the whole difference</h4><p><code>&lt;p&gt;</code> opens. <code>&lt;/p&gt;</code> closes. Forget the slash and the browser keeps waiting for the paragraph to end — and everything after it joins in.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>📐 Headings come in six sizes</h2>
+                <p><code>h1</code> is the biggest and most important, down to <code>h6</code>. Use <code>h1</code> for the name of the page, and the smaller ones for sections inside it.</p>
+                <div class="web-demo" data-kind="html">
+    <code class="demo-code">&lt;h1&gt;h1 — the title of the page&lt;/h1&gt;
+&lt;h2&gt;h2 — a big section&lt;/h2&gt;
+&lt;h3&gt;h3 — a smaller one&lt;/h3&gt;
+&lt;p&gt;And a p for ordinary writing.&lt;/p&gt;</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <div class="warn-box"><h4>⚠️ Size is not the point</h4><p>It is tempting to pick <code>h3</code> because you like the size. Pick by <em>importance</em> instead — a page with its headings in order is one a blind reader's screen reader can navigate, and one Google can understand.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🦴 The skeleton</h2>
+                <p>So far you have written the interesting bit. A complete page wraps it in a little skeleton that every web page in the world shares:</p>
+                <div class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</div>
+                <ul>
+                    <li><code>&lt;!DOCTYPE html&gt;</code> — "this is a modern web page". Not really a tag; just say it first.</li>
+                    <li><code>&lt;html&gt;</code> — everything lives inside this one.</li>
+                    <li><code>&lt;head&gt;</code> — facts <em>about</em> the page. Nobody sees these.</li>
+                    <li><code>&lt;title&gt;</code> — the name on the browser tab.</li>
+                    <li><code>&lt;body&gt;</code> — everything you can actually see.</li>
+                </ul>
+                <div class="tip-box"><h4>🪆 Tags nest like Russian dolls</h4><p><code>&lt;body&gt;</code> is inside <code>&lt;html&gt;</code>, and your <code>&lt;h1&gt;</code> is inside <code>&lt;body&gt;</code>. Whatever opens last must close first — never <code>&lt;b&gt;&lt;i&gt;text&lt;/b&gt;&lt;/i&gt;</code>.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>💬 Notes to yourself</h2>
+                <p>Anything between <code>&lt;!--</code> and <code>--&gt;</code> is a <strong>comment</strong>. The browser skips it entirely — it is there for the humans.</p>
+                <div class="web-demo" data-kind="html">
+    <code class="demo-code">&lt;h1&gt;Party&lt;/h1&gt;
+&lt;!-- remember to add the date here --&gt;
+&lt;p&gt;Bring cake.&lt;/p&gt;</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <p>Real pages are full of them. Leave notes for the person who reads your code next — which is usually you, three weeks later.</p>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="takeaway-box">
+                    <ul>
+                        <li>HTML <strong>labels</strong> pieces of a page; the browser already knows how each label should look.</li>
+                        <li>An element is an <strong>opening tag</strong>, <strong>content</strong>, and a <strong>closing tag</strong> with a slash.</li>
+                        <li><code>h1</code>–<code>h6</code> for headings, <code>p</code> for paragraphs.</li>
+                        <li>Every page has the same skeleton: doctype, <code>html</code>, <code>head</code>, <code>body</code>.</li>
+                        <li>Tags <strong>nest</strong> — last opened, first closed.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Write real HTML and watch your page appear beside it. There is no way to break anything — press Run as often as you like.</p>
+            </div>
+
+            <div class="task" data-kind="html" data-expected="Hello, world!" data-expect-tags="h1, p">
+                <div class="task-head">
+                    <span class="task-badge">👋</span>
+                    <h3>Task 1: Say Hello</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Write a heading that says <code>Hello, world!</code> and a paragraph underneath saying <code>I am building a web page.</code></p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>&lt;h1&gt;Hello, world!&lt;/h1&gt;
+&lt;p&gt;I am building a web page.&lt;/p&gt;</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="html" data-expected="Why it is great" data-expect-tags="h1, h2, p">
+                <div class="task-head">
+                    <span class="task-badge">🐉</span>
+                    <h3>Task 2: A Page About Anything</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Pick something you like. Give it an <code>h1</code> with its name, then an <code>h2</code> saying <code>Why it is great</code>, then a paragraph of your own words underneath.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>&lt;h1&gt;Dragons&lt;/h1&gt;
+&lt;h2&gt;Why it is great&lt;/h2&gt;
+&lt;p&gt;They can fly and they are on fire.&lt;/p&gt;</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="page" data-expected="It works!" data-expect-tags="html, head, title, body, h1">
+                <div class="task-head">
+                    <span class="task-badge">🦴</span>
+                    <h3>Task 3: The Whole Skeleton</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">This time write the <strong>complete</strong> page — doctype, <code>html</code>, <code>head</code> with a <code>title</code> of <code>My First Page</code>, and a <code>body</code> holding an <code>h1</code> that says <code>It works!</code></p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My First Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;It works!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+                </div>
+            </div>
+
+            <div class="practice-intro">
+                <h2>🏋️ Extra Practice — Drill Time!</h2>
+                <p>This is where it sticks. Try every one — and if you get stuck, read your own earlier answers before you peek.</p>
+            </div>
+
+            <div class="task" data-kind="html" data-expected="Wednesday" data-expect-tags="h1, h2, p">
+                <div class="task-head">
+                    <span class="task-badge">📚</span>
+                    <h3>Task 4: Three Sections</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Write an <code>h1</code> called <code>My Week</code>, then three <code>h2</code> headings — <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code> — each with a paragraph after it saying anything you like.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>&lt;h1&gt;My Week&lt;/h1&gt;
+&lt;h2&gt;Monday&lt;/h2&gt;
+&lt;p&gt;Swimming.&lt;/p&gt;
+&lt;h2&gt;Tuesday&lt;/h2&gt;
+&lt;p&gt;Piano.&lt;/p&gt;
+&lt;h2&gt;Wednesday&lt;/h2&gt;
+&lt;p&gt;Nothing at all.&lt;/p&gt;</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="html" data-expected="This paragraph never ends." data-expect-tags="h1, p">
+                <div class="task-head">
+                    <span class="task-badge">🔧</span>
+                    <h3>Task 5: Fix the Broken Tag</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Type this out, but <strong>fix the mistake</strong> first — one closing tag has no slash, so the browser never learns the paragraph ended:<br><code>&lt;h1&gt;Broken&lt;/h1&gt; &lt;p&gt;This paragraph never ends.&lt;p&gt;</code></p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>&lt;h1&gt;Broken&lt;/h1&gt;
+&lt;p&gt;This paragraph never ends.&lt;/p&gt;</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="html" data-expected="Step one: learn HTML." data-expect-tags="h1, p">
+                <div class="task-head">
+                    <span class="task-badge">💬</span>
+                    <h3>Task 6: Leave a Note</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Write an <code>h1</code> saying <code>Secret Plans</code> and a paragraph saying <code>Step one: learn HTML.</code> — and put an HTML comment between them that nobody will see on the page.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>&lt;h1&gt;Secret Plans&lt;/h1&gt;
+&lt;!-- step two is a secret --&gt;
+&lt;p&gt;Step one: learn HTML.&lt;/p&gt;</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="page" data-expected="this bit is bold" data-expect-tags="html, head, title, body, h1, p strong">
+                <div class="task-head">
+                    <span class="task-badge">🪆</span>
+                    <h3>Task 7: Boss Level — Nesting</h3>
+                    <span class="task-difficulty diff-hard">Hard</span>
+                </div>
+                <p class="task-goal">Write a complete page (doctype and all). Its <code>title</code> should be <code>Nesting Practice</code>. In the body put an <code>h1</code> saying <code>Inside Out</code>, and a paragraph containing the words <code>this bit is bold</code> wrapped in <code>&lt;strong&gt;</code> tags — inside the paragraph, not around it.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Nesting Practice&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Inside Out&lt;/h1&gt;
+    &lt;p&gt;Look, &lt;strong&gt;this bit is bold&lt;/strong&gt; and this bit is not.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="lesson-nav">
+            <a href="web.html">← Web Coding Hub</a>
+            <a href="web-html-text.html">Lesson 2: Text, Lists &amp; Links →</a>
+        </div>
+
+        <footer>
+            <p>Right-click any website and choose View Source. It is all just this. 🌐</p>
+        </footer>
+    </div>
+    <script src="../scripts/web-playground.js"></script>
+</body>
+</html>

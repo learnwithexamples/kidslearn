@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 3: Colour & Style - Web Coding - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+    <link rel="stylesheet" href="../styles/web.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Lesson 3: Colour &amp; Style</h1>
+            <p class="subtitle">CSS: telling the browser how your page should look</p>
+            <a href="web.html" class="back-link">← Back to Web Coding</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>🖌️ HTML says what. CSS says how.</h2>
+                <div class="info-box"><p>Your pages so far have used the browser's own taste: black text, blue links, Times New Roman. <strong>CSS</strong> is how you override that. It stands for <em>Cascading Style Sheets</em>, and a rule looks like this:</p></div>
+                <div class="code-block">h1 {
+    color: crimson;
+    font-size: 40px;
+}</div>
+                <div class="tag-anatomy">
+                    <div class="tag-part"><code>h1</code><span>the <strong>selector</strong> — which elements</span></div>
+                    <div class="tag-part"><code>color</code><span>the <strong>property</strong> — what about them</span></div>
+                    <div class="tag-part"><code>crimson</code><span>the <strong>value</strong> — how it should be</span></div>
+                </div>
+                <p>Read it as a sentence: <em>every h1 on this page has crimson text at 40 pixels.</em></p>
+            </section>
+
+            <section class="lesson-section">
+                <h2>📍 Where the CSS goes</h2>
+                <p>Put your rules inside a <code>&lt;style&gt;</code> tag, up in the <code>&lt;head&gt;</code>:</p>
+                <div class="web-demo" data-kind="html">
+    <code class="demo-code">&lt;style&gt;
+    h1 { color: crimson; }
+    p  { color: #2c6e49; font-size: 18px; }
+&lt;/style&gt;
+
+&lt;h1&gt;Styled at last&lt;/h1&gt;
+&lt;p&gt;And this paragraph is green.&lt;/p&gt;</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <div class="tip-box"><h4>🎯 One rule, every match</h4><p>Write <code>p { color: green }</code> once and <em>every</em> paragraph turns green — ten of them, or a thousand. That is the whole reason CSS is separate from HTML: say it once, apply it everywhere.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🌈 Colours</h2>
+                <p>Three ways to name one, and they all work:</p>
+                <div class="web-demo" data-kind="html">
+    <code class="demo-code">&lt;style&gt;
+    .one   { color: tomato; }
+    .two   { color: #1a5490; }
+    .three { color: rgb(46, 139, 87); }
+&lt;/style&gt;
+
+&lt;p class=&quot;one&quot;&gt;A name — about 140 of them exist&lt;/p&gt;
+&lt;p class=&quot;two&quot;&gt;A hex code — # then red, green, blue&lt;/p&gt;
+&lt;p class=&quot;three&quot;&gt;rgb() — three numbers from 0 to 255&lt;/p&gt;</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <p>Names are easiest to start with. Hex codes turn up everywhere once you start copying colours from designs, so it is worth knowing that <code>#1a5490</code> means <code>1a</code> red, <code>54</code> green, <code>90</code> blue.</p>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🏷️ Picking exactly what you want</h2>
+                <p><code>h1</code> selects every h1. But often you want <em>this one particular thing</em>. Give it a <strong>class</strong>:</p>
+                <div class="web-demo" data-kind="html">
+    <code class="demo-code">&lt;style&gt;
+    .warning { color: white; background: crimson; padding: 8px; }
+    .calm    { color: white; background: seagreen; padding: 8px; }
+&lt;/style&gt;
+
+&lt;p class=&quot;warning&quot;&gt;Dragon loose in the building&lt;/p&gt;
+&lt;p class=&quot;calm&quot;&gt;Dragon has been given a biscuit&lt;/p&gt;
+&lt;p&gt;An ordinary paragraph, untouched.&lt;/p&gt;</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <div class="info-box"><p>In the HTML you write <code>class="warning"</code>. In the CSS you write <code>.warning</code> with a dot in front. The dot means <em>this is a class name, not a tag name</em>.</p></div>
+                <div class="tip-box"><h4>🔁 A class can be used as often as you like</h4><p>Twenty elements can all be <code>class="warning"</code>. That is the point — name a <em>kind</em> of thing once, then apply it wherever it belongs.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>📦 Boxes: space, borders and backgrounds</h2>
+                <p>Every element is a rectangle, whether it looks like one or not. Four properties control the rectangle:</p>
+                <div class="web-demo" data-kind="html">
+    <code class="demo-code">&lt;style&gt;
+    .card {
+        background: #eef6fb;
+        border: 3px solid #1a5490;
+        padding: 14px;
+        margin: 10px;
+        border-radius: 10px;
+    }
+&lt;/style&gt;
+
+&lt;div class=&quot;card&quot;&gt;
+    &lt;h2&gt;A card&lt;/h2&gt;
+    &lt;p&gt;padding is space INSIDE the border.&lt;/p&gt;
+    &lt;p&gt;margin is space OUTSIDE it.&lt;/p&gt;
+&lt;/div&gt;</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <ul>
+                    <li><code>background</code> — the colour behind it</li>
+                    <li><code>border</code> — thickness, style, colour, in that order</li>
+                    <li><code>padding</code> — breathing room <em>inside</em> the border</li>
+                    <li><code>margin</code> — space pushing other things <em>away</em></li>
+                </ul>
+                <div class="warn-box"><h4>😖 The one everybody muddles</h4><p>padding is inside, margin is outside. If your text is squashed against its own border you want <strong>padding</strong>. If two boxes are touching each other you want <strong>margin</strong>.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>📐 &lt;div&gt; and &lt;span&gt;: boxes with no opinions</h2>
+                <p>Sometimes you need a container that means nothing at all, just so you can style a group of things. That is <code>&lt;div&gt;</code> (a block, on its own lines) and <code>&lt;span&gt;</code> (inline, inside a sentence).</p>
+                <div class="web-demo" data-kind="html">
+    <code class="demo-code">&lt;style&gt;
+    .box  { border: 2px dashed #888; padding: 10px; }
+    .shout { color: crimson; font-weight: bold; }
+&lt;/style&gt;
+
+&lt;div class=&quot;box&quot;&gt;
+    &lt;p&gt;Everything in here is grouped.&lt;/p&gt;
+    &lt;p&gt;I can move or style the whole lot at once.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;And you can highlight &lt;span class=&quot;shout&quot;&gt;just these words&lt;/span&gt; mid-sentence.&lt;/p&gt;</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="takeaway-box">
+                    <ul>
+                        <li>A rule is <strong>selector { property: value; }</strong> — put them in <code>&lt;style&gt;</code>.</li>
+                        <li>A tag selector styles every one; a <strong>class</strong> (<code>.name</code>) styles the ones you choose.</li>
+                        <li>Colours can be names, <code>#hex</code>, or <code>rgb()</code>.</li>
+                        <li><code>padding</code> is inside the border, <code>margin</code> is outside it.</li>
+                        <li><code>div</code> and <code>span</code> are containers with no meaning — handy for grouping.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Every task here is about making something look the way you want. There is no single right answer — but there is a rule to get right each time.</p>
+            </div>
+
+            <div class="task" data-kind="html" data-expected="Bright Ideas" data-expect-tags="style, h1">
+                <div class="task-head">
+                    <span class="task-badge">🎨</span>
+                    <h3>Task 1: Colour a Heading</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Write a <code>&lt;style&gt;</code> block that makes every <code>h1</code> the colour <code>darkorange</code>, then an <code>h1</code> saying <code>Bright Ideas</code>.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>&lt;style&gt;
+    h1 { color: darkorange; }
+&lt;/style&gt;
+
+&lt;h1&gt;Bright Ideas&lt;/h1&gt;</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="html" data-expect-tags="style, p.good, p.bad">
+                <div class="task-head">
+                    <span class="task-badge">🏷️</span>
+                    <h3>Task 2: Two Classes</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Make two classes, <code>.good</code> (green text) and <code>.bad</code> (red text). Then write two paragraphs, one of each class.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>&lt;style&gt;
+    .good { color: seagreen; }
+    .bad  { color: crimson; }
+&lt;/style&gt;
+
+&lt;p class=&quot;good&quot;&gt;This went well.&lt;/p&gt;
+&lt;p class=&quot;bad&quot;&gt;This did not.&lt;/p&gt;</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="html" data-expect-tags="style, div.card, div.card h2, div.card p">
+                <div class="task-head">
+                    <span class="task-badge">📦</span>
+                    <h3>Task 3: Build a Card</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Make a <code>&lt;div class="card"&gt;</code> holding an <code>h2</code> and a paragraph. Style <code>.card</code> with a background colour, a <code>border</code>, and <code>padding</code> of at least 10px.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>&lt;style&gt;
+    .card {
+        background: #eef6fb;
+        border: 3px solid #1a5490;
+        padding: 14px;
+        border-radius: 10px;
+    }
+&lt;/style&gt;
+
+&lt;div class=&quot;card&quot;&gt;
+    &lt;h2&gt;My Card&lt;/h2&gt;
+    &lt;p&gt;Nicely boxed.&lt;/p&gt;
+&lt;/div&gt;</pre>
+                </div>
+            </div>
+
+            <div class="practice-intro">
+                <h2>🏋️ Extra Practice — Drill Time!</h2>
+                <p>This is where it sticks. Try every one — and if you get stuck, read your own earlier answers before you peek.</p>
+            </div>
+
+            <div class="task" data-kind="html" data-expect-tags="p.one, p.two, p.three">
+                <div class="task-head">
+                    <span class="task-badge">🖍️</span>
+                    <h3>Task 4: Three Colours, Three Ways</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Three paragraphs. Colour the first with a colour <strong>name</strong>, the second with a <code>#hex</code> code, and the third with <code>rgb()</code>. Use a class for each.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>&lt;style&gt;
+    .one   { color: tomato; }
+    .two   { color: #1a5490; }
+    .three { color: rgb(46, 139, 87); }
+&lt;/style&gt;
+
+&lt;p class=&quot;one&quot;&gt;By name&lt;/p&gt;
+&lt;p class=&quot;two&quot;&gt;By hex&lt;/p&gt;
+&lt;p class=&quot;three&quot;&gt;By rgb&lt;/p&gt;</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="html" data-expected="The password is swordfish." data-expect-tags="p span">
+                <div class="task-head">
+                    <span class="task-badge">🔤</span>
+                    <h3>Task 5: Highlight One Word</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write a paragraph containing the sentence <code>The password is swordfish.</code> — with just the word <code>swordfish</code> inside a <code>&lt;span&gt;</code> that has a yellow background.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>&lt;style&gt;
+    .secret { background: gold; padding: 2px 5px; }
+&lt;/style&gt;
+
+&lt;p&gt;The password is &lt;span class=&quot;secret&quot;&gt;swordfish&lt;/span&gt;.&lt;/p&gt;</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="html" data-expect-tags="div.block, div.block p">
+                <div class="task-head">
+                    <span class="task-badge">🧱</span>
+                    <h3>Task 6: Padding vs Margin</h3>
+                    <span class="task-difficulty diff-hard">Hard</span>
+                </div>
+                <p class="task-goal">Two divs, both with the class <code>.block</code> — a border and a background. Give <code>.block</code> <code>padding: 20px</code> so the text is not squashed, and <code>margin: 20px</code> so the two boxes do not touch. Put a paragraph inside each.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>&lt;style&gt;
+    .block {
+        border: 3px solid #333;
+        background: #f4f4f4;
+        padding: 20px;
+        margin: 20px;
+    }
+&lt;/style&gt;
+
+&lt;div class=&quot;block&quot;&gt;&lt;p&gt;First box&lt;/p&gt;&lt;/div&gt;
+&lt;div class=&quot;block&quot;&gt;&lt;p&gt;Second box&lt;/p&gt;&lt;/div&gt;</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="page" data-expect-tags="html, head, title, style, body, h1, div.card h2, div.card p">
+                <div class="task-head">
+                    <span class="task-badge">🏆</span>
+                    <h3>Task 7: Boss Level — A Styled Page</h3>
+                    <span class="task-difficulty diff-hard">Hard</span>
+                </div>
+                <p class="task-goal">A complete page (doctype and all) titled <code>My Styled Page</code>. Give it a <code>&lt;style&gt;</code> in the head that sets the <code>body</code> background to something soft, styles <code>h1</code>, and defines a <code>.card</code> class. In the body: an <code>h1</code> and two cards, each with a heading and a paragraph.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My Styled Page&lt;/title&gt;
+    &lt;style&gt;
+        body { background: #fdf6e3; font-family: sans-serif; }
+        h1   { color: #1a5490; }
+        .card {
+            background: #fff;
+            border: 2px solid #1a5490;
+            border-radius: 10px;
+            padding: 14px;
+            margin: 12px 0;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;My Styled Page&lt;/h1&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;h2&gt;One&lt;/h2&gt;&lt;p&gt;First card.&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;h2&gt;Two&lt;/h2&gt;&lt;p&gt;Second card.&lt;/p&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="lesson-nav">
+            <a href="web-html-text.html">← Lesson 2: Text, Lists &amp; Links</a>
+            <a href="web-js.html">Lesson 4: Your First JavaScript →</a>
+        </div>
+
+        <footer>
+            <p>HTML is the bones. CSS is everything else. 🎨</p>
+        </footer>
+    </div>
+    <script src="../scripts/web-playground.js"></script>
+</body>
+</html>

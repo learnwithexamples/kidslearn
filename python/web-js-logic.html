@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 5: Decisions, Loops & Functions - Web Coding - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+    <link rel="stylesheet" href="../styles/web.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔀 Lesson 5: Decisions, Loops &amp; Functions</h1>
+            <p class="subtitle">if, for, and giving a job a name</p>
+            <a href="web.html" class="back-link">← Back to Web Coding</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>🔀 Making a choice</h2>
+                <p>A condition in round brackets, the work in curly ones:</p>
+                <div class="web-demo" data-kind="js">
+    <code class="demo-code">const age = 12;
+
+if (age &gt;= 13) {
+    console.log(&quot;Teenager&quot;);
+} else {
+    console.log(&quot;Not yet&quot;);
+}</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <p>The tests you can put in the brackets:</p>
+                <div class="algo-table-wrap">
+                <table class="canvas-table">
+                    <tr><th>Test</th><th>Means</th><th>Test</th><th>Means</th></tr>
+                    <tr><td><code>===</code></td><td>is exactly equal to</td><td><code>&gt;</code></td><td>bigger than</td></tr>
+                    <tr><td><code>!==</code></td><td>is not equal to</td><td><code>&lt;</code></td><td>smaller than</td></tr>
+                    <tr><td><code>&gt;=</code></td><td>at least</td><td><code>&lt;=</code></td><td>at most</td></tr>
+                    <tr><td><code>&amp;&amp;</code></td><td>and — both must hold</td><td><code>||</code></td><td>or — either will do</td></tr>
+                </table>
+            </div>
+                <div class="warn-box"><h4>⚠️ Three equals, not one</h4><p><code>=</code> puts a value in a box. <code>===</code> asks whether two things are the same. Writing <code>if (x = 5)</code> quietly <em>sets</em> x to 5 and is always true — a bug that has cost the world a great deal of time.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🪜 More than two paths</h2>
+                <div class="web-demo" data-kind="js">
+    <code class="demo-code">const score = 72;
+
+if (score &gt;= 90) {
+    console.log(&quot;A&quot;);
+} else if (score &gt;= 80) {
+    console.log(&quot;B&quot;);
+} else if (score &gt;= 70) {
+    console.log(&quot;C&quot;);
+} else {
+    console.log(&quot;Keep going&quot;);
+}</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <div class="tip-box"><h4>⬇️ Order matters</h4><p>JavaScript takes the <strong>first</strong> branch that fits and skips the rest. Put <code>score >= 70</code> at the top and every score above 70 gets a C — including 95.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔁 Loops</h2>
+                <p>A <code>for</code> loop says three things in one line: where to start, when to stop, and how to step.</p>
+                <div class="web-demo" data-kind="js">
+    <code class="demo-code">for (let i = 1; i &lt;= 5; i++) {
+    console.log(i);
+}</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <div class="tag-anatomy">
+                    <div class="tag-part"><code>let i = 1</code><span>start here</span></div>
+                    <div class="tag-part"><code>i &lt;= 5</code><span>keep going while this is true</span></div>
+                    <div class="tag-part"><code>i++</code><span>add one each time round</span></div>
+                </div>
+                <p><code>i++</code> is shorthand for <code>i = i + 1</code>. You will see it everywhere.</p>
+                <div class="web-demo" data-kind="js">
+    <code class="demo-code">let total = 0;
+
+for (let n = 1; n &lt;= 10; n++) {
+    total = total + n;
+}
+
+console.log(`1 to 10 adds up to ${total}`);</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <div class="warn-box"><h4>♾️ The loop that never ends</h4><p>If the middle test never becomes false — say you forget the <code>i++</code> — the loop runs for ever and the page freezes. If that happens, close the tab and look at your three parts.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>📋 Lists of things</h2>
+                <p>JavaScript calls them <strong>arrays</strong>. Square brackets, commas between:</p>
+                <div class="web-demo" data-kind="js">
+    <code class="demo-code">const pets = [&quot;cat&quot;, &quot;dog&quot;, &quot;newt&quot;];
+
+console.log(pets.length);
+console.log(pets[0]);
+console.log(pets[2]);
+
+for (const pet of pets) {
+    console.log(`I have a ${pet}`);
+}</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <div class="info-box"><p><code>for (const x of list)</code> is the easy loop: it hands you each item in turn and you never have to think about counting. Use it whenever you do not actually need the position.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🧰 Functions: giving a job a name</h2>
+                <p>A function is a chunk of work with a name, so you can do it again without writing it again:</p>
+                <div class="web-demo" data-kind="js">
+    <code class="demo-code">function greet(name) {
+    return `Hello, ${name}!`;
+}
+
+console.log(greet(&quot;Maya&quot;));
+console.log(greet(&quot;Sam&quot;));
+console.log(greet(&quot;the dragon&quot;));</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <ul>
+                    <li><code>function</code> then a name, then what it needs in brackets.</li>
+                    <li><code>return</code> hands an answer back to whoever asked.</li>
+                    <li>Nothing happens until somebody <strong>calls</strong> it: <code>greet("Maya")</code>.</li>
+                </ul>
+                <div class="web-demo" data-kind="js">
+    <code class="demo-code">function double(n) {
+    return n * 2;
+}
+
+function biggest(a, b) {
+    if (a &gt; b) {
+        return a;
+    }
+    return b;
+}
+
+console.log(double(21));
+console.log(biggest(3, 9));</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <div class="tip-box"><h4>🎁 Write the name you wish existed</h4><p>If your code has a confusing lump in the middle, pull it out into a function and name it after what it <em>does</em>. <code>if (isWeekend(day))</code> reads better than the six lines it replaces.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="takeaway-box">
+                    <ul>
+                        <li><code>if / else if / else</code> — the first match wins.</li>
+                        <li><code>===</code> compares, <code>=</code> assigns. Never muddle them.</li>
+                        <li><code>for (let i = 0; i &lt; n; i++)</code> when you need the number; <code>for (const x of list)</code> when you do not.</li>
+                        <li>Arrays use <code>[ ]</code>, count from <strong>0</strong>, and know their own <code>.length</code>.</li>
+                        <li>A <code>function</code> names a job; <code>return</code> hands the answer back.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>Three ideas here do most of the work in every program ever written. Take your time with them.</p>
+            </div>
+
+            <div class="task" data-kind="js" data-expected="Teenager">
+                <div class="task-head">
+                    <span class="task-badge">🔀</span>
+                    <h3>Task 1: Old Enough?</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Make <code>const age = 15</code>. If it is 13 or more print <code>Teenager</code>, otherwise print <code>Not yet</code>.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>const age = 15;
+if (age &gt;= 13) {
+    console.log(&quot;Teenager&quot;);
+} else {
+    console.log(&quot;Not yet&quot;);
+}</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="js" data-expected="1
+2
+3
+4
+5">
+                <div class="task-head">
+                    <span class="task-badge">🔢</span>
+                    <h3>Task 2: Count to Five</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Use a <code>for</code> loop to print the numbers 1 to 5, one per line.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>for (let i = 1; i &lt;= 5; i++) {
+    console.log(i);
+}</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="js" data-expected="16
+81">
+                <div class="task-head">
+                    <span class="task-badge">🧰</span>
+                    <h3>Task 3: A Function of Your Own</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Write a function <code>square(n)</code> that returns <code>n</code> times itself. Then print <code>square(4)</code> and <code>square(9)</code> — two lines.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>function square(n) {
+    return n * n;
+}
+console.log(square(4));
+console.log(square(9));</pre>
+                </div>
+            </div>
+
+            <div class="practice-intro">
+                <h2>🏋️ Extra Practice — Drill Time!</h2>
+                <p>This is where it sticks. Try every one — and if you get stuck, read your own earlier answers before you peek.</p>
+            </div>
+
+            <div class="task" data-kind="js" data-expected="B">
+                <div class="task-head">
+                    <span class="task-badge">🪜</span>
+                    <h3>Task 4: Grades</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Make <code>const score = 85</code>. Print <code>A</code> for 90 or more, <code>B</code> for 80 or more, <code>C</code> for 70 or more, otherwise <code>Keep going</code>. Get the order right.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>const score = 85;
+if (score &gt;= 90) {
+    console.log(&quot;A&quot;);
+} else if (score &gt;= 80) {
+    console.log(&quot;B&quot;);
+} else if (score &gt;= 70) {
+    console.log(&quot;C&quot;);
+} else {
+    console.log(&quot;Keep going&quot;);
+}</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="js" data-expected="5050">
+                <div class="task-head">
+                    <span class="task-badge">➕</span>
+                    <h3>Task 5: Add Them Up</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Use a loop to add up every number from 1 to 100, then print just the total.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>let total = 0;
+for (let n = 1; n &lt;= 100; n++) {
+    total = total + n;
+}
+console.log(total);</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="js" data-expected="I have a cat
+I have a dog
+I have a newt">
+                <div class="task-head">
+                    <span class="task-badge">📋</span>
+                    <h3>Task 6: Walk a List</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Make an array <code>const pets = ["cat", "dog", "newt"]</code>. Loop over it and print <code>I have a cat</code>, <code>I have a dog</code>, <code>I have a newt</code>.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>const pets = [&quot;cat&quot;, &quot;dog&quot;, &quot;newt&quot;];
+for (const pet of pets) {
+    console.log(`I have a ${pet}`);
+}</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="js" data-expected="1 is odd
+2 is even
+3 is odd
+4 is even
+5 is odd">
+                <div class="task-head">
+                    <span class="task-badge">🎲</span>
+                    <h3>Task 7: Even or Odd</h3>
+                    <span class="task-difficulty diff-hard">Hard</span>
+                </div>
+                <p class="task-goal">Write a function <code>evenOrOdd(n)</code> that returns <code>"even"</code> or <code>"odd"</code> (use <code>%</code>). Then loop from 1 to 5 printing <code>1 is odd</code>, <code>2 is even</code>, and so on.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>function evenOrOdd(n) {
+    if (n % 2 === 0) {
+        return &quot;even&quot;;
+    }
+    return &quot;odd&quot;;
+}
+
+for (let i = 1; i &lt;= 5; i++) {
+    console.log(`${i} is ${evenOrOdd(i)}`);
+}</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="js" data-expected="*
+**
+***
+****
+*****">
+                <div class="task-head">
+                    <span class="task-badge">⭐</span>
+                    <h3>Task 8: Boss Level — A Triangle</h3>
+                    <span class="task-difficulty diff-hard">Hard</span>
+                </div>
+                <p class="task-goal">Print a triangle of stars five rows tall: one star, then two, up to five. You will need a loop inside a loop, or a string you keep adding to.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>let row = &quot;&quot;;
+for (let i = 1; i &lt;= 5; i++) {
+    row = row + &quot;*&quot;;
+    console.log(row);
+}</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="lesson-nav">
+            <a href="web-js.html">← Lesson 4: Your First JavaScript</a>
+            <a href="web-dom.html">Lesson 6: Making the Page Do Things →</a>
+        </div>
+
+        <footer>
+            <p>A loop you write once runs a million times. That is the deal. 🔁</p>
+        </footer>
+    </div>
+    <script src="../scripts/web-playground.js"></script>
+</body>
+</html>

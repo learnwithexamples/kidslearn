@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 8: Circles, Loops & Art - Web Coding - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/grammar-lesson.css">
+    <link rel="stylesheet" href="../styles/python.css">
+    <link rel="stylesheet" href="../styles/web.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Lesson 8: Circles, Loops &amp; Art</h1>
+            <p class="subtitle">Where a loop and a canvas together make something you could not draw by hand</p>
+            <a href="web.html" class="back-link">← Back to Web Coding</a>
+        </header>
+
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-panel="description">📖 Description</button>
+            <button class="lesson-tab" data-panel="practice">🎮 Practice</button>
+        </div>
+
+        <!-- ============ DESCRIPTION ============ -->
+        <div id="description" class="tab-panel">
+            <section class="lesson-section">
+                <h2>⭕ Circles</h2>
+                <p>There is no <code>circle()</code>. There is <code>arc()</code>, which draws a slice of a circle — and a whole circle is just a slice that goes all the way round.</p>
+                <div class="web-demo" data-kind="canvas">
+    <code class="demo-code">const ctx = document.getElementById(&quot;board&quot;).getContext(&quot;2d&quot;);
+
+ctx.fillStyle = &quot;crimson&quot;;
+ctx.beginPath();
+ctx.arc(80, 120, 50, 0, Math.PI * 2);
+ctx.fill();
+
+ctx.strokeStyle = &quot;#1a5490&quot;;
+ctx.lineWidth = 5;
+ctx.beginPath();
+ctx.arc(220, 120, 50, 0, Math.PI * 2);
+ctx.stroke();</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <div class="tag-anatomy">
+                    <div class="tag-part"><code>80, 120</code><span>the <strong>middle</strong> of the circle</span></div>
+                    <div class="tag-part"><code>50</code><span>the <strong>radius</strong> — half the width</span></div>
+                    <div class="tag-part"><code>0, Math.PI * 2</code><span>start angle, end angle</span></div>
+                </div>
+                <div class="info-box"><p><code>Math.PI * 2</code> is a full turn, measured in radians. You do not have to understand radians to use it — <code>0, Math.PI * 2</code> means <em>all the way round</em>, and that is the only pair you need for a whole circle.</p></div>
+                <div class="tip-box"><h4>🍕 Half a turn is a semicircle</h4><p>Try <code>0, Math.PI</code> instead and you get half. <code>0, Math.PI / 2</code> gives you a quarter — a pie slice, once you <code>fill()</code> it.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔁 The trick: a loop that draws</h2>
+                <div class="info-box"><p>Here is where drawing with code beats drawing by hand. You do not write a hundred shapes. You write <strong>one</strong> shape and a loop that moves it.</p></div>
+                <div class="web-demo" data-kind="canvas">
+    <code class="demo-code">const ctx = document.getElementById(&quot;board&quot;).getContext(&quot;2d&quot;);
+
+for (let i = 0; i &lt; 10; i++) {
+    ctx.fillStyle = &quot;#1a5490&quot;;
+    ctx.fillRect(10 + i * 30, 100, 20, 40);
+}</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <p>The whole picture is <code>10 + i * 30</code>. As <code>i</code> counts 0, 1, 2, the x jumps 10, 40, 70 — evenly spaced, for free. Change the 10 to 30 and every square moves at once.</p>
+                <div class="web-demo" data-kind="canvas">
+    <code class="demo-code">const ctx = document.getElementById(&quot;board&quot;).getContext(&quot;2d&quot;);
+
+for (let i = 0; i &lt; 12; i++) {
+    ctx.fillStyle = `hsl(${i * 30}, 80%, 55%)`;
+    ctx.beginPath();
+    ctx.arc(30 + i * 22, 120, 10 + i * 2, 0, Math.PI * 2);
+    ctx.fill();
+}</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <div class="tip-box"><h4>🌈 hsl() is the easy rainbow</h4><p><code>hsl(hue, saturation, lightness)</code> — the hue is an angle round a colour wheel from 0 to 360. Multiply it by the loop counter and you get a rainbow without picking a single colour by hand.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🔲 A loop inside a loop</h2>
+                <p>One loop gives you a row. A loop inside a loop gives you a grid.</p>
+                <div class="web-demo" data-kind="canvas">
+    <code class="demo-code">const ctx = document.getElementById(&quot;board&quot;).getContext(&quot;2d&quot;);
+
+for (let row = 0; row &lt; 6; row++) {
+    for (let col = 0; col &lt; 8; col++) {
+        if ((row + col) % 2 === 0) {
+            ctx.fillStyle = &quot;#2c3e50&quot;;
+        } else {
+            ctx.fillStyle = &quot;#e8e8e8&quot;;
+        }
+        ctx.fillRect(col * 40, row * 40, 40, 40);
+    }
+}</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <div class="info-box"><p>Forty-eight squares from eight lines. The chessboard pattern is the <code>(row + col) % 2</code> — neighbouring squares always differ by one, so they always land on opposite colours.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🎲 A bit of randomness</h2>
+                <div class="web-demo" data-kind="canvas">
+    <code class="demo-code">const ctx = document.getElementById(&quot;board&quot;).getContext(&quot;2d&quot;);
+
+for (let i = 0; i &lt; 40; i++) {
+    const x = Math.random() * 320;
+    const y = Math.random() * 240;
+    const size = Math.random() * 20 + 4;
+
+    ctx.fillStyle = `hsl(${Math.random() * 360}, 70%, 60%)`;
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0, Math.PI * 2);
+    ctx.fill();
+}</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <p><code>Math.random()</code> gives a number from 0 up to 1. Multiply it to stretch it: <code>Math.random() * 320</code> lands anywhere across the canvas.</p>
+                <div class="tip-box"><h4>🔄 Run it twice</h4><p>Press Run again and you get a different picture from exactly the same code. Every run is a new one — which is how every starfield and every snowstorm in every game is made.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>🧰 Wrapping a shape in a function</h2>
+                <p>Once a shape has a name you can scatter it about without repeating yourself:</p>
+                <div class="web-demo" data-kind="canvas">
+    <code class="demo-code">const ctx = document.getElementById(&quot;board&quot;).getContext(&quot;2d&quot;);
+
+function star(x, y, size, colour) {
+    ctx.fillStyle = colour;
+    ctx.beginPath();
+    for (let i = 0; i &lt; 10; i++) {
+        const angle = i * Math.PI / 5 - Math.PI / 2;
+        const reach = (i % 2 === 0) ? size : size / 2.4;
+        ctx.lineTo(x + Math.cos(angle) * reach, y + Math.sin(angle) * reach);
+    }
+    ctx.closePath();
+    ctx.fill();
+}
+
+star(70, 80, 40, &quot;gold&quot;);
+star(180, 140, 55, &quot;crimson&quot;);
+star(270, 60, 30, &quot;#4a90d9&quot;);</code>
+    <span class="demo-label">Try it — this is live</span>
+    <iframe class="web-preview" title="Example" sandbox="allow-scripts"></iframe>
+</div>
+                <div class="info-box"><p>Three stars, three sizes, three colours — and the shape itself is written once. That is the same idea as Lesson 5's functions, pointed at a picture.</p></div>
+            </section>
+
+            <section class="lesson-section">
+                <h2>✅ What you learned</h2>
+                <div class="takeaway-box">
+                    <ul>
+                        <li><code>arc(x, y, radius, 0, Math.PI * 2)</code> is a whole circle — wrap it in <code>beginPath</code> and <code>fill</code>.</li>
+                        <li>A loop plus <code>i * spacing</code> makes a row; a loop inside a loop makes a grid.</li>
+                        <li><code>hsl(hue, …)</code> gives you a rainbow from the loop counter.</li>
+                        <li><code>Math.random()</code> gives 0 to 1 — multiply to stretch it.</li>
+                        <li>A shape in a <strong>function</strong> can be used anywhere, at any size.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ PRACTICE ============ -->
+        <div id="practice" class="tab-panel" style="display:none;">
+            <div class="practice-intro">
+                <h2>🎮 Time to Practice!</h2>
+                <p>The last set. Every task here is a picture built by a loop, which is the whole trick of drawing with code.</p>
+            </div>
+
+            <div class="task" data-kind="canvas" data-expect-calls="beginPath, arc, fill">
+                <div class="task-head">
+                    <span class="task-badge">⭕</span>
+                    <h3>Task 1: One Circle</h3>
+                    <span class="task-difficulty diff-easy">Easy</span>
+                </div>
+                <p class="task-goal">Draw one filled circle in the middle of the canvas — the middle of 320×240 is (160, 120) — with a radius of 60. Any colour.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>ctx.fillStyle = &quot;crimson&quot;;
+ctx.beginPath();
+ctx.arc(160, 120, 60, 0, Math.PI * 2);
+ctx.fill();</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="canvas" data-expect-calls="fillRect, beginPath, arc, fill">
+                <div class="task-head">
+                    <span class="task-badge">🚦</span>
+                    <h3>Task 2: Traffic Lights</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">A dark rectangle standing upright, with three circles down it — red, amber and green. Each circle needs its own <code>beginPath</code>.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>ctx.fillStyle = &quot;#2c3e50&quot;;
+ctx.fillRect(120, 20, 80, 200);
+
+const colours = [&quot;crimson&quot;, &quot;orange&quot;, &quot;seagreen&quot;];
+for (let i = 0; i &lt; 3; i++) {
+    ctx.fillStyle = colours[i];
+    ctx.beginPath();
+    ctx.arc(160, 60 + i * 60, 24, 0, Math.PI * 2);
+    ctx.fill();
+}</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="canvas" data-expect-calls="beginPath, arc, fill">
+                <div class="task-head">
+                    <span class="task-badge">🔁</span>
+                    <h3>Task 3: A Row of Circles</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Use a <strong>loop</strong> to draw eight circles in a row across the canvas, evenly spaced, all the same size. Do not write <code>arc</code> eight times.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>ctx.fillStyle = &quot;#1a5490&quot;;
+for (let i = 0; i &lt; 8; i++) {
+    ctx.beginPath();
+    ctx.arc(25 + i * 40, 120, 16, 0, Math.PI * 2);
+    ctx.fill();
+}</pre>
+                </div>
+            </div>
+
+            <div class="practice-intro">
+                <h2>🏋️ Extra Practice — Drill Time!</h2>
+                <p>This is where it sticks. Try every one — and if you get stuck, read your own earlier answers before you peek.</p>
+            </div>
+
+            <div class="task" data-kind="canvas" data-expect-calls="fillRect">
+                <div class="task-head">
+                    <span class="task-badge">🌈</span>
+                    <h3>Task 4: A Rainbow Row</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Twelve rectangles in a row, each a different colour. Use <code>hsl(${i * 30}, 80%, 55%)</code> inside backticks so the loop counter picks the colour for you.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>for (let i = 0; i &lt; 12; i++) {
+    ctx.fillStyle = `hsl(${i * 30}, 80%, 55%)`;
+    ctx.fillRect(i * 27, 60, 25, 120);
+}</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="canvas" data-expect-calls="fillRect">
+                <div class="task-head">
+                    <span class="task-badge">🏁</span>
+                    <h3>Task 5: A Chessboard</h3>
+                    <span class="task-difficulty diff-hard">Hard</span>
+                </div>
+                <p class="task-goal">A loop inside a loop, drawing an 8 by 6 grid of 40-pixel squares that alternate between two colours. The test is <code>(row + col) % 2 === 0</code>.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>for (let row = 0; row &lt; 6; row++) {
+    for (let col = 0; col &lt; 8; col++) {
+        ctx.fillStyle = (row + col) % 2 === 0 ? &quot;#2c3e50&quot; : &quot;#e8e8e8&quot;;
+        ctx.fillRect(col * 40, row * 40, 40, 40);
+    }
+}</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="canvas" data-expect-calls="fillRect, beginPath, arc, fill">
+                <div class="task-head">
+                    <span class="task-badge">✨</span>
+                    <h3>Task 6: A Starry Sky</h3>
+                    <span class="task-difficulty diff-medium">Medium</span>
+                </div>
+                <p class="task-goal">Fill the whole canvas with a dark colour, then use a loop to scatter 50 small white circles at random positions with <code>Math.random()</code>.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>ctx.fillStyle = &quot;#0b1026&quot;;
+ctx.fillRect(0, 0, 320, 240);
+
+ctx.fillStyle = &quot;white&quot;;
+for (let i = 0; i &lt; 50; i++) {
+    ctx.beginPath();
+    ctx.arc(Math.random() * 320, Math.random() * 240, Math.random() * 2 + 1, 0, Math.PI * 2);
+    ctx.fill();
+}</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="canvas" data-expect-calls="beginPath, arc, fill">
+                <div class="task-head">
+                    <span class="task-badge">🎯</span>
+                    <h3>Task 7: A Target</h3>
+                    <span class="task-difficulty diff-hard">Hard</span>
+                </div>
+                <p class="task-goal">Five circles all with the same middle, each smaller than the last, alternating red and white. A loop, counting <em>down</em> in size — draw the biggest first or the small ones vanish underneath.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>for (let i = 0; i &lt; 5; i++) {
+    ctx.fillStyle = i % 2 === 0 ? &quot;crimson&quot; : &quot;white&quot;;
+    ctx.beginPath();
+    ctx.arc(160, 120, 100 - i * 20, 0, Math.PI * 2);
+    ctx.fill();
+}</pre>
+                </div>
+            </div>
+
+            <div class="task" data-kind="canvas" data-expect-calls="fillRect, arc, fill, fillText">
+                <div class="task-head">
+                    <span class="task-badge">🏆</span>
+                    <h3>Task 8: Boss Level — A Scene</h3>
+                    <span class="task-difficulty diff-hard">Hard</span>
+                </div>
+                <p class="task-goal">Put it all together. Draw a picture with: a filled background, at least one <strong>rectangle</strong>, at least one <strong>circle</strong>, something drawn with a <strong>loop</strong>, and your name in <strong>text</strong>. A house under a sun with a fence, a rocket in a starfield — whatever you like.</p>
+                <div class="playground web-playground">
+                    <textarea class="code-input" spellcheck="false" aria-label="Your code"></textarea>
+                    <div class="pg-buttons">
+                        <button class="run-btn">▶ Run</button>
+                        <button class="check-btn">✓ Check</button>
+                        <button class="reset-btn">↺ Reset</button>
+                        <button class="solution-btn">💡 Solution</button>
+                    </div>
+                    <div class="web-stage">
+                        <iframe class="web-preview" title="Your page" sandbox="allow-scripts"></iframe>
+                    </div>
+                    <pre class="pg-output" aria-live="polite"></pre>
+                </div>
+                <div class="solution" hidden>
+                    <pre>ctx.fillStyle = &quot;#87ceeb&quot;;
+ctx.fillRect(0, 0, 320, 240);
+
+ctx.fillStyle = &quot;gold&quot;;
+ctx.beginPath();
+ctx.arc(265, 45, 30, 0, Math.PI * 2);
+ctx.fill();
+
+ctx.fillStyle = &quot;#6b8e23&quot;;
+ctx.fillRect(0, 180, 320, 60);
+
+ctx.fillStyle = &quot;#e8d5a3&quot;;
+ctx.fillRect(60, 110, 120, 80);
+ctx.fillStyle = &quot;#a83232&quot;;
+ctx.beginPath();
+ctx.moveTo(48, 110);
+ctx.lineTo(120, 60);
+ctx.lineTo(192, 110);
+ctx.closePath();
+ctx.fill();
+
+ctx.strokeStyle = &quot;#5a3a1a&quot;;
+ctx.lineWidth = 4;
+for (let i = 0; i &lt; 8; i++) {
+    ctx.beginPath();
+    ctx.moveTo(200 + i * 15, 165);
+    ctx.lineTo(200 + i * 15, 200);
+    ctx.stroke();
+}
+
+ctx.fillStyle = &quot;#111&quot;;
+ctx.font = &quot;bold 18px sans-serif&quot;;
+ctx.fillText(&quot;by Maya&quot;, 12, 28);</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="lesson-nav">
+            <a href="web-canvas.html">← Lesson 7: Drawing on a Canvas</a>
+            <a href="web.html">Back to the Web Coding Hub →</a>
+        </div>
+
+        <footer>
+            <p>You wrote a program that made a picture. That is computer graphics. 🎨🏆</p>
+        </footer>
+    </div>
+    <script src="../scripts/web-playground.js"></script>
+</body>
+</html>

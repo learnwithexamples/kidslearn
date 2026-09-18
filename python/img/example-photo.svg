@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="90" viewBox="0 0 120 90"
+     role="img" aria-label="A cartoon cat asleep on a keyboard">
+    <rect width="120" height="90" fill="#eef6fb"/>
+    <rect x="10" y="58" width="100" height="22" rx="3" fill="#cfd8e3" stroke="#8a9bb0" stroke-width="2"/>
+    <g fill="#8a9bb0">
+        <rect x="16" y="63" width="10" height="5" rx="1"/><rect x="30" y="63" width="10" height="5" rx="1"/>
+        <rect x="44" y="63" width="10" height="5" rx="1"/><rect x="58" y="63" width="10" height="5" rx="1"/>
+        <rect x="72" y="63" width="10" height="5" rx="1"/><rect x="86" y="63" width="10" height="5" rx="1"/>
+    </g>
+    <ellipse cx="60" cy="48" rx="34" ry="16" fill="#e8a33d"/>
+    <circle cx="32" cy="42" r="13" fill="#e8a33d"/>
+    <path d="M22 33 L24 24 L31 30 Z" fill="#e8a33d"/>
+    <path d="M42 33 L40 24 L33 30 Z" fill="#e8a33d"/>
+    <path d="M26 42 q3 2 6 0" stroke="#7a4a12" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    <path d="M34 42 q3 2 6 0" stroke="#7a4a12" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    <path d="M92 48 q14 -6 8 -18" stroke="#e8a33d" stroke-width="7" fill="none" stroke-linecap="round"/>
+</svg>
