@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combinations &amp; Permutations - KidsLearn</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/fact-sheet.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css" integrity="sha384-vlBdW0r3AcZO/HboRPznQNowvexd3fY8qHOWkBi5q7KGgqJ+F48+DceybYmrVbmB" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js" integrity="sha384-AtrdNsnxl/75rvBneBVH7DtOvCxSVahR2zWqle1coBKd8DEmLoviqNeJSx64gNAs" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"></script>
+    <!-- The practice questions come from the same generators as the printable assignment. -->
+    <script defer src="challenge-academy/ca-core.js"></script>
+    <script defer src="worksheets/topics/combinations-permutations.js"></script>
+    <style>
+        .topic-tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+        .topic-tab { padding: 10px 20px; border: 2px solid #ddd; border-radius: 25px; background: white; cursor: pointer; transition: all 0.3s; font-size: 0.9em; font-family: inherit; }
+        .topic-tab:hover { border-color: #667eea; background: #f5f7ff; }
+        .topic-tab.active { background: #667eea; color: white; border-color: #667eea; }
+        .reference-section { background: white; border-radius: 10px; padding: 25px; margin: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); line-height: 1.7; }
+        .reference-section h2 { color: #5a67d8; margin-bottom: 8px; }
+        .reference-section h3 { margin: 18px 0 6px; color: #2d3748; }
+        .reference-section ul { margin: 8px 0 8px 24px; }
+        .formula-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 16px; }
+        .formula-card { background: #f9f9f9; padding: 16px 18px; border-radius: 8px; border-left: 4px solid #667eea; }
+        .formula-card h4 { margin: 0 0 6px; color: #667eea; }
+        .formula-card .f { background: white; padding: 6px 10px; border-radius: 4px; margin: 6px 0; text-align: center; }
+        .big-formula { text-align: center; font-size: 1.35em; margin: 16px 0; }
+        .steps-box { background: #fff8e1; border-left: 4px solid #ffb300; padding: 14px 20px; margin: 16px auto; border-radius: 6px; max-width: 620px; line-height: 1.8; }
+        .key-box { background: #ebf4ff; border-left: 5px solid #667eea; padding: 12px 18px; border-radius: 8px; margin: 14px 0; }
+        .warn-box { background: #fff5f5; border-left: 5px solid #e53e3e; padding: 12px 18px; border-radius: 8px; margin: 14px 0; }
+        table.cmp { border-collapse: collapse; margin: 12px auto; }
+        table.cmp th, table.cmp td { border: 1px solid #cbd5e0; padding: 7px 14px; text-align: center; }
+        table.cmp th { background: #f5f7ff; color: #434190; }
+        .pascal { text-align: center; font-family: 'Courier New', monospace; line-height: 1.9; margin: 12px 0; }
+        .pascal span { display: inline-block; min-width: 2.6em; }
+        .feedback-message { text-align: center; font-size: 1.1em; font-weight: bold; min-height: 1.5em; margin: 15px 0; }
+        .feedback-message.correct { color: #2e7d32; }
+        .feedback-message.incorrect { color: #c62828; }
+        .primary-btn { background: #667eea; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 1em; cursor: pointer; margin: 5px; font-family: inherit; }
+        .primary-btn:hover { background: #556cd6; }
+        .secondary-btn { background: white; color: #667eea; border: 2px solid #667eea; padding: 10px 22px; border-radius: 8px; font-size: 1em; cursor: pointer; margin: 5px; font-family: inherit; }
+        .secondary-btn:hover { background: #f5f7ff; }
+        .button-group { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 10px 0; }
+        .button-group .operation-btn { width: auto; min-width: 48px; }
+        .operation-btn { padding: 8px 16px; border: 2px solid #ddd; border-radius: 20px; background: white; cursor: pointer; font-size: 0.9em; transition: all 0.3s; font-family: inherit; }
+        .operation-btn:hover { border-color: #667eea; }
+        .operation-btn.active { background: #667eea; color: white; border-color: #667eea; }
+        .control-label { text-align: center; font-weight: bold; color: #4a5568; margin-top: 10px; }
+        .calc-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; align-items: center; margin: 14px 0; }
+        .calc-row label { font-weight: bold; }
+        .calc-row input, .answer-row input { width: 110px; padding: 9px; border: 2px solid #ddd; border-radius: 6px; font-size: 1.05em; text-align: center; font-family: inherit; }
+        .calc-row input:focus, .answer-row input:focus { outline: none; border-color: #667eea; }
+        .calc-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-top: 16px; }
+        .calc-card { background: #f5f7ff; border-radius: 10px; padding: 14px; text-align: center; }
+        .calc-card .label { font-weight: bold; color: #5a67d8; }
+        .calc-card .value { font-size: 1.5em; font-weight: bold; color: #2d3748; margin: 6px 0; word-break: break-all; }
+        .calc-card .how { font-size: 0.92em; color: #4a5568; }
+        .calc-error { text-align: center; color: #c62828; font-weight: bold; min-height: 1.4em; }
+        .chips { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin: 10px 0; }
+        .chip { padding: 4px 10px; border-radius: 6px; font-family: 'Courier New', monospace; font-weight: bold; letter-spacing: 1px; border: 2px solid transparent; }
+        .explore-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .explore-cols h3 { text-align: center; }
+        .count-line { text-align: center; font-size: 1.1em; margin: 6px 0; }
+        .quiz-header { text-align: center; font-size: 1.1em; font-weight: bold; color: #667eea; margin: 10px 0; }
+        .level-tag { display: block; text-align: center; font-size: 0.85em; color: #718096; margin-bottom: 6px; }
+        .question { text-align: center; font-size: 1.2em; margin: 14px auto; max-width: 640px; line-height: 1.7; }
+        .answer-row { display: flex; gap: 10px; justify-content: center; align-items: center; margin: 16px 0; }
+        .choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; max-width: 620px; margin: 16px auto; }
+        .choice { padding: 10px; border: 2px solid #ddd; border-radius: 10px; background: white; cursor: pointer; font-family: inherit; font-size: 1em; }
+        .choice:hover { border-color: #667eea; }
+        .choice.selected { border-color: #667eea; background: #f5f7ff; }
+        .choice.right { border-color: #2e7d32; background: #e8f5e9; }
+        .choice.wrong { border-color: #c62828; background: #ffebee; }
+        @media (max-width: 700px) { .explore-cols { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔀 Combinations &amp; Permutations</h1>
+            <p class="subtitle">Count the ways — and ask: does the order matter?</p>
+            <a href="math.html" class="back-link">← Back to Math Topics</a>
+            <a href="worksheets/pdf/combinations-permutations-assignment.pdf" class="back-link" download title="50 problems with an answer key, to print and work offline">⬇ Assignment (PDF)</a>
+        </header>
+
+        <div class="topic-tabs">
+            <button class="topic-tab active" data-tab="learn">📚 Learn</button>
+            <button class="topic-tab" data-tab="calc">🧮 Calculator</button>
+            <button class="topic-tab" data-tab="explore">🔍 Explorer</button>
+            <button class="topic-tab" data-tab="practice">🎯 Practice</button>
+        </div>
+
+        <!-- LEARN -->
+        <div id="learn-section">
+            <div class="reference-section">
+                <h2>1. The counting principle</h2>
+                <p>If one choice can be made in \(a\) ways and a second choice in \(b\) ways, the two together can
+                   be made in \(a \times b\) ways. It works for any number of choices: just keep multiplying.</p>
+                <div class="steps-box">
+                    <div><strong>Example.</strong> 3 T-shirts and 4 pairs of shorts make \(3 \times 4 = 12\) outfits.</div>
+                    <div><strong>Example.</strong> A 3-digit lock code (digits 0–9, repeats allowed) has \(10 \times 10 \times 10 = 1000\) possibilities.</div>
+                </div>
+
+                <h2 style="margin-top:28px;">2. Factorials</h2>
+                <p>How many ways can 4 friends stand in a line? 4 can go first, then 3 are left for second place,
+                   2 for third, and 1 for last: \(4 \times 3 \times 2 \times 1 = 24\). This product has a name and
+                   a symbol:</p>
+                <div class="big-formula">\(n! = n \times (n-1) \times (n-2) \times \cdots \times 2 \times 1\)</div>
+                <table class="cmp">
+                    <tr><th>\(n\)</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td></tr>
+                    <tr><th>\(n!\)</th><td>1</td><td>1</td><td>2</td><td>6</td><td>24</td><td>120</td><td>720</td><td>5040</td><td>40320</td></tr>
+                </table>
+                <div class="key-box"><strong>\(n!\)</strong> is the number of ways to arrange \(n\) different things in a row.
+                   By agreement \(0! = 1\) (there is exactly one way to arrange nothing).</div>
+
+                <h2 style="margin-top:28px;">3. Permutations: order matters</h2>
+                <p>A <strong>permutation</strong> is an arrangement where the order counts. Choosing a president
+                   and a secretary from 5 people: \(5\) choices for president, then \(4\) for secretary,
+                   \(5 \times 4 = 20\) ways.</p>
+                <div class="big-formula">\({}_{n}P_{r} = \dfrac{n!}{(n-r)!} = \underbrace{n \times (n-1) \times \cdots}_{r \text{ numbers}}\)</div>
+                <p>\({}_{n}P_{r}\) counts the ways to choose \(r\) things from \(n\) <em>and put them in order</em>.
+                   For example \({}_{8}P_{3} = 8 \times 7 \times 6 = 336\).</p>
+
+                <h2 style="margin-top:28px;">4. Combinations: order does not matter</h2>
+                <p>A <strong>combination</strong> is a selection where only <em>who</em> is chosen counts, not
+                   the order. Picking 2 people from 5 to go on a trip: the 20 ordered pairs count every pair twice
+                   (Ann–Ben and Ben–Ann are the same trip), so there are \(20 \div 2 = 10\) ways.</p>
+                <div class="big-formula">\({}_{n}C_{r} = \dfrac{{}_{n}P_{r}}{r!} = \dfrac{n!}{r!\,(n-r)!}\)</div>
+                <p>We divide by \(r!\) because each group of \(r\) can be put in order in \(r!\) ways. For example
+                   \({}_{8}C_{3} = \dfrac{8 \times 7 \times 6}{3 \times 2 \times 1} = 56\). You will also see it
+                   written \(\binom{n}{r}\), read "\(n\) choose \(r\)".</p>
+
+                <h2 style="margin-top:28px;">5. Which one do I use?</h2>
+                <p>Ask: <strong>if I swap two of the chosen items, do I get something different?</strong></p>
+                <table class="cmp">
+                    <tr><th></th><th>Permutation \({}_{n}P_{r}\)</th><th>Combination \({}_{n}C_{r}\)</th></tr>
+                    <tr><th>Order</th><td>matters</td><td>does not matter</td></tr>
+                    <tr><th>Key words</th><td>arrange, order, line up, ranking,<br>1st/2nd/3rd, president &amp; secretary, code</td><td>choose, select, team, group,<br>committee, hand of cards, toppings</td></tr>
+                    <tr><th>Example</th><td>gold, silver, bronze from 10 runners:<br>\({}_{10}P_{3} = 720\)</td><td>a team of 3 from 10 runners:<br>\({}_{10}C_{3} = 120\)</td></tr>
+                </table>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>Repeats allowed</h4>
+                        <div class="f">\(n^r\)</div>
+                        <small>Codes where digits can repeat: each of the \(r\) places has \(n\) choices.</small>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Letters that repeat</h4>
+                        <div class="f">\(\dfrac{n!}{a!\,b!\cdots}\)</div>
+                        <small>BANANA: \(\dfrac{6!}{3!\,2!} = 60\) — divide by the ways to swap identical letters.</small>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Choosing from two groups</h4>
+                        <div class="f">\({}_{b}C_{x} \times {}_{g}C_{y}\)</div>
+                        <small>2 boys from 6 <em>and</em> 1 girl from 5: \(15 \times 5 = 75\).</small>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Taking or leaving</h4>
+                        <div class="f">\({}_{n}C_{r} = {}_{n}C_{n-r}\)</div>
+                        <small>Choosing 8 of 10 to go is the same as choosing 2 to stay: \({}_{10}C_{8} = {}_{10}C_{2} = 45\).</small>
+                    </div>
+                </div>
+
+                <h2 style="margin-top:28px;">6. Tricks for harder problems</h2>
+                <ul>
+                    <li><strong>Must be together?</strong> Bind them into one block, arrange the blocks, then
+                        multiply by the ways to order inside the block. 5 people with Ann and Ben together:
+                        \(4! \times 2! = 48\).</li>
+                    <li><strong>Must be apart?</strong> Count everything and subtract the "together" cases:
+                        \(5! - 48 = 72\).</li>
+                    <li><strong>At least one?</strong> Count all choices and subtract the ones with none.</li>
+                    <li><strong>A restricted place</strong> (no leading zero, must be even)? Fill that place first.</li>
+                </ul>
+
+                <h2 style="margin-top:28px;">7. Pascal's triangle</h2>
+                <p>Each number is the sum of the two above it, and row \(n\) lists \({}_{n}C_{0}, {}_{n}C_{1}, \ldots, {}_{n}C_{n}\).
+                   Row 5 shows \({}_{5}C_{2} = 10\).</p>
+                <div class="pascal" id="pascal"></div>
+
+                <div class="warn-box"><strong>Common mistakes.</strong> Using \({}_{n}P_{r}\) for a team or a group
+                   (order doesn't matter!), forgetting to divide by \(r!\), and forgetting the inside order of a
+                   bound block.</div>
+            </div>
+        </div>
+
+        <!-- CALCULATOR -->
+        <div id="calc-section" style="display:none;">
+            <div class="reference-section">
+                <h2>🧮 Counting calculator</h2>
+                <p>Enter \(n\) (how many things there are) and \(r\) (how many you pick), up to 30.</p>
+                <div class="calc-row">
+                    <label>n = <input type="number" id="calc-n" min="0" max="30" value="8"></label>
+                    <label>r = <input type="number" id="calc-r" min="0" max="30" value="3"></label>
+                    <button class="primary-btn" id="calc-btn">Calculate</button>
+                </div>
+                <div class="calc-error" id="calc-error"></div>
+                <div class="calc-results" id="calc-results"></div>
+            </div>
+        </div>
+
+        <!-- EXPLORER -->
+        <div id="explore-section" style="display:none;">
+            <div class="reference-section">
+                <h2>🔍 See every arrangement</h2>
+                <p>Pick some letters and how many to choose. On the left are all the <strong>permutations</strong>
+                   (order matters); on the right all the <strong>combinations</strong> (order doesn't). Each
+                   combination has its own colour: count how many times each colour appears on the left.</p>
+                <div class="control-label">Letters</div>
+                <div class="button-group" id="ex-n">
+                    <button class="operation-btn" data-n="3">A B C</button>
+                    <button class="operation-btn active" data-n="4">A B C D</button>
+                    <button class="operation-btn" data-n="5">A B C D E</button>
+                </div>
+                <div class="control-label">Choose</div>
+                <div class="button-group" id="ex-r"></div>
+                <div class="count-line" id="ex-summary"></div>
+                <div class="explore-cols">
+                    <div><h3>Permutations</h3><div class="chips" id="ex-perms"></div></div>
+                    <div><h3>Combinations</h3><div class="chips" id="ex-combs"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRACTICE -->
+        <div id="practice-section" style="display:none;">
+            <div class="reference-section">
+                <div class="control-label">Topic</div>
+                <div class="button-group" id="pr-group">
+                    <button class="operation-btn active" data-group="">🎲 Mixed</button>
+                    <button class="operation-btn" data-group="basics">Counting &amp; order</button>
+                    <button class="operation-btn" data-group="factorial">Factorials</button>
+                    <button class="operation-btn" data-group="perm">Permutations</button>
+                    <button class="operation-btn" data-group="comb">Combinations</button>
+                </div>
+                <div class="control-label">Difficulty</div>
+                <div class="button-group" id="pr-level">
+                    <button class="operation-btn active" data-level="0">Any</button>
+                    <button class="operation-btn" data-level="1">⭐ Easy</button>
+                    <button class="operation-btn" data-level="2">⭐⭐ Medium</button>
+                    <button class="operation-btn" data-level="3">⭐⭐⭐ Hard</button>
+                </div>
+                <div class="quiz-header">Score: <span id="score">0</span>/<span id="total">0</span></div>
+                <span class="level-tag" id="pr-tag"></span>
+                <div class="question" id="question">Loading…</div>
+                <div id="pr-input"></div>
+                <div style="text-align:center;">
+                    <button class="primary-btn" id="check-btn">✓ Check</button>
+                    <button class="secondary-btn" id="steps-btn">💡 Show Steps</button>
+                    <button class="secondary-btn" id="new-btn">🎲 New Question</button>
+                </div>
+                <div class="feedback-message" id="feedback"></div>
+                <div class="steps-box" id="steps" style="display:none;"></div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Order matters? Permutation. Order doesn't? Combination. 🔀</p>
+        </footer>
+    </div>
+
+    <script>
+    function typeset(el) {
+        if (window.CA && CA.typeset) return CA.typeset(el);
+        if (window.renderMathInElement) renderMathInElement(el, { throwOnError: false });
+    }
+
+    // Exact big-number helpers for the calculator (20! is already past 2^53).
+    function factB(n) { let f = 1n; for (let i = 2n; i <= BigInt(n); i++) f *= i; return f; }
+    function nPrB(n, r) { let p = 1n; for (let i = 0; i < r; i++) p *= BigInt(n - i); return p; }
+    const fmt = b => b.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+    window.addEventListener('load', () => {
+        // ── Tabs ──────────────────────────────────────────────────────────
+        const sections = { learn: 'learn-section', calc: 'calc-section', explore: 'explore-section', practice: 'practice-section' };
+        document.querySelectorAll('.topic-tab').forEach(tab => tab.addEventListener('click', () => {
+            document.querySelectorAll('.topic-tab').forEach(t => t.classList.toggle('active', t === tab));
+            Object.entries(sections).forEach(([k, id]) => { document.getElementById(id).style.display = tab.dataset.tab === k ? 'block' : 'none'; });
+        }));
+
+        // ── Pascal's triangle ─────────────────────────────────────────────
+        let rows = '', row = [1];
+        for (let n = 0; n <= 7; n++) {
+            rows += `<div>${row.map(v => `<span>${v}</span>`).join('')}</div>`;
+            row = [1, ...row.slice(1).map((v, i) => v + row[i]), 1];
+        }
+        document.getElementById('pascal').innerHTML = rows;
+        typeset(document.getElementById('learn-section'));
+        typeset(document.querySelector('#calc-section .reference-section > p'));
+        typeset(document.querySelector('#explore-section .reference-section > p'));
+
+        // ── Calculator ────────────────────────────────────────────────────
+        function calc() {
+            const n = Number(document.getElementById('calc-n').value), r = Number(document.getElementById('calc-r').value);
+            const errEl = document.getElementById('calc-error'), out = document.getElementById('calc-results');
+            errEl.textContent = ''; out.innerHTML = '';
+            if (!Number.isInteger(n) || !Number.isInteger(r) || n < 0 || r < 0 || n > 30) { errEl.textContent = 'Use whole numbers with 0 ≤ n ≤ 30.'; return; }
+            if (r > n) { errEl.textContent = 'r cannot be bigger than n — you cannot pick more things than there are.'; return; }
+            const factors = k => (k === 0 ? '1' : Array.from({ length: k }, (_, i) => n - i).join(' \\times '));
+            const P = nPrB(n, r), Cv = P / factB(r);
+            out.innerHTML = `
+                <div class="calc-card"><div class="label">\\(${n}!\\)</div><div class="value">${fmt(factB(n))}</div>
+                    <div class="how">ways to arrange all ${n}</div></div>
+                <div class="calc-card"><div class="label">\\({}_{${n}}P_{${r}}\\)</div><div class="value">${fmt(P)}</div>
+                    <div class="how">\\(${r <= 6 ? factors(r) : `\\dfrac{${n}!}{${n - r}!}`}\\)<br>ordered choices of ${r}</div></div>
+                <div class="calc-card"><div class="label">\\({}_{${n}}C_{${r}}\\)</div><div class="value">${fmt(Cv)}</div>
+                    <div class="how">\\(\\dfrac{{}_{${n}}P_{${r}}}{${r}!} = \\dfrac{${fmt(P)}}{${fmt(factB(r))}}\\)<br>groups of ${r}</div></div>`;
+            typeset(out);
+        }
+        document.getElementById('calc-btn').addEventListener('click', calc);
+        ['calc-n', 'calc-r'].forEach(id => document.getElementById(id).addEventListener('keydown', e => { if (e.key === 'Enter') calc(); }));
+        calc();
+
+        // ── Explorer ──────────────────────────────────────────────────────
+        const COLORS = ['#fde2e4', '#e2ece9', '#dfe7fd', '#fff1c1', '#e8dff5', '#d7f3e3', '#ffd8be', '#cfe8fc', '#f9d5e5', '#e4f9c8'];
+        let exN = 4, exR = 2;
+        const permsOf = (a, r) => (r === 0 ? [[]] : a.flatMap((x, i) => permsOf(a.filter((_, j) => j !== i), r - 1).map(p => [x, ...p])));
+        const combsOf = (a, r) => (r === 0 ? [[]] : a.flatMap((x, i) => combsOf(a.slice(i + 1), r - 1).map(c => [x, ...c])));
+        function explore() {
+            document.getElementById('ex-r').innerHTML = Array.from({ length: exN }, (_, i) => i + 1)
+                .map(r => `<button class="operation-btn${r === exR ? ' active' : ''}" data-r="${r}">${r}</button>`).join('');
+            document.querySelectorAll('#ex-r .operation-btn').forEach(b => b.addEventListener('click', () => { exR = Number(b.dataset.r); explore(); }));
+            const letters = 'ABCDE'.slice(0, exN).split('');
+            const combs = combsOf(letters, exR), key = s => [...s].sort().join('');
+            const colorOf = {};
+            combs.forEach((c, i) => { colorOf[c.join('')] = COLORS[i % COLORS.length]; });
+            const perms = permsOf(letters, exR);
+            document.getElementById('ex-perms').innerHTML = perms.map(p => `<span class="chip" style="background:${colorOf[key(p)]}">${p.join('')}</span>`).join('');
+            document.getElementById('ex-combs').innerHTML = combs.map(c => `<span class="chip" style="background:${colorOf[c.join('')]}">${c.join('')}</span>`).join('');
+            document.getElementById('ex-summary').innerHTML = `\\({}_{${exN}}P_{${exR}} = ${perms.length}\\) permutations, \\({}_{${exN}}C_{${exR}} = ${combs.length}\\) combinations. ` +
+                `Each combination appears \\(${exR}! = ${perms.length / combs.length}\\) times on the left, so \\(${perms.length} \\div ${perms.length / combs.length} = ${combs.length}\\).`;
+            typeset(document.getElementById('ex-summary'));
+        }
+        document.querySelectorAll('#ex-n .operation-btn').forEach(b => b.addEventListener('click', () => {
+            document.querySelectorAll('#ex-n .operation-btn').forEach(x => x.classList.toggle('active', x === b));
+            exN = Number(b.dataset.n); exR = Math.min(exR, exN); explore();
+        }));
+        explore();
+
+        // ── Practice (same generators as the printable assignment) ───────
+        const T = CA.lessons['combinations-permutations'];
+        const rng = CA.rng((Date.now() ^ Math.floor(Math.random() * 2 ** 31)) >>> 0);
+        let group = '', level = 0, cur = null, answered = false, picked = null, score = 0, total = 0, last = '';
+        const LEVEL = { 1: '⭐ Easy', 2: '⭐⭐ Medium', 3: '⭐⭐⭐ Hard' };
+        const $ = id => document.getElementById(id);
+
+        function newQuestion() {
+            let pool = T.practice.filter(g => (!group || g.group === group) && (!level || g.level === level));
+            if (!pool.length) pool = T.practice.filter(g => !group || g.group === group);
+            let g, p;
+            for (let i = 0; i < 20; i++) { g = rng.pick(pool); p = g.gen(rng); if (p.q !== last) break; }
+            last = p.q; cur = p; answered = false; picked = null;
+            $('pr-tag').textContent = `${LEVEL[g.level]} · ${g.name}`;
+            $('question').innerHTML = p.q;
+            if (p.ans.kind === 'mc') {
+                $('pr-input').innerHTML = `<div class="choices">${p.ans.choices.map((c, i) => `<button class="choice" data-i="${i}">${c}</button>`).join('')}</div>`;
+                $('pr-input').querySelectorAll('.choice').forEach(b => b.addEventListener('click', () => {
+                    if (answered) return;
+                    picked = Number(b.dataset.i);
+                    $('pr-input').querySelectorAll('.choice').forEach(x => x.classList.toggle('selected', x === b));
+                }));
+            } else {
+                $('pr-input').innerHTML = `<div class="answer-row"><input type="text" id="answer" inputmode="numeric" autocomplete="off" placeholder="?" aria-label="your answer"></div>`;
+                $('answer').addEventListener('keydown', e => { if (e.key === 'Enter') check(); });
+            }
+            $('feedback').textContent = ''; $('feedback').className = 'feedback-message';
+            $('steps').style.display = 'none';
+            typeset($('question')); typeset($('pr-input'));
+        }
+        function showSteps() {
+            $('steps').innerHTML = `<div>${cur.sol}</div><div><strong>Answer:</strong> ${cur.ans.html}</div>`;
+            $('steps').style.display = 'block';
+            typeset($('steps'));
+        }
+        function check() {
+            if (!cur) return;
+            if (answered) return newQuestion();
+            const isMc = cur.ans.kind === 'mc';
+            const input = isMc ? picked : $('answer').value;
+            if (isMc ? input == null : !String(input).trim()) { $('feedback').textContent = isMc ? 'Pick an answer first.' : 'Type an answer first.'; $('feedback').className = 'feedback-message incorrect'; return; }
+            answered = true; total++;
+            if (CA.check(cur.ans, input)) { score++; $('feedback').textContent = '🎉 Correct!'; $('feedback').className = 'feedback-message correct'; }
+            else { $('feedback').textContent = 'Not quite — look at the steps below.'; $('feedback').className = 'feedback-message incorrect'; showSteps(); }
+            if (isMc) $('pr-input').querySelectorAll('.choice').forEach(b => {
+                const i = Number(b.dataset.i);
+                if (i === cur.ans.index) b.classList.add('right'); else if (i === picked) b.classList.add('wrong');
+            });
+            $('score').textContent = score; $('total').textContent = total;
+        }
+        function wire(id, attr, set) {
+            document.querySelectorAll(`#${id} .operation-btn`).forEach(b => b.addEventListener('click', () => {
+                document.querySelectorAll(`#${id} .operation-btn`).forEach(x => x.classList.toggle('active', x === b));
+                set(b.dataset[attr]); newQuestion();
+            }));
+        }
+        wire('pr-group', 'group', v => { group = v; });
+        wire('pr-level', 'level', v => { level = Number(v); });
+        $('check-btn').addEventListener('click', check);
+        $('steps-btn').addEventListener('click', showSteps);
+        $('new-btn').addEventListener('click', newQuestion);
+        newQuestion();
+    });
+    </script>
+</body>
+</html>
