@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge Academy - Math - KidsLearn</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="ca.css">
+    <script defer src="ca-core.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏆 Challenge Academy</h1>
+            <p class="subtitle">Harder maths, one lesson at a time — learn it, see it worked, practise it, then take it offline</p>
+            <a href="../math.html" class="back-link">← Back to Math Topics</a>
+        </header>
+
+        <div class="intro-section">
+            <h2>How each lesson works</h2>
+            <p><strong>📚 Tutorial</strong> explains the idea from the beginning.
+               <strong>✏️ Examples</strong> are solved one step at a time — try each step before you reveal it.
+               <strong>🎯 Practice</strong> gives you fresh questions for as long as you like and checks your answers.
+               <strong>📄 Assignment</strong> is a 50-problem PDF with an answer key at the end, to print and work through away from the screen.</p>
+        </div>
+
+        <main id="ca-hub"></main>
+
+        <footer>
+            <p>Think hard, check twice! 🏆</p>
+        </footer>
+    </div>
+
+    <script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const books = { A: 'Book A · Lessons 1–9', B: 'Book B · Lessons 10–18' };
+        document.getElementById('ca-hub').innerHTML = Object.entries(books).map(([book, name]) => `
+            <h2 class="ca-book">${name}</h2>
+            <div class="ca-lessons">
+                ${CA.catalog.filter(l => l.book === book).map(l => `
+                <div class="ca-card${CA.isAvailable(l.id) ? '' : ' soon'}">
+                    <div class="ca-card-top">
+                        <span class="ca-card-icon">${l.icon}</span>
+                        <div><div class="ca-card-num">Lesson ${l.id}</div><h3>${l.title}</h3></div>
+                    </div>
+                    <p>${l.blurb}</p>
+                    <div class="ca-card-actions">${CA.isAvailable(l.id) ? `
+                        <a class="ca-btn" href="lesson.html?n=${l.id}">Start lesson</a>
+                        <a class="ca-btn ghost" href="${CA.pdfFile(l.id)}" download title="50 problems with answers">⬇ Assignment PDF</a>` : `
+                        <span class="ca-soon">Coming soon</span>`}
+                    </div>
+                </div>`).join('')}
+            </div>`).join('');
+    });
+    </script>
+</body>
+</html>
