@@ -263,7 +263,9 @@
      * gives the same sheet, so the printed PDF and its answer key cannot drift.
      */
     CA.buildAssignment = function (lesson) {
-        const rng = CA.rng(20260000 + lesson.id * 977);
+        const seed = typeof lesson.id === 'number' ? lesson.id * 977
+            : [...String(lesson.id)].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) >>> 0, 7) % 1000003;
+        const rng = CA.rng(20260000 + seed);
         const seen = new Set();
         const out = [];
         for (const { g, count } of CA.assignmentPlan(lesson)) {

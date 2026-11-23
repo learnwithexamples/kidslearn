@@ -9,7 +9,7 @@
  * the 50-problem assignment built and checked for repeats.  Exits 1 on any error.
  */
 import { createRequire } from 'node:module';
-import { existsSync } from 'node:fs';
+import { existsSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
@@ -18,8 +18,14 @@ const dir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CA = require(path.join(dir, 'ca-core.js'));
 
 const RUNS = 300;
-const args = process.argv.slice(2).map(Number).filter(Boolean);
-const ids = args.length ? args : CA.catalog.map(l => l.id).filter(id => CA.isAvailable(id));
+// Numbers are Challenge Academy lessons; names are worksheets for the other math
+// pages (math/worksheets/topics/<name>.js). --topics checks every worksheet.
+const topicDir = path.resolve(dir, '..', 'worksheets', 'topics');
+const argv = process.argv.slice(2);
+const allTopics = () => (existsSync(topicDir) ? readdirSync(topicDir).filter(f => f.endsWith('.js')).map(f => f.slice(0, -3)).sort() : []);
+let ids = argv.filter(a => /^\d+$/.test(a)).map(Number).concat(argv.filter(a => /^[a-z][a-z0-9-]*$/.test(a)));
+if (argv.includes('--topics')) ids = ids.concat(allTopics());
+if (!argv.length) ids = CA.catalog.map(l => l.id).filter(id => CA.isAvailable(id));
 
 let errors = 0;
 const err = (where, msg) => { errors++; console.log(`  ✗ ${where}: ${msg}`); };
@@ -66,16 +72,22 @@ function checkProblem(where, p) {
 }
 
 for (const id of ids) {
-    const info = CA.info(id);
-    console.log(`Lesson ${id}: ${info ? info.title : '???'}`);
-    const file = path.join(dir, CA.lessonFile(id));
-    if (!existsSync(file)) { err('file', `${CA.lessonFile(id)} does not exist`); continue; }
+    const isTopic = typeof id === 'string';
+    const idn = isTopic ? [...id].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) % 100003, 7) : id;
+    const info = isTopic ? null : CA.info(id);
+    const file = isTopic ? path.join(topicDir, `${id}.js`) : path.join(dir, CA.lessonFile(id));
+    console.log(isTopic ? `Worksheet ${id}` : `Lesson ${id}: ${info ? info.title : '???'}`);
+    if (!existsSync(file)) { err('file', `${path.relative(dir, file)} does not exist`); continue; }
     try { require(file); } catch (e) { err('load', e.stack.split('\n').slice(0, 4).join(' | ')); continue; }
     const L = CA.lessons[id];
-    if (!L) { err('register', `the file did not call CA.register({ id: ${id}, … })`); continue; }
+    if (!L) { err('register', `the file did not call CA.register({ id: ${JSON.stringify(id)}, … })`); continue; }
+    if (isTopic) {
+        checkText('title', L.title);
+        if (!L.page || !existsSync(path.resolve(dir, '..', L.page))) err('page', `page ${JSON.stringify(L.page)} is not a file in math/`);
+    }
 
-    // Tutorial
-    if (!Array.isArray(L.tutorial) || L.tutorial.length < 4) err('tutorial', 'needs at least 4 sections');
+    // Tutorial (Challenge Academy lessons only; worksheets have just practice)
+    if (!isTopic && (!Array.isArray(L.tutorial) || L.tutorial.length < 4)) err('tutorial', 'needs at least 4 sections');
     (L.tutorial || []).forEach((s, i) => { checkText(`tutorial[${i}].h`, s.h); checkText(`tutorial[${i}].html`, s.html); });
 
     // Summary (optional)
@@ -89,7 +101,7 @@ for (const id of ids) {
     }
 
     // Examples
-    if (!Array.isArray(L.examples) || L.examples.length < 4) err('examples', 'needs at least 4 worked examples');
+    if (!isTopic && (!Array.isArray(L.examples) || L.examples.length < 4)) err('examples', 'needs at least 4 worked examples');
     (L.examples || []).forEach((e, i) => {
         checkText(`examples[${i}].q`, e.q);
         if (e.fig != null) checkText(`examples[${i}].fig`, e.fig);
@@ -114,8 +126,8 @@ for (const id of ids) {
         const before = errors;
         for (let i = 0; i < RUNS && errors - before < 3; i++) {
             let p;
-            try { p = g.gen(CA.rng(1000 + i * 7919 + id)); } catch (e) { err(where, `threw: ${e.message} (seed ${1000 + i * 7919 + id})`); continue; }
-            checkProblem(`${where} seed ${1000 + i * 7919 + id}`, p);
+            try { p = g.gen(CA.rng(1000 + i * 7919 + idn)); } catch (e) { err(where, `threw: ${e.message} (seed ${1000 + i * 7919 + idn})`); continue; }
+            checkProblem(`${where} seed ${1000 + i * 7919 + idn}`, p);
             if (p && p.q) distinct.add(p.q + '|' + (p.fig || ''));
         }
         if (distinct.size < 8) warn(where, `only ${distinct.size} different problems in ${RUNS} runs — add variety`);
@@ -129,7 +141,7 @@ for (const id of ids) {
         const perLevel = [1, 2, 3].map(lv => sheet.filter(p => p.level === lv).length);
         const again = CA.buildAssignment(L);
         if (JSON.stringify(sheet) !== JSON.stringify(again)) err('assignment', 'is not deterministic — a generator uses Math.random() instead of rng');
-        console.log(`  assignment: ${sheet.length} problems (A ${perLevel[0]}, B ${perLevel[1]}, C ${perLevel[2]}); ${gens.length} generators, ${L.tutorial.length} tutorial sections, ${L.examples.length} examples`);
+        console.log(`  assignment: ${sheet.length} problems (A ${perLevel[0]}, B ${perLevel[1]}, C ${perLevel[2]}); ${gens.length} generators` + (isTopic ? '' : `, ${L.tutorial.length} tutorial sections, ${L.examples.length} examples`));
     } catch (e) { err('assignment', e.message); }
 }
 
