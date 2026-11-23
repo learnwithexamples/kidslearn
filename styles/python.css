@@ -464,6 +464,9 @@
 .track-algo   { border-top-color: #7c3aed; }
 .track-algo:hover { border-color: #7c3aed; }
 .track-arch   { border-top-color: #0d9488; }
+.track-camp   { border-top-color: #306998; }
+.track-camp:hover { border-color: #306998; }
+.track-camp .track-level { background: #306998; }
 .track-arch:hover { border-color: #0d9488; }
 
 .track-top {

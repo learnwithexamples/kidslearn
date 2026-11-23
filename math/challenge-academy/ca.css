@@ -121,7 +121,7 @@ body.ca-sheet-page { background: #edf2f7; padding: 20px; font-family: Georgia, '
 .ca-p .ca-figrow { gap: 10px; margin: 6px 0; justify-content: flex-start; }
 .ca-p .body > .ca-fig { display: block; margin: 6px 0; }
 .ca-p ol.opts { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 18px; align-items: flex-end; }
-.ca-p ol.opts li { display: flex; align-items: flex-end; gap: 4px; }
+.ca-p ol.opts li { display: flex; align-items: baseline; gap: 4px; }
 .ca-p.has-opts .body { padding-bottom: 0.2in; }
 .ca-key-page { break-before: page; page-break-before: always; margin-top: 30px; }
 .ca-key-page h2 { font-family: Helvetica, Arial, sans-serif; font-size: 15pt; border-bottom: 3px solid #333; padding-bottom: 6px; margin-bottom: 10px; color: #111; }

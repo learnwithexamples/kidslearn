@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnCamp - KidsLearn</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="learncamp.css">
+    <script defer src="learncamp.js"></script>
+</head>
+<body data-page="class">
+    <div class="container">
+        <header>
+            <h1 id="lc-title">LearnCamp</h1>
+            <p class="subtitle" id="lc-subtitle">Loading…</p>
+            <a href="index.html" class="back-link">← Back to LearnCamp</a>
+        </header>
+
+        <div class="lc-tabs">
+            <button class="lc-tab active" data-tab="tutorial">📖 Tutorial</button>
+            <button class="lc-tab" data-tab="problems">🧩 Problems</button>
+        </div>
+
+        <div class="lc-wrap" id="lc-tutorial"></div>
+
+        <div class="lc-workspace" id="lc-problems" hidden>
+            <nav class="lc-list" id="lc-list" aria-label="Problems"></nav>
+            <main id="lc-view"></main>
+        </div>
+
+        <footer><p>Read the problem twice, code once. 🐍</p></footer>
+    </div>
+</body>
+</html>

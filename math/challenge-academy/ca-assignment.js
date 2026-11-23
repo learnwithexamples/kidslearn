@@ -19,7 +19,7 @@
             document.title = `${T.title} Assignment - KidsLearn`;
             document.getElementById('ca-back').href = `../${T.page}`;
             document.getElementById('ca-pdf').href = `pdf/${topic}-assignment.pdf`;
-            render(T, { title: T.title, series: 'KidsLearn Math · Practice Assignment', keyTitle: T.title });
+            render(T, { title: T.title, series: `KidsLearn ${T.subject || 'Math'} · Practice Assignment`, keyTitle: T.title });
         };
         s.onerror = () => { sheet.textContent = 'That worksheet does not exist.'; };
         document.head.appendChild(s);

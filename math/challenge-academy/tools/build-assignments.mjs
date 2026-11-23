@@ -9,6 +9,8 @@
  *   node … 3 --no-pdf --preview /some/dir   # previews only; leaves assignments/ alone
  *   node … equations fractions          # worksheets for the other math pages
  *   node … --topics                     # every worksheet in math/worksheets/topics/
+ *   node … physics/speed                # a worksheet in another subject folder
+ *   node … --subject physics            # every worksheet in physics/worksheets/topics/
  *
  * Needs Google Chrome, and a network connection (the pages load KaTeX from a CDN).
  * Previews need PyMuPDF: the repo's .venv has it.
@@ -38,7 +40,12 @@ const previewDir = pv >= 0 ? path.resolve(argv[pv + 1]) : null;
 const noPdf = argv.includes('--no-pdf');
 const wsDir = path.resolve(dir, '..', 'worksheets');
 const plain = argv.filter((a, i) => !(pv >= 0 && i === pv + 1));
-let ids = plain.filter(a => /^\d+$/.test(a)).map(Number).concat(plain.filter(a => /^[a-z][a-z0-9-]*$/.test(a)));
+let ids = plain.filter(a => /^\d+$/.test(a)).map(Number).concat(plain.filter(a => /^[a-z][a-z0-9-]*(\/[a-z0-9-]+)?$/.test(a)));
+const si = argv.indexOf('--subject');
+if (si >= 0) {
+    ids = ids.filter(x => x !== argv[si + 1]);
+    ids = ids.concat(readdirSync(path.join(repo, argv[si + 1], 'worksheets', 'topics')).filter(f => f.endsWith('.js')).sort().map(f => `${argv[si + 1]}/${f.slice(0, -3)}`));
+}
 if (argv.includes('--topics')) ids = ids.concat(readdirSync(path.join(wsDir, 'topics')).filter(f => f.endsWith('.js')).map(f => f.slice(0, -3)).sort());
 if (!ids.length) ids = CA.catalog.map(l => l.id).filter(id => CA.isAvailable(id));
 
@@ -88,16 +95,18 @@ mkdirSync(path.join(dir, 'assignments'), { recursive: true });
 if (previewDir) mkdirSync(previewDir, { recursive: true });
 
 for (const id of ids) {
-    if (typeof id === 'string') {               // a worksheet for one of the other math pages
+    if (typeof id === 'string') {               // a worksheet for one of the other topic pages
         console.log(`Worksheet ${id}`);
-        const url = `${pathToFileURL(path.join(wsDir, 'worksheet.html')).href}?t=${id}`;
+        const [subj, slug] = id.includes('/') ? id.split('/') : ['math', id];
+        const wsDir = path.join(repo, subj, 'worksheets');
+        const url = `${pathToFileURL(path.join(wsDir, 'worksheet.html')).href}?t=${slug}`;
         failures += checkDom('worksheet page', url);
         mkdirSync(path.join(wsDir, 'pdf'), { recursive: true });
-        const out = noPdf ? path.join(previewDir || os.tmpdir(), `${id}-assignment.pdf`) : path.join(wsDir, 'pdf', `${id}-assignment.pdf`);
+        const out = noPdf ? path.join(previewDir || os.tmpdir(), `${slug}-assignment.pdf`) : path.join(wsDir, 'pdf', `${slug}-assignment.pdf`);
         chrome(['--no-pdf-header-footer', `--print-to-pdf=${out}`], url);
         if (!existsSync(out) || statSync(out).size < 20000) { console.log('  ✗ the PDF was not written'); failures++; continue; }
         console.log(`  ✓ ${path.relative(repo, out)} (${Math.round(statSync(out).size / 1024)} KB)`);
-        if (previewDir) toPng(out, path.join(previewDir, `${id}-assignment`));
+        if (previewDir) toPng(out, path.join(previewDir, `${slug}-assignment`));
         continue;
     }
     const info = CA.info(id);

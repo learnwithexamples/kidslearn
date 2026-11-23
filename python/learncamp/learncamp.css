@@ -1,0 +1,106 @@
+/* LearnCamp — hub and class pages. */
+.lc-wrap { max-width: 1200px; margin: 0 auto; }
+.lc-card { background: white; border-radius: 12px; padding: 20px 24px; margin: 16px 0; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); line-height: 1.7; }
+.lc-card h2 { color: #306998; margin-bottom: 8px; font-size: 1.35em; }
+.lc-card h3 { color: #2d3748; margin: 14px 0 4px; font-size: 1.05em; }
+.lc-card p { margin: 8px 0; }
+.lc-card ul, .lc-card ol { margin: 8px 0 8px 24px; }
+.lc-card code { background: #f1f5f9; padding: 1px 6px; border-radius: 4px; font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 0.92em; }
+.lc-card table { border-collapse: collapse; margin: 10px 0; }
+.lc-card th, .lc-card td { border: 1px solid #cbd5e0; padding: 5px 12px; text-align: left; }
+.lc-card th { background: #f1f5f9; }
+.lc-card pre { background: #1e293b; color: #e2e8f0; padding: 12px 14px; border-radius: 8px; overflow-x: auto; font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 0.9em; line-height: 1.5; }
+.lc-center { text-align: center; margin: 18px 0; }
+.lc-small { font-size: 0.85em; color: #64748b; }
+.lc-key { background: #eff6ff; border-left: 5px solid #306998; padding: 10px 16px; border-radius: 8px; margin: 12px 0; }
+.lc-tip { background: #f0fdf4; border-left: 5px solid #16a34a; padding: 10px 16px; border-radius: 8px; margin: 12px 0; }
+.lc-warn { background: #fef2f2; border-left: 5px solid #dc2626; padding: 10px 16px; border-radius: 8px; margin: 12px 0; }
+
+/* Buttons */
+.lc-btn { display: inline-block; font: inherit; font-weight: bold; font-size: 0.95em; padding: 9px 18px; border-radius: 8px; border: 2px solid #306998; background: #306998; color: white; cursor: pointer; text-decoration: none; transition: all 0.15s; }
+.lc-btn:hover { background: #24527a; border-color: #24527a; }
+.lc-btn.go { background: #16a34a; border-color: #16a34a; }
+.lc-btn.go:hover { background: #12833c; }
+.lc-btn.ghost { background: white; color: #306998; }
+.lc-btn.ghost:hover { background: #eff6ff; }
+.lc-btn.small { padding: 5px 12px; font-size: 0.85em; }
+.lc-btn:disabled { opacity: 0.5; cursor: default; }
+.lc-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 10px 0; }
+
+/* Hub */
+.lc-hero { background: linear-gradient(135deg, #306998 0%, #4b8bbe 60%, #ffd43b 140%); color: white; border-radius: 16px; padding: 26px 30px; margin-bottom: 18px; }
+.lc-hero h2 { color: white; font-size: 1.5em; margin-bottom: 6px; }
+.lc-hero p { margin: 6px 0; line-height: 1.65; }
+.lc-goals { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-top: 12px; }
+.lc-goal { background: #f8fafc; border-radius: 10px; padding: 12px 14px; border-left: 4px solid #ffd43b; }
+.lc-goal strong { display: block; color: #306998; }
+.lc-classes { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; margin: 16px 0; }
+.lc-class-card { display: block; background: white; border: 3px solid #e2e8f0; border-top: 6px solid #306998; border-radius: 14px; padding: 18px 20px; text-decoration: none; color: inherit; transition: all 0.2s; }
+.lc-class-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(48, 105, 152, 0.2); border-color: #306998; }
+.lc-class-card h3 { color: #1e293b; margin: 4px 0 6px; font-size: 1.2em; }
+.lc-class-card p { color: #64748b; line-height: 1.5; margin-bottom: 12px; }
+.lc-class-num { font-weight: bold; font-size: 0.85em; color: #306998; text-transform: uppercase; letter-spacing: 0.05em; }
+.lc-class-card.lc-soon { border-top-color: #cbd5e0; opacity: 0.7; }
+.lc-class-card.lc-soon:hover { transform: none; box-shadow: none; border-color: #e2e8f0; }
+.lc-progress { height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
+.lc-progress div { height: 100%; background: #16a34a; }
+.lc-progress-text { font-size: 0.85em; color: #64748b; margin-top: 4px; }
+
+/* Class page */
+.lc-tabs { display: flex; gap: 10px; justify-content: center; margin: 16px 0; }
+.lc-tab { font: inherit; padding: 10px 24px; border: 2px solid #cbd5e0; border-radius: 25px; background: white; cursor: pointer; font-weight: bold; }
+.lc-tab.active { background: #306998; border-color: #306998; color: white; }
+.lc-summary { border-left: 6px solid #ffd43b; }
+.lc-try { margin: 12px 0; }
+.lc-code, .lc-stdin { width: 100%; font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 0.92em; line-height: 1.5; padding: 10px 12px; border: 2px solid #cbd5e0; border-radius: 8px; background: #0f172a; color: #e2e8f0; resize: vertical; tab-size: 4; }
+.lc-stdin { background: #f8fafc; color: #1e293b; }
+.lc-code:focus, .lc-stdin:focus { outline: none; border-color: #4b8bbe; }
+.lc-out { background: #f8fafc !important; color: #1e293b !important; border: 2px solid #e2e8f0; white-space: pre-wrap; word-break: break-word; max-height: 360px; overflow: auto; }
+.lc-out.bad { border-color: #fca5a5; color: #991b1b !important; }
+
+.lc-workspace { display: grid; grid-template-columns: 270px 1fr; gap: 18px; align-items: start; }
+.lc-list { background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); max-height: calc(100vh - 40px); overflow-y: auto; position: sticky; top: 16px; }
+.lc-list-head { padding: 12px 14px; font-weight: bold; color: #306998; border-bottom: 2px solid #e2e8f0; position: sticky; top: 0; background: white; }
+.lc-item { display: grid; grid-template-columns: 2em 1fr auto; gap: 6px; align-items: center; padding: 7px 12px; text-decoration: none; color: #1e293b; border-bottom: 1px solid #f1f5f9; font-size: 0.92em; position: relative; }
+.lc-item:hover { background: #f8fafc; }
+.lc-item.active { background: #eff6ff; box-shadow: inset 4px 0 0 #306998; }
+.lc-item.done .lc-item-t { color: #15803d; }
+.lc-item-n { color: #94a3b8; font-weight: bold; }
+.lc-item-l { font-size: 0.7em; }
+.lc-tick { position: absolute; right: 6px; top: 2px; color: #16a34a; font-weight: bold; font-size: 0.8em; }
+.lc-p-head { display: flex; justify-content: space-between; align-items: center; }
+.lc-p-n { font-weight: bold; color: #94a3b8; text-transform: uppercase; font-size: 0.85em; letter-spacing: 0.05em; }
+.lc-level { font-size: 0.8em; font-weight: bold; padding: 2px 10px; border-radius: 12px; background: #f1f5f9; }
+.lc-level.l1 { background: #dcfce7; color: #166534; }
+.lc-level.l2 { background: #fef9c3; color: #854d0e; }
+.lc-level.l3 { background: #fee2e2; color: #991b1b; }
+.lc-example { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+.lc-example pre { background: #f8fafc; color: #1e293b; border: 1px solid #e2e8f0; margin: 4px 0 0; white-space: pre; }
+.lc-why { grid-column: 1 / -1; font-size: 0.92em; color: #475569; }
+.lc-ex-label { font-weight: bold; font-size: 0.85em; color: #475569; }
+.lc-copy { font: inherit; font-size: 0.85em; border: none; background: none; color: #306998; cursor: pointer; padding: 0 4px; }
+.lc-editor-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+.lc-custom { margin: 8px 0; }
+.lc-custom summary { cursor: pointer; color: #306998; font-weight: bold; font-size: 0.9em; }
+.lc-hint { background: #fffbeb; border-left: 5px solid #f59e0b; padding: 10px 16px; border-radius: 8px; margin: 10px 0; }
+.lc-solution { background: #f0fdf4; border-left: 5px solid #16a34a; padding: 10px 16px; border-radius: 8px; margin: 10px 0; }
+.lc-verdict { font-size: 1.05em; margin: 10px 0 6px; }
+.lc-verdict.good { color: #15803d; }
+.lc-verdict.bad { color: #b91c1c; }
+.lc-dots { display: flex; flex-wrap: wrap; gap: 4px; }
+.lc-dot { width: 14px; height: 14px; border-radius: 3px; background: #e2e8f0; }
+.lc-dot.ok { background: #22c55e; }
+.lc-dot.wa { background: #ef4444; }
+.lc-dot.err { background: #f97316; }
+.lc-dot.tle { background: #a855f7; }
+.lc-fail { margin-top: 12px; padding: 12px; border: 2px solid #fecaca; border-radius: 10px; background: #fff7f7; }
+.lc-fail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 8px; }
+.lc-fail pre { background: white; color: #1e293b; border: 1px solid #e2e8f0; max-height: 220px; overflow: auto; margin: 4px 0 0; }
+.lc-fail .bad { color: #b91c1c; }
+.lc-nav { justify-content: space-between; }
+
+@media (max-width: 900px) {
+    .lc-workspace { grid-template-columns: 1fr; }
+    .lc-list { position: static; max-height: 300px; }
+    .lc-example, .lc-fail-grid { grid-template-columns: 1fr; }
+}

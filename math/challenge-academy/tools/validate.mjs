@@ -20,11 +20,20 @@ const CA = require(path.join(dir, 'ca-core.js'));
 const RUNS = 300;
 // Numbers are Challenge Academy lessons; names are worksheets for the other math
 // pages (math/worksheets/topics/<name>.js). --topics checks every worksheet.
+// A worksheet is "speed" (a math page) or "physics/speed" (a page in another subject folder).
+const repo = path.resolve(dir, '..', '..');
 const topicDir = path.resolve(dir, '..', 'worksheets', 'topics');
+const topicParts = id => (id.includes('/') ? id.split('/') : ['math', id]);
+const topicFile = id => { const [subj, slug] = topicParts(id); return path.join(repo, subj, 'worksheets', 'topics', `${slug}.js`); };
 const argv = process.argv.slice(2);
 const allTopics = () => (existsSync(topicDir) ? readdirSync(topicDir).filter(f => f.endsWith('.js')).map(f => f.slice(0, -3)).sort() : []);
-let ids = argv.filter(a => /^\d+$/.test(a)).map(Number).concat(argv.filter(a => /^[a-z][a-z0-9-]*$/.test(a)));
+let ids = argv.filter(a => /^\d+$/.test(a)).map(Number).concat(argv.filter(a => /^[a-z][a-z0-9-]*(\/[a-z0-9-]+)?$/.test(a)));
 if (argv.includes('--topics')) ids = ids.concat(allTopics());
+const si = argv.indexOf('--subject');          // --subject physics: every worksheet in physics/worksheets/topics
+if (si >= 0) {
+    const d = path.join(repo, argv[si + 1], 'worksheets', 'topics');
+    ids = ids.filter(x => x !== argv[si + 1]).concat(readdirSync(d).filter(f => f.endsWith('.js')).sort().map(f => `${argv[si + 1]}/${f.slice(0, -3)}`));
+}
 if (!argv.length) ids = CA.catalog.map(l => l.id).filter(id => CA.isAvailable(id));
 
 let errors = 0;
@@ -75,15 +84,16 @@ for (const id of ids) {
     const isTopic = typeof id === 'string';
     const idn = isTopic ? [...id].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) % 100003, 7) : id;
     const info = isTopic ? null : CA.info(id);
-    const file = isTopic ? path.join(topicDir, `${id}.js`) : path.join(dir, CA.lessonFile(id));
+    const file = isTopic ? topicFile(id) : path.join(dir, CA.lessonFile(id));
     console.log(isTopic ? `Worksheet ${id}` : `Lesson ${id}: ${info ? info.title : '???'}`);
     if (!existsSync(file)) { err('file', `${path.relative(dir, file)} does not exist`); continue; }
     try { require(file); } catch (e) { err('load', e.stack.split('\n').slice(0, 4).join(' | ')); continue; }
-    const L = CA.lessons[id];
+    const L = CA.lessons[isTopic ? topicParts(id)[1] : id];
     if (!L) { err('register', `the file did not call CA.register({ id: ${JSON.stringify(id)}, … })`); continue; }
     if (isTopic) {
         checkText('title', L.title);
-        if (!L.page || !existsSync(path.resolve(dir, '..', L.page))) err('page', `page ${JSON.stringify(L.page)} is not a file in math/`);
+        const subj = topicParts(id)[0];
+        if (!L.page || !existsSync(path.resolve(repo, subj, L.page))) err('page', `page ${JSON.stringify(L.page)} is not a file in ${subj}/`);
     }
 
     // Tutorial (Challenge Academy lessons only; worksheets have just practice)
